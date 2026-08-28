@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # This repository's default branch is master; main is listed too so the
+    # workflow keeps working if the branch is ever renamed.
+    branches: [master, main]
   workflow_dispatch:
 
 permissions:

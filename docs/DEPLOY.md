@@ -8,7 +8,11 @@ database and nothing to keep patched. It will run from any web host.
 `.github/workflows/deploy.yml` is ready to go:
 
 1. **Settings → Pages → Source → GitHub Actions**.
-2. Push to `main`.
+2. Push to the default branch (`master` in this repository).
+
+The workflow also accepts a manual run from **Actions → Deploy to GitHub Pages
+→ Run workflow**, but GitHub only offers that once the workflow file exists on
+the default branch.
 
 The workflow sets Vite's `base` from the Pages URL automatically, so a project
 site at `https://<org>.github.io/<repo>/` works without edits.
