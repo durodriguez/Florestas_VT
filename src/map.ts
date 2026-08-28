@@ -9,31 +9,34 @@ import { colorFor } from './palette';
  * organisational service here if the university prefers its own imagery.
  */
 function basemaps(maxZoom: number): Record<string, L.TileLayer> {
-  const esriAttr = 'Imagery &copy; Esri, Maxar, Earthstar Geographics';
+  const esri = 'Tiles &copy; Esri';
+  const osm = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+  // Every layer here is keyless — no account, no token, nothing to rotate.
+  // CARTO's raster basemaps used to be the default but now watermark every
+  // tile with "API KEY REQUIRED"; that service is being retired in favour of
+  // vector tiles, so it is gone rather than key-gated.
   return {
-    Streets: L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    Streets: L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom,
-      maxNativeZoom: 20,
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+      maxNativeZoom: 19,
+      attribution: osm,
     }),
     Satellite: L.tileLayer(
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-      { maxZoom, maxNativeZoom: 19, attribution: esriAttr },
+      { maxZoom, maxNativeZoom: 19, attribution: `${esri}, Maxar, Earthstar Geographics` },
     ),
     Topographic: L.tileLayer(
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-      { maxZoom, maxNativeZoom: 19, attribution: 'Tiles &copy; Esri' },
+      { maxZoom, maxNativeZoom: 19, attribution: esri },
     ),
-    OpenStreetMap: L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom,
-      maxNativeZoom: 19,
-      attribution: '&copy; OpenStreetMap contributors',
-    }),
   };
 }
 
 export interface PlantMapOptions {
   onSelect: (plant: Plant) => void;
+  /** Called when the active basemap stops serving tiles. */
+  onBasemapTrouble?: (layerName: string) => void;
 }
 
 export class PlantMap {
@@ -44,6 +47,8 @@ export class PlantMap {
   private readonly markers = new Map<string, L.CircleMarker>();
   private locationMarker: L.CircleMarker | null = null;
   private colorBy: ColorBy = 'habit';
+  private tileErrors = 0;
+  private reportedTrouble = new Set<string>();
 
   constructor(
     container: HTMLElement,
@@ -108,10 +113,31 @@ export class PlantMap {
       .layers(layers, { 'Walking trails': this.trailLayer }, { position: 'bottomright', collapsed: true })
       .addTo(this.map);
 
+    this.watchTiles(layers);
+
     this.buildMarkers(plants);
     this.cluster.addTo(this.map);
     this.trailLayer.addTo(this.map);
     this.highlight.addTo(this.map);
+  }
+
+  /**
+   * Public tile services change their terms without warning — CARTO's raster
+   * basemaps began watermarking every tile "API KEY REQUIRED" mid-2026. A dead
+   * basemap otherwise just looks like a broken map, so say which layer failed.
+   */
+  private watchTiles(layers: Record<string, L.TileLayer>): void {
+    for (const [name, layer] of Object.entries(layers)) {
+      layer.on('tileerror', () => {
+        if (!this.map.hasLayer(layer) || this.reportedTrouble.has(name)) return;
+        // A stray 404 at the edge of coverage is normal; a broken service is not.
+        if (++this.tileErrors < 6) return;
+        this.reportedTrouble.add(name);
+        this.options.onBasemapTrouble?.(name);
+      });
+      layer.on('tileload', () => { this.tileErrors = 0; });
+    }
+    this.map.on('baselayerchange', () => { this.tileErrors = 0; });
   }
 
   private buildMarkers(plants: Plant[]): void {

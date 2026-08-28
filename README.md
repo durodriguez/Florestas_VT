@@ -22,8 +22,8 @@ npm run dev          # http://localhost:5173
 
 ## What it does
 
-**Map** — clustered plant markers over four keyless basemaps (streets,
-satellite, topographic, OSM). Markers scale with trunk diameter, and can be
+**Map** — clustered plant markers over three keyless basemaps (OpenStreetMap,
+Esri satellite, Esri topographic) — no API key, no account. Markers scale with trunk diameter, and can be
 coloured by plant type, origin, condition or campus area, with a matching
 legend.
 
