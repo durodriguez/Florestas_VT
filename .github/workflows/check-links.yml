@@ -1,0 +1,53 @@
+name: Check Wikipedia links
+
+# Run by hand from the Actions tab. The build environment Claude works in has no
+# route to Wikipedia, so the wikipedia_url column in data/taxa.csv is derived
+# from scientific names rather than confirmed. GitHub's runners can reach
+# Wikipedia, so this checks them for you — no local setup needed.
+on:
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Check every wikipedia_url in taxa.csv
+        id: check
+        run: |
+          set +e
+          npm run check:links > result.txt 2>&1
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+          cat result.txt
+
+      - name: Write the result to the run summary
+        if: always()
+        run: |
+          {
+            echo "## Wikipedia link check"
+            echo
+            if [ "${{ steps.check.outputs.code }}" = "0" ]; then
+              echo "**Every link works.** Nothing to do."
+            else
+              echo "**Some links need fixing** — see the lines marked \`✗\` below."
+              echo "Copy this into the chat with Claude and it can correct them."
+            fi
+            echo
+            echo '```'
+            tail -60 result.txt
+            echo '```'
+            echo
+            echo "A link marked \`→\` redirected. That is fine and expected — it means"
+            echo "the name in our data is an older synonym and Wikipedia forwarded it"
+            echo "to the accepted name."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fail if any article is genuinely missing
+        if: steps.check.outputs.code != '0'
+        run: exit 1
