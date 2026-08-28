@@ -1,23 +1,137 @@
 taxon_id,scientific_name,common_name,family,genus,species,infraspecific,cultivar,habit,foliage,native_status,flower_color,flower_months,fruit_color,fruit_months,fall_color,mature_height_ft,hardiness_zones,wikipedia_url,description
-acer-saccharum,Acer saccharum,Sugar maple,Sapindaceae,Acer,saccharum,,,tree,deciduous,native,yellow-green,"4,5",brown,"9,10",orange,75,3-8,https://en.wikipedia.org/wiki/Acer_saccharum,Vermont's state tree and the source of maple syrup. Brilliant orange to scarlet fall color.
-acer-rubrum,Acer rubrum,Red maple,Sapindaceae,Acer,rubrum,,,tree,deciduous,native,red,"3,4",red,"5,6",red,60,3-9,https://en.wikipedia.org/wiki/Acer_rubrum,One of the earliest trees to flower in spring; tolerant of wet soils.
+abies-balsamea,Abies balsamea,Balsam fir,Pinaceae,Abies,balsamea,,,conifer,evergreen,native,,,,,,,,,
+abies-concolor,Abies concolor,White fir,Pinaceae,Abies,concolor,,,conifer,evergreen,introduced,,,,,,,,,
+abies-grandis,Abies grandis,Grand fir,Pinaceae,Abies,grandis,,,conifer,evergreen,introduced,,,,,,,,,
+abies-nordmanniana,Abies nordmanniana,Nordman fir,Pinaceae,Abies,nordmanniana,,,conifer,evergreen,introduced,,,,,,,,,
+acer-buergeranum,Acer buergeranum,Trident maple,Sapindaceae,Acer,buergeranum,,,tree,deciduous,introduced,,,,,,,,,
+acer-campestre,Acer campestre,Hedge maple,Sapindaceae,Acer,campestre,,,tree,deciduous,introduced,,,,,,,,,
+acer-ginnala,Acer ginnala,Amur maple,Sapindaceae,Acer,ginnala,,,tree,deciduous,introduced,,,,,,,,,
+acer-griseum,Acer griseum,Paperbark maple,Sapindaceae,Acer,griseum,,,tree,deciduous,introduced,,,,,,,,,
+acer-negundo,Acer negundo,Boxelder,Sapindaceae,Acer,negundo,,,tree,deciduous,native,,,,,,,,,
+acer-palmatum,Acer palmatum,Japanese maple,Sapindaceae,Acer,palmatum,,,tree,deciduous,introduced,,,,,,,,,
 acer-platanoides,Acer platanoides,Norway maple,Sapindaceae,Acer,platanoides,,,tree,deciduous,invasive,yellow,"4,5",brown,"9,10",yellow,60,3-7,https://en.wikipedia.org/wiki/Acer_platanoides,Widely planted street tree now considered invasive in the Northeast; shades out native seedlings.
-quercus-rubra,Quercus rubra,Northern red oak,Fagaceae,Quercus,rubra,,,tree,deciduous,native,yellow-green,"4,5",brown,"9,10",red,80,3-8,https://en.wikipedia.org/wiki/Quercus_rubra,Fast-growing oak with acorns that feed campus squirrels and jays.
-quercus-alba,Quercus alba,White oak,Fagaceae,Quercus,alba,,,tree,deciduous,native,yellow-green,"5",brown,"9,10",purple,80,3-9,https://en.wikipedia.org/wiki/Quercus_alba,Long-lived oak with distinctive rounded leaf lobes and pale bark.
-betula-papyrifera,Betula papyrifera,Paper birch,Betulaceae,Betula,papyrifera,,,tree,deciduous,native,green,"4,5",brown,"8,9",yellow,60,2-7,https://en.wikipedia.org/wiki/Betula_papyrifera,White peeling bark makes this one of the most recognizable trees in Vermont.
+acer-platanoides-crimson-king,Acer platanoides 'Crimson King',Crimson King Maple,Sapindaceae,Acer,platanoides,,Crimson King,tree,deciduous,invasive,,,,,,,,,
+acer-rubrum,Acer rubrum,Red maple,Sapindaceae,Acer,rubrum,,,tree,deciduous,native,red,"3,4",red,"5,6",red,60,3-9,https://en.wikipedia.org/wiki/Acer_rubrum,One of the earliest trees to flower in spring; tolerant of wet soils.
+acer-saccharinum,Acer saccharinum,Silver maple,Sapindaceae,Acer,saccharinum,,,tree,deciduous,native,,,,,,,,,
+acer-saccharum,Acer saccharum,Sugar maple,Sapindaceae,Acer,saccharum,,,tree,deciduous,native,yellow-green,"4,5",brown,"9,10",orange,75,3-8,https://en.wikipedia.org/wiki/Acer_saccharum,Vermont's state tree and the source of maple syrup. Brilliant orange to scarlet fall color.
+acer-x-freemanii,Acer x freemanii,Freeman's maple,Sapindaceae,Acer,x freemanii,,,tree,deciduous,introduced,,,,,,,,,
+aesculus-hippocastanum,Aesculus hippocastanum,Common horsechestnut,Sapindaceae,Aesculus,hippocastanum,,,tree,deciduous,introduced,,,,,,,,,
+amelanchier-sp,Amelanchier sp.,Serviceberry,Rosaceae,Amelanchier,,,,tree,deciduous,native,,,,,,,,,
+aralia-spinosa,Aralia spinosa,Devils Walkingstick,Araliaceae,Aralia,spinosa,,,tree,deciduous,introduced,,,,,,,,,
 betula-alleghaniensis,Betula alleghaniensis,Yellow birch,Betulaceae,Betula,alleghaniensis,,,tree,deciduous,native,green,"4,5",brown,"8,9",yellow,70,3-7,https://en.wikipedia.org/wiki/Betula_alleghaniensis,Bronze-gold shredding bark; twigs smell of wintergreen when scratched.
-fagus-grandifolia,Fagus grandifolia,American beech,Fagaceae,Fagus,grandifolia,,,tree,deciduous,native,green,"4,5",brown,"9,10",bronze,70,3-9,https://en.wikipedia.org/wiki/Fagus_grandifolia,Smooth gray bark; a keystone species now threatened by beech leaf disease.
-tilia-americana,Tilia americana,American basswood,Malvaceae,Tilia,americana,,,tree,deciduous,native,yellow,"6,7",brown,"9,10",yellow,80,2-8,https://en.wikipedia.org/wiki/Tilia_americana,Fragrant early-summer flowers that are heavily visited by bees.
-fraxinus-americana,Fraxinus americana,White ash,Oleaceae,Fraxinus,americana,,,tree,deciduous,native,purple,"4,5",brown,"9,10",purple,70,3-9,https://en.wikipedia.org/wiki/Fraxinus_americana,Under severe pressure from emerald ash borer; campus specimens are monitored closely.
-ulmus-americana-princeton,Ulmus americana 'Princeton',Princeton American elm,Ulmaceae,Ulmus,americana,,Princeton,tree,deciduous,native,green,"3,4",green,"4,5",yellow,70,3-9,https://en.wikipedia.org/wiki/Ulmus_americana,A Dutch elm disease-resistant selection used to restore the classic American elm vase form.
-tsuga-canadensis,Tsuga canadensis,Eastern hemlock,Pinaceae,Tsuga,canadensis,,,conifer,evergreen,native,green,"5",brown,"9,10",none,70,3-7,https://en.wikipedia.org/wiki/Tsuga_canadensis,Deeply shade-tolerant conifer of cool ravines; threatened by hemlock woolly adelgid.
-pinus-strobus,Pinus strobus,Eastern white pine,Pinaceae,Pinus,strobus,,,conifer,evergreen,native,yellow,"5,6",brown,"9,10",none,90,3-8,https://en.wikipedia.org/wiki/Pinus_strobus,Soft needles in bundles of five; the tallest tree in the Northeast forest.
-picea-abies,Picea abies,Norway spruce,Pinaceae,Picea,abies,,,conifer,evergreen,introduced,red,"5",brown,"9,10",none,80,2-7,https://en.wikipedia.org/wiki/Picea_abies,European spruce with drooping branchlets and very long cones.
-larix-laricina,Larix laricina,Tamarack,Pinaceae,Larix,laricina,,,conifer,deciduous,native,red,"4,5",brown,"9,10",gold,60,2-6,https://en.wikipedia.org/wiki/Larix_laricina,A deciduous conifer whose needles turn gold and drop each November.
-ginkgo-biloba,Ginkgo biloba,Ginkgo,Ginkgoaceae,Ginkgo,biloba,,,tree,deciduous,introduced,green,"4,5",tan,"9,10",yellow,70,3-8,https://en.wikipedia.org/wiki/Ginkgo_biloba,A living fossil with fan-shaped leaves that turn uniform butter yellow.
-gleditsia-triacanthos-inermis,Gleditsia triacanthos var. inermis,Thornless honeylocust,Fabaceae,Gleditsia,triacanthos,var. inermis,,tree,deciduous,introduced,green,"5,6",brown,"9,10",yellow,60,3-9,https://en.wikipedia.org/wiki/Gleditsia_triacanthos,Fine dappled shade and no thorns; a workhorse of urban plantings.
-malus-prairifire,Malus 'Prairifire',Prairifire crabapple,Rosaceae,Malus,,,Prairifire,tree,deciduous,introduced,pink,"5",red,"9,10,11",orange,20,4-8,https://en.wikipedia.org/wiki/Malus,Deep pink spring bloom followed by small red fruit that persists into winter.
-syringa-vulgaris,Syringa vulgaris,Common lilac,Oleaceae,Syringa,vulgaris,,,shrub,deciduous,introduced,purple,"5",brown,"9",none,15,3-7,https://en.wikipedia.org/wiki/Syringa_vulgaris,Intensely fragrant May bloom; a fixture of old Vermont dooryards.
+betula-lenta,Betula lenta,Sweet birch,Betulaceae,Betula,lenta,,,tree,deciduous,,,,,,,,,,
+betula-nigra,Betula nigra,River birch,Betulaceae,Betula,nigra,,,tree,deciduous,introduced,,,,,,,,,
+betula-papyrifera,Betula papyrifera,Paper birch,Betulaceae,Betula,papyrifera,,,tree,deciduous,native,green,"4,5",brown,"8,9",yellow,60,2-7,https://en.wikipedia.org/wiki/Betula_papyrifera,White peeling bark makes this one of the most recognizable trees in Vermont.
+betula-populifolia,Betula populifolia,Gray birch,Betulaceae,Betula,populifolia,,,tree,deciduous,native,,,,,,,,,
+callitropsis-nootkatensis,Callitropsis nootkatensis,Alaska cedar,Cupressaceae,Callitropsis,nootkatensis,,,conifer,evergreen,introduced,,,,,,,,,
+carpinus-caroliniana,Carpinus caroliniana,American hornbeam,Betulaceae,Carpinus,caroliniana,,,tree,deciduous,native,,,,,,,,,
+carya-glabra,Carya glabra,Pignut hickory,Juglandaceae,Carya,glabra,,,tree,deciduous,native,,,,,,,,,
+catalpa-speciosa,Catalpa speciosa,Northern catalpa,Bignoniaceae,Catalpa,speciosa,,,tree,deciduous,introduced,,,,,,,,,
+celtis-occidentalis,Celtis occidentalis,Hackberry,Cannabaceae,Celtis,occidentalis,,,tree,deciduous,native,,,,,,,,,
+cercidiphyllum-japonicum,Cercidiphyllum japonicum,Katsuratree,Cercidiphyllaceae,Cercidiphyllum,japonicum,,,tree,deciduous,introduced,,,,,,,,,
+cercis-canadensis,Cercis canadensis,Eastern redbud,Fabaceae,Cercis,canadensis,,,tree,deciduous,introduced,,,,,,,,,
+chamaecyparis-nootkatensis,Chamaecyparis nootkatensis,Nootka falsecypress,Cupressaceae,Chamaecyparis,nootkatensis,,,conifer,evergreen,introduced,,,,,,,,,
+chamaecyparis-obtusa,Chamaecyparis obtusa,Hinoki falsecypress,Cupressaceae,Chamaecyparis,obtusa,,,conifer,evergreen,introduced,,,,,,,,,
+chamaecyparis-pisifera,Chamaecyparis pisifera,Sawara falsecypress,Cupressaceae,Chamaecyparis,pisifera,,,conifer,evergreen,introduced,,,,,,,,,
+cladrastis-kentukea,Cladrastis kentukea,Yellowwood,Fabaceae,Cladrastis,kentukea,,,tree,deciduous,introduced,,,,,,,,,
 cornus-alternifolia,Cornus alternifolia,Pagoda dogwood,Cornaceae,Cornus,alternifolia,,,shrub,deciduous,native,white,"5,6",blue,"8,9",red,25,3-7,https://en.wikipedia.org/wiki/Cornus_alternifolia,Horizontal tiered branching gives this understory species its common name.
+cornus-florida,Cornus florida,Flowering dogwood,Cornaceae,Cornus,florida,,,tree,deciduous,,,,,,,,,,
+cornus-kousa,Cornus kousa,Kousa dogwood,Cornaceae,Cornus,kousa,,,tree,deciduous,introduced,,,,,,,,,
+cornus-mas,Cornus mas,Corneliancherry dogwood,Cornaceae,Cornus,mas,,,tree,deciduous,introduced,,,,,,,,,
+corylus-avellana,Corylus avellana,Contorted hazelnut,Betulaceae,Corylus,avellana,,,tree,deciduous,introduced,,,,,,,,,
+cotinus-coggygria,Cotinus coggygria,Common smoketree,Anacardiaceae,Cotinus,coggygria,,,tree,deciduous,introduced,,,,,,,,,
+cotinus-obovatus,Cotinus obovatus,American smoketree,Anacardiaceae,Cotinus,obovatus,,,tree,deciduous,introduced,,,,,,,,,
+crataegus-sp,Crataegus sp.,Hawthorn,Rosaceae,Crataegus,,,,tree,deciduous,native,,,,,,,,,
+diospyros-virginiana,Diospyros virginiana,Persimmon,Ebenaceae,Diospyros,virginiana,,,tree,deciduous,introduced,,,,,,,,,
+elaeagnus-angustifolia,Elaeagnus angustifolia,Russian olive,Elaeagnaceae,Elaeagnus,angustifolia,,,tree,deciduous,invasive,,,,,,,,,
+fagus-grandifolia,Fagus grandifolia,American beech,Fagaceae,Fagus,grandifolia,,,tree,deciduous,native,green,"4,5",brown,"9,10",bronze,70,3-9,https://en.wikipedia.org/wiki/Fagus_grandifolia,Smooth gray bark; a keystone species now threatened by beech leaf disease.
+fagus-sylvatica,Fagus sylvatica,European beech,Fagaceae,Fagus,sylvatica,,,tree,deciduous,introduced,,,,,,,,,
+fraxinus-americana,Fraxinus americana,White ash,Oleaceae,Fraxinus,americana,,,tree,deciduous,native,purple,"4,5",brown,"9,10",purple,70,3-9,https://en.wikipedia.org/wiki/Fraxinus_americana,Under severe pressure from emerald ash borer; campus specimens are monitored closely.
+fraxinus-pennsylvanica,Fraxinus pennsylvanica,Green ash,Oleaceae,Fraxinus,pennsylvanica,,,tree,deciduous,native,,,,,,,,,
+ginkgo-biloba,Ginkgo biloba,Ginkgo,Ginkgoaceae,Ginkgo,biloba,,,tree,deciduous,introduced,green,"4,5",tan,"9,10",yellow,70,3-8,https://en.wikipedia.org/wiki/Ginkgo_biloba,A living fossil with fan-shaped leaves that turn uniform butter yellow.
+gleditsia-triacanthos,Gleditsia triacanthos,Thornless Common honeylocust,Fabaceae,Gleditsia,triacanthos,,,tree,deciduous,introduced,,,,,,,,,
+gleditsia-triacanthos-inermis,Gleditsia triacanthos var. inermis,Thornless honeylocust,Fabaceae,Gleditsia,triacanthos,var. inermis,,tree,deciduous,introduced,green,"5,6",brown,"9,10",yellow,60,3-9,https://en.wikipedia.org/wiki/Gleditsia_triacanthos,Fine dappled shade and no thorns; a workhorse of urban plantings.
+gymnocladus-dioicus,Gymnocladus dioicus,Kentucky coffeetree,Fabaceae,Gymnocladus,dioicus,,,tree,deciduous,introduced,,,,,,,,,
+halesia-tetraptera,Halesia tetraptera,Four Winged silverbell,Styracaceae,Halesia,tetraptera,,,tree,deciduous,introduced,,,,,,,,,
+juglans-nigra,Juglans nigra,Black walnut,Juglandaceae,Juglans,nigra,,,tree,deciduous,native,,,,,,,,,
+juniperus-chinensis,Juniperus chinensis,Chinese juniper,Cupressaceae,Juniperus,chinensis,,,conifer,evergreen,introduced,,,,,,,,,
+juniperus-sp,Juniperus sp.,Juniper,Cupressaceae,Juniperus,,,,conifer,evergreen,,,,,,,,,,
+juniperus-virginiana,Juniperus virginiana,Eastern redcedar,Cupressaceae,Juniperus,virginiana,,,conifer,evergreen,native,,,,,,,,,
+larix-decidua,Larix decidua,Common Larch,Pinaceae,Larix,decidua,,,conifer,deciduous,introduced,,,,,,,,,
+larix-laricina,Larix laricina,Tamarack,Pinaceae,Larix,laricina,,,conifer,deciduous,native,red,"4,5",brown,"9,10",gold,60,2-6,https://en.wikipedia.org/wiki/Larix_laricina,A deciduous conifer whose needles turn gold and drop each November.
+liquidambar-styraciflua,Liquidambar styraciflua,Sweetgum,Altingiaceae,Liquidambar,styraciflua,,,tree,deciduous,introduced,,,,,,,,,
+liriodendron-tulipifera,Liriodendron tulipifera,Tuliptree,Magnoliaceae,Liriodendron,tulipifera,,,tree,deciduous,introduced,,,,,,,,,
+maackia-amurensis,Maackia amurensis,Amur maackia,Fabaceae,Maackia,amurensis,,,tree,deciduous,introduced,,,,,,,,,
+magnolia-grandiflora,Magnolia grandiflora,Southern magnolia,Magnoliaceae,Magnolia,grandiflora,,,tree,evergreen,introduced,,,,,,,,,
+magnolia-macrophylla,Magnolia macrophylla,Bigleaf magnolia,Magnoliaceae,Magnolia,macrophylla,,,tree,deciduous,introduced,,,,,,,,,
+magnolia-stellata,Magnolia stellata,Star magnolia,Magnoliaceae,Magnolia,stellata,,,tree,deciduous,introduced,,,,,,,,,
+magnolia-x-soulangiana,Magnolia x soulangiana,Saucer magnolia,Magnoliaceae,Magnolia,x soulangiana,,,tree,deciduous,introduced,,,,,,,,,
+malus-prairifire,Malus 'Prairifire',Prairifire crabapple,Rosaceae,Malus,,,Prairifire,tree,deciduous,introduced,pink,5,red,"9,10,11",orange,20,4-8,https://en.wikipedia.org/wiki/Malus,Deep pink spring bloom followed by small red fruit that persists into winter.
+malus-domestica,Malus domestica,Common apple,Rosaceae,Malus,domestica,,,tree,deciduous,introduced,,,,,,,,,
+malus-sp,Malus sp.,Crabapple,Rosaceae,Malus,,,,tree,deciduous,introduced,,,,,,,,,
+metasequoia-glyptostroboides,Metasequoia glyptostroboides,Dawn redwood,Cupressaceae,Metasequoia,glyptostroboides,,,conifer,deciduous,introduced,,,,,,,,,
+morus-alba,Morus alba,White mulberry,Moraceae,Morus,alba,,,tree,deciduous,introduced,,,,,,,,,
+nyssa-sylvatica,Nyssa sylvatica,Black tupelo,Nyssaceae,Nyssa,sylvatica,,,tree,deciduous,native,,,,,,,,,
+ostrya-virginiana,Ostrya virginiana,Eastern hophornbeam,Betulaceae,Ostrya,virginiana,,,tree,deciduous,native,,,,,,,,,
+picea-abies,Picea abies,Norway spruce,Pinaceae,Picea,abies,,,conifer,evergreen,introduced,red,5,brown,"9,10",none,80,2-7,https://en.wikipedia.org/wiki/Picea_abies,European spruce with drooping branchlets and very long cones.
+picea-glauca,Picea glauca,White spruce,Pinaceae,Picea,glauca,,,conifer,evergreen,native,,,,,,,,,
+picea-pungens,Picea pungens,Colorado Blue spruce,Pinaceae,Picea,pungens,,,conifer,evergreen,introduced,,,,,,,,,
+picea-sp,Picea sp.,Spruce,Pinaceae,Picea,,,,conifer,evergreen,native,,,,,,,,,
+pinus-nigra,Pinus nigra,Austrian pine,Pinaceae,Pinus,nigra,,,conifer,evergreen,introduced,,,,,,,,,
+pinus-resinosa,Pinus resinosa,Red pine,Pinaceae,Pinus,resinosa,,,conifer,evergreen,native,,,,,,,,,
+pinus-strobus,Pinus strobus,Eastern white pine,Pinaceae,Pinus,strobus,,,conifer,evergreen,native,yellow,"5,6",brown,"9,10",none,90,3-8,https://en.wikipedia.org/wiki/Pinus_strobus,Soft needles in bundles of five; the tallest tree in the Northeast forest.
+pinus-sylvestris,Pinus sylvestris,Scotch pine,Pinaceae,Pinus,sylvestris,,,conifer,evergreen,introduced,,,,,,,,,
+platanus-x-acerifolia,Platanus x acerifolia,London planetree,Platanaceae,Platanus,x acerifolia,,,tree,deciduous,introduced,,,,,,,,,
+populus-balsamifera,Populus balsamifera,Balsam poplar,Salicaceae,Populus,balsamifera,,,tree,deciduous,native,,,,,,,,,
+populus-deltoides,Populus deltoides,Eastern poplar,Salicaceae,Populus,deltoides,,,tree,deciduous,native,,,,,,,,,
+populus-nigra,Populus nigra,Lombardy poplar,Salicaceae,Populus,nigra,,,tree,deciduous,introduced,,,,,,,,,
 populus-tremuloides,Populus tremuloides,Quaking aspen,Salicaceae,Populus,tremuloides,,,tree,deciduous,native,green,"3,4",white,"5,6",yellow,50,1-7,https://en.wikipedia.org/wiki/Populus_tremuloides,Flattened leaf stalks make the foliage tremble in the slightest breeze.
+prunus-cerasifera,Prunus cerasifera,Purple Leaf Plum,Rosaceae,Prunus,cerasifera,,,tree,deciduous,introduced,,,,,,,,,
+prunus-maackii,Prunus maackii,Amur chokecherry,Rosaceae,Prunus,maackii,,,tree,deciduous,introduced,,,,,,,,,
+prunus-pennsylvanica,Prunus pennsylvanica,Pin cherry,Rosaceae,Prunus,pennsylvanica,,,tree,deciduous,native,,,,,,,,,
+prunus-serrulata,Prunus serrulata,Flowering cherry,Rosaceae,Prunus,serrulata,,,tree,deciduous,introduced,,,,,,,,,
+prunus-sp,Prunus sp.,Cherry,Rosaceae,Prunus,,,,tree,deciduous,native,,,,,,,,,
+prunus-subhirtella,Prunus subhirtella,Weeping Cherry,Rosaceae,Prunus,subhirtella,,,tree,deciduous,introduced,,,,,,,,,
+prunus-x-yedoensis,Prunus x yedoensis,Yoshino cherry,Rosaceae,Prunus,x yedoensis,,,tree,deciduous,introduced,,,,,,,,,
+pseudotsuga-menziesii,Pseudotsuga menziesii,Douglas fir,Pinaceae,Pseudotsuga,menziesii,,,conifer,evergreen,introduced,,,,,,,,,
+ptelea-trifoliata,Ptelea trifoliata,Wafer ash,Rutaceae,Ptelea,trifoliata,,,tree,deciduous,introduced,,,,,,,,,
+pyrus-calleryana,Pyrus calleryana,Callery pear,Rosaceae,Pyrus,calleryana,,,tree,deciduous,introduced,,,,,,,,,
+pyrus-communis,Pyrus communis,Common pear,Rosaceae,Pyrus,communis,,,tree,deciduous,introduced,,,,,,,,,
+quercus-alba,Quercus alba,White oak,Fagaceae,Quercus,alba,,,tree,deciduous,native,yellow-green,5,brown,"9,10",purple,80,3-9,https://en.wikipedia.org/wiki/Quercus_alba,Long-lived oak with distinctive rounded leaf lobes and pale bark.
+quercus-bicolor,Quercus bicolor,Swamp White oak,Fagaceae,Quercus,bicolor,,,tree,deciduous,native,,,,,,,,,
+quercus-coccinea,Quercus coccinea,Scarlet oak,Fagaceae,Quercus,coccinea,,,tree,deciduous,,,,,,,,,,
+quercus-hemisphaerica,Quercus hemisphaerica,Laurel oak,Fagaceae,Quercus,hemisphaerica,,,tree,deciduous,introduced,,,,,,,,,
+quercus-imbricaria,Quercus imbricaria,Shingle oak,Fagaceae,Quercus,imbricaria,,,tree,deciduous,introduced,,,,,,,,,
+quercus-macrocarpa,Quercus macrocarpa,Bur oak,Fagaceae,Quercus,macrocarpa,,,tree,deciduous,native,,,,,,,,,
+quercus-michauxii,Quercus michauxii,Swamp chestnut oak,Fagaceae,Quercus,michauxii,,,tree,deciduous,introduced,,,,,,,,,
+quercus-muehlenbergii,Quercus muehlenbergii,Chinkapin oak,Fagaceae,Quercus,muehlenbergii,,,tree,deciduous,,,,,,,,,,
+quercus-palustris,Quercus palustris,Pin oak,Fagaceae,Quercus,palustris,,,tree,deciduous,,,,,,,,,,
+quercus-prinus,Quercus prinus,Chestnut oak,Fagaceae,Quercus,prinus,,,tree,deciduous,,,,,,,,,,
+quercus-robur,Quercus robur,English oak,Fagaceae,Quercus,robur,,,tree,deciduous,introduced,,,,,,,,,
+quercus-rubra,Quercus rubra,Northern red oak,Fagaceae,Quercus,rubra,,,tree,deciduous,native,yellow-green,"4,5",brown,"9,10",red,80,3-8,https://en.wikipedia.org/wiki/Quercus_rubra,Fast-growing oak with acorns that feed campus squirrels and jays.
+quercus-velutina,Quercus velutina,Black oak,Fagaceae,Quercus,velutina,,,tree,deciduous,native,,,,,,,,,
 rhamnus-cathartica,Rhamnus cathartica,Common buckthorn,Rhamnaceae,Rhamnus,cathartica,,,shrub,deciduous,invasive,green,"5,6",black,"8,9,10",green,20,3-7,https://en.wikipedia.org/wiki/Rhamnus_cathartica,A Class B noxious weed in Vermont; mapped so that removal work can be tracked.
+robinia-pseudoacacia,Robinia pseudoacacia,Black locust,Fabaceae,Robinia,pseudoacacia,,,tree,deciduous,introduced,,,,,,,,,
+salix-alba,Salix alba,White willow,Salicaceae,Salix,alba,,,tree,deciduous,introduced,,,,,,,,,
+salix-sp,Salix sp.,Willow,Salicaceae,Salix,,,,tree,deciduous,native,,,,,,,,,
+sassafras-albidum,Sassafras albidum,Common sassafras,Lauraceae,Sassafras,albidum,,,tree,deciduous,,,,,,,,,,
+sorbus-aucuparia,Sorbus aucuparia,European mountain ash,Rosaceae,Sorbus,aucuparia,,,tree,deciduous,introduced,,,,,,,,,
+sorbus-x-thuringiaca,Sorbus x thuringiaca,Oakleaf mountain ash,Rosaceae,Sorbus,x thuringiaca,,,tree,deciduous,introduced,,,,,,,,,
+stewartia-pseudocamellia,Stewartia pseudocamellia,Japanese stewartia,Theaceae,Stewartia,pseudocamellia,,,tree,deciduous,introduced,,,,,,,,,
+syringa-reticulata,Syringa reticulata,Japanese Tree lilac,Oleaceae,Syringa,reticulata,,,tree,deciduous,introduced,,,,,,,,,
+syringa-vulgaris,Syringa vulgaris,Common lilac,Oleaceae,Syringa,vulgaris,,,shrub,deciduous,introduced,purple,5,brown,9,none,15,3-7,https://en.wikipedia.org/wiki/Syringa_vulgaris,Intensely fragrant May bloom; a fixture of old Vermont dooryards.
+taxodium-distichum,Taxodium distichum,Common baldcypress,Cupressaceae,Taxodium,distichum,,,conifer,deciduous,introduced,,,,,,,,,
+thuja-occidentalis,Thuja occidentalis,Eastern arborvitae,Cupressaceae,Thuja,occidentalis,,,conifer,evergreen,native,,,,,,,,,
+thuja-sp,Thuja sp.,Arborvitae,Cupressaceae,Thuja,,,,conifer,evergreen,,,,,,,,,,
+tilia-americana,Tilia americana,American basswood,Malvaceae,Tilia,americana,,,tree,deciduous,native,yellow,"6,7",brown,"9,10",yellow,80,2-8,https://en.wikipedia.org/wiki/Tilia_americana,Fragrant early-summer flowers that are heavily visited by bees.
+tilia-cordata,Tilia cordata,Littleleaf linden,Malvaceae,Tilia,cordata,,,tree,deciduous,introduced,,,,,,,,,
+tilia-platyphyllos,Tilia platyphyllos,Bigleaf linden,Malvaceae,Tilia,platyphyllos,,,tree,deciduous,introduced,,,,,,,,,
+tilia-tomentosa,Tilia tomentosa,Silver linden,Malvaceae,Tilia,tomentosa,,,tree,deciduous,introduced,,,,,,,,,
+tilia-x-europaea,Tilia x europaea,European linden,Malvaceae,Tilia,x europaea,,,tree,deciduous,introduced,,,,,,,,,
+tsuga-canadensis,Tsuga canadensis,Eastern hemlock,Pinaceae,Tsuga,canadensis,,,conifer,evergreen,native,green,5,brown,"9,10",none,70,3-7,https://en.wikipedia.org/wiki/Tsuga_canadensis,Deeply shade-tolerant conifer of cool ravines; threatened by hemlock woolly adelgid.
+ulmus-americana,Ulmus americana,American elm,Ulmaceae,Ulmus,americana,,,tree,deciduous,native,,,,,,,,,
+ulmus-americana-princeton,Ulmus americana 'Princeton',Princeton American elm,Ulmaceae,Ulmus,americana,,Princeton,tree,deciduous,native,green,"3,4",green,"4,5",yellow,70,3-9,https://en.wikipedia.org/wiki/Ulmus_americana,A Dutch elm disease-resistant selection used to restore the classic American elm vase form.
+ulmus-glabra,Ulmus glabra,Scotch elm,Ulmaceae,Ulmus,glabra,,,tree,deciduous,introduced,,,,,,,,,
+ulmus-pumila,Ulmus pumila,Siberian elm,Ulmaceae,Ulmus,pumila,,,tree,deciduous,introduced,,,,,,,,,
+ulmus-sp,Ulmus sp.,Elm,Ulmaceae,Ulmus,,,,tree,deciduous,native,,,,,,,,,
+zelkova-serrata,Zelkova serrata,Japanese zelkova,Ulmaceae,Zelkova,serrata,,,tree,deciduous,introduced,,,,,,,,,

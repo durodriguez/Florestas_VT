@@ -137,6 +137,52 @@ describe('importSurvey — species matching', () => {
     expect(r.issues.some((i: { message: string }) => /more than one taxon/.test(i.message))).toBe(true);
   });
 
+  it('lets a plain species win over a cultivar of it', () => {
+    // Adding Acer platanoides 'Crimson King' must not make plain
+    // "Acer platanoides" ambiguous — the exact scientific name wins over the
+    // genus+species key derived from the cultivar's own columns.
+    const withCultivar = [
+      ...taxaRows,
+      { taxon_id: 'acer-platanoides', scientific_name: 'Acer platanoides', common_name: 'Norway maple', genus: 'Acer', species: 'platanoides' },
+      { taxon_id: 'acer-platanoides-crimson-king', scientific_name: "Acer platanoides 'Crimson King'", common_name: 'Crimson King Norway maple', genus: 'Acer', species: 'platanoides', cultivar: 'Crimson King' },
+    ];
+    const r = run([row({ species: 'Acer platanoides' })], { taxaRows: withCultivar });
+    expect(r.summary.errors).toBe(0);
+    expect(r.inserts[0].taxon_id).toBe('acer-platanoides');
+  });
+
+  it('still resolves the cultivar by its own full name', () => {
+    const withCultivar = [
+      ...taxaRows,
+      { taxon_id: 'acer-platanoides', scientific_name: 'Acer platanoides', common_name: 'Norway maple', genus: 'Acer', species: 'platanoides' },
+      { taxon_id: 'acer-platanoides-crimson-king', scientific_name: "Acer platanoides 'Crimson King'", common_name: 'Crimson King Norway maple', genus: 'Acer', species: 'platanoides', cultivar: 'Crimson King' },
+    ];
+    const r = run([row({ species: "Acer platanoides 'Crimson King'" })], { taxaRows: withCultivar });
+    expect(r.inserts[0].taxon_id).toBe('acer-platanoides-crimson-king');
+  });
+
+  it('resolves a genus-only taxon such as "Malus sp."', () => {
+    const withGenusOnly = [
+      ...taxaRows,
+      { taxon_id: 'malus-sp', scientific_name: 'Malus sp.', common_name: 'Crabapple', genus: 'Malus', species: '' },
+    ];
+    // The inventory writes "Malus sp"; the taxa list writes "Malus sp." Both
+    // normalise to the same key.
+    const r = run([row({ species: 'Malus sp' })], { taxaRows: withGenusOnly });
+    expect(r.summary.errors).toBe(0);
+    expect(r.inserts[0].taxon_id).toBe('malus-sp');
+  });
+
+  it('still refuses a common name genuinely shared by two taxa', () => {
+    const ambiguous = [
+      { taxon_id: 'a', scientific_name: 'Acer x', common_name: 'Maple', genus: 'Acer', species: 'x' },
+      { taxon_id: 'b', scientific_name: 'Acer y', common_name: 'Maple', genus: 'Acer', species: 'y' },
+    ];
+    const r = run([row({ species: 'Maple' })], { taxaRows: ambiguous });
+    expect(r.inserts).toHaveLength(0);
+    expect(r.issues.some((i: { message: string }) => /more than one taxon/.test(i.message))).toBe(true);
+  });
+
   it('offers paste-ready taxa.csv stubs for unknown species', () => {
     const r = run([row({ species: 'Dawn redwood' })]);
     expect(taxaStubs(r.unknownSpecies)[0]).toMatch(/^dawn-redwood,Dawn redwood,/);
