@@ -94,6 +94,7 @@ species never reaches the live site.
 | `npm run build` | Validate, typecheck and build to `dist/` |
 | `npm run import -- <file.csv>` | Merge a field-survey export into `data/plants.csv` (dry run by default) |
 | `npm run labels` | Generate QR label sheet and SVGs into `public/labels/` |
+| `npm run check:links` | Check every `wikipedia_url` in `taxa.csv` still resolves |
 | `npm test` | Run the test suite |
 | `npm run typecheck` | TypeScript, no emit |
 

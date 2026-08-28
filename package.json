@@ -7,6 +7,7 @@
   "scripts": {
     "data": "node scripts/build-data.mjs",
     "labels": "node scripts/make-labels.mjs",
+    "check:links": "node scripts/check-links.mjs",
     "dev": "npm run data && vite",
     "build": "npm run data && tsc --noEmit && vite build",
     "preview": "vite preview",

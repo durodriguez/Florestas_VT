@@ -41,7 +41,7 @@ repeated on all 400 sugar maples. `plants.csv` refers to a species by
 | `fall_color` | | `orange`, `yellow`, `none` |
 | `mature_height_ft` | | number |
 | `hardiness_zones` | | `3-8` |
-| `wikipedia_url` | | linked from the plant record |
+| `wikipedia_url` | | linked from the plant record. Derived from the scientific name, so run `npm run check:links` to confirm they resolve — a redirect is fine and usually means the name is a synonym of the accepted one |
 | `description` | | one or two sentences shown on the record |
 
 ## plants.csv
