@@ -55,6 +55,13 @@ with a stop list.
 
 **Export** — the current result set as CSV, for staff working in a spreadsheet.
 
+**Survey intake** — `npm run import` merges a field export into the dataset:
+assigns accession numbers, resolves species from common or scientific names,
+normalises `EXC`/`Very Good`/`g` onto the condition vocabulary, reads whatever
+coordinate format your GPS app emitted, applies re-surveys in place, and
+refuses to write anything if a row has a problem. Dry run by default. See
+[docs/FIELD-SURVEY.md](docs/FIELD-SURVEY.md).
+
 Mobile-first throughout, since most visitors arrive by scanning a label
 outdoors. Keyboard accessible; `/` focuses search, `Escape` closes a record.
 
@@ -85,6 +92,7 @@ species never reaches the live site.
 | `npm run dev` | Rebuild data, start the dev server |
 | `npm run data` | Validate `data/*.csv` and regenerate `public/data/` |
 | `npm run build` | Validate, typecheck and build to `dist/` |
+| `npm run import -- <file.csv>` | Merge a field-survey export into `data/plants.csv` (dry run by default) |
 | `npm run labels` | Generate QR label sheet and SVGs into `public/labels/` |
 | `npm test` | Run the test suite |
 | `npm run typecheck` | TypeScript, no emit |
@@ -113,11 +121,14 @@ worker can pick this up in an afternoon and so it still builds in five years.
 
 ## Getting started for real
 
-1. Set the accession scheme and survey one area — start with the University Green.
-2. Replace the `DEMO-` rows in `data/plants.csv` with real records.
-3. Add each species you encounter to `data/taxa.csv`.
-4. `npm run data` until it is clean, then commit.
-5. Turn on GitHub Pages and push.
-6. `npm run labels`, print, and install signs.
+1. Set the accession scheme in `data/config.json` and survey one area — start
+   with the University Green.
+2. Add each species you encounter to `data/taxa.csv`.
+3. `npm run import -- your-export.csv` to see what it makes of your field data,
+   then again with `--write`.
+4. Delete the `DEMO-` rows from `data/plants.csv` once real records replace them.
+5. `npm run data` until it is clean, then commit.
+6. Turn on GitHub Pages and push.
+7. `npm run labels`, print, and install signs.
 
 Repeat area by area. Each one is a real improvement to a live site.

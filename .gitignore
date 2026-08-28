@@ -4,3 +4,4 @@ public/data/
 public/labels/
 .DS_Store
 *.local
+*.csv.bak

@@ -45,12 +45,18 @@ Recommended tools, all free:
 - **Paper + a numbered flagging tape roll** — genuinely fine for a first pass,
   especially with a student crew.
 
-Capture per plant:
+Capture per plant — `survey/field-template.csv` is a filled-in example you can
+hand to a crew or import straight into a field app:
 
 ```
-plant_id, taxon_id, lat, lng, collection_id,
-dbh_in, height_ft, spread_ft, condition, planted_year, notes, photo
+tag, species, lat, lng, area,
+dbh_in, height_ft, spread_ft, condition, planted_year, surveyor, date, photo, notes
 ```
+
+Leave `tag` blank for a new plant; the importer assigns the accession number.
+Put an existing accession there when you are re-surveying that tree. `species`
+takes a common name, a scientific name or a `taxon_id`, whichever your crew
+finds easier — and your app's own column names are fine, see section 6.
 
 **Measuring DBH**: diameter at 4.5 ft above ground on the uphill side. Use a
 diameter tape, not a regular one. For a tree forking below 4.5 ft, measure the
@@ -80,21 +86,86 @@ trees a day.
 
 ## 5. Get it into the repo
 
-1. Export your field data as CSV.
-2. Append the rows to `data/plants.csv`.
-3. Add any new species to `data/taxa.csv` first — a `taxon_id` that does not
-   exist there will fail the build with a clear message.
-4. Run `npm run data`. Fix anything it reports.
-5. Commit and open a pull request. CI re-validates, and merging to `main`
-   publishes the update.
+Do **not** hand-edit `data/plants.csv` after an outing. Run the importer:
 
-## 6. Photographs
+```bash
+npm run import -- survey/2026-09-green.csv          # dry run — writes nothing
+npm run import -- survey/2026-09-green.csv --write  # apply
+```
+
+`survey/field-template.csv` shows the shape it expects, though you rarely need
+to match it exactly — see the next section.
+
+The importer does the tedious, error-prone work:
+
+- **Assigns accession numbers** in your scheme, continuing from the highest one
+  already issued that year. Leave the `tag` column blank for a new plant.
+- **Resolves species** from a common name, a scientific name or a `taxon_id`.
+  A name matching two taxa is refused rather than guessed at.
+- **Normalises vocabulary** — `EXC`, `Very Good`, `g` all become the right
+  `condition` value. Campus areas resolve by display name.
+- **Reads whatever coordinate format your app emitted** — decimal degrees,
+  degrees-minutes-seconds, `POINT(lng lat)` from QGIS, or a `lat, lng` cell.
+- **Applies re-surveys in place.** Put an existing accession in the `tag`
+  column and it updates that record instead of adding a new one, changing only
+  the values that actually differ. A field the surveyor left blank is left
+  alone rather than blanked out, and GPS drift under half a metre is not
+  treated as the tree having moved.
+- **Refuses to write anything if any row has a problem.** A skipped row means a
+  tree quietly missing from the map, so it stops instead and tells you which
+  line and why.
+- **Catches an accidental re-import.** A field export has no accession numbers
+  for new plants, so running the same file twice would add every tree again.
+  If most of a batch lands on top of existing plants of the same species, it
+  stops. Pass `--allow-duplicates` if it really is dense new planting.
+
+Dry run is the default. To stage the merged result for review without touching
+the dataset:
+
+```bash
+npm run import -- survey/2026-09-green.csv --out review.csv
+```
+
+`--write` saves the previous version as `data/plants.csv.bak` before changing
+anything.
+
+Then:
+
+```bash
+npm run data     # validates every row
+git add data/ && git commit
+```
+
+CI re-validates on push, and merging to `main` publishes the update.
+
+### When it reports an unknown species
+
+Add the species to `data/taxa.csv` first — the importer prints paste-ready stub
+rows for anything it did not recognise. Fill in family, genus, species and
+habit (see [DATA-MODEL.md](DATA-MODEL.md)), then re-run the import.
+
+## 6. Matching your field app's columns
+
+You do not have to rename columns by hand. `survey/mapping.json` maps schema
+fields to the headers that mean them, ignoring case, spaces and punctuation —
+so `DBH (in)`, `dbh_in` and `DBH` all match. It ships with the aliases common
+field apps emit.
+
+When the importer meets a header it cannot place, it says so and ignores that
+column. If it should be imported, add the header to the relevant list in
+`survey/mapping.json`.
+
+The same file holds the condition aliases. If your crew writes `moderate` for
+what the schema calls `fair`, add it there once rather than correcting every
+export.
+
+## 7. Photographs
 
 Drop JPEGs in `public/photos/` and put the filename in the `photo` column.
 Resize to about 1200 px on the long edge — full-resolution phone photos will
 make the site slow on campus wifi.
 
-## 7. Print the labels
+## 8. Print the labels
 
 ```bash
 npm run labels -- --collection university-green --base https://uvm.edu/arboretum/
@@ -104,7 +175,7 @@ Open `public/labels/labels.html` and print at 100% scale. Each label carries
 a QR code linking to that plant's record. `public/labels/<accession>.svg`
 holds the bare QR artwork if you are ordering engraved or aluminium signs.
 
-## 8. Keep it current
+## 9. Keep it current
 
 - Re-survey condition on a rolling 5-year cycle, one area per year.
 - Update `surveyed_on` whenever you revisit a plant.
