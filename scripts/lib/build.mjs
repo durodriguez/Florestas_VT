@@ -201,11 +201,19 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, conf
     plantRowsOut.push(PLANT_FIELDS.map((f) => record[f]));
   });
 
-  // A taxon with no living plants is usually a typo in plants.csv or a leftover
-  // row after a removal — worth surfacing, but not a build failure.
-  taxa.forEach((t) => {
-    if (t.count === 0) warn('taxa.csv', `"${t.id}" is not referenced by any active plant`);
-  });
+  // Once a full species list is loaded, most taxa legitimately have no mapped
+  // plant yet — the list runs ahead of the survey by design. Summarise rather
+  // than emitting a line each, which would bury the warnings that matter.
+  const unused = taxa.filter((t) => t.count === 0);
+  if (unused.length) {
+    const sample = unused.slice(0, 5).map((t) => t.id).join(', ');
+    warn(
+      'taxa.csv',
+      `${unused.length} taxa are not referenced by any active plant ` +
+        `(${sample}${unused.length > 5 ? ', …' : ''}) — expected while the species ` +
+        'list runs ahead of the survey',
+    );
+  }
 
   // ---- trails ------------------------------------------------------------
   const trailFeatures = (trails?.features ?? []).map((f, i) => {

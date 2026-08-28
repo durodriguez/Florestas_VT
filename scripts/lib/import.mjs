@@ -155,25 +155,34 @@ const formatAccession = (prefix, year, seq) =>
   `${prefix}-${year}-${String(seq).padStart(4, '0')}`;
 
 function buildSpeciesLookup(taxaRows) {
-  const lookup = new Map();
-  const add = (key, id) => {
+  // Exact identifiers (taxon_id, scientific name, common name) are what a
+  // surveyor actually writes down. "Genus species" assembled from the columns
+  // is a convenience fallback, and must never make an exact name ambiguous —
+  // otherwise adding Acer platanoides 'Crimson King' would block every plain
+  // Acer platanoides from importing.
+  const exact = new Map();
+  const derived = new Map();
+
+  const add = (map, key, id) => {
     const k = norm(key);
     if (!k) return;
     // A name that maps to two taxa is ambiguous; remember that so we can refuse
     // it rather than silently picking the first.
-    if (lookup.has(k) && lookup.get(k) !== id) lookup.set(k, null);
-    else lookup.set(k, id);
+    if (map.has(k) && map.get(k) !== id) map.set(k, null);
+    else map.set(k, id);
   };
+
   for (const t of taxaRows) {
     const id = trim(t.taxon_id);
     if (!id) continue;
-    add(id, id);
-    add(t.scientific_name, id);
-    add(t.common_name, id);
-    // "Acer saccharum" should also find "Acer saccharum 'Green Mountain'"
-    // only when unambiguous, which the collision rule above already enforces.
-    if (trim(t.genus) && trim(t.species)) add(`${t.genus} ${t.species}`, id);
+    add(exact, id, id);
+    add(exact, t.scientific_name, id);
+    add(exact, t.common_name, id);
+    if (trim(t.genus) && trim(t.species)) add(derived, `${t.genus} ${t.species}`, id);
   }
+
+  const lookup = new Map(derived);
+  for (const [key, id] of exact) lookup.set(key, id);
   return lookup;
 }
 

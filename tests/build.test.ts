@@ -124,6 +124,15 @@ describe('buildDataset', () => {
     expect(r.dataset.counts.active).toBe(1);
   });
 
+  it('summarises unreferenced taxa in one warning rather than one each', () => {
+    const many = Array.from({ length: 8 }, (_, i) => taxon({ taxon_id: `t${i}`, scientific_name: `Genus sp${i}` }));
+    const r = build({ taxaRows: [taxon(), ...many] });
+    const unused = r.warnings.filter((w: string) => /not referenced by any active plant/.test(w));
+    expect(unused).toHaveLength(1);
+    expect(unused[0]).toMatch(/8 taxa are not referenced/);
+    expect(r.errors).toEqual([]);
+  });
+
   it('warns when a trail stop is not a known accession', () => {
     const r = build({
       trails: {

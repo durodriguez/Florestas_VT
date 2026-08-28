@@ -41,7 +41,7 @@ repeated on all 400 sugar maples. `plants.csv` refers to a species by
 | `fall_color` | | `orange`, `yellow`, `none` |
 | `mature_height_ft` | | number |
 | `hardiness_zones` | | `3-8` |
-| `wikipedia_url` | | linked from the plant record |
+| `wikipedia_url` | | linked from the plant record. Derived from the scientific name, so run `npm run check:links` to confirm they resolve — a redirect is fine and usually means the name is a synonym of the accepted one |
 | `description` | | one or two sentences shown on the record |
 
 ## plants.csv
@@ -104,7 +104,10 @@ wrong:
 coordinates or measurements, a value outside a controlled vocabulary.
 
 **Warnings** (build continues) — coordinates outside the campus bounds in
-`config.json`, a plant with no `collection_id`, a taxon no active plant
-references, a trail stop that is not a known accession.
+`config.json`, a plant with no `collection_id`, a trail stop that is not a known
+accession, and a count of taxa no active plant references. That last one is
+summarised in a single line rather than one per taxon, because the species list
+legitimately runs ahead of the survey: `taxa.csv` holds every species known to
+be on campus, while `plants.csv` holds only what has actually been mapped.
 
 CI runs the same check on every push, so bad data cannot reach the live site.
