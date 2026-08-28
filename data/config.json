@@ -1,0 +1,16 @@
+{
+  "siteName": "UVM Arboretum Explorer",
+  "shortName": "UVM Arboretum",
+  "institution": "The University of Vermont",
+  "tagline": "Every mapped tree, shrub and vine on the UVM campus.",
+  "contactEmail": "arboretum@uvm.edu",
+  "publicUrl": "https://uvm.edu/arboretum",
+  "map": {
+    "center": [44.47770, -73.19560],
+    "zoom": 16,
+    "minZoom": 12,
+    "maxZoom": 22,
+    "bounds": [[44.4500, -73.2300], [44.5000, -73.1550]]
+  },
+  "accessionPrefix": "UVM"
+}
