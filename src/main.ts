@@ -41,6 +41,8 @@ class App {
     this.byId = new Map(plants.map((p) => [p.id, p]));
     this.map = new PlantMap($('#map'), dataset, plants, {
       onSelect: (plant) => this.select(plant),
+      onBasemapTrouble: (name) =>
+        this.toast(`The ${name} basemap is not loading. Pick another from the layers control, bottom right.`),
     });
 
     document.title = dataset.config.siteName;

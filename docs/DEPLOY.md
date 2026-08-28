@@ -33,13 +33,25 @@ address **before** printing labels — that value is what the QR codes encode.
 
 ## Basemap tiles
 
-The map ships with four keyless raster basemaps (CARTO Voyager, Esri World
-Imagery, Esri Topographic, OpenStreetMap). No account or token is needed.
+The map ships with three keyless raster basemaps — OpenStreetMap (default),
+Esri World Imagery (satellite) and Esri World Topographic. No account, token or
+API key is needed.
 
-These are free public endpoints with fair-use expectations. If the map becomes
-heavily used, or if UVM already runs ArcGIS Online, point `basemaps()` in
-`src/map.ts` at a university tile service instead — it is a one-function
+CARTO's raster basemaps were the original default and were dropped in
+August 2026: that service now watermarks every tile "API KEY REQUIRED" and is
+being retired in favour of vector tiles. Nothing else here depends on a
+third-party account, which is the point — a key is a thing that expires while
+nobody is watching.
+
+These remain free public endpoints with fair-use expectations, and the
+OpenStreetMap tile policy in particular is aimed at modest traffic. If the map
+becomes heavily used, or if UVM already runs ArcGIS Online, point `basemaps()`
+in `src/map.ts` at a university tile service instead — it is a one-function
 change.
+
+If a basemap ever fails, the map now says so by name rather than just looking
+broken: six consecutive tile failures on the active layer raise a notice
+telling the visitor to pick another layer.
 
 ## Performance at full scale
 
