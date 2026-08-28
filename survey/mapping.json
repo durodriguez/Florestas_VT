@@ -1,0 +1,41 @@
+{
+  "_comment": [
+    "Tells `npm run import` how to read a field-data export. Edit this rather",
+    "than renaming columns by hand in every export you receive.",
+    "",
+    "`columns` maps a schema field to the source headers that mean it. Matching",
+    "ignores case, spaces, underscores and hyphens, so 'DBH (in)' matches 'dbh_in'.",
+    "Add whatever your field app emits; the first alias found in the file wins.",
+    "",
+    "`conditions` maps the words your crew actually writes onto the five",
+    "controlled condition values. An unrecognised value stops that row with a",
+    "clear message rather than silently importing a blank."
+  ],
+
+  "columns": {
+    "plant_id":     ["plant_id", "tag", "tag_no", "accession", "accession_no", "existing_tag", "label"],
+    "species":      ["species", "taxon", "taxon_id", "common_name", "scientific_name", "botanical_name", "spp", "sp"],
+    "lat":          ["lat", "latitude", "y", "gps_lat", "lat_location", "northing"],
+    "lng":          ["lng", "lon", "long", "longitude", "x", "gps_lon", "long_location", "easting"],
+    "latlng":       ["latlng", "lat_lng", "coordinates", "coords", "geometry", "wkt", "position", "gps"],
+    "collection":   ["collection", "collection_id", "area", "bed", "zone", "site", "campus_area"],
+    "dbh_in":       ["dbh_in", "dbh", "diameter", "diameter_in", "dbh_inches", "trunk_diameter"],
+    "height_ft":    ["height_ft", "height", "ht", "height_feet", "tree_height"],
+    "spread_ft":    ["spread_ft", "spread", "crown_spread", "canopy_spread", "crown_width"],
+    "condition":    ["condition", "cond", "health", "vigor", "vigour", "condition_rating"],
+    "planted_year": ["planted_year", "planted", "year_planted", "install_year", "planting_year"],
+    "surveyed_on":  ["surveyed_on", "date", "survey_date", "observed_on", "created_at", "timestamp"],
+    "surveyor":     ["surveyor", "observer", "recorder", "crew", "surveyed_by", "by", "author"],
+    "photo":        ["photo", "photo_file", "photograph", "image", "picture", "img"],
+    "memorial":     ["memorial", "dedication", "donor", "dedicated_to"],
+    "notes":        ["notes", "note", "comments", "comment", "remarks", "description"]
+  },
+
+  "conditions": {
+    "excellent": ["excellent", "exc", "e", "very good", "vg", "very_good"],
+    "good":      ["good", "g", "healthy"],
+    "fair":      ["fair", "f", "moderate", "declining", "some decline"],
+    "poor":      ["poor", "p", "severe decline", "severe_decline", "critical"],
+    "dead":      ["dead", "d", "standing dead", "snag", "deceased"]
+  }
+}

@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Validates every row of the CSVs; fails the build on bad data, so a
+      # mistyped coordinate or an unknown taxon_id never reaches the site.
+      - run: npm run data
+      # Exercises the importer against the checked-in template, so a change to
+      # the schema or the mapping config cannot silently break survey intake.
+      - run: npm run import -- survey/field-template.csv
+      - run: npm run typecheck
+      - run: npm test
+      - run: npx vite build

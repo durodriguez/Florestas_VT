@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Explore every mapped tree, shrub and vine on the University of Vermont campus.">
+  <meta name="theme-color" content="#154734">
+  <title>UVM Arboretum Explorer</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🌳</text></svg>">
+</head>
+<body class="is-loading">
+  <a class="skip-link" href="#results">Skip to plant list</a>
+
+  <header class="topbar">
+    <button type="button" id="toggle-panel" class="icon-btn" aria-label="Toggle search panel">
+      <span aria-hidden="true">☰</span>
+    </button>
+    <div class="brand">
+      <h1 id="site-name">UVM Arboretum</h1>
+      <p id="site-tagline"></p>
+    </div>
+    <button type="button" id="locate" class="icon-btn" aria-label="Find plants near me" title="Find plants near me">
+      <span aria-hidden="true">◎</span>
+    </button>
+  </header>
+
+  <main class="layout">
+    <aside class="panel" aria-label="Search and filters">
+      <div class="panel-search">
+        <label class="visually-hidden" for="search">Search plants</label>
+        <input id="search" type="search" autocomplete="off" spellcheck="false"
+               placeholder="Search a name, family or accession…">
+      </div>
+
+      <form id="filters" class="panel-filters">
+        <details open>
+          <summary>Plant type</summary>
+          <div id="facet-habit" class="facet"></div>
+        </details>
+        <details>
+          <summary>Origin</summary>
+          <div id="facet-native" class="facet"></div>
+        </details>
+        <details>
+          <summary>Campus area</summary>
+          <div id="facet-collection" class="facet"></div>
+        </details>
+        <details>
+          <summary>Family</summary>
+          <div id="facet-family" class="facet facet--scroll"></div>
+        </details>
+        <details>
+          <summary>Condition</summary>
+          <div id="facet-condition" class="facet"></div>
+        </details>
+        <details>
+          <summary>In flower during</summary>
+          <div class="facet">
+            <label class="visually-hidden" for="filter-bloom">Flowering month</label>
+            <select id="filter-bloom"></select>
+          </div>
+        </details>
+        <details>
+          <summary>Trunk size</summary>
+          <div class="facet">
+            <label class="visually-hidden" for="filter-dbh">Minimum diameter at breast height</label>
+            <input id="filter-dbh" type="range" min="0" max="40" step="2" value="0">
+            <p id="filter-dbh-value" class="range-value">Any size</p>
+          </div>
+        </details>
+        <div class="facet facet--plain">
+          <label>
+            <input type="checkbox" id="filter-removed">
+            <span class="facet-label">Include removed plants</span>
+          </label>
+        </div>
+      </form>
+
+      <div class="panel-results">
+        <div class="results-bar">
+          <p id="result-count" class="result-count">—</p>
+          <div class="results-actions">
+            <button type="button" id="zoom-results" class="link-btn">Zoom to results</button>
+            <button type="button" id="export-csv" class="link-btn">Export CSV</button>
+            <button type="button" id="clear-filters" class="link-btn" hidden>Clear all</button>
+          </div>
+        </div>
+        <ul id="results" class="results"></ul>
+        <p id="results-empty" class="results-empty" hidden>
+          No plants match. Try clearing a filter or searching a broader term.
+        </p>
+        <p id="results-more" class="results-more"></p>
+      </div>
+    </aside>
+
+    <div class="map-wrap">
+      <div id="map" role="application" aria-label="Map of campus plants"></div>
+
+      <div class="map-controls">
+        <label class="visually-hidden" for="color-by">Color plants by</label>
+        <select id="color-by">
+          <option value="habit">Color by plant type</option>
+          <option value="native">Color by origin</option>
+          <option value="condition">Color by condition</option>
+          <option value="collection">Color by campus area</option>
+        </select>
+        <ul id="legend-items" class="legend"></ul>
+      </div>
+
+      <section id="detail" class="detail" aria-label="Plant details" hidden></section>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="boot-error" class="boot-error" hidden>
+    <h2>The plant data could not be loaded.</h2>
+    <p id="boot-error-detail"></p>
+    <p>If you are running this locally, generate the data files first with <code>npm run data</code>.</p>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
