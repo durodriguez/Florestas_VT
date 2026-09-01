@@ -1,0 +1,2503 @@
+Tree,Common_Name,Botanical,DBH,Age_Class,Condition
+1,Maple-Silver,Acer saccharinum,22,Semi-mature,Fair
+2,Maple-Sugar,Acer saccharum,21,Semi-mature,Fair
+3,Ash-Green,Fraxinus pennsylvanica,17,Semi-mature,Fair
+4,Fir-Douglas,Pseudotsuga menziesii,11,Semi-mature,Poor
+5,Fir-Douglas,Pseudotsuga menziesii,19,Semi-mature,Fair
+6,Fir-Douglas,Pseudotsuga menziesii,10,Semi-mature,Fair
+7,Maple-Norway,Acer platanoides,33,Mature,Poor
+8,Tuliptree,Liriodendron tulipifera,26,Semi-mature,Good
+9,Tuliptree,Liriodendron tulipifera,13,Young,Good
+10,Maple-Silver,Acer saccharinum,29,Mature,Poor
+12,Maple-Norway,Acer platanoides,26,Mature,Fair
+13,Fir-Douglas,Pseudotsuga menziesii,9,Semi-mature,Fair
+14,Maple-Sugar,Acer saccharum,28,Mature,Fair
+15,Horsechestnut-Common,Aesculus hippocastanum,22,Semi-mature,Good
+16,Horsechestnut-Common,Aesculus hippocastanum,16,Semi-mature,Fair
+17,Maple-Sugar,Acer saccharum,24,Semi-mature,Fair
+18,Maple-Silver,Acer saccharinum,31,Mature,Fair
+19,Maple-Norway,Acer platanoides,27,Mature,Fair
+20,Maple-Silver,Acer saccharinum,24,Mature,Good
+21,Maple-Silver,Acer saccharinum,35,Mature,Fair
+22,Maple-Norway,Acer platanoides,13,Semi-mature,Poor
+23,Maple-Red,Acer rubrum,20,Semi-mature,Fair
+25,Cherry-Flowering,Prunus serrulata,6,Semi-mature,Poor
+26,Fir-White,Abies concolor,17,Semi-mature,Good
+27,Oak- Northern Red,Quercus rubra,27,Mature,Fair
+28,Oak-Pin,Quercus palustris,22,Semi-mature,Fair
+29,Horsechestnut-Common,Aesculus hippocastanum,9,Young,Good
+30,Horsechestnut-Common,Aesculus hippocastanum,18,Semi-mature,Good
+31,Cherry-Flowering,Prunus serrulata,15,Semi-mature,Fair
+32,Cherry-Flowering,Prunus serrulata,10,Semi-mature,Good
+33,Cherry-Flowering,Prunus serrulata,5,Young,Poor
+34,Weeping Cherry,Prunus subhirtella,6,Young,Good
+35,Chokecherry-Amur,Prunus maackii,7,Young,Good
+36,Pine-Austrian,Pinus nigra,17,Semi-mature,Fair
+37,Ginkgo,Ginkgo biloba,15,Semi-mature,Good
+38,Maple-Sugar,Acer saccharum,30,Mature,Fair
+39,Hemlock-Canadian,Tsuga canadensis,18,Semi-mature,Good
+40,Hemlock-Canadian,Tsuga canadensis,21,Semi-mature,Good
+41,Hemlock-Canadian,Tsuga canadensis,12,Semi-mature,Good
+42,Maple-Sugar,Acer saccharum,30,Mature,Fair
+43,Redcedar-Eastern,Juniperus virginiana,12,Semi-mature,Fair
+44,Arborvitae-Eastern,Thuja occidentalis,7,Semi-mature,Good
+45,Maple-Sugar,Acer saccharum,27,Mature,Fair
+46,Maple-Sugar,Acer saccharum,24,Semi-mature,Good
+47,Oak-Bur,Quercus macrocarpa,20,Semi-mature,Good
+49,Pine-Eastern White,Pinus strobus,25,Mature,Fair
+50,Pine-Eastern White,Pinus strobus,15,Semi-mature,Fair
+51,Pine-Eastern White,Pinus strobus,28,Semi-mature,Poor
+52,Pine-Eastern White,Pinus strobus,28,Mature,Poor
+53,Pine-Eastern White,Pinus strobus,23,Mature,Fair
+54,Pine-Eastern White,Pinus strobus,25,Mature,Good
+58,Oak- Northern Red,Quercus rubra,49,Over-mature,Poor
+59,Oak-Pin,Quercus palustris,20,Mature,Fair
+60,Oak-Pin,Quercus palustris,21,Mature,Fair
+61,Oak-Pin,Quercus palustris,16,Semi-mature,Fair
+62,Maple-Sugar,Acer saccharum,38,Over-mature,Poor
+63,Ash-Green,Fraxinus pennsylvanica,23,Mature,Fair
+64,Maple-Silver,Acer saccharinum,32,Mature,Good
+66,Maple-Silver,Acer saccharinum,29,Mature,Fair
+67,Maple-Silver,Acer saccharinum,25,Mature,Fair
+68,Maple-Silver,Acer saccharinum,23,Mature,Fair
+69,Maple-Silver,Acer saccharinum,32,Mature,Fair
+71,Crabapple,Malus sp,18,Semi-mature,Fair
+72,Horsechestnut-Common,Aesculus hippocastanum,22,Semi-mature,Good
+73,Oak-English,Quercus robur,14,Semi-mature,Fair
+74,Horsechestnut-Common,Aesculus hippocastanum,18,Semi-mature,Good
+75,Crabapple,Malus sp,17,Semi-mature,Fair
+76,Spruce-Colorado Blue,Picea pungens,18,Semi-mature,Poor
+77,Crabapple,Malus sp,12,Semi-mature,Fair
+80,Crabapple,Malus sp,11,Semi-mature,Fair
+81,Magnolia-Star,Magnolia stellata,4,Young,Good
+82,Serviceberry,Amelanchier sp,7,Young,Poor
+83,Serviceberry,Amelanchier sp,5,Young,Fair
+84,Spruce-Colorado Blue,Picea pungens,15,Semi-mature,Good
+85,Spruce-Colorado Blue,Picea pungens,17,Semi-mature,Fair
+86,Spruce-Colorado Blue,Picea pungens,17,Semi-mature,Fair
+88,Spruce-Colorado Blue,Picea pungens,15,Semi-mature,Fair
+89,Maple-Red,Acer rubrum,10,Semi-mature,Good
+90,Spruce-Colorado Blue,Picea pungens,19,Semi-mature,Fair
+91,Spruce-Colorado Blue,Picea pungens,15,Semi-mature,Good
+92,Ash-White,Fraxinus americana,36,Mature,Good
+93,Oak- Northern Red,Quercus rubra,18,Semi-mature,Good
+94,Beech-American,Fagus grandifolia,12,Semi-mature,Fair
+95,Spruce-Colorado Blue,Picea pungens,12,Semi-mature,Poor
+96,Spruce-Colorado Blue,Picea pungens,16,Semi-mature,Fair
+97,Spruce-Norway,Picea abies,22,Semi-mature,Good
+98,Spruce-Norway,Picea abies,22,Semi-mature,Good
+99,Maple-Sugar,Acer saccharum,10,Young,Poor
+100,Redwood-Dawn,Metasequoia glyptostroboides,40,Mature,Fair
+101,Spruce-Colorado Blue,Picea pungens,5,Young,Fair
+102,Maple-Silver,Acer saccharinum,20,Semi-mature,Fair
+103,Maple-Silver,Acer saccharinum,23,Mature,Fair
+104,Maple-Silver,Acer saccharinum,24,Mature,Fair
+105,Elm,Ulmus sp,17,Semi-mature,Fair
+107,Elm,Ulmus sp,9,Semi-mature,Fair
+109,Ash-Green,Fraxinus pennsylvanica,31,Mature,Fair
+110,Oak-Pin,Quercus palustris,18,Semi-mature,Good
+111,Oak-Pin,Quercus palustris,18,Semi-mature,Good
+112,Pine-Scotch,Pinus sylvestris,15,Semi-mature,Fair
+113,Oak- Northern Red,Quercus rubra,14,Semi-mature,Fair
+115,Horsechestnut-Common,Aesculus hippocastanum,13,Semi-mature,Good
+116,Crabapple,Malus sp,4,Young,Good
+117,Crabapple,Malus sp,8,Young,Good
+118,Pine-Scotch,Pinus sylvestris,17,Semi-mature,Fair
+119,Pine-Scotch,Pinus sylvestris,16,Semi-mature,Good
+120,Horsechestnut-Common,Aesculus hippocastanum,11,Semi-mature,Good
+121,Oak-Pin,Quercus palustris,18,Semi-mature,Poor
+122,Oak-Pin,Quercus palustris,23,Semi-mature,Fair
+123,Oak-Pin,Quercus palustris,23,Semi-mature,Fair
+124,Ash-Green,Fraxinus pennsylvanica,15,Semi-mature,Fair
+125,Maple-Sugar,Acer saccharum,3,New planting,Poor
+126,Spruce-Norway,Picea abies,19,Semi-mature,Fair
+127,Oak-Pin,Quercus palustris,24,Mature,Poor
+128,Oak-Pin,Quercus palustris,25,Mature,Fair
+129,Oak-Pin,Quercus palustris,23,Mature,Fair
+130,Spruce-Colorado Blue,Picea pungens,14,Semi-mature,Fair
+131,Spruce-Colorado Blue,Picea pungens,17,Semi-mature,Fair
+132,Pine-Austrian,Pinus nigra,9,Young,Good
+133,Crabapple,Malus sp,6,Young,Good
+134,Crabapple,Malus sp,8,Semi-mature,Fair
+135,Crabapple,Malus sp,9,Semi-mature,Fair
+136,Crabapple,Malus sp,6,Semi-mature,Fair
+138,Maple-Sugar,Acer saccharum,18,Semi-mature,Good
+139,Oak-Pin,Quercus palustris,18,Semi-mature,Good
+140,Horsechestnut-Common,Aesculus hippocastanum,16,Semi-mature,Good
+141,Spruce-White,Picea glauca,12,Semi-mature,Fair
+142,Spruce-Norway,Picea abies,22,Mature,Good
+143,Fir-Douglas,Pseudotsuga menziesii,11,Semi-mature,Fair
+144,Spruce-Norway,Picea abies,28,Mature,Good
+145,Spruce-White,Picea glauca,12,Semi-mature,Good
+146,Spruce-White,Picea glauca,10,Semi-mature,Fair
+147,Spruce-Colorado Blue,Picea pungens,12,Semi-mature,Fair
+148,Spruce-Colorado Blue,Picea pungens,19,Mature,Fair
+149,Mountain Ash-European,Sorbus aucuparia,4,Young,Poor
+150,Spruce-Norway,Picea abies,23,Mature,Fair
+151,Oak- Northern Red,Quercus rubra,21,Mature,Poor
+152,Beech-American,Fagus grandifolia,17,Semi-mature,Poor
+154,Spruce-White,Picea glauca,20,Semi-mature,Poor
+155,Maple-Silver,Acer saccharinum,29,Mature,Poor
+156,Ash-Green,Fraxinus pennsylvanica,11,Semi-mature,Fair
+157,Ash-Green,Fraxinus pennsylvanica,9,Semi-mature,Fair
+158,Ash-Green,Fraxinus pennsylvanica,8,Semi-mature,Fair
+159,Ash-Green,Fraxinus pennsylvanica,8,Semi-mature,Fair
+160,Ash-Green,Fraxinus pennsylvanica,9,Semi-mature,Good
+161,Ash-Green,Fraxinus pennsylvanica,9,Semi-mature,Good
+162,Ash-Green,Fraxinus pennsylvanica,9,Semi-mature,Good
+163,Ash-Green,Fraxinus pennsylvanica,9,Semi-mature,Fair
+165,Pine-Austrian,Pinus nigra,15,Mature,Fair
+166,Pine-Austrian,Pinus nigra,9,Semi-mature,Fair
+167,Maple-Sugar,Acer saccharum,14,Semi-mature,Fair
+168,Arborvitae-Eastern,Thuja occidentalis,12,Mature,Fair
+169,Oak- Northern Red,Quercus rubra,27,Mature,Good
+170,Birch-Yellow,Betula alleghaniensis,18,Mature,Good
+171,Oak-English,Quercus robur,14,Mature,Good
+173,Arborvitae-Eastern,Thuja occidentalis,19,Mature,Good
+174,Arborvitae-Eastern,Thuja occidentalis,16,Mature,Fair
+175,Crabapple,Malus sp,6,Mature,Good
+176,Crabapple,Malus sp,13,Mature,Good
+178,Oak-Pin,Quercus palustris,22,Mature,Good
+179,Pine-Austrian,Pinus nigra,10,Semi-mature,Good
+180,Crabapple,Malus sp,8,Mature,Good
+181,Oak-Pin,Quercus palustris,16,Semi-mature,Fair
+182,Oak- Northern Red,Quercus rubra,16,Semi-mature,Good
+183,Oak- Northern Red,Quercus rubra,17,Semi-mature,Good
+184,Maple-Norway,Acer platanoides,16,Mature,Fair
+185,Pine-Eastern White,Pinus strobus,9,Mature,Good
+186,Pine-Eastern White,Pinus strobus,7,Mature,Good
+187,Pine-Eastern White,Pinus strobus,8,Mature,Good
+188,Magnolia-Saucer,Magnolia x soulangiana,4,Mature,Good
+189,Magnolia-Saucer,Magnolia x soulangiana,5,Mature,Good
+190,Spruce-Colorado Blue,Picea pungens,18,Mature,Good
+191,Spruce-Colorado Blue,Picea pungens,17,Mature,Good
+192,Arborvitae-Eastern,Thuja occidentalis,13,Mature,Good
+195,Maple-Sugar,Acer saccharum,28,Mature,Good
+200,Maple-Sugar,Acer saccharum,28,Mature,Fair
+202,Maple-Sugar,Acer saccharum,28,Mature,Good
+203,Hemlock-Canadian,Tsuga canadensis,13,Semi-mature,Good
+204,Hemlock-Canadian,Tsuga canadensis,13,Semi-mature,Good
+205,Maple-Red,Acer rubrum,14,Semi-mature,Poor
+206,Maple-Red,Acer rubrum,11,Semi-mature,Poor
+207,Maple-Norway,Acer platanoides,11,Semi-mature,Fair
+208,Ash-Green,Fraxinus pennsylvanica,16,Semi-mature,Fair
+209,Oak-Pin,Quercus palustris,16,Semi-mature,Good
+210,Crabapple,Malus sp,8,Mature,Good
+211,Crabapple,Malus sp,7,Mature,Fair
+212,Pine-Austrian,Pinus nigra,11,Semi-mature,Poor
+213,Pine-Austrian,Pinus nigra,15,Semi-mature,Fair
+214,Pine-Austrian,Pinus nigra,14,Semi-mature,Fair
+215,Pine-Austrian,Pinus nigra,15,Semi-mature,Fair
+216,Pine-Austrian,Pinus nigra,10,Semi-mature,Poor
+217,Pine-Austrian,Pinus nigra,10,Semi-mature,Poor
+218,Pine-Austrian,Pinus nigra,16,Semi-mature,Fair
+220,Oak- Northern Red,Quercus rubra,11,Young,Good
+221,Maple-Norway,Acer platanoides,14,Semi-mature,Fair
+222,Maple-Norway,Acer platanoides,11,Semi-mature,Fair
+223,Maple-Norway,Acer platanoides,14,Semi-mature,Fair
+224,Oak-English,Quercus robur,22,Mature,Fair
+225,Oak- Northern Red,Quercus rubra,13,Semi-mature,Fair
+226,Maple-Silver,Acer saccharinum,15,Mature,Fair
+227,Mountain Ash-Oakleaf,Sorbus x thuringiaca,8,Semi-mature,Fair
+228,Oak- Northern Red,Quercus rubra,11,Semi-mature,Fair
+229,Ginkgo,Ginkgo biloba,9,Semi-mature,Good
+230,Oak- Northern Red,Quercus rubra,24,Mature,Good
+231,Falsecypress-Nootka,Chamaecyparis nootkatensis,4,Young,Good
+232,Oak- Northern Red,Quercus rubra,16,Mature,Fair
+233,Spruce-White,Picea glauca,12,Semi-mature,Fair
+234,Spruce-White,Picea glauca,17,Mature,Fair
+235,Oak-Pin,Quercus palustris,19,Mature,Good
+236,Maple-Norway,Acer platanoides,21,Mature,Fair
+238,Maple-Norway,Acer platanoides,11,Semi-mature,Fair
+239,Maple-Norway,Acer platanoides,8,Semi-mature,Poor
+240,Crabapple,Malus sp,7,Mature,Fair
+241,Crabapple,Malus sp,6,Mature,Fair
+242,Crabapple,Malus sp,8,Mature,Fair
+243,Crabapple,Malus sp,10,Mature,Fair
+244,Crabapple,Malus sp,8,Mature,Poor
+245,Maple-Norway,Acer platanoides,15,Mature,Fair
+246,Pear-Callery,Pyrus calleryana,16,Mature,Fair
+247,Maple-Norway,Acer platanoides,11,Semi-mature,Fair
+248,Maple-Sugar,Acer saccharum,19,Mature,Fair
+250,Maple-Sugar,Acer saccharum,17,Mature,Fair
+251,Maple-Norway,Acer platanoides,13,Semi-mature,Fair
+252,Crabapple,Malus sp,7,Mature,Fair
+253,Crabapple,Malus sp,9,Mature,Fair
+254,Hawthorn,Crataegus sp,4,Mature,Fair
+255,Hawthorn,Crataegus sp,4,Mature,Fair
+256,Maple-Norway,Acer platanoides,14,Semi-mature,Fair
+257,Elm-American,Ulmus americana,9,Semi-mature,Fair
+258,Maple-Red,Acer rubrum,11,Semi-mature,Fair
+259,Elm-American,Ulmus americana,10,Semi-mature,Fair
+260,Elm-American,Ulmus americana,9,Semi-mature,Fair
+261,Oak-Pin,Quercus palustris,8,Semi-mature,Fair
+262,Oak- Northern Red,Quercus rubra,8,Semi-mature,Fair
+263,Oak-Pin,Quercus palustris,12,Semi-mature,Fair
+264,Oak-Pin,Quercus palustris,8,Semi-mature,Fair
+265,Oak-Pin,Quercus palustris,10,Semi-mature,Fair
+266,Oak-Pin,Quercus palustris,9,Semi-mature,Fair
+267,Oak-Pin,Quercus palustris,8,Semi-mature,Fair
+268,Oak-Pin,Quercus palustris,10,Semi-mature,Fair
+269,Oak-Pin,Quercus palustris,5,Young,Fair
+270,Oak-Pin,Quercus palustris,10,Semi-mature,Fair
+271,Oak-Pin,Quercus palustris,9,Semi-mature,Fair
+272,Oak-Pin,Quercus palustris,11,Semi-mature,Poor
+273,Tuliptree,Liriodendron tulipifera,11,Semi-mature,Fair
+274,Honeylocust-Thornless Common,Gleditsia triacanthos,13,Semi-mature,Fair
+275,Birch-Paper,Betula papyrifera,10,Semi-mature,Fair
+276,Maple-Norway,Acer platanoides,11,Semi-mature,Fair
+277,Maple-Norway,Acer platanoides,9,Semi-mature,Fair
+278,Maple-Norway,Acer platanoides,10,Semi-mature,Fair
+279,Maple-Norway,Acer platanoides,9,Semi-mature,Fair
+280,Maple-Red,Acer rubrum,18,Mature,Fair
+281,Maple-Sugar,Acer saccharum,20,Mature,Poor
+282,Ash-Green,Fraxinus pennsylvanica,24,Mature,Fair
+283,Maple-Red,Acer rubrum,8,Semi-mature,Fair
+284,Ash-Green,Fraxinus pennsylvanica,18,Mature,Fair
+285,Honeylocust-Thornless Common,Gleditsia triacanthos,3,Young,Fair
+286,Honeylocust-Thornless Common,Gleditsia triacanthos,3,Young,Fair
+287,Oak-Pin,Quercus palustris,11,Semi-mature,Fair
+288,Oak-Pin,Quercus palustris,9,Semi-mature,Fair
+289,Oak-Pin,Quercus palustris,11,Semi-mature,Fair
+290,Oak-Pin,Quercus palustris,10,Semi-mature,Fair
+291,Oak-Pin,Quercus palustris,10,Semi-mature,Fair
+292,Oak-Pin,Quercus palustris,10,Semi-mature,Fair
+293,Oak-Pin,Quercus palustris,10,Semi-mature,Fair
+294,Maple-Norway,Acer platanoides,14,Semi-mature,Fair
+295,Maple-Norway,Acer platanoides,9,Semi-mature,Fair
+296,Maple-Norway,Acer platanoides,11,Semi-mature,Fair
+297,Maple-Norway,Acer platanoides,14,Semi-mature,Fair
+298,Maple-Norway,Acer platanoides,14,Semi-mature,Fair
+299,Maple-Norway,Acer platanoides,12,Semi-mature,Fair
+300,Maple-Norway,Acer platanoides,14,Semi-mature,Fair
+301,Maple-Norway,Acer platanoides,13,Semi-mature,Fair
+304,Ginkgo,Ginkgo biloba,22,Mature,Fair
+305,Ginkgo,Ginkgo biloba,21,Mature,Fair
+306,Ginkgo,Ginkgo biloba,7,Young,Good
+307,Spruce-Norway,Picea abies,27,Mature,Good
+308,Spruce-Norway,Picea abies,28,Mature,Good
+309,Crabapple,Malus sp,10,Mature,Fair
+310,Crabapple,Malus sp,5,Mature,Fair
+311,Oak-Pin,Quercus palustris,16,Mature,Fair
+312,Crabapple,Malus sp,7,Mature,Fair
+313,Maple-Sugar,Acer saccharum,23,Mature,Fair
+314,Maple-Sugar,Acer saccharum,26,Mature,Fair
+316,Crabapple,Malus sp,10,Mature,Fair
+317,Crabapple,Malus sp,12,Mature,Fair
+318,Ginkgo,Ginkgo biloba,2,Young,Poor
+319,Ginkgo,Ginkgo biloba,4,Young,Fair
+320,Ginkgo,Ginkgo biloba,2,Young,Fair
+321,Ginkgo,Ginkgo biloba,2,Young,Fair
+322,Ginkgo,Ginkgo biloba,3,Young,Fair
+323,Ginkgo,Ginkgo biloba,3,Young,Fair
+324,Honeylocust-Thornless Common,Gleditsia triacanthos,4,Young,Fair
+325,Honeylocust-Thornless Common,Gleditsia triacanthos,2,Young,Fair
+326,Pine-Red,Pinus resinosa,10,Young,Fair
+327,Pine-Red,Pinus resinosa,13,Semi-mature,Fair
+328,Spruce-White,Picea glauca,8,Semi-mature,Fair
+329,Maple-Red,Acer rubrum,3,Young,Poor
+338,Oak- Northern Red,Quercus rubra,17,Mature,Fair
+340,Elm,Ulmus sp,5,Young,Fair
+341,Honeylocust-Thornless Common,Gleditsia triacanthos,3,Young,Fair
+342,Oak-White,Quercus alba,16,Mature,Poor
+343,Oak-Bur,Quercus macrocarpa,25,Mature,Fair
+345,Honeylocust-Thornless Common,Gleditsia triacanthos,3,Young,Fair
+346,Honeylocust-Thornless Common,Gleditsia triacanthos,3,Young,Fair
+347,Oak-English,Quercus robur,3,Young,Fair
+348,Oak-English,Quercus robur,3,Young,Fair
+349,Oak-Bur,Quercus macrocarpa,19,Mature,Fair
+350,Coffeetree-Kentucky,Gymnocladus dioicus,17,Mature,Fair
+351,Oak-Shingle,Quercus imbricaria,30,Mature,Fair
+352,Maple-Hedge,Acer campestre,16,Mature,Fair
+353,Hawthorn,Crataegus sp,9,Mature,Fair
+354,Hawthorn,Crataegus sp,9,Mature,Fair
+355,Hawthorn,Crataegus sp,12,Mature,Fair
+356,Hawthorn,Crataegus sp,7,Mature,Fair
+357,Hawthorn,Crataegus sp,7,Mature,Fair
+358,Hawthorn,Crataegus sp,8,Mature,Fair
+359,Hawthorn,Crataegus sp,8,Mature,Fair
+360,Oak-Chinkapin,Quercus muehlenbergii,6,Young,Fair
+361,Oak - Scarlet,Quercus coccinea,8,Semi-mature,Fair
+362,Linden-Silver,Tilia tomentosa,14,Semi-mature,Fair
+363,Coffeetree-Kentucky,Gymnocladus dioicus,12,Semi-mature,Fair
+364,Oak-Pin,Quercus palustris,18,Mature,Fair
+365,Oak-White,Quercus alba,20,Mature,Fair
+366,Oak-White,Quercus alba,15,Mature,Fair
+367,Crabapple,Malus sp,8,Mature,Fair
+368,Crabapple,Malus sp,9,Mature,Fair
+369,Crabapple,Malus sp,8,Mature,Fair
+370,Hackberry,Celtis occidentalis,16,Mature,Fair
+371,Coffeetree-Kentucky,Gymnocladus dioicus,4,Young,Fair
+372,Crabapple,Malus sp,5,Mature,Fair
+373,Maple-Norway,Acer platanoides,7,Young,Poor
+374,Crabapple,Malus sp,3,Semi-mature,Fair
+376,Cherry-Flowering,Prunus serrulata,6,Semi-mature,Fair
+377,Cherry-Flowering,Prunus serrulata,7,Semi-mature,Fair
+378,Cherry-Flowering,Prunus serrulata,6,Semi-mature,Fair
+379,Cherry-Flowering,Prunus serrulata,8,Semi-mature,Fair
+380,Oak- Northern Red,Quercus rubra,13,Semi-mature,Fair
+381,Birch-River,Betula nigra,2,Young,Poor
+382,Birch-River,Betula nigra,2,Young,Fair
+383,Birch-River,Betula nigra,2,Young,Fair
+384,Birch-River,Betula nigra,3,Young,Fair
+385,Birch-River,Betula nigra,2,Young,Fair
+386,Birch-River,Betula nigra,2,Young,Fair
+387,Birch-River,Betula nigra,3,Young,Fair
+388,Birch-River,Betula nigra,3,Young,Fair
+389,Birch-River,Betula nigra,2,Young,Fair
+390,Birch-River,Betula nigra,2,Young,Fair
+391,Birch-River,Betula nigra,3,Young,Fair
+392,Birch-River,Betula nigra,4,Young,Fair
+393,Crabapple,Malus sp,4,Semi-mature,Fair
+394,Maple-Norway,Acer platanoides,7,Semi-mature,Fair
+395,Maple-Red,Acer rubrum,3,Young,Poor
+396,Maple-Red,Acer rubrum,3,Young,Fair
+397,Maple-Red,Acer rubrum,4,Young,Fair
+398,Maple-Red,Acer rubrum,4,Young,Fair
+399,Maple-Red,Acer rubrum,4,Young,Fair
+400,Honeylocust-Thornless Common,Gleditsia triacanthos,9,Semi-mature,Fair
+401,Crabapple,Malus sp,5,Semi-mature,Fair
+402,Beech-European,Fagus sylvatica,5,Young,Fair
+409,Maple-Norway,Acer platanoides,18,Mature,Fair
+410,Crabapple,Malus sp,8,Mature,Fair
+411,Birch-Sweet,Betula lenta,13,Semi-mature,Fair
+412,Crabapple,Malus sp,4,Mature,Fair
+414,Oak-Pin,Quercus palustris,10,Semi-mature,Fair
+415,Maple-Sugar,Acer saccharum,21,Mature,Fair
+416,Maple-Silver,Acer saccharinum,14,Semi-mature,Fair
+417,Maple-Sugar,Acer saccharum,17,Mature,Fair
+418,Maple-Sugar,Acer saccharum,11,Semi-mature,Poor
+419,Maple-Sugar,Acer saccharum,11,Semi-mature,Poor
+420,Maple-Norway,Acer platanoides,13,Semi-mature,Fair
+421,Maple-Norway,Acer platanoides,13,Semi-mature,Fair
+422,Maple-Norway,Acer platanoides,12,Semi-mature,Fair
+423,Honeylocust-Thornless Common,Gleditsia triacanthos,13,Mature,Fair
+424,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Mature,Fair
+425,Honeylocust-Thornless Common,Gleditsia triacanthos,15,Mature,Fair
+426,Honeylocust-Thornless Common,Gleditsia triacanthos,16,Mature,Fair
+427,Honeylocust-Thornless Common,Gleditsia triacanthos,12,Mature,Fair
+428,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Mature,Fair
+429,Honeylocust-Thornless Common,Gleditsia triacanthos,13,Mature,Fair
+430,Honeylocust-Thornless Common,Gleditsia triacanthos,18,Mature,Fair
+431,Honeylocust-Thornless Common,Gleditsia triacanthos,21,Mature,Fair
+432,Honeylocust-Thornless Common,Gleditsia triacanthos,12,Mature,Fair
+433,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Mature,Fair
+434,Honeylocust-Thornless Common,Gleditsia triacanthos,11,Mature,Fair
+435,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Mature,Fair
+436,Honeylocust-Thornless Common,Gleditsia triacanthos,13,Mature,Fair
+437,Honeylocust-Thornless Common,Gleditsia triacanthos,12,Mature,Fair
+438,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Mature,Fair
+439,Honeylocust-Thornless Common,Gleditsia triacanthos,17,Mature,Fair
+440,Honeylocust-Thornless Common,Gleditsia triacanthos,11,Mature,Fair
+441,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Mature,Fair
+442,Honeylocust-Thornless Common,Gleditsia triacanthos,16,Mature,Fair
+443,Honeylocust-Thornless Common,Gleditsia triacanthos,20,Mature,Fair
+444,Honeylocust-Thornless Common,Gleditsia triacanthos,15,Mature,Fair
+445,Honeylocust-Thornless Common,Gleditsia triacanthos,15,Mature,Fair
+446,Honeylocust-Thornless Common,Gleditsia triacanthos,12,Mature,Fair
+447,Honeylocust-Thornless Common,Gleditsia triacanthos,12,Mature,Fair
+448,Honeylocust-Thornless Common,Gleditsia triacanthos,15,Mature,Fair
+449,Honeylocust-Thornless Common,Gleditsia triacanthos,12,Mature,Fair
+450,Honeylocust-Thornless Common,Gleditsia triacanthos,11,Mature,Fair
+451,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Mature,Fair
+452,Honeylocust-Thornless Common,Gleditsia triacanthos,15,Mature,Fair
+453,Honeylocust-Thornless Common,Gleditsia triacanthos,12,Mature,Fair
+454,Honeylocust-Thornless Common,Gleditsia triacanthos,16,Mature,Fair
+455,Honeylocust-Thornless Common,Gleditsia triacanthos,11,Mature,Fair
+456,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Mature,Fair
+457,Honeylocust-Thornless Common,Gleditsia triacanthos,15,Mature,Fair
+458,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Mature,Fair
+459,Honeylocust-Thornless Common,Gleditsia triacanthos,11,Mature,Fair
+460,Honeylocust-Thornless Common,Gleditsia triacanthos,10,Mature,Fair
+461,Honeylocust-Thornless Common,Gleditsia triacanthos,12,Mature,Fair
+462,Honeylocust-Thornless Common,Gleditsia triacanthos,13,Mature,Fair
+463,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Mature,Fair
+464,Honeylocust-Thornless Common,Gleditsia triacanthos,13,Mature,Fair
+465,Honeylocust-Thornless Common,Gleditsia triacanthos,13,Mature,Fair
+466,Honeylocust-Thornless Common,Gleditsia triacanthos,12,Mature,Fair
+467,Honeylocust-Thornless Common,Gleditsia triacanthos,20,Mature,Fair
+468,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Mature,Fair
+469,Honeylocust-Thornless Common,Gleditsia triacanthos,15,Mature,Fair
+470,Honeylocust-Thornless Common,Gleditsia triacanthos,11,Mature,Fair
+471,Honeylocust-Thornless Common,Gleditsia triacanthos,10,Mature,Fair
+472,Honeylocust-Thornless Common,Gleditsia triacanthos,20,Mature,Fair
+473,Honeylocust-Thornless Common,Gleditsia triacanthos,17,Mature,Fair
+474,Honeylocust-Thornless Common,Gleditsia triacanthos,17,Mature,Fair
+475,Honeylocust-Thornless Common,Gleditsia triacanthos,17,Mature,Fair
+476,Honeylocust-Thornless Common,Gleditsia triacanthos,17,Mature,Fair
+477,Honeylocust-Thornless Common,Gleditsia triacanthos,21,Mature,Fair
+478,Honeylocust-Thornless Common,Gleditsia triacanthos,13,Mature,Fair
+479,Crimson King Maple,Acer platanoides,9,Semi-mature,Fair
+480,Maple-Red,Acer rubrum,9,Semi-mature,Poor
+481,Maple-Norway,Acer platanoides,10,Semi-mature,Fair
+482,Tuliptree,Liriodendron tulipifera,10,Semi-mature,Fair
+483,Maple-Norway,Acer platanoides,10,Semi-mature,Fair
+484,Birch-Paper,Betula papyrifera,10,Semi-mature,Fair
+485,Linden-Littleleaf,Tilia cordata,9,Semi-mature,Fair
+486,Linden-Littleleaf,Tilia cordata,9,Semi-mature,Fair
+487,Birch-Paper,Betula papyrifera,9,Semi-mature,Fair
+490,Dogwood-Kousa,Cornus kousa,4,Semi-mature,Fair
+491,Hornbeam-American,Ostrya virginiana,4,Semi-mature,Fair
+492,Linden-Littleleaf,Tilia cordata,18,Semi-mature,Fair
+493,Linden-Littleleaf,Tilia cordata,17,Semi-mature,Fair
+494,Linden-Littleleaf,Tilia cordata,17,Semi-mature,Fair
+495,Maple-Sugar,Acer saccharum,9,Semi-mature,Fair
+496,Maple-Norway,Acer platanoides,13,Semi-mature,Poor
+497,Crabapple,Malus sp,5,Mature,Fair
+498,Maple-Norway,Acer platanoides,11,Mature,Fair
+500,Maple-Norway,Acer platanoides,8,Semi-mature,Poor
+501,Maple-Norway,Acer platanoides,13,Semi-mature,Fair
+502,Juniper-Chinese,Juniperus chinensis,6,Semi-mature,Good
+503,Linden-European,Tilia x europaea,4,Young,Good
+504,Linden-European,Tilia x europaea,4,Young,Good
+505,Linden-European,Tilia x europaea,4,Young,Fair
+506,Linden-European,Tilia x europaea,4,Young,Fair
+507,Linden-European,Tilia x europaea,3,Young,Poor
+508,Hornbeam-American,Carpinus caroliniana,3,Young,Poor
+509,Hornbeam-American,Carpinus caroliniana,3,Young,Fair
+510,Hornbeam-American,Carpinus caroliniana,3,Young,Good
+511,Hornbeam-American,Carpinus caroliniana,3,Young,Fair
+512,Hornbeam-American,Carpinus caroliniana,4,Young,Fair
+513,Hornbeam-American,Carpinus caroliniana,3,Young,Good
+514,Hornbeam-American,Carpinus caroliniana,4,Young,Good
+515,Stewartia-Japanese,Stewartia pseudocamellia,2,Young,Good
+516,Hornbeam-American,Carpinus caroliniana,3,Young,Good
+517,Hornbeam-American,Carpinus caroliniana,4,Young,Good
+518,Hornbeam-American,Carpinus caroliniana,3,Young,Good
+519,Ash-Green,Fraxinus pennsylvanica,4,Young,Fair
+520,Ash-Green,Fraxinus pennsylvanica,5,Young,Fair
+521,Arborvitae-Eastern,Thuja occidentalis,3,Young,Good
+522,Crabapple,Malus sp,8,Semi-mature,Good
+523,Serviceberry,Amelanchier sp,5,Semi-mature,Fair
+524,Maple-Norway,Acer platanoides,6,Semi-mature,Fair
+525,Serviceberry,Amelanchier sp,3,Semi-mature,Fair
+526,Lilac-Japanese Tree,Syringa reticulata,7,Semi-mature,Fair
+527,Maple-Norway,Acer platanoides,10,Semi-mature,Poor
+528,Maple-Sugar,Acer saccharum,15,Semi-mature,Poor
+529,Pine-Austrian,Pinus nigra,16,Semi-mature,Fair
+530,Pine-Austrian,Pinus nigra,14,Semi-mature,Fair
+531,Pine-Austrian,Pinus nigra,15,Semi-mature,Fair
+532,Ginkgo,Ginkgo biloba,10,Semi-mature,Good
+533,Ash-Green,Fraxinus pennsylvanica,4,Young,Fair
+534,Ash-Green,Fraxinus pennsylvanica,5,Young,Fair
+535,Ash-Green,Fraxinus pennsylvanica,3,Young,Fair
+536,Pear-Callery,Pyrus calleryana,3,Young,Poor
+537,Pear-Callery,Pyrus calleryana,4,Young,Good
+538,Maple-Sugar,Acer saccharum,2,Young,Poor
+539,Pear-Callery,Pyrus calleryana,3,Young,Good
+540,Pear-Callery,Pyrus calleryana,3,Young,Good
+541,Pear-Callery,Pyrus calleryana,3,Young,Good
+542,Pear-Callery,Pyrus calleryana,5,Young,Good
+543,Maple-Sugar,Acer saccharum,3,Young,Fair
+544,Pear-Callery,Pyrus calleryana,4,Young,Fair
+545,Linden-European,Tilia x europaea,8,Young,Fair
+546,Linden-European,Tilia x europaea,9,Semi-mature,Fair
+547,Maple-Norway,Acer platanoides,14,Semi-mature,Fair
+548,Spruce-Norway,Picea abies,16,Semi-mature,Fair
+549,Maple-Norway,Acer platanoides,12,Semi-mature,Fair
+550,Linden-European,Tilia x europaea,15,Semi-mature,Fair
+551,Maple-Amur,Acer ginnala,8,Mature,Poor
+552,Maple-Amur,Acer ginnala,9,Mature,Poor
+553,Maple-Amur,Acer ginnala,6,Mature,Poor
+554,Maple-Amur,Acer ginnala,5,Mature,Fair
+555,Maple-Amur,Acer ginnala,5,Mature,Fair
+556,Pine-Austrian,Pinus nigra,15,Semi-mature,Fair
+557,Pine-Austrian,Pinus nigra,9,Semi-mature,Fair
+558,Pine-Austrian,Pinus nigra,9,Semi-mature,Poor
+559,Pine-Austrian,Pinus nigra,10,Semi-mature,Poor
+560,Pine-Austrian,Pinus nigra,10,Semi-mature,Fair
+561,Pine-Austrian,Pinus nigra,8,Semi-mature,Poor
+562,Pine-Austrian,Pinus nigra,10,Semi-mature,Poor
+563,Pine-Austrian,Pinus nigra,10,Semi-mature,Good
+564,Pine-Austrian,Pinus nigra,13,Semi-mature,Fair
+565,Pine-Austrian,Pinus nigra,9,Semi-mature,Fair
+566,Pine-Austrian,Pinus nigra,10,Semi-mature,Good
+567,Maple-Norway,Acer platanoides,13,Semi-mature,Good
+568,Oak- Northern Red,Quercus rubra,9,Semi-mature,Fair
+569,Oak-Pin,Quercus palustris,12,Semi-mature,Good
+570,Oak-Pin,Quercus palustris,10,Semi-mature,Good
+571,Maple-Sugar,Acer saccharum,18,Semi-mature,Fair
+572,Fir-Douglas,Pseudotsuga menziesii,20,Mature,Fair
+573,Oak-Pin,Quercus palustris,24,Mature,Fair
+574,Maple-Norway,Acer platanoides,17,Semi-mature,Good
+575,Spruce-Colorado Blue,Picea pungens,16,Semi-mature,Fair
+576,Spruce-Colorado Blue,Picea pungens,25,Mature,Fair
+577,Maple-Norway,Acer platanoides,14,Mature,Poor
+578,Ginkgo,Ginkgo biloba,20,Semi-mature,Good
+579,Ash-Green,Fraxinus pennsylvanica,22,Mature,Fair
+580,Linden-Littleleaf,Tilia cordata,25,Mature,Good
+581,Crabapple,Malus sp,8,Semi-mature,Good
+582,Crabapple,Malus sp,8,Semi-mature,Fair
+583,Crabapple,Malus sp,9,Semi-mature,Fair
+584,Ginkgo,Ginkgo biloba,14,Semi-mature,Fair
+585,Oak-Laurel,Quercus hemisphaerica,35,Mature,Fair
+586,Oak- Northern Red,Quercus rubra,9,Young,Fair
+587,Pine-Eastern White,Pinus strobus,18,Semi-mature,Fair
+588,Pine-Eastern White,Pinus strobus,19,Semi-mature,Fair
+589,Pine-Eastern White,Pinus strobus,8,Young,Good
+590,Crabapple,Malus sp,6,Semi-mature,Fair
+591,Crabapple,Malus sp,11,Semi-mature,Fair
+592,Crabapple,Malus sp,8,Semi-mature,Fair
+593,Spruce-Colorado Blue,Picea pungens,25,Mature,Fair
+594,Pine-Scotch,Pinus sylvestris,8,Semi-mature,Fair
+595,Spruce-Colorado Blue,Picea pungens,19,Semi-mature,Fair
+596,Arborvitae-Eastern,Thuja occidentalis,4,Young,Good
+597,Linden-Littleleaf,Tilia cordata,17,Semi-mature,Fair
+598,Linden-Littleleaf,Tilia cordata,8,Young,Fair
+599,Linden-Littleleaf,Tilia cordata,9,Young,Fair
+600,Arborvitae-Eastern,Thuja occidentalis,5,Semi-mature,Fair
+601,Birch-River,Betula nigra,4,Young,Fair
+602,Birch-River,Betula nigra,4,Young,Good
+603,Birch-River,Betula nigra,3,Young,Good
+604,Zelkova-Japanese,Zelkova serrata,5,Young,Good
+605,Zelkova-Japanese,Zelkova serrata,5,Young,Good
+606,Zelkova-Japanese,Zelkova serrata,6,Young,Good
+607,Zelkova-Japanese,Zelkova serrata,6,Young,Good
+608,Zelkova-Japanese,Zelkova serrata,6,Young,Good
+609,Zelkova-Japanese,Zelkova serrata,6,Young,Good
+610,Zelkova-Japanese,Zelkova serrata,5,Young,Good
+611,Zelkova-Japanese,Zelkova serrata,5,Young,Fair
+612,Zelkova-Japanese,Zelkova serrata,3,Young,Good
+613,Zelkova-Japanese,Zelkova serrata,5,Young,Good
+614,Zelkova-Japanese,Zelkova serrata,5,Young,Good
+615,Oak- Northern Red,Quercus rubra,5,Young,Good
+616,Elm,Ulmus sp,6,Young,Good
+617,Oak- Northern Red,Quercus rubra,4,Young,Good
+618,Maple-Sugar,Acer saccharum,8,Young,Good
+619,Oak-Swamp White,Quercus bicolor,4,Young,Good
+620,Honeylocust-Thornless Common,Gleditsia triacanthos,4,Young,Good
+621,Honeylocust-Thornless Common,Gleditsia triacanthos,4,Young,Good
+622,Honeylocust-Thornless Common,Gleditsia triacanthos,4,Young,Good
+623,Oak-Swamp White,Quercus bicolor,4,Young,Good
+624,Oak-Swamp White,Quercus bicolor,4,Young,Good
+625,Pear-Callery,Pyrus calleryana,4,Young,Good
+626,Dogwood-Corneliancherry,Cornus mas,2,Young,Good
+627,Crabapple,Malus sp,3,Young,Good
+628,Serviceberry,Amelanchier sp,2,Young,Good
+629,Serviceberry,Amelanchier sp,2,Young,Good
+630,Cherry,Prunus sp,4,Young,Good
+631,Cherry,Prunus sp,2,Young,Good
+632,Zelkova-Japanese,Zelkova serrata,6,Young,Good
+633,Zelkova-Japanese,Zelkova serrata,5,Young,Good
+634,Zelkova-Japanese,Zelkova serrata,5,Young,Good
+635,Zelkova-Japanese,Zelkova serrata,6,Young,Good
+636,Mulberry-White,Morus alba,2,Young,Good
+637,Zelkova-Japanese,Zelkova serrata,4,Young,Fair
+638,Zelkova-Japanese,Zelkova serrata,4,Young,Fair
+639,Fir-Balsam,Abies balsamea,2,Young,Good
+640,Fir-Balsam,Abies balsamea,2,Young,Good
+641,Fir-Balsam,Abies balsamea,2,Young,Good
+642,Serviceberry,Amelanchier sp,2,Young,Fair
+643,Serviceberry,Amelanchier sp,2,Young,Fair
+644,Serviceberry,Amelanchier sp,2,Young,Good
+645,Serviceberry,Amelanchier sp,2,Young,Good
+646,Serviceberry,Amelanchier sp,2,Young,Good
+647,Cherry,Prunus sp,2,Young,Good
+648,Serviceberry,Amelanchier sp,2,Young,Fair
+649,Serviceberry,Amelanchier sp,2,Young,Fair
+650,Serviceberry,Amelanchier sp,2,Young,Good
+651,Serviceberry,Amelanchier sp,2,Young,Fair
+652,Serviceberry,Amelanchier sp,2,Young,Good
+653,Serviceberry,Amelanchier sp,2,Young,Good
+654,Serviceberry,Amelanchier sp,2,Young,Good
+655,Oak-English,Quercus robur,4,Young,Good
+656,Oak-English,Quercus robur,4,Young,Good
+657,Oak-English,Quercus robur,3,Young,Good
+658,Oak-English,Quercus robur,4,Young,Good
+659,Serviceberry,Amelanchier sp,2,Young,Fair
+660,Serviceberry,Amelanchier sp,2,Young,Good
+661,Serviceberry,Amelanchier sp,2,Young,Good
+662,Serviceberry,Amelanchier sp,2,Young,Fair
+663,Elm,Ulmus sp,4,Young,Good
+664,Elm,Ulmus sp,4,Young,Good
+665,Cedar-Alaska,Callitropsis nootkatensis,2,Young,Good
+666,Cedar-Alaska,Callitropsis nootkatensis,4,Young,Good
+667,Cedar-Alaska,Callitropsis nootkatensis,3,Young,Good
+668,Yellowwood,Cladrastis kentukea,3,Young,Good
+669,Elm,Ulmus sp,4,Young,Good
+670,Elm,Ulmus sp,5,Young,Good
+671,Elm,Ulmus sp,5,Young,Good
+672,Elm,Ulmus sp,5,Young,Good
+673,Elm,Ulmus sp,4,Young,Good
+674,Baldcypress-Common,Taxodium distichum,2,Young,Good
+675,Redwood-Dawn,Metasequoia glyptostroboides,4,Young,Good
+676,Redwood-Dawn,Metasequoia glyptostroboides,4,Young,Good
+677,Honeylocust-Thornless Common,Gleditsia triacanthos,4,Young,Good
+678,Smoketree-Common,Cotinus coggygria,2,Young,Good
+679,Yellowwood,Cladrastis kentukea,4,Young,Good
+680,Cedar-Alaska,Callitropsis nootkatensis,2,Young,Good
+681,Cedar-Alaska,Callitropsis nootkatensis,2,Young,Good
+682,Cedar-Alaska,Callitropsis nootkatensis,2,Young,Good
+683,Dogwood-Flowering,Cornus florida,2,Young,Good
+684,wafer ash,Ptelea trifoliata,1,Young,Good
+685,Dogwood-Flowering,Cornus florida,2,Young,Good
+686,Persimmon,Diospyros virginiana,4,Young,Good
+687,Persimmon,Diospyros virginiana,2,Young,Good
+688,Persimmon,Diospyros virginiana,4,Young,Good
+689,Devils Walkingstick,Aralia spinosa,2,Young,Good
+690,Cherry,Prunus sp,1,Young,Good
+691,Fir-Nordman,Abies nordmanniana,6,Young,Good
+692,Fir-Nordman,Abies nordmanniana,4,Young,Good
+693,Fir-Nordman,Abies nordmanniana,3,Young,Fair
+694,Fir-Nordman,Abies nordmanniana,6,Young,Fair
+695,Redbud-Eastern,Cercis canadensis,2,Young,Good
+696,Redbud-Eastern,Cercis canadensis,3,Young,Good
+697,Coffeetree-Kentucky,Gymnocladus dioicus,2,Young,Good
+698,Cherry,Prunus sp,2,Young,Good
+699,Redwood-Dawn,Metasequoia glyptostroboides,3,Young,Good
+700,Redwood-Dawn,Metasequoia glyptostroboides,2,Young,Good
+701,Silverbell-Four Winged,Halesia tetraptera,1,Young,Good
+702,Redwood-Dawn,Metasequoia glyptostroboides,2,Young,Good
+703,Cherry,Prunus sp,2,Young,Good
+704,Sassafras-Common,Sassafras albidum,2,Young,Good
+705,Dogwood-Flowering,Cornus florida,1,Young,Good
+706,Redbud-Eastern,Cercis canadensis,1,Young,Good
+707,Yellowwood,Cladrastis kentukea,1,Young,Good
+708,Serviceberry,Amelanchier sp,2,Young,Good
+709,Serviceberry,Amelanchier sp,2,Young,Good
+710,Elm-Scotch,Ulmus glabra,2,Young,Good
+711,Silverbell-Four Winged,Halesia tetraptera,5,Mature,Good
+712,Silverbell-Four Winged,Halesia tetraptera,7,Mature,Good
+713,Hornbeam-American,Carpinus caroliniana,7,Mature,Good
+714,Devils Walkingstick,Aralia spinosa,2,Mature,Fair
+715,Katsuratree,Cercidiphyllum japonicum,4,Semi-mature,Good
+716,Birch-River,Betula nigra,2,Young,Good
+717,Crabapple,Malus sp,3,Semi-mature,Good
+718,Crabapple,Malus sp,5,Mature,Fair
+719,Crabapple,Malus sp,9,Mature,Good
+720,Crabapple,Malus sp,9,Mature,Good
+721,Crabapple,Malus sp,13,Mature,Good
+722,Crabapple,Malus sp,5,Mature,Good
+723,Crabapple,Malus sp,10,Mature,Good
+724,Linden-Silver,Tilia tomentosa,6,Semi-mature,Good
+725,Linden-Silver,Tilia tomentosa,5,Semi-mature,Good
+726,Linden-Silver,Tilia tomentosa,6,Semi-mature,Good
+727,Linden-Silver,Tilia tomentosa,6,Semi-mature,Good
+728,Linden-Silver,Tilia tomentosa,6,Semi-mature,Good
+729,Linden-Silver,Tilia tomentosa,5,Semi-mature,Good
+730,Linden-Silver,Tilia tomentosa,5,Semi-mature,Good
+731,Honeylocust-Thornless Common,Gleditsia triacanthos,6,Semi-mature,Good
+732,Juniper,Juniperus sp,2,Semi-mature,Fair
+733,Serviceberry,Amelanchier sp,5,Semi-mature,Fair
+734,Serviceberry,Amelanchier sp,3,Semi-mature,Fair
+735,Crabapple,Malus sp,12,Mature,Good
+736,Crabapple,Malus sp,9,Mature,Good
+737,Maple-Sugar,Acer saccharum,24,Mature,Fair
+738,Beech-European,Fagus sylvatica,26,Mature,Good
+739,Maple-Sugar,Acer saccharum,20,Mature,Good
+740,Maple-Sugar,Acer saccharum,34,Over-mature,Fair
+741,Maple-Sugar,Acer saccharum,28,Mature,Fair
+742,Maple-Japanese,Acer palmatum,2,Semi-mature,Good
+743,Falsecypress-Hinoki,Chamaecyparis obtusa,2,Young,Fair
+744,Falsecypress-Sawara,Chamaecyparis pisifera,2,Young,Good
+745,Spruce-Norway,Picea abies,9,Semi-mature,Good
+746,Spruce-Norway,Picea abies,5,Young,Good
+747,Cherry,Prunus sp,15,Mature,Good
+748,Juniper,Juniperus sp,2,Young,Fair
+749,Crimson King Maple,Acer platanoides,18,Mature,Good
+750,Cherry,Prunus sp,7,Semi-mature,Good
+751,Beech-European,Fagus sylvatica,19,Semi-mature,Good
+752,Crabapple,Malus sp,6,Mature,Good
+753,Hawthorn,Crataegus sp,4,Mature,Good
+754,Hawthorn,Crataegus sp,4,Mature,Good
+755,Crabapple,Malus sp,7,Mature,Fair
+756,Serviceberry,Amelanchier sp,3,Semi-mature,Good
+757,Hawthorn,Crataegus sp,6,Mature,Fair
+758,Serviceberry,Amelanchier sp,2,Semi-mature,Good
+759,Oak- Northern Red,Quercus rubra,3,Young,Fair
+760,Beech-American,Fagus grandifolia,2,Young,Good
+761,Oak-English,Quercus robur,2,New planting,Good
+762,swamp chestnut oak,Quercus michauxii,3,Young,Good
+763,Birch-River,Betula nigra,3,Young,Fair
+764,Birch-River,Betula nigra,2,Young,Fair
+765,Birch-River,Betula nigra,2,Young,Fair
+766,Elm-Scotch,Ulmus glabra,2,Young,Good
+767,Elm-Siberian,Ulmus pumila,25,Mature,Fair
+768,Baldcypress-Common,Taxodium distichum,4,Young,Good
+769,Baldcypress-Common,Taxodium distichum,2,Young,Good
+770,Baldcypress-Common,Taxodium distichum,4,Young,Good
+771,Baldcypress-Common,Taxodium distichum,3,Young,Good
+772,Baldcypress-Common,Taxodium distichum,2,Young,Good
+773,Birch-River,Betula nigra,8,Mature,Good
+774,Maple-Japanese,Acer palmatum,2,Semi-mature,Fair
+775,Maple-Paperbark,Acer griseum,3,Young,Good
+776,Katsuratree,Cercidiphyllum japonicum,2,Semi-mature,Good
+777,Devils Walkingstick,Aralia spinosa,3,Semi-mature,Good
+778,Ginkgo,Ginkgo biloba,3,Young,Good
+779,Poplar-Lombardy,Populus nigra,5,Semi-mature,Good
+780,Poplar-Lombardy,Populus nigra,6,Semi-mature,Good
+781,Poplar-Lombardy,Populus nigra,7,Semi-mature,Good
+782,Magnolia-Bigleaf,Magnolia macrophylla,5,Semi-mature,Good
+783,Magnolia-Southern,Magnolia grandiflora,3,Semi-mature,Fair
+784,Serviceberry,Amelanchier sp,2,Young,Poor
+785,Serviceberry,Amelanchier sp,2,Young,Fair
+786,Serviceberry,Amelanchier sp,2,Young,Fair
+787,Serviceberry,Amelanchier sp,2,Young,Fair
+788,Elm,Ulmus sp,4,Young,Fair
+789,Elm,Ulmus sp,3,Young,Poor
+790,Elm,Ulmus sp,3,Young,Poor
+791,Elm,Ulmus sp,4,Young,Good
+792,Elm,Ulmus sp,4,Young,Good
+793,Elm,Ulmus sp,4,Young,Good
+794,Elm,Ulmus sp,5,Young,Good
+795,Elm,Ulmus sp,5,Young,Good
+796,Elm,Ulmus sp,4,Young,Good
+797,Elm,Ulmus sp,5,Young,Good
+798,Horsechestnut-Common,Aesculus hippocastanum,23,Mature,Fair
+799,Spruce-White,Picea glauca,2,Young,Good
+800,Spruce-White,Picea glauca,2,Young,Good
+801,Spruce-White,Picea glauca,2,Young,Good
+802,Spruce-White,Picea glauca,2,Young,Good
+803,Spruce-White,Picea glauca,2,Young,Good
+804,Spruce-White,Picea glauca,4,Young,Good
+805,Spruce-White,Picea glauca,4,Young,Good
+806,Spruce-White,Picea glauca,2,Young,Good
+807,Spruce-White,Picea glauca,3,Young,Good
+808,Spruce-White,Picea glauca,2,Young,Good
+809,Spruce-White,Picea glauca,2,Young,Good
+810,Birch-Paper,Betula papyrifera,2,Young,Fair
+811,Birch-Paper,Betula papyrifera,2,Young,Fair
+812,Birch-Paper,Betula papyrifera,2,Young,Fair
+813,Birch-Paper,Betula papyrifera,2,Young,Fair
+814,Birch-Paper,Betula papyrifera,2,Young,Fair
+815,Birch-Paper,Betula papyrifera,2,Young,Fair
+816,Birch-Paper,Betula papyrifera,2,Young,Fair
+817,Birch-Paper,Betula papyrifera,2,Young,Fair
+818,Birch-Paper,Betula papyrifera,2,Young,Fair
+819,Birch-Paper,Betula papyrifera,3,Young,Fair
+820,Spruce-White,Picea glauca,1,Young,Good
+821,Spruce-White,Picea glauca,2,Young,Good
+822,Ash-Green,Fraxinus pennsylvanica,23,Mature,Fair
+823,Birch-Paper,Betula papyrifera,3,Young,Fair
+824,Birch-Paper,Betula papyrifera,3,Young,Fair
+825,Birch-Paper,Betula papyrifera,3,Young,Fair
+826,Linden-Littleleaf,Tilia cordata,11,Semi-mature,Good
+827,Oak-Pin,Quercus palustris,12,Semi-mature,Fair
+828,Linden-European,Tilia x europaea,16,Semi-mature,Fair
+829,Ash-Green,Fraxinus pennsylvanica,20,Mature,Good
+830,Spruce-White,Picea glauca,2,Young,Good
+831,Birch-Paper,Betula papyrifera,3,Young,Fair
+832,Spruce-White,Picea glauca,3,Young,Fair
+833,Birch-Paper,Betula papyrifera,3,Young,Fair
+834,Birch-Paper,Betula papyrifera,3,Young,Fair
+835,Spruce-White,Picea glauca,3,Young,Good
+836,Spruce-White,Picea glauca,6,Young,Good
+837,Pine-Austrian,Pinus nigra,6,Young,Fair
+838,Spruce-Colorado Blue,Picea pungens,8,Semi-mature,Good
+839,Pine-Austrian,Pinus nigra,7,Semi-mature,Good
+840,Smoketree-American,Cotinus obovatus,6,Mature,Fair
+841,Crabapple,Malus sp,6,Mature,Good
+842,Crabapple,Malus sp,6,Mature,Good
+843,Spruce-Colorado Blue,Picea pungens,0,Semi-mature,Good
+844,Spruce-Colorado Blue,Picea pungens,14,Semi-mature,Good
+845,Crabapple,Malus sp,9,Mature,Good
+846,Crabapple,Malus sp,9,Mature,Good
+847,Crabapple,Malus sp,10,Mature,Good
+848,Crabapple,Malus sp,2,Young,Good
+849,Hawthorn,Crataegus sp,13,Mature,Good
+850,Spruce-Norway,Picea abies,15,Mature,Fair
+851,Spruce-White,Picea glauca,2,Young,Good
+852,Spruce-White,Picea glauca,3,Young,Good
+853,Spruce-White,Picea glauca,3,Young,Fair
+854,Spruce-Norway,Picea abies,19,Mature,Fair
+855,Spruce-Norway,Picea abies,19,Mature,Fair
+856,Spruce-Norway,Picea abies,14,Semi-mature,Fair
+857,Mulberry-White,Morus alba,2,Young,Fair
+858,Hawthorn,Crataegus sp,6,Mature,Good
+859,Spruce-Norway,Picea abies,13,Semi-mature,Fair
+860,Spruce-Norway,Picea abies,15,Semi-mature,Fair
+861,Spruce-Norway,Picea abies,15,Semi-mature,Fair
+862,Spruce-White,Picea glauca,2,Young,Good
+863,Spruce-White,Picea glauca,2,Young,Fair
+864,Spruce-White,Picea glauca,2,Young,Fair
+865,Hawthorn,Crataegus sp,6,Over-mature,Poor
+866,Linden-Silver,Tilia tomentosa,10,Semi-mature,Good
+867,Birch-Paper,Betula papyrifera,4,Semi-mature,Good
+868,Birch-Paper,Betula papyrifera,5,Semi-mature,Good
+869,Spruce-White,Picea glauca,14,Semi-mature,Good
+870,Spruce-Norway,Picea abies,13,Semi-mature,Fair
+871,Spruce-White,Picea glauca,5,Young,Dead
+872,Spruce-Norway,Picea abies,14,Semi-mature,Fair
+873,Birch-Paper,Betula papyrifera,3,Semi-mature,Poor
+874,Birch-Paper,Betula papyrifera,3,Semi-mature,Good
+875,Birch-Paper,Betula papyrifera,4,Semi-mature,Good
+876,Spruce-White,Picea glauca,14,Semi-mature,Fair
+877,Oak- Northern Red,Quercus rubra,20,Mature,Poor
+878,Oak- Northern Red,Quercus rubra,20,Mature,Fair
+879,Linden-American,Tilia americana,4,Young,Fair
+880,Oak- Northern Red,Quercus rubra,17,Semi-mature,Fair
+881,Oak- Northern Red,Quercus rubra,16,Semi-mature,Fair
+882,Spruce-Norway,Picea abies,18,Mature,Fair
+883,Fir-Douglas,Pseudotsuga menziesii,21,Mature,Poor
+884,Spruce-Norway,Picea abies,16,Semi-mature,Fair
+885,Spruce-Norway,Picea abies,8,Semi-mature,Dead
+886,Spruce-Norway,Picea abies,18,Semi-mature,Fair
+887,Spruce-Norway,Picea abies,16,Mature,Fair
+888,Spruce-Norway,Picea abies,20,Mature,Fair
+889,Linden-American,Tilia americana,24,Mature,Fair
+890,Oak- Northern Red,Quercus rubra,28,Mature,Fair
+891,Oak- Northern Red,Quercus rubra,24,Mature,Fair
+892,Oak-Swamp White,Quercus bicolor,22,Mature,Fair
+893,Maple-Norway,Acer platanoides,3,Young,Good
+894,Maple-Norway,Acer platanoides,3,Young,Fair
+895,Maple-Norway,Acer platanoides,5,Young,Fair
+896,Maple-Norway,Acer platanoides,3,Young,Fair
+897,Maple-Norway,Acer platanoides,3,Young,Fair
+898,Maple-Norway,Acer platanoides,5,Young,Good
+899,Maple-Norway,Acer platanoides,3,Young,Good
+900,Maple-Norway,Acer platanoides,4,Young,Good
+901,Maple-Norway,Acer platanoides,4,Young,Good
+902,Maple-Norway,Acer platanoides,4,Young,Good
+903,Maple-Norway,Acer platanoides,4,Young,Good
+904,Crabapple,Malus sp,5,Young,Good
+905,Cherry-Pin,Prunus pennsylvanica,1,New planting,Good
+906,Maple-Norway,Acer platanoides,8,Young,Fair
+907,Maple-Norway,Acer platanoides,7,Young,Fair
+908,Maple-Norway,Acer platanoides,7,Young,Fair
+909,Maple-Norway,Acer platanoides,7,Young,Good
+910,Maple-Norway,Acer platanoides,5,Young,Fair
+911,Arborvitae-Eastern,Thuja occidentalis,2,Young,Fair
+912,Oak- Northern Red,Quercus rubra,3,Young,Fair
+913,Crabapple,Malus sp,5,Young,Good
+914,Crabapple,Malus sp,5,Young,Good
+915,Crabapple,Malus sp,2,Young,Good
+916,Crabapple,Malus sp,3,Young,Good
+917,Crabapple,Malus sp,3,Young,Good
+918,Oak- Northern Red,Quercus rubra,3,Young,Poor
+919,Oak- Northern Red,Quercus rubra,3,Young,Fair
+920,Oak- Northern Red,Quercus rubra,3,Young,Fair
+921,Oak- Northern Red,Quercus rubra,3,Young,Poor
+922,Oak- Northern Red,Quercus rubra,4,Young,Poor
+923,Oak- Northern Red,Quercus rubra,4,Young,Poor
+924,Oak- Northern Red,Quercus rubra,4,Young,Fair
+925,Oak- Northern Red,Quercus rubra,4,Young,Fair
+926,Oak- Northern Red,Quercus rubra,3,Young,Fair
+927,Oak- Northern Red,Quercus rubra,4,Young,Fair
+928,Oak- Northern Red,Quercus rubra,4,Young,Poor
+929,Oak- Northern Red,Quercus rubra,3,Young,Poor
+930,Oak- Northern Red,Quercus rubra,3,Young,Poor
+931,Oak- Northern Red,Quercus rubra,3,Young,Poor
+932,Oak- Northern Red,Quercus rubra,4,Young,Fair
+933,Oak- Northern Red,Quercus rubra,4,Young,Fair
+934,Oak- Northern Red,Quercus rubra,4,Young,Fair
+935,Oak- Northern Red,Quercus rubra,3,Young,Good
+936,Oak- Northern Red,Quercus rubra,3,Young,Poor
+937,Maple-Red,Acer rubrum,5,Young,Poor
+938,Maple-Red,Acer rubrum,6,Young,Fair
+939,Birch-Paper,Betula papyrifera,4,Young,Fair
+940,Oak- Northern Red,Quercus rubra,3,Young,Fair
+941,Oak- Northern Red,Quercus rubra,4,Young,Fair
+942,Oak- Northern Red,Quercus rubra,3,Young,Good
+943,Oak- Northern Red,Quercus rubra,3,Young,Fair
+944,Oak- Northern Red,Quercus rubra,2,Young,Poor
+945,Oak- Northern Red,Quercus rubra,3,Young,Poor
+946,Hackberry,Celtis occidentalis,2,Young,Poor
+947,Hackberry,Celtis occidentalis,3,Young,Fair
+948,Hackberry,Celtis occidentalis,4,Young,Poor
+949,Hackberry,Celtis occidentalis,4,Young,Good
+950,Hackberry,Celtis occidentalis,3,Young,Fair
+951,Hackberry,Celtis occidentalis,2,Young,Poor
+952,Hackberry,Celtis occidentalis,4,Young,Fair
+953,Hackberry,Celtis occidentalis,5,Young,Good
+954,Hackberry,Celtis occidentalis,3,Young,Fair
+955,Oak- Northern Red,Quercus rubra,16,Semi-mature,Good
+956,Horsechestnut-Common,Aesculus hippocastanum,15,Semi-mature,Good
+957,Oak- Northern Red,Quercus rubra,2,Young,Fair
+958,Oak- Northern Red,Quercus rubra,3,Young,Fair
+959,Oak- Northern Red,Quercus rubra,9,Young,Fair
+960,Oak-Bur,Quercus macrocarpa,8,Young,Good
+961,Oak- Northern Red,Quercus rubra,8,Young,Fair
+962,Oak- Northern Red,Quercus rubra,9,Young,Fair
+963,Oak-Pin,Quercus palustris,14,Semi-mature,Fair
+964,Oak-Bur,Quercus macrocarpa,6,Young,Fair
+965,Oak- Northern Red,Quercus rubra,15,Semi-mature,Fair
+966,Oak- Northern Red,Quercus rubra,8,Young,Fair
+967,Oak- Northern Red,Quercus rubra,5,Young,Fair
+968,Oak- Northern Red,Quercus rubra,6,Young,Fair
+969,Oak- Northern Red,Quercus rubra,11,Semi-mature,Poor
+970,Oak-Pin,Quercus palustris,20,Semi-mature,Fair
+971,Oak- Northern Red,Quercus rubra,4,Semi-mature,Fair
+972,Crabapple,Malus sp,9,Semi-mature,Fair
+973,Crabapple,Malus sp,5,Semi-mature,Fair
+974,Crabapple,Malus sp,14,Semi-mature,Fair
+975,Ash-Green,Fraxinus pennsylvanica,0,Young,Fair
+976,Crabapple,Malus sp,15,Mature,Fair
+977,Crabapple,Malus sp,17,Mature,Fair
+978,Crabapple,Malus sp,18,Mature,Fair
+979,Crabapple,Malus sp,18,Mature,Fair
+980,Crabapple,Malus sp,19,Mature,Fair
+981,Crabapple,Malus sp,17,Mature,Fair
+982,Crabapple,Malus sp,15,Mature,Fair
+983,Crabapple,Malus sp,16,Mature,Fair
+984,Crabapple,Malus sp,17,Mature,Fair
+985,Maple-Sugar,Acer saccharum,24,Mature,Fair
+986,Maple-Sugar,Acer saccharum,25,Mature,Good
+987,Maple-Sugar,Acer saccharum,31,Mature,Fair
+988,Maple-Sugar,Acer saccharum,24,Mature,Fair
+989,Maple-Sugar,Acer saccharum,27,Mature,Fair
+990,Maple-Sugar,Acer saccharum,26,Mature,Good
+991,Maple-Sugar,Acer saccharum,18,Mature,Poor
+992,Maple-Sugar,Acer saccharum,30,Mature,Fair
+993,Maple-Sugar,Acer saccharum,22,Mature,Fair
+994,Maple-Sugar,Acer saccharum,23,Mature,Fair
+995,Maple-Sugar,Acer saccharum,25,Mature,Good
+996,Maple-Sugar,Acer saccharum,24,Mature,Good
+997,Maple-Sugar,Acer saccharum,26,Mature,Good
+998,Maple-Sugar,Acer saccharum,22,Mature,Good
+999,Maple-Sugar,Acer saccharum,20,Mature,Good
+1000,Hackberry,Celtis occidentalis,5,Young,Fair
+1001,Maple-Sugar,Acer saccharum,27,Mature,Fair
+1002,Oak-English,Quercus robur,2,New planting,Fair
+1003,Fir-Balsam,Abies balsamea,5,Young,Good
+1004,Ash-Green,Fraxinus pennsylvanica,18,Semi-mature,Fair
+1005,Oak-English,Quercus robur,2,New planting,Fair
+1006,Fir-Balsam,Abies balsamea,3,New planting,Poor
+1007,Linden-Littleleaf,Tilia cordata,10,Semi-mature,Fair
+1008,Linden-Littleleaf,Tilia cordata,13,Semi-mature,Fair
+1009,Linden-Littleleaf,Tilia cordata,13,Semi-mature,Fair
+1010,Linden-Littleleaf,Tilia cordata,15,Semi-mature,Fair
+1011,Pine-Eastern White,Pinus strobus,6,Semi-mature,Good
+1012,Oak- Northern Red,Quercus rubra,20,Semi-mature,Fair
+1013,Birch-Gray,Betula populifolia,5,Young,Good
+1014,Birch-Gray,Betula populifolia,4,Young,Good
+1015,Oak-Pin,Quercus palustris,20,Semi-mature,Fair
+1016,Linden-Littleleaf,Tilia cordata,17,Semi-mature,Fair
+1017,Linden-Littleleaf,Tilia cordata,17,Semi-mature,Fair
+1018,Linden-Littleleaf,Tilia cordata,15,Semi-mature,Fair
+1019,Linden-Littleleaf,Tilia cordata,16,Semi-mature,Fair
+1020,Linden-Littleleaf,Tilia cordata,14,Semi-mature,Fair
+1021,Linden-Littleleaf,Tilia cordata,18,Semi-mature,Fair
+1022,Linden-Littleleaf,Tilia cordata,17,Semi-mature,Fair
+1023,Arborvitae-Eastern,Thuja occidentalis,5,Semi-mature,Good
+1024,Linden-Littleleaf,Tilia cordata,14,Semi-mature,Good
+1025,Hornbeam-American,Carpinus caroliniana,5,Young,Poor
+1026,Linden-Littleleaf,Tilia cordata,6,Young,Poor
+1027,Linden-Littleleaf,Tilia cordata,8,Semi-mature,Fair
+1028,Linden-Littleleaf,Tilia cordata,7,Semi-mature,Fair
+1029,Linden-Littleleaf,Tilia cordata,12,Semi-mature,Fair
+1030,Linden-European,Tilia x europaea,2,Young,Fair
+1031,Crabapple,Malus sp,6,Semi-mature,Good
+1032,Linden-European,Tilia x europaea,4,Young,Good
+1033,Ginkgo,Ginkgo biloba,7,Semi-mature,Fair
+1034,Linden-European,Tilia x europaea,3,Young,Good
+1035,Linden-European,Tilia x europaea,3,Young,Good
+1036,Linden-European,Tilia x europaea,3,Young,Fair
+1037,Hornbeam-American,Carpinus caroliniana,4,Young,Fair
+1038,Zelkova-Japanese,Zelkova serrata,4,Young,Dead
+1039,Hornbeam-American,Carpinus caroliniana,4,Young,Fair
+1040,Hornbeam-American,Carpinus caroliniana,2,Young,Poor
+1041,Hornbeam-American,Carpinus caroliniana,3,Young,Good
+1042,Hornbeam-American,Carpinus caroliniana,4,Young,Fair
+1043,Hornbeam-American,Carpinus caroliniana,3,Young,Fair
+1044,Hornbeam-American,Carpinus caroliniana,3,Young,Good
+1045,Hornbeam-American,Carpinus caroliniana,4,Young,Good
+1046,Hornbeam-American,Carpinus caroliniana,3,Young,Fair
+1047,Linden-European,Tilia x europaea,3,Young,Good
+1048,Linden-European,Tilia x europaea,4,Young,Good
+1049,Linden-European,Tilia x europaea,4,Young,Good
+1050,Linden-European,Tilia x europaea,4,Young,Good
+1051,Serviceberry,Amelanchier sp,3,Young,Poor
+1052,Serviceberry,Amelanchier sp,3,Young,Fair
+1053,Linden-European,Tilia x europaea,3,Young,Good
+1054,Linden-European,Tilia x europaea,3,Young,Good
+1055,Linden-European,Tilia x europaea,3,Young,Good
+1056,Serviceberry,Amelanchier sp,3,Young,Good
+1057,Serviceberry,Amelanchier sp,3,Young,Fair
+1058,Linden-European,Tilia x europaea,2,Young,Poor
+1059,Weeping Cherry,Prunus subhirtella,1,New planting,Good
+1060,Crabapple,Malus sp,3,Young,Good
+1061,Spruce-White,Picea glauca,5,Young,Good
+1062,Spruce-White,Picea glauca,4,Young,Fair
+1063,Spruce-White,Picea glauca,5,Young,Fair
+1064,Linden-European,Tilia x europaea,3,Young,Fair
+1065,Arborvitae-Eastern,Thuja occidentalis,2,Young,Good
+1066,Arborvitae-Eastern,Thuja occidentalis,2,Young,Good
+1067,Arborvitae-Eastern,Thuja occidentalis,2,Young,Good
+1068,Serviceberry,Amelanchier sp,6,Semi-mature,Fair
+1069,Serviceberry,Amelanchier sp,4,Semi-mature,Fair
+1070,Serviceberry,Amelanchier sp,5,Semi-mature,Fair
+1071,Serviceberry,Amelanchier sp,4,Semi-mature,Poor
+1072,Serviceberry,Amelanchier sp,4,Semi-mature,Fair
+1073,Serviceberry,Amelanchier sp,5,Semi-mature,Poor
+1074,Serviceberry,Amelanchier sp,5,Semi-mature,Fair
+1075,Serviceberry,Amelanchier sp,4,Semi-mature,Poor
+1076,Serviceberry,Amelanchier sp,5,Semi-mature,Fair
+1077,Linden-European,Tilia x europaea,2,Young,Fair
+1078,Linden-European,Tilia x europaea,3,Young,Fair
+1079,Linden-European,Tilia x europaea,3,Young,Fair
+1080,Oak- Northern Red,Quercus rubra,47,Mature,Fair
+1081,Oak- Northern Red,Quercus rubra,18,Mature,Poor
+1082,Oak- Northern Red,Quercus rubra,21,Mature,Poor
+1083,Oak- Northern Red,Quercus rubra,8,Semi-mature,Poor
+1084,Oak- Northern Red,Quercus rubra,22,Mature,Poor
+1085,Oak- Northern Red,Quercus rubra,23,Mature,Poor
+1086,Oak- Northern Red,Quercus rubra,22,Mature,Poor
+1087,Oak- Northern Red,Quercus rubra,14,Semi-mature,Poor
+1088,Oak- Northern Red,Quercus rubra,21,Mature,Poor
+1089,Oak- Northern Red,Quercus rubra,23,Mature,Fair
+1090,Oak- Northern Red,Quercus rubra,13,Semi-mature,Fair
+1091,Oak- Northern Red,Quercus rubra,25,Mature,Fair
+1092,Oak- Northern Red,Quercus rubra,24,Mature,Fair
+1093,Hornbeam-American,Ostrya virginiana,3,Mature,Good
+1094,Cherry-Yoshino,Prunus x yedoensis,10,Semi-mature,Fair
+1095,Katsuratree,Cercidiphyllum japonicum,6,Semi-mature,Good
+1096,Oak-Swamp White,Quercus bicolor,14,Semi-mature,Fair
+1097,Crimson King Maple,Acer platanoides,6,Semi-mature,Good
+1098,Oak-Shingle,Quercus imbricaria,8,Semi-mature,Good
+1099,Oak-Swamp White,Quercus bicolor,17,Semi-mature,Good
+1100,Oak- Northern Red,Quercus rubra,27,Mature,Poor
+1101,Maple-Sugar,Acer saccharum,16,Semi-mature,Good
+1102,Hemlock-Canadian,Tsuga canadensis,8,Semi-mature,Good
+1103,Hemlock-Canadian,Tsuga canadensis,7,Semi-mature,Good
+1104,Serviceberry,Amelanchier sp,5,Mature,Good
+1105,Maple-Norway,Acer platanoides,7,Semi-mature,Good
+1106,Oak- Northern Red,Quercus rubra,13,Semi-mature,Good
+1107,Maple-Norway,Acer platanoides,7,Semi-mature,Fair
+1108,Maple-Norway,Acer platanoides,10,Semi-mature,Good
+1109,Maple-Norway,Acer platanoides,9,Semi-mature,Good
+1110,Oak- Northern Red,Quercus rubra,24,Mature,Fair
+1111,Oak- Northern Red,Quercus rubra,8,Semi-mature,Good
+1112,Ash-Green,Fraxinus pennsylvanica,6,Semi-mature,Fair
+1113,Falsecypress-Sawara,Chamaecyparis pisifera,20,Mature,Fair
+1114,Spruce-Colorado Blue,Picea pungens,16,Mature,Good
+1115,Mulberry-White,Morus alba,10,Mature,Fair
+1116,Locust-Black,Robinia pseudoacacia,18,Mature,Fair
+1117,Locust-Black,Robinia pseudoacacia,13,Semi-mature,Fair
+1118,Maple-Norway,Acer platanoides,12,Semi-mature,Fair
+1119,Maple-Norway,Acer platanoides,5,Young,Poor
+1120,Maple-Norway,Acer platanoides,5,Young,Fair
+1121,Locust-Black,Robinia pseudoacacia,4,Young,Fair
+1122,Maple-Norway,Acer platanoides,9,Semi-mature,Fair
+1123,Locust-Black,Robinia pseudoacacia,14,Semi-mature,Fair
+1124,Arborvitae-Eastern,Thuja occidentalis,12,Mature,Good
+1125,Arborvitae-Eastern,Thuja occidentalis,9,Mature,Good
+1126,Arborvitae-Eastern,Thuja occidentalis,10,Mature,Good
+1127,Honeylocust-Thornless Common,Gleditsia triacanthos,19,Mature,Good
+1128,Honeylocust-Thornless Common,Gleditsia triacanthos,18,Mature,Good
+1129,Elm-American,Ulmus americana,7,Young,Fair
+1130,Maple-Norway,Acer platanoides,14,Semi-mature,Good
+1131,Birch-River,Betula nigra,3,Young,Good
+1132,Birch-River,Betula nigra,4,Young,Good
+1133,Birch-River,Betula nigra,4,Young,Good
+1134,Birch-River,Betula nigra,4,Young,Good
+1135,Birch-River,Betula nigra,5,Young,Good
+1136,Maple-Sugar,Acer saccharum,33,Mature,Fair
+1137,Locust-Black,Robinia pseudoacacia,15,Mature,Poor
+1138,Locust-Black,Robinia pseudoacacia,13,Mature,Fair
+1139,Maple-Sugar,Acer saccharum,20,Mature,Fair
+1140,Locust-Black,Robinia pseudoacacia,28,Mature,Fair
+1141,Locust-Black,Robinia pseudoacacia,14,Semi-mature,Fair
+1142,Locust-Black,Robinia pseudoacacia,12,Semi-mature,Fair
+1143,Locust-Black,Robinia pseudoacacia,12,Semi-mature,Fair
+1144,Maple-Red,Acer rubrum,15,Mature,Fair
+1145,Maple-Sugar,Acer saccharum,12,Mature,Good
+1146,Spruce-Colorado Blue,Picea pungens,15,Mature,Good
+1147,Pine-Eastern White,Pinus strobus,19,Mature,Poor
+1148,Pine-Eastern White,Pinus strobus,12,Semi-mature,Good
+1149,Pine-Eastern White,Pinus strobus,26,Mature,Good
+1150,Elm-American,Ulmus americana,18,Mature,Fair
+1151,Fir-White,Abies concolor,17,Mature,Good
+1152,Oak- Northern Red,Quercus rubra,34,Mature,Good
+1153,Maple-Sugar,Acer saccharum,3,Young,Good
+1154,Katsuratree,Cercidiphyllum japonicum,13,Mature,Good
+1155,Katsuratree,Cercidiphyllum japonicum,9,Semi-mature,Fair
+1156,Katsuratree,Cercidiphyllum japonicum,16,Mature,Good
+1157,Katsuratree,Cercidiphyllum japonicum,14,Mature,Good
+1158,Katsuratree,Cercidiphyllum japonicum,14,Mature,Fair
+1159,Katsuratree,Cercidiphyllum japonicum,14,Mature,Fair
+1160,Katsuratree,Cercidiphyllum japonicum,11,Mature,Fair
+1161,Katsuratree,Cercidiphyllum japonicum,8,Semi-mature,Good
+1162,Maple-Freeman's,Acer x freemanii,2,Young,Good
+1163,Redwood-Dawn,Metasequoia glyptostroboides,22,Mature,Good
+1164,Redwood-Dawn,Metasequoia glyptostroboides,26,Mature,Good
+1165,Redwood-Dawn,Metasequoia glyptostroboides,14,Semi-mature,Good
+1166,Redwood-Dawn,Metasequoia glyptostroboides,13,Semi-mature,Good
+1167,Redwood-Dawn,Metasequoia glyptostroboides,26,Mature,Good
+1168,Hemlock-Canadian,Tsuga canadensis,16,Mature,Fair
+1169,Spruce-Norway,Picea abies,29,Mature,Good
+1170,Maple-Norway,Acer platanoides,14,Semi-mature,Good
+1171,Linden-Littleleaf,Tilia cordata,20,Mature,Good
+1172,Crimson King Maple,Acer platanoides,15,Semi-mature,Good
+1173,Cherry,Prunus sp,1,Young,Good
+1174,Cherry,Prunus sp,1,Young,Good
+1175,Maple-Red,Acer rubrum,29,Mature,Good
+1176,Redcedar-Eastern,Juniperus virginiana,20,Mature,Fair
+1177,Maple-Sugar,Acer saccharum,23,Over-mature,Poor
+1178,Crabapple,Malus sp,6,Mature,Good
+1179,Crabapple,Malus sp,8,Mature,Fair
+1180,Cherry,Prunus sp,13,Mature,Good
+1181,Honeylocust-Thornless Common,Gleditsia triacanthos,2,Young,Good
+1182,Crabapple,Malus sp,10,Mature,Good
+1183,Crabapple,Malus sp,6,Mature,Good
+1184,Crabapple,Malus sp,8,Mature,Good
+1185,Crabapple,Malus sp,8,Mature,Fair
+1186,Hemlock-Canadian,Tsuga canadensis,1,New planting,Good
+1187,Hemlock-Canadian,Tsuga canadensis,1,New planting,Poor
+1188,Hemlock-Canadian,Tsuga canadensis,1,New planting,Good
+1189,Hemlock-Canadian,Tsuga canadensis,1,New planting,Fair
+1190,Hemlock-Canadian,Tsuga canadensis,1,New planting,Poor
+1191,Hemlock-Canadian,Tsuga canadensis,1,New planting,Good
+1192,Hemlock-Canadian,Tsuga canadensis,1,New planting,Good
+1193,Hemlock-Canadian,Tsuga canadensis,1,New planting,Good
+1194,Pine-Eastern White,Pinus strobus,12,Mature,Fair
+1195,Pine-Eastern White,Pinus strobus,14,Mature,Fair
+1196,Pine-Eastern White,Pinus strobus,14,Mature,Fair
+1197,Pine-Eastern White,Pinus strobus,16,Mature,Good
+1198,Pine-Eastern White,Pinus strobus,14,Mature,Fair
+1199,Pine-Eastern White,Pinus strobus,10,Mature,Good
+1200,Pine-Eastern White,Pinus strobus,11,Mature,Fair
+1201,Pine-Eastern White,Pinus strobus,16,Mature,Good
+1202,Pine-Eastern White,Pinus strobus,5,Semi-mature,Fair
+1203,Pine-Eastern White,Pinus strobus,14,Mature,Good
+1204,Pine-Eastern White,Pinus strobus,12,Mature,Good
+1205,Pine-Eastern White,Pinus strobus,11,Mature,Good
+1206,Pine-Eastern White,Pinus strobus,13,Mature,Good
+1207,Pine-Eastern White,Pinus strobus,10,Mature,Good
+1208,Pine-Eastern White,Pinus strobus,17,Mature,Good
+1209,Pine-Eastern White,Pinus strobus,15,Mature,Good
+1210,Pine-Eastern White,Pinus strobus,14,Mature,Good
+1211,Pine-Eastern White,Pinus strobus,16,Mature,Good
+1212,Pine-Eastern White,Pinus strobus,4,Semi-mature,Fair
+1213,Pine-Eastern White,Pinus strobus,16,Mature,Good
+1214,Pine-Eastern White,Pinus strobus,11,Mature,Good
+1215,Pine-Eastern White,Pinus strobus,13,Mature,Good
+1216,Pine-Eastern White,Pinus strobus,11,Mature,Good
+1217,Pine-Eastern White,Pinus strobus,15,Mature,Good
+1218,Crabapple,Malus sp,7,Mature,Good
+1219,Crabapple,Malus sp,7,Mature,Good
+1220,Maple-Sugar,Acer saccharum,11,Semi-mature,Fair
+1221,Spruce-Colorado Blue,Picea pungens,16,Mature,Good
+1222,Birch-Gray,Betula populifolia,9,Mature,Fair
+1223,Crabapple,Malus sp,7,Mature,Good
+1224,Crabapple,Malus sp,2,Semi-mature,Poor
+1225,Honeylocust-Thornless Common,Gleditsia triacanthos,16,Mature,Good
+1226,Honeylocust-Thornless Common,Gleditsia triacanthos,13,Semi-mature,Good
+1227,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Semi-mature,Good
+1228,Locust-Black,Robinia pseudoacacia,28,Mature,Poor
+1229,Maple-Sugar,Acer saccharum,15,Semi-mature,Good
+1230,Crabapple,Malus sp,9,Mature,Good
+1231,Ash-Green,Fraxinus pennsylvanica,14,Semi-mature,Good
+1232,Apple-Common,Malus domestica,5,Mature,Fair
+1233,Apple-Common,Malus domestica,7,Mature,Fair
+1234,Pine-Eastern White,Pinus strobus,22,Mature,Good
+1235,Pine-Eastern White,Pinus strobus,16,Mature,Fair
+1236,Ash-Green,Fraxinus pennsylvanica,11,Semi-mature,Fair
+1237,Ash-White,Fraxinus americana,7,Semi-mature,Poor
+1238,Boxelder,Acer negundo,7,Semi-mature,Fair
+1239,Boxelder,Acer negundo,15,Mature,Fair
+1240,Elm-American,Ulmus americana,15,Semi-mature,Fair
+1241,Maple-Norway,Acer platanoides,15,Mature,Fair
+1242,Oak- Northern Red,Quercus rubra,18,Mature,Good
+1243,Elm-American,Ulmus americana,15,Semi-mature,Fair
+1244,Maple-Norway,Acer platanoides,16,Mature,Good
+1245,Walnut-Black,Juglans nigra,16,Mature,Fair
+1246,Maple-Norway,Acer platanoides,24,Mature,Fair
+1247,Ash-Green,Fraxinus pennsylvanica,22,Mature,Fair
+1248,Spruce-Norway,Picea abies,15,Mature,Good
+1249,Spruce-Norway,Picea abies,16,Mature,Good
+1250,Spruce-Norway,Picea abies,13,Mature,Good
+1251,Spruce-Colorado Blue,Picea pungens,14,Mature,Good
+1252,Spruce-Colorado Blue,Picea pungens,18,Mature,Good
+1253,Hemlock-Canadian,Tsuga canadensis,1,New planting,Good
+1254,Hemlock-Canadian,Tsuga canadensis,1,New planting,Fair
+1255,Hemlock-Canadian,Tsuga canadensis,1,New planting,Fair
+1256,Maple-Norway,Acer platanoides,25,Mature,Good
+1257,Maple-Sugar,Acer saccharum,15,Semi-mature,Poor
+1258,Hawthorn,Crataegus sp,6,Mature,Fair
+1259,Hawthorn,Crataegus sp,7,Mature,Fair
+1260,Hawthorn,Crataegus sp,8,Mature,Fair
+1261,Hawthorn,Crataegus sp,6,Mature,Fair
+1262,Hawthorn,Crataegus sp,8,Mature,Fair
+1263,Hawthorn,Crataegus sp,3,Mature,Poor
+1264,Hawthorn,Crataegus sp,3,Mature,Poor
+1265,Hawthorn,Crataegus sp,7,Mature,Fair
+1266,Hawthorn,Crataegus sp,8,Mature,Fair
+1267,Hawthorn,Crataegus sp,7,Mature,Poor
+1268,Hawthorn,Crataegus sp,8,Mature,Fair
+1269,Hawthorn,Crataegus sp,6,Mature,Fair
+1270,Hawthorn,Crataegus sp,8,Mature,Fair
+1271,Hawthorn,Crataegus sp,7,Mature,Poor
+1272,Hawthorn,Crataegus sp,6,Mature,Poor
+1273,Hawthorn,Crataegus sp,6,Mature,Fair
+1274,Hawthorn,Crataegus sp,6,Mature,Poor
+1275,Hawthorn,Crataegus sp,6,Mature,Poor
+1276,Elm,Ulmus sp,2,New planting,Good
+1277,Hawthorn,Crataegus sp,6,Mature,Fair
+1278,Hawthorn,Crataegus sp,7,Mature,Fair
+1279,Hawthorn,Crataegus sp,6,Mature,Poor
+1280,Hawthorn,Crataegus sp,6,Mature,Fair
+1281,Hawthorn,Crataegus sp,6,Mature,Fair
+1282,Hawthorn,Crataegus sp,5,Mature,Fair
+1283,Hawthorn,Crataegus sp,6,Mature,Fair
+1284,Hawthorn,Crataegus sp,6,Mature,Fair
+1285,Hawthorn,Crataegus sp,6,Mature,Poor
+1286,Hawthorn,Crataegus sp,6,Mature,Poor
+1287,Hawthorn,Crataegus sp,5,Mature,Poor
+1288,Hawthorn,Crataegus sp,6,Mature,Fair
+1289,Serviceberry,Amelanchier sp,1,Mature,Poor
+1290,Serviceberry,Amelanchier sp,2,Mature,Fair
+1291,Crabapple,Malus sp,3,Mature,Fair
+1292,Serviceberry,Amelanchier sp,2,Mature,Fair
+1293,Hornbeam-American,Ostrya virginiana,2,Young,Fair
+1294,Beech-American,Fagus grandifolia,3,Young,Good
+1295,Tupelo-Black,Nyssa sylvatica,2,Young,Good
+1296,Beech-American,Fagus grandifolia,4,Young,Good
+1297,Tupelo-Black,Nyssa sylvatica,2,Young,Good
+1298,Tupelo-Black,Nyssa sylvatica,3,Young,Good
+1299,Birch-River,Betula nigra,3,Young,Good
+1300,Birch-River,Betula nigra,4,Young,Good
+1301,Serviceberry,Amelanchier sp,3,Semi-mature,Fair
+1302,Maple-Red,Acer rubrum,3,New planting,Good
+1303,Elm,Ulmus sp,4,Young,Good
+1304,Redcedar-Eastern,Juniperus virginiana,5,Mature,Poor
+1305,Redcedar-Eastern,Juniperus virginiana,4,Mature,Poor
+1306,Baldcypress-Common,Taxodium distichum,2,Young,Fair
+1307,Spruce-White,Picea glauca,6,Semi-mature,Fair
+1308,Spruce-White,Picea glauca,4,Young,Fair
+1309,Hemlock-Canadian,Tsuga canadensis,10,Semi-mature,Fair
+1310,Arborvitae,Thuja sp,7,Semi-mature,Fair
+1311,Hemlock-Canadian,Tsuga canadensis,8,Semi-mature,Fair
+1312,Arborvitae-Eastern,Thuja occidentalis,2,Semi-mature,Fair
+1313,Spruce-Colorado Blue,Picea pungens,6,Semi-mature,Fair
+1314,Spruce-Colorado Blue,Picea pungens,5,Semi-mature,Fair
+1315,Elm,Ulmus sp,2,New planting,Fair
+1316,Elm,Ulmus sp,2,New planting,Fair
+1317,Elm,Ulmus sp,2,New planting,Fair
+1318,Elm,Ulmus sp,2,New planting,Fair
+1319,Elm,Ulmus sp,2,New planting,Fair
+1320,Elm,Ulmus sp,2,New planting,Fair
+1321,Elm,Ulmus sp,2,New planting,Fair
+1322,Honeylocust-Thornless Common,Gleditsia triacanthos,2,New planting,Fair
+1323,Honeylocust-Thornless Common,Gleditsia triacanthos,3,Young,Fair
+1324,Honeylocust-Thornless Common,Gleditsia triacanthos,2,New planting,Fair
+1325,Honeylocust-Thornless Common,Gleditsia triacanthos,2,New planting,Fair
+1326,Honeylocust-Thornless Common,Gleditsia triacanthos,2,New planting,Fair
+1327,Honeylocust-Thornless Common,Gleditsia triacanthos,2,New planting,Fair
+1328,Birch-River,Betula nigra,5,Semi-mature,Fair
+1329,Birch-River,Betula nigra,4,Semi-mature,Fair
+1330,Birch-River,Betula nigra,4,Semi-mature,Fair
+1331,Birch-River,Betula nigra,5,Semi-mature,Fair
+1332,Birch-River,Betula nigra,4,Semi-mature,Fair
+1333,Birch-River,Betula nigra,5,Semi-mature,Fair
+1334,Birch-River,Betula nigra,4,Semi-mature,Fair
+1335,Birch-River,Betula nigra,5,Semi-mature,Fair
+1336,Birch-River,Betula nigra,5,Semi-mature,Fair
+1337,Birch-River,Betula nigra,4,Semi-mature,Fair
+1338,Birch-River,Betula nigra,4,Semi-mature,Fair
+1339,Linden-Silver,Tilia tomentosa,8,Semi-mature,Fair
+1340,Linden-Silver,Tilia tomentosa,9,Semi-mature,Poor
+1341,Birch-River,Betula nigra,2,New planting,Fair
+1342,Birch-River,Betula nigra,2,New planting,Fair
+1343,Birch-River,Betula nigra,2,New planting,Fair
+1344,Birch-River,Betula nigra,2,New planting,Fair
+1345,Birch-River,Betula nigra,1,New planting,Fair
+1346,Birch-River,Betula nigra,2,New planting,Fair
+1347,Birch-River,Betula nigra,1,New planting,Fair
+1348,Birch-River,Betula nigra,2,New planting,Fair
+1349,Birch-River,Betula nigra,2,New planting,Fair
+1350,Birch-River,Betula nigra,1,New planting,Fair
+1351,Birch-River,Betula nigra,1,New planting,Poor
+1352,Birch-River,Betula nigra,1,New planting,Fair
+1353,Birch-River,Betula nigra,5,Semi-mature,Fair
+1354,Birch-River,Betula nigra,6,Semi-mature,Fair
+1355,Elm,Ulmus sp,7,Semi-mature,Poor
+1356,Tupelo-Black,Nyssa sylvatica,1,New planting,Fair
+1357,Fir-Balsam,Abies balsamea,1,New planting,Fair
+1358,Planetree-London,Platanus x acerifolia,2,New planting,Fair
+1359,Planetree-London,Platanus x acerifolia,2,New planting,Fair
+1360,Elm,Ulmus sp,2,New planting,Fair
+1361,Elm,Ulmus sp,2,New planting,Fair
+1362,Elm,Ulmus sp,2,New planting,Fair
+1363,Elm,Ulmus sp,2,New planting,Fair
+1364,Elm,Ulmus sp,2,New planting,Fair
+1365,Elm,Ulmus sp,2,New planting,Fair
+1366,Elm,Ulmus sp,2,New planting,Fair
+1367,Redcedar-Eastern,Juniperus virginiana,6,Semi-mature,Fair
+1368,Serviceberry,Amelanchier sp,5,Mature,Fair
+1369,Serviceberry,Amelanchier sp,2,Semi-mature,Fair
+1370,Serviceberry,Amelanchier sp,3,Semi-mature,Fair
+1371,Serviceberry,Amelanchier sp,3,Semi-mature,Fair
+1372,Serviceberry,Amelanchier sp,3,Semi-mature,Fair
+1373,Serviceberry,Amelanchier sp,2,Semi-mature,Fair
+1374,Serviceberry,Amelanchier sp,4,Mature,Fair
+1375,Honeylocust-Thornless Common,Gleditsia triacanthos,2,New planting,Fair
+1376,Honeylocust-Thornless Common,Gleditsia triacanthos,2,New planting,Fair
+1377,Hawthorn,Crataegus sp,5,Mature,Fair
+1378,Hawthorn,Crataegus sp,6,Mature,Fair
+1379,Hawthorn,Crataegus sp,5,Mature,Fair
+1380,Hawthorn,Crataegus sp,6,Mature,Fair
+1381,Hawthorn,Crataegus sp,6,Mature,Fair
+1382,Hawthorn,Crataegus sp,5,Mature,Fair
+1383,Hawthorn,Crataegus sp,5,Mature,Fair
+1384,Hawthorn,Crataegus sp,6,Mature,Fair
+1385,Hawthorn,Crataegus sp,6,Mature,Fair
+1386,Hawthorn,Crataegus sp,6,Mature,Fair
+1387,Hawthorn,Crataegus sp,5,Mature,Fair
+1388,Hawthorn,Crataegus sp,6,Mature,Fair
+1389,Hawthorn,Crataegus sp,6,Mature,Fair
+1390,Hawthorn,Crataegus sp,7,Mature,Fair
+1391,Hawthorn,Crataegus sp,7,Mature,Fair
+1392,Hawthorn,Crataegus sp,8,Mature,Fair
+1393,Hawthorn,Crataegus sp,7,Mature,Fair
+1394,Hawthorn,Crataegus sp,7,Mature,Fair
+1395,Hawthorn,Crataegus sp,6,Mature,Fair
+1396,Hawthorn,Crataegus sp,5,Mature,Fair
+1397,Hawthorn,Crataegus sp,6,Mature,Fair
+1398,Hawthorn,Crataegus sp,5,Mature,Fair
+1399,Hawthorn,Crataegus sp,6,Mature,Fair
+1400,Hawthorn,Crataegus sp,5,Mature,Fair
+1401,Pine-Austrian,Pinus nigra,14,Semi-mature,Fair
+1402,Pine-Eastern White,Pinus strobus,13,Semi-mature,Fair
+1403,Pine-Eastern White,Pinus strobus,15,Semi-mature,Good
+1404,Horsechestnut-Common,Aesculus hippocastanum,10,Semi-mature,Good
+1405,Horsechestnut-Common,Aesculus hippocastanum,13,Semi-mature,Good
+1406,Birch-Paper,Betula papyrifera,5,Semi-mature,Good
+1407,Birch-Paper,Betula papyrifera,4,Semi-mature,Good
+1408,Birch-Paper,Betula papyrifera,4,Semi-mature,Good
+1409,Birch-Paper,Betula papyrifera,4,Semi-mature,Good
+1410,Birch-Paper,Betula papyrifera,4,Semi-mature,Fair
+1411,Crabapple,Malus sp,6,Mature,Fair
+1412,Crabapple,Malus sp,8,Mature,Fair
+1413,Lilac-Japanese Tree,Syringa reticulata,4,Semi-mature,Fair
+1414,Oak-Pin,Quercus palustris,14,Semi-mature,Fair
+1415,Oak-Pin,Quercus palustris,13,Semi-mature,Good
+1416,Linden-European,Tilia x europaea,3,Young,Good
+1417,Crabapple,Malus sp,12,Mature,Fair
+1418,Crabapple,Malus sp,11,Mature,Good
+1419,Honeylocust-Thornless Common,Gleditsia triacanthos,3,Young,Good
+1420,Honeylocust-Thornless Common,Gleditsia triacanthos,2,Young,Good
+1421,Hawthorn,Crataegus sp,4,Mature,Fair
+1422,Hawthorn,Crataegus sp,5,Mature,Fair
+1423,Ash-White,Fraxinus americana,4,Young,Good
+1424,Ash-Green,Fraxinus pennsylvanica,4,Young,Good
+1425,Ash-Green,Fraxinus pennsylvanica,4,Young,Fair
+1426,Ash-Green,Fraxinus pennsylvanica,4,Young,Good
+1427,Ash-Green,Fraxinus pennsylvanica,4,Young,Good
+1428,Hawthorn,Crataegus sp,8,Mature,Fair
+1429,Crabapple,Malus sp,10,Mature,Good
+1430,Crabapple,Malus sp,7,Mature,Good
+1431,Arborvitae-Eastern,Thuja occidentalis,4,Semi-mature,Good
+1432,Birch-Paper,Betula papyrifera,10,Mature,Good
+1433,Hawthorn,Crataegus sp,4,Mature,Fair
+1434,Linden-European,Tilia x europaea,9,Semi-mature,Fair
+1435,Birch-Paper,Betula papyrifera,7,Semi-mature,Good
+1436,Birch-Paper,Betula papyrifera,2,Young,Fair
+1437,Birch-Paper,Betula papyrifera,8,Mature,Fair
+1438,Maple-Sugar,Acer saccharum,17,Mature,Fair
+1439,Birch-Paper,Betula papyrifera,10,Mature,Good
+1440,Cherry,Prunus sp,2,Semi-mature,Good
+1441,Pine-Eastern White,Pinus strobus,16,Mature,Fair
+1442,Elm-American,Ulmus americana,16,Semi-mature,Fair
+1443,Arborvitae-Eastern,Thuja occidentalis,11,Mature,Good
+1444,Pine-Eastern White,Pinus strobus,19,Mature,Good
+1445,Pine-Eastern White,Pinus strobus,18,Mature,Fair
+1446,Pine-Eastern White,Pinus strobus,17,Mature,Good
+1447,Pine-Eastern White,Pinus strobus,17,Mature,Fair
+1448,Pine-Eastern White,Pinus strobus,17,Mature,Fair
+1449,Boxelder,Acer negundo,15,Mature,Good
+1450,Oak-English,Quercus robur,4,Young,Good
+1451,Oak-Bur,Quercus macrocarpa,5,Young,Good
+1452,Oak-Bur,Quercus macrocarpa,4,Young,Good
+1453,Oak- Northern Red,Quercus rubra,4,Young,Fair
+1454,Oak- Northern Red,Quercus rubra,4,Young,Fair
+1455,Oak- Northern Red,Quercus rubra,3,Young,Good
+1456,Oak-Swamp White,Quercus bicolor,3,Young,Good
+1457,Oak-English,Quercus robur,3,Young,Good
+1458,Oak-English,Quercus robur,3,Young,Good
+1459,Oak- Northern Red,Quercus rubra,3,Young,Good
+1460,Oak- Northern Red,Quercus rubra,3,Young,Good
+1461,Oak-Bur,Quercus macrocarpa,3,Young,Good
+1462,Redwood-Dawn,Metasequoia glyptostroboides,6,Young,Good
+1463,Pine-Eastern White,Pinus strobus,6,Young,Good
+1464,Pine-Eastern White,Pinus strobus,5,Young,Good
+1465,Oak- Northern Red,Quercus rubra,2,Young,Good
+1466,Oak-Bur,Quercus macrocarpa,3,Young,Good
+1467,Redwood-Dawn,Metasequoia glyptostroboides,2,Young,Fair
+1468,Redwood-Dawn,Metasequoia glyptostroboides,3,Young,Fair
+1469,Oak- Northern Red,Quercus rubra,3,Young,Good
+1470,Oak- Northern Red,Quercus rubra,4,Young,Good
+1471,Oak- Northern Red,Quercus rubra,4,Young,Good
+1472,Oak- Northern Red,Quercus rubra,6,Young,Good
+1473,Spruce-Norway,Picea abies,35,Mature,Good
+1474,Maple-Sugar,Acer saccharum,2,Young,Good
+1475,Maple-Sugar,Acer saccharum,4,Young,Good
+1476,Birch-River,Betula nigra,4,Young,Good
+1477,Birch-River,Betula nigra,2,Young,Good
+1478,Birch-River,Betula nigra,2,Young,Good
+1479,Birch-River,Betula nigra,2,Young,Good
+1480,Birch-River,Betula nigra,2,Young,Good
+1481,Birch-River,Betula nigra,2,Young,Good
+1482,Birch-River,Betula nigra,2,Young,Good
+1483,Birch-River,Betula nigra,2,Young,Good
+1484,Birch-River,Betula nigra,2,Young,Good
+1485,Birch-River,Betula nigra,2,Young,Good
+1486,Ash-Green,Fraxinus pennsylvanica,3,Young,Good
+1487,Ash-Green,Fraxinus pennsylvanica,3,Young,Good
+1488,Hornbeam-American,Carpinus caroliniana,4,Young,Good
+1489,Hornbeam-American,Carpinus caroliniana,5,Young,Good
+1490,Hornbeam-American,Carpinus caroliniana,3,Young,Good
+1491,Hornbeam-American,Carpinus caroliniana,4,Young,Good
+1492,Hornbeam-American,Carpinus caroliniana,3,Young,Fair
+1493,Tuliptree,Liriodendron tulipifera,3,Young,Good
+1494,Ash-White,Fraxinus americana,4,Young,Good
+1495,Hornbeam-American,Carpinus caroliniana,3,Young,Good
+1496,Ash-White,Fraxinus americana,3,Young,Good
+1497,Ash-White,Fraxinus americana,3,Young,Fair
+1498,Ash-White,Fraxinus americana,3,Young,Good
+1499,Ash-White,Fraxinus americana,4,Young,Fair
+1500,Maple-Red,Acer rubrum,4,Young,Good
+1501,Locust-Black,Robinia pseudoacacia,36,Over-mature,Fair
+1502,Lilac-Japanese Tree,Syringa reticulata,2,Semi-mature,Fair
+1503,Hickory-Pignut,Carya glabra,13,Semi-mature,Good
+1504,Locust-Black,Robinia pseudoacacia,30,Over-mature,Fair
+1505,Linden-European,Tilia x europaea,18,Mature,Good
+1506,Honeylocust-Thornless Common,Gleditsia triacanthos,7,Semi-mature,Good
+1507,Honeylocust-Thornless Common,Gleditsia triacanthos,5,Young,Good
+1508,Serviceberry,Amelanchier sp,2,Semi-mature,Good
+1509,Serviceberry,Amelanchier sp,2,Semi-mature,Good
+1510,Serviceberry,Amelanchier sp,3,Semi-mature,Good
+1511,Serviceberry,Amelanchier sp,2,Semi-mature,Good
+1512,Serviceberry,Amelanchier sp,2,Semi-mature,Good
+1513,Serviceberry,Amelanchier sp,2,Semi-mature,Good
+1514,Maple-Sugar,Acer saccharum,7,Semi-mature,Good
+1515,Maple-Sugar,Acer saccharum,7,Semi-mature,Good
+1516,Maple-Sugar,Acer saccharum,7,Semi-mature,Good
+1517,Maple-Sugar,Acer saccharum,8,Semi-mature,Good
+1518,Maple-Sugar,Acer saccharum,10,Semi-mature,Good
+1519,Maple-Sugar,Acer saccharum,10,Semi-mature,Good
+1520,Maple-Sugar,Acer saccharum,11,Semi-mature,Good
+1521,Maple-Sugar,Acer saccharum,9,Semi-mature,Good
+1522,Birch-Paper,Betula papyrifera,4,Semi-mature,Good
+1523,Birch-Paper,Betula papyrifera,5,Semi-mature,Fair
+1524,Birch-Paper,Betula papyrifera,5,Semi-mature,Fair
+1525,Birch-Paper,Betula papyrifera,4,Semi-mature,Good
+1526,Birch-Paper,Betula papyrifera,3,Semi-mature,Good
+1527,Birch-Paper,Betula papyrifera,5,Semi-mature,Good
+1528,Birch-Paper,Betula papyrifera,5,Semi-mature,Good
+1529,Birch-Paper,Betula papyrifera,6,Semi-mature,Good
+1530,Birch-Paper,Betula papyrifera,3,Semi-mature,Good
+1531,Birch-Paper,Betula papyrifera,4,Semi-mature,Good
+1532,Birch-Paper,Betula papyrifera,5,Semi-mature,Good
+1533,Birch-Paper,Betula papyrifera,3,Semi-mature,Good
+1534,Pine-Austrian,Pinus nigra,12,Semi-mature,Good
+1535,Pine-Austrian,Pinus nigra,10,Semi-mature,Good
+1536,Pine-Austrian,Pinus nigra,7,Semi-mature,Fair
+1537,Pine-Austrian,Pinus nigra,7,Semi-mature,Good
+1538,Birch-Paper,Betula papyrifera,5,Semi-mature,Good
+1539,Birch-Paper,Betula papyrifera,7,Semi-mature,Good
+1540,Birch-Paper,Betula papyrifera,6,Semi-mature,Good
+1541,Birch-Paper,Betula papyrifera,3,Semi-mature,Good
+1542,Birch-Paper,Betula papyrifera,3,Semi-mature,Good
+1543,Birch-Paper,Betula papyrifera,4,Semi-mature,Good
+1544,Birch-Paper,Betula papyrifera,5,Semi-mature,Fair
+1545,Birch-Paper,Betula papyrifera,4,Semi-mature,Fair
+1546,Birch-Paper,Betula papyrifera,3,Semi-mature,Good
+1547,Birch-Paper,Betula papyrifera,5,Semi-mature,Good
+1548,Birch-Paper,Betula papyrifera,5,Semi-mature,Good
+1549,Birch-Paper,Betula papyrifera,5,Semi-mature,Good
+1550,Birch-Paper,Betula papyrifera,5,Semi-mature,Good
+1551,Crabapple,Malus sp,6,Mature,Good
+1552,Crabapple,Malus sp,5,Mature,Good
+1553,Crabapple,Malus sp,5,Mature,Good
+1554,Crabapple,Malus sp,5,Mature,Good
+1555,Crabapple,Malus sp,6,Mature,Good
+1556,Crabapple,Malus sp,6,Mature,Good
+1557,Birch-Paper,Betula papyrifera,2,Young,Fair
+1558,Birch-Paper,Betula papyrifera,3,Young,Fair
+1559,Birch-Paper,Betula papyrifera,6,Semi-mature,Good
+1560,Maple-Red,Acer rubrum,6,Semi-mature,Good
+1561,Maple-Red,Acer rubrum,7,Semi-mature,Good
+1562,Maple-Red,Acer rubrum,4,Young,Fair
+1563,Maple-Red,Acer rubrum,7,Semi-mature,Good
+1564,Birch-Paper,Betula papyrifera,7,Semi-mature,Good
+1565,Birch-Paper,Betula papyrifera,7,Semi-mature,Good
+1566,Maple-Red,Acer rubrum,4,Young,Good
+1567,Maple-Red,Acer rubrum,4,Young,Good
+1568,Maple-Red,Acer rubrum,5,Young,Good
+1569,Maple-Red,Acer rubrum,4,Young,Good
+1570,Maple-Red,Acer rubrum,5,Young,Good
+1571,Maple-Red,Acer rubrum,6,Young,Good
+1572,Maple-Red,Acer rubrum,4,Young,Good
+1573,Maple-Red,Acer rubrum,3,Young,Fair
+1574,Maple-Red,Acer rubrum,2,Young,Fair
+1575,Maple-Red,Acer rubrum,4,Young,Good
+1576,Maple-Red,Acer rubrum,4,Young,Good
+1577,Maple-Red,Acer rubrum,5,Young,Good
+1578,Maple-Red,Acer rubrum,5,Young,Good
+1579,Maple-Red,Acer rubrum,6,Young,Good
+1580,Maple-Red,Acer rubrum,4,Young,Fair
+1581,Birch-Paper,Betula papyrifera,2,Young,Good
+1582,Birch-Paper,Betula papyrifera,3,Young,Good
+1583,Birch-Paper,Betula papyrifera,3,Young,Good
+1584,Birch-Paper,Betula papyrifera,3,Young,Good
+1585,Redwood-Dawn,Metasequoia glyptostroboides,3,Young,Dead
+1586,Spruce-White,Picea glauca,9,Mature,Fair
+1587,Birch-River,Betula nigra,6,Mature,Good
+1588,Birch-River,Betula nigra,4,Mature,Good
+1589,Birch-River,Betula nigra,5,Mature,Good
+1590,Birch-River,Betula nigra,4,Mature,Good
+1591,Birch-River,Betula nigra,4,Mature,Good
+1592,Maple-Norway,Acer platanoides,9,Mature,Fair
+1593,Birch-Yellow,Betula alleghaniensis,25,Mature,Fair
+1594,Locust-Black,Robinia pseudoacacia,31,Over-mature,Fair
+1595,Locust-Black,Robinia pseudoacacia,24,Over-mature,Fair
+1596,Locust-Black,Robinia pseudoacacia,23,Over-mature,Fair
+1597,Planetree-London,Platanus x acerifolia,7,Young,Good
+1598,Pear-Callery,Pyrus calleryana,7,Mature,Good
+1599,Purple Leaf Plum,Prunus cerasifera,4,Semi-mature,Good
+1600,Purple Leaf Plum,Prunus cerasifera,3,Semi-mature,Good
+1601,Maple-Red,Acer rubrum,4,Young,Good
+1602,Arborvitae-Eastern,Thuja occidentalis,23,Over-mature,Good
+1603,Oak- Black,Quercus velutina,14,Semi-mature,Fair
+1604,Arborvitae-Eastern,Thuja occidentalis,2,Semi-mature,Fair
+1605,Arborvitae-Eastern,Thuja occidentalis,2,Semi-mature,Fair
+1606,Pine-Eastern White,Pinus strobus,4,Semi-mature,Fair
+1607,Pine-Eastern White,Pinus strobus,6,Semi-mature,Good
+1608,Linden-Silver,Tilia tomentosa,9,Semi-mature,Good
+1609,Linden-Silver,Tilia tomentosa,9,Semi-mature,Good
+1610,Linden-Silver,Tilia tomentosa,5,Semi-mature,Fair
+1611,Linden-Silver,Tilia tomentosa,6,Semi-mature,Fair
+1612,Maple-Sugar,Acer saccharum,8,Semi-mature,Good
+1613,Fir-Douglas,Pseudotsuga menziesii,20,Mature,Fair
+1614,Maple-Norway,Acer platanoides,8,Semi-mature,Good
+1615,Spruce-Norway,Picea abies,23,Mature,Good
+1616,Hawthorn,Crataegus sp,11,Mature,Good
+1617,Hawthorn,Crataegus sp,11,Mature,Good
+1618,Spruce-Norway,Picea abies,21,Mature,Good
+1619,Maple-Norway,Acer platanoides,3,Young,Fair
+1620,Zelkova-Japanese,Zelkova serrata,4,Young,Good
+1621,Zelkova-Japanese,Zelkova serrata,3,Young,Good
+1622,Zelkova-Japanese,Zelkova serrata,4,Young,Good
+1623,Zelkova-Japanese,Zelkova serrata,4,Young,Good
+1624,Zelkova-Japanese,Zelkova serrata,6,Semi-mature,Good
+1625,Linden-Silver,Tilia tomentosa,11,Semi-mature,Good
+1626,Honeylocust-Thornless Common,Gleditsia triacanthos,8,Semi-mature,Fair
+1627,Willow,Salix sp,9,Semi-mature,Good
+1628,Arborvitae-Eastern,Thuja occidentalis,11,Mature,Fair
+1629,Arborvitae-Eastern,Thuja occidentalis,11,Mature,Poor
+1630,Arborvitae-Eastern,Thuja occidentalis,10,Mature,Fair
+1631,Arborvitae-Eastern,Thuja occidentalis,13,Mature,Fair
+1632,Arborvitae-Eastern,Thuja occidentalis,14,Mature,Fair
+1633,Maple-Norway,Acer platanoides,6,Semi-mature,Good
+1634,Arborvitae-Eastern,Thuja occidentalis,16,Mature,Good
+1635,Maple-Sugar,Acer saccharum,2,New planting,Good
+1636,Boxelder,Acer negundo,6,Semi-mature,Poor
+1637,Zelkova-Japanese,Zelkova serrata,4,Young,Good
+1638,Zelkova-Japanese,Zelkova serrata,2,Young,Good
+1639,Willow-White,Salix alba,11,Semi-mature,Good
+1640,Sweetgum,Liquidambar styraciflua,2,New planting,Fair
+1641,Willow,Salix sp,8,New planting,Good
+1642,Sweetgum,Liquidambar styraciflua,2,New planting,Good
+1643,Birch-Sweet,Betula lenta,4,Semi-mature,Good
+1644,Maackia-Amur,Maackia amurensis,7,Semi-mature,Good
+1645,Birch-Paper,Betula papyrifera,4,Young,Good
+1646,Birch-Paper,Betula papyrifera,2,Young,Good
+1647,Birch-Paper,Betula papyrifera,4,Semi-mature,Good
+1648,Linden-Littleleaf,Tilia cordata,14,Mature,Good
+1649,Oak-Pin,Quercus palustris,24,Mature,Good
+1650,Redwood-Dawn,Metasequoia glyptostroboides,7,Young,Good
+1651,Maple-Norway,Acer platanoides,15,Mature,Good
+1652,Maple-Sugar,Acer saccharum,12,Semi-mature,Fair
+1653,Maple-Silver,Acer saccharinum,20,Mature,Poor
+1654,Oak-Pin,Quercus palustris,24,Mature,Good
+1655,Ash-Green,Fraxinus pennsylvanica,19,Mature,Good
+1656,Ash-Green,Fraxinus pennsylvanica,14,Mature,Good
+1657,Ash-Green,Fraxinus pennsylvanica,20,Mature,Good
+1658,Oak-English,Quercus robur,18,Mature,Good
+1659,Oak-English,Quercus robur,10,Semi-mature,Good
+1660,Oak-English,Quercus robur,12,Semi-mature,Good
+1661,Oak-English,Quercus robur,15,Mature,Good
+1662,Ash-Green,Fraxinus pennsylvanica,21,Mature,Fair
+1663,Oak-White,Quercus alba,24,Mature,Good
+1664,Oak-White,Quercus alba,29,Mature,Good
+1665,Maple-Norway,Acer platanoides,12,Semi-mature,Good
+1666,Maple-Norway,Acer platanoides,24,Over-mature,Good
+1667,Maple-Norway,Acer platanoides,9,Semi-mature,Good
+1668,Maple-Norway,Acer platanoides,14,Semi-mature,Good
+1669,Maple-Sugar,Acer saccharum,19,Mature,Good
+1670,Oak-White,Quercus alba,19,Mature,Dead
+1671,Oak-English,Quercus robur,15,Semi-mature,Good
+1672,Oak-English,Quercus robur,23,Mature,Good
+1673,Oak-White,Quercus alba,24,Mature,Good
+1674,Oak-English,Quercus robur,14,Semi-mature,Good
+1675,Oak-English,Quercus robur,16,Semi-mature,Good
+1676,Maple-Norway,Acer platanoides,7,Semi-mature,Good
+1677,Maple-Norway,Acer platanoides,6,Semi-mature,Good
+1678,Maple-Norway,Acer platanoides,23,Mature,Good
+1679,Spruce-White,Picea glauca,18,Mature,Fair
+1680,Spruce-Norway,Picea abies,30,Mature,Fair
+1681,Spruce-Norway,Picea abies,22,Mature,Fair
+1682,Spruce-Norway,Picea abies,21,Mature,Good
+1683,Spruce-Norway,Picea abies,24,Mature,Good
+1684,Spruce-Norway,Picea abies,21,Mature,Good
+1685,Spruce-Norway,Picea abies,19,Mature,Good
+1686,Spruce-Norway,Picea abies,22,Mature,Good
+1687,Spruce-Norway,Picea abies,13,Semi-mature,Good
+1688,Spruce-Colorado Blue,Picea pungens,16,Mature,Good
+1689,Linden-Littleleaf,Tilia cordata,4,Young,Good
+1690,Linden-Littleleaf,Tilia cordata,4,Young,Good
+1691,Linden-Littleleaf,Tilia cordata,3,Young,Good
+1692,Arborvitae-Eastern,Thuja occidentalis,2,Young,Good
+1693,Arborvitae-Eastern,Thuja occidentalis,2,Young,Good
+1694,Arborvitae-Eastern,Thuja occidentalis,2,Young,Good
+1695,Arborvitae-Eastern,Thuja occidentalis,2,Young,Good
+1696,Arborvitae-Eastern,Thuja occidentalis,2,Young,Good
+1697,Fir-White,Abies concolor,2,Young,Poor
+1698,Fir-White,Abies concolor,2,Young,Fair
+1699,Fir-White,Abies concolor,2,Young,Good
+1700,Arborvitae-Eastern,Thuja occidentalis,2,Young,Good
+1701,Arborvitae-Eastern,Thuja occidentalis,1,Young,Good
+1702,Arborvitae-Eastern,Thuja occidentalis,2,Young,Good
+1703,Spruce,Picea sp,2,Young,Poor
+1704,Spruce,Picea sp,2,Young,Fair
+1705,Spruce,Picea sp,2,Young,Good
+1706,Spruce,Picea sp,2,Young,Fair
+1707,Spruce,Picea sp,2,Young,Fair
+1708,Spruce,Picea sp,2,Young,Fair
+1709,Arborvitae-Eastern,Thuja occidentalis,2,Young,Fair
+1710,Arborvitae-Eastern,Thuja occidentalis,1,Young,Good
+1711,Arborvitae-Eastern,Thuja occidentalis,2,Young,Good
+1712,Arborvitae-Eastern,Thuja occidentalis,2,Young,Fair
+1713,Arborvitae-Eastern,Thuja occidentalis,1,Young,Fair
+1714,Arborvitae-Eastern,Thuja occidentalis,2,Young,Fair
+1715,Arborvitae-Eastern,Thuja occidentalis,3,Young,Poor
+1716,Arborvitae-Eastern,Thuja occidentalis,2,Young,Fair
+1717,Arborvitae-Eastern,Thuja occidentalis,2,Young,Fair
+1718,Arborvitae-Eastern,Thuja occidentalis,2,Young,Good
+1719,Tupelo-Black,Nyssa sylvatica,3,Young,Good
+1720,Oak-Swamp White,Quercus bicolor,3,Young,Good
+1721,Oak-Bur,Quercus macrocarpa,4,Young,Good
+1722,Oak-Bur,Quercus macrocarpa,4,Young,Good
+1723,Oak-Bur,Quercus macrocarpa,3,Young,Good
+1724,Oak-Bur,Quercus macrocarpa,5,Young,Good
+1725,Oak- Northern Red,Quercus rubra,6,Young,Good
+1726,Oak-Bur,Quercus macrocarpa,6,Young,Good
+1727,Oak- Northern Red,Quercus rubra,4,Young,Good
+1728,Oak- Northern Red,Quercus rubra,3,Young,Good
+1729,Maple-Trident,Acer buergeranum,25,Over-mature,Fair
+1730,Oak- Northern Red,Quercus rubra,3,Young,Good
+1731,Oak- Northern Red,Quercus rubra,3,Young,Good
+1732,Oak- Northern Red,Quercus rubra,4,Young,Good
+1733,Maple-Red,Acer rubrum,3,Young,Good
+1734,Maple-Red,Acer rubrum,3,Young,Good
+1735,Maple-Red,Acer rubrum,3,Young,Good
+1736,Maple-Red,Acer rubrum,4,Young,Good
+1737,Maple-Red,Acer rubrum,3,Young,Good
+1738,Maple-Red,Acer rubrum,3,Young,Good
+1739,Maple-Red,Acer rubrum,3,Young,Good
+1740,Oak-Swamp White,Quercus bicolor,3,Young,Good
+1741,Oak- Northern Red,Quercus rubra,2,Young,Good
+1742,Oak-Swamp White,Quercus bicolor,4,Young,Good
+1743,Oak-Swamp White,Quercus bicolor,4,Young,Good
+1744,Oak-Chestnut,Quercus prinus,4,Young,Good
+1745,Ash-White,Fraxinus americana,4,Young,Good
+1746,Pine-Eastern White,Pinus strobus,10,Semi-mature,Good
+1747,Oak-Swamp White,Quercus bicolor,5,Young,Fair
+1748,Oak-Swamp White,Quercus bicolor,7,Young,Good
+1749,Ash-White,Fraxinus americana,5,Young,Good
+1750,Ash-White,Fraxinus americana,5,Young,Good
+1751,Ash-White,Fraxinus americana,5,Young,Good
+1752,Oak-Bur,Quercus macrocarpa,4,Young,Good
+1753,Oak-Bur,Quercus macrocarpa,5,Young,Good
+1754,Oak-Bur,Quercus macrocarpa,4,Young,Good
+1755,Oak-Bur,Quercus macrocarpa,3,Young,Good
+1756,Oak-Bur,Quercus macrocarpa,4,Young,Good
+1757,Oak-Chestnut,Quercus prinus,5,Young,Good
+1758,Oak-Bur,Quercus macrocarpa,4,Young,Good
+1759,Pine-Eastern White,Pinus strobus,8,Young,Fair
+1760,Poplar-Eastern,Populus deltoides,21,Mature,Fair
+1761,Crabapple,Malus sp,4,Semi-mature,Good
+1762,Crabapple,Malus sp,4,Young,Good
+1763,Pine-Eastern White,Pinus strobus,6,Young,Good
+1764,Oak-Swamp White,Quercus bicolor,4,Young,Good
+1765,Oak-Swamp White,Quercus bicolor,3,Young,Fair
+1766,Pine-Eastern White,Pinus strobus,7,Young,Good
+1767,Pine-Eastern White,Pinus strobus,6,Young,Fair
+1768,Oak-Swamp White,Quercus bicolor,5,Young,Good
+1769,Oak-Swamp White,Quercus bicolor,4,Young,Good
+1770,Oak-Swamp White,Quercus bicolor,5,Young,Good
+1771,Pine-Scotch,Pinus sylvestris,2,Young,Fair
+1772,Pine-Eastern White,Pinus strobus,7,Young,Good
+1773,Poplar-Eastern,Populus deltoides,19,Mature,Fair
+1774,Poplar-Eastern,Populus deltoides,11,Semi-mature,Fair
+1775,Poplar-Eastern,Populus deltoides,12,Semi-mature,Fair
+1776,Crabapple,Malus sp,3,Semi-mature,Good
+1777,Crabapple,Malus sp,3,Semi-mature,Good
+1778,Oak-Swamp White,Quercus bicolor,5,Young,Good
+1779,Oak-Swamp White,Quercus bicolor,5,Young,Good
+1780,Oak-Bur,Quercus macrocarpa,3,Young,Good
+1781,Oak- Northern Red,Quercus rubra,4,Young,Good
+1782,Oak- Northern Red,Quercus rubra,4,Young,Good
+1783,Oak- Northern Red,Quercus rubra,4,Young,Good
+1784,Oak- Northern Red,Quercus rubra,3,Young,Good
+1785,Oak- Northern Red,Quercus rubra,3,Young,Good
+1786,Tupelo-Black,Nyssa sylvatica,3,Young,Good
+1787,Serviceberry,Amelanchier sp,2,Semi-mature,Good
+1788,Oak- Northern Red,Quercus rubra,4,Young,Good
+1789,Oak- Northern Red,Quercus rubra,4,Young,Good
+1790,Oak-Bur,Quercus macrocarpa,3,Young,Good
+1791,Oak-Bur,Quercus macrocarpa,3,Young,Good
+1792,Oak-Bur,Quercus macrocarpa,3,Young,Good
+1793,Serviceberry,Amelanchier sp,1,Semi-mature,Good
+1794,Serviceberry,Amelanchier sp,1,Semi-mature,Good
+1795,Oak-Bur,Quercus macrocarpa,3,Young,Good
+1796,Tupelo-Black,Nyssa sylvatica,4,Young,Good
+1797,Oak-Bur,Quercus macrocarpa,5,Young,Good
+1798,Oak-Bur,Quercus macrocarpa,3,Young,Good
+1799,Oak- Northern Red,Quercus rubra,3,Young,Good
+1800,Oak-Swamp White,Quercus bicolor,4,Young,Good
+1801,Serviceberry,Amelanchier sp,2,Semi-mature,Good
+1802,Serviceberry,Amelanchier sp,2,Semi-mature,Good
+1803,Maple-Red,Acer rubrum,4,Young,Good
+1804,Zelkova-Japanese,Zelkova serrata,16,Mature,Good
+1805,Linden-European,Tilia x europaea,16,Mature,Good
+1806,Ash-White,Fraxinus americana,12,Semi-mature,Good
+1807,Maple-Red,Acer rubrum,4,Young,Good
+1808,Oak- Northern Red,Quercus rubra,12,Semi-mature,Good
+1809,Maple-Red,Acer rubrum,5,Young,Good
+1810,Horsechestnut-Common,Aesculus hippocastanum,16,Mature,Good
+1811,Horsechestnut-Common,Aesculus hippocastanum,14,Mature,Good
+1812,Honeylocust-Thornless Common,Gleditsia triacanthos,12,Mature,Good
+1813,Honeylocust-Thornless Common,Gleditsia triacanthos,15,Mature,Good
+1814,Maple-Sugar,Acer saccharum,15,Mature,Good
+1815,Maple-Norway,Acer platanoides,12,Mature,Good
+1816,Maple-Sugar,Acer saccharum,15,Mature,Fair
+1817,Pine-Eastern White,Pinus strobus,21,Mature,Good
+1818,Pine-Austrian,Pinus nigra,10,Semi-mature,Good
+1819,Pine-Austrian,Pinus nigra,20,Over-mature,Poor
+1820,Maple-Red,Acer rubrum,4,Young,Good
+1821,Maple-Red,Acer rubrum,4,Young,Good
+1822,Maple-Red,Acer rubrum,4,Young,Good
+1823,Maple-Red,Acer rubrum,4,Young,Good
+1824,Maple-Red,Acer rubrum,3,Young,Fair
+1825,Maple-Norway,Acer platanoides,20,Mature,Good
+1826,Pine-Austrian,Pinus nigra,17,Mature,Good
+1827,Pine-Eastern White,Pinus strobus,20,Mature,Good
+1828,Pine-Eastern White,Pinus strobus,23,Mature,Good
+1829,Pine-Eastern White,Pinus strobus,26,Mature,Good
+1830,Pine-Eastern White,Pinus strobus,17,Mature,Good
+1831,Pine-Eastern White,Pinus strobus,15,Mature,Good
+1832,Pine-Eastern White,Pinus strobus,7,Semi-mature,Fair
+1833,Pine-Eastern White,Pinus strobus,17,Mature,Good
+1834,Pine-Eastern White,Pinus strobus,8,Semi-mature,Good
+1835,Arborvitae-Eastern,Thuja occidentalis,10,Mature,Good
+1836,Arborvitae-Eastern,Thuja occidentalis,10,Mature,Good
+1837,Arborvitae-Eastern,Thuja occidentalis,10,Mature,Good
+1838,Arborvitae-Eastern,Thuja occidentalis,12,Mature,Good
+1839,Arborvitae-Eastern,Thuja occidentalis,22,Mature,Good
+1840,Arborvitae-Eastern,Thuja occidentalis,14,Mature,Good
+1841,Hornbeam-American,Carpinus caroliniana,4,Young,Fair
+1842,Hornbeam-American,Carpinus caroliniana,3,Young,Fair
+1843,Hornbeam-American,Carpinus caroliniana,4,Young,Fair
+1844,Pine-Eastern White,Pinus strobus,15,Semi-mature,Fair
+1845,Pine-Eastern White,Pinus strobus,14,Semi-mature,Fair
+1846,Pine-Eastern White,Pinus strobus,15,Mature,Fair
+1847,Pine-Eastern White,Pinus strobus,20,Mature,Fair
+1848,Pine-Eastern White,Pinus strobus,13,Mature,Fair
+1849,Pine-Eastern White,Pinus strobus,10,Semi-mature,Fair
+1850,Pine-Eastern White,Pinus strobus,19,Mature,Fair
+1851,Arborvitae-Eastern,Thuja occidentalis,14,Mature,Fair
+1852,Arborvitae-Eastern,Thuja occidentalis,19,Mature,Poor
+1853,Pine-Eastern White,Pinus strobus,20,Mature,Fair
+1854,Pine-Eastern White,Pinus strobus,22,Mature,Fair
+1855,Pine-Eastern White,Pinus strobus,14,Mature,Fair
+1856,Pine-Eastern White,Pinus strobus,19,Mature,Fair
+1857,Pine-Eastern White,Pinus strobus,9,Young,Fair
+1858,Pine-Eastern White,Pinus strobus,13,Semi-mature,Fair
+1859,Pine-Eastern White,Pinus strobus,18,Mature,Fair
+1860,Pine-Eastern White,Pinus strobus,28,Mature,Good
+1861,Pine-Eastern White,Pinus strobus,18,Mature,Good
+1862,Pine-Eastern White,Pinus strobus,16,Mature,Fair
+1863,Pine-Eastern White,Pinus strobus,17,Mature,Fair
+1864,Pine-Eastern White,Pinus strobus,12,Semi-mature,Fair
+1865,Pine-Eastern White,Pinus strobus,20,Mature,Fair
+1866,Pine-Eastern White,Pinus strobus,15,Mature,Fair
+1867,Pine-Eastern White,Pinus strobus,16,Mature,Fair
+1868,Pine-Eastern White,Pinus strobus,12,Semi-mature,Fair
+1869,Pine-Eastern White,Pinus strobus,19,Mature,Fair
+1870,Pine-Eastern White,Pinus strobus,6,Young,Fair
+1871,Pine-Eastern White,Pinus strobus,21,Mature,Fair
+1872,Pine-Eastern White,Pinus strobus,17,Mature,Fair
+1873,Pine-Eastern White,Pinus strobus,14,Semi-mature,Fair
+1874,Pine-Eastern White,Pinus strobus,13,Semi-mature,Fair
+1875,Pine-Eastern White,Pinus strobus,20,Mature,Poor
+1876,Pine-Eastern White,Pinus strobus,19,Mature,Fair
+1877,Pine-Eastern White,Pinus strobus,13,Semi-mature,Fair
+1878,Pine-Eastern White,Pinus strobus,17,Mature,Fair
+1879,Pine-Eastern White,Pinus strobus,17,Mature,Fair
+1880,Pine-Eastern White,Pinus strobus,19,Mature,Fair
+1881,Pine-Eastern White,Pinus strobus,14,Semi-mature,Fair
+1882,Pine-Eastern White,Pinus strobus,20,Mature,Fair
+1883,Pine-Eastern White,Pinus strobus,2,Young,Fair
+1884,Pine-Eastern White,Pinus strobus,15,Semi-mature,Fair
+1885,Pine-Eastern White,Pinus strobus,11,Semi-mature,Fair
+1886,Pine-Eastern White,Pinus strobus,8,Young,Fair
+1887,Pine-Eastern White,Pinus strobus,12,Semi-mature,Fair
+1888,Pine-Eastern White,Pinus strobus,7,Young,Fair
+1889,Pine-Eastern White,Pinus strobus,7,Young,Fair
+1890,Pine-Eastern White,Pinus strobus,8,Young,Fair
+1891,Pine-Eastern White,Pinus strobus,12,Semi-mature,Fair
+1892,Honeylocust-Thornless Common,Gleditsia triacanthos,3,Young,Fair
+1893,Catalpa-Northern,Catalpa speciosa,27,Mature,Fair
+1894,Redcedar-Eastern,Juniperus virginiana,5,Semi-mature,Fair
+1895,Birch-Paper,Betula papyrifera,15,Mature,Fair
+1896,Birch-Paper,Betula papyrifera,15,Mature,Fair
+1897,Maple-Norway,Acer platanoides,15,Mature,Fair
+1898,Crabapple,Malus sp,5,Mature,Fair
+1899,Lilac-Japanese Tree,Syringa reticulata,5,Mature,Fair
+1900,Birch-Paper,Betula papyrifera,13,Mature,Fair
+1901,Birch-Paper,Betula papyrifera,16,Mature,Fair
+1902,Oak- Northern Red,Quercus rubra,17,Mature,Fair
+1903,Oak-Pin,Quercus palustris,25,Mature,Fair
+1904,Crabapple,Malus sp,13,Mature,Poor
+1905,Crabapple,Malus sp,13,Mature,Poor
+1906,Crabapple,Malus sp,10,Mature,Fair
+1907,Crabapple,Malus sp,14,Mature,Fair
+1908,Crabapple,Malus sp,4,Mature,Fair
+1909,Crabapple,Malus sp,6,Mature,Fair
+1910,Crabapple,Malus sp,8,Mature,Fair
+1911,Serviceberry,Amelanchier sp,4,Semi-mature,Fair
+1912,Serviceberry,Amelanchier sp,7,Semi-mature,Fair
+1913,Arborvitae-Eastern,Thuja occidentalis,4,Semi-mature,Fair
+1914,Pine-Austrian,Pinus nigra,13,Semi-mature,Fair
+1915,Pine-Austrian,Pinus nigra,16,Mature,Fair
+1916,Pine-Austrian,Pinus nigra,16,Mature,Fair
+1917,Pine-Austrian,Pinus nigra,8,Semi-mature,Fair
+1918,Arborvitae-Eastern,Thuja occidentalis,14,Mature,Poor
+1919,Arborvitae-Eastern,Thuja occidentalis,16,Mature,Fair
+1920,Arborvitae-Eastern,Thuja occidentalis,14,Mature,Fair
+1921,Arborvitae-Eastern,Thuja occidentalis,16,Mature,Fair
+1922,Poplar-Eastern,Populus deltoides,12,Semi-mature,Fair
+1923,Poplar-Eastern,Populus deltoides,28,Mature,Fair
+1924,Elm-Siberian,Ulmus pumila,7,Semi-mature,Poor
+1925,Buckthorn-European,Rhamnus cathartica,16,Mature,Poor
+1926,Buckthorn-European,Rhamnus cathartica,8,Mature,Poor
+1927,Buckthorn-European,Rhamnus cathartica,4,Mature,Poor
+1928,Buckthorn-European,Rhamnus cathartica,8,Mature,Poor
+1929,Buckthorn-European,Rhamnus cathartica,7,Mature,Poor
+1930,Buckthorn-European,Rhamnus cathartica,6,Mature,Poor
+1931,Maple-Sugar,Acer saccharum,18,Mature,Fair
+1932,Birch-Paper,Betula papyrifera,12,Mature,Fair
+1933,Maple-Sugar,Acer saccharum,19,Mature,Fair
+1934,Spruce-Colorado Blue,Picea pungens,14,Semi-mature,Fair
+1935,Elm,Ulmus sp,2,New planting,Fair
+1936,Pine-Austrian,Pinus nigra,9,Semi-mature,Fair
+1937,Oak-Pin,Quercus palustris,14,Semi-mature,Fair
+1938,Maple-Norway,Acer platanoides,18,Mature,Poor
+1939,Lilac-Japanese Tree,Syringa reticulata,12,Mature,Fair
+1940,Pine-Eastern White,Pinus strobus,24,Mature,Fair
+1941,Maple-Norway,Acer platanoides,21,Mature,Fair
+1942,Maple-Norway,Acer platanoides,16,Mature,Fair
+1943,Maple-Norway,Acer platanoides,25,Mature,Fair
+1944,Crabapple,Malus sp,5,Mature,Fair
+1945,Boxelder,Acer negundo,14,Mature,Fair
+1946,Boxelder,Acer negundo,7,Semi-mature,Fair
+1947,Boxelder,Acer negundo,12,Semi-mature,Fair
+1948,Poplar-Balsam,Populus balsamifera,20,Mature,Poor
+1949,Maple-Norway,Acer platanoides,11,Mature,Poor
+1950,Maple-Norway,Acer platanoides,12,Mature,Fair
+1951,Maple-Norway,Acer platanoides,12,Mature,Fair
+1952,Maple-Norway,Acer platanoides,10,Mature,Fair
+1953,Maple-Silver,Acer saccharinum,34,Mature,Fair
+1954,Elm-American,Ulmus americana,13,Semi-mature,Fair
+1955,Elm,Ulmus sp,6,Young,Fair
+1956,Arborvitae-Eastern,Thuja occidentalis,7,Semi-mature,Poor
+1957,Arborvitae-Eastern,Thuja occidentalis,5,Semi-mature,Poor
+1958,Elm,Ulmus sp,5,Semi-mature,Fair
+1959,Arborvitae-Eastern,Thuja occidentalis,6,Semi-mature,Poor
+1960,Arborvitae-Eastern,Thuja occidentalis,5,Semi-mature,Poor
+1961,Arborvitae-Eastern,Thuja occidentalis,6,Semi-mature,Fair
+1962,Horsechestnut-Common,Aesculus hippocastanum,18,Mature,Fair
+1963,Maple-Norway,Acer platanoides,6,Semi-mature,Fair
+1964,Buckthorn-European,Rhamnus cathartica,6,Mature,Poor
+1965,Buckthorn-European,Rhamnus cathartica,5,Semi-mature,Fair
+1966,Buckthorn-European,Rhamnus cathartica,10,Mature,Poor
+1967,Maple-Norway,Acer platanoides,4,Young,Fair
+1968,Maple-Norway,Acer platanoides,19,Mature,Fair
+1969,Buckthorn-European,Rhamnus cathartica,6,Mature,Poor
+1970,Buckthorn-European,Rhamnus cathartica,5,Mature,Poor
+1971,Buckthorn-European,Rhamnus cathartica,12,Mature,Poor
+1972,Maple-Norway,Acer platanoides,5,Young,Fair
+1973,Oak- Northern Red,Quercus rubra,43,Mature,Fair
+1974,Oak-Pin,Quercus palustris,23,Mature,Fair
+1975,Fir-White,Abies concolor,24,Mature,Fair
+1976,Crabapple,Malus sp,9,Mature,Fair
+1977,Arborvitae-Eastern,Thuja occidentalis,5,Semi-mature,Poor
+1978,Arborvitae-Eastern,Thuja occidentalis,8,Semi-mature,Poor
+1979,Maple-Silver,Acer saccharinum,7,Semi-mature,Poor
+1980,Elm,Ulmus sp,9,Semi-mature,Fair
+1981,Arborvitae-Eastern,Thuja occidentalis,16,Mature,Fair
+1982,Arborvitae-Eastern,Thuja occidentalis,13,Mature,Fair
+1983,Arborvitae-Eastern,Thuja occidentalis,12,Mature,Fair
+1984,Arborvitae-Eastern,Thuja occidentalis,17,Mature,Fair
+1985,Maple-Norway,Acer platanoides,8,Semi-mature,Fair
+1986,Maple-Norway,Acer platanoides,7,Semi-mature,Fair
+1987,Maple-Norway,Acer platanoides,7,Semi-mature,Fair
+1988,Maple-Norway,Acer platanoides,4,Young,Fair
+1989,Maple-Norway,Acer platanoides,3,Young,Poor
+1990,Maple-Norway,Acer platanoides,6,Semi-mature,Fair
+1991,Maple-Norway,Acer platanoides,6,Semi-mature,Fair
+1992,Elm,Ulmus sp,11,Semi-mature,Fair
+1993,Walnut-Black,Juglans nigra,11,Mature,Fair
+1994,Oak-White,Quercus alba,42,Mature,Poor
+1995,Maple-Norway,Acer platanoides,22,Mature,Fair
+1996,Spruce-Norway,Picea abies,20,Mature,Fair
+1997,Spruce-Norway,Picea abies,20,Mature,Fair
+1998,Spruce-Norway,Picea abies,20,Mature,Fair
+1999,Crabapple,Malus sp,7,Mature,Fair
+2000,Maple-Silver,Acer saccharinum,12,Semi-mature,Fair
+2001,Maple-Silver,Acer saccharinum,15,Mature,Fair
+2002,Maple-Silver,Acer saccharinum,13,Mature,Fair
+2003,Maple-Silver,Acer saccharinum,14,Mature,Fair
+2004,Maple-Silver,Acer saccharinum,20,Mature,Fair
+2005,Spruce-Norway,Picea abies,23,Mature,Fair
+2006,Spruce-Norway,Picea abies,32,Mature,Fair
+2007,Spruce-Norway,Picea abies,21,Mature,Poor
+2008,Maple-Sugar,Acer saccharum,17,Mature,Poor
+2009,Maple-Sugar,Acer saccharum,17,Mature,Poor
+2010,Elm,Ulmus sp,9,Mature,Fair
+2011,Maple-Sugar,Acer saccharum,20,Mature,Fair
+2012,Maple-Norway,Acer platanoides,9,Semi-mature,Fair
+2013,Maple-Norway,Acer platanoides,8,Semi-mature,Fair
+2014,Maple-Norway,Acer platanoides,8,Semi-mature,Fair
+2015,Maple-Norway,Acer platanoides,6,Semi-mature,Fair
+2016,Maple-Norway,Acer platanoides,8,Semi-mature,Fair
+2017,Maple-Norway,Acer platanoides,6,Semi-mature,Fair
+2018,Spruce-Norway,Picea abies,13,Semi-mature,Fair
+2019,Spruce-Norway,Picea abies,9,Semi-mature,Fair
+2020,Spruce-Norway,Picea abies,10,Semi-mature,Fair
+2021,Spruce-Norway,Picea abies,8,Semi-mature,Fair
+2022,Spruce-Norway,Picea abies,13,Semi-mature,Fair
+2023,Maple-Norway,Acer platanoides,10,Semi-mature,Fair
+2024,Buckthorn-European,Rhamnus cathartica,7,Mature,Poor
+2025,Elm,Ulmus sp,7,Young,Fair
+2026,Maple-Norway,Acer platanoides,5,Young,Fair
+2027,Maple-Norway,Acer platanoides,10,Semi-mature,Poor
+2028,Maple-Norway,Acer platanoides,6,Semi-mature,Fair
+2029,Maple-Norway,Acer platanoides,5,Young,Fair
+2030,Maple-Norway,Acer platanoides,5,Young,Fair
+2031,Maple-Norway,Acer platanoides,5,Young,Fair
+2032,Locust-Black,Robinia pseudoacacia,12,Semi-mature,Poor
+2033,Spruce-White,Picea glauca,14,Semi-mature,Fair
+2034,Spruce-White,Picea glauca,14,Semi-mature,Poor
+2035,Locust-Black,Robinia pseudoacacia,11,Semi-mature,Poor
+2036,Maple-Norway,Acer platanoides,5,Semi-mature,Fair
+2037,Locust-Black,Robinia pseudoacacia,7,Young,Fair
+2038,Buckthorn-European,Rhamnus cathartica,6,Mature,Fair
+2039,Crabapple,Malus sp,14,Mature,Fair
+2040,Crabapple,Malus sp,11,Mature,Fair
+2041,Crabapple,Malus sp,13,Mature,Fair
+2042,Crabapple,Malus sp,9,Mature,Poor
+2043,Pine-Scotch,Pinus sylvestris,17,Mature,Good
+2044,Pine-Scotch,Pinus sylvestris,15,Mature,Fair
+2045,Pine-Scotch,Pinus sylvestris,14,Mature,Fair
+2046,Crabapple,Malus sp,4,Mature,Fair
+2047,Crabapple,Malus sp,11,Mature,Fair
+2048,Pine-Scotch,Pinus sylvestris,18,Mature,Poor
+2049,Pine-Scotch,Pinus sylvestris,7,Mature,Fair
+2050,Arborvitae-Eastern,Thuja occidentalis,16,Mature,Fair
+2051,Crabapple,Malus sp,9,Mature,Fair
+2052,Crabapple,Malus sp,8,Mature,Poor
+2053,Arborvitae-Eastern,Thuja occidentalis,14,Mature,Fair
+2054,Arborvitae-Eastern,Thuja occidentalis,10,Semi-mature,Fair
+2055,Arborvitae-Eastern,Thuja occidentalis,13,Semi-mature,Fair
+2056,Arborvitae-Eastern,Thuja occidentalis,9,Semi-mature,Fair
+2057,Arborvitae-Eastern,Thuja occidentalis,10,Semi-mature,Fair
+2058,Arborvitae-Eastern,Thuja occidentalis,11,Semi-mature,Fair
+2059,Arborvitae-Eastern,Thuja occidentalis,9,Semi-mature,Fair
+2060,Arborvitae-Eastern,Thuja occidentalis,14,Mature,Fair
+2061,Arborvitae-Eastern,Thuja occidentalis,10,Mature,Fair
+2062,Arborvitae-Eastern,Thuja occidentalis,4,Young,Fair
+2063,Arborvitae-Eastern,Thuja occidentalis,16,Mature,Fair
+2064,Arborvitae-Eastern,Thuja occidentalis,5,Young,Fair
+2065,Arborvitae-Eastern,Thuja occidentalis,13,Mature,Fair
+2066,Magnolia-Saucer,Magnolia x soulangiana,5,Semi-mature,Fair
+2067,Magnolia-Saucer,Magnolia x soulangiana,5,Semi-mature,Fair
+2068,Crabapple,Malus sp,7,Mature,Fair
+2069,Crabapple,Malus sp,10,Mature,Fair
+2070,Cherry-Flowering,Prunus serrulata,16,Mature,Fair
+2071,Crabapple,Malus sp,9,Mature,Fair
+2072,Common Larch,Larix decidua,7,Mature,Fair
+2073,Catalpa-Northern,Catalpa speciosa,28,Mature,Fair
+2074,Catalpa-Northern,Catalpa speciosa,20,Mature,Fair
+2075,Catalpa-Northern,Catalpa speciosa,38,Mature,Fair
+2076,Catalpa-Northern,Catalpa speciosa,16,Mature,Fair
+2077,Catalpa-Northern,Catalpa speciosa,20,Mature,Fair
+2078,Catalpa-Northern,Catalpa speciosa,17,Mature,Fair
+2079,Catalpa-Northern,Catalpa speciosa,5,Young,Fair
+2080,Oak-Swamp White,Quercus bicolor,8,Semi-mature,Fair
+2081,Maple-Norway,Acer platanoides,6,Semi-mature,Fair
+2082,Arborvitae-Eastern,Thuja occidentalis,20,Mature,Fair
+2083,Serviceberry,Amelanchier sp,2,Semi-mature,Fair
+2084,Serviceberry,Amelanchier sp,2,Semi-mature,Fair
+2085,Serviceberry,Amelanchier sp,3,Semi-mature,Fair
+2086,Crabapple,Malus sp,5,Semi-mature,Fair
+2087,Serviceberry,Amelanchier sp,2,Semi-mature,Fair
+2088,Spruce-Norway,Picea abies,46,Mature,Fair
+2089,Spruce-Norway,Picea abies,28,Mature,Fair
+2090,Common Larch,Larix decidua,30,Mature,Fair
+2091,Crabapple,Malus sp,6,Mature,Fair
+2092,Crabapple,Malus sp,6,Mature,Fair
+2093,Hazelnut-Contorted,Corylus avellana,2,Mature,Fair
+2094,Crabapple,Malus sp,2,Mature,Poor
+2095,Crabapple,Malus sp,2,Mature,Poor
+2096,Cherry-Flowering,Prunus serrulata,11,Mature,Fair
+2097,Pear-Common,Pyrus communis,5,Semi-mature,Fair
+2098,Cherry-Yoshino,Prunus x yedoensis,2,Young,Fair
+2099,Crabapple,Malus sp,5,Young,Fair
+2100,Pear-Common,Pyrus communis,6,Semi-mature,Fair
+2101,Common Larch,Larix decidua,2,Young,Dead
+2102,Maple-Norway,Acer platanoides,6,Young,Fair
+2103,Maple-Norway,Acer platanoides,9,Semi-mature,Poor
+2104,Common Larch,Larix decidua,3,Young,Poor
+2105,Common Larch,Larix decidua,3,Young,Fair
+2106,Maple-Norway,Acer platanoides,12,Semi-mature,Fair
+2107,Common Larch,Larix decidua,6,Young,Good
+2108,Common Larch,Larix decidua,7,Young,Good
+2109,Common Larch,Larix decidua,7,Young,Good
+2110,Common Larch,Larix decidua,6,Young,Good
+2111,Maple-Norway,Acer platanoides,10,Semi-mature,Good
+2112,Common Larch,Larix decidua,5,Young,Good
+2113,Maple-Norway,Acer platanoides,9,Semi-mature,Fair
+2114,Common Larch,Larix decidua,3,Young,Good
+2115,Maple-Norway,Acer platanoides,10,Semi-mature,Poor
+2116,Maple-Norway,Acer platanoides,12,Semi-mature,Fair
+2117,Common Larch,Larix decidua,4,Young,Good
+2118,Maple-Norway,Acer platanoides,12,Semi-mature,Fair
+2119,Common Larch,Larix decidua,4,Young,Fair
+2120,Common Larch,Larix decidua,4,Young,Fair
+2121,Maple-Norway,Acer platanoides,11,Semi-mature,Fair
+2122,Common Larch,Larix decidua,4,Young,Good
+2123,Common Larch,Larix decidua,4,Young,Good
+2124,Maple-Norway,Acer platanoides,13,Semi-mature,Fair
+2125,Common Larch,Larix decidua,4,Young,Good
+2126,Maple-Norway,Acer platanoides,11,Semi-mature,Fair
+2127,Common Larch,Larix decidua,5,Young,Fair
+2128,Lilac-Japanese Tree,Syringa reticulata,2,Young,Poor
+2129,Lilac-Japanese Tree,Syringa reticulata,4,Young,Fair
+2130,Lilac-Japanese Tree,Syringa reticulata,3,Young,Fair
+2131,Lilac-Japanese Tree,Syringa reticulata,4,Young,Good
+2132,Oak - Scarlet,Quercus coccinea,18,Semi-mature,Fair
+2133,Oak - Scarlet,Quercus coccinea,18,Semi-mature,Fair
+2134,Oak - Scarlet,Quercus coccinea,19,Semi-mature,Fair
+2135,Oak- Northern Red,Quercus rubra,0,Semi-mature,Fair
+2136,Oak-Pin,Quercus palustris,15,Semi-mature,Fair
+2137,Oak- Northern Red,Quercus rubra,5,Young,Poor
+2138,Oak- Northern Red,Quercus rubra,5,Young,Poor
+2139,Oak- Northern Red,Quercus rubra,17,Semi-mature,Fair
+2140,Oak- Northern Red,Quercus rubra,3,Young,Fair
+2141,Linden-European,Tilia x europaea,11,Semi-mature,Good
+2142,Maackia-Amur,Maackia amurensis,8,Semi-mature,Good
+2143,Maple-Sugar,Acer saccharum,18,Mature,Poor
+2144,Crabapple,Malus sp,18,Mature,Fair
+2145,Crabapple,Malus sp,19,Mature,Fair
+2146,Crabapple,Malus sp,15,Mature,Poor
+2147,Crabapple,Malus sp,19,Mature,Fair
+2148,Crabapple,Malus sp,15,Mature,Fair
+2149,Crabapple,Malus sp,21,Mature,Fair
+2150,Crabapple,Malus sp,21,Mature,Fair
+2151,Pine-Austrian,Pinus nigra,15,Semi-mature,Fair
+2152,Pine-Austrian,Pinus nigra,17,Semi-mature,Fair
+2153,Pine-Austrian,Pinus nigra,16,Semi-mature,Fair
+2154,Pine-Austrian,Pinus nigra,15,Semi-mature,Fair
+2155,Pine-Austrian,Pinus nigra,14,Semi-mature,Fair
+2156,Pine-Austrian,Pinus nigra,4,Young,Fair
+2157,Pine-Austrian,Pinus nigra,7,Young,Fair
+2158,Pine-Austrian,Pinus nigra,8,Young,Fair
+2159,Pine-Austrian,Pinus nigra,5,Young,Good
+2160,Pine-Austrian,Pinus nigra,6,Young,Good
+2161,Pine-Austrian,Pinus nigra,4,Young,Fair
+2162,Pine-Austrian,Pinus nigra,0,Young,Fair
+2163,Pine-Austrian,Pinus nigra,7,Young,Fair
+2164,Birch-Paper,Betula papyrifera,5,Semi-mature,Fair
+2165,Crabapple,Malus sp,4,Young,Fair
+2166,Crabapple,Malus sp,9,Semi-mature,Fair
+2167,Crabapple,Malus sp,11,Semi-mature,Fair
+2168,Horsechestnut-Common,Aesculus hippocastanum,13,Semi-mature,Good
+2169,Pine-Austrian,Pinus nigra,11,Semi-mature,Fair
+2170,Horsechestnut-Common,Aesculus hippocastanum,8,Semi-mature,Fair
+2171,Pine-Austrian,Pinus nigra,11,Semi-mature,Fair
+2172,Pine-Austrian,Pinus nigra,9,Semi-mature,Fair
+2173,Horsechestnut-Common,Aesculus hippocastanum,14,Semi-mature,Good
+2174,Horsechestnut-Common,Aesculus hippocastanum,14,Semi-mature,Good
+2175,Pine-Austrian,Pinus nigra,13,Semi-mature,Poor
+2176,Pine-Austrian,Pinus nigra,13,Semi-mature,Fair
+2177,Pine-Austrian,Pinus nigra,12,Semi-mature,Fair
+2178,Pine-Austrian,Pinus nigra,11,Semi-mature,Poor
+2179,Pine-Austrian,Pinus nigra,13,Semi-mature,Fair
+2180,Pine-Austrian,Pinus nigra,15,Semi-mature,Fair
+2181,Pine-Austrian,Pinus nigra,15,Semi-mature,Fair
+2182,Pine-Austrian,Pinus nigra,14,Semi-mature,Fair
+2183,Pine-Austrian,Pinus nigra,15,Semi-mature,Poor
+2184,Honeylocust-Thornless Common,Gleditsia triacanthos,8,Semi-mature,Good
+2185,Honeylocust-Thornless Common,Gleditsia triacanthos,8,Semi-mature,Good
+2186,Honeylocust-Thornless Common,Gleditsia triacanthos,7,Semi-mature,Good
+2187,Honeylocust-Thornless Common,Gleditsia triacanthos,6,Semi-mature,Good
+2188,Honeylocust-Thornless Common,Gleditsia triacanthos,13,Semi-mature,Good
+2189,Pine-Austrian,Pinus nigra,10,Semi-mature,Good
+2190,Pine-Scotch,Pinus sylvestris,13,Semi-mature,Good
+2191,Honeylocust-Thornless Common,Gleditsia triacanthos,8,Semi-mature,Fair
+2192,Honeylocust-Thornless Common,Gleditsia triacanthos,8,Semi-mature,Fair
+2193,Honeylocust-Thornless Common,Gleditsia triacanthos,13,Semi-mature,Good
+2194,Honeylocust-Thornless Common,Gleditsia triacanthos,7,Semi-mature,Poor
+2195,Common Larch,Larix decidua,8,Semi-mature,Good
+2196,Common Larch,Larix decidua,7,Semi-mature,Good
+2197,Common Larch,Larix decidua,6,Semi-mature,Good
+2198,Common Larch,Larix decidua,7,Semi-mature,Good
+2199,Common Larch,Larix decidua,5,Semi-mature,Good
+2200,Common Larch,Larix decidua,9,Semi-mature,Good
+2201,Ginkgo,Ginkgo biloba,2,Young,Fair
+2202,Ginkgo,Ginkgo biloba,2,Young,Fair
+2203,Ginkgo,Ginkgo biloba,2,Young,Good
+2204,Ginkgo,Ginkgo biloba,2,Young,Good
+2205,Ginkgo,Ginkgo biloba,2,Young,Good
+2206,Ginkgo,Ginkgo biloba,3,Young,Good
+2207,Ginkgo,Ginkgo biloba,3,Young,Poor
+2208,Ginkgo,Ginkgo biloba,3,Young,Good
+2209,Ginkgo,Ginkgo biloba,3,Young,Good
+2210,Ginkgo,Ginkgo biloba,3,Young,Fair
+2211,Ginkgo,Ginkgo biloba,3,Young,Fair
+2212,Hackberry,Celtis occidentalis,5,Young,Fair
+2213,Hackberry,Celtis occidentalis,5,Young,Poor
+2214,Hackberry,Celtis occidentalis,4,Young,Poor
+2215,Hackberry,Celtis occidentalis,4,Young,Poor
+2216,Hackberry,Celtis occidentalis,5,Young,Poor
+2217,Maple-Norway,Acer platanoides,7,Semi-mature,Fair
+2218,Maple-Norway,Acer platanoides,7,Semi-mature,Fair
+2219,Maple-Norway,Acer platanoides,5,Semi-mature,Fair
+2220,Lilac-Japanese Tree,Syringa reticulata,3,Young,Fair
+2221,Maple-Sugar,Acer saccharum,12,Semi-mature,Fair
+2222,Maple-Norway,Acer platanoides,15,Semi-mature,Fair
+2223,Maple-Sugar,Acer saccharum,14,Semi-mature,Fair
+2224,Lilac-Japanese Tree,Syringa reticulata,4,Young,Good
+2225,Maple-Red,Acer rubrum,10,Semi-mature,Poor
+2226,Crabapple,Malus sp,12,Mature,Good
+2227,Crabapple,Malus sp,13,Mature,Good
+2228,Oak-Pin,Quercus palustris,24,Mature,Good
+2229,Crabapple,Malus sp,6,Mature,Poor
+2230,Maple-Sugar,Acer saccharum,14,Semi-mature,Fair
+2231,Maple-Sugar,Acer saccharum,17,Semi-mature,Good
+2232,Crabapple,Malus sp,15,Mature,Good
+2233,Spruce-Norway,Picea abies,4,Young,Good
+2234,Spruce-Norway,Picea abies,3,Young,Good
+2235,Oak-Pin,Quercus palustris,14,Semi-mature,Fair
+2236,Crabapple,Malus sp,7,Semi-mature,Good
+2237,Oak-Bur,Quercus macrocarpa,3,Young,Poor
+2238,Oak-Bur,Quercus macrocarpa,4,Young,Good
+2239,Maple-Freeman's,Acer x freemanii,9,Semi-mature,Fair
+2240,Oak-Pin,Quercus palustris,17,Semi-mature,Good
+2241,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Semi-mature,Good
+2242,Maple-Sugar,Acer saccharum,12,Semi-mature,Good
+2243,Maple-Sugar,Acer saccharum,4,Young,Poor
+2244,Arborvitae-Eastern,Thuja occidentalis,4,Semi-mature,Good
+2245,Maple-Norway,Acer platanoides,7,Semi-mature,Poor
+2246,Arborvitae-Eastern,Thuja occidentalis,3,Semi-mature,Good
+2247,Maple-Norway,Acer platanoides,10,Semi-mature,Poor
+2248,Maple-Norway,Acer platanoides,10,Semi-mature,Fair
+2249,Maple-Norway,Acer platanoides,5,Semi-mature,Fair
+2250,Hackberry,Celtis occidentalis,2,Young,Poor
+2251,Hackberry,Celtis occidentalis,3,Young,Fair
+2252,Hackberry,Celtis occidentalis,4,Young,Fair
+2253,Hackberry,Celtis occidentalis,4,Young,Good
+2254,Hackberry,Celtis occidentalis,4,Young,Fair
+2255,Hackberry,Celtis occidentalis,3,Young,Good
+2256,Hackberry,Celtis occidentalis,4,Young,Fair
+2257,Elm,Ulmus sp,2,New planting,Poor
+2258,Pear-Callery,Pyrus calleryana,1,New planting,Good
+2259,Honeylocust-Thornless Common,Gleditsia triacanthos,4,Young,Poor
+2260,Maple-Sugar,Acer saccharum,3,Young,Poor
+2261,Maple-Sugar,Acer saccharum,2,Young,Good
+2262,Maple-Red,Acer rubrum,2,Young,Poor
+2263,Honeylocust-Thornless Common,Gleditsia triacanthos,24,Mature,Fair
+2264,Honeylocust-Thornless Common,Gleditsia triacanthos,22,Mature,Fair
+2265,Honeylocust-Thornless Common,Gleditsia triacanthos,16,Semi-mature,Poor
+2266,Honeylocust-Thornless Common,Gleditsia triacanthos,21,Mature,Poor
+2267,Honeylocust-Thornless Common,Gleditsia triacanthos,18,Mature,Poor
+2268,Maple-Sugar,Acer saccharum,23,Mature,Good
+2269,Maple-Red,Acer rubrum,3,Young,Good
+2270,Arborvitae-Eastern,Thuja occidentalis,5,Semi-mature,Fair
+2271,Crabapple,Malus sp,12,Mature,Fair
+2272,Crabapple,Malus sp,13,Mature,Fair
+2273,Crabapple,Malus sp,12,Mature,Fair
+2274,Crabapple,Malus sp,4,Young,Good
+2275,Crabapple,Malus sp,11,Mature,Fair
+2276,Ash-Green,Fraxinus pennsylvanica,16,Semi-mature,Fair
+2277,Crabapple,Malus sp,11,Mature,Fair
+2278,Honeylocust-Thornless Common,Gleditsia triacanthos,6,Semi-mature,Fair
+2279,Honeylocust-Thornless Common,Gleditsia triacanthos,5,Semi-mature,Fair
+2280,Honeylocust-Thornless Common,Gleditsia triacanthos,6,Semi-mature,Fair
+2281,Common Larch,Larix decidua,15,Semi-mature,Good
+2282,Common Larch,Larix decidua,14,Semi-mature,Fair
+2283,Common Larch,Larix decidua,14,Semi-mature,Fair
+2284,Common Larch,Larix decidua,16,Semi-mature,Fair
+2285,Arborvitae-Eastern,Thuja occidentalis,8,Semi-mature,Good
+2286,Honeylocust-Thornless Common,Gleditsia triacanthos,14,Semi-mature,Fair
+2287,Honeylocust-Thornless Common,Gleditsia triacanthos,17,Semi-mature,Fair
+2288,Maple-Red,Acer rubrum,3,Young,Good
+2289,Maple-Red,Acer rubrum,3,Young,Fair
+2290,Maple-Sugar,Acer saccharum,13,Semi-mature,Fair
+2291,Maple-Sugar,Acer saccharum,11,Semi-mature,Fair
+2292,Lilac-Japanese Tree,Syringa reticulata,4,Semi-mature,Fair
+2293,Lilac-Japanese Tree,Syringa reticulata,5,Semi-mature,Fair
+2294,Lilac-Japanese Tree,Syringa reticulata,4,Semi-mature,Fair
+2295,Lilac-Japanese Tree,Syringa reticulata,4,Semi-mature,Fair
+2296,Lilac-Japanese Tree,Syringa reticulata,5,Semi-mature,Fair
+2297,Lilac-Japanese Tree,Syringa reticulata,2,Young,Fair
+2298,Lilac-Japanese Tree,Syringa reticulata,2,Young,Good
+2299,Lilac-Japanese Tree,Syringa reticulata,2,Young,Fair
+2300,Elm,Ulmus sp,4,Young,Good
+2301,Maple-Red,Acer rubrum,4,Young,Fair
+2302,Maple-Red,Acer rubrum,4,Young,Good
+2303,Ash-Green,Fraxinus pennsylvanica,4,Young,Good
+2304,Ash-Green,Fraxinus pennsylvanica,5,Young,Good
+2305,Ash-Green,Fraxinus pennsylvanica,3,Young,Good
+2306,Hornbeam-American,Carpinus caroliniana,2,Young,Good
+2307,Beech-American,Fagus grandifolia,4,Young,Good
+2308,Beech-American,Fagus grandifolia,4,Young,Good
+2309,Birch-Paper,Betula papyrifera,3,Young,Good
+2310,Oak-Swamp White,Quercus bicolor,3,Young,Good
+2311,Oak-Swamp White,Quercus bicolor,4,Young,Good
+2312,Oak-Swamp White,Quercus bicolor,4,Young,Good
+2313,Oak-Swamp White,Quercus bicolor,3,Young,Fair
+2314,Oak-Swamp White,Quercus bicolor,4,Young,Fair
+2315,Oak- Northern Red,Quercus rubra,4,Young,Good
+2316,Oak- Northern Red,Quercus rubra,4,Young,Good
+2317,Pine-Eastern White,Pinus strobus,3,Young,Good
+2318,Pine-Eastern White,Pinus strobus,5,Young,Fair
+2319,Pine-Eastern White,Pinus strobus,4,Young,Good
+2320,Oak- Northern Red,Quercus rubra,3,Young,Good
+2321,Oak- Northern Red,Quercus rubra,3,Young,Good
+2322,Oak-Bur,Quercus macrocarpa,3,Young,Good
+2323,Oak-Bur,Quercus macrocarpa,4,Young,Fair
+2324,Oak-Bur,Quercus macrocarpa,4,Young,Fair
+2325,Oak- Northern Red,Quercus rubra,5,Young,Good
+2326,Oak- Northern Red,Quercus rubra,4,Young,Good
+2327,Oak- Northern Red,Quercus rubra,4,Young,Good
+2328,Maple-Sugar,Acer saccharum,3,Young,Good
+2329,Maple-Sugar,Acer saccharum,4,Young,Good
+2330,Maple-Sugar,Acer saccharum,3,Young,Good
+2331,Maple-Sugar,Acer saccharum,4,Young,Good
+2332,Pine-Eastern White,Pinus strobus,5,Young,Good
+2333,Pine-Eastern White,Pinus strobus,5,Young,Fair
+2334,Maple-Red,Acer rubrum,30,Mature,Fair
+2335,Beech-American,Fagus grandifolia,2,Young,Good
+2336,Maple-Sugar,Acer saccharum,22,Mature,Good
+2337,Linden-European,Tilia x europaea,4,Young,Good
+2338,Linden-European,Tilia x europaea,4,Young,Good
+2339,Oak-Swamp White,Quercus bicolor,3,Young,Good
+2340,Birch-River,Betula nigra,2,Young,Good
+2341,Birch-River,Betula nigra,2,Young,Good
+2342,Oak-Swamp White,Quercus bicolor,2,Young,Fair
+2343,Oak-Swamp White,Quercus bicolor,5,Young,Good
+2344,Ash-Green,Fraxinus pennsylvanica,3,Young,Good
+2345,Ash-Green,Fraxinus pennsylvanica,3,Young,Good
+2346,Ash-White,Fraxinus americana,3,Young,Good
+2347,Birch-River,Betula nigra,2,Young,Good
+2348,Birch-River,Betula nigra,3,Young,Good
+2349,Birch-River,Betula nigra,2,Young,Good
+2350,Birch-River,Betula nigra,2,Young,Good
+2351,Ginkgo,Ginkgo biloba,3,Young,Good
+2352,Hornbeam-American,Carpinus caroliniana,3,Young,Good
+2353,Ginkgo,Ginkgo biloba,3,Young,Good
+2354,Ash-White,Fraxinus americana,4,Young,Good
+2355,Ash-White,Fraxinus americana,4,Young,Good
+2356,Ash-White,Fraxinus americana,2,Young,Good
+2357,Ash-Green,Fraxinus pennsylvanica,5,Young,Good
+2358,Ash-Green,Fraxinus pennsylvanica,4,Young,Good
+2359,Ash-White,Fraxinus americana,4,Young,Good
+2360,Ash-Green,Fraxinus pennsylvanica,4,Young,Good
+2361,Ash-Green,Fraxinus pennsylvanica,5,Young,Good
+2362,Ash-Green,Fraxinus pennsylvanica,5,Young,Fair
+2363,Ash-White,Fraxinus americana,4,Young,Good
+2364,Ash-Green,Fraxinus pennsylvanica,5,Young,Good
+2365,Ash-White,Fraxinus americana,4,Young,Good
+2366,Ash-White,Fraxinus americana,5,Young,Good
+2367,Ash-White,Fraxinus americana,4,Young,Good
+2368,Ash-White,Fraxinus americana,4,Young,Good
+2369,Ash-Green,Fraxinus pennsylvanica,4,Young,Good
+2370,Ash-Green,Fraxinus pennsylvanica,5,Young,Good
+2371,Ash-Green,Fraxinus pennsylvanica,4,Young,Good
+2372,Ash-Green,Fraxinus pennsylvanica,4,Young,Good
+2373,Ash-White,Fraxinus americana,4,Young,Good
+2374,Ash-White,Fraxinus americana,3,Young,Good
+2375,Ash-White,Fraxinus americana,4,Young,Good
+2376,Ash-Green,Fraxinus pennsylvanica,5,Young,Good
+2377,Ash-Green,Fraxinus pennsylvanica,5,Young,Good
+2378,Ash-Green,Fraxinus pennsylvanica,4,Young,Good
+2379,Ash-White,Fraxinus americana,4,Young,Good
+2380,Ash-White,Fraxinus americana,3,Young,Good
+2381,Ash-White,Fraxinus americana,4,Young,Good
+2382,Ash-White,Fraxinus americana,4,Young,Good
+2383,Ash-White,Fraxinus americana,3,Young,Good
+2384,Ash-White,Fraxinus americana,4,Young,Good
+2385,Ash-Green,Fraxinus pennsylvanica,4,Young,Good
+2386,Ash-White,Fraxinus americana,4,Young,Good
+2387,Birch-River,Betula nigra,2,Young,Fair
+2388,Birch-River,Betula nigra,1,Young,Fair
+2389,Birch-River,Betula nigra,2,Young,Good
+2390,Birch-River,Betula nigra,2,Young,Good
+2391,Birch-River,Betula nigra,3,Young,Good
+2392,Oak- Northern Red,Quercus rubra,7,New planting,Good
+2393,Crabapple,Malus sp,9,Mature,Good
+2394,Crabapple,Malus sp,4,Mature,Good
+2395,Oak- Northern Red,Quercus rubra,7,Young,Fair
+2396,Maple-Norway,Acer platanoides,15,Semi-mature,Good
+2397,Lilac-Japanese Tree,Syringa reticulata,2,Young,Good
+2398,Oak-Swamp White,Quercus bicolor,3,Young,Good
+2399,Tupelo-Black,Nyssa sylvatica,3,Young,Good
+2400,Hornbeam-American,Carpinus caroliniana,2,Young,Good
+2401,Oak-Swamp White,Quercus bicolor,3,Young,Good
+2402,Oak-Swamp White,Quercus bicolor,4,Young,Good
+2403,Oak-Swamp White,Quercus bicolor,4,Young,Good
+2404,Oak-Swamp White,Quercus bicolor,4,Young,Good
+2405,Oak-Swamp White,Quercus bicolor,4,Young,Fair
+2406,Oak-Swamp White,Quercus bicolor,4,Young,Fair
+2407,Tupelo-Black,Nyssa sylvatica,3,Young,Good
+2408,Honeylocust-Thornless Common,Gleditsia triacanthos,2,Young,Good
+2409,Honeylocust-Thornless Common,Gleditsia triacanthos,2,Young,Good
+2410,Honeylocust-Thornless Common,Gleditsia triacanthos,2,Young,Good
+2411,Honeylocust-Thornless Common,Gleditsia triacanthos,2,Young,Good
+2412,Coffeetree-Kentucky,Gymnocladus dioicus,4,Young,Good
+2413,Hornbeam-American,Carpinus caroliniana,4,Young,Good
+2414,Coffeetree-Kentucky,Gymnocladus dioicus,4,Young,Good
+2415,Hornbeam-American,Carpinus caroliniana,4,Young,Good
+2416,Coffeetree-Kentucky,Gymnocladus dioicus,3,Young,Good
+2417,Planetree-London,Platanus x acerifolia,4,Young,Good
+2418,Planetree-London,Platanus x acerifolia,4,Young,Good
+2419,Planetree-London,Platanus x acerifolia,4,Young,Good
+2420,Planetree-London,Platanus x acerifolia,5,Young,Good
+2421,Crabapple,Malus sp,7,Mature,Fair
+2422,Crabapple,Malus sp,6,Mature,Good
+2423,Crabapple,Malus sp,4,Semi-mature,Good
+2424,Crabapple,Malus sp,3,Semi-mature,Good
+2425,Crabapple,Malus sp,3,Semi-mature,Good
+2426,Common Larch,Larix decidua,13,Semi-mature,Good
+2427,Common Larch,Larix decidua,17,Mature,Good
+2428,Tamarack,Larix laricina,9,Semi-mature,Good
+2429,Honeylocust-Thornless Common,Gleditsia triacanthos,16,Mature,Good
+2430,Hornbeam-American,Carpinus caroliniana,2,Young,Good
+2431,Hornbeam-American,Carpinus caroliniana,1,Young,Good
+2432,Planetree-London,Platanus x acerifolia,4,Young,Good
+2433,Crabapple,Malus sp,13,Mature,Good
+2434,Crabapple,Malus sp,9,Mature,Good
+2435,Crabapple,Malus sp,10,Mature,Good
+2436,Maple-Norway,Acer platanoides,10,Semi-mature,Fair
+2437,Maple-Norway,Acer platanoides,15,Semi-mature,Fair
+2438,Maple-Norway,Acer platanoides,8,Semi-mature,Fair
+2439,Maple-Norway,Acer platanoides,12,Semi-mature,Poor
+2440,Maple-Norway,Acer platanoides,10,Semi-mature,Good
+2441,Maple-Norway,Acer platanoides,7,Semi-mature,Good
+2442,Maple-Norway,Acer platanoides,10,Semi-mature,Poor
+2443,Maple-Norway,Acer platanoides,14,Semi-mature,Poor
+2444,Maple-Norway,Acer platanoides,8,Semi-mature,Poor
+2445,Pine-Eastern White,Pinus strobus,19,Mature,Fair
+2446,Pine-Eastern White,Pinus strobus,24,Mature,Fair
+2447,Pine-Eastern White,Pinus strobus,14,Semi-mature,Fair
+2448,Pine-Eastern White,Pinus strobus,17,Semi-mature,Fair
+2449,Pine-Eastern White,Pinus strobus,19,Mature,Fair
+2450,Maple-Norway,Acer platanoides,16,Semi-mature,Fair
+2451,Maple-Norway,Acer platanoides,10,Semi-mature,Fair
+2452,Maple-Norway,Acer platanoides,8,Semi-mature,Fair
+2453,Pine-Eastern White,Pinus strobus,16,Semi-mature,Fair
+2454,Maple-Norway,Acer platanoides,10,Semi-mature,Good
+2455,Maple-Norway,Acer platanoides,9,Semi-mature,Fair
+2456,Maple-Norway,Acer platanoides,10,Semi-mature,Fair
+2457,Maple-Norway,Acer platanoides,20,Mature,Poor
+2458,Ash-Green,Fraxinus pennsylvanica,16,Semi-mature,Poor
+2459,Maple-Norway,Acer platanoides,8,Semi-mature,Fair
+2460,Maple-Norway,Acer platanoides,9,Semi-mature,Fair
+2461,Maple-Norway,Acer platanoides,16,Semi-mature,Fair
+2462,Maple-Norway,Acer platanoides,17,Semi-mature,Poor
+2463,Pine-Eastern White,Pinus strobus,11,Semi-mature,Poor
+2464,Ash-Green,Fraxinus pennsylvanica,21,Mature,Poor
+2465,Maple-Norway,Acer platanoides,27,Mature,Poor
+2466,Maple-Norway,Acer platanoides,19,Semi-mature,Fair
+2467,Crabapple,Malus sp,11,Mature,Fair
+2468,Pine-Eastern White,Pinus strobus,29,Mature,Poor
+2469,Crabapple,Malus sp,4,Mature,Fair
+2470,Crabapple,Malus sp,5,Mature,Fair
+2471,Russian-olive,Elaeagnus angustifolia,4,Mature,Poor
+2472,Pear-Common,Pyrus communis,2,New planting,Fair
+2473,Hemlock-Canadian,Tsuga canadensis,11,Semi-mature,Fair
+2474,Hemlock-Canadian,Tsuga canadensis,14,Semi-mature,Fair
+2475,Hemlock-Canadian,Tsuga canadensis,12,Semi-mature,Fair
+2476,Hemlock-Canadian,Tsuga canadensis,5,Semi-mature,Fair
+2477,Hemlock-Canadian,Tsuga canadensis,4,Semi-mature,Fair
+2478,Hemlock-Canadian,Tsuga canadensis,7,Semi-mature,Fair
+2479,Hemlock-Canadian,Tsuga canadensis,6,Semi-mature,Fair
+2480,Hemlock-Canadian,Tsuga canadensis,13,Semi-mature,Poor
+2481,Hemlock-Canadian,Tsuga canadensis,10,Semi-mature,Poor
+2482,Hemlock-Canadian,Tsuga canadensis,13,Mature,Poor
+2483,Hawthorn,Crataegus sp,7,Mature,Fair
+2484,Linden-Bigleaf,Tilia platyphyllos,14,Semi-mature,Fair
+2485,Crimson King Maple,Acer platanoides,27,Mature,Fair
+2486,Birch-Paper,Betula papyrifera,13,Mature,Good
+2487,Maple-Norway,Acer platanoides,12,Semi-mature,Good
+2488,Arborvitae-Eastern,Thuja occidentalis,10,Mature,Good
+2489,Arborvitae-Eastern,Thuja occidentalis,9,Mature,Good
+2490,Arborvitae-Eastern,Thuja occidentalis,10,Mature,Good
+2491,Maple-Norway,Acer platanoides,21,Mature,Fair
+2492,Ash-Green,Fraxinus pennsylvanica,6,Semi-mature,Poor
+2493,Maple-Red,Acer rubrum,14,Semi-mature,Good
+2494,Maple-Sugar,Acer saccharum,17,Semi-mature,Good
+2495,Crabapple,Malus sp,6,Mature,Fair
+2496,Linden-Littleleaf,Tilia cordata,12,Semi-mature,Fair
+2497,Maple-Norway,Acer platanoides,17,Mature,Fair
+2498,Cherry-Flowering,Prunus serrulata,7,Mature,Fair
+2499,Fir-Balsam,Abies balsamea,19,Mature,Poor
+2500,grand fir,Abies grandis,2,Young,Fair
+2501,Lilac-Japanese Tree,Syringa reticulata,6,Semi-mature,Fair
+2502,Lilac-Japanese Tree,Syringa reticulata,5,Semi-mature,Fair
+2503,Lilac-Japanese Tree,Syringa reticulata,4,Semi-mature,Fair
+2504,Oak-Pin,Quercus palustris,14,Semi-mature,Poor
+2505,Crimson King Maple,Acer platanoides,1,Young,Poor
+2506,Maple-Red,Acer rubrum,3,Young,Fair
+2507,Maple-Red,Acer rubrum,3,Young,Good
+2508,Maple-Red,Acer rubrum,3,Young,Poor
+2509,Crabapple,Malus sp,9,Mature,Fair
+2510,Maple-Red,Acer rubrum,3,Young,Fair
+2511,Maple-Red,Acer rubrum,4,Young,Fair
+2512,Maple-Red,Acer rubrum,3,Young,Fair
+2513,Maple-Norway,Acer platanoides,15,Semi-mature,Fair
+2514,Maple-Norway,Acer platanoides,15,Semi-mature,Poor
+2515,Maple-Norway,Acer platanoides,9,Semi-mature,Fair
+2516,Crabapple,Malus sp,5,Mature,Fair
+2517,Common Larch,Larix decidua,15,Semi-mature,Fair
+2518,Common Larch,Larix decidua,13,Semi-mature,Good
+2519,Common Larch,Larix decidua,16,Semi-mature,Fair
+2520,Maple-Sugar,Acer saccharum,5,Semi-mature,Poor
+2521,Locust-Black,Robinia pseudoacacia,25,Mature,Fair
+2522,Linden-European,Tilia x europaea,14,Semi-mature,Good
+2523,Linden-European,Tilia x europaea,14,Semi-mature,Good
+2524,Maple-Silver,Acer saccharinum,33,Over-mature,Poor
+2525,Oak-Pin,Quercus palustris,16,Semi-mature,Poor
+2526,Linden-European,Tilia x europaea,14,Semi-mature,Fair
+2527,Oak- Northern Red,Quercus rubra,24,Mature,Fair
+2528,Linden-European,Tilia x europaea,13,Semi-mature,Good
+2529,Linden-European,Tilia x europaea,13,Semi-mature,Good
+2530,Maple-Sugar,Acer saccharum,4,Young,Poor
+2531,Linden-European,Tilia x europaea,15,Semi-mature,Fair
+2532,Linden-European,Tilia x europaea,11,Semi-mature,Fair
+2533,Crabapple,Malus sp,11,Mature,Fair
+2534,Spruce-White,Picea glauca,14,Mature,Fair
+2535,Maple-Red,Acer rubrum,18,Mature,Poor
+2536,Maple-Sugar,Acer saccharum,18,Mature,Poor
+2537,Crimson King Maple,Acer platanoides,17,Mature,Fair
+2538,Crimson King Maple,Acer platanoides,25,Semi-mature,Fair
+2539,Crabapple,Malus sp,6,Semi-mature,Good
+2540,Fir-White,Abies concolor,20,Mature,Poor
+2541,Arborvitae-Eastern,Thuja occidentalis,6,Mature,Fair
+2542,Maple-Norway,Acer platanoides,19,Mature,Fair
+2543,Maple-Red,Acer rubrum,14,Semi-mature,Fair
+2544,Crabapple,Malus sp,8,Semi-mature,Good
+2545,Catalpa-Northern,Catalpa speciosa,30,Mature,Fair
+2546,Catalpa-Northern,Catalpa speciosa,20,Mature,Fair
+2547,Locust-Black,Robinia pseudoacacia,24,Mature,Fair
+2548,Locust-Black,Robinia pseudoacacia,19,Mature,Poor
+2549,Locust-Black,Robinia pseudoacacia,14,Mature,Poor
+2550,Locust-Black,Robinia pseudoacacia,12,Semi-mature,Fair
+2551,Locust-Black,Robinia pseudoacacia,21,Mature,Poor
+2552,Locust-Black,Robinia pseudoacacia,19,Mature,Poor
+2553,Oak - Scarlet,Quercus coccinea,32,Mature,Good
+2554,Locust-Black,Robinia pseudoacacia,13,Mature,Poor
+2555,Locust-Black,Robinia pseudoacacia,20,Mature,Poor

@@ -11,8 +11,8 @@ There is no server and no account. Nothing leaves the device until you export.
 Open `<your site>/field/` in Chrome on Android, then **⋮ → Add to Home screen**.
 It then launches full-screen like any other app and works with no signal.
 
-Load it once on wifi before going out: that first load is what caches the app
-for offline use.
+Load it once on wifi before going out: that first load is what caches both the
+app and the 2014 tree list for offline use.
 
 ## Using it
 
@@ -69,19 +69,28 @@ refused rather than silently creating a bogus record.
 
 ## The 2014 reference
 
-Tag lookup needs the 2014 inventory. The app finds it in one of two ways:
+Tag lookup uses the 2014 inventory, published at
+`public/field/reference.csv`. The app fetches it on first load and caches it,
+so surveyors never have to do anything — open the app and tag lookup works.
 
-1. `public/field/reference.csv`, if the project publishes one. Loaded
-   automatically, and surveyors never see this step.
-2. A file picked once per device, from the Saved screen.
+Only the columns the lookup needs are published: tree number, common and
+scientific name, DBH, age class and condition. The inventory's free-text
+`Notes` column and its care-priority ratings are deliberately left out — they
+are not needed to autofill a form, and they are not worth putting on a public
+URL.
 
-Either way it is cached for offline use. The app works without it — you just
-type the species yourself and lose the cross-check.
+A surveyor can still load a different file by hand from the Saved screen, which
+overrides the published copy on that device. Any CSV with a tree-number column
+and a scientific-name column will do; common header spellings are recognised.
 
-The inventory is not committed to this repository, because publishing it is
-UVM's decision rather than this project's. To skip the per-device step, put a
-copy at `public/field/reference.csv`. Any CSV with a tree-number column and a
-scientific-name column will do; common header spellings are recognised.
+The app works without any reference at all — you just type the species yourself
+and lose the cross-check against 2014.
+
+### Replacing it
+
+Overwrite `public/field/reference.csv` and merge. Phones that have already
+cached the old copy keep using it until their app cache is cleared, so bump
+`CACHE` in `public/field/sw.js` when the contents change materially.
 
 ## Known limits
 
