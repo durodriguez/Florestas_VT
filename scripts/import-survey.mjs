@@ -47,6 +47,9 @@ if (!existsSync(inputPath)) {
 const parse = (path) => {
   const out = Papa.parse(readFileSync(path, 'utf8'), {
     header: true,
+    // Stated rather than sniffed: a header-only file (an emptied collections
+    // list, say) gives Papa nothing to detect a delimiter from and it errors.
+    delimiter: ',',
     skipEmptyLines: 'greedy',
     transformHeader: (h) => h.trim(),
   });

@@ -1,51 +1,5 @@
 {
   "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "trail_id": "green-heritage-walk",
-        "name": "Green Heritage Walk",
-        "color": "#154734",
-        "length_mi": 0.4,
-        "duration_min": 20,
-        "description": "A short loop of the University Green featuring the campus elms, sugar maples and the oldest specimen trees at UVM.",
-        "stops": ["DEMO-0001", "DEMO-0002", "DEMO-0004", "DEMO-0007"]
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [-73.19640, 44.47730],
-          [-73.19570, 44.47770],
-          [-73.19495, 44.47800],
-          [-73.19430, 44.47775],
-          [-73.19470, 44.47725],
-          [-73.19565, 44.47700],
-          [-73.19640, 44.47730]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "trail_id": "conifer-walk",
-        "name": "Redstone Conifer Walk",
-        "color": "#8c6d1f",
-        "length_mi": 0.6,
-        "duration_min": 30,
-        "description": "Follows the Redstone Pines and the mature evergreen plantings of the former Redstone estate.",
-        "stops": ["DEMO-0012", "DEMO-0013", "DEMO-0014"]
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [-73.19790, 44.47180],
-          [-73.19720, 44.47140],
-          [-73.19640, 44.47110],
-          [-73.19560, 44.47130],
-          [-73.19520, 44.47190]
-        ]
-      }
-    }
-  ]
+  "comment": "No trails defined yet. Add LineString features with trail_id, name, color, length_mi, duration_min, description and a stops array of plant_id values. See docs/DATA-MODEL.md.",
+  "features": []
 }
