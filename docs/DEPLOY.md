@@ -71,6 +71,26 @@ recolour every marker.
 If you exceed roughly 50,000 plants and notice sluggishness, the next step is
 vector tiles (`tippecanoe` + MapLibre GL) rather than incremental tuning.
 
+## Why a new survey shows up immediately
+
+The generated data files sit in `public/`, which Vite copies through without
+hashing their filenames — unlike the JS and CSS, whose names change on every
+build. Left alone, `data/plants.json` would keep the same URL forever and a
+returning visitor would keep seeing the plants they saw last time.
+
+So `npm run data` hashes the source CSVs and writes `.data-version`, which the
+build compiles into the bundle and the app appends to its data requests
+(`data/plants.json?v=13daaec74e34`). Because the constant lives inside the
+bundle, changing it also changes the bundle's own hashed filename — so the
+browser fetches new JS, which asks for a new data URL.
+
+The hash comes from the source files rather than the generated JSON, which
+carries a build timestamp; hashing the output would invalidate every visitor's
+cache on every deploy even when nothing changed.
+
+If a change still does not appear, it is worth checking the deploy actually ran
+(**Actions → Deploy to GitHub Pages**) before assuming a caching problem.
+
 ## Backups
 
 The CSVs in `data/` are the whole dataset, and they are in git. Every change
