@@ -151,8 +151,11 @@ export function nextSequence(existingIds, prefix, year) {
   return max + 1;
 }
 
+/** `UVM-2026-0001` for a newly issued number, `UVM-0772` for an adopted tag. */
 const formatAccession = (prefix, year, seq) =>
-  `${prefix}-${year}-${String(seq).padStart(4, '0')}`;
+  year === null
+    ? `${prefix}-${String(seq).padStart(4, '0')}`
+    : `${prefix}-${year}-${String(seq).padStart(4, '0')}`;
 
 function buildSpeciesLookup(taxaRows) {
   // Exact identifiers (taxon_id, scientific name, common name) are what a
@@ -224,6 +227,7 @@ export function importSurvey({
   year = new Date().getFullYear(),
   duplicateMeters = 2,
   movedMeters = 0.5,
+  adoptTags = false,
 }) {
   const { resolved, unmapped } = resolveColumns(headers, mapping.columns);
   const species = buildSpeciesLookup(taxaRows);
@@ -338,15 +342,38 @@ export function importSurvey({
     };
 
     // --- new accession, or an update to an existing one --------------------
+    // --- new accession, or an update to an existing one --------------------
     const tag = get(row, 'plant_id');
     if (tag) {
-      if (!existing.has(tag)) {
-        error(`tag "${tag}" is not an existing accession — leave the column blank to assign a new one`);
+      // A bare number is a physical tag stamped on the tree. Its accession is
+      // that number in the project's prefix form, so a surveyor reading "772"
+      // off a metal tag and the record UVM-0772 are the same tree.
+      const bareTag = /^\d+$/.test(tag);
+      const asAccession = bareTag ? formatAccession(prefix, null, Number(tag)) : tag;
+      const known = existing.has(tag) ? tag : existing.has(asAccession) ? asAccession : null;
+
+      if (!known) {
+        if (adoptTags && bareTag) {
+          // First survey of an already-tagged tree: adopt the tag as its
+          // accession rather than issuing a parallel number nobody can read
+          // in the field.
+          if (takenIds.has(asAccession)) {
+            error(`tag "${tag}" maps to ${asAccession}, which is already in use`);
+            return;
+          }
+          takenIds.add(asAccession);
+          inserts.push({ plant_id: asAccession, ...record });
+          return;
+        }
+        error(
+          `tag "${tag}" is not an existing accession — leave the column blank to assign a new ` +
+          'one, or pass --adopt-tags to register physical tags as accession numbers',
+        );
         return;
       }
       // Only carry across what the surveyor actually recorded, so a re-survey
       // that skipped a field does not blank out good data already on file.
-      const before = existing.get(tag);
+      const before = existing.get(known);
       const changes = {};
       for (const [k, v] of Object.entries(record)) {
         if (v === '') continue;
@@ -357,7 +384,7 @@ export function importSurvey({
         warn(`tag "${tag}" re-surveyed with no changed values`);
         return;
       }
-      updates.push({ plant_id: tag, changes });
+      updates.push({ plant_id: known, changes });
       return;
     }
 

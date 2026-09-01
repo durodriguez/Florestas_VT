@@ -304,6 +304,55 @@ describe('importSurvey — re-surveys', () => {
   });
 });
 
+describe('importSurvey — adopting physical tags', () => {
+  it('refuses an unknown tag by default, and says how to adopt it', () => {
+    const r = run([row({ tag: '772' })]);
+    expect(r.inserts).toHaveLength(0);
+    expect(r.issues.some((i: { message: string }) => /--adopt-tags/.test(i.message))).toBe(true);
+  });
+
+  it('adopts a bare numeric tag as the accession number', () => {
+    const r = run([row({ tag: '772' })], { adoptTags: true });
+    expect(r.summary.errors).toBe(0);
+    expect(r.inserts[0].plant_id).toBe('UVM-0772');
+  });
+
+  it('zero-pads short tags and leaves long ones intact', () => {
+    const r = run([row({ tag: '7' }), row({ tag: '12345', lat: '44.4780' })], { adoptTags: true });
+    expect(r.inserts.map((i: { plant_id: string }) => i.plant_id)).toEqual(['UVM-0007', 'UVM-12345']);
+  });
+
+  it('treats a later survey of the same tag as an update, not a duplicate', () => {
+    const adopted = [
+      ...plantRows,
+      { plant_id: 'UVM-0772', taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955', dbh_in: '9.4', status: 'active' },
+    ];
+    const r = run([row({ tag: '772', dbh_in: '10.2' })], { adoptTags: true, plantRows: adopted });
+    expect(r.inserts).toHaveLength(0);
+    expect(r.updates[0].plant_id).toBe('UVM-0772');
+    expect(r.updates[0].changes).toHaveProperty('dbh_in', '10.2');
+  });
+
+  it('still assigns a fresh accession when the tag column is blank', () => {
+    const r = run([row({ tag: '' })], { adoptTags: true });
+    expect(r.inserts[0].plant_id).toBe('UVM-2026-0001');
+  });
+
+  it('does not adopt a non-numeric tag, which is probably a typo', () => {
+    const r = run([row({ tag: 'BOGUS-1' })], { adoptTags: true });
+    expect(r.inserts).toHaveLength(0);
+    expect(r.issues.some((i: { message: string }) => /not an existing accession/.test(i.message))).toBe(true);
+  });
+
+  it('refuses when two rows in one file adopt the same tag', () => {
+    // Two trees cannot share a physical tag number; the second is a
+    // transcription error and must not overwrite the first.
+    const r = run([row({ tag: '772' }), row({ tag: '772', lat: '44.4781' })], { adoptTags: true });
+    expect(r.inserts).toHaveLength(1);
+    expect(r.issues.some((i: { message: string }) => /already in use/.test(i.message))).toBe(true);
+  });
+});
+
 describe('importSurvey — duplicate protection', () => {
   it('flags a new plant sitting on top of the same species already on file', () => {
     const r = run([row({ lat: '44.4700', lng: '-73.2000', species: 'Sugar maple' })]);

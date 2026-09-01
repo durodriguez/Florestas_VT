@@ -55,6 +55,11 @@ with a stop list.
 
 **Export** — the current result set as CSV, for staff working in a spreadsheet.
 
+**Field survey app** — an installable offline web app at `/field/` for
+recording trees on a phone: tag lookup against the 2014 inventory, GPS with an
+accuracy gate, tap-to-place pin on satellite imagery, camera, and CSV export
+that feeds the importer. See [docs/FIELD-APP.md](docs/FIELD-APP.md).
+
 **Survey intake** — `npm run import` merges a field export into the dataset:
 assigns accession numbers, resolves species from common or scientific names,
 normalises `EXC`/`Very Good`/`g` onto the condition vocabulary, reads whatever
@@ -83,6 +88,7 @@ species never reaches the live site.
 |---|---|
 | **Data model & validation rules** | [docs/DATA-MODEL.md](docs/DATA-MODEL.md) |
 | **Surveying and mapping trees** | [docs/FIELD-SURVEY.md](docs/FIELD-SURVEY.md) |
+| **The field survey app** | [docs/FIELD-APP.md](docs/FIELD-APP.md) |
 | **Hosting, domains, scaling** | [docs/DEPLOY.md](docs/DEPLOY.md) |
 
 ## Commands

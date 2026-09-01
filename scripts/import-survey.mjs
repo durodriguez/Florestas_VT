@@ -5,6 +5,7 @@
 //   npm run import -- survey/2026-09-green.csv --write     # apply
 //   npm run import -- export.csv --out review.csv          # stage for review
 //   npm run import -- export.csv --year 2026 --write
+//   npm run import -- field.csv --adopt-tags --write   # first survey of tagged trees
 //
 // Dry run is the default on purpose: you see exactly what would change, and
 // what it could not read, before anything touches the dataset.
@@ -66,6 +67,7 @@ const result = importSurvey({
   config: JSON.parse(readFileSync(join(root, 'data', 'config.json'), 'utf8')),
   year: Number(opt('year', new Date().getFullYear())),
   duplicateMeters: flag('allow-duplicates') ? 0 : Number(opt('duplicate-meters', 2)),
+  adoptTags: flag('adopt-tags'),
 });
 
 // ---- report --------------------------------------------------------------

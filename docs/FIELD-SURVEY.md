@@ -35,7 +35,12 @@ check your points against visible crowns.
 
 ## 3. Collect in the field
 
-Recommended tools, all free:
+**The quickest route is this project's own app** — see
+[FIELD-APP.md](FIELD-APP.md). It is built around UVM's tagged trees
+specifically: type the tag, it tells you what 2014 recorded, you confirm or
+correct it. Nothing to install beyond adding a web page to your home screen.
+
+Other options, all free:
 
 - **[QField](https://qfield.org/)** or **[Mergin Maps](https://merginmaps.com/)** —
   QGIS projects on an Android/iOS device, with offline basemaps and a form

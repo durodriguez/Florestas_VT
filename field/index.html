@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+  <meta name="description" content="Record tree measurements, photos and positions in the field, offline.">
+  <meta name="theme-color" content="#154734">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <title>Tree Survey — UVM Arboretum</title>
+</head>
+<body>
+  <header class="bar">
+    <h1>Tree Survey</h1>
+    <button type="button" id="nav-list" class="bar-btn">
+      Saved <span id="saved-count" class="badge">0</span>
+    </button>
+  </header>
+
+  <main id="screen-form" class="screen">
+    <!-- 1. tag ------------------------------------------------------------ -->
+    <section class="card">
+      <label class="field-label" for="tag">Metal tag number</label>
+      <div class="tag-row">
+        <input id="tag" type="text" inputmode="numeric" autocomplete="off"
+               placeholder="e.g. 772" enterkeyhint="search">
+        <button type="button" id="tag-new" class="ghost-btn">No tag</button>
+      </div>
+      <div id="tag-result" class="tag-result"></div>
+    </section>
+
+    <!-- 2. species -------------------------------------------------------- -->
+    <section class="card">
+      <label class="field-label" for="species">Species</label>
+      <input id="species" type="text" autocomplete="off" placeholder="Scientific or common name">
+      <label class="check">
+        <input type="checkbox" id="species-mismatch">
+        <span>This is <strong>not</strong> what the 2014 record says</span>
+      </label>
+    </section>
+
+    <!-- 3. position ------------------------------------------------------- -->
+    <section class="card">
+      <div class="card-head">
+        <span class="field-label">Position</span>
+        <span id="gps-accuracy" class="accuracy">—</span>
+      </div>
+      <div id="gps-status" class="gps-status">Waiting for location…</div>
+      <div id="pin-map" class="pin-map" aria-label="Drag the pin onto the tree"></div>
+      <p class="hint">Tap the map to place the pin on the tree's crown, or drag it. Imagery beats GPS under canopy.</p>
+      <div class="btn-row">
+        <button type="button" id="gps-recapture" class="ghost-btn">Re-read GPS</button>
+        <span id="coords" class="coords">—</span>
+      </div>
+    </section>
+
+    <!-- 4. measurements --------------------------------------------------- -->
+    <section class="card">
+      <span class="field-label">Measurements</span>
+      <div class="grid-3">
+        <label>DBH (in)<input id="dbh" type="number" inputmode="decimal" step="0.1" min="0"></label>
+        <label>Height (ft)<input id="height" type="number" inputmode="numeric" step="1" min="0"></label>
+        <label>Spread (ft)<input id="spread" type="number" inputmode="numeric" step="1" min="0"></label>
+      </div>
+      <label class="field-label" for="condition">Condition</label>
+      <div class="seg" id="condition-seg" role="radiogroup" aria-label="Condition"></div>
+    </section>
+
+    <!-- 5. photo ---------------------------------------------------------- -->
+    <section class="card">
+      <span class="field-label">Photo</span>
+      <input type="file" id="photo" accept="image/*" capture="environment" hidden>
+      <button type="button" id="photo-btn" class="big-btn">Take photo</button>
+      <div id="photo-preview" class="photo-preview" hidden>
+        <img id="photo-img" alt="Photo of this tree">
+        <button type="button" id="photo-clear" class="ghost-btn">Remove</button>
+      </div>
+    </section>
+
+    <!-- 6. notes ---------------------------------------------------------- -->
+    <section class="card">
+      <label class="field-label" for="notes">Notes</label>
+      <textarea id="notes" rows="3" placeholder="Defects, construction damage, multiple stems…"></textarea>
+      <div class="grid-2">
+        <label>Date<input id="date" type="date"></label>
+        <label>Surveyor<input id="surveyor" type="text" autocomplete="off" placeholder="Initials"></label>
+      </div>
+    </section>
+
+    <div id="form-error" class="form-error" hidden></div>
+    <button type="button" id="save" class="save-btn">Save this tree</button>
+    <p class="hint hint--foot">Saved on this phone only. Export before you finish for the day.</p>
+  </main>
+
+  <!-- saved list ---------------------------------------------------------- -->
+  <section id="screen-list" class="screen" hidden>
+    <div class="card">
+      <div class="card-head">
+        <span class="field-label">Saved this session</span>
+        <button type="button" id="nav-form" class="ghost-btn">Back to form</button>
+      </div>
+      <ul id="record-list" class="record-list"></ul>
+      <p id="list-empty" class="hint">Nothing saved yet.</p>
+    </div>
+    <div class="card">
+      <span class="field-label">Export</span>
+      <p class="hint">Send these to yourself, then run <code>npm run import</code> at a computer.</p>
+      <button type="button" id="export-csv" class="big-btn">Download CSV</button>
+      <button type="button" id="export-photos" class="big-btn">Download photos (zip)</button>
+      <button type="button" id="clear-all" class="danger-btn">Clear saved data</button>
+    </div>
+    <div class="card">
+      <span class="field-label">2014 inventory reference</span>
+      <p id="ref-status" class="hint">Not loaded.</p>
+      <input type="file" id="ref-file" accept=".csv,text/csv" hidden>
+      <button type="button" id="ref-btn" class="ghost-btn">Load inventory CSV</button>
+    </div>
+  </section>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="../src/field/main.ts"></script>
+</body>
+</html>
