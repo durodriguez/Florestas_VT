@@ -3,6 +3,7 @@
 // loads at runtime. Run via `npm run data` (also invoked by `npm run dev` and
 // `npm run build`). Exits non-zero on validation errors so CI catches bad data.
 
+import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -57,8 +58,30 @@ if (result.errors.length) {
 }
 
 mkdirSync(outDir, { recursive: true });
-writeFileSync(join(outDir, 'dataset.json'), JSON.stringify(result.dataset));
-writeFileSync(join(outDir, 'plants.json'), JSON.stringify(result.plants));
+const datasetJson = JSON.stringify(result.dataset);
+const plantsJson = JSON.stringify(result.plants);
+writeFileSync(join(outDir, 'dataset.json'), datasetJson);
+writeFileSync(join(outDir, 'plants.json'), plantsJson);
+
+// These two files keep the same URL forever — Vite hashes JS and CSS
+// filenames, but copies public/ through untouched. Without a cache-buster a
+// returning visitor keeps seeing the plants they saw last time, however many
+// surveys have landed since. The app appends this hash to the data URLs, and
+// because it is compiled into the bundle, changing it also changes the
+// bundle's own hashed filename.
+//
+// Hashed from the source files rather than the generated JSON: the output
+// carries a build timestamp, which would change the version on every build and
+// make every visitor re-download data that had not actually changed.
+const version = createHash('sha256')
+  .update(
+    ['taxa.csv', 'plants.csv', 'collections.csv', 'trails.geojson', 'config.json']
+      .map((name) => readFileSync(join(dataDir, name)))
+      .reduce((a, b) => Buffer.concat([a, b]), Buffer.alloc(0)),
+  )
+  .digest('hex')
+  .slice(0, 12);
+writeFileSync(join(root, '.data-version'), version + '\n');
 
 const kb = (s) => `${(Buffer.byteLength(s) / 1024).toFixed(1)} kB`;
 const c = result.dataset.counts;
@@ -67,5 +90,6 @@ console.log(
   `${c.collections} collections · ${c.trails} trails` +
   `${result.warnings.length ? ` · ${result.warnings.length} warning(s)` : ''}`
 );
-console.log(`  public/data/dataset.json  ${kb(JSON.stringify(result.dataset))}`);
-console.log(`  public/data/plants.json   ${kb(JSON.stringify(result.plants))}`);
+console.log(`  public/data/dataset.json  ${kb(datasetJson)}`);
+console.log(`  public/data/plants.json   ${kb(plantsJson)}`);
+console.log(`  data version              ${version}`);

@@ -55,9 +55,14 @@ export function expandPlants(file: PlantsFile, dataset: Dataset): Plant[] {
 }
 
 export async function loadData(base: string): Promise<{ dataset: Dataset; plants: Plant[] }> {
+  // __DATA_VERSION__ is a hash of the data itself, compiled in at build time.
+  // Without it these two URLs never change and browsers keep serving whatever
+  // they cached, so a visitor would not see a new survey until their cache
+  // expired on its own.
+  const v = `?v=${__DATA_VERSION__}`;
   const [dataset, plantsFile] = await Promise.all([
-    fetch(`${base}data/dataset.json`).then(assertOk('dataset.json')) as Promise<Dataset>,
-    fetch(`${base}data/plants.json`).then(assertOk('plants.json')) as Promise<PlantsFile>,
+    fetch(`${base}data/dataset.json${v}`).then(assertOk('dataset.json')) as Promise<Dataset>,
+    fetch(`${base}data/plants.json${v}`).then(assertOk('plants.json')) as Promise<PlantsFile>,
   ]);
   return { dataset, plants: expandPlants(plantsFile, dataset) };
 }
