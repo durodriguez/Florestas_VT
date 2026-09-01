@@ -94,9 +94,13 @@ trees a day.
 Do **not** hand-edit `data/plants.csv` after an outing. Run the importer:
 
 ```bash
-npm run import -- survey/2026-09-green.csv          # dry run — writes nothing
-npm run import -- survey/2026-09-green.csv --write  # apply
+npm run import -- survey/2026-09-green.csv --adopt-tags          # dry run
+npm run import -- survey/2026-09-green.csv --adopt-tags --write  # apply
 ```
+
+`--adopt-tags` registers the metal tag stamped on a tree as its accession
+number, so tag 772 becomes `UVM-0772`. Use it for any export from the field
+app; see [FIELD-APP.md](FIELD-APP.md).
 
 `survey/field-template.csv` shows the shape it expects, though you rarely need
 to match it exactly — see the next section.
