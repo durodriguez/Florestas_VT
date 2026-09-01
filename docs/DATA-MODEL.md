@@ -80,6 +80,17 @@ option, which preserves the campus's landscape history.
 `collection_id`, `name`, `color` (hex, used by the "colour by campus area"
 map mode), `description`.
 
+**Currently empty.** The file previously held seven invented area names, which
+were removed when real survey data replaced the sample rows — publishing made-up
+campus zones alongside real trees would have been misleading. Fill it with UVM
+Grounds' actual landscape zones, then set `collection_id` on the plants. Until
+then the campus-area filter and the colour-by-area mode are simply empty, which
+is accurate.
+
+Draw the areas so a surveyor standing at a tree knows without thinking which one
+they are in; vague boundaries are how the same bed ends up recorded three
+different ways.
+
 ## trails.geojson
 
 A GeoJSON `FeatureCollection` of `LineString` features. Each needs

@@ -19,8 +19,11 @@ jobs:
       # mistyped coordinate or an unknown taxon_id never reaches the site.
       - run: npm run data
       # Exercises the importer against the checked-in template, so a change to
-      # the schema or the mapping config cannot silently break survey intake.
-      - run: npm run import -- survey/field-template.csv
+      # the schema, the mapping config or the taxa list cannot silently break
+      # survey intake. --adopt-tags matches how a real field export is imported:
+      # the template covers a first survey of a tagged tree, a re-survey of one
+      # already on file, and an untagged tree needing a fresh accession.
+      - run: npm run import -- survey/field-template.csv --adopt-tags
       - run: npm run typecheck
       - run: npm test
       - run: npx vite build

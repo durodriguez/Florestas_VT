@@ -7,11 +7,12 @@ Search and filter every mapped tree, shrub and vine on campus; tap a plant for
 its full record; scan a QR code on a physical label to land straight on that
 plant's page.
 
-> **The data in this repository is sample data.** The 28 plants in
-> `data/plants.csv` all carry `DEMO-` accession numbers and exist only so the
-> map has something to draw. They are placed at plausible campus coordinates
-> but **were not surveyed** — replace them with real field data before
-> publishing. See [docs/FIELD-SURVEY.md](docs/FIELD-SURVEY.md).
+> **The collection is being surveyed now.** `data/plants.csv` holds only the
+> trees that have actually been visited and positioned — six at the time of
+> writing. `data/taxa.csv` already carries all 129 species from UVM's 2014
+> inventory, so the species list runs well ahead of the mapped plants. That is
+> the intended state: a plant appears on the map when someone has stood under
+> it and recorded a position.
 
 ## Quick start
 
@@ -128,14 +129,12 @@ worker can pick this up in an afternoon and so it still builds in five years.
 
 ## Getting started for real
 
-1. Set the accession scheme in `data/config.json` and survey one area — start
-   with the University Green.
-2. Add each species you encounter to `data/taxa.csv`.
-3. `npm run import -- your-export.csv` to see what it makes of your field data,
-   then again with `--write`.
-4. Delete the `DEMO-` rows from `data/plants.csv` once real records replace them.
-5. `npm run data` until it is clean, then commit.
-6. Turn on GitHub Pages and push.
-7. `npm run labels`, print, and install signs.
+1. Survey an area with the [field app](docs/FIELD-APP.md) — start with the
+   University Green.
+2. Add any species not already in `data/taxa.csv`.
+3. `npm run import -- your-export.csv --adopt-tags` to see what it makes of the
+   field data, then again with `--write`.
+4. `npm run data` until it is clean, then commit.
+5. `npm run labels`, print, and install signs.
 
 Repeat area by area. Each one is a real improvement to a live site.

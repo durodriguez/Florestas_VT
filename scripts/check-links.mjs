@@ -19,6 +19,7 @@ import Papa from 'papaparse';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const rows = Papa.parse(readFileSync(join(root, 'data', 'taxa.csv'), 'utf8'), {
   header: true,
+  delimiter: ',',
   skipEmptyLines: 'greedy',
   transformHeader: (h) => h.trim(),
 }).data;

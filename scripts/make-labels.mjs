@@ -26,6 +26,9 @@ const config = JSON.parse(readFileSync(join(root, 'data', 'config.json'), 'utf8'
 const csv = (name) =>
   Papa.parse(readFileSync(join(root, 'data', name), 'utf8'), {
     header: true,
+    // Stated rather than sniffed: a header-only file (an emptied collections
+    // list, say) gives Papa nothing to detect a delimiter from and it errors.
+    delimiter: ',',
     skipEmptyLines: 'greedy',
     transformHeader: (h) => h.trim(),
   }).data;

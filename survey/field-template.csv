@@ -1,5 +1,5 @@
-tag,species,lat,lng,area,dbh_in,height_ft,spread_ft,condition,planted_year,surveyor,date,photo,notes
-,Sugar maple,44.478210,-73.194310,University Green,32.5,68,55,good,1908,DR,2026-09-02,,Large open-grown specimen
-,Acer rubrum,44.478330,-73.194050,University Green,14.0,40,30,Good,2004,DR,2026-09-02,,
-,paper birch,44.478450,-73.193800,University Green,9.8,32,22,EXC,2011,DR,2026-09-02,birch-north.jpg,Three stems from base
-DEMO-0011,White ash,44.478900,-73.196410,Central Campus,20.4,50,34,poor,1968,DR,2026-09-02,,Re-survey: EAB decline advancing
+tag,species,lat,lng,area,dbh_in,height_ft,spread_ft,condition,surveyor,date,photo,notes
+771,Common baldcypress,44.476680,-73.194840,,6.2,24,14,Good,DR,2026-09-02,,First survey of a tagged tree
+774,Acer palmatum,44.477020,-73.195310,,4.1,12,11,EXC,DR,2026-09-02,,Species given as a scientific name
+772,Taxodium distichum,44.476609,-73.194780,,10.4,35,,excellent,DR,2026-09-02,,Re-survey of a tree already on file
+,sugar maple,44.478210,-73.194310,,32.5,68,55,fair,DR,2026-09-02,,No tag - gets a fresh accession number
