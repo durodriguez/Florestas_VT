@@ -11,6 +11,7 @@ import {
 } from './reference';
 import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
 import { download, stamp, toCsv, toPhotoZip } from './exporter';
+import { kb, shrinkPhoto } from './photo';
 
 const BASE = import.meta.env.BASE_URL;
 const CONDITIONS = ['excellent', 'good', 'fair', 'poor', 'dead'];
@@ -198,6 +199,7 @@ function clearPhoto(): void {
   photoBlob = null;
   photoName = null;
   $('photo-preview').hidden = true;
+  $('photo-size').textContent = '';
   $<HTMLInputElement>('photo').value = '';
   const img = $<HTMLImageElement>('photo-img');
   if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
@@ -358,13 +360,21 @@ $('condition-seg').addEventListener('click', (e) => {
 });
 
 $('photo-btn').addEventListener('click', () => $('photo').click());
-$('photo').addEventListener('change', (e) => {
+$('photo').addEventListener('change', async (e) => {
   const file = (e.target as HTMLInputElement).files?.[0];
   if (!file) return;
-  photoBlob = file;
-  const img = $<HTMLImageElement>('photo-img');
-  img.src = URL.createObjectURL(file);
+  $('photo-size').textContent = 'Processing…';
   $('photo-preview').hidden = false;
+
+  const shrunk = await shrinkPhoto(file);
+  photoBlob = shrunk.blob;
+
+  const img = $<HTMLImageElement>('photo-img');
+  if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
+  img.src = URL.createObjectURL(shrunk.blob);
+  $('photo-size').textContent = shrunk.width
+    ? `${shrunk.width}×${shrunk.height} · ${kb(shrunk.blob.size)} (from ${kb(shrunk.originalBytes)})`
+    : kb(shrunk.blob.size);
 });
 $('photo-clear').addEventListener('click', clearPhoto);
 

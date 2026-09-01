@@ -97,7 +97,12 @@ cached the old copy keep using it until their app cache is cleared, so bump
 - **Basemap imagery needs a signal.** Tiles are deliberately not cached — a
   campus-wide basemap would fill the phone. With no signal the pin still works,
   you just place it without the aerial view underneath.
-- **Photos are full phone resolution.** A long day of photographs can get large
-  before the zip comes off the device.
+- **Photos are shrunk before they are stored** — 1600 px on the long edge, about
+  250–600 kB each, down from roughly 4 MB straight off the camera. That is more
+  than the map's record panel can display, and it keeps a day's photographs
+  small enough to zip and email off the phone. Even so, photographing all 2,500
+  trees would come to well over a gigabyte, which is more than a GitHub Pages
+  site can hold: photograph selectively — specimen trees, defects, anything a
+  future surveyor will want to see rather than re-walk.
 - **One device, one dataset.** Two surveyors produce two CSVs; the importer
   merges them and flags any trees recorded twice.
