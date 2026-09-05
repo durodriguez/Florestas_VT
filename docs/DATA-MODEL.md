@@ -102,6 +102,25 @@ A GeoJSON `FeatureCollection` of `LineString` features. Each needs
 `stops` — an array of `plant_id` values in walking order. Draw the lines in
 [geojson.io](https://geojson.io) or QGIS and paste them in.
 
+### On the horticultural columns generally
+
+`flower_color`, `flower_months`, `fruit_color`, `fruit_months`, `fall_color`,
+`hardiness_zones`, `mature_height_ft`, `mature_spread_ft`, `bark_profile`,
+`pest_resistance` and `soil_preference` are complete for every taxon, and all of
+it is authored rather than transcribed from a reference.
+
+A sample was checked against the Morton Arboretum, Missouri Botanical Garden,
+Chicago Botanic Garden and NC State Extension. Of thirty values checked across
+five taxa, one was wrong (Amur maackia has no autumn colour; it had been given
+yellow, which belongs to one cultivar), three bloom windows were a month too
+narrow, and the rest — including every hardiness range — matched. Those five
+were corrected. Read that as roughly one value in six needing a nudge, mostly in
+the month windows, which shift with the season anyway.
+
+Months are the usual window for this climate, which runs a week or two later
+than the same species further south. Anyone reviewing this file should start
+with `flower_months` and `fruit_months`.
+
 ### On `pest_resistance`
 
 The column records what a species is known to suffer from, not a rating. A
