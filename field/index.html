@@ -88,6 +88,13 @@
         <label>Date<input id="date" type="date"></label>
         <label>Surveyor<input id="surveyor" type="text" autocomplete="off" placeholder="Initials"></label>
       </div>
+      <label class="field-label" for="planted">Year planted</label>
+      <div class="year-row">
+        <input id="planted" type="number" inputmode="numeric" placeholder="e.g. 1998"
+               min="1700" max="2100" step="1">
+        <button type="button" id="planted-unknown" class="ghost-btn" aria-pressed="false">Unknown</button>
+      </div>
+      <p id="planted-note" class="hint">Leave blank if you would rather not guess.</p>
     </section>
 
     <div id="form-error" class="form-error" hidden></div>

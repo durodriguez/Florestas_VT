@@ -42,6 +42,12 @@ export interface Taxon {
   fruitMonths: number[];
   fallColor: string;
   matureHeightFt: number | null;
+  matureSpreadFt: number | null;
+  /** What the bark looks like — the most useful field identification cue. */
+  bark: string;
+  /** Known pest and disease pressure, not a resistance score. */
+  pests: string;
+  soil: string;
   zones: string;
   wikipedia: string;
   description: string;

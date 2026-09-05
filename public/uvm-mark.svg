@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="University of Vermont">
+  <!-- Redrawn from UVM's V mark: gold ring, white shield, green serif V.
+       Replace with the official asset from UVM Communications before any
+       public launch — this is a reconstruction, not the licensed file. -->
+  <circle cx="50" cy="50" r="43" fill="none" stroke="#FFD100" stroke-width="6"/>
+  <path d="M25 28 H75 V54 C75 67 63 76 50 83 C37 76 25 67 25 54 Z" fill="#ffffff"/>
+  <g fill="#154734">
+    <path d="M34 37 H45 L50 57 L55 37 H66 L54 71 H46 Z"/>
+    <rect x="31" y="34" width="16" height="6"/>
+    <rect x="53" y="34" width="16" height="6"/>
+    <rect x="41" y="65" width="18" height="6"/>
+  </g>
+</svg>

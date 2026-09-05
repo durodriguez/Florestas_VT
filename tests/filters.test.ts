@@ -10,7 +10,8 @@ const taxon = (over: Partial<Taxon>): Taxon => ({
   id: 't', sci: '', common: '', family: '', genus: '', species: '', infra: '',
   cultivar: '', habit: 'tree', foliage: 'deciduous', native: 'native',
   flowerColor: '', flowerMonths: [], fruitColor: '', fruitMonths: [], fallColor: '',
-  matureHeightFt: null, zones: '', wikipedia: '', description: '', count: 0, ...over,
+  matureHeightFt: null, matureSpreadFt: null, bark: '', pests: '', soil: '',
+  zones: '', wikipedia: '', description: '', count: 0, ...over,
 });
 
 const dataset = {
