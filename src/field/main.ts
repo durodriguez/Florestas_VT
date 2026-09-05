@@ -26,6 +26,7 @@ const reference = new Reference();
 let photoBlob: Blob | null = null;
 let photoName: string | null = null;
 let pinAdjusted = false;
+let plantedUnknown = false;
 let manualLatLng: L.LatLng | null = null;
 
 // ---------------------------------------------------------------- map
@@ -178,9 +179,10 @@ function selectedCondition(): string {
 }
 
 function resetForm(): void {
-  for (const id of ['tag', 'species', 'dbh', 'height', 'spread', 'notes']) {
+  for (const id of ['tag', 'species', 'dbh', 'height', 'spread', 'notes', 'planted']) {
     $<HTMLInputElement>(id).value = '';
   }
+  setPlantedUnknown(false);
   $<HTMLInputElement>('species').dataset.autofilled = '';
   $<HTMLInputElement>('species-mismatch').checked = false;
   for (const b of $('condition-seg').querySelectorAll('[aria-checked]')) {
@@ -213,6 +215,15 @@ async function save(): Promise<void> {
   const fix = gps.bestFix;
 
   if (!species) return fail('Enter a species before saving.');
+
+  const plantedRaw = $<HTMLInputElement>('planted').value.trim();
+  if (!plantedUnknown && plantedRaw !== '') {
+    const year = Number(plantedRaw);
+    const thisYear = new Date().getFullYear();
+    if (!/^\d{4}$/.test(plantedRaw) || year < 1700 || year > thisYear) {
+      return fail(`"${plantedRaw}" is not a planting year. Enter four digits between 1700 and ${thisYear}, or press Unknown.`);
+    }
+  }
   if (!point) return fail('No position yet. Wait for a fix, or drag the pin onto the tree.');
   if (!pinAdjusted && fix && fix.accuracy > ACCURACY_WARN_M) {
     return fail(
@@ -243,6 +254,8 @@ async function save(): Promise<void> {
     heightFt: num('height'),
     spreadFt: num('spread'),
     condition: selectedCondition(),
+    plantedYear: plantedUnknown ? null : num('planted'),
+    plantedUnknown,
     notes: $<HTMLTextAreaElement>('notes').value.trim(),
     surveyedOn: $<HTMLInputElement>('date').value || stamp(),
     surveyor: $<HTMLInputElement>('surveyor').value.trim(),
@@ -272,7 +285,7 @@ async function renderList(): Promise<void> {
         <div class="rec">
           <span class="rec-tag">${escapeHtml(r.tag || 'no tag')}</span>
           <span class="rec-species">${escapeHtml(r.species)}</span>
-          <span class="rec-meta">${r.dbhIn ? `${r.dbhIn}″ · ` : ''}${escapeHtml(r.condition || '—')}${r.photoName ? ' · photo' : ''}${r.speciesMismatch ? ' · flagged' : ''}</span>
+          <span class="rec-meta">${r.dbhIn ? `${r.dbhIn}″ · ` : ''}${escapeHtml(r.condition || '—')}${r.plantedYear ? ` · ${r.plantedYear}` : r.plantedUnknown ? ' · year unknown' : ''}${r.photoName ? ' · photo' : ''}${r.speciesMismatch ? ' · flagged' : ''}</span>
         </div>
         <button type="button" class="ghost-btn" data-delete="${r.id}">Delete</button>
       </li>`,
@@ -357,6 +370,25 @@ $('condition-seg').addEventListener('click', (e) => {
   for (const b of $('condition-seg').querySelectorAll('[aria-checked]')) {
     b.setAttribute('aria-checked', String(b === btn));
   }
+});
+
+/** Unknown and a typed year are mutually exclusive, so the toggle owns both. */
+function setPlantedUnknown(on: boolean): void {
+  plantedUnknown = on;
+  const btn = $('planted-unknown');
+  const input = $<HTMLInputElement>('planted');
+  btn.setAttribute('aria-pressed', String(on));
+  btn.classList.toggle('is-on', on);
+  input.disabled = on;
+  if (on) input.value = '';
+  $('planted-note').textContent = on
+    ? 'Recorded as unknown — a finding in itself, not a blank.'
+    : 'Leave blank if you would rather not guess.';
+}
+
+$('planted-unknown').addEventListener('click', () => setPlantedUnknown(!plantedUnknown));
+$('planted').addEventListener('input', () => {
+  if (plantedUnknown) setPlantedUnknown(false);
 });
 
 $('photo-btn').addEventListener('click', () => $('photo').click());

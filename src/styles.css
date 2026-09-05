@@ -64,6 +64,9 @@ button, input, select { font: inherit; color: inherit; }
   position: relative; z-index: 900;
 }
 
+/* The mark is decorative here — the adjacent h1 already names the site — so
+   its alt is empty and it is hidden from assistive tech. */
+.brand-mark { flex: 0 0 auto; display: block; }
 .brand { flex: 1; min-width: 0; }
 .brand h1 { font-size: 1.05rem; letter-spacing: .01em; }
 .brand p { margin: 0; font-size: .78rem; opacity: .82; }

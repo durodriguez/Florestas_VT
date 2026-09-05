@@ -40,6 +40,10 @@ repeated on all 400 sugar maples. `plants.csv` refers to a species by
 | `fruit_color`, `fruit_months` | | same shape as the flower columns |
 | `fall_color` | | `orange`, `yellow`, `none` |
 | `mature_height_ft` | | number |
+| `mature_spread_ft` | | number — typical crown width at maturity |
+| `bark_profile` | | short description; bark is usually the most reliable field cue |
+| `pest_resistance` | | known pest and disease **pressure**, not a resistance score — see below |
+| `soil_preference` | | moisture, drainage and pH in a phrase |
 | `hardiness_zones` | | `3-8` |
 | `wikipedia_url` | | linked from the plant record. Derived from the scientific name, so run `npm run check:links` to confirm they resolve — a redirect is fine and usually means the name is a synonym of the accepted one |
 | `description` | | one or two sentences shown on the record |
@@ -97,6 +101,16 @@ A GeoJSON `FeatureCollection` of `LineString` features. Each needs
 `trail_id`, `name`, `color`, `length_mi`, `duration_min`, `description`, and
 `stops` — an array of `plant_id` values in walking order. Draw the lines in
 [geojson.io](https://geojson.io) or QGIS and paste them in.
+
+### On `pest_resistance`
+
+The column records what a species is known to suffer from, not a rating. A
+score invites "resistant, so plant it", which is a claim that ages badly:
+emerald ash borer and beech leaf disease both arrived in Vermont after the 2014
+inventory was taken, and either would have made an earlier rating wrong.
+
+These values are authored, not taken from a source. Check them against UMass
+Extension or UVM Extension guidance before using them to inform planting.
 
 ## Controlled vocabularies
 

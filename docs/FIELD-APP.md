@@ -27,6 +27,12 @@ app and the 2014 tree list for offline use.
    usually beats the receiver, especially under canopy.
 4. Measure, photograph, note, save. The form clears for the next tree.
 
+**Year planted** takes a four-digit year, or press **Unknown**. The two are
+different findings: Unknown means the surveyor checked and nobody knows, while
+leaving it blank means nobody has looked yet. Unknown is written into the notes
+so that distinction survives the export. A year outside 1700 to the present is
+refused as a typo.
+
 Trees with no tag: press **No tag**, type the species, and carry on. The
 importer issues a fresh accession number for them.
 

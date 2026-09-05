@@ -11,7 +11,7 @@ export const NATIVE_STATUS = ['native', 'introduced', 'invasive'];
 export const TAXON_REQUIRED = ['taxon_id', 'scientific_name', 'common_name', 'family', 'genus', 'habit'];
 export const PLANT_REQUIRED = ['plant_id', 'taxon_id', 'lat', 'lng'];
 
-export const TAXON_NUMERIC = ['mature_height_ft'];
+export const TAXON_NUMERIC = ['mature_height_ft', 'mature_spread_ft'];
 export const PLANT_NUMERIC = ['dbh_in', 'height_ft', 'spread_ft', 'planted_year'];
 
 /** Column order of the compact `plants.json` row arrays. */

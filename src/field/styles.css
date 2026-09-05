@@ -243,3 +243,11 @@ textarea { min-height: 78px; resize: vertical; }
   position: absolute; width: 34px; height: 34px; border-radius: 50%;
   border: 1.5px dashed rgb(255 209 0 / 85%);
 }
+
+/* Year planted: a typed year or an explicit Unknown, never both. */
+.year-row { display: flex; gap: 8px; }
+.year-row input { flex: 1; }
+.year-row input:disabled { opacity: .5; }
+.ghost-btn.is-on {
+  background: var(--green); border-color: var(--green); color: #fff; font-weight: 650;
+}

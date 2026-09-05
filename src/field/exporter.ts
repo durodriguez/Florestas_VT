@@ -18,6 +18,7 @@ const COLUMNS: Array<[string, (r: SurveyRecord) => string]> = [
   ['height_ft', (r) => (r.heightFt === null ? '' : String(r.heightFt))],
   ['spread_ft', (r) => (r.spreadFt === null ? '' : String(r.spreadFt))],
   ['condition', (r) => r.condition],
+  ['planted_year', (r) => (r.plantedYear === null ? '' : String(r.plantedYear))],
   ['surveyor', (r) => r.surveyor],
   ['date', (r) => r.surveyedOn],
   ['photo', (r) => r.photoName ?? ''],
@@ -32,6 +33,9 @@ function notesFor(r: SurveyRecord): string {
   const parts: string[] = [];
   // Trim a trailing stop so joining does not produce "bark.. GPS ±4 m".
   if (r.notes.trim()) parts.push(r.notes.trim().replace(/\.\s*$/, ''));
+  if (r.plantedUnknown) {
+    parts.push('Planting year recorded as unknown');
+  }
   if (r.speciesMismatch) {
     parts.push('SPECIES MISMATCH: does not match the 2014 record for this tag — verify.');
   }

@@ -79,6 +79,10 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
       ${row('Fruit', `${titleCase(t.fruitColor) || '—'}${t.fruitMonths.length ? ` &middot; ${monthRange(t.fruitMonths)}` : ''}`)}
       ${row('Fall color', titleCase(t.fallColor))}
       ${row('Mature height', numOr(t.matureHeightFt, ' ft'))}
+      ${row('Mature spread', numOr(t.matureSpreadFt, ' ft'))}
+      ${row('Bark', t.bark ? escapeHtml(t.bark) : null)}
+      ${row('Soil', t.soil ? escapeHtml(t.soil) : null)}
+      ${row('Pests and disease', t.pests ? escapeHtml(t.pests) : null)}
       ${row('Hardiness zones', t.zones)}
       ${row('On campus', `${t.count} mapped ${t.count === 1 ? 'plant' : 'plants'}`)}
     </dl>

@@ -25,6 +25,13 @@ export interface SurveyRecord {
   heightFt: number | null;
   spreadFt: number | null;
   condition: string;
+  /**
+   * Four-digit year, or null. `plantedUnknown` distinguishes "the surveyor
+   * checked and nobody knows" from "the surveyor did not get to it" — the
+   * first is a finding, the second is a gap.
+   */
+  plantedYear: number | null;
+  plantedUnknown: boolean;
   notes: string;
   surveyedOn: string;
   surveyor: string;
