@@ -69,6 +69,7 @@ export interface Dataset {
   collections: Collection[];
   taxa: Taxon[];
   trails: GeoJSON.FeatureCollection<GeoJSON.LineString, TrailProps>;
+  campusAreas: GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon, CampusAreaProps>;
   counts: Record<string, number>;
 }
 
@@ -80,6 +81,17 @@ export interface TrailProps {
   duration_min: number;
   description: string;
   stops: string[];
+}
+
+export interface CampusAreaProps {
+  area_id: string;
+  name: string;
+  /** 'boundary' is the outer campus edge; 'campus' is a named sub-campus. */
+  kind: 'boundary' | 'campus';
+  color: string;
+  description: string;
+  /** True while the geometry is an estimate rather than a traced boundary. */
+  provisional: boolean;
 }
 
 /** A plant record after the columnar rows in plants.json are expanded. */

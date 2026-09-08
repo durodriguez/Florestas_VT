@@ -29,11 +29,13 @@ export default defineConfig({
     target: 'es2022',
     sourcemap: true,
     rollupOptions: {
-      // Two apps from one build: the public map at /, and the field survey
-      // PWA at /field/. They share the data pipeline and the deploy workflow.
+      // Three apps from one build: the public map at /, the field survey PWA
+      // at /field/, and the internal boundary tracer at /tracer/. They share
+      // the data pipeline and the deploy workflow.
       input: {
         main: resolve(__dirname, 'index.html'),
         field: resolve(__dirname, 'field/index.html'),
+        tracer: resolve(__dirname, 'tracer/index.html'),
       },
     },
   },

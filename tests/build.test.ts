@@ -32,12 +32,27 @@ const plant = (over: Record<string, string> = {}) => ({
 
 const collection = { collection_id: 'green', name: 'University Green', color: '#154734' };
 
+/** A closed, correctly wound ring inside the configured map bounds. */
+const ring = [
+  [-73.198, 44.476], [-73.193, 44.476], [-73.193, 44.480], [-73.198, 44.480], [-73.198, 44.476],
+];
+
+const area = (props: Record<string, unknown> = {}, geometry: unknown = { type: 'Polygon', coordinates: [ring] }) => ({
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    properties: { area_id: 'central', name: 'Central Campus', kind: 'campus', color: '#154734', ...props },
+    geometry,
+  }],
+});
+
 const build = (over: Partial<Parameters<typeof buildDataset>[0]> = {}) =>
   buildDataset({
     taxaRows: [taxon()],
     plantRows: [plant()],
     collectionRows: [collection],
     trails: { type: 'FeatureCollection', features: [] },
+    campusAreas: { type: 'FeatureCollection', features: [] },
     config,
     ...over,
   });
@@ -160,5 +175,60 @@ describe('buildDataset', () => {
       },
     });
     expect(r.errors.join()).toMatch(/must be a LineString/);
+  });
+});
+
+describe('campus areas', () => {
+  it('passes a well-formed area through with provisional defaulted to false', () => {
+    const r = build({ campusAreas: area() });
+    expect(r.errors).toEqual([]);
+    expect(r.dataset.counts.campusAreas).toBe(1);
+    expect(r.dataset.campusAreas.features[0].properties).toMatchObject({
+      area_id: 'central', name: 'Central Campus', kind: 'campus', provisional: false,
+    });
+  });
+
+  it('warns, but does not fail, while geometry is flagged provisional', () => {
+    const r = build({ campusAreas: area({ provisional: true }) });
+    expect(r.errors).toEqual([]);
+    expect(r.warnings.join(' ')).toMatch(/provisional/);
+  });
+
+  it('rejects a ring whose last position does not repeat the first', () => {
+    const open = { type: 'Polygon', coordinates: [ring.slice(0, -1)] };
+    expect(build({ campusAreas: area({}, open) }).errors.join(' ')).toMatch(/not closed/);
+  });
+
+  it('rejects a ring with fewer than four positions', () => {
+    const sliver = { type: 'Polygon', coordinates: [[ring[0], ring[1], ring[0]]] };
+    expect(build({ campusAreas: area({}, sliver) }).errors.join(' ')).toMatch(/at least 4 positions/);
+  });
+
+  // GeoJSON is lng-then-lat, the opposite of every other coordinate in this
+  // repo. Swapping them puts the polygon in the Indian Ocean, where it is
+  // simply invisible rather than visibly wrong.
+  it('catches lat and lng written the wrong way round', () => {
+    const swapped = { type: 'Polygon', coordinates: [ring.map(([lng, lat]) => [lat, lng])] };
+    expect(build({ campusAreas: area({}, swapped) }).errors.join(' ')).toMatch(/lat and lng swapped/);
+  });
+
+  it('rejects an unknown kind', () => {
+    expect(build({ campusAreas: area({ kind: 'zone' }) }).errors.join(' ')).toMatch(/kind must be/);
+  });
+
+  it('rejects a non-polygon geometry', () => {
+    const line = { type: 'LineString', coordinates: ring };
+    expect(build({ campusAreas: area({}, line) }).errors.join(' ')).toMatch(/must be a Polygon/);
+  });
+
+  it('rejects a duplicate area_id', () => {
+    const two = area();
+    two.features.push(JSON.parse(JSON.stringify(two.features[0])));
+    expect(build({ campusAreas: two }).errors.join(' ')).toMatch(/duplicate area_id/);
+  });
+
+  it('accepts a MultiPolygon, validating every ring', () => {
+    const multi = { type: 'MultiPolygon', coordinates: [[ring], [ring.slice(0, -1)]] };
+    expect(build({ campusAreas: area({}, multi) }).errors.join(' ')).toMatch(/not closed/);
   });
 });

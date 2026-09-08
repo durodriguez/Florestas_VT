@@ -1,0 +1,282 @@
+{
+  "type": "FeatureCollection",
+  "comment": "PROVISIONAL geometry, hand-georeferenced from a screenshot of https://www.uvm.edu/map/ and expected to be off by 100-300 m. Replace it by tracing over satellite imagery at /tracer/, then drop the downloaded file in here. Clear \"provisional\" once the geometry is real. See docs/CAMPUS-AREAS.md.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "area_id": "campus-boundary",
+        "name": "UVM campus",
+        "kind": "boundary",
+        "color": "#154734",
+        "description": "The outer edge of university land in Burlington.",
+        "provisional": true
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.202185,
+              44.479362
+            ],
+            [
+              -73.198874,
+              44.480599
+            ],
+            [
+              -73.196194,
+              44.482736
+            ],
+            [
+              -73.189416,
+              44.482736
+            ],
+            [
+              -73.18642,
+              44.480262
+            ],
+            [
+              -73.182006,
+              44.479924
+            ],
+            [
+              -73.182006,
+              44.47655
+            ],
+            [
+              -73.183267,
+              44.47385
+            ],
+            [
+              -73.188943,
+              44.472276
+            ],
+            [
+              -73.190992,
+              44.472051
+            ],
+            [
+              -73.19115,
+              44.470026
+            ],
+            [
+              -73.192884,
+              44.467214
+            ],
+            [
+              -73.198086,
+              44.467327
+            ],
+            [
+              -73.19982,
+              44.468226
+            ],
+            [
+              -73.19982,
+              44.4734
+            ],
+            [
+              -73.201712,
+              44.4743
+            ],
+            [
+              -73.202185,
+              44.479362
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "area_id": "central",
+        "name": "Central Campus",
+        "kind": "campus",
+        "color": "#154734",
+        "description": "The academic core, from the Green east to East Avenue.",
+        "provisional": true
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.199032,
+              44.479924
+            ],
+            [
+              -73.193041,
+              44.479924
+            ],
+            [
+              -73.193041,
+              44.475425
+            ],
+            [
+              -73.199032,
+              44.475425
+            ],
+            [
+              -73.199032,
+              44.479924
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "area_id": "trinity",
+        "name": "Trinity Campus",
+        "kind": "campus",
+        "color": "#1d6fe0",
+        "description": "The former Trinity College grounds, north of Colchester Avenue.",
+        "provisional": true
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.196194,
+              44.482736
+            ],
+            [
+              -73.192726,
+              44.482736
+            ],
+            [
+              -73.192726,
+              44.480262
+            ],
+            [
+              -73.196194,
+              44.480262
+            ],
+            [
+              -73.196194,
+              44.482736
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "area_id": "centennial",
+        "name": "Centennial Campus",
+        "kind": "campus",
+        "color": "#8a5a00",
+        "description": "East of East Avenue, running into Centennial Woods.",
+        "provisional": true
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.192568,
+              44.481612
+            ],
+            [
+              -73.187366,
+              44.481612
+            ],
+            [
+              -73.187366,
+              44.479137
+            ],
+            [
+              -73.192568,
+              44.479137
+            ],
+            [
+              -73.192568,
+              44.481612
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "area_id": "redstone",
+        "name": "Redstone Campus",
+        "kind": "campus",
+        "color": "#a3123a",
+        "description": "The residential campus on the old Redstone estate.",
+        "provisional": true
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.19982,
+              44.472276
+            ],
+            [
+              -73.195879,
+              44.472276
+            ],
+            [
+              -73.195879,
+              44.467327
+            ],
+            [
+              -73.19982,
+              44.467327
+            ],
+            [
+              -73.19982,
+              44.472276
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "area_id": "athletic",
+        "name": "Athletic Campus",
+        "kind": "campus",
+        "color": "#6b21a8",
+        "description": "Playing fields, the track and the athletic facilities.",
+        "provisional": true
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.195879,
+              44.470476
+            ],
+            [
+              -73.19178,
+              44.470476
+            ],
+            [
+              -73.19178,
+              44.467214
+            ],
+            [
+              -73.195879,
+              44.467214
+            ],
+            [
+              -73.195879,
+              44.470476
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
