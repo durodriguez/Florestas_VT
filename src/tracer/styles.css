@@ -33,6 +33,21 @@ body {
   background: var(--uvm-gold); color: #000; font: inherit; font-weight: 650;
 }
 .bar-btn:disabled { opacity: .45; cursor: not-allowed; }
+.bar-actions { display: flex; align-items: center; gap: .6rem; }
+.load-btn {
+  padding: .5rem .85rem; border-radius: 8px; cursor: pointer;
+  border: 1px solid rgb(255 255 255 / 45%); color: #fff;
+  font-size: .82rem; font-weight: 600; white-space: nowrap;
+}
+.load-btn:hover { background: rgb(255 255 255 / 12%); }
+
+.modes { display: flex; gap: .3rem; margin-bottom: .85rem; }
+.mode {
+  flex: 1; padding: .45rem; cursor: pointer; font: inherit; font-size: .85rem; font-weight: 600;
+  background: var(--bg); color: var(--text-dim);
+  border: 1px solid var(--border); border-radius: 8px;
+}
+.mode.is-on { background: var(--uvm-green); color: #fff; border-color: var(--uvm-green); }
 
 .layout {
   display: grid; grid-template-columns: 20rem 1fr;
@@ -56,6 +71,11 @@ code { font-size: .95em; }
   border-left: 4px solid var(--area-color, var(--uvm-green));
 }
 .area:hover { border-color: var(--uvm-green); }
+/* The outer boundary is the thing being carved up, so it is not a target in
+   split mode. Shown, because its acreage is the number everything else is
+   measured against. */
+.area.is-disabled { opacity: .55; cursor: default; }
+.area.is-disabled:hover { border-color: var(--border); }
 .area.is-active { outline: 2px solid var(--uvm-green); outline-offset: 1px; }
 .area-name { font-size: .88rem; font-weight: 600; }
 .area-meta { font-size: .74rem; color: var(--text-dim); font-variant-numeric: tabular-nums; }
@@ -67,7 +87,15 @@ code { font-size: .95em; }
   font-size: .8rem; color: var(--text-dim); min-height: 2.5rem;
 }
 
-.actions { display: flex; gap: .5rem; }
+.primary {
+  display: block; width: 100%; padding: .6rem; margin-bottom: .5rem;
+  cursor: pointer; font: inherit; font-size: .85rem; font-weight: 650;
+  background: var(--uvm-green); color: #fff;
+  border: 1px solid var(--uvm-green); border-radius: 8px;
+}
+.primary:disabled { opacity: .4; cursor: not-allowed; }
+
+.actions { display: flex; gap: .5rem; margin-bottom: .5rem; }
 .actions button {
   flex: 1; padding: .5rem; cursor: pointer; font: inherit; font-size: .82rem;
   background: var(--bg); color: var(--text);

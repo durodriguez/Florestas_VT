@@ -68,8 +68,11 @@ accuracy gate, tap-to-place pin on satellite imagery, camera, and CSV export
 that feeds the importer. See [docs/FIELD-APP.md](docs/FIELD-APP.md).
 
 **Boundary tracer** — an internal tool at `/tracer/` for drawing the campus
-areas over satellite imagery. It saves nothing; it hands you a GeoJSON file to
-commit. See [docs/CAMPUS-AREAS.md](docs/CAMPUS-AREAS.md).
+areas over satellite imagery. *Split* carves the sub-campuses out of the traced
+boundary with boolean clipping, so rough shapes snap to the real campus edge and
+only the lines between campuses are ever drawn by hand; *Trace* clicks out an
+outline from scratch. It saves nothing; it hands you a GeoJSON file to commit.
+See [docs/CAMPUS-AREAS.md](docs/CAMPUS-AREAS.md).
 
 **Survey intake** — `npm run import` merges a field export into the dataset:
 assigns accession numbers, resolves species from common or scientific names,

@@ -12,58 +12,81 @@ one basemap; the overlays are checkboxes, because you can have any combination.
 
 ---
 
-## The geometry is currently an estimate
+## Where the geometry stands
 
-**Read this before quoting any boundary on this map.**
+**The outer campus boundary is real.** It was traced over satellite imagery on
+8 September 2026 — 104 vertices, 542 acres, which sits sensibly against UVM's
+commonly cited ~460-acre main campus plus Centennial Woods and the athletic
+land.
 
-UVM does not publish these boundaries as a downloadable file, and the machine
-that built this repository has no outbound network access to `uvm.edu` (nor to
-OpenStreetMap's Overpass or Nominatim APIs), so the real geometry could not be
-fetched. The shapes in `data/campus-areas.geojson` were georeferenced by hand
-from a screenshot of UVM's map. **Expect them to be off by 100–300 m.**
+**The five sub-campuses are still estimates.** They are the original hand-drawn
+placeholders, georeferenced from a screenshot of UVM's map, and can be 100–300 m
+out. Carve them out of the boundary in split mode, below.
 
-Three things keep that honest rather than hidden:
+Three things keep the difference visible rather than hidden:
 
-- every feature carries `"provisional": true`
-- provisional areas are drawn **dashed**, and the layer is labelled
-  **Campus areas (approximate)**
-- `npm run data` prints a warning on every build while any area is provisional
+- each feature carries `provisional`, true only while it is an estimate
+- provisional areas draw **dashed** and pale; real ones draw solid
+- `npm run data` warns on every build while any area is provisional, and the
+  map labels the layer **Campus areas (approximate)**
 
-Once the geometry is real, the dashes, the "(approximate)" suffix and the
-warning all disappear on their own. Nothing needs editing but the data file.
+All three clear themselves once nothing is provisional. Nothing needs editing
+but the data file.
 
-The simple block shapes are deliberate too. A hand-wobbled 40-vertex outline
-would *look* surveyed while being just as wrong; plain rectangles read as
-placeholders, which is what they are.
-
-## Replacing it — the tracer
+## The tracer
 
 Open **`/tracer/`** on the live site (or `npm run dev` then
 <http://localhost:5173/tracer/>). It is an internal tool: it writes nothing
 anywhere, and its only output is a file you download.
 
-1. Click an area in the left-hand list — say **Central Campus**.
-2. Click your way around its edge on the satellite imagery. The current
-   estimated shapes show underneath as faint dashed guides, so you know which
-   part of campus you are looking at.
-3. **Undo point** removes the last click; **Clear area** starts that one over.
-   You do not need to close the shape — the last point joins back to the first.
-4. Repeat for the other areas. You can do one now and the rest later; anything
-   you do not trace keeps the shape it already had.
-5. **Download campus-areas.geojson**, and put that file in `data/`, replacing
-   the one there.
-6. `npm run data` to check it, then commit.
+**Load a file** pulls in a `campus-areas.geojson` from your computer, so you can
+stop, download, come back and carry on without committing between rounds.
 
-Anything you traced comes back with `"provisional": false`. Anything you left
-alone stays flagged, so the map keeps telling the truth about which boundaries
-are real and which are still guesses.
+### Split — for the sub-campuses
+
+This is the mode to use, and it opens in it whenever the outer boundary is real.
+It exists because tracing all five campuses by hand costs hundreds of clicks,
+almost all of them re-drawing an edge that has already been traced once.
+
+The whole boundary starts out as unassigned land, shaded green.
+
+1. Click an area in the list — say **Redstone Campus**.
+2. Draw a **rough** shape over the part of campus that belongs to it. Run well
+   outside the campus edge; that side gets trimmed back to the traced boundary
+   automatically. Only the lines *between* campuses need care, and each of those
+   gets drawn exactly once, because whatever you leave behind becomes the
+   neighbour.
+3. **Assign this shape to Redstone Campus.** The acreage appears in the list and
+   the unassigned total drops.
+4. Repeat for three more. For the last one, **Give the rest to this area** — no
+   drawing at all.
+
+Four rough shapes and a button, and the five campuses tile the boundary exactly:
+no gaps, no overlaps, every outer edge the one you traced.
+
+**Undo last change** steps back one assignment. **Start over** resets the five
+campuses — never the outer boundary, which is far too expensive to lose to a
+misclick.
+
+### Trace — for anything from scratch
+
+Click every vertex yourself. This is what the outer boundary needed, and it is
+the fallback for redoing a single area. Undo point, discard shape, same as
+before.
+
+### Then
+
+**Download campus-areas.geojson**, put it in `data/` replacing the file there,
+`npm run data` to check it, and commit. Areas you finished come back with
+`provisional: false`; anything you left alone keeps what it had, so the map
+never claims more accuracy than it has.
 
 ### Or get the real thing
 
-Better than tracing: ask UVM ETS or Campus Planning for the campus boundary as
-a shapefile or GeoJSON. They maintain it, and a file from them beats anyone's
-tracing. If you get one, reproject to WGS84 (EPSG:4326), give each feature the
-properties below, and drop it straight in — no code changes.
+Better than any of this: ask UVM ETS or Campus Planning for the campus boundary
+as a shapefile or GeoJSON. They maintain it. If you get one, reproject to WGS84
+(EPSG:4326), give each feature the properties below, and drop it straight in —
+no code changes.
 
 ## File format
 
@@ -98,6 +121,26 @@ does not repeat its first; and any position outside the configured map bounds.
 Every ring of a MultiPolygon is checked, not just the first.
 
 It warns — without failing — while any area is still provisional.
+
+## How the splitting works
+
+Split mode is boolean polygon clipping, via the `polygon-clipping` package. Your
+drawn shape is intersected with the unassigned remainder to produce the area,
+and subtracted from it to produce the new remainder. That is why a sloppy
+outside edge costs nothing: the intersection can only ever return land that was
+already inside the boundary.
+
+The remainder is not stored. It is recomputed as the boundary minus everything
+the campuses hold, so there is no second copy to drift out of step with the
+areas themselves — assigning to one area *is* the whole edit.
+
+Pieces under 200 m² are dropped as clipping noise: a hair of overlap where a
+drawn edge grazes the boundary, rather than a real scrap of campus. The maths
+lives in `src/tracer/split.ts`, away from Leaflet and the DOM, and
+`tests/split.test.ts` covers it — including that area is conserved across a
+sequence of carves, that a shape swallowing the whole boundary yields the whole
+boundary, and that a self-intersecting scribble is normalised rather than
+throwing.
 
 ## Two things this does not do yet
 

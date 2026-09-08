@@ -20,7 +20,8 @@
     "jszip": "^3.10.1",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
-    "papaparse": "^5.7.0"
+    "papaparse": "^5.7.0",
+    "polygon-clipping": "^0.15.7"
   },
   "devDependencies": {
     "@types/geojson": "^7946.0.14",
