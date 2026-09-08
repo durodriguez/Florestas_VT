@@ -214,6 +214,8 @@ button, input, select { font: inherit; color: inherit; }
 .campus-label::before {
   background: none; border: 0; box-shadow: none; padding: 0;
 }
+.hide-campus-labels .campus-label { display: none; }
+
 .campus-label {
   font-size: .82rem; font-weight: 700; letter-spacing: .02em;
   color: var(--uvm-green); white-space: nowrap;

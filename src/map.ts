@@ -33,6 +33,9 @@ function basemaps(maxZoom: number): Record<string, L.TileLayer> {
   };
 }
 
+/** Below this, the five campus names overlap each other and the boundary. */
+const CAMPUS_LABEL_MIN_ZOOM = 15;
+
 export interface PlantMapOptions {
   onSelect: (plant: Plant) => void;
   /** Called when the active basemap stops serving tiles. */
@@ -127,6 +130,8 @@ export class PlantMap {
       .addTo(this.map);
 
     this.watchTiles(layers);
+    this.map.on('zoomend', () => this.updateCampusLabels());
+    this.updateCampusLabels();
 
     this.buildMarkers(plants);
     // Added before the clusters so the polygons sit under the tree markers.
@@ -153,6 +158,16 @@ export class PlantMap {
       layer.on('tileload', () => { this.tileErrors = 0; });
     }
     this.map.on('baselayerchange', () => { this.tileErrors = 0; });
+  }
+
+  /**
+   * Campus names are permanent labels, so zooming out piles them on top of one
+   * another — five names inside a boundary a couple of centimetres across. Real
+   * maps drop area labels below the zoom where the areas are distinguishable,
+   * and so does this: the polygons stay, the names come back on the way in.
+   */
+  private updateCampusLabels(): void {
+    this.map.getContainer().classList.toggle('hide-campus-labels', this.map.getZoom() < CAMPUS_LABEL_MIN_ZOOM);
   }
 
   private buildMarkers(plants: Plant[]): void {
