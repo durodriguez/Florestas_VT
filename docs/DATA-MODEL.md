@@ -104,12 +104,15 @@ The campus outline and its five named campuses — Central, Trinity, Centennial,
 Redstone, Athletic — drawn as an optional map overlay, mirroring the layer on
 UVM's own map at <https://www.uvm.edu/map/>.
 
-**The shapes currently in the file are estimates and can be 100–300 m out.**
-UVM does not publish the boundaries as a file and this repository's build
-machine cannot reach `uvm.edu`, so they were georeferenced by hand from a
-screenshot. Every feature is flagged `"provisional": true`, which makes the map
-draw it dashed and label the layer "(approximate)". Replace them with the
-tracer at `/tracer/`. Full format, workflow and validation rules:
+The outer boundary is traced and real — 104 vertices, 542 acres — but covers the
+main campus only; Spear Street Campus is detached, 1.2 km south, and is merged
+in by tracing it. **All six sub-campuses are still estimates and can be
+100–300 m out**; UVM does not
+publish them as a file and this repository's build machine cannot reach
+`uvm.edu`, so they were georeferenced by hand from a screenshot. They carry
+`"provisional": true`, which makes the map draw them dashed and label the layer
+"(approximate)". Carve them out of the boundary in split mode at `/tracer/`.
+Full format, workflow and validation rules:
 [docs/CAMPUS-AREAS.md](CAMPUS-AREAS.md).
 
 Note that this file is *not* connected to `collections.csv` — the overlay is

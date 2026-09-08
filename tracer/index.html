@@ -3,29 +3,46 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Trace the UVM campus boundary and its sub-campuses over satellite imagery.">
+  <meta name="description" content="Split the UVM campus boundary into its five campuses, or trace an area from scratch.">
   <meta name="theme-color" content="#154734">
   <title>Boundary tracer — UVM Trees</title>
 </head>
 <body>
   <header class="bar">
     <h1>Boundary tracer</h1>
-    <button type="button" id="download" class="bar-btn" disabled>Download campus-areas.geojson</button>
+    <div class="bar-actions">
+      <label class="load-btn">
+        Load a file
+        <input type="file" id="load" accept=".geojson,.json,application/geo+json,application/json" hidden>
+      </label>
+      <button type="button" id="download" class="bar-btn" disabled>Download campus-areas.geojson</button>
+    </div>
   </header>
 
   <main class="layout">
     <aside class="side">
-      <p class="intro">
-        Pick an area, then click along its edge on the map. Areas still marked
-        <em>estimated</em> are the placeholder shapes — trace over them to
-        replace them.
-      </p>
-      <ul id="areas" class="areas"></ul>
-      <div class="hint" id="hint">Pick an area to start.</div>
-      <div class="actions">
-        <button type="button" id="undo" disabled>Undo point</button>
-        <button type="button" id="clear" disabled>Clear area</button>
+      <div class="modes" role="radiogroup" aria-label="What to do">
+        <button type="button" id="mode-split" class="mode" role="radio" aria-checked="true">Split</button>
+        <button type="button" id="mode-trace" class="mode" role="radio" aria-checked="false">Trace</button>
       </div>
+      <p class="intro" id="intro"></p>
+
+      <ul id="areas" class="areas"></ul>
+
+      <div class="hint" id="hint"></div>
+      <button type="button" id="commit" class="primary" disabled></button>
+      <div class="actions">
+        <button type="button" id="undo-point" disabled>Undo point</button>
+        <button type="button" id="cancel" disabled>Discard shape</button>
+      </div>
+      <div class="actions">
+        <button type="button" id="rest" disabled>Give the rest to this area</button>
+      </div>
+      <div class="actions">
+        <button type="button" id="undo-step" disabled>Undo last change</button>
+        <button type="button" id="reset">Start over</button>
+      </div>
+
       <p class="note">
         Nothing is saved until you download. The downloaded file replaces
         <code>data/campus-areas.geojson</code> in the repository.

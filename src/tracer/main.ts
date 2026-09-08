@@ -1,29 +1,49 @@
 /**
  * Boundary tracer — an internal tool, not part of the public map.
  *
- * UVM publishes campus boundaries on https://www.uvm.edu/map/ but does not
- * offer them as a download, so data/campus-areas.geojson ships with hand-drawn
- * estimates. This page turns "fix the boundaries" from a GIS job into clicking
- * around the edge of campus on satellite imagery.
+ * Two ways to work, because they cost wildly different amounts of clicking:
  *
- * It writes nothing: the only output is a downloaded GeoJSON file that replaces
- * data/campus-areas.geojson.
+ * **Split** carves the sub-campuses out of the already-traced outer boundary.
+ * You draw a rough shape over the part of campus that belongs to an area and it
+ * is intersected with whatever is still unassigned, so the outer side of every
+ * piece snaps to the real boundary and only the *internal* edges are ever drawn
+ * by hand. Four rough shapes plus "give the rest" divides campus into five.
+ *
+ * **Trace** is the from-scratch mode: click every vertex yourself. That is what
+ * the outer boundary needed, and it is the fallback for redoing any one area.
+ *
+ * It writes nothing: the only output is a downloaded GeoJSON file.
  */
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './styles.css';
 import type { CampusAreaProps, Dataset } from '../types';
+import {
+  ACRES_PER_M2, MIN_PIECE_M2, areaM2, carve, outside, subtractAll, toGeometry, toMultiPoly, union,
+  type MultiPoly, type Ring,
+} from './split';
 
-type Ring = L.LatLng[];
+type Mode = 'split' | 'trace';
 
 const base = import.meta.env.BASE_URL;
+const el = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const els = {
-  areas: document.getElementById('areas') as HTMLUListElement,
-  hint: document.getElementById('hint') as HTMLDivElement,
-  undo: document.getElementById('undo') as HTMLButtonElement,
-  clear: document.getElementById('clear') as HTMLButtonElement,
-  download: document.getElementById('download') as HTMLButtonElement,
+  areas: el<HTMLUListElement>('areas'),
+  intro: el<HTMLParagraphElement>('intro'),
+  hint: el<HTMLDivElement>('hint'),
+  commit: el<HTMLButtonElement>('commit'),
+  undoPoint: el<HTMLButtonElement>('undo-point'),
+  cancel: el<HTMLButtonElement>('cancel'),
+  rest: el<HTMLButtonElement>('rest'),
+  undoStep: el<HTMLButtonElement>('undo-step'),
+  reset: el<HTMLButtonElement>('reset'),
+  download: el<HTMLButtonElement>('download'),
+  load: el<HTMLInputElement>('load'),
+  modeSplit: el<HTMLButtonElement>('mode-split'),
+  modeTrace: el<HTMLButtonElement>('mode-trace'),
 };
+
+// ---- map ------------------------------------------------------------------
 
 const dataset: Dataset = await fetch(`${base}data/dataset.json?v=${__DATA_VERSION__}`).then((r) => {
   if (!r.ok) throw new Error(`Could not load dataset.json (HTTP ${r.status}). Run \`npm run data\` first.`);
@@ -31,12 +51,7 @@ const dataset: Dataset = await fetch(`${base}data/dataset.json?v=${__DATA_VERSIO
 });
 
 const cfg = dataset.config.map;
-const map = L.map('map', {
-  center: cfg.center,
-  zoom: cfg.zoom,
-  minZoom: cfg.minZoom,
-  maxZoom: cfg.maxZoom,
-});
+const map = L.map('map', { center: cfg.center, zoom: cfg.zoom, minZoom: cfg.minZoom, maxZoom: cfg.maxZoom });
 
 // Satellite first: you trace against what is on the ground, not against a
 // street cartographer's idea of where the campus edge is.
@@ -51,54 +66,260 @@ const streets = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 });
 L.control.layers({ Satellite: imagery, Streets: streets }, {}, { position: 'bottomright' }).addTo(map);
 
-/** One row per area in the file, holding whatever has been traced so far. */
+// Panes, so the fills never end up on top of the shape being drawn.
+map.createPane('remaining').style.zIndex = '390';
+map.createPane('areas').style.zIndex = '400';
+map.createPane('draft').style.zIndex = '450';
+
+// ---- state ----------------------------------------------------------------
+
 interface AreaState {
   props: CampusAreaProps;
-  /** The shape as shipped, kept so an untraced area survives the download. */
-  original: GeoJSON.Polygon | GeoJSON.MultiPolygon;
-  ring: Ring;
-  traced: boolean;
-  outline: L.Polygon;
-  vertices: L.LayerGroup;
+  geometry: MultiPoly;
+  /** False once this area's geometry comes from tracing or carving. */
+  provisional: boolean;
+  layer: L.Polygon | null;
   row: HTMLLIElement;
 }
 
-const areas: AreaState[] = dataset.campusAreas.features.map((f) => {
-  const props = f.properties;
-  const state: AreaState = {
-    props,
-    original: f.geometry,
-    ring: [],
-    traced: false,
-    outline: L.polygon([], { color: props.color, weight: 2, fillOpacity: 0.12, interactive: false }),
-    vertices: L.layerGroup(),
-    row: document.createElement('li'),
-  };
-  state.outline.addTo(map);
-  state.vertices.addTo(map);
-  return state;
-});
+const areas: AreaState[] = dataset.campusAreas.features.map((f) => ({
+  props: f.properties,
+  geometry: toMultiPoly(f.geometry),
+  provisional: f.properties.provisional,
+  layer: null,
+  row: document.createElement('li'),
+}));
 
-// The shapes currently in the file, drawn faintly underneath as a guide to
-// roughly where each area is. They are estimates, so they are a hint about
-// which part of campus to look at, not something to trace over exactly.
-const guides = L.geoJSON(dataset.campusAreas, {
+const boundary = areas.find((a) => a.props.kind === 'boundary');
+const campuses = areas.filter((a) => a.props.kind === 'campus');
+
+let mode: Mode = boundary && !boundary.provisional ? 'split' : 'trace';
+let active: AreaState | null = null;
+let draft: L.LatLng[] = [];
+/** A one-off message that outranks the usual hint until the next action. */
+let notice: string | null = null;
+
+/** Enough state to undo one assignment, kept as plain geometry. */
+interface Snapshot {
+  areas: { geometry: MultiPoly; provisional: boolean }[];
+}
+const history: Snapshot[] = [];
+
+const snapshot = (): Snapshot => ({
+  areas: areas.map((a) => ({ geometry: a.geometry, provisional: a.provisional })),
+});
+const restore = (s: Snapshot): void => {
+  s.areas.forEach((saved, i) => {
+    areas[i]!.geometry = saved.geometry;
+    areas[i]!.provisional = saved.provisional;
+  });
+};
+
+/** Campus land no sub-campus has claimed yet. */
+function unassigned(): MultiPoly {
+  if (!boundary || boundary.geometry.length === 0) return [];
+  return subtractAll(boundary.geometry, campuses.map((c) => (c.provisional ? [] : c.geometry)));
+}
+
+// ---- drawing --------------------------------------------------------------
+
+const remainingLayer = L.polygon([], {
+  pane: 'remaining',
+  color: '#154734',
+  weight: 1,
+  opacity: 0.5,
+  fillColor: '#154734',
+  fillOpacity: 0.12,
   interactive: false,
-  style: (f) => ({
-    color: (f?.properties as CampusAreaProps).color,
-    weight: 1,
-    opacity: 0.5,
-    dashArray: '4 6',
-    fill: false,
-  }),
 }).addTo(map);
 
-let active: AreaState | null = null;
+const draftLayer = L.polygon([], {
+  pane: 'draft',
+  color: '#ffd100',
+  weight: 3,
+  fillColor: '#ffd100',
+  fillOpacity: 0.25,
+  dashArray: '6 5',
+  interactive: false,
+}).addTo(map);
+const draftVertices = L.layerGroup([], { pane: 'draft' } as L.LayerOptions).addTo(map);
+
+/** Leaflet wants [lat, lng] nested per ring; the model holds [lng, lat]. */
+const toLatLngs = (mp: MultiPoly): L.LatLngExpression[][][] =>
+  mp.map((poly) => poly.map((ring) => ring.map(([lng, lat]) => [lat, lng] as L.LatLngExpression)));
+
+function redraw(): void {
+  const rest = mode === 'split' ? unassigned() : [];
+  remainingLayer.setLatLngs(toLatLngs(rest));
+
+  for (const area of areas) {
+    area.layer?.remove();
+    area.layer = null;
+    // In split mode the boundary is the backdrop, drawn as the remainder; an
+    // outline on top of every carved edge would just be noise.
+    if (mode === 'split' && area.props.kind === 'boundary') continue;
+    if (area.geometry.length === 0) continue;
+    const settled = !area.provisional;
+    area.layer = L.polygon(toLatLngs(area.geometry), {
+      pane: 'areas',
+      color: area.props.color,
+      weight: settled ? 2 : 1,
+      opacity: settled ? 0.95 : 0.5,
+      dashArray: settled ? undefined : '4 6',
+      fillColor: area.props.color,
+      fillOpacity: settled ? 0.28 : 0.06,
+      interactive: false,
+    }).addTo(map);
+  }
+
+  draftLayer.setLatLngs(draft.length > 1 ? [draft] : []);
+  draftVertices.clearLayers();
+  draft.forEach((latlng, i) => {
+    L.circleMarker(latlng, {
+      pane: 'draft',
+      radius: 4,
+      color: '#000',
+      weight: 2,
+      fillColor: '#ffd100',
+      fillOpacity: 1,
+      interactive: false,
+    })
+      .bindTooltip(String(i + 1), { direction: 'top' })
+      .addTo(draftVertices);
+  });
+
+  renderPanel(rest);
+}
+
+// ---- panel ----------------------------------------------------------------
+
+const acres = (mp: MultiPoly) => Math.round(areaM2(mp) * ACRES_PER_M2);
+
+function statusFor(area: AreaState): string {
+  if (area.provisional) return 'estimated';
+  if (area.geometry.length === 0) return 'empty';
+  return `${acres(area.geometry)} acres`;
+}
+
+function renderPanel(rest: MultiPoly): void {
+  const restAcres = acres(rest);
+
+  els.intro.textContent =
+    mode === 'split'
+      ? 'Draw a rough shape over the part of campus that belongs to an area. It is trimmed to the campus boundary, so you can scribble well outside the edge — only the lines between areas need care.'
+      : 'Click every point along an area\'s edge. Use this for the outer boundary, or to redo one area from scratch.';
+
+  for (const area of areas) {
+    const disabled = mode === 'split' && area.props.kind === 'boundary';
+    area.row.className = `area${area === active ? ' is-active' : ''}${disabled ? ' is-disabled' : ''}`;
+    area.row.style.setProperty('--area-color', area.props.color);
+    area.row.tabIndex = disabled ? -1 : 0;
+    area.row.innerHTML = '';
+    const name = document.createElement('span');
+    name.className = 'area-name';
+    name.textContent = area.props.name;
+    const meta = document.createElement('span');
+    meta.className = `area-meta${area.provisional ? '' : ' is-done'}`;
+    meta.textContent = disabled ? `${acres(area.geometry)} acres · traced` : statusFor(area);
+    area.row.append(name, meta);
+  }
+
+  const enough = draft.length >= 3;
+  els.commit.textContent = active
+    ? mode === 'split'
+      ? `Assign this shape to ${active.props.name}`
+      : `Save this outline as ${active.props.name}`
+    : 'Pick an area first';
+  els.commit.disabled = !active || !enough;
+  els.undoPoint.disabled = draft.length === 0;
+  els.cancel.disabled = draft.length === 0;
+  els.rest.disabled = mode !== 'split' || !active || restAcres <= 0 || draft.length > 0;
+  els.undoStep.disabled = history.length === 0;
+  els.download.disabled = !areas.some((a) => !a.provisional);
+
+  if (notice) {
+    els.hint.textContent = notice;
+  } else if (!active) {
+    els.hint.textContent =
+      mode === 'split'
+        ? restAcres > 0
+          ? `${restAcres} acres unassigned. Pick an area to carve it out of.`
+          : 'Every acre is assigned. Download the file, or pick an area to redo it.'
+        : 'Pick an area to trace.';
+  } else if (!enough) {
+    els.hint.textContent = `Click at least ${3 - draft.length} more point${3 - draft.length === 1 ? '' : 's'} for ${active.props.name}.`;
+  } else {
+    els.hint.textContent =
+      mode === 'split'
+        ? `${draft.length} points. Assign it, or keep clicking. ${restAcres} acres still unassigned.`
+        : `${draft.length} points. Save it, or keep clicking — the shape closes itself.`;
+  }
+}
+
+// ---- actions --------------------------------------------------------------
 
 function selectArea(area: AreaState | null): void {
-  active = area;
-  for (const a of areas) a.row.classList.toggle('is-active', a === area);
-  render();
+  if (area && mode === 'split' && area.props.kind === 'boundary') return;
+  active = area === active ? null : area;
+  draft = [];
+  notice = null;
+  redraw();
+}
+
+function commitDraft(): void {
+  if (!active || draft.length < 3) return;
+  const ring: Ring = draft.map((p) => [p.lng, p.lat]);
+  history.push(snapshot());
+
+  notice = null;
+
+  if (mode === 'trace') {
+    const traced: MultiPoly = [[[...ring, ring[0]!]]];
+    active.geometry = traced;
+    active.provisional = false;
+    // A campus traced beyond the boundary — Spear Street sits over a kilometre
+    // from everything else — is university land the boundary does not yet know
+    // about. Merging it in keeps the boundary the union of its campuses, which
+    // is what split mode's unassigned remainder is measured against. Disjoint
+    // parts stay disjoint: the boundary simply becomes a MultiPolygon.
+    if (boundary && active.props.kind === 'campus') {
+      const beyond = outside(traced, boundary.geometry);
+      if (areaM2(beyond) >= MIN_PIECE_M2) {
+        boundary.geometry = union(boundary.geometry, traced);
+        notice =
+          `Added ${Math.round(areaM2(beyond) * ACRES_PER_M2)} acres to the ` +
+          `${boundary.props.name} boundary, which ${active.props.name} reaches beyond. ` +
+          'Undo last change if that was not intended.';
+      }
+    }
+  } else {
+    const { assigned } = carve(unassigned(), ring);
+    if (assigned.length === 0) {
+      history.pop();
+      notice = 'That shape does not overlap any unassigned campus land. In split mode you can only carve up land inside the boundary — use Trace for a detached parcel.';
+      redraw();
+      return;
+    }
+    // The remainder is derived from what every area holds, so assigning to one
+    // area is the whole edit — there is no separate remainder to keep in step.
+    active.geometry = assigned;
+    active.provisional = false;
+  }
+
+  draft = [];
+  active = null;
+  redraw();
+}
+
+function giveRest(): void {
+  if (!active || mode !== 'split') return;
+  const rest = unassigned();
+  if (rest.length === 0) return;
+  history.push(snapshot());
+  active.geometry = rest;
+  active.provisional = false;
+  active = null;
+  redraw();
 }
 
 map.on('click', (e: L.LeafletMouseEvent) => {
@@ -106,110 +327,93 @@ map.on('click', (e: L.LeafletMouseEvent) => {
     els.hint.textContent = 'Pick an area on the left first.';
     return;
   }
-  active.ring.push(e.latlng);
-  active.traced = true;
-  render();
+  draft.push(e.latlng);
+  notice = null;
+  redraw();
 });
 
-els.undo.addEventListener('click', () => {
-  active?.ring.pop();
-  // Undoing back to nothing means the area was never really traced, so it
-  // falls back to its shipped geometry rather than downloading as empty.
-  if (active && active.ring.length === 0) active.traced = false;
-  render();
+els.commit.addEventListener('click', commitDraft);
+els.rest.addEventListener('click', giveRest);
+els.undoPoint.addEventListener('click', () => { draft.pop(); redraw(); });
+els.cancel.addEventListener('click', () => { draft = []; redraw(); });
+els.undoStep.addEventListener('click', () => {
+  const previous = history.pop();
+  if (previous) restore(previous);
+  draft = [];
+  redraw();
+});
+els.reset.addEventListener('click', () => {
+  // Only the sub-campuses: throwing away a hand-traced outer boundary because
+  // someone wanted to redo the splits would be a genuinely costly mistake.
+  history.push(snapshot());
+  for (const campus of campuses) {
+    const original = dataset.campusAreas.features.find((f) => f.properties.area_id === campus.props.area_id)!;
+    campus.geometry = toMultiPoly(original.geometry);
+    campus.provisional = original.properties.provisional;
+  }
+  active = null;
+  draft = [];
+  redraw();
 });
 
-els.clear.addEventListener('click', () => {
-  if (!active) return;
-  active.ring = [];
-  active.traced = false;
-  render();
-});
+function setMode(next: Mode): void {
+  mode = next;
+  active = null;
+  draft = [];
+  notice = null;
+  els.modeSplit.setAttribute('aria-checked', String(next === 'split'));
+  els.modeTrace.setAttribute('aria-checked', String(next === 'trace'));
+  els.modeSplit.classList.toggle('is-on', next === 'split');
+  els.modeTrace.classList.toggle('is-on', next === 'trace');
+  redraw();
+}
+els.modeSplit.addEventListener('click', () => setMode('split'));
+els.modeTrace.addEventListener('click', () => setMode('trace'));
 
-els.download.addEventListener('click', download);
+// ---- file in, file out ----------------------------------------------------
 
-function render(): void {
-  for (const a of areas) {
-    a.outline.setLatLngs(a.ring);
-    a.vertices.clearLayers();
-    if (a === active) {
-      a.ring.forEach((latlng, i) => {
-        L.circleMarker(latlng, {
-          radius: 4,
-          color: '#fff',
-          weight: 2,
-          fillColor: a.props.color,
-          fillOpacity: 1,
-        })
-          .bindTooltip(String(i + 1), { direction: 'top' })
-          .addTo(a.vertices);
-      });
+els.load.addEventListener('change', async () => {
+  const file = els.load.files?.[0];
+  if (!file) return;
+  try {
+    const loaded = JSON.parse(await file.text()) as typeof dataset.campusAreas;
+    let matched = 0;
+    for (const feature of loaded.features ?? []) {
+      const area = areas.find((a) => a.props.area_id === feature.properties?.area_id);
+      if (!area || !feature.geometry) continue;
+      area.geometry = toMultiPoly(feature.geometry);
+      area.provisional = Boolean(feature.properties.provisional);
+      matched++;
     }
-    const points = a.ring.length;
-    const status = a.traced
-      ? `${points} point${points === 1 ? '' : 's'}${points > 2 ? '' : ' — need at least 3'}`
-      : a.props.provisional ? 'estimated' : 'from file';
-    a.row.innerHTML = '';
-    const name = document.createElement('span');
-    name.className = 'area-name';
-    name.textContent = a.props.name;
-    const meta = document.createElement('span');
-    meta.className = `area-meta${a.traced && points > 2 ? ' is-done' : ''}`;
-    meta.textContent = status;
-    a.row.append(name, meta);
-    a.row.style.setProperty('--area-color', a.props.color);
+    history.length = 0;
+    active = null;
+    draft = [];
+    setMode(boundary && !boundary.provisional ? 'split' : 'trace');
+    notice = `Loaded ${matched} area${matched === 1 ? '' : 's'} from ${file.name}.`;
+    redraw();
+  } catch {
+    notice = `${file.name} is not readable GeoJSON.`;
+    redraw();
+  } finally {
+    // Let the same file be picked again after an edit on disk.
+    els.load.value = '';
   }
+});
 
-  els.undo.disabled = !active || active.ring.length === 0;
-  els.clear.disabled = els.undo.disabled;
-
-  const usable = areas.filter((a) => a.traced && a.ring.length > 2);
-  const unfinished = areas.filter((a) => a.traced && a.ring.length <= 2);
-  els.download.disabled = usable.length === 0 || unfinished.length > 0;
-
-  if (unfinished.length > 0) {
-    els.hint.textContent = `${unfinished[0]!.props.name} needs at least 3 points.`;
-  } else if (active) {
-    els.hint.textContent = active.ring.length
-      ? `Tracing ${active.props.name}. Click to add points; the shape closes itself.`
-      : `Click around the edge of ${active.props.name}.`;
-  } else {
-    els.hint.textContent = 'Pick an area to start.';
-  }
-}
-
-/** Leaflet rings are open; GeoJSON rings repeat the first position as the last. */
-function toGeoJsonRing(ring: Ring): number[][] {
-  const round = (n: number) => Number(n.toFixed(6));
-  const positions = ring.map((p) => [round(p.lng), round(p.lat)]);
-  positions.push(positions[0]!);
-  return positions;
-}
-
-function download(): void {
-  const features = areas.map((a) => ({
+els.download.addEventListener('click', () => {
+  const features = areas.map((area) => ({
     type: 'Feature' as const,
-    properties: {
-      area_id: a.props.area_id,
-      name: a.props.name,
-      kind: a.props.kind,
-      color: a.props.color,
-      description: a.props.description,
-      // A traced area is real; an untraced one keeps whatever it had.
-      provisional: a.traced ? false : a.props.provisional,
-    },
-    geometry: a.traced
-      ? { type: 'Polygon' as const, coordinates: [toGeoJsonRing(a.ring)] }
-      : a.original,
-  }));
+    properties: { ...area.props, provisional: area.provisional },
+    geometry: toGeometry(area.geometry),
+  })).filter((f) => f.geometry !== null);
 
-  const traced = features.filter((f) => !f.properties.provisional).length;
+  const real = features.filter((f) => !f.properties.provisional).length;
   const body = JSON.stringify(
     {
       type: 'FeatureCollection',
       comment:
-        `Traced over satellite imagery on ${new Date().toISOString().slice(0, 10)}. ` +
-        `${traced} of ${features.length} areas are real; any still marked provisional ` +
+        `Drawn over satellite imagery on ${new Date().toISOString().slice(0, 10)}. ` +
+        `${real} of ${features.length} areas are real; any still marked provisional ` +
         'are the hand-drawn estimates. See docs/CAMPUS-AREAS.md.',
       features,
     },
@@ -223,24 +427,18 @@ function download(): void {
   link.download = 'campus-areas.geojson';
   link.click();
   URL.revokeObjectURL(url);
-}
+});
+
+// ---- wire up --------------------------------------------------------------
 
 for (const area of areas) {
-  area.row.className = 'area';
-  area.row.tabIndex = 0;
-  area.row.addEventListener('click', () => selectArea(area === active ? null : area));
+  area.row.addEventListener('click', () => selectArea(area));
   area.row.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      selectArea(area === active ? null : area);
-    }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectArea(area); }
   });
   els.areas.append(area.row);
 }
 
-// Open on the areas themselves rather than on config.map.bounds, which is a
-// deliberately generous box: fitting that would start you zoomed out past the
-// point where campus edges are visible on the imagery.
-const guideBounds = guides.getBounds();
-map.fitBounds(guideBounds.isValid() ? guideBounds : L.latLngBounds(cfg.bounds), { padding: [40, 40] });
-render();
+const extent = L.geoJSON(dataset.campusAreas).getBounds();
+map.fitBounds(extent.isValid() ? extent : L.latLngBounds(cfg.bounds), { padding: [40, 40] });
+setMode(mode);
