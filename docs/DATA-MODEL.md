@@ -10,6 +10,7 @@ data/taxa.csv         one row per species/cultivar   (what a plant is)
 data/plants.csv       one row per mapped individual  (where it is, how big)
 data/collections.csv  campus areas / beds
 data/trails.geojson   self-guided walking tours
+data/campus-areas.geojson  campus boundary + the five named campuses
 data/config.json      site name, map centre, campus bounds
 ```
 
@@ -87,13 +88,32 @@ map mode), `description`.
 **Currently empty.** The file previously held seven invented area names, which
 were removed when real survey data replaced the sample rows — publishing made-up
 campus zones alongside real trees would have been misleading. Fill it with UVM
-Grounds' actual landscape zones, then set `collection_id` on the plants. Until
+Grounds' actual landscape zones — or with the five campuses UVM's own map
+names, which now exist as geometry in `campus-areas.geojson` — then set
+`collection_id` on the plants. Until
 then the campus-area filter and the colour-by-area mode are simply empty, which
 is accurate.
 
 Draw the areas so a surveyor standing at a tree knows without thinking which one
 they are in; vague boundaries are how the same bed ends up recorded three
 different ways.
+
+## campus-areas.geojson
+
+The campus outline and its five named campuses — Central, Trinity, Centennial,
+Redstone, Athletic — drawn as an optional map overlay, mirroring the layer on
+UVM's own map at <https://www.uvm.edu/map/>.
+
+**The shapes currently in the file are estimates and can be 100–300 m out.**
+UVM does not publish the boundaries as a file and this repository's build
+machine cannot reach `uvm.edu`, so they were georeferenced by hand from a
+screenshot. Every feature is flagged `"provisional": true`, which makes the map
+draw it dashed and label the layer "(approximate)". Replace them with the
+tracer at `/tracer/`. Full format, workflow and validation rules:
+[docs/CAMPUS-AREAS.md](CAMPUS-AREAS.md).
+
+Note that this file is *not* connected to `collections.csv` — the overlay is
+drawn, but nothing is computed from it.
 
 ## trails.geojson
 
@@ -149,7 +169,8 @@ coordinates or measurements, a value outside a controlled vocabulary.
 
 **Warnings** (build continues) — coordinates outside the campus bounds in
 `config.json`, a plant with no `collection_id`, a trail stop that is not a known
-accession, and a count of taxa no active plant references. That last one is
+accession, a count of campus areas whose geometry is still provisional, and a
+count of taxa no active plant references. That last one is
 summarised in a single line rather than one per taxon, because the species list
 legitimately runs ahead of the survey: `taxa.csv` holds every species known to
 be on campus, while `plants.csv` holds only what has actually been mapped.

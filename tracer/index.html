@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Trace the UVM campus boundary and its sub-campuses over satellite imagery.">
+  <meta name="theme-color" content="#154734">
+  <title>Boundary tracer — UVM Trees</title>
+</head>
+<body>
+  <header class="bar">
+    <h1>Boundary tracer</h1>
+    <button type="button" id="download" class="bar-btn" disabled>Download campus-areas.geojson</button>
+  </header>
+
+  <main class="layout">
+    <aside class="side">
+      <p class="intro">
+        Pick an area, then click along its edge on the map. Areas still marked
+        <em>estimated</em> are the placeholder shapes — trace over them to
+        replace them.
+      </p>
+      <ul id="areas" class="areas"></ul>
+      <div class="hint" id="hint">Pick an area to start.</div>
+      <div class="actions">
+        <button type="button" id="undo" disabled>Undo point</button>
+        <button type="button" id="clear" disabled>Clear area</button>
+      </div>
+      <p class="note">
+        Nothing is saved until you download. The downloaded file replaces
+        <code>data/campus-areas.geojson</code> in the repository.
+      </p>
+    </aside>
+    <div id="map" class="map"></div>
+  </main>
+
+  <script type="module" src="/src/tracer/main.ts"></script>
+</body>
+</html>

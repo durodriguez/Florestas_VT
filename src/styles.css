@@ -206,6 +206,25 @@ button, input, select { font: inherit; color: inherit; }
 .plant-cluster--lg { font-size: .9rem; }
 
 .leaflet-tooltip { font-size: .78rem; }
+
+/* Campus names sit flat on the map rather than in a tooltip bubble: they label
+   an area, so a pointer and a border would read as a popup about a feature.
+   The halo keeps them legible over both street tiles and satellite imagery. */
+.campus-label,
+.campus-label::before {
+  background: none; border: 0; box-shadow: none; padding: 0;
+}
+.campus-label {
+  font-size: .82rem; font-weight: 700; letter-spacing: .02em;
+  color: var(--uvm-green); white-space: nowrap;
+  /* Dark ink in a white halo, the usual cartographic answer to a label that
+     has to sit on both pale street tiles and dark satellite imagery. The
+     colours are fixed to the tiles, not to the site theme, because the tiles
+     do not follow it. */
+  text-shadow:
+    0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff,
+    1px 1px 2px rgb(255 255 255 / 90%), -1px -1px 2px rgb(255 255 255 / 90%);
+}
 .popup-title { font-size: .95rem; margin-bottom: .2rem; }
 .popup-meta { margin: 0 0 .4rem; font-size: .78rem; color: #5d665f; }
 

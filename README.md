@@ -48,6 +48,12 @@ individual QR SVGs. Each code encodes `?plant=<accession>`, so scanning a sign
 on a tree opens that record. Removed plants still resolve from their old
 labels.
 
+**Campus areas** — an optional overlay drawing UVM's campus boundary and its
+five named campuses (Central, Trinity, Centennial, Redstone, Athletic), toggled
+from the same layers control as the basemaps. The shapes shipped today are
+hand-drawn estimates, marked as such on the map; `/tracer/` replaces them with
+traced ones. See [docs/CAMPUS-AREAS.md](docs/CAMPUS-AREAS.md).
+
 **Walking trails** — self-guided tours drawn from `data/trails.geojson`, each
 with a stop list.
 
@@ -60,6 +66,10 @@ with a stop list.
 recording trees on a phone: tag lookup against the 2014 inventory, GPS with an
 accuracy gate, tap-to-place pin on satellite imagery, camera, and CSV export
 that feeds the importer. See [docs/FIELD-APP.md](docs/FIELD-APP.md).
+
+**Boundary tracer** — an internal tool at `/tracer/` for drawing the campus
+areas over satellite imagery. It saves nothing; it hands you a GeoJSON file to
+commit. See [docs/CAMPUS-AREAS.md](docs/CAMPUS-AREAS.md).
 
 **Survey intake** — `npm run import` merges a field export into the dataset:
 assigns accession numbers, resolves species from common or scientific names,
@@ -88,6 +98,7 @@ species never reaches the live site.
 | | |
 |---|---|
 | **Data model & validation rules** | [docs/DATA-MODEL.md](docs/DATA-MODEL.md) |
+| **Campus boundaries & the tracer** | [docs/CAMPUS-AREAS.md](docs/CAMPUS-AREAS.md) |
 | **Surveying and mapping trees** | [docs/FIELD-SURVEY.md](docs/FIELD-SURVEY.md) |
 | **The field survey app** | [docs/FIELD-APP.md](docs/FIELD-APP.md) |
 | **Hosting, domains, scaling** | [docs/DEPLOY.md](docs/DEPLOY.md) |

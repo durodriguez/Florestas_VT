@@ -1,6 +1,6 @@
 import L from 'leaflet';
 import 'leaflet.markercluster';
-import type { ColorBy, Dataset, Plant, TrailProps } from './types';
+import type { CampusAreaProps, ColorBy, Dataset, Plant, TrailProps } from './types';
 import { colorFor } from './palette';
 
 /**
@@ -43,6 +43,7 @@ export class PlantMap {
   readonly map: L.Map;
   private readonly cluster: L.MarkerClusterGroup;
   private readonly trailLayer: L.GeoJSON;
+  private readonly campusLayer: L.GeoJSON;
   private readonly highlight: L.CircleMarker;
   private readonly markers = new Map<string, L.CircleMarker>();
   private locationMarker: L.CircleMarker | null = null;
@@ -109,13 +110,27 @@ export class PlantMap {
       interactive: false,
     });
 
+    this.campusLayer = campusAreas(dataset.campusAreas);
+
+    // Overlays are checkboxes in the same control as the basemap radio buttons,
+    // so campus areas toggle on and off without disturbing the chosen basemap.
+    const provisional = dataset.campusAreas.features.some((f) => f.properties.provisional);
     L.control
-      .layers(layers, { 'Walking trails': this.trailLayer }, { position: 'bottomright', collapsed: true })
+      .layers(
+        layers,
+        {
+          [`Campus areas${provisional ? ' (approximate)' : ''}`]: this.campusLayer,
+          'Walking trails': this.trailLayer,
+        },
+        { position: 'bottomright', collapsed: true },
+      )
       .addTo(this.map);
 
     this.watchTiles(layers);
 
     this.buildMarkers(plants);
+    // Added before the clusters so the polygons sit under the tree markers.
+    this.campusLayer.addTo(this.map);
     this.cluster.addTo(this.map);
     this.trailLayer.addTo(this.map);
     this.highlight.addTo(this.map);
@@ -228,6 +243,50 @@ export class PlantMap {
     if (visible) this.trailLayer.addTo(this.map);
     else this.trailLayer.remove();
   }
+
+  toggleCampusAreas(visible: boolean): void {
+    if (visible) this.campusLayer.addTo(this.map);
+    else this.campusLayer.remove();
+  }
+}
+
+/**
+ * The campus outline and its named sub-campuses, as UVM's own map draws them.
+ * Non-interactive throughout: these are background context, and a polygon that
+ * swallowed clicks would make the tree underneath it unselectable.
+ */
+function campusAreas(
+  collection: GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon, CampusAreaProps>,
+): L.GeoJSON {
+  return L.geoJSON(collection, {
+    interactive: false,
+    style: (feature) => {
+      const p = feature?.properties as CampusAreaProps | undefined;
+      const outline = p?.kind === 'boundary';
+      return {
+        color: p?.color ?? '#154734',
+        weight: outline ? 3 : 2,
+        opacity: outline ? 0.9 : 0.7,
+        // Provisional geometry is dashed so an estimate never reads as survey.
+        dashArray: p?.provisional ? '6 6' : undefined,
+        fill: !outline,
+        fillColor: p?.color ?? '#154734',
+        fillOpacity: 0.08,
+      };
+    },
+    onEachFeature: (feature, layer) => {
+      const p = feature.properties as CampusAreaProps;
+      // The outer boundary has no sensible centre to label — the sub-campus
+      // names sit inside it, and a seventh label there would collide.
+      if (p.kind !== 'campus') return;
+      layer.bindTooltip(escapeHtml(p.name), {
+        permanent: true,
+        direction: 'center',
+        className: 'campus-label',
+        interactive: false,
+      });
+    },
+  });
 }
 
 /** Bigger trunks read as bigger dots, which makes specimen trees findable. */

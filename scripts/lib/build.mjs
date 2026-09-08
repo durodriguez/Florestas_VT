@@ -34,7 +34,13 @@ function enumIndex(value, list) {
   return list.indexOf(token(value));
 }
 
-export function buildDataset({ taxaRows, plantRows, collectionRows, trails, config }) {
+/** Is a position inside the configured map bounds? Catches swapped lat/lng. */
+function inBounds(lat, lng, config) {
+  const [[south, west], [north, east]] = config.map.bounds;
+  return lat >= south && lat <= north && lng >= west && lng <= east;
+}
+
+export function buildDataset({ taxaRows, plantRows, collectionRows, trails, campusAreas, config }) {
   const errors = [];
   const warnings = [];
   const err = (where, msg) => errors.push(`${where}: ${msg}`);
@@ -234,6 +240,65 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, conf
     return f;
   });
 
+  // ---- campus areas ------------------------------------------------------
+  // The campus outline and its five named sub-campuses, drawn as an optional
+  // overlay. Geometry only: nothing else in the dataset depends on it, so a bad
+  // ring degrades the overlay rather than the map.
+  const areaFeatures = [];
+  const seenAreaIds = new Set();
+  let provisionalAreas = 0;
+  (campusAreas?.features ?? []).forEach((f, i) => {
+    const where = `campus-areas.geojson feature ${i}`;
+    const props = f.properties ?? {};
+    const id = trim(props.area_id);
+    if (!id) return err(where, 'missing area_id');
+    if (seenAreaIds.has(id)) return err(where, `duplicate area_id "${id}"`);
+    if (props.kind !== 'boundary' && props.kind !== 'campus') {
+      return err(where, `kind must be "boundary" or "campus", got "${props.kind}"`);
+    }
+    if (f.geometry?.type !== 'Polygon' && f.geometry?.type !== 'MultiPolygon') {
+      return err(where, `geometry must be a Polygon or MultiPolygon, got "${f.geometry?.type}"`);
+    }
+    const rings = f.geometry.type === 'Polygon' ? f.geometry.coordinates : f.geometry.coordinates.flat();
+    for (const ring of rings) {
+      if (!Array.isArray(ring) || ring.length < 4) {
+        return err(where, 'each ring needs at least 4 positions (first repeated as last)');
+      }
+      const [fx, fy] = ring[0];
+      const [lx, ly] = ring[ring.length - 1];
+      if (fx !== lx || fy !== ly) return err(where, 'ring is not closed — repeat the first position as the last');
+      // A ring outside the configured map bounds is almost always lat/lng
+      // written the wrong way round, which is invisible on screen: the shape
+      // simply never appears.
+      for (const [lng, lat] of ring) {
+        if (!inBounds(lat, lng, config)) {
+          return err(where, `position ${lat}, ${lng} is outside the map bounds — are lat and lng swapped?`);
+        }
+      }
+    }
+    seenAreaIds.add(id);
+    if (props.provisional) provisionalAreas++;
+    areaFeatures.push({
+      type: 'Feature',
+      properties: {
+        area_id: id,
+        name: trim(props.name) || id,
+        kind: props.kind,
+        color: trim(props.color) || '#154734',
+        description: trim(props.description),
+        provisional: Boolean(props.provisional),
+      },
+      geometry: f.geometry,
+    });
+  });
+  if (provisionalAreas > 0) {
+    warn(
+      'campus-areas.geojson',
+      `${provisionalAreas} of ${areaFeatures.length} areas are still flagged provisional — ` +
+        'the boundaries are estimates. Trace the real ones at /tracer/ (docs/CAMPUS-AREAS.md)',
+    );
+  }
+
   const dataset = {
     generatedAt: new Date().toISOString(),
     config,
@@ -241,12 +306,14 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, conf
     collections,
     taxa,
     trails: { type: 'FeatureCollection', features: trailFeatures },
+    campusAreas: { type: 'FeatureCollection', features: areaFeatures },
     counts: {
       taxa: taxa.length,
       plants: plantRowsOut.length,
       active: plantRowsOut.filter((r) => r[PLANT_FIELDS.indexOf('status')] === STATUSES.indexOf('active')).length,
       collections: collections.length,
       trails: trailFeatures.length,
+      campusAreas: areaFeatures.length,
     },
   };
 
