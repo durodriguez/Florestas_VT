@@ -104,8 +104,10 @@ The campus outline and its five named campuses — Central, Trinity, Centennial,
 Redstone, Athletic — drawn as an optional map overlay, mirroring the layer on
 UVM's own map at <https://www.uvm.edu/map/>.
 
-The outer boundary is traced and real — 104 vertices, 542 acres. **The five
-sub-campuses are still estimates and can be 100–300 m out**; UVM does not
+The outer boundary is traced and real — 104 vertices, 542 acres — but covers the
+main campus only; Spear Street Campus is detached, 1.2 km south, and is merged
+in by tracing it. **All six sub-campuses are still estimates and can be
+100–300 m out**; UVM does not
 publish them as a file and this repository's build machine cannot reach
 `uvm.edu`, so they were georeferenced by hand from a screenshot. They carry
 `"provisional": true`, which makes the map draw them dashed and label the layer

@@ -91,6 +91,21 @@ export function carve(remaining: MultiPoly, drawn: Ring): CarveResult {
   };
 }
 
+/** Merge shapes into one, dissolving any shared edge. */
+export function union(...parts: MultiPoly[]): MultiPoly {
+  const real = parts.filter((p) => p.length > 0);
+  if (real.length === 0) return [];
+  if (real.length === 1) return real[0]!;
+  return clipping.union(real[0]!, ...(real.slice(1) as [MultiPoly, ...MultiPoly[]])) as MultiPoly;
+}
+
+/** The part of `shape` that falls outside `container`. */
+export function outside(shape: MultiPoly, container: MultiPoly): MultiPoly {
+  if (shape.length === 0) return [];
+  if (container.length === 0) return shape;
+  return dropSlivers(clipping.difference(shape, container) as MultiPoly);
+}
+
 /** Everything in `whole` that none of `taken` has claimed. */
 export function subtractAll(whole: MultiPoly, taken: MultiPoly[]): MultiPoly {
   const claimed = taken.filter((t) => t.length > 0);

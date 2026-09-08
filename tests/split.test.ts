@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  areaM2, carve, dropSlivers, ringAreaM2, subtractAll, toGeometry, toMultiPoly,
+  areaM2, carve, dropSlivers, outside, ringAreaM2, subtractAll, toGeometry, toMultiPoly, union,
   type MultiPoly, type Ring,
 } from '../src/tracer/split';
 
@@ -123,5 +123,49 @@ describe('dropSlivers', () => {
   it('drops clipping noise but keeps real pieces', () => {
     const noise: MultiPoly = [[square(-73.2, 44.47, 0.01)], [square(-73.18, 44.47, 0.00001)]];
     expect(dropSlivers(noise)).toHaveLength(1);
+  });
+});
+
+describe('union and outside', () => {
+  // Spear Street Campus sits about 1.2 km south of everything else, so the
+  // campus boundary has to become a two-part MultiPolygon to hold it.
+  const detached: MultiPoly = [[square(-73.19, 44.452, 0.008)]];
+
+  it('keeps disjoint parts separate rather than bridging them', () => {
+    const merged = union(boundary, detached);
+    expect(merged).toHaveLength(2);
+    expect(areaM2(merged)).toBeCloseTo(areaM2(boundary) + areaM2(detached), 0);
+  });
+
+  it('dissolves the shared edge between touching parts', () => {
+    const abutting: MultiPoly = [[square(-73.18, 44.47, 0.02)]];
+    expect(union(boundary, abutting)).toHaveLength(1);
+  });
+
+  it('ignores empty parts', () => {
+    expect(union([], boundary, [])).toEqual(boundary);
+    expect(union([], [])).toEqual([]);
+  });
+
+  it('reports the part of a shape that falls outside the boundary', () => {
+    expect(areaM2(outside(detached, boundary))).toBeCloseTo(areaM2(detached), 0);
+  });
+
+  it('reports nothing outside for a shape wholly within the boundary', () => {
+    const inside: MultiPoly = [[square(-73.195, 44.475, 0.005)]];
+    expect(outside(inside, boundary)).toEqual([]);
+  });
+
+  it('treats a shape as wholly outside when there is no boundary yet', () => {
+    expect(outside(detached, [])).toEqual(detached);
+  });
+
+  // The workflow: trace the detached parcel, merge it in, then split the
+  // original polygon without the parcel getting swept into a campus.
+  it('leaves only the main part unassigned once the parcel is claimed', () => {
+    const merged = union(boundary, detached);
+    const rest = subtractAll(merged, [detached]);
+    expect(rest).toHaveLength(1);
+    expect(areaM2(rest)).toBeCloseTo(areaM2(boundary), 0);
   });
 });

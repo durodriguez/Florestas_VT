@@ -19,7 +19,7 @@ import 'leaflet/dist/leaflet.css';
 import './styles.css';
 import type { CampusAreaProps, Dataset } from '../types';
 import {
-  ACRES_PER_M2, areaM2, carve, subtractAll, toGeometry, toMultiPoly,
+  ACRES_PER_M2, MIN_PIECE_M2, areaM2, carve, outside, subtractAll, toGeometry, toMultiPoly, union,
   type MultiPoly, type Ring,
 } from './split';
 
@@ -96,6 +96,8 @@ const campuses = areas.filter((a) => a.props.kind === 'campus');
 let mode: Mode = boundary && !boundary.provisional ? 'split' : 'trace';
 let active: AreaState | null = null;
 let draft: L.LatLng[] = [];
+/** A one-off message that outranks the usual hint until the next action. */
+let notice: string | null = null;
 
 /** Enough state to undo one assignment, kept as plain geometry. */
 interface Snapshot {
@@ -235,7 +237,9 @@ function renderPanel(rest: MultiPoly): void {
   els.undoStep.disabled = history.length === 0;
   els.download.disabled = !areas.some((a) => !a.provisional);
 
-  if (!active) {
+  if (notice) {
+    els.hint.textContent = notice;
+  } else if (!active) {
     els.hint.textContent =
       mode === 'split'
         ? restAcres > 0
@@ -258,6 +262,7 @@ function selectArea(area: AreaState | null): void {
   if (area && mode === 'split' && area.props.kind === 'boundary') return;
   active = area === active ? null : area;
   draft = [];
+  notice = null;
   redraw();
 }
 
@@ -266,14 +271,33 @@ function commitDraft(): void {
   const ring: Ring = draft.map((p) => [p.lng, p.lat]);
   history.push(snapshot());
 
+  notice = null;
+
   if (mode === 'trace') {
-    active.geometry = [[[...ring, ring[0]!]]];
+    const traced: MultiPoly = [[[...ring, ring[0]!]]];
+    active.geometry = traced;
     active.provisional = false;
+    // A campus traced beyond the boundary — Spear Street sits over a kilometre
+    // from everything else — is university land the boundary does not yet know
+    // about. Merging it in keeps the boundary the union of its campuses, which
+    // is what split mode's unassigned remainder is measured against. Disjoint
+    // parts stay disjoint: the boundary simply becomes a MultiPolygon.
+    if (boundary && active.props.kind === 'campus') {
+      const beyond = outside(traced, boundary.geometry);
+      if (areaM2(beyond) >= MIN_PIECE_M2) {
+        boundary.geometry = union(boundary.geometry, traced);
+        notice =
+          `Added ${Math.round(areaM2(beyond) * ACRES_PER_M2)} acres to the ` +
+          `${boundary.props.name} boundary, which ${active.props.name} reaches beyond. ` +
+          'Undo last change if that was not intended.';
+      }
+    }
   } else {
     const { assigned } = carve(unassigned(), ring);
     if (assigned.length === 0) {
       history.pop();
-      els.hint.textContent = 'That shape does not overlap any unassigned campus land. Try again over the boundary.';
+      notice = 'That shape does not overlap any unassigned campus land. In split mode you can only carve up land inside the boundary — use Trace for a detached parcel.';
+      redraw();
       return;
     }
     // The remainder is derived from what every area holds, so assigning to one
@@ -304,6 +328,7 @@ map.on('click', (e: L.LeafletMouseEvent) => {
     return;
   }
   draft.push(e.latlng);
+  notice = null;
   redraw();
 });
 
@@ -335,6 +360,7 @@ function setMode(next: Mode): void {
   mode = next;
   active = null;
   draft = [];
+  notice = null;
   els.modeSplit.setAttribute('aria-checked', String(next === 'split'));
   els.modeTrace.setAttribute('aria-checked', String(next === 'trace'));
   els.modeSplit.classList.toggle('is-on', next === 'split');
@@ -363,9 +389,11 @@ els.load.addEventListener('change', async () => {
     active = null;
     draft = [];
     setMode(boundary && !boundary.provisional ? 'split' : 'trace');
-    els.hint.textContent = `Loaded ${matched} area${matched === 1 ? '' : 's'} from ${file.name}.`;
+    notice = `Loaded ${matched} area${matched === 1 ? '' : 's'} from ${file.name}.`;
+    redraw();
   } catch {
-    els.hint.textContent = `${file.name} is not readable GeoJSON.`;
+    notice = `${file.name} is not readable GeoJSON.`;
+    redraw();
   } finally {
     // Let the same file be picked again after an edit on disk.
     els.load.value = '';

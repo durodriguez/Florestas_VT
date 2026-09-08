@@ -1,6 +1,6 @@
 {
   "type": "FeatureCollection",
-  "comment": "Campus boundary traced over satellite imagery on 2026-09-08 and accurate. The five sub-campuses are still the hand-drawn estimates \u2014 carve them out of the boundary in split mode at /tracer/. See docs/CAMPUS-AREAS.md.",
+  "comment": "Campus boundary traced over satellite imagery on 2026-09-08 and accurate, but it covers the main campus only. Spear Street Campus is detached and still an estimate: trace it, which merges it into the boundary as a second part, then split the main polygon into the other five. See docs/CAMPUS-AREAS.md.",
   "features": [
     {
       "type": "Feature",
@@ -625,6 +625,52 @@
             [
               -73.195879,
               44.470476
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "area_id": "spear",
+        "name": "Spear Street Campus",
+        "kind": "campus",
+        "color": "#0f766e",
+        "description": "The detached research and farm land south of the main campus, along Spear Street.",
+        "provisional": true
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.190745,
+              44.463636
+            ],
+            [
+              -73.184697,
+              44.463636
+            ],
+            [
+              -73.184697,
+              44.45703
+            ],
+            [
+              -73.190195,
+              44.452695
+            ],
+            [
+              -73.196793,
+              44.452695
+            ],
+            [
+              -73.196793,
+              44.45703
+            ],
+            [
+              -73.190745,
+              44.463636
             ]
           ]
         ]
