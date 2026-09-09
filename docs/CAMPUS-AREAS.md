@@ -109,6 +109,32 @@ fragments land, though: a seam can be closer to a different campus than the one
 you gave it to, and it will simply become a detached scrap of the area you
 chose.
 
+### Edit — for moving land that already has an owner
+
+Split can only hand out *unassigned* land, so once a split is finished it can
+fix nothing: every acre has a holder. Edit mode moves land between areas, and
+the areas still tile the boundary afterwards — what one gains, the others lose,
+with no gap or overlap left behind.
+
+Pick who should receive the land in the list, then choose the land two ways:
+
+**Pick a piece** makes every area clickable; click one and it transfers whole.
+Any piece under 5 acres also carries a **label with its acreage** floating over
+it, because a half-acre scrap stranded inside a neighbour is invisible at the
+zoom where you can see the campus — the pieces most likely to be misfiled are
+exactly the ones nobody can find.
+
+**Draw a region** turns the clicking off and lets you draw instead; the region
+is taken from whichever areas hold it. This is the tool for a messy junction:
+draw the shape you *want* one area to have and it takes it from its neighbours
+in one go. The region is clipped to the campus boundary first, so a sloppy
+outer edge cannot push an area outside university land.
+
+The two are separate because they cannot coexist — a clickable polygon
+swallows the very clicks that would draw a shape across it.
+
+**Undo last change** reverses a move.
+
 ### Trace — for anything from scratch
 
 Click every vertex yourself. This is what the outer boundary needed, what Spear
@@ -190,6 +216,11 @@ areas themselves — assigning to one area *is* the whole edit.
 Merging a detached parcel is the same library's union. Disjoint inputs come back
 as separate parts, which is exactly what the boundary needs.
 
+Edit mode's transfer is a union for the receiving area and a difference for
+every other one, applied in a single pass. Because the same region is added
+once and removed everywhere else, the areas cannot end up overlapping or
+leaving a gap — verified after a run of moves as 0.0000 acres of both.
+
 Pieces under 200 m² are dropped as clipping noise: a hair of overlap where a
 drawn edge grazes the boundary, rather than a real scrap of campus. It is also
 why the campuses can sum to a hair under the boundary — 0.03 acres across a full
@@ -198,8 +229,9 @@ lives in `src/tracer/split.ts`, away from Leaflet and the DOM, and
 `tests/split.test.ts` covers it — including that area is conserved across a
 sequence of carves, that a shape swallowing the whole boundary yields the whole
 boundary, that a self-intersecting scribble is normalised rather than throwing,
-that disjoint parts merge without bridging, and that claiming the detached
-parcel leaves only the main polygon unassigned.
+that disjoint parts merge without bridging, that claiming the detached parcel
+leaves only the main polygon unassigned, and that a transfer conserves area,
+leaves no overlap, and closes the hole a moved scrap leaves behind.
 
 ## Two things this does not do yet
 

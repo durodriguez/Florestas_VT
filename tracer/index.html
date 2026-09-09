@@ -23,9 +23,15 @@
     <aside class="side">
       <div class="modes" role="radiogroup" aria-label="What to do">
         <button type="button" id="mode-split" class="mode" role="radio" aria-checked="true">Split</button>
+        <button type="button" id="mode-edit" class="mode" role="radio" aria-checked="false">Edit</button>
         <button type="button" id="mode-trace" class="mode" role="radio" aria-checked="false">Trace</button>
       </div>
       <p class="intro" id="intro"></p>
+
+      <div class="modes tools" id="edit-tools" role="radiogroup" aria-label="How to choose land" hidden>
+        <button type="button" id="tool-pick" class="mode" role="radio" aria-checked="true">Pick a piece</button>
+        <button type="button" id="tool-draw" class="mode" role="radio" aria-checked="false">Draw a region</button>
+      </div>
 
       <ul id="areas" class="areas"></ul>
 

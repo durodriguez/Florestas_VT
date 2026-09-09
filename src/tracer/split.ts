@@ -109,6 +109,31 @@ export function outside(shape: MultiPoly, container: MultiPoly): MultiPoly {
   return dropSlivers(clipping.difference(shape, container) as MultiPoly);
 }
 
+/** The overlap between two shapes. */
+export function intersect(a: MultiPoly, b: MultiPoly): MultiPoly {
+  if (a.length === 0 || b.length === 0) return [];
+  return dropSlivers(clipping.intersection(a, b) as MultiPoly);
+}
+
+/**
+ * Move a region from whoever currently holds it to one area.
+ *
+ * Splitting only ever hands out *unassigned* land, which cannot fix a boundary
+ * drawn in the wrong place — by then every acre has an owner. This is the
+ * operation for second thoughts: it takes the region away from every other
+ * holding and merges it into the target's, so the areas still tile without
+ * gaps or overlaps afterwards.
+ *
+ * `region` should already be clipped to the campus boundary; this does not
+ * check, because it is equally valid for moving a scrap between two areas.
+ */
+export function transfer(holdings: MultiPoly[], targetIndex: number, region: MultiPoly): MultiPoly[] {
+  if (region.length === 0) return holdings;
+  return holdings.map((held, i) =>
+    i === targetIndex ? union(held, region) : outside(held, region),
+  );
+}
+
 /** Everything in `whole` that none of `taken` has claimed. */
 export function subtractAll(whole: MultiPoly, taken: MultiPoly[]): MultiPoly {
   const claimed = taken.filter((t) => t.length > 0);
