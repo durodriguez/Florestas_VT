@@ -85,18 +85,19 @@ option, which preserves the campus's landscape history.
 `collection_id`, `name`, `color` (hex, used by the "colour by campus area"
 map mode), `description`.
 
-**Currently empty.** The file previously held seven invented area names, which
-were removed when real survey data replaced the sample rows — publishing made-up
-campus zones alongside real trees would have been misleading. Fill it with UVM
-Grounds' actual landscape zones — or with the five campuses UVM's own map
-names, which now exist as geometry in `campus-areas.geojson` — then set
-`collection_id` on the plants. Until
-then the campus-area filter and the colour-by-area mode are simply empty, which
-is accurate.
+Holds UVM's six campuses: Central, Trinity, Centennial, Redstone, Athletic and
+Spear Street. This is what the map's **Campus area** filter and colour-by mode
+read; `campus-areas.geojson` draws the matching polygons. They are separate
+files because a collection could one day be a bed finer than a whole campus,
+but where an id appears in both, `npm run data` warns if the name or colour has
+drifted apart — a filter option with no shape, or a shape nothing can filter to,
+is almost always a rename that stopped half way.
 
-Draw the areas so a surveyor standing at a tree knows without thinking which one
-they are in; vague boundaries are how the same bed ends up recorded three
-different ways.
+Plants are filed by coordinate, not by hand: **`npm run areas`** looks up which
+campus polygon each plant stands in and fills in its `collection_id`. It is a
+dry run by default, keeps existing values unless you pass `--all`, backs up
+`plants.csv` before writing, and reports any plant that falls outside every
+area. Run it after an import, or after the campus boundaries change.
 
 ## campus-areas.geojson
 
