@@ -9,7 +9,10 @@
  *
  * Kept free of Leaflet and the DOM so the test suite can exercise it directly.
  */
-import * as clipping from 'polygon-clipping';
+// The package ships a CommonJS default export holding the four operations.
+// A namespace import happens to work through Vite's interop but resolves to an
+// empty namespace under plain Node, so any script outside the bundler breaks.
+import clipping from 'polygon-clipping';
 
 /** `[lng, lat]`, GeoJSON order — the order polygon-clipping wants too. */
 export type Pair = [number, number];

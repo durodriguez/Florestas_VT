@@ -15,28 +15,30 @@ one basemap; the overlays are checkboxes, because you can have any combination.
 
 ## Where the geometry stands
 
-**The outer campus boundary is real.** It was traced over satellite imagery on
-8 September 2026 — 104 vertices, 542 acres, which sits sensibly against UVM's
-commonly cited ~460-acre main campus plus Centennial Woods and the athletic
-land.
+**All of it is real.** Traced and split over satellite imagery on 8–9 September
+2026, and nothing in the file is flagged provisional any more.
 
-**It covers the main campus only.** Spear Street Campus is detached — roughly
-1.2 km south, on the far side of open land — and falls entirely outside it. It
-has to be traced, which merges it into the boundary as a second part.
+| Area | Acres |
+| --- | ---: |
+| UVM campus (boundary, two parts) | 692 |
+| Centennial Campus | 222 |
+| Central Campus | 164 |
+| Spear Street Campus | 151 |
+| Athletic Campus | 81 |
+| Redstone Campus | 55 |
+| Trinity Campus | 19 |
 
-**All six sub-campuses are still estimates.** They are the original hand-drawn
-placeholders, georeferenced from screenshots of UVM's map, and can be 100–300 m
-out.
+The six campuses tile the boundary exactly — nothing unassigned, and they sum
+to within 0.02 acres of it, which is the sliver threshold below.
 
-Three things keep the difference visible rather than hidden:
+The boundary is a two-part MultiPolygon: the main campus, and the Spear Street
+parcel about 1.2 km south of it.
 
-- each feature carries `provisional`, true only while it is an estimate
-- provisional areas draw **dashed** and pale; real ones draw solid
-- `npm run data` warns on every build while any area is provisional, and the
-  map labels the layer **Campus areas (approximate)**
-
-All three clear themselves once nothing is provisional. Nothing needs editing
-but the data file.
+Because nothing is provisional, the map draws every area solid and the layer is
+called plain **Campus areas**. Should anyone add an estimated area later, that
+one feature draws dashed, the layer regains its "(approximate)" suffix, and
+`npm run data` warns until it is replaced. All three are driven by the
+`provisional` property and need no code change either way.
 
 ## The tracer
 
@@ -47,10 +49,11 @@ anywhere, and its only output is a file you download.
 **Load a file** pulls in a `campus-areas.geojson` from your computer, so you can
 stop, download, come back and carry on without committing between rounds.
 
-### Do Spear Street first
+### Detached parcels first
 
-Order matters, and only here. Trace Spear Street Campus in **Trace** mode before
-splitting anything. Two things then happen automatically:
+Order matters for anything detached — Spear Street was the case that proved it.
+Trace it in **Trace** mode before splitting anything. Two things then happen
+automatically:
 
 - the parcel is merged into the **UVM campus** boundary, which becomes a
   two-part MultiPolygon — the tracer says how many acres it added, and *Undo
@@ -87,9 +90,24 @@ The whole boundary starts out as unassigned land, shaded green.
 Four rough shapes and a button, and the five main-campus areas tile the boundary
 exactly: no gaps, no overlaps, every outer edge the one you traced.
 
-**Undo last change** steps back one assignment. **Start over** resets the five
-campuses — never the outer boundary, which is far too expensive to lose to a
+**Undo last change** steps back one assignment. **Start over** resets the
+sub-campuses — never the outer boundary, which is far too expensive to lose to a
 misclick.
+
+#### When a few acres will not go anywhere
+
+Splitting by hand leaves hairline seams where two draws did not quite meet. In
+the real split they came to 1.54 acres in five pieces, the largest 50 m wide and
+the smallest 21 × 41 m — impossible to click accurately, and easy to miss
+entirely.
+
+**Give the rest to this area** is the answer, and it is built for exactly this:
+it takes every leftover piece at once and *merges* them into what that area
+already holds. It stays available while you are part-way through drawing,
+because that is precisely when you are likely to need it. Watch where the
+fragments land, though: a seam can be closer to a different campus than the one
+you gave it to, and it will simply become a detached scrap of the area you
+chose.
 
 ### Trace — for anything from scratch
 
