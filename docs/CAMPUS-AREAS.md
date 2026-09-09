@@ -233,19 +233,22 @@ that disjoint parts merge without bridging, that claiming the detached parcel
 leaves only the main polygon unassigned, and that a transfer conserves area,
 leaves no overlap, and closes the hole a moved scrap leaves behind.
 
-## Two things this does not do yet
+## What reads the areas
 
-**The overlay is decoration, not data.** The polygons are drawn; nothing is
-computed from them. In particular they are not connected to `collections.csv`,
-which is what feeds the map's existing *Campus area* filter and its colour-by
-mode. Those five campuses are the obvious real content for that file, which is
-currently empty.
+**The overlay** draws the polygons, and is the visible half.
 
-**Nothing assigns a tree to a campus.** Spear Street makes this more useful than
-it was: a tree there is 1.2 km from anything else, so a coordinate alone would
-place it unambiguously. Once the geometry is real, a
-point-in-polygon check could fill in each plant's `collection_id` automatically
-from its coordinates, instead of a surveyor picking one by hand. That is a
-small script, and it is worth writing *after* the boundaries are, because a
-tree 200 m from where the line really runs would be filed under the wrong
-campus — quietly, and 2,500 times over.
+**collections.csv** carries the same six campuses as the map's *Campus area*
+filter and its colour-by mode, keyed by the same ids. `npm run data` warns if
+the two drift apart in name or colour.
+
+**`npm run areas`** files each plant under the campus its coordinates fall in,
+using a point-in-polygon test against this file, so a surveyor never picks a
+campus from a list. That test is in `scripts/lib/geo.mjs` with its own tests,
+including the vertex-on-the-ray case that makes naive ray casting flip the
+answer twice, holes, and MultiPolygons. It deliberately ignores the `boundary`
+feature: the boundary contains every point every campus does, so matching it
+would file every tree under the outline instead of the campus it stands in.
+
+This was worth waiting for. Run against boundaries that were 100–300 m out, it
+would have misfiled trees near every internal edge — quietly, and 2,500 times
+over.

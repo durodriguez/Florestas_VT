@@ -48,7 +48,7 @@ individual QR SVGs. Each code encodes `?plant=<accession>`, so scanning a sign
 on a tree opens that record. Removed plants still resolve from their old
 labels.
 
-**Campus areas** — an optional overlay drawing UVM's campus boundary and its
+**Campus areas** — UVM's six campuses, as an optional overlay drawing the boundary and its
 five named campuses (Central, Trinity, Centennial, Redstone, Athletic), toggled
 from the same layers control as the basemaps. The shapes shipped today are
 hand-drawn estimates, marked as such on the map; `/tracer/` replaces them with
@@ -115,6 +115,7 @@ species never reaches the live site.
 | `npm run data` | Validate `data/*.csv` and regenerate `public/data/` |
 | `npm run build` | Validate, typecheck and build to `dist/` |
 | `npm run import -- <file.csv>` | Merge a field-survey export into `data/plants.csv` (dry run by default) |
+| `npm run areas` | File each plant under the campus area its coordinates fall in (dry run by default) |
 | `npm run labels` | Generate QR label sheet and SVGs into `public/labels/` |
 | `npm run check:links` | Check every `wikipedia_url` in `taxa.csv` still resolves |
 | `npm test` | Run the test suite |

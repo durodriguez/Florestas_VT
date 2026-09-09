@@ -291,6 +291,31 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
       geometry: f.geometry,
     });
   });
+  // collections.csv drives the map's campus-area filter; campus-areas.geojson
+  // draws the polygons. They are separate files because a collection can be a
+  // bed finer than a campus, but where they share an id they should agree, and
+  // an id in one and not the other is almost always a rename that stopped
+  // half-way — a filter option with no shape, or a shape nothing can filter to.
+  for (const feature of areaFeatures) {
+    if (feature.properties.kind !== 'campus') continue;
+    const index = collectionIndex.get(feature.properties.area_id);
+    if (index === undefined) {
+      warn(
+        'campus-areas.geojson',
+        `"${feature.properties.area_id}" has no matching collection_id in collections.csv, ` +
+          'so it is drawn on the map but cannot be filtered by',
+      );
+      continue;
+    }
+    const collection = collections[index];
+    if (collection.name !== feature.properties.name) {
+      warn('collections.csv', `"${collection.id}" is named "${collection.name}" but the map area says "${feature.properties.name}"`);
+    }
+    if (collection.color !== feature.properties.color) {
+      warn('collections.csv', `"${collection.id}" is ${collection.color} but the map area is drawn ${feature.properties.color}`);
+    }
+  }
+
   if (provisionalAreas > 0) {
     warn(
       'campus-areas.geojson',

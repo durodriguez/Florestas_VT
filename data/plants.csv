@@ -1,7 +1,7 @@
 plant_id,taxon_id,lat,lng,collection_id,dbh_in,height_ft,spread_ft,condition,planted_year,status,surveyed_on,surveyor,photo,memorial,notes
-UVM-0493,tilia-cordata,44.476523,-73.194675,,,,,good,,active,2026-09-01,EMR,493-1788288876530.jpg,,Position set by pin on imagery
-UVM-0772,taxodium-distichum,44.476609,-73.194780,,,,,excellent,,active,2026-09-01,EMR,772-1788288766549.jpg,,Position set by pin on imagery
-UVM-0778,ginkgo-biloba,44.476560,-73.194932,,,,,excellent,,active,2026-09-01,EMR,778-1788288680135.jpg,,Position set by pin on imagery
-UVM-0762,quercus-michauxii,44.476167,-73.194979,,,,,good,,active,2026-09-01,EMR,762-1788288601167.jpg,,GPS ±3 m
-UVM-0763,betula-nigra,44.476079,-73.195033,,,,,excellent,,active,2026-09-01,EMR,763-1788288527638.jpg,,GPS ±4 m
-UVM-0765,betula-nigra,44.476011,-73.194983,,,,,excellent,,active,2026-09-01,EMR,765-1788288472730.jpg,,Position set by pin on imagery
+UVM-0493,tilia-cordata,44.476523,-73.194675,central,,,,good,,active,2026-09-01,EMR,493-1788288876530.jpg,,"Position set by pin on imagery"
+UVM-0772,taxodium-distichum,44.476609,-73.194780,central,,,,excellent,,active,2026-09-01,EMR,772-1788288766549.jpg,,"Position set by pin on imagery"
+UVM-0778,ginkgo-biloba,44.476560,-73.194932,central,,,,excellent,,active,2026-09-01,EMR,778-1788288680135.jpg,,"Position set by pin on imagery"
+UVM-0762,quercus-michauxii,44.476167,-73.194979,central,,,,good,,active,2026-09-01,EMR,762-1788288601167.jpg,,"GPS ±3 m"
+UVM-0763,betula-nigra,44.476079,-73.195033,central,,,,excellent,,active,2026-09-01,EMR,763-1788288527638.jpg,,"GPS ±4 m"
+UVM-0765,betula-nigra,44.476011,-73.194983,central,,,,excellent,,active,2026-09-01,EMR,765-1788288472730.jpg,,Position set by pin on imagery
