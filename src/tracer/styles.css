@@ -49,6 +49,12 @@ body {
 }
 .mode.is-on { background: var(--uvm-green); color: #fff; border-color: var(--uvm-green); }
 
+/* The tool switch sits under the intro it qualifies, so it reads as a choice
+   within edit mode rather than a fourth mode. */
+.tools { margin: -.35rem 0 .85rem; }
+.tools .mode { font-size: .8rem; font-weight: 500; padding: .35rem; }
+.tools .mode.is-on { background: var(--uvm-green-light, #1f6f4a); border-color: var(--uvm-green-light, #1f6f4a); }
+
 .layout {
   display: grid; grid-template-columns: 20rem 1fr;
   height: calc(100vh - 3.5rem);
@@ -105,6 +111,18 @@ code { font-size: .95em; }
 
 /* The whole point of the page is clicking exact spots on the imagery. */
 .leaflet-container { cursor: crosshair; }
+
+/* A half-acre scrap is invisible at campus zoom, so the pieces most likely to
+   be misfiled are the ones nobody can find. These label them where they are. */
+.fragment-mark { display: grid; place-items: center; }
+.fragment-mark span {
+  padding: .1rem .35rem; border-radius: 999px; cursor: pointer;
+  background: #fff; color: var(--text);
+  border: 2px solid var(--mark, var(--uvm-green));
+  font: 600 .68rem/1 var(--font); white-space: nowrap;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 35%);
+}
+.fragment-mark span:hover { background: var(--uvm-gold); }
 
 @media (max-width: 760px) {
   .layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }

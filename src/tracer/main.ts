@@ -9,6 +9,12 @@
  * piece snaps to the real boundary and only the *internal* edges are ever drawn
  * by hand. Four rough shapes plus "give the rest" divides campus into five.
  *
+ * **Edit** moves land that already has an owner, which splitting cannot do —
+ * by the time a split is finished every acre is claimed. Click a piece, or draw
+ * over a region, and it transfers to the selected area. Pieces too small to
+ * find get a labelled marker, because the ones needing attention are usually
+ * the ones nobody can see.
+ *
  * **Trace** is the from-scratch mode: click every vertex yourself. That is what
  * the outer boundary needed, and it is the fallback for redoing any one area.
  *
@@ -19,11 +25,22 @@ import 'leaflet/dist/leaflet.css';
 import './styles.css';
 import type { CampusAreaProps, Dataset } from '../types';
 import {
-  ACRES_PER_M2, MIN_PIECE_M2, areaM2, carve, outside, subtractAll, toGeometry, toMultiPoly, union,
-  type MultiPoly, type Ring,
+  ACRES_PER_M2, MIN_PIECE_M2, areaM2, carve, intersect, outside, subtractAll, toGeometry,
+  toMultiPoly, transfer, union,
+  type MultiPoly, type Poly, type Ring,
 } from './split';
 
-type Mode = 'split' | 'trace';
+type Mode = 'split' | 'edit' | 'trace';
+
+/** Parts smaller than this get a marker in edit mode so they can be found. */
+const FRAGMENT_ACRES = 5;
+
+/**
+ * Within edit mode, whether a map click picks an existing piece or adds a point
+ * to a new region. It has to be one or the other: a clickable polygon swallows
+ * the very clicks that would draw a shape on top of it.
+ */
+type EditTool = 'pick' | 'draw';
 
 const base = import.meta.env.BASE_URL;
 const el = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -40,7 +57,11 @@ const els = {
   download: el<HTMLButtonElement>('download'),
   load: el<HTMLInputElement>('load'),
   modeSplit: el<HTMLButtonElement>('mode-split'),
+  modeEdit: el<HTMLButtonElement>('mode-edit'),
   modeTrace: el<HTMLButtonElement>('mode-trace'),
+  editTools: el<HTMLDivElement>('edit-tools'),
+  toolPick: el<HTMLButtonElement>('tool-pick'),
+  toolDraw: el<HTMLButtonElement>('tool-draw'),
 };
 
 // ---- map ------------------------------------------------------------------
@@ -70,6 +91,7 @@ L.control.layers({ Satellite: imagery, Streets: streets }, {}, { position: 'bott
 map.createPane('remaining').style.zIndex = '390';
 map.createPane('areas').style.zIndex = '400';
 map.createPane('draft').style.zIndex = '450';
+map.createPane('marks').style.zIndex = '460';
 
 // ---- state ----------------------------------------------------------------
 
@@ -78,7 +100,8 @@ interface AreaState {
   geometry: MultiPoly;
   /** False once this area's geometry comes from tracing or carving. */
   provisional: boolean;
-  layer: L.Polygon | null;
+  /** One layer per part, so a single piece can be clicked in edit mode. */
+  layers: L.Polygon[];
   row: HTMLLIElement;
 }
 
@@ -86,7 +109,7 @@ const areas: AreaState[] = dataset.campusAreas.features.map((f) => ({
   props: f.properties,
   geometry: toMultiPoly(f.geometry),
   provisional: f.properties.provisional,
-  layer: null,
+  layers: [],
   row: document.createElement('li'),
 }));
 
@@ -98,6 +121,7 @@ let active: AreaState | null = null;
 let draft: L.LatLng[] = [];
 /** A one-off message that outranks the usual hint until the next action. */
 let notice: string | null = null;
+let editTool: EditTool = 'pick';
 
 /** Enough state to undo one assignment, kept as plain geometry. */
 interface Snapshot {
@@ -148,28 +172,51 @@ const draftVertices = L.layerGroup([], { pane: 'draft' } as L.LayerOptions).addT
 const toLatLngs = (mp: MultiPoly): L.LatLngExpression[][][] =>
   mp.map((poly) => poly.map((ring) => ring.map(([lng, lat]) => [lat, lng] as L.LatLngExpression)));
 
+const fragmentMarks = L.layerGroup([], { pane: 'marks' } as L.LayerOptions).addTo(map);
+
+/** The part of an area currently picked out for a move. */
+let picked: { area: AreaState; part: Poly } | null = null;
+
 function redraw(): void {
   const rest = mode === 'split' ? unassigned() : [];
   remainingLayer.setLatLngs(toLatLngs(rest));
+  fragmentMarks.clearLayers();
 
   for (const area of areas) {
-    area.layer?.remove();
-    area.layer = null;
+    for (const layer of area.layers) layer.remove();
+    area.layers = [];
     // In split mode the boundary is the backdrop, drawn as the remainder; an
     // outline on top of every carved edge would just be noise.
     if (mode === 'split' && area.props.kind === 'boundary') continue;
+    // In edit mode it is the containing shape, and drawing it over the areas
+    // would intercept the clicks that pick them.
+    if (mode === 'edit' && area.props.kind === 'boundary') continue;
     if (area.geometry.length === 0) continue;
+
     const settled = !area.provisional;
-    area.layer = L.polygon(toLatLngs(area.geometry), {
-      pane: 'areas',
-      color: area.props.color,
-      weight: settled ? 2 : 1,
-      opacity: settled ? 0.95 : 0.5,
-      dashArray: settled ? undefined : '4 6',
-      fillColor: area.props.color,
-      fillOpacity: settled ? 0.28 : 0.06,
-      interactive: false,
-    }).addTo(map);
+    for (const part of area.geometry) {
+      const isPicked = picked?.area === area && picked.part === part;
+      const layer = L.polygon(toLatLngs([part])[0]!, {
+        pane: 'areas',
+        color: isPicked ? '#ffd100' : area.props.color,
+        weight: isPicked ? 4 : settled ? 2 : 1,
+        opacity: settled ? 0.95 : 0.5,
+        dashArray: settled ? undefined : '4 6',
+        fillColor: area.props.color,
+        fillOpacity: isPicked ? 0.5 : settled ? 0.28 : 0.06,
+        // Only while picking: a clickable fill would otherwise intercept every
+        // point of a region drawn across it.
+        interactive: mode === 'edit' && editTool === 'pick',
+      }).addTo(map);
+      if (mode === 'edit' && editTool === 'pick') {
+        layer.on('click', (e) => {
+          L.DomEvent.stop(e);
+          pickPart(area, part);
+        });
+        markIfSmall(area, part);
+      }
+      area.layers.push(layer);
+    }
   }
 
   draftLayer.setLatLngs(draft.length > 1 ? [draft] : []);
@@ -189,6 +236,36 @@ function redraw(): void {
   });
 
   renderPanel(rest);
+}
+
+/**
+ * A half-acre scrap stranded inside a neighbour is invisible at the zoom where
+ * you can see the whole campus, so the pieces most likely to be wrong are the
+ * ones you would never find. Label them.
+ */
+function markIfSmall(area: AreaState, part: Poly): void {
+  const a = areaM2([part]) * ACRES_PER_M2;
+  if (a > FRAGMENT_ACRES) return;
+  const ring = part[0]!;
+  const lat = ring.reduce((sum, p) => sum + p[1], 0) / ring.length;
+  const lng = ring.reduce((sum, p) => sum + p[0], 0) / ring.length;
+  L.marker([lat, lng], {
+    pane: 'marks',
+    icon: L.divIcon({
+      className: 'fragment-mark',
+      html: `<span style="--mark:${area.props.color}">${a.toFixed(2)} ac</span>`,
+      iconSize: [64, 20],
+      iconAnchor: [32, 10],
+    }),
+  })
+    .on('click', () => pickPart(area, part))
+    .addTo(fragmentMarks);
+}
+
+function pickPart(area: AreaState, part: Poly): void {
+  picked = picked?.part === part ? null : { area, part };
+  notice = null;
+  redraw();
 }
 
 // ---- panel ----------------------------------------------------------------
@@ -220,10 +297,12 @@ function renderPanel(rest: MultiPoly): void {
   els.intro.textContent =
     mode === 'split'
       ? 'Draw a rough shape over the part of campus that belongs to an area. It is trimmed to the campus boundary, so you can scribble well outside the edge — only the lines between areas need care.'
-      : 'Click every point along an area\'s edge. Use this for the outer boundary, or to redo one area from scratch.';
+      : mode === 'edit'
+        ? 'Move land that already has an owner. Click a piece on the map — small ones are labelled with their acreage — or draw over a region, then pick who it should belong to.'
+        : 'Click every point along an area\'s edge. Use this for the outer boundary, or to redo one area from scratch.';
 
   for (const area of areas) {
-    const disabled = mode === 'split' && area.props.kind === 'boundary';
+    const disabled = area.props.kind === 'boundary' && (mode === 'split' || mode === 'edit');
     area.row.className = `area${area === active ? ' is-active' : ''}${disabled ? ' is-disabled' : ''}`;
     area.row.style.setProperty('--area-color', area.props.color);
     area.row.tabIndex = disabled ? -1 : 0;
@@ -233,19 +312,36 @@ function renderPanel(rest: MultiPoly): void {
     name.textContent = area.props.name;
     const meta = document.createElement('span');
     meta.className = `area-meta${area.provisional ? '' : ' is-done'}`;
-    meta.textContent = disabled ? `${acres(area.geometry)} acres · traced` : statusFor(area);
+    const parts = area.geometry.length;
+    meta.textContent = disabled
+      ? `${acres(area.geometry)} acres · traced`
+      : mode === 'edit' && parts > 1
+        ? `${acres(area.geometry)} acres · ${parts} pieces`
+        : statusFor(area);
     area.row.append(name, meta);
   }
 
   const enough = draft.length >= 3;
-  els.commit.textContent = active
-    ? mode === 'split'
-      ? `Assign this shape to ${active.props.name}`
-      : `Save this outline as ${active.props.name}`
-    : 'Pick an area first';
-  els.commit.disabled = !active || !enough;
+  if (mode === 'edit') {
+    // In edit mode the list is a set of destinations, so the button describes
+    // what is being moved rather than what is being drawn.
+    const moving = picked ? `${acreLabel([picked.part])} acres of ${picked.area.props.name}` : 'this region';
+    els.commit.textContent = !picked && !enough
+      ? editTool === 'pick' ? 'Click a piece on the map' : 'Draw a region on the map'
+      : active
+        ? `Move ${moving} to ${active.props.name}`
+        : `Pick who gets ${moving}`;
+    els.commit.disabled = !active || (!picked && !enough) || active === picked?.area;
+  } else {
+    els.commit.textContent = active
+      ? mode === 'split'
+        ? `Assign this shape to ${active.props.name}`
+        : `Save this outline as ${active.props.name}`
+      : 'Pick an area first';
+    els.commit.disabled = !active || !enough;
+  }
   els.undoPoint.disabled = draft.length === 0;
-  els.cancel.disabled = draft.length === 0;
+  els.cancel.disabled = draft.length === 0 && !picked;
   // Deliberately NOT disabled while a shape is part-drawn. The remainder is
   // typically a hairline seam that cannot be clicked accurately, so the moment
   // someone starts trying, this is the button they need — greying it out then
@@ -256,6 +352,14 @@ function renderPanel(rest: MultiPoly): void {
 
   if (notice) {
     els.hint.textContent = notice;
+  } else if (mode === 'edit') {
+    els.hint.textContent = picked
+      ? `Holding ${acreLabel([picked.part])} acres of ${picked.area.props.name}. Pick the area it should belong to.`
+      : editTool === 'draw'
+        ? enough
+          ? `${draft.length} points. Pick the area this region should belong to.`
+          : `Click at least ${3 - draft.length} more point${3 - draft.length === 1 ? '' : 's'} around the region to move.`
+        : 'Click a piece of any area. Small ones carry a label with their acreage.';
   } else if (!active) {
     els.hint.textContent =
       mode === 'split'
@@ -280,14 +384,17 @@ function renderPanel(rest: MultiPoly): void {
 // ---- actions --------------------------------------------------------------
 
 function selectArea(area: AreaState | null): void {
-  if (area && mode === 'split' && area.props.kind === 'boundary') return;
+  if (area && area.props.kind === 'boundary' && mode !== 'trace') return;
   active = area === active ? null : area;
-  draft = [];
+  // Edit mode keeps whatever is picked: choosing a destination is the second
+  // half of the move, not the start of something new.
+  if (mode !== 'edit') draft = [];
   notice = null;
   redraw();
 }
 
 function commitDraft(): void {
+  if (mode === 'edit') return commitTransfer();
   if (!active || draft.length < 3) return;
   const ring: Ring = draft.map((p) => [p.lng, p.lat]);
   history.push(snapshot());
@@ -332,6 +439,40 @@ function commitDraft(): void {
   redraw();
 }
 
+/**
+ * Hand the picked piece, or the drawn region, to the selected area — taking it
+ * from whoever holds it now. Clipped to the boundary first so a sloppy edge
+ * cannot push a campus outside university land.
+ */
+function commitTransfer(): void {
+  if (!active) return;
+  const region = picked
+    ? [picked.part]
+    : draft.length >= 3
+      ? intersect([[[...draft.map((p) => [p.lng, p.lat] as [number, number]), [draft[0]!.lng, draft[0]!.lat]]]],
+                  boundary?.geometry ?? [])
+      : [];
+  if (region.length === 0) {
+    notice = 'That region is outside the campus boundary, so there is nothing to move.';
+    return redraw();
+  }
+
+  history.push(snapshot());
+  const moved = areaM2(region) * ACRES_PER_M2;
+  const from = picked?.area.props.name;
+  const holdings = transfer(campuses.map((c) => c.geometry), campuses.indexOf(active), region);
+  campuses.forEach((c, i) => { c.geometry = holdings[i]!; });
+  active.provisional = false;
+
+  notice = from
+    ? `Moved ${moved.toFixed(2)} acres from ${from} to ${active.props.name}.`
+    : `${active.props.name} takes ${moved.toFixed(2)} acres from the areas that held it.`;
+  picked = null;
+  draft = [];
+  active = null;
+  redraw();
+}
+
 function giveRest(): void {
   if (!active || mode !== 'split') return;
   const rest = unassigned();
@@ -352,6 +493,13 @@ function giveRest(): void {
 }
 
 map.on('click', (e: L.LeafletMouseEvent) => {
+  if (mode === 'edit') {
+    notice = null;
+    if (editTool === 'draw') draft.push(e.latlng);
+    // A click on bare map while picking means "none of them".
+    else picked = null;
+    return redraw();
+  }
   if (!active) {
     els.hint.textContent = 'Pick an area on the left first.';
     return;
@@ -364,11 +512,13 @@ map.on('click', (e: L.LeafletMouseEvent) => {
 els.commit.addEventListener('click', commitDraft);
 els.rest.addEventListener('click', giveRest);
 els.undoPoint.addEventListener('click', () => { draft.pop(); redraw(); });
-els.cancel.addEventListener('click', () => { draft = []; redraw(); });
+els.cancel.addEventListener('click', () => { draft = []; picked = null; redraw(); });
 els.undoStep.addEventListener('click', () => {
   const previous = history.pop();
   if (previous) restore(previous);
   draft = [];
+  // The picked part is a reference into geometry that undo has just replaced.
+  picked = null;
   redraw();
 });
 els.reset.addEventListener('click', () => {
@@ -389,14 +539,38 @@ function setMode(next: Mode): void {
   mode = next;
   active = null;
   draft = [];
+  picked = null;
   notice = null;
-  els.modeSplit.setAttribute('aria-checked', String(next === 'split'));
-  els.modeTrace.setAttribute('aria-checked', String(next === 'trace'));
-  els.modeSplit.classList.toggle('is-on', next === 'split');
-  els.modeTrace.classList.toggle('is-on', next === 'trace');
+  for (const [button, name] of [
+    [els.modeSplit, 'split'],
+    [els.modeEdit, 'edit'],
+    [els.modeTrace, 'trace'],
+  ] as const) {
+    button.setAttribute('aria-checked', String(next === name));
+    button.classList.toggle('is-on', next === name);
+  }
+  els.editTools.hidden = next !== 'edit';
+  if (next === 'edit') setTool('pick');
+  else redraw();
+}
+
+function setTool(next: EditTool): void {
+  editTool = next;
+  // Each tool produces one kind of selection; carrying the other one over
+  // would leave the button describing something the map is no longer showing.
+  if (next === 'pick') draft = [];
+  else picked = null;
+  notice = null;
+  for (const [button, name] of [[els.toolPick, 'pick'], [els.toolDraw, 'draw']] as const) {
+    button.setAttribute('aria-checked', String(next === name));
+    button.classList.toggle('is-on', next === name);
+  }
   redraw();
 }
+els.toolPick.addEventListener('click', () => setTool('pick'));
+els.toolDraw.addEventListener('click', () => setTool('draw'));
 els.modeSplit.addEventListener('click', () => setMode('split'));
+els.modeEdit.addEventListener('click', () => setMode('edit'));
 els.modeTrace.addEventListener('click', () => setMode('trace'));
 
 // ---- file in, file out ----------------------------------------------------
@@ -417,6 +591,7 @@ els.load.addEventListener('change', async () => {
     history.length = 0;
     active = null;
     draft = [];
+    picked = null;
     setMode(boundary && !boundary.provisional ? 'split' : 'trace');
     notice = `Loaded ${matched} area${matched === 1 ? '' : 's'} from ${file.name}.`;
     redraw();

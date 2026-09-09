@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
-  areaM2, carve, dropSlivers, outside, ringAreaM2, subtractAll, toGeometry, toMultiPoly, union,
+  areaM2, carve, dropSlivers, intersect, outside, ringAreaM2, subtractAll, toGeometry, toMultiPoly,
+  transfer, union,
   type MultiPoly, type Ring,
 } from '../src/tracer/split';
 
@@ -167,5 +168,67 @@ describe('union and outside', () => {
     const rest = subtractAll(merged, [detached]);
     expect(rest).toHaveLength(1);
     expect(areaM2(rest)).toBeCloseTo(areaM2(boundary), 0);
+  });
+});
+
+describe('transfer', () => {
+  // Two areas splitting the boundary down the middle, as a real split leaves it.
+  const west: MultiPoly = [[[[-73.2, 44.47], [-73.19, 44.47], [-73.19, 44.49], [-73.2, 44.49], [-73.2, 44.47]]]];
+  const east: MultiPoly = [[[[-73.19, 44.47], [-73.18, 44.47], [-73.18, 44.49], [-73.19, 44.49], [-73.19, 44.47]]]];
+
+  it('moves a region from its holder to the target, conserving area', () => {
+    // A strip straddling the shared edge.
+    const strip: MultiPoly = [[[[-73.192, 44.47], [-73.188, 44.47], [-73.188, 44.49], [-73.192, 44.49], [-73.192, 44.47]]]];
+    const [newWest, newEast] = transfer([west, east], 0, strip);
+    expect(areaM2(newWest!) + areaM2(newEast!)).toBeCloseTo(areaM2(west) + areaM2(east), 0);
+    expect(areaM2(newWest!)).toBeGreaterThan(areaM2(west));
+    expect(areaM2(newEast!)).toBeLessThan(areaM2(east));
+  });
+
+  it('leaves no overlap between the target and the areas it took from', () => {
+    const strip: MultiPoly = [[[[-73.192, 44.47], [-73.188, 44.47], [-73.188, 44.49], [-73.192, 44.49], [-73.192, 44.47]]]];
+    const [newWest, newEast] = transfer([west, east], 0, strip);
+    expect(intersect(newWest!, newEast!)).toEqual([]);
+  });
+
+  // The real case that prompted this: a scrap of one area stranded inside
+  // another's territory, which leaves the neighbour holding a hole around it.
+  it('moves a whole detached part and closes the hole it leaves behind', () => {
+    const scrap: MultiPoly = [[[[-73.186, 44.475], [-73.184, 44.475], [-73.184, 44.477], [-73.186, 44.477], [-73.186, 44.475]]]];
+    const holder: MultiPoly = [...west, ...scrap];
+    const punctured = outside(east, scrap);
+    expect(punctured[0]).toHaveLength(2); // outer ring plus the hole
+
+    const [newHolder, newEast] = transfer([holder, punctured], 1, scrap);
+    expect(newHolder).toHaveLength(1);
+    expect(areaM2(newHolder!)).toBeCloseTo(areaM2(west), 0);
+    // The hole is filled again, so east is whole and there is no seam left.
+    expect(newEast).toHaveLength(1);
+    expect(newEast![0]).toHaveLength(1);
+    expect(areaM2(newEast!)).toBeCloseTo(areaM2(east), 0);
+  });
+
+  it('is a no-op for an empty region', () => {
+    expect(transfer([west, east], 0, [])).toEqual([west, east]);
+  });
+
+  it('gives the target land it did not touch, leaving the others alone', () => {
+    const detached: MultiPoly = [[[[-73.17, 44.47], [-73.169, 44.47], [-73.169, 44.471], [-73.17, 44.471], [-73.17, 44.47]]]];
+    const [newWest, newEast] = transfer([west, east], 0, detached);
+    expect(newWest).toHaveLength(2);
+    expect(newEast).toEqual(east);
+  });
+});
+
+describe('intersect', () => {
+  it('returns the overlap', () => {
+    const a: MultiPoly = [[square(-73.2, 44.47, 0.01)]];
+    const b: MultiPoly = [[square(-73.195, 44.475, 0.01)]];
+    expect(areaM2(intersect(a, b))).toBeGreaterThan(0);
+    expect(areaM2(intersect(a, b))).toBeLessThan(areaM2(a));
+  });
+
+  it('returns nothing for shapes that miss each other', () => {
+    expect(intersect([[square(-73.2, 44.47, 0.005)]], [[square(-73.18, 44.47, 0.005)]])).toEqual([]);
   });
 });
