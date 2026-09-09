@@ -195,6 +195,16 @@ function redraw(): void {
 
 const acres = (mp: MultiPoly) => Math.round(areaM2(mp) * ACRES_PER_M2);
 
+/**
+ * Acreage for a remainder, which is usually a seam between two areas rather
+ * than a field. Rounding those to whole acres reports "0 acres unassigned"
+ * over land that is genuinely still unassigned, so keep a decimal while small.
+ */
+function acreLabel(mp: MultiPoly): string {
+  const a = areaM2(mp) * ACRES_PER_M2;
+  return a > 0 && a < 10 ? a.toFixed(2) : String(Math.round(a));
+}
+
 function statusFor(area: AreaState): string {
   if (area.provisional) return 'estimated';
   if (area.geometry.length === 0) return 'empty';
@@ -202,7 +212,10 @@ function statusFor(area: AreaState): string {
 }
 
 function renderPanel(rest: MultiPoly): void {
-  const restAcres = acres(rest);
+  // Measured in metres, not rounded acres: a 0.4-acre seam is still land, and
+  // testing the rounded figure would strand it while the panel claimed done.
+  const restM2 = areaM2(rest);
+  const restLeft = restM2 >= MIN_PIECE_M2;
 
   els.intro.textContent =
     mode === 'split'
@@ -233,7 +246,11 @@ function renderPanel(rest: MultiPoly): void {
   els.commit.disabled = !active || !enough;
   els.undoPoint.disabled = draft.length === 0;
   els.cancel.disabled = draft.length === 0;
-  els.rest.disabled = mode !== 'split' || !active || restAcres <= 0 || draft.length > 0;
+  // Deliberately NOT disabled while a shape is part-drawn. The remainder is
+  // typically a hairline seam that cannot be clicked accurately, so the moment
+  // someone starts trying, this is the button they need — greying it out then
+  // hides the answer behind the failing attempt.
+  els.rest.disabled = mode !== 'split' || !active || !restLeft;
   els.undoStep.disabled = history.length === 0;
   els.download.disabled = !areas.some((a) => !a.provisional);
 
@@ -242,8 +259,8 @@ function renderPanel(rest: MultiPoly): void {
   } else if (!active) {
     els.hint.textContent =
       mode === 'split'
-        ? restAcres > 0
-          ? `${restAcres} acres unassigned. Pick an area to carve it out of.`
+        ? restLeft
+          ? `${acreLabel(rest)} acres unassigned. Pick an area to carve it out of.`
           : 'Every acre is assigned. Download the file, or pick an area to redo it.'
         : 'Pick an area to trace.';
   } else if (!enough) {
@@ -251,7 +268,11 @@ function renderPanel(rest: MultiPoly): void {
   } else {
     els.hint.textContent =
       mode === 'split'
-        ? `${draft.length} points. Assign it, or keep clicking. ${restAcres} acres still unassigned.`
+        ? `${draft.length} points. Assign it, or keep clicking.` +
+          (restLeft
+            ? ` ${acreLabel(rest)} acres still unassigned — "Give the rest" takes all of it, ` +
+              'which is easier than drawing over a seam.'
+            : '')
         : `${draft.length} points. Save it, or keep clicking — the shape closes itself.`;
   }
 }
@@ -316,9 +337,17 @@ function giveRest(): void {
   const rest = unassigned();
   if (rest.length === 0) return;
   history.push(snapshot());
-  active.geometry = rest;
+  // Everything left, merged into whatever this area already holds — the last
+  // area in a split has usually been assigned once already, and the leftovers
+  // are the seams around it.
+  active.geometry = union(active.geometry, rest);
   active.provisional = false;
+  notice =
+    `${active.props.name} takes the remaining ${acreLabel(rest)} acres` +
+    (rest.length > 1 ? ` in ${rest.length} pieces.` : '.');
   active = null;
+  // Any part-drawn shape was an attempt at this same job.
+  draft = [];
   redraw();
 }
 
