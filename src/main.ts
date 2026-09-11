@@ -5,7 +5,7 @@ import './styles.css';
 import { loadData } from './data';
 import { PlantMap, escapeHtml } from './map';
 import { renderDetail, renderResultItem } from './detail';
-import { legendFor } from './palette';
+import { legendFor, ORIGIN_LABELS, TYPE_LABELS } from './palette';
 import {
   applyFilters, emptyFilters, facetCounts, isFilterActive, distanceMeters, toCsv,
 } from './filters';
@@ -29,7 +29,7 @@ class App {
   private filters: FilterState = emptyFilters();
   private results: Plant[] = [];
   private selected: Plant | null = null;
-  private colorBy: ColorBy = 'habit';
+  private colorBy: ColorBy = 'type';
   private userPos: { lat: number; lng: number } | null = null;
   private readonly byId: Map<string, Plant>;
   private readonly map: PlantMap;
@@ -61,8 +61,12 @@ class App {
     const { vocab, collections } = this.dataset;
     const families = [...new Set(this.plants.map((p) => p.taxon.family))].sort();
 
-    $('#facet-habit').innerHTML = vocab.habits.map((h) => checkbox('habits', h, titleCase(h))).join('');
-    $('#facet-native').innerHTML = vocab.nativeStatus.map((n) => checkbox('native', n, titleCase(n))).join('');
+    $('#facet-type').innerHTML = vocab.plantTypes
+      .map((t) => checkbox('types', t, TYPE_LABELS[t] ?? titleCase(t)))
+      .join('');
+    $('#facet-origin').innerHTML = vocab.origins
+      .map((o) => checkbox('origins', o, ORIGIN_LABELS[o] ?? titleCase(o)))
+      .join('');
     $('#facet-condition').innerHTML = vocab.conditions.map((c) => checkbox('conditions', c, titleCase(c))).join('');
     $('#facet-collection').innerHTML = collections.map((c) => checkbox('collections', c.id, c.name)).join('');
     $('#facet-family').innerHTML = families.map((f) => checkbox('families', f, f)).join('');
@@ -89,8 +93,8 @@ class App {
       }
     };
 
-    update('#facet-habit', 'habits', (p) => p.taxon.habit);
-    update('#facet-native', 'native', (p) => p.taxon.native);
+    update('#facet-type', 'types', (p) => p.taxon.type);
+    update('#facet-origin', 'origins', (p) => p.taxon.origin);
     update('#facet-condition', 'conditions', (p) => p.condition);
     update('#facet-collection', 'collections', (p) => p.collection?.id ?? null);
     update('#facet-family', 'families', (p) => p.taxon.family);

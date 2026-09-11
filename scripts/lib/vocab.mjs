@@ -4,11 +4,27 @@
 
 export const CONDITIONS = ['excellent', 'good', 'fair', 'poor', 'dead'];
 export const STATUSES = ['active', 'removed'];
-export const HABITS = ['tree', 'conifer', 'shrub', 'vine'];
-export const FOLIAGE = ['deciduous', 'evergreen', 'semi-evergreen'];
-export const NATIVE_STATUS = ['native', 'introduced', 'invasive'];
+/**
+ * What kind of plant it is. One column, seven values — trees carry their own
+ * deciduous/evergreen split rather than needing a second column to say it.
+ */
+export const PLANT_TYPES = [
+  'deciduous-tree',
+  'evergreen-tree',
+  'shrub',
+  'perennial',
+  'annual',
+  'vine',
+  'grass',
+];
 
-export const TAXON_REQUIRED = ['taxon_id', 'scientific_name', 'common_name', 'family', 'genus', 'habit'];
+/**
+ * Where the plant is from, and whether it is a problem here. One value per
+ * taxon; blank means nobody has assessed it.
+ */
+export const ORIGINS = ['vermont-native', 'vermont-invasive', 'introduced'];
+
+export const TAXON_REQUIRED = ['taxon_id', 'scientific_name', 'common_name', 'family', 'genus', 'plant_type'];
 export const PLANT_REQUIRED = ['plant_id', 'taxon_id', 'lat', 'lng'];
 
 export const TAXON_NUMERIC = ['mature_height_ft', 'mature_spread_ft'];

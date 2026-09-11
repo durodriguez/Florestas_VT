@@ -32,8 +32,8 @@ legend.
 campus area and accession number. Every term must match, so extra words narrow
 the result.
 
-**Filters** — faceted and combinable: plant type, native/introduced/invasive,
-campus area, family, condition, flowering month, minimum trunk diameter, and
+**Filters** — faceted and combinable: plant type (seven categories, trees split
+deciduous/evergreen), origin including Vermont-invasive, campus area, family, condition, flowering month, minimum trunk diameter, and
 whether to include removed plants. Each option shows a live count, computed
 with its own facet relaxed so the alternatives stay clickable.
 
@@ -116,6 +116,7 @@ species never reaches the live site.
 | `npm run build` | Validate, typecheck and build to `dist/` |
 | `npm run import -- <file.csv>` | Merge a field-survey export into `data/plants.csv` (dry run by default) |
 | `npm run areas` | File each plant under the campus area its coordinates fall in (dry run by default) |
+| `npm run check:species -- <file>` | Report how a source file's species names resolve against `taxa.csv` |
 | `npm run labels` | Generate QR label sheet and SVGs into `public/labels/` |
 | `npm run check:links` | Check every `wikipedia_url` in `taxa.csv` still resolves |
 | `npm test` | Run the test suite |

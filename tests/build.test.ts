@@ -11,7 +11,7 @@ const taxon = (over: Record<string, string> = {}) => ({
   family: 'Sapindaceae',
   genus: 'Acer',
   species: 'saccharum',
-  habit: 'tree',
+  plant_type: 'deciduous-tree',
   foliage: 'deciduous',
   native_status: 'native',
   flower_months: '4,5',
@@ -115,9 +115,23 @@ describe('buildDataset', () => {
   });
 
   it('normalises enum casing and spacing', () => {
-    const r = build({ taxaRows: [taxon({ native_status: 'Native' })] });
+    const r = build({ taxaRows: [taxon({ origin: 'Vermont Native' })] });
     expect(r.errors).toEqual([]);
-    expect(r.dataset.taxa[0].native).toBe('native');
+    expect(r.dataset.taxa[0].origin).toBe('vermont-native');
+  });
+
+  it('accepts every plant type and rejects anything else', () => {
+    for (const t of ['deciduous-tree', 'evergreen-tree', 'shrub', 'perennial', 'annual', 'vine', 'grass']) {
+      expect(build({ taxaRows: [taxon({ plant_type: t })] }).errors).toEqual([]);
+    }
+    // The old vocabulary, which conflated a conifer with an evergreen.
+    expect(build({ taxaRows: [taxon({ plant_type: 'conifer' })] }).errors.join())
+      .toMatch(/plant_type "conifer" is not one of/);
+  });
+
+  it('rejects an origin outside the three values', () => {
+    expect(build({ taxaRows: [taxon({ origin: 'naturalised' })] }).errors.join())
+      .toMatch(/origin "naturalised" is not one of/);
   });
 
   it('parses flowering months into a numeric list and drops junk', () => {

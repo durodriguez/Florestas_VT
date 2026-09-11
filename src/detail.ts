@@ -1,5 +1,6 @@
 import type { Dataset, Plant } from './types';
 import { escapeHtml } from './map';
+import { ORIGIN_LABELS, TYPE_LABELS } from './palette';
 
 const MONTHS = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -51,8 +52,8 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
       <p class="detail-eyebrow">${escapeHtml(plant.id)}</p>
       <h2 class="detail-title">${escapeHtml(t.common)}</h2>
       <p class="detail-sci">${formatScientific(plant)}</p>
-      <p class="detail-family">${escapeHtml(t.family)} &middot; ${escapeHtml(titleCase(t.habit))}
-        &middot; ${escapeHtml(titleCase(t.native))}</p>
+      <p class="detail-family">${escapeHtml(t.family)} &middot; ${escapeHtml(TYPE_LABELS[t.type] ?? titleCase(t.type))}
+        &middot; ${escapeHtml(ORIGIN_LABELS[t.origin] ?? titleCase(t.origin))}</p>
     </header>
     ${removed}
     ${photo}
@@ -74,7 +75,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
 
     <h3 class="detail-section">About ${escapeHtml(t.common)}</h3>
     <dl class="facts">
-      ${row('Foliage', titleCase(t.foliage))}
+      ${row('Plant type', TYPE_LABELS[t.type] ?? titleCase(t.type))}
       ${row('Flowers', `${titleCase(t.flowerColor) || '—'}${t.flowerMonths.length ? ` &middot; ${monthRange(t.flowerMonths)}` : ''}`)}
       ${row('Fruit', `${titleCase(t.fruitColor) || '—'}${t.fruitMonths.length ? ` &middot; ${monthRange(t.fruitMonths)}` : ''}`)}
       ${row('Fall color', titleCase(t.fallColor))}

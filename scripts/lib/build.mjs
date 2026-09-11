@@ -2,9 +2,10 @@
 // Kept free of filesystem access so the test suite can exercise it directly.
 
 import {
-  CONDITIONS, STATUSES, HABITS, FOLIAGE, NATIVE_STATUS,
+  CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES,
   TAXON_REQUIRED, PLANT_REQUIRED, TAXON_NUMERIC, PLANT_NUMERIC, PLANT_FIELDS,
 } from './vocab.mjs';
+import { buildSpeciesLookup } from './species.mjs';
 
 const trim = (v) => (typeof v === 'string' ? v.trim() : v ?? '');
 
@@ -40,7 +41,7 @@ function inBounds(lat, lng, config) {
   return lat >= south && lat <= north && lng >= west && lng <= east;
 }
 
-export function buildDataset({ taxaRows, plantRows, collectionRows, trails, campusAreas, config }) {
+export function buildDataset({ taxaRows, plantRows, collectionRows, trails, campusAreas, aliasRows = [], config }) {
   const errors = [];
   const warnings = [];
   const err = (where, msg) => errors.push(`${where}: ${msg}`);
@@ -80,17 +81,13 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
       if (Number.isNaN(num(row[field]))) err(where, `"${field}" is not a number: "${row[field]}"`);
     }
 
-    const habit = token(row.habit);
-    if (habit && !HABITS.includes(habit)) {
-      err(where, `habit "${row.habit}" is not one of: ${HABITS.join(', ')}`);
+    const type = token(row.plant_type);
+    if (type && !PLANT_TYPES.includes(type)) {
+      err(where, `plant_type "${row.plant_type}" is not one of: ${PLANT_TYPES.join(', ')}`);
     }
-    const foliage = token(row.foliage);
-    if (foliage && !FOLIAGE.includes(foliage)) {
-      err(where, `foliage "${row.foliage}" is not one of: ${FOLIAGE.join(', ')}`);
-    }
-    const native = token(row.native_status);
-    if (native && !NATIVE_STATUS.includes(native)) {
-      err(where, `native_status "${row.native_status}" is not one of: ${NATIVE_STATUS.join(', ')}`);
+    const origin = token(row.origin);
+    if (origin && !ORIGINS.includes(origin)) {
+      err(where, `origin "${row.origin}" is not one of: ${ORIGINS.join(', ')}`);
     }
 
     taxonIndex.set(id, taxa.length);
@@ -103,9 +100,8 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
       species: trim(row.species),
       infra: trim(row.infraspecific),
       cultivar: trim(row.cultivar),
-      habit,
-      foliage,
-      native,
+      type,
+      origin,
       flowerColor: token(row.flower_color),
       flowerMonths: monthList(row.flower_months),
       fruitColor: token(row.fruit_color),
@@ -240,6 +236,16 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
     return f;
   });
 
+  // ---- species aliases ---------------------------------------------------
+  // Not used by the map, which only ever sees canonical names — but validated
+  // here so a broken alias fails the build rather than surfacing months later
+  // as an import that silently drops a thousand trees.
+  const { conflicts } = buildSpeciesLookup(taxaRows, aliasRows);
+  for (const c of conflicts) {
+    err('species-aliases.csv', `alias "${c.alias}": ${c.reason}`);
+  }
+  const aliasCount = aliasRows.filter((r) => trim(r.alias)).length;
+
   // ---- campus areas ------------------------------------------------------
   // The campus outline and its five named sub-campuses, drawn as an optional
   // overlay. Geometry only: nothing else in the dataset depends on it, so a bad
@@ -327,7 +333,12 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
   const dataset = {
     generatedAt: new Date().toISOString(),
     config,
-    vocab: { conditions: CONDITIONS, statuses: STATUSES, habits: HABITS, foliage: FOLIAGE, nativeStatus: NATIVE_STATUS },
+    vocab: {
+      conditions: CONDITIONS,
+      statuses: STATUSES,
+      plantTypes: PLANT_TYPES,
+      origins: ORIGINS,
+    },
     collections,
     taxa,
     trails: { type: 'FeatureCollection', features: trailFeatures },
@@ -339,6 +350,7 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
       collections: collections.length,
       trails: trailFeatures.length,
       campusAreas: areaFeatures.length,
+      aliases: aliasCount,
     },
   };
 

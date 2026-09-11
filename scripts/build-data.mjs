@@ -46,6 +46,7 @@ const result = buildDataset({
   collectionRows: readCsv('collections.csv'),
   trails: JSON.parse(readFileSync(join(dataDir, 'trails.geojson'), 'utf8')),
   campusAreas: JSON.parse(readFileSync(join(dataDir, 'campus-areas.geojson'), 'utf8')),
+  aliasRows: readCsv('species-aliases.csv'),
   config: JSON.parse(readFileSync(join(dataDir, 'config.json'), 'utf8')),
 });
 
@@ -76,7 +77,8 @@ writeFileSync(join(outDir, 'plants.json'), plantsJson);
 // make every visitor re-download data that had not actually changed.
 const version = createHash('sha256')
   .update(
-    ['taxa.csv', 'plants.csv', 'collections.csv', 'trails.geojson', 'campus-areas.geojson', 'config.json']
+    ['taxa.csv', 'plants.csv', 'collections.csv', 'trails.geojson', 'campus-areas.geojson',
+      'species-aliases.csv', 'config.json']
       .map((name) => readFileSync(join(dataDir, name)))
       .reduce((a, b) => Buffer.concat([a, b]), Buffer.alloc(0)),
   )
@@ -88,7 +90,8 @@ const kb = (s) => `${(Buffer.byteLength(s) / 1024).toFixed(1)} kB`;
 const c = result.dataset.counts;
 console.log(
   `\n✓ ${c.plants} plants (${c.active} active) · ${c.taxa} taxa · ` +
-  `${c.collections} collections · ${c.trails} trails · ${c.campusAreas} campus areas` +
+  `${c.collections} collections · ${c.trails} trails · ${c.campusAreas} campus areas · ` +
+  `${c.aliases} species aliases` +
   `${result.warnings.length ? ` · ${result.warnings.length} warning(s)` : ''}`
 );
 console.log(`  public/data/dataset.json  ${kb(datasetJson)}`);

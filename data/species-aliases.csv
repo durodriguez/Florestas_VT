@@ -1,0 +1,192 @@
+alias,taxon_id,note
+White pine,pinus-strobus,
+Weeping white pine,pinus-strobus,Cultivar not distinguished
+Honey locust,gleditsia-triacanthos,
+Crab apple,malus-sp,
+Apple,malus-domestica,
+Red oak,quercus-rubra,
+Fastigiate English oak,quercus-robur-fastigiata,
+Majestic Sky northern pin oak,quercus-ellipsoidalis,Cultivar 'Majestic Skies' not distinguished
+Ash,fraxinus-sp,Genus only in the source
+Freeman maple,acer-x-freemanii,
+Blue Spruce,picea-pungens,
+Little leaf linden,tilia-cordata,
+Basswood,tilia-americana,
+White cedar,thuja-occidentalis,
+Cedar,thuja-sp,Genus only; assumed Thuja rather than Juniperus
+Musclewood,carpinus-caroliniana,Local name for American hornbeam
+Ironwood,ostrya-virginiana,Local name for eastern hophornbeam
+Washington hawthorn,crataegus-phaenopyrum,
+Crimson Cloud Hawthornvigata suberpa crimson cloud,crataegus-laevigata-crimson-cloud,Garbled entry in the source
+White birch,betula-papyrifera,
+Black birch,betula-lenta,Local name for sweet birch
+American sycamore,platanus-occidentalis,
+Horse chestnut,aesculus-hippocastanum,
+Larch,larix-sp,Genus only in the source
+Bald cypress,taxodium-distichum,
+Lombardy black poplar,populus-nigra,
+Big tooth aspen,populus-grandidentata,
+American chestnut,castanea-dentata,
+Northern Katalpa,catalpa-speciosa,Misspelling of catalpa
+Northern Northern Katalpa,catalpa-speciosa,Duplicated word in the source
+Scots pine,pinus-sylvestris,
+Hemlock,tsuga-canadensis,Genus only; eastern hemlock is the only one here
+Tulip poplar,liriodendron-tulipifera,
+Sweet gum,liquidambar-styraciflua,
+Smoke tree,cotinus-coggygria,
+Weeping Alaska cedar,callitropsis-nootkatensis,Cultivar not distinguished
+Magnolia,magnolia-sp,Genus only in the source
+Big leaf magnolia,magnolia-macrophylla,
+Intermediate yew,taxus-x-media,
+Green Giant Arborvitae,thuja-green-giant,
+Witch hazel,hamamelis-virginiana,
+Japanese lilac,syringa-reticulata,
+Lilac,syringa-vulgaris,Assumed common lilac rather than the tree lilacs
+Three flower maple,acer-triflorum,
+Paper bark maple,acer-griseum,
+Crimson King Norway Maple,acer-platanoides-crimson-king,
+Kentucky coffee tree,gymnocladus-dioicus,
+Amur cork tree,phellodendron-amurense,
+Mountain ash,sorbus-aucuparia,
+Weeping mulberry,morus-alba,Cultivar not distinguished
+Black cherry,prunus-serotina,
+Purple leaf sand cherry,prunus-x-cistena,
+Montmorency cherry,prunus-cerasus-montmorency,
+Summer Sweet Clethra,clethra-alnifolia,
+Boxwood,buxus-sempervirens,
+Spirea,spiraea-sp,Genus only in the source
+Dragon claw willow,salix-matsudana-tortuosa,
+White Fringe Tree,chionanthus-virginicus,
+White Fringetree,chionanthus-virginicus,
+Carolina Silverbell,halesia-tetraptera,Halesia carolina is usually treated as a synonym
+Weeping Katsura Tree,cercidiphyllum-japonicum,Cultivar 'Pendulum' not distinguished
+Eastern hackberry,celtis-occidentalis,
+Japanese stewardia,stewartia-pseudocamellia,Misspelling of stewartia
+Seven son flower,heptacodium-miconioides,
+Concolor fir,abies-concolor,
+Alternate leaf dogwood,cornus-alternifolia,
+Turkish Hazel,corylus-colurna,
+Weeping Elm,ulmus-glabra-camperdownii,
+Elm,ulmus-sp,Genus only in the source
+ID Needed,,Not a species — the surveyor flagged it for identification
+Unknown,,Not a species
+Malus spp,malus-sp,Folded from Malus sp.
+Fraxinus pennsylvanica 'Patmore',fraxinus-pennsylvanica,Folded from Fraxinus pennsylvanica
+Fraxinus pennsylvanica 'Summit',fraxinus-pennsylvanica,Folded from Fraxinus pennsylvanica
+Pyrus calleryana 'Chanticleer',pyrus-calleryana,Folded from Pyrus calleryana
+Betula nigra 'Cully',betula-nigra,Folded from Betula nigra
+Acer x freemanii 'Celebration',acer-x-freemanii,Folded from Acer x freemanii
+Ulmus davidiana var. japonica 'Morton',ulmus-davidiana-japonica,Folded from Ulmus davidiana var. japonica
+Tilia tomentosa 'Sterling',tilia-tomentosa,Folded from Tilia tomentosa
+Ulmus 'Morton Glossy',ulmus-sp,Folded from Ulmus sp.
+Gleditsia triacanthos f. inermis 'Skycole',gleditsia-triacanthos,Folded from Gleditsia triacanthos
+Acer x freemannii 'Sienna Glen',acer-x-freemanii-sienna-glen,Folded from Acer x freemanii 'Sienna Glen'
+Acer platenoides 'Emerald Queen',acer-platanoides,Folded from Acer platanoides
+Tilia cordata 'Corinthian',tilia-cordata,Folded from Tilia cordata
+Tilia tomentosa 'PNI 6051',tilia-tomentosa,Folded from Tilia tomentosa
+Acer x freemanii 'Marmo',acer-x-freemanii,Folded from Acer x freemanii
+Malus 'Red Barron',malus-sp,Folded from Malus sp.
+Fraxinus pennsylvanica 'Marshall's Seedless',fraxinus-pennsylvanica,Folded from Fraxinus pennsylvanica
+Zelkove serrata 'Green Vase',zelkova-serrata,Folded from Zelkova serrata
+Platanus x acerifolia 'Exclamation',platanus-x-acerifolia,Folded from Platanus x acerifolia
+Acer rubrum 'Frank Jr',acer-rubrum,Folded from Acer rubrum
+Malus 'Shotizam',malus-sp,Folded from Malus sp.
+Tilia americana 'McKSentry'',tilia-americana,Folded from Tilia americana
+Fraxinus pennsylvanica 'Cimmaron',fraxinus-pennsylvanica,Folded from Fraxinus pennsylvanica
+Gleditsia triacanthos 'Draves',gleditsia-triacanthos,Folded from Gleditsia triacanthos
+Malus 'Rejzam',malus-sp,Folded from Malus sp.
+Acer rubrum 'Autumn Blaze',acer-x-freemanii-autumn-blaze,'Autumn Blaze' is a Freeman maple; the source files it under Acer rubrum
+Malus 'Hargozam',malus-sp,Folded from Malus sp.
+Gingko biloba,ginkgo-biloba,Folded from Ginkgo biloba
+Tilia americana 'Redmond',tilia-americana,Folded from Tilia americana
+Prunus spp,prunus-sp,Folded from Prunus sp.
+Quercus x warei 'Long',quercus-x-warei,Folded from Quercus x warei
+Ginkgo biloba male,ginkgo-biloba,Folded from Ginkgo biloba
+Crataegus viridis 'Winter King',crataegus-viridis,Folded from Crataegus viridis
+Acer x freemannii 'Bailston',acer-x-freemanii,Folded from Acer x freemanii
+Malus 'Purple prince',malus-sp,Folded from Malus sp.
+Acer rubrum 'Franksred',acer-rubrum,Folded from Acer rubrum
+Acer x freemanii 'Firefall',acer-x-freemanii,Folded from Acer x freemanii
+Acer saccharum 'Green Mountain',acer-saccharum,Folded from Acer saccharum
+Acer tataricum 'Garann',acer-tataricum,Folded from Acer tataricum
+Tilia cordata 'Shamrock',tilia-cordata,Folded from Tilia cordata
+Tilia americana ‘Boulevard’,tilia-americana,Folded from Tilia americana
+Malus 'Jewelcole',malus-sp,Folded from Malus sp.
+Crataegus spp,crataegus-sp,Folded from Crataegus sp.
+Malus 'Adams',malus-sp,Folded from Malus sp.
+Ulmus spp,ulmus-sp,Folded from Ulmus sp.
+Pyrus calleryana 'Bradford',pyrus-calleryana,Folded from Pyrus calleryana
+Ulmus 'Homestead',ulmus-sp,Folded from Ulmus sp.
+Aesculus x arnoldiana 'Autumn Splendor',aesculus-x-arnoldiana,Folded from Aesculus x arnoldiana
+Liquidambar styraciflua 'Worplesdon',liquidambar-styraciflua,Folded from Liquidambar styraciflua
+Tilia x mongolica 'Harvest Gold',tilia-x-mongolica,Folded from Tilia x mongolica
+Ulmus americana 'Deleware',ulmus-americana,Folded from Ulmus americana
+Acer x freemannii 'Matador',acer-x-freemanii,Folded from Acer x freemanii
+Amelanchier laevis 'Lustre',amelanchier-laevis,Folded from Amelanchier laevis
+Gymnocladus dioicus 'Espresso',gymnocladus-dioicus,Folded from Gymnocladus dioicus
+Malus 'Adirondack',malus-sp,Folded from Malus sp.
+Juniperus spp,juniperus-sp,Folded from Juniperus sp.
+"Tilia americana ""Frontyard'",tilia-americana,Folded from Tilia americana
+Ulmus 'Morton Plainsman',ulmus-sp,Folded from Ulmus sp.
+Malus 'Prairie Fire',malus-sp,Folded from Malus sp.
+Quercus ellipsoides,quercus-ellipsoidalis,Folded from Quercus ellipsoidalis
+Acer rubrum 'Autumn Spire',acer-rubrum,Folded from Acer rubrum
+Malus 'Pink Spires',malus-sp,Folded from Malus sp.
+Quercus bicolor 'JFS-KW12',quercus-bicolor,Folded from Quercus bicolor
+Ulmus 'Patriot',ulmus-sp,Folded from Ulmus sp.
+Tilia cordata'DeGroot',tilia-cordata,Folded from Tilia cordata
+Ulmus americana 'Jefferson',ulmus-americana,Folded from Ulmus americana
+Acer x freemanii 'Autumn Spire',acer-x-freemanii,Folded from Acer x freemanii
+Caragana arborescens 'Sutherland',caragana-arborescens,Folded from Caragana arborescens
+Ulmus pumila x u. japonica 'Cathedral',ulmus-sp,Folded from Ulmus sp.
+Acer spp,acer-sp,Folded from Acer sp.
+Maackia amurensis 'Starburst',maackia-amurensis,Folded from Maackia amurensis
+Pyrus spp,pyrus-sp,Folded from Pyrus sp.
+Acer negundo 'Sensation',acer-negundo,Folded from Acer negundo
+Taxodium ascendens 'Morris',taxodium-ascendens,Folded from Taxodium ascendens
+Gleditsia triacanthos var. inermis 'Imperial',gleditsia-triacanthos-inermis,Folded from Gleditsia triacanthos var. inermis
+Maackia amerunsis 'Maacnificent',maackia-amurensis,Folded from Maackia amurensis
+Ulmus minor x  u. parvifolia 'Frontier',ulmus-sp,Folded from Ulmus sp.
+Ulmus americana 'New Harmony',ulmus-americana,Folded from Ulmus americana
+Acer x freemanii 'Scarlet Sentinal',acer-x-freemanii,Folded from Acer x freemanii
+Malus x robusta 'Sentinal',malus-sp,Folded from Malus sp.
+Malus 'Sutyzam' Sugar Tyme,malus-sp,Folded from Malus sp.
+Acer rubrum 'WW Warren',acer-rubrum,Folded from Acer rubrum
+Pyrus calleryana 'Redspire',pyrus-calleryana,Folded from Pyrus calleryana
+Malus 'JFS-KW5',malus-sp,Folded from Malus sp.
+Acer x freeman 'Marmo',acer-x-freemanii,Folded from Acer x freemanii
+Acer miyabei 'Rugged Ridge',acer-miyabei,Folded from Acer miyabei
+Maackia amurensis 'Summertime',maackia-amurensis,Folded from Maackia amurensis
+Ginkgo biloba female,ginkgo-biloba,Folded from Ginkgo biloba
+Syringa reticulata 'Bailnce',syringa-reticulata,Folded from Syringa reticulata
+Taxus spp,taxus-sp,Folded from Taxus sp.
+Parrotia persica 'Igne's Ruby Vase',parrotia-persica,Folded from Parrotia persica
+Rhamnus spp,rhamnus-sp,Folded from Rhamnus sp.
+Malus 'Spring Snow',malus-sp,Folded from Malus sp.
+Morus spp,morus-sp,Folded from Morus sp.
+Malus'Indian Summer',malus-sp,Folded from Malus sp.
+Acer rubrum 'Bailcraig',acer-rubrum,Folded from Acer rubrum
+Malus 'Velvetcole',malus-sp,Folded from Malus sp.
+Liriodendron tulipifera 'Fagistatum,liriodendron-tulipifera,Folded from Liriodendron tulipifera
+Pyrus calleryana 'Jaczam',pyrus-calleryana,Folded from Pyrus calleryana
+Catalpa speciosa 'Straight Up',catalpa-speciosa,Folded from Catalpa speciosa
+Aesculus x carnea ‘Fort Mcnair’,aesculus-x-carnea,Folded from Aesculus x carnea
+Magnolia spp,magnolia-sp,Folded from Magnolia
+Phellodendron amurense 'Macho',phellodendron-amurense,Folded from Phellodendron amurense
+Cornus spp,cornus-sp,Folded from Cornus sp.
+Acer campestre 'Streetside',acer-campestre,Folded from Acer campestre
+Salix alba'Tristis',salix-alba-tristis,Missing space before the cultivar hid it from the canonical match
+Prunus pensylvanica,prunus-pennsylvanica,Folded from Prunus pennsylvanica
+Gleditsia triacanthos 'Harve',gleditsia-triacanthos,Folded from Gleditsia triacanthos
+Fraxinus spp,fraxinus-sp,Folded from Fraxinus sp.
+Prunus serrulata 'Kanzan',prunus-serrulata,Folded from Prunus serrulata
+Acer rubrum 'Autumn Flame',acer-rubrum,Folded from Acer rubrum
+Fraxinus americana 'Rosehill',fraxinus-americana,Folded from Fraxinus americana
+Ginkgo biloba ‘Goldspire’,ginkgo-biloba,Folded from Ginkgo biloba
+Salix spp,salix-sp,Folded from Salix sp.
+Magnolia x loebneri 'Merrill',magnolia-x-loebneri,Folded from Magnolia x loebneri
+Malus 'Snowdrift',malus-sp,Folded from Malus sp.
+Syringa recticulata subsp. pekinensis 'Copper Curls',syringa-pekinensis-copper-curls,Misspelling of reticulata; now treated as S. pekinensis
+Syringa reticulate ssp.'Willamette',syringa-pekinensis,Misspelling; 'Willamette' folded to the species
+Syringa reticulate ssp.pekinensis'Sundak',syringa-pekinensis,Misspelling; 'Sundak' (Summer Charm) folded to the species
+Halesia carolina,halesia-tetraptera,Usually treated as a synonym of H. tetraptera

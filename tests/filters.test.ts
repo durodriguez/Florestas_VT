@@ -8,7 +8,7 @@ import type { Dataset, Plant, Taxon } from '../src/types';
 
 const taxon = (over: Partial<Taxon>): Taxon => ({
   id: 't', sci: '', common: '', family: '', genus: '', species: '', infra: '',
-  cultivar: '', habit: 'tree', foliage: 'deciduous', native: 'native',
+  cultivar: '', type: 'deciduous-tree', origin: 'vermont-native',
   flowerColor: '', flowerMonths: [], fruitColor: '', fruitMonths: [], fallColor: '',
   matureHeightFt: null, matureSpreadFt: null, bark: '', pests: '', soil: '',
   zones: '', wikipedia: '', description: '', count: 0, ...over,
@@ -18,8 +18,8 @@ const dataset = {
   vocab: {
     conditions: ['excellent', 'good', 'fair', 'poor', 'dead'],
     statuses: ['active', 'removed'],
-    habits: ['tree', 'conifer', 'shrub', 'vine'],
-    foliage: [], nativeStatus: [],
+    plantTypes: ['deciduous-tree', 'evergreen-tree', 'shrub', 'perennial', 'annual', 'vine', 'grass'],
+    origins: ['vermont-native', 'vermont-invasive', 'introduced'],
   },
   collections: [
     { id: 'green', name: 'University Green', color: '#154734', description: '' },
@@ -27,8 +27,8 @@ const dataset = {
   ],
   taxa: [
     taxon({ id: 'acer-saccharum', sci: 'Acer saccharum', common: 'Sugar maple', family: 'Sapindaceae', genus: 'Acer', flowerMonths: [4, 5] }),
-    taxon({ id: 'pinus-strobus', sci: 'Pinus strobus', common: 'Eastern white pine', family: 'Pinaceae', genus: 'Pinus', habit: 'conifer', flowerMonths: [5, 6] }),
-    taxon({ id: 'rhamnus', sci: 'Rhamnus cathartica', common: 'Common buckthorn', family: 'Rhamnaceae', genus: 'Rhamnus', habit: 'shrub', native: 'invasive' }),
+    taxon({ id: 'pinus-strobus', sci: 'Pinus strobus', common: 'Eastern white pine', family: 'Pinaceae', genus: 'Pinus', type: 'evergreen-tree', flowerMonths: [5, 6] }),
+    taxon({ id: 'rhamnus', sci: 'Rhamnus cathartica', common: 'Common buckthorn', family: 'Rhamnaceae', genus: 'Rhamnus', type: 'shrub', origin: 'vermont-invasive' }),
   ],
 } as unknown as Dataset;
 
@@ -90,18 +90,18 @@ describe('applyFilters', () => {
     expect(applyFilters(plants, { ...base(), includeRemoved: true })).toHaveLength(5);
   });
 
-  it('filters by habit', () => {
-    const f = { ...base(), habits: new Set(['conifer']) };
+  it('filters by plant type', () => {
+    const f = { ...base(), types: new Set(['evergreen-tree']) };
     expect(applyFilters(plants, f).map((p) => p.id)).toEqual(['UVM-0003']);
   });
 
   it('treats multiple values in one facet as OR', () => {
-    const f = { ...base(), habits: new Set(['conifer', 'shrub']) };
+    const f = { ...base(), types: new Set(['evergreen-tree', 'shrub']) };
     expect(applyFilters(plants, f).map((p) => p.id)).toEqual(['UVM-0003', 'UVM-0004']);
   });
 
   it('treats different facets as AND', () => {
-    const f = { ...base(), habits: new Set(['tree']), collections: new Set(['redstone']) };
+    const f = { ...base(), types: new Set(['deciduous-tree']), collections: new Set(['redstone']) };
     expect(applyFilters(plants, f)).toHaveLength(0);
   });
 
@@ -117,8 +117,13 @@ describe('applyFilters', () => {
       .toEqual(['UVM-0003']);
   });
 
-  it('filters by native status', () => {
-    const f = { ...base(), native: new Set(['invasive']) };
+  it('filters by origin', () => {
+    const f = { ...base(), origins: new Set(['vermont-native']) };
+    expect(applyFilters(plants, f).length).toBeGreaterThan(0);
+  });
+
+  it('filters to invasive plants, which are now an origin rather than a flag', () => {
+    const f = { ...base(), origins: new Set(['vermont-invasive']) };
     expect(applyFilters(plants, f).map((p) => p.id)).toEqual(['UVM-0004']);
   });
 
@@ -137,7 +142,7 @@ describe('isFilterActive', () => {
     expect(isFilterActive(emptyFilters())).toBe(false);
     expect(isFilterActive({ ...emptyFilters(), q: 'oak' })).toBe(true);
     expect(isFilterActive({ ...emptyFilters(), bloomMonth: 5 })).toBe(true);
-    expect(isFilterActive({ ...emptyFilters(), habits: new Set(['tree']) })).toBe(true);
+    expect(isFilterActive({ ...emptyFilters(), types: new Set(['deciduous-tree']) })).toBe(true);
   });
 
   it('ignores a whitespace-only query', () => {
@@ -147,24 +152,24 @@ describe('isFilterActive', () => {
 
 describe('facetCounts', () => {
   it('counts values across the active result set', () => {
-    const counts = facetCounts(plants, emptyFilters(), 'habits', (p) => p.taxon.habit);
-    expect(counts.get('tree')).toBe(2);
-    expect(counts.get('conifer')).toBe(1);
+    const counts = facetCounts(plants, emptyFilters(), 'types', (p) => p.taxon.type);
+    expect(counts.get('deciduous-tree')).toBe(2);
+    expect(counts.get('evergreen-tree')).toBe(1);
     expect(counts.get('shrub')).toBe(1);
   });
 
   it('ignores its own facet so sibling options stay selectable', () => {
-    const f = { ...emptyFilters(), habits: new Set(['conifer']) };
-    const counts = facetCounts(plants, f, 'habits', (p) => p.taxon.habit);
-    expect(counts.get('tree')).toBe(2);
-    expect(counts.get('conifer')).toBe(1);
+    const f = { ...emptyFilters(), types: new Set(['evergreen-tree']) };
+    const counts = facetCounts(plants, f, 'types', (p) => p.taxon.type);
+    expect(counts.get('deciduous-tree')).toBe(2);
+    expect(counts.get('evergreen-tree')).toBe(1);
   });
 
   it('still respects the other facets', () => {
     const f = { ...emptyFilters(), collections: new Set(['redstone']) };
-    const counts = facetCounts(plants, f, 'habits', (p) => p.taxon.habit);
-    expect(counts.get('tree')).toBeUndefined();
-    expect(counts.get('conifer')).toBe(1);
+    const counts = facetCounts(plants, f, 'types', (p) => p.taxon.type);
+    expect(counts.get('deciduous-tree')).toBeUndefined();
+    expect(counts.get('evergreen-tree')).toBe(1);
   });
 });
 

@@ -50,7 +50,7 @@ export class PlantMap {
   private readonly highlight: L.CircleMarker;
   private readonly markers = new Map<string, L.CircleMarker>();
   private locationMarker: L.CircleMarker | null = null;
-  private colorBy: ColorBy = 'habit';
+  private colorBy: ColorBy = 'type';
   private tileErrors = 0;
   private reportedTrouble = new Set<string>();
 
@@ -307,7 +307,9 @@ function campusAreas(
 /** Bigger trunks read as bigger dots, which makes specimen trees findable. */
 function radiusFor(plant: Plant): number {
   const dbh = plant.dbhIn ?? 0;
-  if (plant.taxon.habit === 'shrub' || plant.taxon.habit === 'vine') return 5;
+  // Shrubs, vines and herbaceous plants have no trunk to scale by, so they get
+  // the small dot rather than a diameter-derived one.
+  if (plant.taxon.type !== 'deciduous-tree' && plant.taxon.type !== 'evergreen-tree') return 5;
   if (dbh >= 30) return 10;
   if (dbh >= 18) return 8;
   if (dbh >= 8) return 6.5;
