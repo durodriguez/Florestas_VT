@@ -1,5 +1,6 @@
-import type { Dataset, Plant } from './types';
+import type { Dataset, Plant, Taxon } from './types';
 import { escapeHtml } from './map';
+import { ORIGIN_LABELS, TYPE_LABELS } from './palette';
 
 const MONTHS = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -27,6 +28,22 @@ function row(label: string, value: string | null | undefined): string {
 const numOr = (v: number | null, unit: string): string | null =>
   v === null ? null : `${v}${unit}`;
 
+/**
+ * Regulatory and ecological status, shown only when a taxon actually carries a
+ * flag. A blank means nobody has assessed it, and printing "not prohibited"
+ * over an unassessed plant would be a claim the data does not support.
+ */
+function statusFlags(t: Taxon): string {
+  const flags: string[] = [];
+  if (t.prohibited === 'yes') {
+    flags.push('<span class="pill pill--prohibited" title="Illegal to sell, move or plant in Vermont under the Noxious Weed Quarantine Rule">Vermont prohibited</span>');
+  }
+  if (t.invasive === 'yes') {
+    flags.push('<span class="pill pill--invasive" title="Spreads aggressively in the northeast and displaces other plants">Northeast invasive</span>');
+  }
+  return flags.length ? `<p class="detail-flags">${flags.join(' ')}</p>` : '';
+}
+
 export function renderDetail(plant: Plant, dataset: Dataset, base: string): string {
   const t = plant.taxon;
   const shareUrl = `${location.origin}${location.pathname}?plant=${encodeURIComponent(plant.id)}`;
@@ -51,8 +68,9 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
       <p class="detail-eyebrow">${escapeHtml(plant.id)}</p>
       <h2 class="detail-title">${escapeHtml(t.common)}</h2>
       <p class="detail-sci">${formatScientific(plant)}</p>
-      <p class="detail-family">${escapeHtml(t.family)} &middot; ${escapeHtml(titleCase(t.habit))}
-        &middot; ${escapeHtml(titleCase(t.native))}</p>
+      <p class="detail-family">${escapeHtml(t.family)} &middot; ${escapeHtml(TYPE_LABELS[t.type] ?? titleCase(t.type))}
+        &middot; ${escapeHtml(ORIGIN_LABELS[t.origin] ?? titleCase(t.origin))}</p>
+      ${statusFlags(t)}
     </header>
     ${removed}
     ${photo}

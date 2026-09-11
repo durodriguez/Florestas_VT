@@ -50,7 +50,7 @@ export class PlantMap {
   private readonly highlight: L.CircleMarker;
   private readonly markers = new Map<string, L.CircleMarker>();
   private locationMarker: L.CircleMarker | null = null;
-  private colorBy: ColorBy = 'habit';
+  private colorBy: ColorBy = 'type';
   private tileErrors = 0;
   private reportedTrouble = new Set<string>();
 

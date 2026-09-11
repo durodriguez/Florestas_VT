@@ -36,11 +36,30 @@
       <form id="filters" class="panel-filters">
         <details open>
           <summary>Plant type</summary>
-          <div id="facet-habit" class="facet"></div>
+          <div id="facet-type" class="facet"></div>
         </details>
         <details>
-          <summary>Origin</summary>
-          <div id="facet-native" class="facet"></div>
+          <summary>Origin &amp; status</summary>
+          <div id="facet-origin" class="facet"></div>
+          <!-- Independent of origin and of each other: a Vermont native can be
+               regionally invasive, and a ban is a legal fact either way. -->
+          <div class="facet facet--flags">
+            <label>
+              <input type="checkbox" id="filter-prohibited">
+              <span>Vermont prohibited</span>
+              <span class="facet-count" id="count-prohibited">0</span>
+            </label>
+            <p class="facet-note">Illegal to sell, gift, barter, transport or plant in
+              Vermont under the Noxious Weed Quarantine Rule.</p>
+            <label>
+              <input type="checkbox" id="filter-invasive">
+              <span>Northeast invasive</span>
+              <span class="facet-count" id="count-invasive">0</span>
+            </label>
+            <p class="facet-note">Spreads aggressively in the northeast and displaces
+              other plants. A broad category — it can include natives that become
+              a problem in the right conditions.</p>
+          </div>
         </details>
         <details>
           <summary>Campus area</summary>
@@ -100,8 +119,8 @@
       <div class="map-controls">
         <label class="visually-hidden" for="color-by">Color plants by</label>
         <select id="color-by">
-          <option value="habit">Color by plant type</option>
-          <option value="native">Color by origin</option>
+          <option value="type">Color by plant type</option>
+          <option value="origin">Color by origin &amp; status</option>
           <option value="condition">Color by condition</option>
           <option value="collection">Color by campus area</option>
         </select>

@@ -3,8 +3,10 @@ import type { FilterState, Plant } from './types';
 export function emptyFilters(): FilterState {
   return {
     q: '',
-    habits: new Set(),
-    native: new Set(),
+    types: new Set(),
+    origins: new Set(),
+    prohibitedOnly: false,
+    invasiveOnly: false,
     conditions: new Set(),
     collections: new Set(),
     families: new Set(),
@@ -17,8 +19,10 @@ export function emptyFilters(): FilterState {
 export function isFilterActive(f: FilterState): boolean {
   return (
     f.q.trim() !== '' ||
-    f.habits.size > 0 ||
-    f.native.size > 0 ||
+    f.types.size > 0 ||
+    f.origins.size > 0 ||
+    f.prohibitedOnly ||
+    f.invasiveOnly ||
     f.conditions.size > 0 ||
     f.collections.size > 0 ||
     f.families.size > 0 ||
@@ -44,8 +48,13 @@ const inSet = (set: Set<string>, value: string | null): boolean =>
 
 export function matchesFilters(plant: Plant, f: FilterState): boolean {
   if (!f.includeRemoved && plant.status !== 'active') return false;
-  if (!inSet(f.habits, plant.taxon.habit)) return false;
-  if (!inSet(f.native, plant.taxon.native)) return false;
+  if (!inSet(f.types, plant.taxon.type)) return false;
+  if (!inSet(f.origins, plant.taxon.origin)) return false;
+  // Flags narrow to the plants that carry them; "no" and "not assessed" are
+  // both excluded, because the question being asked is "show me the ones that
+  // are", not "show me the ones nobody has ruled out".
+  if (f.prohibitedOnly && plant.taxon.prohibited !== 'yes') return false;
+  if (f.invasiveOnly && plant.taxon.invasive !== 'yes') return false;
   if (!inSet(f.conditions, plant.condition)) return false;
   if (!inSet(f.collections, plant.collection?.id ?? null)) return false;
   if (!inSet(f.families, plant.taxon.family)) return false;
@@ -98,8 +107,8 @@ const CSV_COLUMNS: Array<[string, (p: Plant) => unknown]> = [
   ['scientific_name', (p) => p.taxon.sci],
   ['common_name', (p) => p.taxon.common],
   ['family', (p) => p.taxon.family],
-  ['habit', (p) => p.taxon.habit],
-  ['native_status', (p) => p.taxon.native],
+  ['plant_type', (p) => p.taxon.type],
+  ['origin', (p) => p.taxon.origin],
   ['collection', (p) => p.collection?.name ?? ''],
   ['lat', (p) => p.lat],
   ['lng', (p) => p.lng],

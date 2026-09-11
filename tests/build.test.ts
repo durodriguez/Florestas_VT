@@ -115,9 +115,64 @@ describe('buildDataset', () => {
   });
 
   it('normalises enum casing and spacing', () => {
-    const r = build({ taxaRows: [taxon({ native_status: 'Native' })] });
+    const r = build({ taxaRows: [taxon({ origin: 'Vermont Native' })] });
     expect(r.errors).toEqual([]);
-    expect(r.dataset.taxa[0].native).toBe('native');
+    expect(r.dataset.taxa[0].origin).toBe('vermont-native');
+  });
+
+  describe('plant type', () => {
+    it('splits trees by foliage rather than storing a separate column', () => {
+      expect(build({ taxaRows: [taxon({ habit: 'tree', foliage: 'deciduous' })] })
+        .dataset.taxa[0].type).toBe('deciduous-tree');
+      expect(build({ taxaRows: [taxon({ habit: 'tree', foliage: 'evergreen' })] })
+        .dataset.taxa[0].type).toBe('evergreen-tree');
+    });
+
+    // The case the old tree/conifer split got wrong: a larch is a conifer and
+    // drops its needles, so "conifer" told you the wrong thing about it.
+    it('files a deciduous conifer under deciduous trees', () => {
+      const r = build({ taxaRows: [taxon({ taxon_id: 'larix', scientific_name: 'Larix laricina', habit: 'tree', foliage: 'deciduous' })] });
+      expect(r.dataset.taxa[0].type).toBe('deciduous-tree');
+    });
+
+    it('counts semi-evergreen as evergreen', () => {
+      expect(build({ taxaRows: [taxon({ habit: 'tree', foliage: 'semi-evergreen' })] })
+        .dataset.taxa[0].type).toBe('evergreen-tree');
+    });
+
+    it('leaves non-trees as their habit', () => {
+      for (const habit of ['shrub', 'perennial', 'annual', 'vine', 'grass']) {
+        expect(build({ taxaRows: [taxon({ habit })] }).dataset.taxa[0].type).toBe(habit);
+      }
+    });
+
+    it('rejects conifer, which is no longer a habit', () => {
+      expect(build({ taxaRows: [taxon({ habit: 'conifer' })] }).errors.join())
+        .toMatch(/habit "conifer" is not one of/);
+    });
+
+    it('warns about a tree with no foliage, which would default silently', () => {
+      expect(build({ taxaRows: [taxon({ habit: 'tree', foliage: '' })] }).warnings.join())
+        .toMatch(/no foliage value/);
+    });
+  });
+
+  describe('status flags', () => {
+    it('keeps origin and the two flags independent', () => {
+      const r = build({ taxaRows: [taxon({ origin: 'vermont-native', northeast_invasive: 'yes' })] });
+      expect(r.errors).toEqual([]);
+      expect(r.dataset.taxa[0]).toMatchObject({ origin: 'vermont-native', invasive: 'yes' });
+    });
+
+    it('treats blank as not assessed rather than no', () => {
+      const r = build({ taxaRows: [taxon({ vt_prohibited: '' })] });
+      expect(r.dataset.taxa[0].prohibited).toBe('');
+    });
+
+    it('rejects anything but yes, no or blank', () => {
+      expect(build({ taxaRows: [taxon({ vt_prohibited: 'maybe' })] }).errors.join())
+        .toMatch(/must be yes, no, or blank/);
+    });
   });
 
   it('parses flowering months into a numeric list and drops junk', () => {

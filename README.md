@@ -32,7 +32,8 @@ legend.
 campus area and accession number. Every term must match, so extra words narrow
 the result.
 
-**Filters** — faceted and combinable: plant type, native/introduced/invasive,
+**Filters** — faceted and combinable: plant type (seven categories, trees split
+deciduous/evergreen), origin, Vermont-prohibited and northeast-invasive flags,
 campus area, family, condition, flowering month, minimum trunk diameter, and
 whether to include removed plants. Each option shows a live count, computed
 with its own facet relaxed so the alternatives stay clickable.

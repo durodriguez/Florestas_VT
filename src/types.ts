@@ -35,7 +35,12 @@ export interface Taxon {
   cultivar: string;
   habit: string;
   foliage: string;
-  native: string;
+  /** One of Vocab.plantTypes — habit, with trees split by foliage. */
+  type: string;
+  origin: string;
+  /** 'yes' | 'no' | '' where blank means not yet assessed. */
+  prohibited: string;
+  invasive: string;
   flowerColor: string;
   flowerMonths: number[];
   fruitColor: string;
@@ -59,7 +64,8 @@ export interface Vocab {
   statuses: string[];
   habits: string[];
   foliage: string[];
-  nativeStatus: string[];
+  plantTypes: string[];
+  origins: string[];
 }
 
 export interface Dataset {
@@ -116,12 +122,15 @@ export interface Plant {
   search: string;
 }
 
-export type ColorBy = 'habit' | 'native' | 'condition' | 'collection';
+export type ColorBy = 'type' | 'origin' | 'condition' | 'collection';
 
 export interface FilterState {
   q: string;
-  habits: Set<string>;
-  native: Set<string>;
+  types: Set<string>;
+  origins: Set<string>;
+  /** Independent of origin, and of each other. */
+  prohibitedOnly: boolean;
+  invasiveOnly: boolean;
   conditions: Set<string>;
   collections: Set<string>;
   families: Set<string>;
