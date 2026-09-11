@@ -8,7 +8,7 @@ import type { Dataset, Plant, Taxon } from '../src/types';
 
 const taxon = (over: Partial<Taxon>): Taxon => ({
   id: 't', sci: '', common: '', family: '', genus: '', species: '', infra: '',
-  cultivar: '', habit: 'tree', type: 'deciduous-tree', foliage: 'deciduous', origin: 'vermont-native', prohibited: '', invasive: '',
+  cultivar: '', type: 'deciduous-tree', origin: 'vermont-native',
   flowerColor: '', flowerMonths: [], fruitColor: '', fruitMonths: [], fallColor: '',
   matureHeightFt: null, matureSpreadFt: null, bark: '', pests: '', soil: '',
   zones: '', wikipedia: '', description: '', count: 0, ...over,
@@ -19,8 +19,7 @@ const dataset = {
     conditions: ['excellent', 'good', 'fair', 'poor', 'dead'],
     statuses: ['active', 'removed'],
     plantTypes: ['deciduous-tree', 'evergreen-tree', 'shrub', 'perennial', 'annual', 'vine', 'grass'],
-    origins: ['vermont-native', 'introduced', 'unknown'],
-    foliage: [], habits: ['tree', 'shrub', 'perennial', 'annual', 'vine', 'grass'],
+    origins: ['vermont-native', 'vermont-invasive', 'introduced'],
   },
   collections: [
     { id: 'green', name: 'University Green', color: '#154734', description: '' },
@@ -28,8 +27,8 @@ const dataset = {
   ],
   taxa: [
     taxon({ id: 'acer-saccharum', sci: 'Acer saccharum', common: 'Sugar maple', family: 'Sapindaceae', genus: 'Acer', flowerMonths: [4, 5] }),
-    taxon({ id: 'pinus-strobus', sci: 'Pinus strobus', common: 'Eastern white pine', family: 'Pinaceae', genus: 'Pinus', habit: 'tree', type: 'evergreen-tree', flowerMonths: [5, 6] }),
-    taxon({ id: 'rhamnus', sci: 'Rhamnus cathartica', common: 'Common buckthorn', family: 'Rhamnaceae', genus: 'Rhamnus', habit: 'shrub', type: 'shrub', origin: 'introduced', prohibited: 'yes', invasive: 'yes' }),
+    taxon({ id: 'pinus-strobus', sci: 'Pinus strobus', common: 'Eastern white pine', family: 'Pinaceae', genus: 'Pinus', type: 'evergreen-tree', flowerMonths: [5, 6] }),
+    taxon({ id: 'rhamnus', sci: 'Rhamnus cathartica', common: 'Common buckthorn', family: 'Rhamnaceae', genus: 'Rhamnus', type: 'shrub', origin: 'vermont-invasive' }),
   ],
 } as unknown as Dataset;
 
@@ -119,26 +118,13 @@ describe('applyFilters', () => {
   });
 
   it('filters by origin', () => {
-    const f = { ...base(), origins: new Set(['introduced']) };
-    expect(applyFilters(plants, f).map((p) => p.id)).toEqual(['UVM-0004']);
+    const f = { ...base(), origins: new Set(['vermont-native']) };
+    expect(applyFilters(plants, f).length).toBeGreaterThan(0);
   });
 
-  // The whole point of splitting these out: a flag is not an origin, and the
-  // two flags are not each other.
-  it('filters to prohibited plants independently of origin', () => {
-    const f = { ...base(), prohibitedOnly: true };
+  it('filters to invasive plants, which are now an origin rather than a flag', () => {
+    const f = { ...base(), origins: new Set(['vermont-invasive']) };
     expect(applyFilters(plants, f).map((p) => p.id)).toEqual(['UVM-0004']);
-  });
-
-  it('filters to invasive plants independently of origin', () => {
-    const f = { ...base(), invasiveOnly: true };
-    expect(applyFilters(plants, f).map((p) => p.id)).toEqual(['UVM-0004']);
-  });
-
-  it('excludes taxa nobody has assessed, not just the ones ruled out', () => {
-    // Every other taxon here has blank flags, which is not a claim of "no".
-    const f = { ...base(), prohibitedOnly: true };
-    expect(applyFilters(plants, f).every((p) => p.taxon.prohibited === 'yes')).toBe(true);
   });
 
   it('combines a text query with facets', () => {

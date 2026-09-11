@@ -162,75 +162,48 @@ values in a CSV — the filter panel and the legend are generated from them.
 
 | Column | Values |
 | --- | --- |
-| `habit` | `tree`, `shrub`, `perennial`, `annual`, `vine`, `grass` |
-| `foliage` | `deciduous`, `evergreen`, `semi-evergreen` |
-| `origin` | `vermont-native`, `introduced`, `unknown` |
-| `vt_prohibited` | `yes`, `no`, blank |
-| `northeast_invasive` | `yes`, `no`, blank |
+| `plant_type` | `deciduous-tree`, `evergreen-tree`, `shrub`, `perennial`, `annual`, `vine`, `grass` |
+| `origin` | `vermont-native`, `vermont-invasive`, `introduced` |
 | `condition` | `excellent`, `good`, `fair`, `poor`, `dead` |
 | `status` | `active`, `removed` |
 
-### Plant type is derived, not stored
+Blank is allowed in both taxon columns and means nobody has assessed it, which
+is not the same as any of the listed values. The map shows nothing for a blank.
 
-The map offers seven categories. Six are the habits above; trees split in two
-by `foliage`:
+### plant_type
 
-| Shown as | From |
-| --- | --- |
-| Deciduous trees | `habit: tree` + `foliage: deciduous` |
-| Evergreen trees | `habit: tree` + `foliage: evergreen` or `semi-evergreen` |
-| Shrubs & bushes | `habit: shrub` |
-| Perennials | `habit: perennial` |
-| Annuals | `habit: annual` |
-| Vines & climbers | `habit: vine` |
-| Grasses | `habit: grass` |
+Shown on the map as *Deciduous trees*, *Evergreen trees*, *Shrubs & bushes*,
+*Perennials*, *Annuals*, *Vines & climbers*, *Grasses*.
 
-`habit` used to include `conifer` alongside `tree`, which was wrong twice over:
-a conifer *is* a tree, and the category implied evergreen while a larch, bald
-cypress and dawn redwood all drop their needles. The file had 30 conifers and
-26 evergreens — those four were exactly the problem. The split the category was
-really carrying lives in `foliage`, which had it right all along.
+This replaced a pair of columns, `habit` and `foliage`. `habit` listed
+`conifer` alongside `tree`, which was wrong twice over: a conifer *is* a tree,
+and the label implied evergreen while a larch, a bald cypress and a dawn
+redwood all drop their needles — the file held 30 conifers against 26
+evergreens, and those four were exactly the problem. Merging the two columns
+puts the deciduous/evergreen distinction where it is actually useful, on trees,
+and leaves one value for a surveyor to pick instead of two that have to agree.
 
-Derived rather than stored so the two cannot disagree. A stored column
-repeating what `foliage` already says is a column that drifts, and this list is
-heading past 400 taxa. A tree with no `foliage` value defaults to deciduous and
-`npm run data` warns, because a silent default here is a wrong answer in a
-filter.
+One thing went with it: an evergreen shrub — yew, box, rhododendron — is now
+just `shrub`. With five shrubs in the file that costs nothing. If the shrub
+list grows into the hundreds, foliage may be worth reviving for them alone.
 
-### Origin and status are three separate things
-
-`native_status` used to be one enum of `native` / `introduced` / `invasive`.
-That cannot express what it needs to. A Vermont native can be invasive here; a
-plant banned from sale is banned whatever its origin. So:
-
-**`origin`** — where the plant is from. One value per taxon.
+### origin
 
 - **`vermont-native`** — occurs naturally in Vermont, generally meaning present
   before European settlement.
-- **`introduced`** — brought here, deliberately or otherwise.
-- **`unknown`** — not established.
+- **`vermont-invasive`** — spreads aggressively here and displaces other
+  plants. Nine taxa currently carry it, including Norway maple, common
+  buckthorn and Russian olive.
+- **`introduced`** — brought here and not known to be a problem.
 
-**`vt_prohibited`** — Vermont's **Noxious Weed Quarantine Rule**, administered
-by the Agency of Agriculture, Food & Markets, makes it illegal to sell, gift,
-barter, exchange, distribute, transport or plant the listed species. A legal
-fact, not an opinion.
-
-**`northeast_invasive`** — spreads aggressively in the northeast and displaces
-other plants. Ecological, wider than the legal list, and — as Purdue note about
-their own equivalent — broad enough to include natives that become a problem in
-the right conditions.
-
-Both flags are `yes`, `no`, or **blank meaning nobody has assessed it**. Blank
-is not `no`. The map shows a flag only for `yes`, and filtering by a flag
-excludes both `no` and blank: the question being asked is "show me the ones
-that are", not "show me the ones nobody has ruled out".
-
-> **The regulatory flags need verifying before anyone relies on them.** Five
-> taxa are currently marked `vt_prohibited`, set from general knowledge of the
-> Vermont list, not from reading the rule. Check them against the current
-> Quarantine Rule from the Agency of Agriculture, Food & Markets — the list
-> changes, and this is a legal claim on a public website. Anything uncertain was
-> left blank rather than guessed at.
+One value, not several flags. An earlier draft split this into an origin plus
+independent `vt_prohibited` and `northeast_invasive` flags, on the grounds that
+a native can be invasive and a sale ban is a legal fact independent of both.
+That is true, and it was dropped anyway: tracking Vermont's Noxious Weed
+Quarantine Rule means making a regulatory claim on a public website against a
+list that changes, and this map does not need to make it. If a Vermont native
+ever does need flagging as invasive here, that is the case this column cannot
+express, and the flags would have to come back.
 
 ## Validation
 
@@ -239,13 +212,11 @@ wrong:
 
 **Errors** (build fails) — missing required field, duplicate `plant_id` or
 `taxon_id`, `taxon_id`/`collection_id` with no matching row, non-numeric
-coordinates or measurements, a value outside a controlled vocabulary, and a
-status flag that is not `yes`, `no` or blank.
+coordinates or measurements, and a value outside a controlled vocabulary.
 
 **Warnings** (build continues) — coordinates outside the campus bounds in
 `config.json`, a plant with no `collection_id`, a trail stop that is not a known
-accession, a count of campus areas whose geometry is still provisional, a tree
-with no `foliage` value (it would default silently into deciduous), and a count
+accession, a count of campus areas whose geometry is still provisional, and a count
 of taxa no active plant references. That last one is
 summarised in a single line rather than one per taxon, because the species list
 legitimately runs ahead of the survey: `taxa.csv` holds every species known to

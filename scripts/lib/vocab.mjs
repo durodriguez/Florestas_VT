@@ -5,25 +5,9 @@
 export const CONDITIONS = ['excellent', 'good', 'fair', 'poor', 'dead'];
 export const STATUSES = ['active', 'removed'];
 /**
- * What kind of plant it is, structurally. Deliberately does NOT split trees by
- * foliage: "conifer" used to sit alongside "tree" here, which made a larch two
- * things at once and a holly neither. The map's seven-way Plant type comes from
- * this crossed with FOLIAGE — see plantTypeOf.
+ * What kind of plant it is. One column, seven values — trees carry their own
+ * deciduous/evergreen split rather than needing a second column to say it.
  */
-export const HABITS = ['tree', 'shrub', 'perennial', 'annual', 'vine', 'grass'];
-export const FOLIAGE = ['deciduous', 'evergreen', 'semi-evergreen'];
-
-/**
- * Where the plant is from. One value per taxon, unlike the two status flags,
- * which are independent of origin and of each other — a Vermont native can be
- * regionally invasive, and a prohibited plant is prohibited whatever its origin.
- */
-export const ORIGINS = ['vermont-native', 'introduced', 'unknown'];
-
-/** Yes / no / blank, where blank means nobody has assessed it yet. */
-export const FLAGS = ['yes', 'no'];
-
-/** The seven categories the map offers, in the order they are listed. */
 export const PLANT_TYPES = [
   'deciduous-tree',
   'evergreen-tree',
@@ -35,20 +19,12 @@ export const PLANT_TYPES = [
 ];
 
 /**
- * A taxon's display category. Trees split by foliage; everything else is its
- * habit unchanged. Derived rather than stored so the two can never disagree —
- * with the list heading past 400 taxa, a column repeating what `foliage`
- * already says is a column that drifts.
- *
- * Semi-evergreen trees count as evergreen: the question the filter answers is
- * "will there be leaves on it in January", and the answer is mostly yes.
+ * Where the plant is from, and whether it is a problem here. One value per
+ * taxon; blank means nobody has assessed it.
  */
-export function plantTypeOf(habit, foliage) {
-  if (habit !== 'tree') return habit;
-  return foliage === 'evergreen' || foliage === 'semi-evergreen' ? 'evergreen-tree' : 'deciduous-tree';
-}
+export const ORIGINS = ['vermont-native', 'vermont-invasive', 'introduced'];
 
-export const TAXON_REQUIRED = ['taxon_id', 'scientific_name', 'common_name', 'family', 'genus', 'habit'];
+export const TAXON_REQUIRED = ['taxon_id', 'scientific_name', 'common_name', 'family', 'genus', 'plant_type'];
 export const PLANT_REQUIRED = ['plant_id', 'taxon_id', 'lat', 'lng'];
 
 export const TAXON_NUMERIC = ['mature_height_ft', 'mature_spread_ft'];

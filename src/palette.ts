@@ -16,8 +16,8 @@ const TYPE_COLORS: Record<string, string> = {
 
 const ORIGIN_COLORS: Record<string, string> = {
   'vermont-native': '#2f7a4d',
+  'vermont-invasive': '#b3452c',
   introduced: '#4a7c9b',
-  unknown: '#8a8f98',
 };
 
 const CONDITION_COLORS: Record<string, string> = {
@@ -43,8 +43,8 @@ export const TYPE_LABELS: Record<string, string> = {
 
 export const ORIGIN_LABELS: Record<string, string> = {
   'vermont-native': 'Vermont native',
+  'vermont-invasive': 'Vermont invasive',
   introduced: 'Introduced',
-  unknown: 'Origin unknown',
 };
 
 export function colorFor(plant: Plant, mode: ColorBy): string {
@@ -52,11 +52,6 @@ export function colorFor(plant: Plant, mode: ColorBy): string {
     case 'type':
       return TYPE_COLORS[plant.taxon.type] ?? FALLBACK;
     case 'origin':
-      // A prohibited or invasive plant is coloured by that rather than its
-      // origin: it is the more useful thing to see, and the case where origin
-      // alone misleads — a Vermont native can still be a problem here.
-      if (plant.taxon.prohibited === 'yes') return '#b3452c';
-      if (plant.taxon.invasive === 'yes') return '#d1642c';
       return ORIGIN_COLORS[plant.taxon.origin] ?? FALLBACK;
     case 'condition':
       return plant.condition ? CONDITION_COLORS[plant.condition] ?? FALLBACK : FALLBACK;
@@ -71,11 +66,7 @@ export function legendFor(mode: ColorBy, dataset: Dataset): Array<{ label: strin
     case 'type':
       return dataset.vocab.plantTypes.map((t) => ({ label: TYPE_LABELS[t] ?? t, color: TYPE_COLORS[t] ?? FALLBACK }));
     case 'origin':
-      return [
-        ...dataset.vocab.origins.map((o) => ({ label: ORIGIN_LABELS[o] ?? o, color: ORIGIN_COLORS[o] ?? FALLBACK })),
-        { label: 'Northeast invasive', color: '#d1642c' },
-        { label: 'Vermont prohibited', color: '#b3452c' },
-      ];
+      return dataset.vocab.origins.map((o) => ({ label: ORIGIN_LABELS[o] ?? o, color: ORIGIN_COLORS[o] ?? FALLBACK }));
     case 'condition':
       return dataset.vocab.conditions.map((c) => ({ label: c, color: CONDITION_COLORS[c] ?? FALLBACK }));
     case 'collection':

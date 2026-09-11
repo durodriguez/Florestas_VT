@@ -95,18 +95,9 @@ class App {
 
     update('#facet-type', 'types', (p) => p.taxon.type);
     update('#facet-origin', 'origins', (p) => p.taxon.origin);
-    // The two status flags are single checkboxes rather than a facet list, so
-    // their counts are the plants that carry them, not a per-value breakdown.
-    this.updateFlagCount('#count-prohibited', (p) => p.taxon.prohibited === 'yes');
-    this.updateFlagCount('#count-invasive', (p) => p.taxon.invasive === 'yes');
     update('#facet-condition', 'conditions', (p) => p.condition);
     update('#facet-collection', 'collections', (p) => p.collection?.id ?? null);
     update('#facet-family', 'families', (p) => p.taxon.family);
-  }
-
-  private updateFlagCount(selector: string, carries: (p: Plant) => boolean): void {
-    const el = document.querySelector(selector);
-    if (el) el.textContent = String(this.plants.filter(carries).length);
   }
 
   private renderLegend(): void {
@@ -247,16 +238,6 @@ class App {
         this.refresh();
       }
     });
-
-    for (const [id, key] of [
-      ['#filter-prohibited', 'prohibitedOnly'],
-      ['#filter-invasive', 'invasiveOnly'],
-    ] as const) {
-      $<HTMLInputElement>(id).addEventListener('change', (e) => {
-        this.filters[key] = (e.target as HTMLInputElement).checked;
-        this.refresh();
-      });
-    }
 
     $<HTMLSelectElement>('#filter-bloom').addEventListener('change', (e) => {
       const v = (e.target as HTMLSelectElement).value;

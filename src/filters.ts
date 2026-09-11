@@ -5,8 +5,6 @@ export function emptyFilters(): FilterState {
     q: '',
     types: new Set(),
     origins: new Set(),
-    prohibitedOnly: false,
-    invasiveOnly: false,
     conditions: new Set(),
     collections: new Set(),
     families: new Set(),
@@ -21,8 +19,6 @@ export function isFilterActive(f: FilterState): boolean {
     f.q.trim() !== '' ||
     f.types.size > 0 ||
     f.origins.size > 0 ||
-    f.prohibitedOnly ||
-    f.invasiveOnly ||
     f.conditions.size > 0 ||
     f.collections.size > 0 ||
     f.families.size > 0 ||
@@ -50,11 +46,6 @@ export function matchesFilters(plant: Plant, f: FilterState): boolean {
   if (!f.includeRemoved && plant.status !== 'active') return false;
   if (!inSet(f.types, plant.taxon.type)) return false;
   if (!inSet(f.origins, plant.taxon.origin)) return false;
-  // Flags narrow to the plants that carry them; "no" and "not assessed" are
-  // both excluded, because the question being asked is "show me the ones that
-  // are", not "show me the ones nobody has ruled out".
-  if (f.prohibitedOnly && plant.taxon.prohibited !== 'yes') return false;
-  if (f.invasiveOnly && plant.taxon.invasive !== 'yes') return false;
   if (!inSet(f.conditions, plant.condition)) return false;
   if (!inSet(f.collections, plant.collection?.id ?? null)) return false;
   if (!inSet(f.families, plant.taxon.family)) return false;

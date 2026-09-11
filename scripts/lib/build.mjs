@@ -2,7 +2,7 @@
 // Kept free of filesystem access so the test suite can exercise it directly.
 
 import {
-  CONDITIONS, STATUSES, HABITS, FOLIAGE, ORIGINS, FLAGS, PLANT_TYPES, plantTypeOf,
+  CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES,
   TAXON_REQUIRED, PLANT_REQUIRED, TAXON_NUMERIC, PLANT_NUMERIC, PLANT_FIELDS,
 } from './vocab.mjs';
 
@@ -80,33 +80,13 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
       if (Number.isNaN(num(row[field]))) err(where, `"${field}" is not a number: "${row[field]}"`);
     }
 
-    const habit = token(row.habit);
-    if (habit && !HABITS.includes(habit)) {
-      err(where, `habit "${row.habit}" is not one of: ${HABITS.join(', ')}`);
-    }
-    const foliage = token(row.foliage);
-    if (foliage && !FOLIAGE.includes(foliage)) {
-      err(where, `foliage "${row.foliage}" is not one of: ${FOLIAGE.join(', ')}`);
+    const type = token(row.plant_type);
+    if (type && !PLANT_TYPES.includes(type)) {
+      err(where, `plant_type "${row.plant_type}" is not one of: ${PLANT_TYPES.join(', ')}`);
     }
     const origin = token(row.origin);
     if (origin && !ORIGINS.includes(origin)) {
       err(where, `origin "${row.origin}" is not one of: ${ORIGINS.join(', ')}`);
-    }
-    // Blank is a third state throughout: nobody has assessed this taxon, which
-    // is not the same claim as "no". The map shows neither.
-    const flag = (name) => {
-      const v = token(row[name]);
-      if (v && !FLAGS.includes(v)) {
-        err(where, `${name} "${row[name]}" must be yes, no, or blank for not yet assessed`);
-      }
-      return v;
-    };
-    const prohibited = flag('vt_prohibited');
-    const invasive = flag('northeast_invasive');
-    // A tree with no foliage value cannot be sorted into deciduous or
-    // evergreen, and would silently land in whichever the fallback is.
-    if (habit === 'tree' && !foliage) {
-      warn(where, 'a tree with no foliage value is filed under deciduous trees by default');
     }
 
     taxonIndex.set(id, taxa.length);
@@ -119,13 +99,8 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
       species: trim(row.species),
       infra: trim(row.infraspecific),
       cultivar: trim(row.cultivar),
-      habit,
-      foliage,
-      // Computed, never stored: see plantTypeOf in vocab.mjs.
-      type: plantTypeOf(habit, foliage),
+      type,
       origin,
-      prohibited,
-      invasive,
       flowerColor: token(row.flower_color),
       flowerMonths: monthList(row.flower_months),
       fruitColor: token(row.fruit_color),
@@ -350,8 +325,6 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
     vocab: {
       conditions: CONDITIONS,
       statuses: STATUSES,
-      habits: HABITS,
-      foliage: FOLIAGE,
       plantTypes: PLANT_TYPES,
       origins: ORIGINS,
     },
