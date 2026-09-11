@@ -215,6 +215,29 @@ A GeoJSON `FeatureCollection` of `LineString` features. Each needs
 `stops` — an array of `plant_id` values in walking order. Draw the lines in
 [geojson.io](https://geojson.io) or QGIS and paste them in.
 
+### Filling in a new taxon
+
+All 257 taxa now carry a description and, where the question is meaningful, the
+full horticultural set. Three kinds of row are filled differently:
+
+**Species** get everything, written from general horticultural knowledge and
+spot-checked against Morton Arboretum, Missouri Botanical Garden, Chicago
+Botanic Garden and NC State Extension.
+
+**Cultivars inherit from their species** and override only what the cultivar
+actually changes — usually spread for a columnar form, foliage colour for a
+purple one. Written out in full instead, a cultivar row would drift from its
+species the first time the species was corrected.
+
+**Genus-level rows** — `Acer sp.`, `Malus sp.` — get a description, a hardiness
+range spanning the genus, and nothing else. Asserting one flower colour for
+"any maple" would be inventing a fact about trees nobody has identified. The
+blanks are deliberate and should stay blank.
+
+Four taxa have a blank `fruit_months` for the same kind of reason: boxwood's
+fruit is insignificant, and the two ginkgo cultivars and Lombardy poplar are
+male clones, which is exactly why they get planted.
+
 ### On the horticultural columns generally
 
 `flower_color`, `flower_months`, `fruit_color`, `fruit_months`, `fall_color`,
@@ -233,6 +256,27 @@ the month windows, which shift with the season anyway.
 Months are the usual window for this climate, which runs a week or two later
 than the same species further south. Anyone reviewing this file should start
 with `flower_months` and `fruit_months`.
+
+### Measured accuracy
+
+The horticultural columns are authored, not sourced — see the note above. Both
+large fills were spot-checked the same way, and both came out at roughly the
+same rate:
+
+| Fill | Taxa checked | Values | Corrections |
+| --- | --- | --- | --- |
+| 693 cells across the original 169 | 5 | 30 | 5 |
+| 1,144 cells across 88 new taxa | 5 | ~25 | 4 |
+
+About one value in six needed a nudge. The second round's corrections were
+Heptacodium blooming from July rather than August and being narrower than
+recorded, Amur corktree being wider than tall, and white fringetree fruiting
+from late August. None changed what a visitor would conclude; all four were
+wrong.
+
+That rate is the honest state of this data. It is a good working draft to
+survey against, not a publication-grade reference, and a botanist reading
+through will find more.
 
 ### On `pest_resistance`
 
@@ -261,8 +305,9 @@ is not the same as any of the listed values. The map shows nothing for a blank.
 
 ### plant_type
 
-Shown on the map as *Deciduous trees*, *Evergreen trees*, *Shrubs & bushes*,
-*Perennials*, *Annuals*, *Vines & climbers*, *Grasses*.
+Shown on the map as *Deciduous tree*, *Evergreen tree*, *Shrub/bush*,
+*Perennial*, *Annual*, *Vine/climber*, *Grass* — singular, because each label
+describes one plant rather than a collection.
 
 This replaced a pair of columns, `habit` and `foliage`. `habit` listed
 `conifer` alongside `tree`, which was wrong twice over: a conifer *is* a tree,
