@@ -155,11 +155,38 @@ Current coverage:
 | Source | Names resolved | Records |
 | --- | --- | --- |
 | UVM ArcGIS tree layer | 128 of 129 | 2,051 of 2,061 (99.5%) |
-| Burlington street inventory | 100 of 268 | 8,490 of 14,429 (59%) |
+| Burlington street inventory | 267 of 268 | 13,627 of 14,429 (94.4%) |
 
-Burlington's shortfall is almost all named cultivars of species already in
-`taxa.csv` — `'Patmore'` green ash, `'Chanticleer'` Callery pear — which is a
-decision about how finely to record cultivars, not a gap in the alias table.
+The one holdout in each is honest: UVM has five trees recorded as `ID Needed`,
+Burlington has 265 as `Unknown`. Neither is a species.
+
+### How finely cultivars are recorded
+
+**Fold by default; keep the ones you can see from across a lawn.**
+
+A street tree chosen for uniformity and disease resistance folds to its species:
+`Fraxinus pennsylvanica 'Patmore'` and `'Summit'` are both green ash, and a
+visitor does not care which. A cultivar with a visible character of its own gets
+a taxon row: weeping, columnar or fastigiate, purple or golden or variegated
+foliage, cutleaf. Twenty were kept on that test, including `Acer platanoides
+'Columnare'`, `Prunus x subhirtella 'Pendula'`, `Fagus sylvatica 'Riversii'` and
+`Salix alba 'Tristis'`.
+
+Folding is mechanical — strip the quoted cultivar, strip `var.`/`f.`/`ssp.`,
+fall back to `Genus sp.` — so a new source needs judgement only on what is left
+over. Two errors that survived the mechanics and were caught by checking each
+kept cultivar was still reachable:
+
+- `Salix alba'Tristis'` has no space before the apostrophe, so it missed the
+  canonical name and folded to the plain species.
+- `Acer rubrum 'Autumn Blaze'` is filed under the wrong species in the source.
+  'Autumn Blaze' is a Freeman maple, *Acer x freemanii*, and the alias corrects
+  it rather than preserving the mistake.
+
+Genus-level names — `Malus spp`, `Ulmus 'Morton Glossy'`, `Prunus spp` — resolve
+to genus taxa (`malus-sp`, `ulmus-sp`) rather than being guessed at. Burlington
+has 1,031 trees recorded as `Malus spp`, and deciding which crabapple each one
+is would be inventing data.
 
 ## campus-areas.geojson
 
