@@ -10,7 +10,8 @@ data/taxa.csv         one row per species/cultivar   (what a plant is)
 data/plants.csv       one row per mapped individual  (where it is, how big)
 data/collections.csv  campus areas / beds
 data/trails.geojson   self-guided walking tours
-data/campus-areas.geojson  campus boundary + the five named campuses
+data/campus-areas.geojson  campus boundary + the six named campuses
+data/species-aliases.csv   free-text species names -> taxon_id
 data/config.json      site name, map centre, campus bounds
 ```
 
@@ -98,6 +99,67 @@ campus polygon each plant stands in and fills in its `collection_id`. It is a
 dry run by default, keeps existing values unless you pass `--all`, backs up
 `plants.csv` before writing, and reports any plant that falls outside every
 area. Run it after an import, or after the campus boundaries change.
+
+## species-aliases.csv
+
+`alias`, `taxon_id`, `note`.
+
+Every source of plant records writes species names as prose. UVM's ArcGIS layer
+holds "White pine", "Musclewood", "Northern Katalpa" and both "Scots pine" and
+"Scot's pine". Burlington's inventory has "Acer platenoides" and
+`Tilia americana "Frontyard`. A surveyor with a clipboard will invent a third
+spelling of anything. `taxa.csv` holds one canonical name per taxon, so
+something has to sit in between.
+
+This file is that something, and it is data rather than code: a new alias is a
+line in a CSV, not a deploy, and the reasoning behind each judgement call
+survives in its `note`.
+
+**Matching ignores case, spacing, accents, ligatures and apostrophes.** So
+`Scots pine`, `Scot's pine` and `Scot’s pine` all land on the same taxon
+without three rows, and `Cratægus phænopyrum` matches `Crataegus phaenopyrum`.
+Canonical `taxon_id`, `scientific_name` and `common_name` values resolve
+automatically — an alias is only needed for a name that is none of those.
+
+**A blank `taxon_id` means "seen this, deliberately cannot resolve it".** UVM's
+layer has five trees recorded as `ID Needed`, which is not a species and never
+will be. Recording it keeps it out of the pile of names nobody has looked at
+yet. The three outcomes are different and an importer treats them differently:
+
+| Outcome | Meaning |
+| --- | --- |
+| a `taxon_id` | resolved |
+| blank `taxon_id` | looked at, unresolvable |
+| absent from the file | nobody has looked |
+
+**Canonical names always win.** An alias that contradicts `taxa.csv` is a
+mistake in the alias file, and `npm run data` fails on it rather than letting
+it quietly override the real name. Two aliases fighting over one name fail too.
+
+### Checking a source before importing it
+
+```
+npm run check:species -- <file.csv|file.geojson> [column]
+```
+
+Reports how many of a file's names resolve, which are known-unresolvable, and
+which are new — and prints paste-ready alias lines for the new ones. It picks
+the species column by trying each candidate and keeping whichever resolves
+best, which matters: Burlington's inventory has a `species` column holding
+"ash,gr patmore" and a `botanic` column holding
+`Fraxinus pennsylvanica 'Patmore'`, and guessing the first would have reported
+2.7% coverage on a file that actually reaches 59%.
+
+Current coverage:
+
+| Source | Names resolved | Records |
+| --- | --- | --- |
+| UVM ArcGIS tree layer | 128 of 129 | 2,051 of 2,061 (99.5%) |
+| Burlington street inventory | 100 of 268 | 8,490 of 14,429 (59%) |
+
+Burlington's shortfall is almost all named cultivars of species already in
+`taxa.csv` — `'Patmore'` green ash, `'Chanticleer'` Callery pear — which is a
+decision about how finely to record cultivars, not a gap in the alias table.
 
 ## campus-areas.geojson
 

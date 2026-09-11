@@ -5,6 +5,7 @@ import {
   CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES,
   TAXON_REQUIRED, PLANT_REQUIRED, TAXON_NUMERIC, PLANT_NUMERIC, PLANT_FIELDS,
 } from './vocab.mjs';
+import { buildSpeciesLookup } from './species.mjs';
 
 const trim = (v) => (typeof v === 'string' ? v.trim() : v ?? '');
 
@@ -40,7 +41,7 @@ function inBounds(lat, lng, config) {
   return lat >= south && lat <= north && lng >= west && lng <= east;
 }
 
-export function buildDataset({ taxaRows, plantRows, collectionRows, trails, campusAreas, config }) {
+export function buildDataset({ taxaRows, plantRows, collectionRows, trails, campusAreas, aliasRows = [], config }) {
   const errors = [];
   const warnings = [];
   const err = (where, msg) => errors.push(`${where}: ${msg}`);
@@ -235,6 +236,16 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
     return f;
   });
 
+  // ---- species aliases ---------------------------------------------------
+  // Not used by the map, which only ever sees canonical names — but validated
+  // here so a broken alias fails the build rather than surfacing months later
+  // as an import that silently drops a thousand trees.
+  const { conflicts } = buildSpeciesLookup(taxaRows, aliasRows);
+  for (const c of conflicts) {
+    err('species-aliases.csv', `alias "${c.alias}": ${c.reason}`);
+  }
+  const aliasCount = aliasRows.filter((r) => trim(r.alias)).length;
+
   // ---- campus areas ------------------------------------------------------
   // The campus outline and its five named sub-campuses, drawn as an optional
   // overlay. Geometry only: nothing else in the dataset depends on it, so a bad
@@ -339,6 +350,7 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
       collections: collections.length,
       trails: trailFeatures.length,
       campusAreas: areaFeatures.length,
+      aliases: aliasCount,
     },
   };
 
