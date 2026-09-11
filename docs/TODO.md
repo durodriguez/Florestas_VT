@@ -4,11 +4,11 @@ Recorded 11 September 2026, from a list you sent. Nothing here is built yet —
 this file exists so none of it gets lost. Each item has the ask, then what I'd
 suggest and what it would cost.
 
-Roughly in the order I'd do them: 1, 3, 5, 6 are small and independent. 2 and 4
+Roughly in the order I'd do them: 1, 3 and 6 are small and independent. 2 and 4
 follow 1. 8 and 9 are entangled with each other and with the ArcGIS import, so
 they want one design decision rather than two. 7 and 10 are the big ones.
 
-**11 is done** — see the bottom of this file.
+**5 and 11 are done** — marked below.
 
 ---
 
@@ -94,36 +94,30 @@ UVM tree needs someone who can vouch for it.
 **Cost.** Column: trivial. Filling 257 fun facts: a day of writing, and — as
 with the trait fill — expect roughly one in six to need a botanist's correction.
 
-## 5. Species autocomplete in the survey app
+## 5. Species autocomplete in the survey app — ✅ done, 11 September 2026
 
 **Ask.** Typing a few digits of a tag auto-populates; typing a species name does
 not. It should, from `taxa.csv`, for the many trees with no tag.
 
-**Suggestion.** This is the highest value-per-hour item on the list. It prevents
-typos at the source, which is worth more than fixing them afterwards: an
-unresolvable name found in October means going back to the tree.
+**Built.** The species box suggests from `taxa.csv` as you type and records the
+`taxon_id`, not just the text — so the importer has nothing left to resolve.
+Both names search, part-words match ("sug map" finds sugar maple), aliases are
+searchable, and equally good matches are ranked by how many of that species are
+already mapped. Free text still saves and is flagged in the notes.
 
-Build it on `scripts/lib/species.mjs`, which already does the hard part —
-normalisation and the alias table. Match on both scientific and common name in
-one box ("sugar maple" and "Acer saccharum" find the same row), and store the
-`taxon_id`, not the text, when a suggestion is accepted. Then the import has
-nothing to resolve.
+Two things worth knowing, both found by driving the real app rather than by
+reasoning about it:
 
-Two details that decide whether it gets used:
+- Typing a species' **full correct name** without tapping a suggestion counts
+  as picked. The first version told you *Metasequoia glyptostroboides* was not
+  on the list, when it is.
+- A name **two taxa share** is not a match. "Swedish whitebeam" is both
+  *Sorbus intermedia* and *Sorbus hybrida*, and only the surveyor can say
+  which, so the app asks instead of choosing.
 
-- **Free text must still save.** If a surveyor sees something not in `taxa.csv`,
-  the app must take what they type and flag it — an autocomplete that refuses
-  unknown input is worse than no autocomplete in a field where new species are
-  precisely what you want to hear about.
-- **Rank by what's actually on campus.** 2,500 trees, ~257 taxa, and a very long
-  tail. Sorting suggestions by how many trees of that taxon are already recorded
-  puts sugar maple above every other *Acer* on the first keystroke.
-
-Offline, so the taxa list has to be bundled into the PWA the way the 2014
-reference file already is.
-
-**Cost.** Medium — half a day. The matching logic exists and is tested; this is
-UI plus getting the list into the service worker's cache.
+The list is `public/field/species.json`, ~38 kB, cached on the device for
+offline use, and versioned so a phone picks up a new one rather than serving
+its first copy forever.
 
 ## 6. Finalise the detail panel
 

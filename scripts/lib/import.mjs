@@ -279,20 +279,36 @@ export function importSurvey({
     if (Object.values(row).every((v) => trim(v) === '')) return;
 
     // --- species -----------------------------------------------------------
+    // An explicit taxon_id wins. The field app fills it in when the surveyor
+    // picks from the species list, and an id resolved on the spot by somebody
+    // looking at the tree beats a name re-resolved at a desk weeks later.
     const speciesRaw = get(row, 'species');
-    if (!speciesRaw) {
-      error('no species recorded');
-      return;
-    }
-    const taxonId = species.get(norm(speciesRaw));
-    if (taxonId === undefined) {
-      unknownSpecies.set(speciesRaw, (unknownSpecies.get(speciesRaw) ?? 0) + 1);
-      error(`species "${speciesRaw}" is not in taxa.csv`);
-      return;
-    }
-    if (taxonId === null) {
-      error(`species "${speciesRaw}" matches more than one taxon — use the taxon_id`);
-      return;
+    const explicitId = get(row, 'taxon_id');
+    let taxonId;
+
+    if (explicitId) {
+      taxonId = species.get(norm(explicitId));
+      // null means the key is shared with another taxon's name, which an id is
+      // never supposed to be — report it rather than importing a null.
+      if (taxonId === undefined || taxonId === null) {
+        error(`taxon_id "${explicitId}" is not in taxa.csv`);
+        return;
+      }
+    } else {
+      if (!speciesRaw) {
+        error('no species recorded');
+        return;
+      }
+      taxonId = species.get(norm(speciesRaw));
+      if (taxonId === undefined) {
+        unknownSpecies.set(speciesRaw, (unknownSpecies.get(speciesRaw) ?? 0) + 1);
+        error(`species "${speciesRaw}" is not in taxa.csv`);
+        return;
+      }
+      if (taxonId === null) {
+        error(`species "${speciesRaw}" matches more than one taxon — use the taxon_id`);
+        return;
+      }
     }
 
     // --- coordinates -------------------------------------------------------

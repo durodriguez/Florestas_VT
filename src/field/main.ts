@@ -9,6 +9,11 @@ import {
 import {
   Reference, cacheReference, fetchServerReference, loadCachedReference, parseReference,
 } from './reference';
+import {
+  MAX_SUGGESTIONS, matchExact, resolveExact, searchSpecies,
+  type SpeciesEntry, type Suggestion,
+} from './species';
+import { getMeta, setMeta } from './db';
 import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
 import { download, stamp, toCsv, toPhotoZip } from './exporter';
 import { kb, shrinkPhoto } from './photo';
@@ -23,6 +28,9 @@ const $ = <T extends HTMLElement>(id: string): T => {
 };
 
 const reference = new Reference();
+let species: SpeciesEntry[] = [];
+let suggestions: Suggestion[] = [];
+let highlighted = -1;
 let photoBlob: Blob | null = null;
 let photoName: string | null = null;
 let pinAdjusted = false;
@@ -146,10 +154,21 @@ function renderTagLookup(): void {
       `<span>${escapeHtml(hit.common)}</span>` +
       `<span class="tag-meta">2014: ${escapeHtml(hit.dbh || '—')}″ DBH · ` +
       `${escapeHtml(hit.ageClass || '—')} · ${escapeHtml(hit.condition || '—')}</span>`;
-    const species = $<HTMLInputElement>('species');
-    if (!species.value.trim() || species.dataset.autofilled === '1') {
-      species.value = hit.botanical;
-      species.dataset.autofilled = '1';
+    const input = $<HTMLInputElement>('species');
+    if (!input.value.trim() || input.dataset.autofilled === '1') {
+      // The 2014 name comes from a botanical source, so it usually is a name
+      // taxa.csv knows. Resolving it here means a tagged tree carries a
+      // taxon_id too, rather than only untagged ones getting the benefit.
+      const entry = resolveExact(hit.botanical, species);
+      if (entry) {
+        setTaxon(entry, true);
+      } else {
+        input.value = hit.botanical;
+        delete input.dataset.taxonId;
+        input.dataset.autofilled = '1';
+        renderSpeciesNote();
+      }
+      closeSuggestions();
     }
     return;
   }
@@ -163,6 +182,150 @@ function renderTagLookup(): void {
           .map((t) => `<button type="button" class="tag-near" data-tag="${escapeHtml(t.tag)}">${escapeHtml(t.tag)} ${escapeHtml(t.common)}</button>`)
           .join(' ')}</span>`
       : '<span class="tag-meta">Check the digits, or record it as a new tree.</span>');
+}
+
+// ------------------------------------------------------- species autocomplete
+
+const SPECIES_KEY = 'species-list';
+
+/**
+ * The species list, from the cache first so the form is usable the instant the
+ * app opens and offline, then refreshed from the server in the background.
+ *
+ * The other way round would make a surveyor stand in a field waiting on a
+ * fetch that is not going to complete.
+ */
+async function initSpecies(): Promise<void> {
+  const cached = await getMeta<SpeciesEntry[]>(SPECIES_KEY);
+  if (cached?.length) species = cached;
+
+  try {
+    // Versioned because the service worker serves same-origin GETs from its
+    // cache first: at a fixed URL the first list a phone ever fetched would be
+    // the only list it ever saw, however many species were added since.
+    const res = await fetch(`${BASE}field/species.json?v=${__DATA_VERSION__}`);
+    if (!res.ok) return;
+    const fresh = (await res.json()) as SpeciesEntry[];
+    if (Array.isArray(fresh) && fresh.length) {
+      species = fresh;
+      await setMeta(SPECIES_KEY, fresh);
+    }
+  } catch {
+    /* offline, or no list published yet — typing the name still works */
+  }
+}
+
+/** The taxon the surveyor actually picked, or '' if they typed free text. */
+const pickedTaxon = (): string => $<HTMLInputElement>('species').dataset.taxonId ?? '';
+
+function setTaxon(entry: SpeciesEntry | undefined, autofilled: boolean): void {
+  const input = $<HTMLInputElement>('species');
+  if (entry) {
+    input.value = entry.sci;
+    input.dataset.taxonId = entry.id;
+  } else {
+    delete input.dataset.taxonId;
+  }
+  input.dataset.autofilled = autofilled ? '1' : '';
+  renderSpeciesNote();
+}
+
+/**
+ * Says whether the name in the box is one the desk will recognise. A surveyor
+ * cannot be expected to know what taxa.csv contains, and finding out in October
+ * that a name did not resolve is finding out far too late.
+ */
+function renderSpeciesNote(): void {
+  const note = $('species-note');
+  const typed = $<HTMLInputElement>('species').value.trim();
+  const id = pickedTaxon();
+
+  if (id) {
+    const entry = species.find((e) => e.id === id);
+    note.className = 'hint species-note species-note--set';
+    note.textContent = entry ? `On the list as ${entry.common}.` : 'On the list.';
+  } else if (!typed || species.length === 0) {
+    note.className = 'hint species-note';
+    note.textContent = '';
+  } else if (matchExact(typed, species).length > 1) {
+    // Two taxa share this name. Only the surveyor, standing under the tree,
+    // can say which — so say so rather than picking one of them.
+    note.className = 'hint species-note species-note--new';
+    note.textContent = 'More than one species goes by that name — pick one from the list.';
+  } else if (suggestions.length > 0) {
+    // Still mid-word, with matches on screen. Warning that a half-typed name is
+    // unknown, directly above a list containing it, is noise.
+    note.className = 'hint species-note';
+    note.textContent = '';
+  } else {
+    // Not an error. A tree nobody has recorded before is the most interesting
+    // thing a surveyor can find, and it saves exactly as it is typed.
+    note.className = 'hint species-note species-note--new';
+    note.textContent = 'Not on the species list — saved as typed, and flagged for review.';
+  }
+}
+
+function closeSuggestions(): void {
+  suggestions = [];
+  highlighted = -1;
+  const list = $('species-list');
+  list.hidden = true;
+  list.innerHTML = '';
+  $('species').setAttribute('aria-expanded', 'false');
+  renderSpeciesNote();
+}
+
+function renderSuggestions(): void {
+  const list = $('species-list');
+  if (suggestions.length === 0) return closeSuggestions();
+
+  list.innerHTML = suggestions
+    .map(({ entry }, i) => {
+      // The count is the only thing on screen that says "this one is all over
+      // campus" — worth the room it takes, and omitted at zero rather than
+      // printing "0 mapped" against every tree before the first survey lands.
+      const count = entry.n > 0 ? `<span class="combo-count">${entry.n} mapped</span>` : '';
+      return `<li role="presentation">
+        <button type="button" class="combo-opt" role="option" data-index="${i}"
+                aria-selected="${i === highlighted}">
+          <span class="combo-common">${escapeHtml(entry.common)}</span>
+          <span class="combo-sci">${escapeHtml(entry.sci)}</span>
+          ${count}
+        </button>
+      </li>`;
+    })
+    .join('');
+  list.hidden = false;
+  $('species').setAttribute('aria-expanded', 'true');
+}
+
+function renderSpeciesSearch(): void {
+  const input = $<HTMLInputElement>('species');
+  // Typing after picking means the pick no longer describes what is in the box.
+  delete input.dataset.taxonId;
+  // ...unless what is in the box is itself a name on the list. Someone who
+  // spells a species correctly should not have to tap a suggestion to confirm
+  // it, and must certainly not be told it is unknown.
+  const exact = resolveExact(input.value, species);
+  if (exact) input.dataset.taxonId = exact.id;
+  suggestions = searchSpecies(input.value, species, MAX_SUGGESTIONS);
+  highlighted = -1;
+  renderSuggestions();
+  renderSpeciesNote();
+}
+
+function highlight(delta: number): void {
+  if (suggestions.length === 0) return;
+  highlighted = (highlighted + delta + suggestions.length) % suggestions.length;
+  renderSuggestions();
+  $('species-list').querySelector('[aria-selected="true"]')?.scrollIntoView({ block: 'nearest' });
+}
+
+function accept(index: number): void {
+  const hit = suggestions[index];
+  if (!hit) return;
+  setTaxon(hit.entry, false);
+  closeSuggestions();
 }
 
 // ---------------------------------------------------------------- form
@@ -183,7 +346,8 @@ function resetForm(): void {
     $<HTMLInputElement>(id).value = '';
   }
   setPlantedUnknown(false);
-  $<HTMLInputElement>('species').dataset.autofilled = '';
+  setTaxon(undefined, false);
+  closeSuggestions();
   $<HTMLInputElement>('species-mismatch').checked = false;
   for (const b of $('condition-seg').querySelectorAll('[aria-checked]')) {
     b.setAttribute('aria-checked', 'false');
@@ -210,11 +374,11 @@ function clearPhoto(): void {
 
 async function save(): Promise<void> {
   const err = $('form-error');
-  const species = $<HTMLInputElement>('species').value.trim();
+  const speciesName = $<HTMLInputElement>('species').value.trim();
   const point = currentLatLng();
   const fix = gps.bestFix;
 
-  if (!species) return fail('Enter a species before saving.');
+  if (!speciesName) return fail('Enter a species before saving.');
 
   const plantedRaw = $<HTMLInputElement>('planted').value.trim();
   if (!plantedUnknown && plantedRaw !== '') {
@@ -244,7 +408,8 @@ async function save(): Promise<void> {
 
   await saveRecord({
     tag: $<HTMLInputElement>('tag').value.trim(),
-    species,
+    species: speciesName,
+    taxonId: pickedTaxon(),
     speciesMismatch: $<HTMLInputElement>('species-mismatch').checked,
     lat: point.lat,
     lng: point.lng,
@@ -359,9 +524,33 @@ $('tag-new').addEventListener('click', () => {
   $<HTMLInputElement>('species').dataset.autofilled = '';
   renderTagLookup();
   $('species').focus();
+  renderSpeciesSearch();
 });
-$('species').addEventListener('input', (e) => {
-  (e.target as HTMLInputElement).dataset.autofilled = '';
+$('species').addEventListener('input', renderSpeciesSearch);
+$('species').addEventListener('focus', renderSpeciesSearch);
+$('species').addEventListener('keydown', (e) => {
+  const key = (e as KeyboardEvent).key;
+  if (key === 'ArrowDown' || key === 'ArrowUp') {
+    e.preventDefault();
+    highlight(key === 'ArrowDown' ? 1 : -1);
+  } else if (key === 'Enter') {
+    // Enter with nothing highlighted keeps whatever was typed, which is what
+    // somebody entering a species the list has never heard of needs it to do.
+    if (highlighted >= 0) e.preventDefault();
+    accept(highlighted);
+    closeSuggestions();
+  } else if (key === 'Escape') {
+    closeSuggestions();
+  }
+});
+$('species-list').addEventListener('click', (e) => {
+  const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-index]');
+  if (btn) accept(Number(btn.dataset.index));
+});
+// A tap outside dismisses the list. Bound on pointerdown rather than click so
+// it fires before the keyboard closing shifts the layout under the finger.
+document.addEventListener('pointerdown', (e) => {
+  if (!(e.target as HTMLElement).closest('.combo')) closeSuggestions();
 });
 
 $('condition-seg').addEventListener('click', (e) => {
@@ -480,6 +669,7 @@ window.addEventListener('beforeunload', (e) => {
 });
 
 void initReference();
+void initSpecies();
 void refreshCount();
 gps.start();
 
@@ -493,5 +683,10 @@ if ('serviceWorker' in navigator) {
 
 // Surfaced for the browser test to drive without a real camera or GPS.
 Object.assign(window as unknown as Record<string, unknown>, {
-  __field: { getPhoto, allRecords, currentLatLng, isPinAdjusted: () => pinAdjusted },
+  __field: {
+    getPhoto, allRecords, currentLatLng,
+    isPinAdjusted: () => pinAdjusted,
+    speciesCount: () => species.length,
+    pickedTaxon,
+  },
 });

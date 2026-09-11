@@ -10,6 +10,9 @@ import type { SurveyRecord, PhotoBlob } from './db';
 /** Column names match survey/mapping.json, so the importer needs no config. */
 const COLUMNS: Array<[string, (r: SurveyRecord) => string]> = [
   ['tag', (r) => r.tag],
+  // Both, deliberately. taxon_id is what the importer matches on, and the name
+  // is what makes the file readable by the person reviewing it.
+  ['taxon_id', (r) => r.taxonId ?? ''],
   ['species', (r) => r.species],
   ['lat', (r) => (r.lat === null ? '' : r.lat.toFixed(6))],
   ['lng', (r) => (r.lng === null ? '' : r.lng.toFixed(6))],
@@ -38,6 +41,11 @@ function notesFor(r: SurveyRecord): string {
   }
   if (r.speciesMismatch) {
     parts.push('SPECIES MISMATCH: does not match the 2014 record for this tag — verify.');
+  }
+  // A name the species list did not recognise is either a new taxon for
+  // taxa.csv or a typo, and only someone at a desk can tell which.
+  if (!r.taxonId) {
+    parts.push(`SPECIES NOT ON LIST: "${r.species}" was typed by hand — check it`);
   }
   if (r.accuracy !== null) {
     parts.push(`GPS ±${r.accuracy.toFixed(0)} m${r.pinAdjusted ? ', pin adjusted on imagery' : ''}`);

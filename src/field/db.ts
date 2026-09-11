@@ -13,6 +13,12 @@ export interface SurveyRecord {
   tag: string;
   /** Scientific name, seeded from the reference and confirmed by the surveyor. */
   species: string;
+  /**
+   * The taxon the surveyor picked from the species list, or '' if they typed a
+   * name that is not on it. Exported alongside the text so the importer matches
+   * on an id rather than re-resolving prose weeks later.
+   */
+  taxonId: string;
   /** Set when the surveyor says the tree is not what the 2014 record claims. */
   speciesMismatch: boolean;
   lat: number | null;

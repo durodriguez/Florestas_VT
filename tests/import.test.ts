@@ -31,9 +31,9 @@ const observationRows = [
   { plant_id: 'UVM-2025-0007', surveyed_on: '2025-06-01', surveyor: 'EMR', dbh_in: '20', condition: 'good', status: 'active', notes: 'old note' },
 ];
 
-const headers = ['tag', 'species', 'lat', 'lng', 'area', 'dbh_in', 'condition', 'date', 'notes'];
+const headers = ['tag', 'taxon_id', 'species', 'lat', 'lng', 'area', 'dbh_in', 'condition', 'date', 'notes'];
 const row = (over: Record<string, string> = {}) => ({
-  tag: '', species: 'Sugar maple', lat: '44.4779', lng: '-73.1955',
+  tag: '', taxon_id: '', species: 'Sugar maple', lat: '44.4779', lng: '-73.1955',
   area: 'University Green', dbh_in: '30', condition: 'good', date: '2026-09-01',
   notes: '', ...over,
 });
@@ -257,6 +257,48 @@ describe('importSurvey — coordinates', () => {
   it('rounds stored coordinates to six decimal places', () => {
     const r = run([row({ lat: '44.47791234567' })]);
     expect(r.inserts[0].lat).toBe('44.477912');
+  });
+});
+
+describe('importSurvey — taxon_id from the field app', () => {
+  it('uses an explicit taxon_id', () => {
+    const r = run([row({ taxon_id: 'acer-rubrum', species: '' })]);
+    expect(r.summary.errors).toBe(0);
+    expect(r.inserts[0].taxon_id).toBe('acer-rubrum');
+  });
+
+  it('trusts the id over the name beside it', () => {
+    // The surveyor picked a taxon from the list; the text is whatever was in
+    // the box at the time, and the id is the deliberate act.
+    const r = run([row({ taxon_id: 'pinus-strobus', species: 'Sugar maple' })]);
+    expect(r.inserts[0].taxon_id).toBe('pinus-strobus');
+  });
+
+  it('still reads the name when no id was recorded', () => {
+    const r = run([row({ taxon_id: '', species: 'Red maple' })]);
+    expect(r.inserts[0].taxon_id).toBe('acer-rubrum');
+  });
+
+  it('resolves a name that would be ambiguous, given the id', () => {
+    const ambiguous = [
+      ...taxaRows,
+      { taxon_id: 'sorbus-intermedia', scientific_name: 'Sorbus intermedia', common_name: 'Swedish whitebeam', genus: 'Sorbus', species: 'intermedia' },
+      { taxon_id: 'sorbus-hybrida', scientific_name: 'Sorbus hybrida', common_name: 'Swedish whitebeam', genus: 'Sorbus', species: 'hybrida' },
+    ];
+    const byName = run([row({ species: 'Swedish whitebeam' })], { taxaRows: ambiguous });
+    expect(byName.issues.some((i: { message: string }) => /more than one taxon/.test(i.message))).toBe(true);
+
+    const byId = run([row({ taxon_id: 'sorbus-hybrida', species: 'Swedish whitebeam' })], { taxaRows: ambiguous });
+    expect(byId.summary.errors).toBe(0);
+    expect(byId.inserts[0].taxon_id).toBe('sorbus-hybrida');
+  });
+
+  it('refuses an id that is not in taxa.csv rather than falling back to the name', () => {
+    // Falling back would import the tree under whatever the text happened to
+    // say, hiding a species list that has drifted from the app's copy.
+    const r = run([row({ taxon_id: 'acer-invented', species: 'Sugar maple' })]);
+    expect(r.inserts).toHaveLength(0);
+    expect(r.issues.some((i: { message: string }) => /taxon_id "acer-invented" is not in taxa.csv/.test(i.message))).toBe(true);
   });
 });
 

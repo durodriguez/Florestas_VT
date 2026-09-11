@@ -34,7 +34,15 @@
     <!-- 2. species -------------------------------------------------------- -->
     <section class="card">
       <label class="field-label" for="species">Species</label>
-      <input id="species" type="text" autocomplete="off" placeholder="Scientific or common name">
+      <div class="combo">
+        <input id="species" type="text" autocomplete="off" autocapitalize="off"
+               spellcheck="false" placeholder="Scientific or common name"
+               role="combobox" aria-expanded="false" aria-autocomplete="list"
+               aria-controls="species-list">
+        <ul id="species-list" class="combo-list" role="listbox"
+            aria-label="Matching species" hidden></ul>
+      </div>
+      <p id="species-note" class="hint species-note"></p>
       <label class="check">
         <input type="checkbox" id="species-mismatch">
         <span>This is <strong>not</strong> what the 2014 record says</span>

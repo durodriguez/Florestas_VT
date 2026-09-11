@@ -9,12 +9,17 @@
     "",
     "`conditions` maps the words your crew actually writes onto the five",
     "controlled condition values. An unrecognised value stops that row with a",
-    "clear message rather than silently importing a blank."
+    "clear message rather than silently importing a blank.",
+    "",
+    "`taxon_id` wins over `species` where both are present. The field app fills",
+    "it in when the surveyor picks from the species list, and an exact id can",
+    "never be ambiguous the way a name can."
   ],
 
   "columns": {
     "plant_id":     ["plant_id", "tag", "tag_no", "accession", "accession_no", "existing_tag", "label"],
-    "species":      ["species", "taxon", "taxon_id", "common_name", "scientific_name", "botanical_name", "spp", "sp"],
+    "taxon_id":     ["taxon_id", "taxon"],
+    "species":      ["species", "common_name", "scientific_name", "botanical_name", "spp", "sp"],
     "lat":          ["lat", "latitude", "y", "gps_lat", "lat_location", "northing"],
     "lng":          ["lng", "lon", "long", "longitude", "x", "gps_lon", "long_location", "easting"],
     "latlng":       ["latlng", "lat_lng", "coordinates", "coords", "geometry", "wkt", "position", "gps"],

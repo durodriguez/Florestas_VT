@@ -110,8 +110,12 @@ The importer does the tedious, error-prone work:
 
 - **Assigns accession numbers** in your scheme, continuing from the highest one
   already issued that year. Leave the `tag` column blank for a new plant.
-- **Resolves species** from a common name, a scientific name or a `taxon_id`.
-  A name matching two taxa is refused rather than guessed at.
+- **Takes the `taxon_id` where the app recorded one**, which is whenever the
+  surveyor picked from the species list. An id resolved on the spot by someone
+  looking at the tree beats a name re-resolved at a desk weeks later, and it
+  cannot be ambiguous the way a name can. Failing that it **resolves species**
+  from a common name or a scientific name, and refuses a name matching two taxa
+  rather than guessing at it.
 - **Normalises vocabulary** — `EXC`, `Very Good`, `g` all become the right
   `condition` value. Campus areas resolve by display name.
 - **Reads whatever coordinate format your app emitted** — decimal degrees,

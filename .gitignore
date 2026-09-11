@@ -1,6 +1,7 @@
 node_modules/
 dist/
 public/data/
+public/field/species.json
 public/labels/
 .DS_Store
 *.local

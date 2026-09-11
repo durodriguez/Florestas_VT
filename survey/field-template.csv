@@ -1,5 +1,5 @@
-tag,species,lat,lng,area,dbh_in,height_ft,spread_ft,condition,surveyor,date,photo,notes
-771,Common baldcypress,44.476680,-73.194840,,6.2,24,14,Good,DR,2026-09-02,,First survey of a tagged tree
-774,Acer palmatum,44.477020,-73.195310,,4.1,12,11,EXC,DR,2026-09-02,,Species given as a scientific name
-772,Taxodium distichum,44.476609,-73.194780,,10.4,35,,excellent,DR,2026-09-02,,Re-survey of a tree already on file
-,sugar maple,44.478210,-73.194310,,32.5,68,55,fair,DR,2026-09-02,,No tag - gets a fresh accession number
+tag,taxon_id,species,lat,lng,area,dbh_in,height_ft,spread_ft,condition,surveyor,date,photo,notes
+771,taxodium-distichum,Common baldcypress,44.476680,-73.194840,,6.2,24,14,Good,DR,2026-09-02,,First survey of a tagged tree
+774,,Acer palmatum,44.477020,-73.195310,,4.1,12,11,EXC,DR,2026-09-02,,Species given as a scientific name
+772,taxodium-distichum,Taxodium distichum,44.476609,-73.194780,,10.4,35,,excellent,DR,2026-09-02,,Re-survey of a tree already on file
+,,sugar maple,44.478210,-73.194310,,32.5,68,55,fair,DR,2026-09-02,,No tag - gets a fresh accession number
