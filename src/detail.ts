@@ -1,4 +1,4 @@
-import type { Dataset, Plant } from './types';
+import type { Dataset, Observation, Plant } from './types';
 import { escapeHtml } from './map';
 import { ORIGIN_LABELS, TYPE_LABELS } from './palette';
 
@@ -27,6 +27,60 @@ function row(label: string, value: string | null | undefined): string {
 
 const numOr = (v: number | null, unit: string): string | null =>
   v === null ? null : `${v}${unit}`;
+
+/** "2026-09-01" -> "Sep 2026". Days are noise across a multi-year series. */
+function surveyDate(iso: string): string {
+  const [year, month] = iso.split('-');
+  return `${MONTHS[Number(month)] ?? ''} ${year}`.trim();
+}
+
+/**
+ * Every visit, newest first, for a plant surveyed more than once. This is the
+ * whole point of keeping observations rather than overwriting them: a single
+ * row can say how big a tree is, but only a series can say it is growing, or
+ * that it started declining two surveys ago.
+ */
+function renderHistory(plant: Plant): string {
+  if (plant.history.length < 2) return '';
+
+  const rows = [...plant.history].reverse().map((o: Observation) => {
+    const measures = [
+      o.dbhIn === null ? null : `${o.dbhIn}&Prime; DBH`,
+      o.heightFt === null ? null : `${o.heightFt} ft tall`,
+    ].filter(Boolean).join(' &middot; ');
+    return `
+      <li class="survey">
+        <span class="survey-date">${escapeHtml(surveyDate(o.surveyedOn))}</span>
+        <span class="survey-body">
+          ${o.condition ? `<span class="pill pill--${o.condition}">${escapeHtml(titleCase(o.condition))}</span>` : ''}
+          ${measures ? `<span class="survey-measures">${measures}</span>` : ''}
+          ${o.status !== 'active' ? `<span class="survey-measures">${escapeHtml(titleCase(o.status))}</span>` : ''}
+        </span>
+      </li>`;
+  });
+
+  return `
+    <h3 class="detail-section">Survey history</h3>
+    ${growth(plant)}
+    <ul class="surveys">${rows.join('')}</ul>`;
+}
+
+/**
+ * Growth between the first and last survey that measured a trunk — skipped
+ * unless both ends have a diameter, since a change from nothing is not growth.
+ */
+function growth(plant: Plant): string {
+  const measured = plant.history.filter((o) => o.dbhIn !== null);
+  if (measured.length < 2) return '';
+  const first = measured[0]!;
+  const last = measured.at(-1)!;
+  const gained = (last.dbhIn as number) - (first.dbhIn as number);
+  if (gained <= 0) return '';
+  const years = Number(last.surveyedOn.slice(0, 4)) - Number(first.surveyedOn.slice(0, 4));
+  const span = years > 0 ? ` over ${years} year${years === 1 ? '' : 's'}` : '';
+  return `<p class="detail-growth">Grew ${gained.toFixed(1)}&Prime; in trunk diameter${span},
+    from ${first.dbhIn}&Prime; to ${last.dbhIn}&Prime;.</p>`;
+}
 
 export function renderDetail(plant: Plant, dataset: Dataset, base: string): string {
   const t = plant.taxon;
@@ -68,10 +122,14 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
       ${row('Canopy spread', numOr(plant.spreadFt, ' ft'))}
       ${row('Condition', plant.condition ? `<span class="pill pill--${plant.condition}">${escapeHtml(titleCase(plant.condition))}</span>` : null)}
       ${row('Planted', plant.plantedYear ? `${plant.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
-      ${row('Last surveyed', plant.surveyedOn)}
+      ${row('Last surveyed', plant.surveyedOn
+        ? `${escapeHtml(surveyDate(plant.surveyedOn))}${plant.history.length > 1 ? ` (${plant.history.length} surveys)` : ''}`
+        : 'Not yet surveyed')}
       ${row('Coordinates', `${plant.lat.toFixed(6)}, ${plant.lng.toFixed(6)}`)}
       ${row('Notes', plant.notes ? escapeHtml(plant.notes) : null)}
     </dl>
+
+    ${renderHistory(plant)}
 
     <h3 class="detail-section">About ${escapeHtml(t.common)}</h3>
     <dl class="facts">

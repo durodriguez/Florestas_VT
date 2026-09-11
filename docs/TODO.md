@@ -5,8 +5,10 @@ this file exists so none of it gets lost. Each item has the ask, then what I'd
 suggest and what it would cost.
 
 Roughly in the order I'd do them: 1, 3, 5, 6 are small and independent. 2 and 4
-follow 1. 8, 9 and 11 are entangled with each other and with the ArcGIS import,
-so they want one design decision rather than three. 7 and 10 are the big ones.
+follow 1. 8 and 9 are entangled with each other and with the ArcGIS import, so
+they want one design decision rather than two. 7 and 10 are the big ones.
+
+**11 is done** — see the bottom of this file.
 
 ---
 
@@ -312,43 +314,37 @@ one photo per tree is ever filled in.
 regardless of where the files end up. Storage: depends entirely on what UVM can
 offer, which is worth asking about in the same conversation as the ETS request.
 
-## 11. Updating the data over time
+## 11. Updating the data over time — ✅ done, 11 September 2026
 
 **Ask.** The system handles a one-time inventory well. It needs to support an
 inventory in 2026, an update in 2028, and keeping the history.
 
-**Suggestion.** This is the most structural item here, and the one where the
-current design will quietly fail: `plants.csv` holds *one* row per tree,
-describing it *now*. Re-surveying overwrites — the 2028 DBH replaces the 2026
-DBH, and the growth is gone. Not an error anyone sees; the number is just
-silently no longer a record of anything.
+**Built.** `plants.csv` now holds identity only — what a tree is and where it
+stands. Every measurement moved to `data/observations.csv`, one row per plant
+per visit, append-only. The map shows each plant's most recent observation, so
+nothing about it looks different; the detail panel grows a **Survey history**
+section once a plant has been visited twice, with a line saying how much the
+trunk grew between the first and last measured visit.
 
-The fix is to separate what a tree *is* from what was *observed* about it:
+The importer no longer overwrites anything measured: a re-survey appends an
+observation, and only a correction to the tree's *identity* touches
+`plants.csv`. Re-importing the same export is refused, because the tree already
+has an observation on that date.
 
-- **`plants.csv`** keeps what does not change: id, taxon, position, planting
-  year, dedication. One row per tree, still.
-- **A new observations file** — one row per tree per survey: date, surveyor,
-  DBH, height, spread, condition, photo. Append-only. Nothing is ever
-  overwritten.
-- The map shows the **most recent** observation for each tree, which is what it
-  shows today, so nothing visibly changes on day one.
+Two things fell out of it worth knowing:
 
-What that buys, essentially for free once the shape is right: growth over time
-(the interesting part of a tree map, and the part every other campus map is
-missing); condition trending downward as an early warning; "surveyed 2026,
-re-surveyed 2028"; and an honest answer to "when was this measured?" — which
-matters more the older the data gets.
+- A plant with **no observations at all** is now a valid, normal record — a
+  tree somebody plotted but nobody has surveyed. That is most of what the
+  ArcGIS import will hand us, and it would have needed inventing otherwise.
+- Removal is a final observation with `status: removed`, not an edit. The
+  tree's whole life stays readable, which is what makes a "trees we have lost"
+  view possible later.
 
-It also handles removals properly. A tree that comes down is not deleted; it
-gets a final observation with `status: removed`, and the map can offer a
-"trees we have lost" view, which is often the most-read page on maps like this.
+Still open, deliberately: `status` is derived from the latest observation
+rather than cached on `plants.csv`. Deriving cannot drift; caching would make
+"show me the removed trees" a one-file lookup. Worth revisiting only if that
+query gets slow, which at 2,061 rows it will not.
 
-**Do this before the ArcGIS import, not after.** Restructuring 6 rows is
-trivial; restructuring 2,061 rows that other things already depend on is not.
-Of everything on this list, this is the one where waiting has a real cost.
-
-**Cost.** Medium — a day or two of restructuring, touching the build, the
-import, the field export and the detail panel. Cheap now, expensive later.
 
 ---
 

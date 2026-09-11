@@ -7,7 +7,7 @@
 // that variation without silently guessing — anything ambiguous stops the row
 // and is reported, rather than being imported wrong.
 
-import { CONDITIONS } from './vocab.mjs';
+import { CONDITIONS, TAXON_COLUMNS } from './vocab.mjs';
 
 const trim = (v) => (typeof v === 'string' ? v.trim() : v ?? '');
 
@@ -70,7 +70,9 @@ export function parseLatLng(value) {
   return null;
 }
 
-const NUMERIC_FIELDS = new Set(['dbh_in', 'height_ft', 'spread_ft', 'planted_year']);
+// Only identity fields are ever compared against what is already on file;
+// measurements are appended as a new observation rather than diffed.
+const NUMERIC_FIELDS = new Set(['planted_year']);
 
 /**
  * Did a re-survey actually change this field? Compared loosely on purpose:
@@ -211,7 +213,8 @@ function buildConditionLookup(conditionAliases) {
 
 /**
  * @returns {{
- *   inserts: object[], updates: {plant_id: string, changes: object}[],
+ *   inserts: object[], observations: object[],
+ *   updates: {plant_id: string, changes: object}[],
  *   issues: {row: number, level: 'error'|'warning', message: string}[],
  *   unknownSpecies: Map<string, number>, unmapped: string[], summary: object
  * }}
@@ -222,6 +225,7 @@ export function importSurvey({
   mapping,
   taxaRows,
   plantRows,
+  observationRows = [],
   collectionRows,
   config,
   year = new Date().getFullYear(),
@@ -242,9 +246,27 @@ export function importSurvey({
   const takenIds = new Set(existing.keys());
 
   const inserts = [];
+  const observations = [];
   const updates = [];
   const issues = [];
   const unknownSpecies = new Map();
+
+  // A survey already on file for this tree on this date. Importing the same
+  // export twice is the ordinary way this happens, and appending the readings
+  // again would put two versions of one visit in the history.
+  const seenObservations = new Set(
+    observationRows.map((o) => `${trim(o.plant_id)}\u0000${trim(o.surveyed_on)}`),
+  );
+  const recordObservation = (plantId, observation, error) => {
+    const key = `${plantId}\u0000${observation.surveyed_on}`;
+    if (seenObservations.has(key)) {
+      error(`${plantId} already has an observation dated ${observation.surveyed_on} — already imported?`);
+      return false;
+    }
+    seenObservations.add(key);
+    observations.push({ plant_id: plantId, ...observation });
+    return true;
+  };
 
   const get = (row, field) => (resolved[field] ? trim(row[resolved[field]]) : '');
 
@@ -326,23 +348,49 @@ export function importSurvey({
       measures[field] = v === null ? '' : String(v);
     }
 
+    // --- identity, and what was observed on the day ------------------------
+    // The split that matters: `record` is what the tree is, and never changes
+    // because someone measured it; `observation` is one visit, appended to the
+    // history rather than overwriting the visit before it.
     const record = {
       taxon_id: taxonId,
       lat: lat.toFixed(6),
       lng: lng.toFixed(6),
       collection_id: collection,
-      ...measures,
+      planted_year: measures.planted_year,
+      memorial: get(row, 'memorial'),
+    };
+
+    const surveyedOn = get(row, 'surveyed_on');
+    const observation = {
+      surveyed_on: surveyedOn,
+      surveyor: get(row, 'surveyor'),
+      dbh_in: measures.dbh_in,
+      height_ft: measures.height_ft,
+      spread_ft: measures.spread_ft,
       condition,
       status: 'active',
-      surveyed_on: get(row, 'surveyed_on'),
-      surveyor: get(row, 'surveyor'),
       photo: get(row, 'photo'),
-      memorial: get(row, 'memorial'),
       notes: get(row, 'notes'),
     };
 
-    // --- new accession, or an update to an existing one --------------------
-    // --- new accession, or an update to an existing one --------------------
+    // A reading with no date cannot be placed in the history, and the history
+    // is the whole point — where it sits in the series is what makes it mean
+    // anything. A row with no date and nothing measured is fine: that is a
+    // position somebody plotted, and it becomes a plant with no survey yet.
+    const measured = Object.entries(observation)
+      .filter(([k]) => k !== 'surveyed_on' && k !== 'status')
+      .some(([, v]) => trim(v) !== '');
+    if (!surveyedOn && measured) {
+      error('recorded a measurement but no survey date — add a date column, or drop the measurements');
+      return;
+    }
+    if (surveyedOn && !/^\d{4}-\d{2}-\d{2}$/.test(surveyedOn)) {
+      error(`survey date "${surveyedOn}" must be written as YYYY-MM-DD`);
+      return;
+    }
+
+    // --- new accession, or another visit to an existing one ----------------
     const tag = get(row, 'plant_id');
     if (tag) {
       // A bare number is a physical tag stamped on the tree. Its accession is
@@ -363,6 +411,7 @@ export function importSurvey({
           }
           takenIds.add(asAccession);
           inserts.push({ plant_id: asAccession, ...record });
+          if (surveyedOn) recordObservation(asAccession, observation, error);
           return;
         }
         error(
@@ -371,6 +420,11 @@ export function importSurvey({
         );
         return;
       }
+      // The visit itself is always recorded. Only corrections to the tree's
+      // identity touch plants.csv — a re-measured trunk is new history, not an
+      // edit, which is the whole reason the two files are separate.
+      const recorded = surveyedOn ? recordObservation(known, observation, error) : false;
+
       // Only carry across what the surveyor actually recorded, so a re-survey
       // that skipped a field does not blank out good data already on file.
       const before = existing.get(known);
@@ -380,11 +434,8 @@ export function importSurvey({
         if (!isChanged(k, before[k], v, movedMeters, before, record)) continue;
         changes[k] = v;
       }
-      if (Object.keys(changes).length === 0) {
-        warn(`tag "${tag}" re-surveyed with no changed values`);
-        return;
-      }
-      updates.push({ plant_id: known, changes });
+      if (Object.keys(changes).length > 0) updates.push({ plant_id: known, changes });
+      else if (!recorded && !surveyedOn) warn(`tag "${tag}" carries nothing new to record`);
       return;
     }
 
@@ -392,6 +443,7 @@ export function importSurvey({
     while (takenIds.has(id)) id = formatAccession(prefix, year, seq++);
     takenIds.add(id);
     inserts.push({ plant_id: id, ...record });
+    if (surveyedOn) recordObservation(id, observation, error);
   });
 
   // A field export carries no accession for a new plant, so importing the same
@@ -432,6 +484,7 @@ export function importSurvey({
 
   return {
     inserts,
+    observations,
     updates,
     duplicates,
     issues,
@@ -441,6 +494,7 @@ export function importSurvey({
     summary: {
       read: rows.length,
       inserts: inserts.length,
+      observations: observations.length,
       updates: updates.length,
       duplicates: duplicates.length,
       errors: issues.filter((i) => i.level === 'error').length,
@@ -453,6 +507,12 @@ export function importSurvey({
 export function taxaStubs(unknownSpecies) {
   return [...unknownSpecies.keys()].map((name) => {
     const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    return `${slug},${name},,,,,,,tree,deciduous,,,,,,,,,,`;
+    // taxon_id, scientific_name, then blanks through to description, with a
+    // guessed plant_type in the ninth column to be corrected by hand.
+    const row = new Array(TAXON_COLUMNS.length).fill('');
+    row[0] = slug;
+    row[1] = name;
+    row[TAXON_COLUMNS.indexOf('plant_type')] = 'deciduous-tree';
+    return row.join(',');
   });
 }

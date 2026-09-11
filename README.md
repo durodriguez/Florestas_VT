@@ -115,7 +115,7 @@ species never reaches the live site.
 | `npm run dev` | Rebuild data, start the dev server |
 | `npm run data` | Validate `data/*.csv` and regenerate `public/data/` |
 | `npm run build` | Validate, typecheck and build to `dist/` |
-| `npm run import -- <file.csv>` | Merge a field-survey export into `data/plants.csv` (dry run by default) |
+| `npm run import -- <file.csv>` | Merge a field-survey export into `data/plants.csv` and `data/observations.csv` (dry run by default) |
 | `npm run areas` | File each plant under the campus area its coordinates fall in (dry run by default) |
 | `npm run check:species -- <file>` | Report how a source file's species names resolve against `taxa.csv` |
 | `npm run labels` | Generate QR label sheet and SVGs into `public/labels/` |

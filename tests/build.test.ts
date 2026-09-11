@@ -25,6 +25,13 @@ const plant = (over: Record<string, string> = {}) => ({
   lat: '44.4779',
   lng: '-73.1956',
   collection_id: 'green',
+  ...over,
+});
+
+const observation = (over: Record<string, string> = {}) => ({
+  plant_id: 'UVM-0001',
+  surveyed_on: '2026-09-01',
+  surveyor: 'EMR',
   condition: 'good',
   status: 'active',
   ...over,
@@ -50,12 +57,112 @@ const build = (over: Partial<Parameters<typeof buildDataset>[0]> = {}) =>
   buildDataset({
     taxaRows: [taxon()],
     plantRows: [plant()],
+    observationRows: [observation()],
     collectionRows: [collection],
     trails: { type: 'FeatureCollection', features: [] },
     campusAreas: { type: 'FeatureCollection', features: [] },
     config,
     ...over,
   });
+
+const field = (r: { plants: { fields: string[]; rows: unknown[][] } }, i: number, name: string) =>
+  r.plants.rows[i]![r.plants.fields.indexOf(name)];
+
+describe('buildDataset — observations', () => {
+  it('shows the most recent observation, not the first', () => {
+    const r = build({
+      observationRows: [
+        observation({ surveyed_on: '2026-09-01', dbh_in: '12', condition: 'good' }),
+        observation({ surveyed_on: '2028-10-14', dbh_in: '16', condition: 'fair' }),
+      ],
+    });
+    expect(r.errors).toEqual([]);
+    expect(field(r, 0, 'dbh_in')).toBe(16);
+    expect(field(r, 0, 'surveyed_on')).toBe('2028-10-14');
+    expect(field(r, 0, 'surveys')).toBe(2);
+  });
+
+  it('orders by date, not by row order', () => {
+    const r = build({
+      observationRows: [
+        observation({ surveyed_on: '2028-10-14', dbh_in: '16' }),
+        observation({ surveyed_on: '2026-09-01', dbh_in: '12' }),
+      ],
+    });
+    expect(field(r, 0, 'dbh_in')).toBe(16);
+    expect(r.plants.history['UVM-0001']!.map((o: unknown[]) => o[0]))
+      .toEqual(['2026-09-01', '2028-10-14']);
+  });
+
+  it('keeps the whole series for a plant surveyed more than once', () => {
+    const r = build({
+      observationRows: [
+        observation({ surveyed_on: '2026-09-01', dbh_in: '12' }),
+        observation({ surveyed_on: '2028-10-14', dbh_in: '16' }),
+      ],
+    });
+    const series = r.plants.history['UVM-0001'];
+    expect(series).toHaveLength(2);
+    expect(series[0]![r.plants.observationFields.indexOf('dbh_in')]).toBe(12);
+  });
+
+  it('sends no history for a plant surveyed once — the row already says it', () => {
+    const r = build();
+    expect(r.plants.history).toEqual({});
+    expect(field(r, 0, 'surveys')).toBe(1);
+  });
+
+  it('accepts a mapped plant nobody has surveyed yet', () => {
+    const r = build({ observationRows: [] });
+    expect(r.errors).toEqual([]);
+    expect(field(r, 0, 'surveyed_on')).toBeNull();
+    expect(field(r, 0, 'condition')).toBe(-1);
+    expect(field(r, 0, 'surveys')).toBe(0);
+    expect(r.dataset.counts.unsurveyed).toBe(1);
+    // Still a live tree on the map, and still counted for its species.
+    expect(r.dataset.counts.active).toBe(1);
+  });
+
+  it('takes status from the latest observation, so a removal is the last word', () => {
+    const r = build({
+      observationRows: [
+        observation({ surveyed_on: '2026-09-01', status: 'active' }),
+        observation({ surveyed_on: '2029-06-02', status: 'removed', condition: 'dead' }),
+      ],
+    });
+    expect(r.dataset.counts.active).toBe(0);
+    expect(r.dataset.taxa[0]!.count).toBe(0);
+  });
+
+  it('rejects an observation of a plant that is not in plants.csv', () => {
+    const r = build({ observationRows: [observation({ plant_id: 'UVM-9999' })] });
+    expect(r.errors.join()).toMatch(/UVM-9999.*no matching row in plants.csv/);
+  });
+
+  it('rejects two observations of one plant on one day', () => {
+    const r = build({
+      observationRows: [observation({ dbh_in: '12' }), observation({ dbh_in: '16' })],
+    });
+    expect(r.errors.join()).toMatch(/already has an observation dated 2026-09-01/);
+  });
+
+  it('rejects a date it cannot sort by', () => {
+    // "2026-9-1" would sort after "2026-10-14" and quietly make the older
+    // reading the current one.
+    const r = build({ observationRows: [observation({ surveyed_on: '2026-9-1' })] });
+    expect(r.errors.join()).toMatch(/must be a date as YYYY-MM-DD/);
+  });
+
+  it('requires a survey date', () => {
+    const r = build({ observationRows: [observation({ surveyed_on: '' })] });
+    expect(r.errors.join()).toMatch(/missing required field "surveyed_on"/);
+  });
+
+  it('sends a measurement left on a plants.csv row back where it belongs', () => {
+    const r = build({ plantRows: [plant({ dbh_in: '20' })] });
+    expect(r.errors.join()).toMatch(/"dbh_in" belongs in observations.csv/);
+  });
+});
 
 describe('buildDataset', () => {
   it('builds a clean dataset with no errors', () => {
@@ -94,7 +201,7 @@ describe('buildDataset', () => {
   });
 
   it('rejects a condition outside the controlled vocabulary', () => {
-    const r = build({ plantRows: [plant({ condition: 'pretty good' })] });
+    const r = build({ observationRows: [observation({ condition: 'pretty good' })] });
     expect(r.errors.join()).toMatch(/condition "pretty good" is not one of/);
   });
 
@@ -141,14 +248,15 @@ describe('buildDataset', () => {
 
   it('counts only active plants toward a taxon total', () => {
     const r = build({
-      plantRows: [plant(), plant({ plant_id: 'UVM-0002', status: 'removed' })],
+      plantRows: [plant(), plant({ plant_id: 'UVM-0002' })],
+      observationRows: [observation(), observation({ plant_id: 'UVM-0002', status: 'removed' })],
     });
     expect(r.dataset.taxa[0].count).toBe(1);
     expect(r.dataset.counts).toMatchObject({ plants: 2, active: 1 });
   });
 
   it('treats a blank status as active', () => {
-    const r = build({ plantRows: [plant({ status: '' })] });
+    const r = build({ observationRows: [observation({ status: '' })] });
     expect(r.errors).toEqual([]);
     expect(r.dataset.counts.active).toBe(1);
   });

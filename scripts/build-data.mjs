@@ -43,6 +43,7 @@ function readCsv(name) {
 const result = buildDataset({
   taxaRows: readCsv('taxa.csv'),
   plantRows: readCsv('plants.csv'),
+  observationRows: readCsv('observations.csv'),
   collectionRows: readCsv('collections.csv'),
   trails: JSON.parse(readFileSync(join(dataDir, 'trails.geojson'), 'utf8')),
   campusAreas: JSON.parse(readFileSync(join(dataDir, 'campus-areas.geojson'), 'utf8')),
@@ -77,8 +78,8 @@ writeFileSync(join(outDir, 'plants.json'), plantsJson);
 // make every visitor re-download data that had not actually changed.
 const version = createHash('sha256')
   .update(
-    ['taxa.csv', 'plants.csv', 'collections.csv', 'trails.geojson', 'campus-areas.geojson',
-      'species-aliases.csv', 'config.json']
+    ['taxa.csv', 'plants.csv', 'observations.csv', 'collections.csv', 'trails.geojson',
+      'campus-areas.geojson', 'species-aliases.csv', 'config.json']
       .map((name) => readFileSync(join(dataDir, name)))
       .reduce((a, b) => Buffer.concat([a, b]), Buffer.alloc(0)),
   )
@@ -93,6 +94,10 @@ console.log(
   `${c.collections} collections · ${c.trails} trails · ${c.campusAreas} campus areas · ` +
   `${c.aliases} species aliases` +
   `${result.warnings.length ? ` · ${result.warnings.length} warning(s)` : ''}`
+);
+console.log(
+  `  ${c.observations} observation(s) · ${c.resurveyed} plant(s) surveyed more than once · ` +
+  `${c.unsurveyed} never surveyed`,
 );
 console.log(`  public/data/dataset.json  ${kb(datasetJson)}`);
 console.log(`  public/data/plants.json   ${kb(plantsJson)}`);
