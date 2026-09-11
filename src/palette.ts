@@ -32,13 +32,13 @@ const FALLBACK = '#6b7280';
 
 /** Display names. The stored values stay hyphenated and lowercase. */
 export const TYPE_LABELS: Record<string, string> = {
-  'deciduous-tree': 'Deciduous trees',
-  'evergreen-tree': 'Evergreen trees',
-  shrub: 'Shrubs & bushes',
-  perennial: 'Perennials',
-  annual: 'Annuals',
-  vine: 'Vines & climbers',
-  grass: 'Grasses',
+  'deciduous-tree': 'Deciduous tree',
+  'evergreen-tree': 'Evergreen tree',
+  shrub: 'Shrub/bush',
+  perennial: 'Perennial',
+  annual: 'Annual',
+  vine: 'Vine/climber',
+  grass: 'Grass',
 };
 
 export const ORIGIN_LABELS: Record<string, string> = {
