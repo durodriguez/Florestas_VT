@@ -68,6 +68,60 @@ const build = (over: Partial<Parameters<typeof buildDataset>[0]> = {}) =>
 const field = (r: { plants: { fields: string[]; rows: unknown[][] } }, i: number, name: string) =>
   r.plants.rows[i]![r.plants.fields.indexOf(name)];
 
+describe('buildDataset — dedications', () => {
+  const dedicated = (r: { plants: { fields: string[]; rows: unknown[][] } }) =>
+    r.plants.rows[0]![r.plants.fields.indexOf('dedicated')];
+  const label = (r: { plants: { fields: string[]; rows: unknown[][] } }) =>
+    r.plants.rows[0]![r.plants.fields.indexOf('dedication_label')];
+
+  it('carries the flag and the wording separately', () => {
+    const r = build({
+      plantRows: [plant({ dedicated: 'yes', dedication_label: 'In memory of John Dewey' })],
+    });
+    expect(r.errors).toEqual([]);
+    expect(dedicated(r)).toBe(1);
+    expect(label(r)).toBe('In memory of John Dewey');
+  });
+
+  it('accepts the flag on its own', () => {
+    // Known to be a gift, plaque wording not transcribed yet — which is
+    // exactly the state a surveyor is in, and is why this is two columns.
+    const r = build({ plantRows: [plant({ dedicated: 'yes' })] });
+    expect(r.errors).toEqual([]);
+    expect(dedicated(r)).toBe(1);
+    expect(label(r)).toBeNull();
+  });
+
+  it('treats a plant with no dedication as undedicated', () => {
+    const r = build();
+    expect(dedicated(r)).toBe(0);
+    expect(label(r)).toBeNull();
+  });
+
+  it('rejects a value that is not "yes" or blank', () => {
+    // This drives a banner on the public record, so a stray value must not
+    // quietly read as false.
+    const r = build({ plantRows: [plant({ dedicated: 'maybe' })] });
+    expect(r.errors.join()).toMatch(/dedicated must be "yes" or blank/);
+  });
+
+  it('normalises the casing of the flag', () => {
+    expect(dedicated(build({ plantRows: [plant({ dedicated: ' YES ' })] }))).toBe(1);
+  });
+
+  it('shows a labelled plant as dedicated even when the flag was missed, and says so', () => {
+    const r = build({ plantRows: [plant({ dedication_label: 'A gift from the class of 1985' })] });
+    expect(r.errors).toEqual([]);
+    expect(dedicated(r)).toBe(1);
+    expect(r.warnings.join()).toMatch(/has a dedication_label but dedicated is blank/);
+  });
+
+  it('points a positional remark at geolocation_notes, not at observations.csv', () => {
+    const r = build({ plantRows: [plant({ notes: 'GPS ±3 m' })] });
+    expect(r.errors.join()).toMatch(/geolocation_notes if it is about the position/);
+  });
+});
+
 describe('buildDataset — observations', () => {
   it('shows the most recent observation, not the first', () => {
     const r = build({

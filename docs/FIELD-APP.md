@@ -29,6 +29,11 @@ app and the 2014 tree list for offline use.
    usually beats the receiver, especially under canopy.
 4. Measure, photograph, note, save. The form clears for the next tree.
 
+The GPS accuracy and whether you moved the pin are exported separately from
+your notes, into `geolocation_notes` — so a remark about how the position was
+fixed stays beside the coordinates it describes, and out of the public record,
+where it answers a question no visitor is asking.
+
 **Year planted** takes a four-digit year, or press **Unknown**. The two are
 different findings: Unknown means the surveyor checked and nobody knows, while
 leaving it blank means nobody has looked yet. Unknown is written into the notes

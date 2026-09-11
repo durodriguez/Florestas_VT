@@ -7,7 +7,7 @@
 // that variation without silently guessing — anything ambiguous stops the row
 // and is reported, rather than being imported wrong.
 
-import { CONDITIONS, TAXON_COLUMNS } from './vocab.mjs';
+import { CONDITIONS, DEDICATED, TAXON_COLUMNS } from './vocab.mjs';
 
 const trim = (v) => (typeof v === 'string' ? v.trim() : v ?? '');
 
@@ -368,13 +368,31 @@ export function importSurvey({
     // The split that matters: `record` is what the tree is, and never changes
     // because someone measured it; `observation` is one visit, appended to the
     // history rather than overwriting the visit before it.
+    // A dedication flag arrives as whatever the source writes for true —
+    // "yes", "Y", "1", "TRUE". Anything else is a value nobody meant as a
+    // boolean, and guessing at it would put a banner on the wrong tree.
+    const dedicatedRaw = get(row, 'dedicated');
+    const dedicationLabel = get(row, 'dedication_label');
+    let dedicated = '';
+    if (dedicatedRaw) {
+      if (!/^(y|yes|true|1)$/i.test(dedicatedRaw)) {
+        error(`"${dedicatedRaw}" in dedicated is not a yes/no value`);
+        return;
+      }
+      dedicated = DEDICATED;
+    } else if (dedicationLabel) {
+      dedicated = DEDICATED;
+    }
+
     const record = {
       taxon_id: taxonId,
       lat: lat.toFixed(6),
       lng: lng.toFixed(6),
+      geolocation_notes: get(row, 'geolocation_notes'),
       collection_id: collection,
       planted_year: measures.planted_year,
-      memorial: get(row, 'memorial'),
+      dedicated,
+      dedication_label: dedicationLabel,
     };
 
     const surveyedOn = get(row, 'surveyed_on');

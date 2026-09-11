@@ -73,9 +73,40 @@ measurement, which is why a re-survey never rewrites one of these rows.
 | `plant_id` | ✅ | Accession number, e.g. `UVM-2026-0001`. **Permanent** — it is what the QR code encodes. |
 | `taxon_id` | ✅ | Must exist in `taxa.csv` |
 | `lat`, `lng` | ✅ | Decimal degrees, WGS84, 6 decimal places (~0.1 m) |
+| `geolocation_notes` | | how the position was arrived at — `GPS ±3 m`, `Position set by pin on imagery` |
 | `collection_id` | | Must exist in `collections.csv` |
 | `planted_year` | | blank for naturally regenerated plants |
-| `memorial` | | dedication text, shown prominently |
+| `dedicated` | | `yes` for a gift, memorial or dedicated tree; otherwise blank |
+| `dedication_label` | | what the plaque says, e.g. `In memory of John Dewey` |
+
+### Dedications
+
+Two columns, not one. A tree can be known to be a gift before anyone has found
+the wording on its plaque — which is exactly the state a surveyor is in when
+they spot a plaque they cannot read from where they are standing. `dedicated`
+alone says "this tree was given, wording not yet recorded", which a single text
+column cannot say at all.
+
+`dedicated` is `yes` or blank, and nothing else fails silently: any other value
+stops the build, because it drives a banner on the public record and a stray
+value must not quietly read as false. A row with a label but no flag is a slip
+rather than a contradiction, so it renders as dedicated and `npm run data`
+warns — otherwise the tree would go missing from anyone filtering that column.
+
+### geolocation_notes, and the other notes
+
+`geolocation_notes` sits next to the coordinates because that is what it
+qualifies: how this position was arrived at, not what the surveyor thought of
+the tree. That second kind goes in the observation's `notes`, next to the visit
+it came from.
+
+The field app writes both, from one form: the GPS accuracy and whether the pin
+was moved become `geolocation_notes`, and everything the surveyor typed or
+flagged becomes `notes`.
+
+`geolocation_notes` is deliberately **not** shipped to the browser. "Position
+set by pin on imagery" answers a question no visitor is asking, and the cheapest
+way to keep it off the public record is not to send it.
 
 A measurement column left on one of these rows fails the build rather than
 being ignored, and the error names the column — otherwise the number would sit
@@ -101,7 +132,7 @@ survey.
 | `condition` | | `excellent`, `good`, `fair`, `poor`, `dead` |
 | `status` | | `active` (default) or `removed` |
 | `photo` | | filename in `public/photos/` |
-| `notes` | | free text — what the surveyor saw that day |
+| `notes` | | free text — what the surveyor saw that day, not how the position was fixed |
 
 The file is **ragged, not a grid**. It is not every tree once a year: if the
 2028 crew only walks Central Campus, only Central trees get 2028 rows. A tree

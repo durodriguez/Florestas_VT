@@ -4,33 +4,32 @@ Recorded 11 September 2026, from a list you sent. Nothing here is built yet —
 this file exists so none of it gets lost. Each item has the ask, then what I'd
 suggest and what it would cost.
 
-Roughly in the order I'd do them: 1, 3 and 6 are small and independent. 2 and 4
-follow 1. 8 and 9 are entangled with each other and with the ArcGIS import, so
-they want one design decision rather than two. 7 and 10 are the big ones.
+Roughly in the order I'd do them: 6 is small and independent, 2 and 4 follow 1.
+8 and 9 are entangled with each other and with the ArcGIS import, so they want
+one design decision rather than two. 7 and 10 are the big ones.
 
-**5 and 11 are done** — marked below.
+**1, 3, 5 and 11 are done** — marked below.
 
 ---
 
-## 1. Rename `memorial`, add `dedication_label`
+## 1. Rename `memorial`, add `dedication_label` — ✅ done, 11 September 2026
 
 **Ask.** `plants.csv`'s `memorial` column should cover gift, dedicated and
 memorial trees generally, marked `yes` or blank. A second column holds the note
 — "in memory of John Dewey", "A gift from the class of 1985", "Dedicated to xyz".
 
-**Suggestion.** Call the flag `dedicated` and the note `dedication_label`. Both
-in `plants.csv`; neither belongs in `taxa.csv`, since it is about the individual
-tree.
+**Built.** `memorial` became `dedicated` (`yes` or blank) plus
+`dedication_label`. Both are on `plants.csv`, since both describe the
+individual tree.
 
-A flag *and* a label is one more column than strictly needed — a non-blank label
-implies the flag. Keep both anyway: a tree can be known to be a gift before
-anyone has found the wording on the plaque, and that is exactly the state a
-surveyor will be in. Blank label plus `yes` flag says "dedicated, wording not
-yet recorded", which one column cannot say.
+The flag alone is enough to show the banner, reading "A gift, memorial or
+dedicated tree" until someone transcribes the plaque — which is the whole
+reason it is two columns. Anything other than `yes` or blank stops the build;
+a label with no flag renders as dedicated and warns, since that is a slip
+rather than a contradiction. The importer accepts `yes`/`Y`/`TRUE`/`1` from
+whatever source writes it, and infers the flag from wording alone.
 
-**Cost.** Small. Zero rows currently use `memorial`, so there is no data to
-migrate — it is a rename in `vocab.mjs`, `build.mjs`, `import.mjs`, `data.ts`,
-`types.ts`, `detail.ts`, and the header line of `plants.csv`. Half an hour.
+Searching the map by plaque wording works: "John Dewey" finds the linden.
 
 ## 2. Dedication in the survey app
 
@@ -49,23 +48,25 @@ exists and plaque text is small, weathered and easy to mistype.
 **Cost.** Small, but do it after #1 so the field app writes the final column
 names. An hour.
 
-## 3. Rename `notes` → `coordinates_notes`, move it right of `lng`
+## 3. `geolocation_notes`, right of `lng` — ✅ done, 11 September 2026
 
-**Ask.** Exactly that.
+**Ask.** Rename the `notes` column and move it to the right of `lng`. (You
+chose `geolocation_notes` over my suggested `coordinates_notes`.)
 
-**Suggestion.** Agreed, and the move matters as much as the rename — the column
-belongs next to the thing it qualifies. All six existing rows use it for exactly
-this ("Position set by pin on imagery", "GPS ±3 m"), so the rename describes
-what is already there.
+**Built.** Because to-do 11 had already moved `notes` onto `observations.csv`,
+this was an *add* rather than a rename: `plants.csv` gains
+`geolocation_notes` immediately after `lng`, and the six existing remarks —
+all positional — moved into it.
 
-One flag: the field app has its own free-text `notes` box, which is *not* about
-coordinates — surveyors will write "leaning badly" or "construction fence around
-it" in it. If `notes` becomes `coordinates_notes` there is nowhere for that to
-land. I'd keep a general `notes` column too, at the far right, and have the
-field app write to it while the positioning remark goes in `coordinates_notes`.
+The split I flagged when recording this is now real. The field app writes both
+columns from one form: GPS accuracy and whether the pin was moved go to
+`geolocation_notes`, and everything the surveyor typed or flagged goes to the
+observation's `notes`. So "leaning badly" and "GPS ±3 m" no longer share a
+column.
 
-**Cost.** Small. Same file list as #1, plus a one-line column reorder in
-`build.mjs`. Half an hour.
+`geolocation_notes` is not shipped to the browser at all, which settles the
+first half of to-do 6 for free: "Position set by pin on imagery" no longer
+appears on the public record, because it never reaches it.
 
 ## 4. A "fun fact" column — undecided
 
@@ -125,9 +126,8 @@ its first copy forever.
 "position set by pin on imagery" should not appear — irrelevant to most users.
 And `arboretum@uvm.edu` is a placeholder that needs to be a real address.
 
-**Suggestion.** The positioning line goes away for free once #3 lands: rename
-the column to `coordinates_notes` and the panel simply stops reading it. That is
-a good argument for doing #3 first.
+**Suggestion.** The positioning line is **already gone** — to-do 3 moved it to
+`geolocation_notes`, which is never sent to the browser.
 
 Beyond that, I'd propose the panel earns its space in this order: species and
 common name; the photo; what makes this tree interesting (dedication, story, fun

@@ -1,7 +1,7 @@
-plant_id,taxon_id,lat,lng,collection_id,planted_year,memorial
-UVM-0493,tilia-cordata,44.476523,-73.194675,central,,
-UVM-0772,taxodium-distichum,44.476609,-73.194780,central,,
-UVM-0778,ginkgo-biloba,44.476560,-73.194932,central,,
-UVM-0762,quercus-michauxii,44.476167,-73.194979,central,,
-UVM-0763,betula-nigra,44.476079,-73.195033,central,,
-UVM-0765,betula-nigra,44.476011,-73.194983,central,,
+plant_id,taxon_id,lat,lng,geolocation_notes,collection_id,planted_year,dedicated,dedication_label
+UVM-0493,tilia-cordata,44.476523,-73.194675,Position set by pin on imagery,central,,,
+UVM-0772,taxodium-distichum,44.476609,-73.194780,Position set by pin on imagery,central,,,
+UVM-0778,ginkgo-biloba,44.476560,-73.194932,Position set by pin on imagery,central,,,
+UVM-0762,quercus-michauxii,44.476167,-73.194979,GPS ±3 m,central,,,
+UVM-0763,betula-nigra,44.476079,-73.195033,GPS ±4 m,central,,,
+UVM-0765,betula-nigra,44.476011,-73.194983,Position set by pin on imagery,central,,,

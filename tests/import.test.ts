@@ -31,11 +31,12 @@ const observationRows = [
   { plant_id: 'UVM-2025-0007', surveyed_on: '2025-06-01', surveyor: 'EMR', dbh_in: '20', condition: 'good', status: 'active', notes: 'old note' },
 ];
 
-const headers = ['tag', 'taxon_id', 'species', 'lat', 'lng', 'area', 'dbh_in', 'condition', 'date', 'notes'];
+const headers = ['tag', 'taxon_id', 'species', 'lat', 'lng', 'area', 'dbh_in', 'condition',
+  'date', 'geolocation_notes', 'dedicated', 'dedication_label', 'notes'];
 const row = (over: Record<string, string> = {}) => ({
   tag: '', taxon_id: '', species: 'Sugar maple', lat: '44.4779', lng: '-73.1955',
   area: 'University Green', dbh_in: '30', condition: 'good', date: '2026-09-01',
-  notes: '', ...over,
+  geolocation_notes: '', dedicated: '', dedication_label: '', notes: '', ...over,
 });
 
 const run = (rows: Record<string, string>[], over: Record<string, unknown> = {}) =>
@@ -299,6 +300,52 @@ describe('importSurvey — taxon_id from the field app', () => {
     const r = run([row({ taxon_id: 'acer-invented', species: 'Sugar maple' })]);
     expect(r.inserts).toHaveLength(0);
     expect(r.issues.some((i: { message: string }) => /taxon_id "acer-invented" is not in taxa.csv/.test(i.message))).toBe(true);
+  });
+});
+
+describe('importSurvey — dedications and position notes', () => {
+  it('files a positional remark with the plant, not with the visit', () => {
+    const r = run([row({ geolocation_notes: 'GPS ±3 m', notes: 'Leaning badly' })]);
+    expect(r.inserts[0].geolocation_notes).toBe('GPS ±3 m');
+    expect(r.observations[0].notes).toBe('Leaning badly');
+    // ...and the other way round: what the surveyor saw is not about the spot.
+    expect(r.inserts[0].notes).toBeUndefined();
+    expect(r.observations[0].geolocation_notes).toBeUndefined();
+  });
+
+  it('takes a dedication flag and its wording', () => {
+    const r = run([row({ dedicated: 'yes', dedication_label: 'In memory of John Dewey' })]);
+    expect(r.inserts[0]).toMatchObject({
+      dedicated: 'yes', dedication_label: 'In memory of John Dewey',
+    });
+  });
+
+  it('accepts the ways a source writes true', () => {
+    for (const v of ['yes', 'Y', 'TRUE', '1']) {
+      expect(run([row({ dedicated: v })]).inserts[0].dedicated).toBe('yes');
+    }
+  });
+
+  it('infers the flag from wording alone', () => {
+    const r = run([row({ dedication_label: 'A gift from the class of 1985' })]);
+    expect(r.inserts[0].dedicated).toBe('yes');
+  });
+
+  it('leaves an ordinary tree undedicated', () => {
+    expect(run([row()]).inserts[0].dedicated).toBe('');
+  });
+
+  it('refuses a value nobody meant as a yes or a no', () => {
+    // Guessing would put a memorial banner on the public record of a tree
+    // nobody dedicated.
+    const r = run([row({ dedicated: 'in memory of someone' })]);
+    expect(r.inserts).toHaveLength(0);
+    expect(r.issues.some((i: { message: string }) => /is not a yes\/no value/.test(i.message))).toBe(true);
+  });
+
+  it('corrects a dedication on a tree already on file', () => {
+    const r = run([row({ tag: 'UVM-2025-0007', dedicated: 'yes', dedication_label: 'Class of 1985' })]);
+    expect(r.updates[0].changes).toMatchObject({ dedicated: 'yes', dedication_label: 'Class of 1985' });
   });
 });
 

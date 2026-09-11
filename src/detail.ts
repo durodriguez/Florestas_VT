@@ -97,8 +97,15 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
       ? `<p class="detail-banner">This plant has been removed from the landscape. Its record is kept for historical reference.</p>`
       : '';
 
-  const memorial = plant.memorial
-    ? `<p class="detail-memorial">Dedicated: ${escapeHtml(plant.memorial)}</p>`
+  // The flag alone is worth showing: "this tree was given" is most of the
+  // point, and waiting until someone has transcribed the plaque would hide
+  // every dedicated tree whose wording nobody has copied down yet.
+  const dedication = plant.dedicated
+    ? `<p class="detail-dedication">${
+        plant.dedicationLabel
+          ? escapeHtml(plant.dedicationLabel)
+          : 'A gift, memorial or dedicated tree.'
+      }</p>`
     : '';
 
   return `
@@ -111,7 +118,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
     </header>
     ${removed}
     ${photo}
-    ${memorial}
+    ${dedication}
     ${t.description ? `<p class="detail-desc">${escapeHtml(t.description)}</p>` : ''}
 
     <h3 class="detail-section">This specimen</h3>

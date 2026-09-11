@@ -2,7 +2,7 @@
 // Kept free of filesystem access so the test suite can exercise it directly.
 
 import {
-  CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES,
+  CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES, DEDICATED,
   TAXON_REQUIRED, PLANT_REQUIRED, OBSERVATION_REQUIRED,
   TAXON_NUMERIC, PLANT_NUMERIC, OBSERVATION_NUMERIC,
   OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS,
@@ -190,9 +190,27 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
         err(
           where,
           `"${field}" belongs in observations.csv, not plants.csv — move it to a row ` +
-            `for ${id} with the date it was recorded`,
+            `for ${id} with the date it was recorded` +
+            // "notes" is the one that splits two ways, and sending a remark
+            // about the coordinates off to observations.csv would file it
+            // under a visit rather than beside the position it describes.
+            (field === 'notes' ? ', or into geolocation_notes if it is about the position' : ''),
         );
       }
+    }
+
+    // "yes" or blank, and nothing else: this drives a banner on the public
+    // record, so a stray value must not quietly read as false.
+    const dedicatedRaw = token(row.dedicated);
+    if (dedicatedRaw && dedicatedRaw !== DEDICATED) {
+      err(where, `dedicated must be "${DEDICATED}" or blank, got "${row.dedicated}"`);
+    }
+    const label = trim(row.dedication_label);
+    // A tree with plaque wording on file is self-evidently a dedicated one, so
+    // render it as such — but say so, because the blank flag is a slip and the
+    // next person to filter on that column will not find this tree.
+    if (label && !dedicatedRaw) {
+      warn(where, `has a dedication_label but dedicated is blank — set dedicated to "${DEDICATED}"`);
     }
 
     plantsMeta.push({
@@ -202,7 +220,8 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       lng: Number(lng.toFixed(6)),
       collection: cIdx,
       planted_year: num(row.planted_year),
-      memorial: trim(row.memorial) || null,
+      dedicated: dedicatedRaw === DEDICATED || Boolean(label) ? 1 : 0,
+      dedication_label: label || null,
     });
   });
 
@@ -304,7 +323,8 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       surveyed_on: latest.surveyed_on,
       surveyor: latest.surveyor,
       photo: latest.photo,
-      memorial: plant.memorial,
+      dedicated: plant.dedicated,
+      dedication_label: plant.dedication_label,
       notes: latest.notes,
       surveys: series.length,
     };

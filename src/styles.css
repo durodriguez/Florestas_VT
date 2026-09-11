@@ -269,7 +269,7 @@ button, input, select { font: inherit; color: inherit; }
   margin: .9rem 0 0; padding: .5rem .7rem; font-size: .8rem;
   background: #fdf3d6; border-left: 3px solid var(--uvm-gold); color: #4a3c00;
 }
-.detail-memorial {
+.detail-dedication {
   margin: .9rem 0 0; padding: .5rem .7rem; font-size: .85rem;
   background: var(--bg-sunk); border-left: 3px solid var(--uvm-green-light);
 }

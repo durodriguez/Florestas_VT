@@ -24,6 +24,14 @@ export const PLANT_TYPES = [
  */
 export const ORIGINS = ['vermont-native', 'vermont-invasive', 'introduced'];
 
+/**
+ * Whether a plant is a gift, a memorial, or otherwise dedicated. A flag and a
+ * label rather than one column, because a tree can be known to be a gift before
+ * anyone has found the wording on its plaque — and "dedicated, wording not yet
+ * recorded" is exactly the state a surveyor will be in.
+ */
+export const DEDICATED = 'yes';
+
 export const TAXON_REQUIRED = ['taxon_id', 'scientific_name', 'common_name', 'family', 'genus', 'plant_type'];
 /**
  * plants.csv holds what a tree *is* — the things that do not change when
@@ -52,9 +60,13 @@ export const PLANT_COLUMNS = [
   'taxon_id',
   'lat',
   'lng',
+  // Next to the coordinates it qualifies: how this position was arrived at,
+  // not what the surveyor thought of the tree. That goes in the observation.
+  'geolocation_notes',
   'collection_id',
   'planted_year',
-  'memorial',
+  'dedicated',
+  'dedication_label',
 ];
 
 /** Column order of data/observations.csv. */
@@ -92,7 +104,8 @@ export const PLANT_FIELDS = [
   'surveyed_on',
   'surveyor',
   'photo',
-  'memorial',
+  'dedicated',   // 1 if this is a gift, memorial or dedicated tree, else 0
+  'dedication_label',
   'notes',
   'surveys',     // how many observations this plant has
 ];

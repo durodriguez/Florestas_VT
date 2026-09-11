@@ -38,8 +38,8 @@ whether to include removed plants. Each option shows a live count, computed
 with its own facet relaxed so the alternatives stay clickable.
 
 **Plant records** — accession, species description, DBH, height, spread,
-condition, planting year, age, last survey date, coordinates, notes, memorial
-dedications, photo, and species-level facts (foliage, flower and fruit colour
+condition, planting year, age, last survey date, coordinates, notes, gift and
+memorial dedications, photo, and species-level facts (foliage, flower and fruit colour
 and season, fall colour, mature height, hardiness zones). Plus walking
 directions, a shareable link, and a "see all N of this species" jump.
 

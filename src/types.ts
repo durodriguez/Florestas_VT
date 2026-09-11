@@ -123,7 +123,10 @@ export interface Plant {
   surveyedOn: string | null;
   surveyor: string | null;
   photo: string | null;
-  memorial: string | null;
+  /** True for a gift, memorial or otherwise dedicated tree. */
+  dedicated: boolean;
+  /** What the plaque says, where anyone has transcribed it. */
+  dedicationLabel: string | null;
   notes: string | null;
   /**
    * Every observation of this plant, oldest first — empty for a plant nobody

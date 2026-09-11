@@ -1,7 +1,7 @@
 plant_id,surveyed_on,surveyor,dbh_in,height_ft,spread_ft,condition,status,photo,notes
-UVM-0493,2026-09-01,EMR,,,,good,active,493-1788288876530.jpg,Position set by pin on imagery
-UVM-0772,2026-09-01,EMR,,,,excellent,active,772-1788288766549.jpg,Position set by pin on imagery
-UVM-0778,2026-09-01,EMR,,,,excellent,active,778-1788288680135.jpg,Position set by pin on imagery
-UVM-0762,2026-09-01,EMR,,,,good,active,762-1788288601167.jpg,GPS ±3 m
-UVM-0763,2026-09-01,EMR,,,,excellent,active,763-1788288527638.jpg,GPS ±4 m
-UVM-0765,2026-09-01,EMR,,,,excellent,active,765-1788288472730.jpg,Position set by pin on imagery
+UVM-0493,2026-09-01,EMR,,,,good,active,493-1788288876530.jpg,
+UVM-0772,2026-09-01,EMR,,,,excellent,active,772-1788288766549.jpg,
+UVM-0778,2026-09-01,EMR,,,,excellent,active,778-1788288680135.jpg,
+UVM-0762,2026-09-01,EMR,,,,good,active,762-1788288601167.jpg,
+UVM-0763,2026-09-01,EMR,,,,excellent,active,763-1788288527638.jpg,
+UVM-0765,2026-09-01,EMR,,,,excellent,active,765-1788288472730.jpg,
