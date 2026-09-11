@@ -106,6 +106,7 @@ species never reaches the live site.
 | **Surveying and mapping trees** | [docs/FIELD-SURVEY.md](docs/FIELD-SURVEY.md) |
 | **The field survey app** | [docs/FIELD-APP.md](docs/FIELD-APP.md) |
 | **Hosting, domains, scaling** | [docs/DEPLOY.md](docs/DEPLOY.md) |
+| **What's planned next** | [docs/TODO.md](docs/TODO.md) |
 
 ## Commands
 
