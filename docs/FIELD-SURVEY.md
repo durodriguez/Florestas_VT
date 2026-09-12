@@ -91,7 +91,8 @@ trees a day.
 
 ## 5. Get it into the repo
 
-Do **not** hand-edit `data/plants.csv` after an outing. Run the importer:
+Do **not** hand-edit `data/plants.csv` or `data/observations.csv` after an
+outing. Run the importer:
 
 ```bash
 npm run import -- survey/2026-09-green.csv --adopt-tags          # dry run
@@ -109,24 +110,42 @@ The importer does the tedious, error-prone work:
 
 - **Assigns accession numbers** in your scheme, continuing from the highest one
   already issued that year. Leave the `tag` column blank for a new plant.
-- **Resolves species** from a common name, a scientific name or a `taxon_id`.
-  A name matching two taxa is refused rather than guessed at.
+- **Takes the `taxon_id` where the app recorded one**, which is whenever the
+  surveyor picked from the species list. An id resolved on the spot by someone
+  looking at the tree beats a name re-resolved at a desk weeks later, and it
+  cannot be ambiguous the way a name can. Failing that it **resolves species**
+  from a common name or a scientific name, and refuses a name matching two taxa
+  rather than guessing at it.
 - **Normalises vocabulary** — `EXC`, `Very Good`, `g` all become the right
   `condition` value. Campus areas resolve by display name.
 - **Reads whatever coordinate format your app emitted** — decimal degrees,
   degrees-minutes-seconds, `POINT(lng lat)` from QGIS, or a `lat, lng` cell.
-- **Applies re-surveys in place.** Put an existing accession in the `tag`
-  column and it updates that record instead of adding a new one, changing only
-  the values that actually differ. A field the surveyor left blank is left
-  alone rather than blanked out, and GPS drift under half a metre is not
-  treated as the tree having moved.
+- **Records every visit as a new observation.** Each row becomes a line in
+  `data/observations.csv`, dated. A re-survey of a tree already on file is not
+  an edit: the measurements you took today are appended, and the ones from the
+  last survey stay exactly as they were. That is what makes growth over time
+  answerable later.
+- **Corrects identity in place, and only identity.** Put an existing accession
+  in the `tag` column and a changed species, position or campus updates that
+  plant's row, changing only the values that actually differ. A field the
+  surveyor left blank is left alone rather than blanked out, and GPS drift
+  under half a metre is not treated as the tree having moved. A re-measured
+  trunk is never an update — it is new history.
+- **Insists on a date for anything measured.** A reading with no survey date
+  cannot be placed in the history, and where it sits in the series is what
+  makes it mean anything. A row with no date and nothing measured is fine: that
+  is a position somebody plotted, and it becomes a plant nobody has surveyed
+  yet.
 - **Refuses to write anything if any row has a problem.** A skipped row means a
   tree quietly missing from the map, so it stops instead and tells you which
   line and why.
-- **Catches an accidental re-import.** A field export has no accession numbers
-  for new plants, so running the same file twice would add every tree again.
-  If most of a batch lands on top of existing plants of the same species, it
-  stops. Pass `--allow-duplicates` if it really is dense new planting.
+- **Catches an accidental re-import**, twice over. A tree that already has an
+  observation on that date is refused outright — importing the same export
+  again would put two versions of one visit in the history. And because a field
+  export has no accession numbers for new plants, running the same file twice
+  would otherwise add every tree again: if most of a batch lands on top of
+  existing plants of the same species, it stops. Pass `--allow-duplicates` if
+  it really is dense new planting.
 
 Dry run is the default. To stage the merged result for review without touching
 the dataset:
@@ -135,7 +154,10 @@ the dataset:
 npm run import -- survey/2026-09-green.csv --out review.csv
 ```
 
-`--write` saves the previous version as `data/plants.csv.bak` before changing
+That writes `review.csv` (the whole plants file, as it would be) and
+`review-observations.csv` (only the new lines, to append).
+
+`--write` saves the previous version of each file as `.bak` before changing
 anything.
 
 Then:

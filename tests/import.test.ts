@@ -24,17 +24,26 @@ const collectionRows = [
 ];
 
 const plantRows = [
-  { plant_id: 'UVM-2025-0007', taxon_id: 'acer-saccharum', lat: '44.4700', lng: '-73.2000', condition: 'good', dbh_in: '20', status: 'active', notes: 'old note' },
+  { plant_id: 'UVM-2025-0007', taxon_id: 'acer-saccharum', lat: '44.4700', lng: '-73.2000', collection_id: 'university-green' },
 ];
 
-const headers = ['tag', 'species', 'lat', 'lng', 'area', 'dbh_in', 'condition', 'notes'];
+const observationRows = [
+  { plant_id: 'UVM-2025-0007', surveyed_on: '2025-06-01', surveyor: 'EMR', dbh_in: '20', condition: 'good', status: 'active', notes: 'old note' },
+];
+
+const headers = ['tag', 'taxon_id', 'species', 'lat', 'lng', 'area', 'dbh_in', 'condition',
+  'date', 'geolocation_notes', 'dedication_label', 'notes'];
 const row = (over: Record<string, string> = {}) => ({
-  tag: '', species: 'Sugar maple', lat: '44.4779', lng: '-73.1955',
-  area: 'University Green', dbh_in: '30', condition: 'good', notes: '', ...over,
+  tag: '', taxon_id: '', species: 'Sugar maple', lat: '44.4779', lng: '-73.1955',
+  area: 'University Green', dbh_in: '30', condition: 'good', date: '2026-09-01',
+  geolocation_notes: '', dedication_label: '', notes: '', ...over,
 });
 
 const run = (rows: Record<string, string>[], over: Record<string, unknown> = {}) =>
-  importSurvey({ rows, headers, mapping, taxaRows, plantRows, collectionRows, config, year: 2026, ...over });
+  importSurvey({
+    rows, headers, mapping, taxaRows, plantRows, observationRows, collectionRows,
+    config, year: 2026, ...over,
+  });
 
 describe('parseCoord', () => {
   it('reads plain decimal degrees', () => {
@@ -193,7 +202,7 @@ describe('importSurvey — normalisation', () => {
   it('maps condition abbreviations onto the controlled vocabulary', () => {
     const r = run([row({ condition: 'EXC' }), row({ condition: 'Very Good', lat: '44.4780' }), row({ condition: 'g', lat: '44.4781' })]);
     expect(r.summary.errors).toBe(0);
-    expect(r.inserts.map((i: { condition: string }) => i.condition)).toEqual(['excellent', 'excellent', 'good']);
+    expect(r.observations.map((o: { condition: string }) => o.condition)).toEqual(['excellent', 'excellent', 'good']);
   });
 
   it('stops a row whose condition word is not recognised', () => {
@@ -216,7 +225,7 @@ describe('importSurvey — normalisation', () => {
   it('tolerates a unit typed into a measurement cell', () => {
     const r = run([row({ dbh_in: '32.5 in' })]);
     expect(r.summary.errors).toBe(0);
-    expect(r.inserts[0].dbh_in).toBe('32.5');
+    expect(r.observations[0].dbh_in).toBe('32.5');
   });
 
   it('refuses a written-out number rather than importing it as zero', () => {
@@ -228,7 +237,7 @@ describe('importSurvey — normalisation', () => {
   it('leaves a blank measurement blank', () => {
     const r = run([row({ dbh_in: '' })]);
     expect(r.summary.errors).toBe(0);
-    expect(r.inserts[0].dbh_in).toBe('');
+    expect(r.observations[0].dbh_in).toBe('');
   });
 });
 
@@ -252,6 +261,80 @@ describe('importSurvey — coordinates', () => {
   });
 });
 
+describe('importSurvey — taxon_id from the field app', () => {
+  it('uses an explicit taxon_id', () => {
+    const r = run([row({ taxon_id: 'acer-rubrum', species: '' })]);
+    expect(r.summary.errors).toBe(0);
+    expect(r.inserts[0].taxon_id).toBe('acer-rubrum');
+  });
+
+  it('trusts the id over the name beside it', () => {
+    // The surveyor picked a taxon from the list; the text is whatever was in
+    // the box at the time, and the id is the deliberate act.
+    const r = run([row({ taxon_id: 'pinus-strobus', species: 'Sugar maple' })]);
+    expect(r.inserts[0].taxon_id).toBe('pinus-strobus');
+  });
+
+  it('still reads the name when no id was recorded', () => {
+    const r = run([row({ taxon_id: '', species: 'Red maple' })]);
+    expect(r.inserts[0].taxon_id).toBe('acer-rubrum');
+  });
+
+  it('resolves a name that would be ambiguous, given the id', () => {
+    const ambiguous = [
+      ...taxaRows,
+      { taxon_id: 'sorbus-intermedia', scientific_name: 'Sorbus intermedia', common_name: 'Swedish whitebeam', genus: 'Sorbus', species: 'intermedia' },
+      { taxon_id: 'sorbus-hybrida', scientific_name: 'Sorbus hybrida', common_name: 'Swedish whitebeam', genus: 'Sorbus', species: 'hybrida' },
+    ];
+    const byName = run([row({ species: 'Swedish whitebeam' })], { taxaRows: ambiguous });
+    expect(byName.issues.some((i: { message: string }) => /more than one taxon/.test(i.message))).toBe(true);
+
+    const byId = run([row({ taxon_id: 'sorbus-hybrida', species: 'Swedish whitebeam' })], { taxaRows: ambiguous });
+    expect(byId.summary.errors).toBe(0);
+    expect(byId.inserts[0].taxon_id).toBe('sorbus-hybrida');
+  });
+
+  it('refuses an id that is not in taxa.csv rather than falling back to the name', () => {
+    // Falling back would import the tree under whatever the text happened to
+    // say, hiding a species list that has drifted from the app's copy.
+    const r = run([row({ taxon_id: 'acer-invented', species: 'Sugar maple' })]);
+    expect(r.inserts).toHaveLength(0);
+    expect(r.issues.some((i: { message: string }) => /taxon_id "acer-invented" is not in taxa.csv/.test(i.message))).toBe(true);
+  });
+});
+
+describe('importSurvey — dedications and position notes', () => {
+  it('files a positional remark with the plant, not with the visit', () => {
+    const r = run([row({ geolocation_notes: 'GPS ±3 m', notes: 'Leaning badly' })]);
+    expect(r.inserts[0].geolocation_notes).toBe('GPS ±3 m');
+    expect(r.observations[0].notes).toBe('Leaning badly');
+    // ...and the other way round: what the surveyor saw is not about the spot.
+    expect(r.inserts[0].notes).toBeUndefined();
+    expect(r.observations[0].geolocation_notes).toBeUndefined();
+  });
+
+  it('takes the plaque wording', () => {
+    const r = run([row({ dedication_label: 'In memory of John Dewey' })]);
+    expect(r.inserts[0].dedication_label).toBe('In memory of John Dewey');
+  });
+
+  it('leaves an ordinary tree with nothing', () => {
+    expect(run([row()]).inserts[0].dedication_label).toBe('');
+  });
+
+  it('refuses a yes/no column mapped onto the wording', () => {
+    // Importing it would put "Yes" on a public record as a dedication.
+    const r = run([row({ dedication_label: 'Yes' })]);
+    expect(r.inserts).toHaveLength(0);
+    expect(r.issues.some((i: { message: string }) => /map the column holding the wording/.test(i.message))).toBe(true);
+  });
+
+  it('corrects a dedication on a tree already on file', () => {
+    const r = run([row({ tag: 'UVM-2025-0007', dedication_label: 'Class of 1985' })]);
+    expect(r.updates[0].changes).toMatchObject({ dedication_label: 'Class of 1985' });
+  });
+});
+
 describe('importSurvey — accessions', () => {
   it('assigns sequential accessions in the configured scheme', () => {
     const r = run([row(), row({ lat: '44.4780' }), row({ lat: '44.4781' })]);
@@ -272,35 +355,79 @@ describe('importSurvey — accessions', () => {
 });
 
 describe('importSurvey — re-surveys', () => {
-  it('updates an existing accession instead of inserting', () => {
+  it('appends an observation rather than editing the plant', () => {
     const r = run([row({ tag: 'UVM-2025-0007', dbh_in: '22', condition: 'fair' })]);
     expect(r.inserts).toHaveLength(0);
-    expect(r.updates).toHaveLength(1);
-    expect(r.updates[0].plant_id).toBe('UVM-2025-0007');
+    expect(r.observations).toHaveLength(1);
+    expect(r.observations[0]).toMatchObject({
+      plant_id: 'UVM-2025-0007', surveyed_on: '2026-09-01', dbh_in: '22', condition: 'fair',
+    });
   });
 
-  it('records only the values that actually changed', () => {
-    const r = run([row({ tag: 'UVM-2025-0007', dbh_in: '22', condition: 'good' })]);
-    expect(r.updates[0].changes).toHaveProperty('dbh_in', '22');
-    // condition was already "good" on file, so it is not part of the update
-    expect(r.updates[0].changes).not.toHaveProperty('condition');
-  });
-
-  it('does not blank a field the surveyor left empty', () => {
-    const r = run([row({ tag: 'UVM-2025-0007', dbh_in: '22', notes: '' })]);
-    expect(r.updates[0].changes).not.toHaveProperty('notes');
-  });
-
-  it('warns when a re-survey changed nothing', () => {
-    const r = run([row({ tag: 'UVM-2025-0007', dbh_in: '20', condition: 'good', area: '', lat: '44.4700', lng: '-73.2000', notes: 'old note' })]);
+  it('leaves the earlier measurement alone — that is the whole point', () => {
+    const r = run([row({ tag: 'UVM-2025-0007', dbh_in: '22', condition: 'fair', area: '', lat: '44.4700', lng: '-73.2000' })]);
+    // 20" from 2025 is untouched; 22" from 2026 is a second row, not a rewrite.
     expect(r.updates).toHaveLength(0);
-    expect(r.issues.some((i: { message: string }) => /no changed values/.test(i.message))).toBe(true);
+    expect(observationRows[0]!.dbh_in).toBe('20');
+  });
+
+  it('still corrects the plant when its identity was recorded wrongly', () => {
+    const r = run([row({ tag: 'UVM-2025-0007', species: 'Red maple' })]);
+    expect(r.updates).toHaveLength(1);
+    expect(r.updates[0].changes).toHaveProperty('taxon_id', 'acer-rubrum');
+    // ...and the visit is recorded either way.
+    expect(r.observations).toHaveLength(1);
+  });
+
+  it('does not treat an unchanged measurement as a correction', () => {
+    const r = run([row({ tag: 'UVM-2025-0007', dbh_in: '20', area: '', lat: '44.4700', lng: '-73.2000' })]);
+    expect(r.updates).toHaveLength(0);
+    expect(r.observations).toHaveLength(1);
+  });
+
+  it('refuses a second observation of the same tree on the same day', () => {
+    const r = run([row({ tag: 'UVM-2025-0007', date: '2025-06-01' })]);
+    expect(r.observations).toHaveLength(0);
+    expect(r.issues.some((i: { message: string }) => /already has an observation dated/.test(i.message))).toBe(true);
+  });
+
+  it('refuses the same file imported twice in one run', () => {
+    const r = run([row({ tag: 'UVM-2025-0007' }), row({ tag: 'UVM-2025-0007' })]);
+    expect(r.observations).toHaveLength(1);
+    expect(r.summary.errors).toBe(1);
   });
 
   it('rejects a tag that is not an existing accession', () => {
     const r = run([row({ tag: 'BOGUS-999' })]);
     expect(r.inserts).toHaveLength(0);
     expect(r.issues.some((i: { message: string }) => /not an existing accession/.test(i.message))).toBe(true);
+  });
+});
+
+describe('importSurvey — dates', () => {
+  it('gives every new plant an observation dated by the survey', () => {
+    const r = run([row()]);
+    expect(r.inserts).toHaveLength(1);
+    expect(r.observations).toHaveLength(1);
+    expect(r.observations[0].plant_id).toBe(r.inserts[0].plant_id);
+  });
+
+  it('takes a plotted position with no survey date as a plant nobody has visited', () => {
+    const r = run([row({ dbh_in: '', condition: '', notes: '', date: '' })]);
+    expect(r.summary.errors).toBe(0);
+    expect(r.inserts).toHaveLength(1);
+    expect(r.observations).toHaveLength(0);
+  });
+
+  it('refuses a measurement with no date, which cannot be placed in the history', () => {
+    const r = run([row({ date: '' })]);
+    expect(r.issues.some((i: { message: string }) => /no survey date/.test(i.message))).toBe(true);
+    expect(r.observations).toHaveLength(0);
+  });
+
+  it('refuses a date it cannot order the history by', () => {
+    const r = run([row({ date: '9/1/2026' })]);
+    expect(r.issues.some((i: { message: string }) => /YYYY-MM-DD/.test(i.message))).toBe(true);
   });
 });
 
@@ -322,15 +449,14 @@ describe('importSurvey — adopting physical tags', () => {
     expect(r.inserts.map((i: { plant_id: string }) => i.plant_id)).toEqual(['UVM-0007', 'UVM-12345']);
   });
 
-  it('treats a later survey of the same tag as an update, not a duplicate', () => {
+  it('treats a later survey of the same tag as another visit, not a duplicate', () => {
     const adopted = [
       ...plantRows,
-      { plant_id: 'UVM-0772', taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955', dbh_in: '9.4', status: 'active' },
+      { plant_id: 'UVM-0772', taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955' },
     ];
     const r = run([row({ tag: '772', dbh_in: '10.2' })], { adoptTags: true, plantRows: adopted });
     expect(r.inserts).toHaveLength(0);
-    expect(r.updates[0].plant_id).toBe('UVM-0772');
-    expect(r.updates[0].changes).toHaveProperty('dbh_in', '10.2');
+    expect(r.observations[0]).toMatchObject({ plant_id: 'UVM-0772', dbh_in: '10.2' });
   });
 
   it('still assigns a fresh accession when the tag column is blank', () => {

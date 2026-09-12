@@ -52,6 +52,8 @@ export interface Taxon {
   zones: string;
   wikipedia: string;
   description: string;
+  /** One line about the species, shown on every plant of it. */
+  funFact: string;
   count: number;
 }
 
@@ -94,6 +96,19 @@ export interface CampusAreaProps {
   provisional: boolean;
 }
 
+/** What one surveyor recorded about one plant on one day. */
+export interface Observation {
+  surveyedOn: string;
+  surveyor: string | null;
+  dbhIn: number | null;
+  heightFt: number | null;
+  spreadFt: number | null;
+  condition: string | null;
+  status: string;
+  photo: string | null;
+  notes: string | null;
+}
+
 /** A plant record after the columnar rows in plants.json are expanded. */
 export interface Plant {
   id: string;
@@ -110,8 +125,20 @@ export interface Plant {
   surveyedOn: string | null;
   surveyor: string | null;
   photo: string | null;
-  memorial: string | null;
+  /**
+   * What the plaque says. Non-blank *is* what makes a tree a gift, memorial or
+   * dedicated one — there is no separate flag to disagree with it.
+   */
+  dedicationLabel: string | null;
+  /** One line about *this* tree — where it came from, what happened to it. */
+  story: string | null;
   notes: string | null;
+  /**
+   * Every observation of this plant, oldest first — empty for a plant nobody
+   * has surveyed, and length 1 for most of the rest. The fields above are the
+   * last entry, flattened on so the map never has to look in here.
+   */
+  history: Observation[];
   /** Lowercased haystack for free-text search, built once at load. */
   search: string;
 }

@@ -11,7 +11,7 @@ const taxon = (over: Partial<Taxon>): Taxon => ({
   cultivar: '', type: 'deciduous-tree', origin: 'vermont-native',
   flowerColor: '', flowerMonths: [], fruitColor: '', fruitMonths: [], fallColor: '',
   matureHeightFt: null, matureSpreadFt: null, bark: '', pests: '', soil: '',
-  zones: '', wikipedia: '', description: '', count: 0, ...over,
+  zones: '', wikipedia: '', description: '', funFact: '', count: 0, ...over,
 });
 
 const dataset = {
@@ -35,15 +35,15 @@ const dataset = {
 // fields mirror scripts/lib/vocab.mjs PLANT_FIELDS
 const fields = ['plant_id', 'taxon', 'lat', 'lng', 'collection', 'dbh_in', 'height_ft',
   'spread_ft', 'condition', 'planted_year', 'status', 'surveyed_on', 'surveyor',
-  'photo', 'memorial', 'notes'];
+  'photo', 'dedication_label', 'story', 'notes'];
 
 const plants: Plant[] = expandPlants({
   fields,
   rows: [
-    ['UVM-0001', 0, 44.4779, -73.1955, 0, 32, 68, 55, 1, 1908, 0, null, null, null, null, null],
-    ['UVM-0002', 0, 44.4780, -73.1950, 0, 6, 20, 15, 0, 2018, 0, null, null, null, null, null],
-    ['UVM-0003', 1, 44.4716, -73.1971, 1, 34, 88, 42, 1, 1895, 0, null, null, null, null, null],
-    ['UVM-0004', 2, 44.4767, -73.1849, 1, null, 12, 10, 1, null, 0, null, null, null, null, null],
+    ['UVM-0001', 0, 44.4779, -73.1955, 0, 32, 68, 55, 1, 1908, 0, null, null, null, null, null, null],
+    ['UVM-0002', 0, 44.4780, -73.1950, 0, 6, 20, 15, 0, 2018, 0, null, null, null, null, null, null],
+    ['UVM-0003', 1, 44.4716, -73.1971, 1, 34, 88, 42, 1, 1895, 0, null, null, null, null, null, null],
+    ['UVM-0004', 2, 44.4767, -73.1849, 1, null, 12, 10, 1, null, 0, null, null, null, null, null, null],
     ['UVM-0005', 0, 44.4770, -73.1965, 0, 29, 64, 50, 4, 1912, 1, null, null, null, null, null],
   ],
 }, dataset);

@@ -1,5 +1,9 @@
 #!/usr/bin/env node
-// Merges a field-survey export into data/plants.csv.
+// Merges a field-survey export into data/plants.csv and data/observations.csv.
+//
+// A new tree gets a row in plants.csv; every visit — to a new tree or one
+// already on file — is appended to observations.csv. Re-measuring a tree is
+// therefore never an edit: nothing already recorded is overwritten.
 //
 //   npm run import -- survey/field-template.csv            # dry run, writes nothing
 //   npm run import -- survey/2026-09-green.csv --write     # apply
@@ -15,9 +19,11 @@ import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Papa from 'papaparse';
 import { importSurvey, taxaStubs } from './lib/import.mjs';
+import { OBSERVATION_COLUMNS } from './lib/vocab.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const plantsPath = join(root, 'data', 'plants.csv');
+const observationsPath = join(root, 'data', 'observations.csv');
 
 const argv = process.argv.slice(2);
 const flag = (name) => argv.includes(`--${name}`);
@@ -58,6 +64,7 @@ const parse = (path) => {
 
 const field = parse(inputPath);
 const plants = parse(plantsPath);
+const existingObservations = parse(observationsPath);
 const mappingPath = resolve(root, opt('mapping', 'survey/mapping.json'));
 
 const result = importSurvey({
@@ -66,6 +73,7 @@ const result = importSurvey({
   mapping: JSON.parse(readFileSync(mappingPath, 'utf8')),
   taxaRows: parse(join(root, 'data', 'taxa.csv')).rows,
   plantRows: plants.rows,
+  observationRows: existingObservations.rows,
   collectionRows: parse(join(root, 'data', 'collections.csv')).rows,
   config: JSON.parse(readFileSync(join(root, 'data', 'config.json'), 'utf8')),
   year: Number(opt('year', new Date().getFullYear())),
@@ -94,15 +102,23 @@ for (const issue of result.issues) {
 if (result.unknownSpecies.size) {
   console.log(`\n${result.unknownSpecies.size} species not in taxa.csv. Add these rows first:`);
   for (const stub of taxaStubs(result.unknownSpecies)) console.log(`  ${stub}`);
-  console.log('  (fill in family, genus, species and habit — see docs/DATA-MODEL.md)');
+  console.log('  (fill in family, genus, species and plant_type — see docs/DATA-MODEL.md)');
 }
 
 if (result.updates.length) {
-  console.log(`\n${result.updates.length} re-survey update(s):`);
+  console.log(`\n${result.updates.length} correction(s) to what a plant is:`);
   for (const u of result.updates) {
     const diff = Object.entries(u.changes).map(([k, v]) => `${k}=${v}`).join(', ');
     console.log(`  ${u.plant_id}: ${diff}`);
   }
+}
+
+if (result.observations.length) {
+  const dates = [...new Set(result.observations.map((o) => o.surveyed_on))].sort();
+  console.log(
+    `\n${result.observations.length} observation(s) to append` +
+    `${dates.length === 1 ? `, all dated ${dates[0]}` : `, dated ${dates[0]} – ${dates.at(-1)}`}`,
+  );
 }
 
 if (result.inserts.length) {
@@ -110,7 +126,7 @@ if (result.inserts.length) {
 }
 
 console.log(
-  `\n${s.inserts} insert(s), ${s.updates} update(s), ` +
+  `\n${s.inserts} new plant(s), ${s.observations} observation(s), ${s.updates} correction(s), ` +
   `${s.errors} error(s), ${s.warnings} warning(s)`,
 );
 
@@ -121,7 +137,7 @@ if (s.errors > 0) {
   process.exit(1);
 }
 
-if (s.inserts === 0 && s.updates === 0) {
+if (s.inserts === 0 && s.updates === 0 && s.observations === 0) {
   console.log('\nNothing to import.');
   process.exit(0);
 }
@@ -140,26 +156,47 @@ if (!flag('write') && !opt('out')) {
   process.exit(0);
 }
 
-if (outPath === plantsPath) copyFileSync(plantsPath, `${plantsPath}.bak`);
+// Staging to --out writes one file for review, so both halves have to go in it
+// — splitting them would hand back a plants file whose observations vanished.
+if (outPath !== plantsPath) {
+  writeFileSync(outPath, Papa.unparse([...plants.rows, ...newRows], { columns: header }) + '\n');
+  const stem = outPath.replace(/\.csv$/i, '');
+  const obsOut = `${stem}-observations.csv`;
+  writeFileSync(
+    obsOut,
+    Papa.unparse(result.observations, { columns: OBSERVATION_COLUMNS }) + '\n',
+  );
+  console.log(`\n✓ wrote ${opt('out')} and ${obsOut.slice(root.length + 1)} — review, then copy over data/`);
+  console.log('  Note: the observations file holds only the new rows, to append.');
+  process.exit(0);
+}
+
+copyFileSync(plantsPath, `${plantsPath}.bak`);
+copyFileSync(observationsPath, `${observationsPath}.bak`);
 
 if (result.updates.length > 0) {
-  // Updates touch existing lines, so the file has to be rewritten as a whole.
+  // Corrections touch existing lines, so the file has to be rewritten whole.
   const byId = new Map(result.updates.map((u) => [u.plant_id, u.changes]));
   const merged = plants.rows.map((row) => {
     const changes = byId.get(row.plant_id?.trim());
     return changes ? { ...row, ...changes } : row;
   });
-  writeFileSync(outPath, Papa.unparse([...merged, ...newRows], { columns: header }) + '\n');
-} else {
+  writeFileSync(plantsPath, Papa.unparse([...merged, ...newRows], { columns: header }) + '\n');
+} else if (newRows.length > 0) {
   // Inserts only — append so the diff shows just the new lines.
   const lines = Papa.unparse(newRows, { columns: header, header: false });
-  const current = readFileSync(plantsPath, 'utf8');
-  writeFileSync(outPath, current.replace(/\n*$/, '\n') + lines + '\n');
+  writeFileSync(plantsPath, readFileSync(plantsPath, 'utf8').replace(/\n*$/, '\n') + lines + '\n');
 }
 
-if (outPath === plantsPath) {
-  console.log(`\n✓ data/plants.csv updated (previous version saved as plants.csv.bak)`);
-} else {
-  console.log(`\n✓ wrote ${opt('out')} — review it, then copy over data/plants.csv`);
+// Observations are only ever appended. Nothing already in the file is read,
+// rewritten or reordered, which is what keeps a past survey a past survey.
+if (result.observations.length > 0) {
+  const lines = Papa.unparse(result.observations, { columns: OBSERVATION_COLUMNS, header: false });
+  writeFileSync(
+    observationsPath,
+    readFileSync(observationsPath, 'utf8').replace(/\n*$/, '\n') + lines + '\n',
+  );
 }
+
+console.log('\n✓ data/plants.csv and data/observations.csv updated (previous versions saved as .bak)');
 console.log('  Next: npm run data');

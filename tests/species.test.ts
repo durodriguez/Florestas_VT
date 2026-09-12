@@ -1,12 +1,11 @@
 import { describe, it, expect } from 'vitest';
-// @ts-expect-error -- plain .mjs module, intentionally untyped
 import { buildSpeciesLookup, classifyNames, normalizeName, resolveSpecies } from '../scripts/lib/species.mjs';
 
 const taxa = [
   { taxon_id: 'pinus-strobus', scientific_name: 'Pinus strobus', common_name: 'Eastern white pine' },
   { taxon_id: 'acer-rubrum', scientific_name: 'Acer rubrum', common_name: 'Red maple' },
 ];
-interface AliasRow { alias: string; taxon_id: string; note?: string }
+type AliasRow = Record<string, string>;
 const aliases: AliasRow[] = [
   { alias: 'White pine', taxon_id: 'pinus-strobus', note: '' },
   { alias: 'ID Needed', taxon_id: '', note: 'Not a species' },
@@ -54,7 +53,7 @@ describe('buildSpeciesLookup', () => {
   it('reports an alias pointing at a taxon that does not exist', () => {
     const { conflicts } = build([{ alias: 'Ghost tree', taxon_id: 'nothing-here' }]);
     expect(conflicts[0]).toMatchObject({ alias: 'Ghost tree' });
-    expect(conflicts[0].reason).toMatch(/no taxon/);
+    expect(conflicts[0]!.reason).toMatch(/no taxon/);
   });
 
   // An alias that contradicts taxa.csv is a mistake in the alias file, and
@@ -62,7 +61,7 @@ describe('buildSpeciesLookup', () => {
   it('refuses to let an alias override a canonical name', () => {
     const { lookup, conflicts } = build([{ alias: 'Red maple', taxon_id: 'pinus-strobus' }]);
     expect(resolveSpecies('Red maple', lookup)).toBe('acer-rubrum');
-    expect(conflicts[0].reason).toMatch(/already resolves to "acer-rubrum"/);
+    expect(conflicts[0]!.reason).toMatch(/already resolves to "acer-rubrum"/);
   });
 
   it('reports two aliases fighting over the same name', () => {

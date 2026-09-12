@@ -38,8 +38,22 @@ const baseUrl = (arg('base', config.publicUrl) ?? '').replace(/\/?$/, '/');
 const onlyCollection = arg('collection');
 const onlyIds = arg('ids')?.split(',').map((s) => s.trim());
 
+// Status lives on the latest observation, not on the plant — so a tree that
+// came down in 2029 is filtered out by its final survey rather than by a column
+// on plants.csv, where a stale "active" would keep printing labels for a stump.
+const latestStatus = new Map();
+for (const o of csv('observations.csv')) {
+  const id = o.plant_id?.trim();
+  const date = o.surveyed_on?.trim();
+  if (!id || !date) continue;
+  const seen = latestStatus.get(id);
+  if (!seen || date >= seen.date) {
+    latestStatus.set(id, { date, status: (o.status || 'active').trim() });
+  }
+}
+
 const plants = csv('plants.csv').filter((p) => {
-  if ((p.status || 'active').trim() !== 'active') return false;
+  if ((latestStatus.get(p.plant_id?.trim())?.status ?? 'active') !== 'active') return false;
   if (onlyIds && !onlyIds.includes(p.plant_id?.trim())) return false;
   if (onlyCollection && p.collection_id?.trim() !== onlyCollection) return false;
   return true;

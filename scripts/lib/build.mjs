@@ -2,8 +2,10 @@
 // Kept free of filesystem access so the test suite can exercise it directly.
 
 import {
-  CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES,
-  TAXON_REQUIRED, PLANT_REQUIRED, TAXON_NUMERIC, PLANT_NUMERIC, PLANT_FIELDS,
+  CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES, BOOLEANISH, PROSE_MAX,
+  TAXON_REQUIRED, PLANT_REQUIRED, OBSERVATION_REQUIRED,
+  TAXON_NUMERIC, PLANT_NUMERIC, OBSERVATION_NUMERIC,
+  OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS,
 } from './vocab.mjs';
 import { buildSpeciesLookup } from './species.mjs';
 
@@ -35,13 +37,20 @@ function enumIndex(value, list) {
   return list.indexOf(token(value));
 }
 
+/**
+ * Survey dates are compared as strings to order a plant's history, which is
+ * only correct for zero-padded ISO dates — "2026-9-1" would sort after
+ * "2026-10-14" and silently make the wrong observation the current one.
+ */
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+
 /** Is a position inside the configured map bounds? Catches swapped lat/lng. */
 function inBounds(lat, lng, config) {
   const [[south, west], [north, east]] = config.map.bounds;
   return lat >= south && lat <= north && lng >= west && lng <= east;
 }
 
-export function buildDataset({ taxaRows, plantRows, collectionRows, trails, campusAreas, aliasRows = [], config }) {
+export function buildDataset({ taxaRows, plantRows, observationRows = [], collectionRows, trails, campusAreas, aliasRows = [], config }) {
   const errors = [];
   const warnings = [];
   const err = (where, msg) => errors.push(`${where}: ${msg}`);
@@ -89,6 +98,9 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
     if (origin && !ORIGINS.includes(origin)) {
       err(where, `origin "${row.origin}" is not one of: ${ORIGINS.join(', ')}`);
     }
+    if (trim(row.fun_fact).length > PROSE_MAX) {
+      warn(where, `fun_fact is ${trim(row.fun_fact).length} characters — it is meant to be one line, not a second description`);
+    }
 
     taxonIndex.set(id, taxa.length);
     taxa.push({
@@ -115,13 +127,16 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
       zones: trim(row.hardiness_zones),
       wikipedia: trim(row.wikipedia_url),
       description: trim(row.description),
+      funFact: trim(row.fun_fact),
       count: 0, // filled in below
     });
   });
 
   // ---- plants ------------------------------------------------------------
+  // Identity only: what the tree is and where it stands. Nothing here is a
+  // measurement, so a re-survey never rewrites one of these rows.
   const bounds = config?.map?.bounds;
-  const plantRowsOut = [];
+  const plantsMeta = [];
   const seenPlantIds = new Set();
 
   plantRows.forEach((row, i) => {
@@ -170,6 +185,81 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
       warn(where, 'no collection_id set');
     }
 
+    // A measurement left on a plants.csv row is data that will never be read:
+    // the map takes every one of these from the latest observation. Say so
+    // rather than dropping it, because the number itself may be the only copy.
+    for (const field of OBSERVATION_COLUMNS) {
+      if (field === 'plant_id') continue;
+      if (trim(row[field]) !== '') {
+        err(
+          where,
+          `"${field}" belongs in observations.csv, not plants.csv — move it to a row ` +
+            `for ${id} with the date it was recorded` +
+            // "notes" is the one that splits two ways, and sending a remark
+            // about the coordinates off to observations.csv would file it
+            // under a visit rather than beside the position it describes.
+            (field === 'notes' ? ', or into geolocation_notes if it is about the position' : ''),
+        );
+      }
+    }
+
+    // A label reading "Yes" is a yes/no column that landed in a text one, and
+    // it would go onto the public record as though it were what the plaque says.
+    const label = trim(row.dedication_label);
+    if (BOOLEANISH.test(label)) {
+      err(where, `dedication_label is "${label}" — it should be what the plaque says, not a yes/no`);
+    }
+    if (trim(row.story).length > PROSE_MAX) {
+      warn(where, `story is ${trim(row.story).length} characters — it is meant to be one line`);
+    }
+
+    plantsMeta.push({
+      id,
+      taxon: tIdx,
+      lat: Number(lat.toFixed(6)),
+      lng: Number(lng.toFixed(6)),
+      collection: cIdx,
+      planted_year: num(row.planted_year),
+      dedication_label: label || null,
+      story: trim(row.story) || null,
+    });
+  });
+
+  // ---- observations ------------------------------------------------------
+  // One row per plant per visit, appended and never overwritten. The map shows
+  // the most recent; the rest is what makes growth over time answerable.
+  const history = new Map();
+  const seenObservations = new Set();
+
+  observationRows.forEach((row, i) => {
+    const where = `observations.csv row ${i + 2}`;
+    const id = trim(row.plant_id);
+    const date = trim(row.surveyed_on);
+
+    for (const field of OBSERVATION_REQUIRED) {
+      if (!trim(row[field])) err(where, `missing required field "${field}"`);
+    }
+    if (!id || !date) return;
+    if (!seenPlantIds.has(id)) {
+      return err(where, `plant_id "${id}" has no matching row in plants.csv`);
+    }
+    if (!ISO_DATE.test(date)) {
+      return err(where, `surveyed_on "${date}" must be a date as YYYY-MM-DD`);
+    }
+    // Two observations of one tree on one day are a file imported twice far
+    // more often than they are two crews measuring the same trunk, and only one
+    // of them can be the latest — so which reading the map shows would come
+    // down to row order.
+    const key = `${id}\u0000${date}`;
+    if (seenObservations.has(key)) {
+      return err(where, `${id} already has an observation dated ${date}`);
+    }
+    seenObservations.add(key);
+
+    for (const field of OBSERVATION_NUMERIC) {
+      if (Number.isNaN(num(row[field]))) err(where, `"${field}" is not a number: "${row[field]}"`);
+    }
+
     let condIdx = -1;
     if (trim(row.condition)) {
       condIdx = enumIndex(row.condition, CONDITIONS);
@@ -184,28 +274,69 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
       err(where, `status "${statusRaw}" is not one of: ${STATUSES.join(', ')}`);
     }
 
-    const record = {
-      plant_id: id,
-      taxon: tIdx,
-      lat: Number(lat.toFixed(6)),
-      lng: Number(lng.toFixed(6)),
-      collection: cIdx,
+    if (!history.has(id)) history.set(id, []);
+    history.get(id).push({
+      surveyed_on: date,
+      surveyor: trim(row.surveyor) || null,
       dbh_in: num(row.dbh_in),
       height_ft: num(row.height_ft),
       spread_ft: num(row.spread_ft),
       condition: condIdx,
-      planted_year: num(row.planted_year),
       status: statusIdx === -1 ? 0 : statusIdx,
-      surveyed_on: trim(row.surveyed_on) || null,
-      surveyor: trim(row.surveyor) || null,
       photo: trim(row.photo) || null,
-      memorial: trim(row.memorial) || null,
       notes: trim(row.notes) || null,
+    });
+  });
+
+  for (const series of history.values()) {
+    series.sort((a, b) => a.surveyed_on.localeCompare(b.surveyed_on));
+  }
+
+  // ---- plants + their latest observation ---------------------------------
+  // Flattened together here so the map, the filters and the clustering carry on
+  // seeing one row per plant and need to know nothing about the history.
+  const plantRowsOut = [];
+  const historyOut = {};
+  const NO_SURVEY = {
+    surveyed_on: null, surveyor: null, dbh_in: null, height_ft: null, spread_ft: null,
+    condition: -1, status: STATUSES.indexOf('active'), photo: null, notes: null,
+  };
+
+  for (const plant of plantsMeta) {
+    const series = history.get(plant.id) ?? [];
+    // A mapped tree nobody has surveyed yet is a normal state, not an error —
+    // it is most of what a municipal inventory gives you.
+    const latest = series.at(-1) ?? NO_SURVEY;
+
+    const record = {
+      plant_id: plant.id,
+      taxon: plant.taxon,
+      lat: plant.lat,
+      lng: plant.lng,
+      collection: plant.collection,
+      dbh_in: latest.dbh_in,
+      height_ft: latest.height_ft,
+      spread_ft: latest.spread_ft,
+      condition: latest.condition,
+      planted_year: plant.planted_year,
+      status: latest.status,
+      surveyed_on: latest.surveyed_on,
+      surveyor: latest.surveyor,
+      photo: latest.photo,
+      dedication_label: plant.dedication_label,
+      story: plant.story,
+      notes: latest.notes,
+      surveys: series.length,
     };
 
-    if (record.status === STATUSES.indexOf('active')) taxa[tIdx].count += 1;
+    if (record.status === STATUSES.indexOf('active')) taxa[plant.taxon].count += 1;
     plantRowsOut.push(PLANT_FIELDS.map((f) => record[f]));
-  });
+    // One observation is already on the row above; sending it a second time
+    // would double the file to say nothing new.
+    if (series.length > 1) {
+      historyOut[plant.id] = series.map((o) => OBSERVATION_FIELDS.map((f) => o[f]));
+    }
+  }
 
   // Once a full species list is loaded, most taxa legitimately have no mapped
   // plant yet — the list runs ahead of the survey by design. Summarise rather
@@ -346,6 +477,9 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
     counts: {
       taxa: taxa.length,
       plants: plantRowsOut.length,
+      observations: seenObservations.size,
+      resurveyed: Object.keys(historyOut).length,
+      unsurveyed: plantsMeta.filter((p) => !history.has(p.id)).length,
       active: plantRowsOut.filter((r) => r[PLANT_FIELDS.indexOf('status')] === STATUSES.indexOf('active')).length,
       collections: collections.length,
       trails: trailFeatures.length,
@@ -356,7 +490,12 @@ export function buildDataset({ taxaRows, plantRows, collectionRows, trails, camp
 
   return {
     dataset,
-    plants: { fields: PLANT_FIELDS, rows: plantRowsOut },
+    plants: {
+      fields: PLANT_FIELDS,
+      rows: plantRowsOut,
+      observationFields: OBSERVATION_FIELDS,
+      history: historyOut,
+    },
     errors,
     warnings,
   };

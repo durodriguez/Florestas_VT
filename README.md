@@ -38,8 +38,8 @@ whether to include removed plants. Each option shows a live count, computed
 with its own facet relaxed so the alternatives stay clickable.
 
 **Plant records** — accession, species description, DBH, height, spread,
-condition, planting year, age, last survey date, coordinates, notes, memorial
-dedications, photo, and species-level facts (foliage, flower and fruit colour
+condition, planting year, age, last survey date, coordinates, notes, gift and
+memorial dedications, photo, and species-level facts (foliage, flower and fruit colour
 and season, fall colour, mature height, hardiness zones). Plus walking
 directions, a shareable link, and a "see all N of this species" jump.
 
@@ -106,6 +106,7 @@ species never reaches the live site.
 | **Surveying and mapping trees** | [docs/FIELD-SURVEY.md](docs/FIELD-SURVEY.md) |
 | **The field survey app** | [docs/FIELD-APP.md](docs/FIELD-APP.md) |
 | **Hosting, domains, scaling** | [docs/DEPLOY.md](docs/DEPLOY.md) |
+| **What's planned next** | [docs/TODO.md](docs/TODO.md) |
 
 ## Commands
 
@@ -114,7 +115,7 @@ species never reaches the live site.
 | `npm run dev` | Rebuild data, start the dev server |
 | `npm run data` | Validate `data/*.csv` and regenerate `public/data/` |
 | `npm run build` | Validate, typecheck and build to `dist/` |
-| `npm run import -- <file.csv>` | Merge a field-survey export into `data/plants.csv` (dry run by default) |
+| `npm run import -- <file.csv>` | Merge a field-survey export into `data/plants.csv` and `data/observations.csv` (dry run by default) |
 | `npm run areas` | File each plant under the campus area its coordinates fall in (dry run by default) |
 | `npm run check:species -- <file>` | Report how a source file's species names resolve against `taxa.csv` |
 | `npm run labels` | Generate QR label sheet and SVGs into `public/labels/` |

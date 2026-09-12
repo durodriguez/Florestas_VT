@@ -9,10 +9,14 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Papa from 'papaparse';
 import { buildDataset } from './lib/build.mjs';
+import { normalizeName } from './lib/species.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dataDir = join(root, 'data');
 const outDir = join(root, 'public', 'data');
+// The field app is a separate PWA with its own cache; its species list lives
+// beside it so a surveyor's phone never fetches the whole 197 kB dataset.
+const fieldDir = join(root, 'public', 'field');
 
 function readCsv(name) {
   const path = join(dataDir, name);
@@ -43,6 +47,7 @@ function readCsv(name) {
 const result = buildDataset({
   taxaRows: readCsv('taxa.csv'),
   plantRows: readCsv('plants.csv'),
+  observationRows: readCsv('observations.csv'),
   collectionRows: readCsv('collections.csv'),
   trails: JSON.parse(readFileSync(join(dataDir, 'trails.geojson'), 'utf8')),
   campusAreas: JSON.parse(readFileSync(join(dataDir, 'campus-areas.geojson'), 'utf8')),
@@ -65,6 +70,34 @@ const plantsJson = JSON.stringify(result.plants);
 writeFileSync(join(outDir, 'dataset.json'), datasetJson);
 writeFileSync(join(outDir, 'plants.json'), plantsJson);
 
+// ---- the field app's species list ----------------------------------------
+// Just enough to autocomplete a name offline and hand back a taxon_id: no
+// descriptions, no horticultural columns. Search keys are normalised here,
+// once, by the same function the importer resolves names with, so the phone
+// never has to agree with the desk about what "Scot's pine" folds down to.
+const aliasKeys = new Map();
+for (const row of readCsv('species-aliases.csv')) {
+  const id = (row.taxon_id ?? '').trim();
+  // A blank taxon_id is a deliberate "cannot resolve this" — offering it as a
+  // suggestion would hand back the one thing it was recorded to say it is not.
+  if (!id) continue;
+  const key = normalizeName(row.alias);
+  if (!key) continue;
+  if (!aliasKeys.has(id)) aliasKeys.set(id, []);
+  aliasKeys.get(id).push(key);
+}
+
+const species = result.dataset.taxa.map((t) => {
+  const keys = new Set([normalizeName(t.sci), normalizeName(t.common), normalizeName(t.id)]);
+  for (const key of aliasKeys.get(t.id) ?? []) keys.add(key);
+  keys.delete('');
+  return { id: t.id, sci: t.sci, common: t.common, n: t.count, k: [...keys] };
+});
+
+mkdirSync(fieldDir, { recursive: true });
+const speciesJson = JSON.stringify(species);
+writeFileSync(join(fieldDir, 'species.json'), speciesJson);
+
 // These two files keep the same URL forever — Vite hashes JS and CSS
 // filenames, but copies public/ through untouched. Without a cache-buster a
 // returning visitor keeps seeing the plants they saw last time, however many
@@ -77,8 +110,8 @@ writeFileSync(join(outDir, 'plants.json'), plantsJson);
 // make every visitor re-download data that had not actually changed.
 const version = createHash('sha256')
   .update(
-    ['taxa.csv', 'plants.csv', 'collections.csv', 'trails.geojson', 'campus-areas.geojson',
-      'species-aliases.csv', 'config.json']
+    ['taxa.csv', 'plants.csv', 'observations.csv', 'collections.csv', 'trails.geojson',
+      'campus-areas.geojson', 'species-aliases.csv', 'config.json']
       .map((name) => readFileSync(join(dataDir, name)))
       .reduce((a, b) => Buffer.concat([a, b]), Buffer.alloc(0)),
   )
@@ -94,6 +127,11 @@ console.log(
   `${c.aliases} species aliases` +
   `${result.warnings.length ? ` · ${result.warnings.length} warning(s)` : ''}`
 );
+console.log(
+  `  ${c.observations} observation(s) · ${c.resurveyed} plant(s) surveyed more than once · ` +
+  `${c.unsurveyed} never surveyed`,
+);
 console.log(`  public/data/dataset.json  ${kb(datasetJson)}`);
 console.log(`  public/data/plants.json   ${kb(plantsJson)}`);
+console.log(`  public/field/species.json ${kb(speciesJson)}  (${species.length} taxa for the survey app)`);
 console.log(`  data version              ${version}`);

@@ -10,6 +10,9 @@ import type { SurveyRecord, PhotoBlob } from './db';
 /** Column names match survey/mapping.json, so the importer needs no config. */
 const COLUMNS: Array<[string, (r: SurveyRecord) => string]> = [
   ['tag', (r) => r.tag],
+  // Both, deliberately. taxon_id is what the importer matches on, and the name
+  // is what makes the file readable by the person reviewing it.
+  ['taxon_id', (r) => r.taxonId ?? ''],
   ['species', (r) => r.species],
   ['lat', (r) => (r.lat === null ? '' : r.lat.toFixed(6))],
   ['lng', (r) => (r.lng === null ? '' : r.lng.toFixed(6))],
@@ -22,16 +25,31 @@ const COLUMNS: Array<[string, (r: SurveyRecord) => string]> = [
   ['surveyor', (r) => r.surveyor],
   ['date', (r) => r.surveyedOn],
   ['photo', (r) => r.photoName ?? ''],
+  ['geolocation_notes', (r) => geolocationNotesFor(r)],
+  ['dedication_label', (r) => r.dedication ?? ''],
   ['notes', (r) => notesFor(r)],
 ];
 
 /**
- * Field observations that have no column of their own are folded into notes,
- * so nothing the surveyor flagged is silently dropped on export.
+ * How this position was arrived at — which is about the coordinates, not about
+ * the tree, and so belongs beside them in plants.csv rather than in the notes
+ * on one visit. It is also the line a visitor reading the public record has no
+ * use for, which is a second reason to keep it out of the surveyor's notes.
+ */
+function geolocationNotesFor(r: SurveyRecord): string {
+  if (r.accuracy !== null) {
+    return `GPS ±${r.accuracy.toFixed(0)} m${r.pinAdjusted ? ', pin adjusted on imagery' : ''}`;
+  }
+  return r.pinAdjusted ? 'Position set by pin on imagery' : '';
+}
+
+/**
+ * What the surveyor saw. Field observations that have no column of their own
+ * are folded in here, so nothing they flagged is silently dropped on export.
  */
 function notesFor(r: SurveyRecord): string {
   const parts: string[] = [];
-  // Trim a trailing stop so joining does not produce "bark.. GPS ±4 m".
+  // Trim a trailing stop so joining does not produce "bark.. Planting year…".
   if (r.notes.trim()) parts.push(r.notes.trim().replace(/\.\s*$/, ''));
   if (r.plantedUnknown) {
     parts.push('Planting year recorded as unknown');
@@ -39,10 +57,10 @@ function notesFor(r: SurveyRecord): string {
   if (r.speciesMismatch) {
     parts.push('SPECIES MISMATCH: does not match the 2014 record for this tag — verify.');
   }
-  if (r.accuracy !== null) {
-    parts.push(`GPS ±${r.accuracy.toFixed(0)} m${r.pinAdjusted ? ', pin adjusted on imagery' : ''}`);
-  } else if (r.pinAdjusted) {
-    parts.push('Position set by pin on imagery');
+  // A name the species list did not recognise is either a new taxon for
+  // taxa.csv or a typo, and only someone at a desk can tell which.
+  if (!r.taxonId) {
+    parts.push(`SPECIES NOT ON LIST: "${r.species}" was typed by hand — check it`);
   }
   return parts.join('. ');
 }

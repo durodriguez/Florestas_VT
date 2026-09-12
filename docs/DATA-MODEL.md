@@ -7,7 +7,8 @@ Google Sheets, and every change shows up as a readable diff in git.
 
 ```
 data/taxa.csv         one row per species/cultivar   (what a plant is)
-data/plants.csv       one row per mapped individual  (where it is, how big)
+data/plants.csv       one row per mapped individual  (what it is, where it stands)
+data/observations.csv one row per plant per visit    (what someone measured, and when)
 data/collections.csv  campus areas / beds
 data/trails.geojson   self-guided walking tours
 data/campus-areas.geojson  campus boundary + the six named campuses
@@ -15,10 +16,23 @@ data/species-aliases.csv   free-text species names -> taxon_id
 data/config.json      site name, map centre, campus bounds
 ```
 
-The split between `taxa.csv` and `plants.csv` matters: species facts (flower
-colour, hardiness zone, description) are written **once** per species, not
-repeated on all 400 sugar maples. `plants.csv` refers to a species by
-`taxon_id`.
+Two splits run through this, and both exist to stop one fact being written in
+more than one place.
+
+**taxa.csv vs plants.csv** — species facts (flower colour, hardiness zone,
+description) are written **once** per species, not repeated on all 400 sugar
+maples. `plants.csv` refers to a species by `taxon_id`.
+
+**plants.csv vs observations.csv** — a tree's identity does not change when
+somebody walks past it with a tape measure. `plants.csv` holds what it is and
+where it stands; every measurement belongs to the day it was taken, and lives
+in `observations.csv` as one row per plant per visit.
+
+That second split is the difference between a snapshot and a record. With one
+row per tree, a 2028 re-survey overwrites the 2026 diameter and the growth
+between them is gone — not archived, not flagged, just gone, with nothing on
+screen looking wrong. Appending instead means the map still shows the latest
+reading, and the earlier ones are still there to be asked about.
 
 ---
 
@@ -34,9 +48,8 @@ repeated on all 400 sugar maples. `plants.csv` refers to a species by
 | `species` | | `saccharum` — blank for hybrids and genus-only cultivars |
 | `infraspecific` | | `var. inermis`, `subsp. nigrum` |
 | `cultivar` | | `Princeton` — no quote marks, the site adds them |
-| `habit` | ✅ | `tree`, `conifer`, `shrub`, `vine` |
-| `foliage` | | `deciduous`, `evergreen`, `semi-evergreen` |
-| `native_status` | | `native`, `introduced`, `invasive` |
+| `plant_type` | ✅ | `deciduous-tree`, `evergreen-tree`, `shrub`, `perennial`, `annual`, `vine`, `grass` |
+| `origin` | | `vermont-native`, `vermont-invasive`, `introduced` |
 | `flower_color` | | free text, one word: `pink`, `yellow-green` |
 | `flower_months` | | month numbers, e.g. `4,5` for April–May |
 | `fruit_color`, `fruit_months` | | same shape as the flower columns |
@@ -49,37 +62,157 @@ repeated on all 400 sugar maples. `plants.csv` refers to a species by
 | `hardiness_zones` | | `3-8` |
 | `wikipedia_url` | | linked from the plant record. Derived from the scientific name, so run `npm run check:links` to confirm they resolve — a redirect is fine and usually means the name is a synonym of the accepted one |
 | `description` | | one or two sentences shown on the record |
+| `fun_fact` | | one line about the species, shown on every plant of it — see the rule below |
 
 ## plants.csv
+
+One row per tree, for as long as the tree exists. Nothing here is a
+measurement, which is why a re-survey never rewrites one of these rows.
 
 | Column | Required | Notes |
 |---|---|---|
 | `plant_id` | ✅ | Accession number, e.g. `UVM-2026-0001`. **Permanent** — it is what the QR code encodes. |
 | `taxon_id` | ✅ | Must exist in `taxa.csv` |
 | `lat`, `lng` | ✅ | Decimal degrees, WGS84, 6 decimal places (~0.1 m) |
+| `geolocation_notes` | | how the position was arrived at — `GPS ±3 m`, `Position set by pin on imagery` |
 | `collection_id` | | Must exist in `collections.csv` |
+| `planted_year` | | blank for naturally regenerated plants |
+| `dedication_label` | | what the plaque says, e.g. `In memory of John Dewey` |
+| `story` | | one line about *this* tree — where it came from, what happened to it |
+
+### Dedications
+
+One column, not two. A tree is a gift, memorial or dedicated one **exactly
+when somebody has written down what its plaque says** — there is no separate
+flag. A boolean derivable from a text column is a second place for the same
+fact to live, and two columns that must agree are where a hand-edited CSV
+drifts.
+
+The state a flag would have carried on its own — "there is a plaque, nobody has
+transcribed it" — is better said in the label itself: *"Gift of the class of
+19??, rest illegible"* records what was actually seen, and why. That is the
+same answer this project already gives for a planting year nobody knows, which
+goes into prose rather than earning a column.
+
+The one thing that gets easier to do wrong: a source with a yes/no `memorial`
+column, mapped onto this one, would put the word "Yes" on a public record as
+though it were plaque wording. A `dedication_label` that is *only* a boolean
+word — `yes`, `Y`, `TRUE`, `1`, `no`, `false`, `0` — is refused by both the
+build and the importer. Wording that merely begins with one, like *"Yes, in
+memory of a friend"*, is fine.
+
+### fun_fact and story: the source rule
+
+Two columns, because they are two different things. `fun_fact` is about the
+**species** and is written once in `taxa.csv`, then shown on every one of that
+species on campus. `story` is about **one tree** — where it came from, what
+happened to it — and lives in `plants.csv`, where it will be blank for almost
+every row.
+
+Neither is a second description, and nothing can validate that either is *true*.
+So the rule is editorial, and it matters more than any check:
+
+- **A `fun_fact` is horticultural or historical, and checkable.** Etymology, a
+  documented use, a piece of biology, a named date. Not "some say", not a
+  superlative you cannot source, not a number you half-remember.
+- **A `story` needs someone who can vouch for it.** Anything asserted about a
+  specific UVM tree — who planted it, what it survived, how old it is — needs a
+  person or a record behind it. A campus map is exactly the kind of place where
+  a pleasant guess becomes folklore that outlives everyone who could correct it.
+- **Blank is a perfectly good answer.** An empty `story` costs nothing; a wrong
+  one is on a university website under UVM's name.
+
+`npm run data` warns if either runs past 240 characters, which is the only part
+a machine can usefully police — it keeps the column from quietly becoming a
+second description nobody will read on a phone.
+
+Every `fun_fact` in the file today was authored here, not transcribed. Seven
+were spot-checked against published sources and two needed correcting: the
+surviving Hiroshima ginkgos are a kilometre or two from the blast rather than
+within a mile, and the Tidal Basin story had been attached to Japanese
+flowering cherry when it belongs to the Yoshino. That is a higher error rate
+than the horticultural columns measured, and it is what you should expect —
+facts with dates and numbers in them are easier to get slightly wrong than a
+bloom window is. **Treat the column as a good draft to check, not a reference.**
+
+### geolocation_notes, and the other notes
+
+`geolocation_notes` sits next to the coordinates because that is what it
+qualifies: how this position was arrived at, not what the surveyor thought of
+the tree. That second kind goes in the observation's `notes`, next to the visit
+it came from.
+
+The field app writes both, from one form: the GPS accuracy and whether the pin
+was moved become `geolocation_notes`, and everything the surveyor typed or
+flagged becomes `notes`.
+
+`geolocation_notes` is deliberately **not** shipped to the browser. "Position
+set by pin on imagery" answers a question no visitor is asking, and the cheapest
+way to keep it off the public record is not to send it.
+
+A measurement column left on one of these rows fails the build rather than
+being ignored, and the error names the column — otherwise the number would sit
+in the file looking like data while nothing on the map ever read it.
+
+A plant with **no observations at all** is fine, and stays on the map: it is a
+tree somebody has plotted but not yet surveyed, which is most of what a
+municipal inventory hands you. Its record simply says "Not yet surveyed".
+
+## observations.csv
+
+One row per plant per **visit**. Append-only: nothing in this file is ever
+edited or reordered by the tooling, which is what keeps a past survey a past
+survey.
+
+| Column | Required | Notes |
+|---|---|---|
+| `plant_id` | ✅ | Must exist in `plants.csv` |
+| `surveyed_on` | ✅ | `YYYY-MM-DD`, zero-padded. Ordering the history depends on it, so `2026-9-1` is rejected rather than sorted after `2026-10-14`. |
+| `surveyor` | | initials or name |
 | `dbh_in` | | Diameter at breast height, inches. Leave blank for shrubs. |
 | `height_ft`, `spread_ft` | | numbers |
 | `condition` | | `excellent`, `good`, `fair`, `poor`, `dead` |
-| `planted_year` | | blank for naturally regenerated plants |
 | `status` | | `active` (default) or `removed` |
-| `surveyed_on` | | `YYYY-MM-DD` |
-| `surveyor` | | initials or name |
 | `photo` | | filename in `public/photos/` |
-| `memorial` | | dedication text, shown prominently |
-| `notes` | | free text |
+| `notes` | | free text — what the surveyor saw that day, not how the position was fixed |
+
+The file is **ragged, not a grid**. It is not every tree once a year: if the
+2028 crew only walks Central Campus, only Central trees get 2028 rows. A tree
+with a single 2026 row means nobody has looked at it since, which is itself
+worth being able to read.
+
+`(plant_id, surveyed_on)` must be unique. Two readings of one trunk on one day
+are a file imported twice far more often than they are two crews at work, and
+only one of them can be the latest — so which one the map showed would come
+down to row order.
+
+### What the map shows
+
+The **most recent** observation for each plant, flattened onto its row at build
+time. So the map, the filters, the clustering and the colour-by modes see
+exactly one row per plant and know nothing about the history; only the detail
+panel reads the series, and only when there is more than one visit to show.
+
+Condition and status both come from the latest observation. Nothing caches them
+on `plants.csv`, so they cannot drift out of step with the survey that
+established them.
 
 ### Multi-stemmed trees
 
-Record the largest stem in `dbh_in` and note the others in `notes`
-(`"3 stems: 12.1, 9.4, 7.8 in"`). A single map point per plant keeps the
+Record the largest stem in `dbh_in` and note the others in the observation's
+`notes` (`"3 stems: 12.1, 9.4, 7.8 in"`). A single map point per plant keeps the
 accession-to-label relationship one-to-one.
 
 ### Removed plants
 
-Set `status` to `removed` rather than deleting the row. The record stays
-reachable from its old QR code and from the map's "include removed plants"
-option, which preserves the campus's landscape history.
+Add a final observation with `status` set to `removed` rather than deleting
+anything. The tree's whole life stays readable, the record stays reachable from
+its old QR code and from the map's "include removed plants" option, and the
+campus's landscape history is preserved instead of edited away.
+
+`npm run labels` reads status the same way, so a tree that came down in 2029
+stops printing labels because of its last survey — not because of a column
+somebody remembered to update.
 
 ## collections.csv
 

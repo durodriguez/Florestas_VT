@@ -269,7 +269,7 @@ button, input, select { font: inherit; color: inherit; }
   margin: .9rem 0 0; padding: .5rem .7rem; font-size: .8rem;
   background: #fdf3d6; border-left: 3px solid var(--uvm-gold); color: #4a3c00;
 }
-.detail-memorial {
+.detail-dedication {
   margin: .9rem 0 0; padding: .5rem .7rem; font-size: .85rem;
   background: var(--bg-sunk); border-left: 3px solid var(--uvm-green-light);
 }
@@ -278,6 +278,17 @@ button, input, select { font: inherit; color: inherit; }
   border-radius: var(--radius);
 }
 .detail-desc { font-size: .88rem; line-height: 1.5; }
+
+/* This tree's own history, and a line about the species. Both are optional
+   colour rather than record, so they read lighter than the description. */
+.detail-story {
+  margin: .9rem 0 0; padding: .5rem .7rem; font-size: .85rem; line-height: 1.5;
+  background: var(--bg-sunk); border-left: 3px solid var(--uvm-gold);
+}
+.detail-fact {
+  margin: .6rem 0 0; font-size: .85rem; line-height: 1.5; color: var(--text-dim);
+  padding-left: .7rem; border-left: 2px solid var(--border);
+}
 
 .detail-section {
   font-size: .74rem; letter-spacing: .08em; text-transform: uppercase;
@@ -299,6 +310,19 @@ button, input, select { font: inherit; color: inherit; }
 .pill--fair { background: #b8860b; }
 .pill--poor { background: #d1642c; }
 .pill--dead { background: #7c7c7c; }
+
+.detail-growth {
+  margin: 0 0 .6rem; font-size: .84rem; line-height: 1.45;
+  color: var(--text-dim);
+}
+.surveys { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
+.survey {
+  display: grid; grid-template-columns: 5.5rem 1fr; gap: .5rem;
+  align-items: baseline; font-size: .84rem;
+}
+.survey-date { color: var(--text-dim); }
+.survey-body { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem; }
+.survey-measures { color: var(--text-dim); font-size: .8rem; }
 
 .detail-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.25rem 0 0; }
 .btn {
