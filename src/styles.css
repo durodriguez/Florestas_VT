@@ -279,6 +279,17 @@ button, input, select { font: inherit; color: inherit; }
 }
 .detail-desc { font-size: .88rem; line-height: 1.5; }
 
+/* This tree's own history, and a line about the species. Both are optional
+   colour rather than record, so they read lighter than the description. */
+.detail-story {
+  margin: .9rem 0 0; padding: .5rem .7rem; font-size: .85rem; line-height: 1.5;
+  background: var(--bg-sunk); border-left: 3px solid var(--uvm-gold);
+}
+.detail-fact {
+  margin: .6rem 0 0; font-size: .85rem; line-height: 1.5; color: var(--text-dim);
+  padding-left: .7rem; border-left: 2px solid var(--border);
+}
+
 .detail-section {
   font-size: .74rem; letter-spacing: .08em; text-transform: uppercase;
   color: var(--text-dim); margin: 1.4rem 0 .5rem;

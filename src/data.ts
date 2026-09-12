@@ -65,6 +65,7 @@ export function expandPlants(file: PlantsFile, dataset: Dataset): Plant[] {
       surveyor: at(row, 'surveyor') as string | null,
       photo: at(row, 'photo') as string | null,
       dedicationLabel: at(row, 'dedication_label') as string | null,
+      story: at(row, 'story') as string | null,
       notes: at(row, 'notes') as string | null,
       history: [],
       search: '',
@@ -98,6 +99,7 @@ export function expandPlants(file: PlantsFile, dataset: Dataset): Plant[] {
       taxon.cultivar,
       collection?.name ?? '',
       plant.dedicationLabel ?? '',
+      plant.story ?? '',
     ]
       .join(' ')
       .toLowerCase();

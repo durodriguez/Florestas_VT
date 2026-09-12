@@ -62,6 +62,7 @@ reading, and the earlier ones are still there to be asked about.
 | `hardiness_zones` | | `3-8` |
 | `wikipedia_url` | | linked from the plant record. Derived from the scientific name, so run `npm run check:links` to confirm they resolve — a redirect is fine and usually means the name is a synonym of the accepted one |
 | `description` | | one or two sentences shown on the record |
+| `fun_fact` | | one line about the species, shown on every plant of it — see the rule below |
 
 ## plants.csv
 
@@ -77,6 +78,7 @@ measurement, which is why a re-survey never rewrites one of these rows.
 | `collection_id` | | Must exist in `collections.csv` |
 | `planted_year` | | blank for naturally regenerated plants |
 | `dedication_label` | | what the plaque says, e.g. `In memory of John Dewey` |
+| `story` | | one line about *this* tree — where it came from, what happened to it |
 
 ### Dedications
 
@@ -98,6 +100,40 @@ though it were plaque wording. A `dedication_label` that is *only* a boolean
 word — `yes`, `Y`, `TRUE`, `1`, `no`, `false`, `0` — is refused by both the
 build and the importer. Wording that merely begins with one, like *"Yes, in
 memory of a friend"*, is fine.
+
+### fun_fact and story: the source rule
+
+Two columns, because they are two different things. `fun_fact` is about the
+**species** and is written once in `taxa.csv`, then shown on every one of that
+species on campus. `story` is about **one tree** — where it came from, what
+happened to it — and lives in `plants.csv`, where it will be blank for almost
+every row.
+
+Neither is a second description, and nothing can validate that either is *true*.
+So the rule is editorial, and it matters more than any check:
+
+- **A `fun_fact` is horticultural or historical, and checkable.** Etymology, a
+  documented use, a piece of biology, a named date. Not "some say", not a
+  superlative you cannot source, not a number you half-remember.
+- **A `story` needs someone who can vouch for it.** Anything asserted about a
+  specific UVM tree — who planted it, what it survived, how old it is — needs a
+  person or a record behind it. A campus map is exactly the kind of place where
+  a pleasant guess becomes folklore that outlives everyone who could correct it.
+- **Blank is a perfectly good answer.** An empty `story` costs nothing; a wrong
+  one is on a university website under UVM's name.
+
+`npm run data` warns if either runs past 240 characters, which is the only part
+a machine can usefully police — it keeps the column from quietly becoming a
+second description nobody will read on a phone.
+
+Every `fun_fact` in the file today was authored here, not transcribed. Seven
+were spot-checked against published sources and two needed correcting: the
+surviving Hiroshima ginkgos are a kilometre or two from the blast rather than
+within a mile, and the Tidal Basin story had been attached to Japanese
+flowering cherry when it belongs to the Yoshino. That is a higher error rate
+than the horticultural columns measured, and it is what you should expect —
+facts with dates and numbers in them are easier to get slightly wrong than a
+bloom window is. **Treat the column as a good draft to check, not a reference.**
 
 ### geolocation_notes, and the other notes
 

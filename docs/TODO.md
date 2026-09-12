@@ -4,12 +4,11 @@ Recorded 11 September 2026, from a list you sent. Nothing here is built yet —
 this file exists so none of it gets lost. Each item has the ask, then what I'd
 suggest and what it would cost.
 
-Roughly in the order I'd do them: 6 is small and independent, and 4 is a
-writing job more than a coding one. 8 and 9 are entangled with each other and
-with the ArcGIS import, so they want one design decision rather than two. 7 and
-10 are the big ones.
+Roughly in the order I'd do them: 6 is small and independent. 8 and 9 are
+entangled with each other and with the ArcGIS import, so they want one design
+decision rather than two. 7 and 10 are the big ones.
 
-**1, 2, 3, 5 and 11 are done** — marked below.
+**1, 2, 3, 4, 5 and 11 are done** — marked below.
 
 ---
 
@@ -81,32 +80,35 @@ column.
 first half of to-do 6 for free: "Position set by pin on imagery" no longer
 appears on the public record, because it never reaches it.
 
-## 4. A "fun fact" column — undecided
+## 4. A "fun fact" column — ✅ done, 12 September 2026
 
 **Ask.** Either in `taxa.csv` (generic to the species) or in `plants.csv`
 (specific to the tree). Still deciding.
 
-**Suggestion.** Both, and they are different things, which is why the choice
-feels hard:
+**Built.** Both, because they are two different things — which is what made the
+choice feel hard.
 
-- `taxa.csv` → `fun_fact`. One line per species, written once, shown on every
-  tree of that species. 257 rows to fill, but it is library work you can do at a
-  desk, and it pays off ~2,500 times over.
-- `plants.csv` → something like `story`. This tree, this spot. "Planted by the
-  Class of 1902." "The oldest ginkgo in Vermont." Almost always blank, and each
-  one has to be found individually — but these are the ones people remember.
+- `taxa.csv` gets **`fun_fact`**: one line about the species, written once and
+  shown on every one of that species on campus. All 257 are filled in.
+- `plants.csv` gets **`story`**: one line about an individual tree. Blank
+  everywhere today, deliberately — a story about a specific UVM tree needs
+  someone who can vouch for it, and inventing one would be exactly what the
+  source rule forbids.
 
-If you only want one now, take the `taxa.csv` one: it is bounded, you can write
-it without leaving your desk, and it makes every marker on the map more
-interesting immediately. The per-tree stories can arrive later as a column added
-to a file that already exists.
+The source rule is written down in `docs/DATA-MODEL.md`, because no validator
+can check whether a fact is true. A fun fact is horticultural or historical and
+checkable; a story needs a person or a record behind it; and blank is a
+perfectly good answer. `npm run data` polices the one thing a machine can — a
+240-character cap, so neither column becomes a second description.
 
-Both need a source rule, or the map ends up asserting folklore. I'd write it
-down: fun facts are horticultural or historical, and anything about a specific
-UVM tree needs someone who can vouch for it.
-
-**Cost.** Column: trivial. Filling 257 fun facts: a day of writing, and — as
-with the trait fill — expect roughly one in six to need a botanist's correction.
+**On accuracy.** All 257 facts were authored here. Seven were spot-checked
+against published sources and two needed correcting — the Hiroshima ginkgos are
+a kilometre or two from the blast, not within a mile, and the Tidal Basin story
+belonged to the Yoshino cherry rather than to Japanese flowering cherry. That is
+worse than the roughly one-in-six measured on the horticultural columns, and it
+is the expected direction: facts carrying dates and numbers are easier to get
+slightly wrong. Worth a read-through by someone who knows the subject before
+this goes public.
 
 ## 5. Species autocomplete in the survey app — ✅ done, 11 September 2026
 

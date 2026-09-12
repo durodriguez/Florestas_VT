@@ -68,6 +68,46 @@ const build = (over: Partial<Parameters<typeof buildDataset>[0]> = {}) =>
 const field = (r: { plants: { fields: string[]; rows: unknown[][] } }, i: number, name: string) =>
   r.plants.rows[i]![r.plants.fields.indexOf(name)];
 
+describe('buildDataset — fun facts and stories', () => {
+  const at = (r: { plants: { fields: string[]; rows: unknown[][] } }, f: string) =>
+    r.plants.rows[0]![r.plants.fields.indexOf(f)];
+
+  it('carries a species fun fact through to the dataset', () => {
+    const r = build({ taxaRows: [taxon({ fun_fact: 'Its resin was the standard cement for microscope slides.' })] });
+    expect(r.errors).toEqual([]);
+    expect(r.dataset.taxa[0]!.funFact).toBe('Its resin was the standard cement for microscope slides.');
+  });
+
+  it('carries a story about one tree', () => {
+    const r = build({ plantRows: [plant({ story: 'Planted by the class of 1902.' })] });
+    expect(r.errors).toEqual([]);
+    expect(at(r, 'story')).toBe('Planted by the class of 1902.');
+  });
+
+  it('leaves both empty when nobody has written one', () => {
+    expect(build().dataset.taxa[0]!.funFact).toBe('');
+    expect(at(build(), 'story')).toBeNull();
+  });
+
+  it('warns when a fun fact turns into a second description', () => {
+    // Nothing can check whether a fact is true; length is the one thing a
+    // machine can usefully police, and it keeps the column readable on a phone.
+    const r = build({ taxaRows: [taxon({ fun_fact: 'x'.repeat(241) })] });
+    expect(r.errors).toEqual([]);
+    expect(r.warnings.join()).toMatch(/fun_fact is 241 characters/);
+  });
+
+  it('warns on an over-long story too', () => {
+    const r = build({ plantRows: [plant({ story: 'y'.repeat(300) })] });
+    expect(r.warnings.join()).toMatch(/story is 300 characters/);
+  });
+
+  it('does not warn at the limit', () => {
+    const r = build({ taxaRows: [taxon({ fun_fact: 'z'.repeat(240) })] });
+    expect(r.warnings.join()).not.toMatch(/fun_fact/);
+  });
+});
+
 describe('buildDataset — dedications', () => {
   const label = (r: { plants: { fields: string[]; rows: unknown[][] } }) =>
     r.plants.rows[0]![r.plants.fields.indexOf('dedication_label')];

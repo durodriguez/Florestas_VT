@@ -55,8 +55,16 @@ export const TAXON_COLUMNS = [
   'infraspecific', 'cultivar', 'plant_type', 'origin',
   'flower_color', 'flower_months', 'fruit_color', 'fruit_months', 'fall_color',
   'mature_height_ft', 'mature_spread_ft', 'bark_profile', 'pest_resistance',
-  'soil_preference', 'hardiness_zones', 'wikipedia_url', 'description',
+  'soil_preference', 'hardiness_zones', 'wikipedia_url', 'description', 'fun_fact',
 ];
+
+/**
+ * A fun fact or a story is one line, not a second description. Nothing enforces
+ * that a fact is *true* — no validator can — so the rule that matters lives in
+ * docs/DATA-MODEL.md; this only keeps the column from silently becoming an
+ * essay nobody will read on a phone.
+ */
+export const PROSE_MAX = 240;
 
 /** Column order of data/plants.csv, and of the rows the importer writes. */
 export const PLANT_COLUMNS = [
@@ -70,6 +78,7 @@ export const PLANT_COLUMNS = [
   'collection_id',
   'planted_year',
   'dedication_label',
+  'story',
 ];
 
 /** Column order of data/observations.csv. */
@@ -108,6 +117,7 @@ export const PLANT_FIELDS = [
   'surveyor',
   'photo',
   'dedication_label',
+  'story',
   'notes',
   'surveys',     // how many observations this plant has
 ];

@@ -52,6 +52,8 @@ export interface Taxon {
   zones: string;
   wikipedia: string;
   description: string;
+  /** One line about the species, shown on every plant of it. */
+  funFact: string;
   count: number;
 }
 
@@ -128,6 +130,8 @@ export interface Plant {
    * dedicated one — there is no separate flag to disagree with it.
    */
   dedicationLabel: string | null;
+  /** One line about *this* tree — where it came from, what happened to it. */
+  story: string | null;
   notes: string | null;
   /**
    * Every observation of this plant, oldest first — empty for a plant nobody

@@ -114,7 +114,9 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
     ${removed}
     ${photo}
     ${dedication}
+    ${plant.story ? `<p class="detail-story">${escapeHtml(plant.story)}</p>` : ''}
     ${t.description ? `<p class="detail-desc">${escapeHtml(t.description)}</p>` : ''}
+    ${t.funFact ? `<p class="detail-fact">${escapeHtml(t.funFact)}</p>` : ''}
 
     <h3 class="detail-section">This specimen</h3>
     <dl class="facts">

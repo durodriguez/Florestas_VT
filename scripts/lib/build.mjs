@@ -2,7 +2,7 @@
 // Kept free of filesystem access so the test suite can exercise it directly.
 
 import {
-  CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES, BOOLEANISH,
+  CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES, BOOLEANISH, PROSE_MAX,
   TAXON_REQUIRED, PLANT_REQUIRED, OBSERVATION_REQUIRED,
   TAXON_NUMERIC, PLANT_NUMERIC, OBSERVATION_NUMERIC,
   OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS,
@@ -98,6 +98,9 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     if (origin && !ORIGINS.includes(origin)) {
       err(where, `origin "${row.origin}" is not one of: ${ORIGINS.join(', ')}`);
     }
+    if (trim(row.fun_fact).length > PROSE_MAX) {
+      warn(where, `fun_fact is ${trim(row.fun_fact).length} characters — it is meant to be one line, not a second description`);
+    }
 
     taxonIndex.set(id, taxa.length);
     taxa.push({
@@ -124,6 +127,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       zones: trim(row.hardiness_zones),
       wikipedia: trim(row.wikipedia_url),
       description: trim(row.description),
+      funFact: trim(row.fun_fact),
       count: 0, // filled in below
     });
   });
@@ -205,6 +209,9 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     if (BOOLEANISH.test(label)) {
       err(where, `dedication_label is "${label}" — it should be what the plaque says, not a yes/no`);
     }
+    if (trim(row.story).length > PROSE_MAX) {
+      warn(where, `story is ${trim(row.story).length} characters — it is meant to be one line`);
+    }
 
     plantsMeta.push({
       id,
@@ -214,6 +221,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       collection: cIdx,
       planted_year: num(row.planted_year),
       dedication_label: label || null,
+      story: trim(row.story) || null,
     });
   });
 
@@ -316,6 +324,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       surveyor: latest.surveyor,
       photo: latest.photo,
       dedication_label: plant.dedication_label,
+      story: plant.story,
       notes: latest.notes,
       surveys: series.length,
     };
