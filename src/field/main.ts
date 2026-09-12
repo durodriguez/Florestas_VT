@@ -10,7 +10,7 @@ import {
   Reference, cacheReference, fetchServerReference, loadCachedReference, parseReference,
 } from './reference';
 import {
-  MAX_SUGGESTIONS, matchExact, resolveExact, searchSpecies,
+  MAX_SUGGESTIONS, matchExact, resolveExact, searchSpecies, speciesChanged,
   type SpeciesEntry, type Suggestion,
 } from './species';
 import { getMeta, setMeta } from './db';
@@ -27,7 +27,7 @@ const $ = <T extends HTMLElement>(id: string): T => {
   return el as T;
 };
 
-const reference = new Reference();
+const referenceFile = new Reference();
 let species: SpeciesEntry[] = [];
 let suggestions: Suggestion[] = [];
 let highlighted = -1;
@@ -36,6 +36,8 @@ let photoName: string | null = null;
 let pinAdjusted = false;
 let plantedUnknown = false;
 let hasPlaque = false;
+/** What the 2014 inventory claims for the tag currently in the box. */
+let reference = { species: '', taxonId: '' };
 let manualLatLng: L.LatLng | null = null;
 
 // ---------------------------------------------------------------- map
@@ -141,14 +143,16 @@ function renderTagLookup(): void {
     box.className = 'tag-result';
     return;
   }
-  if (reference.size === 0) {
+  if (referenceFile.size === 0) {
     box.className = 'tag-result tag-result--info';
     box.textContent = 'No 2014 inventory loaded — type the species yourself. Load it from the Saved screen.';
     return;
   }
 
-  const hit = reference.lookup(tag);
+  const hit = referenceFile.lookup(tag);
   if (hit) {
+    const known = resolveExact(hit.botanical, species);
+    reference = { species: hit.botanical, taxonId: known?.id ?? '' };
     box.className = 'tag-result tag-result--hit';
     box.innerHTML =
       `<strong>${escapeHtml(hit.botanical)}</strong>` +
@@ -160,9 +164,8 @@ function renderTagLookup(): void {
       // The 2014 name comes from a botanical source, so it usually is a name
       // taxa.csv knows. Resolving it here means a tagged tree carries a
       // taxon_id too, rather than only untagged ones getting the benefit.
-      const entry = resolveExact(hit.botanical, species);
-      if (entry) {
-        setTaxon(entry, true);
+      if (known) {
+        setTaxon(known, true);
       } else {
         input.value = hit.botanical;
         delete input.dataset.taxonId;
@@ -171,10 +174,13 @@ function renderTagLookup(): void {
       }
       closeSuggestions();
     }
+    renderSpeciesChange();
     return;
   }
 
-  const near = reference.neighbours(tag);
+  reference = { species: '', taxonId: '' };
+  renderSpeciesChange();
+  const near = referenceFile.neighbours(tag);
   box.className = 'tag-result tag-result--miss';
   box.innerHTML =
     `<strong>No tree ${escapeHtml(tag)} in the 2014 inventory.</strong>` +
@@ -237,6 +243,7 @@ function setTaxon(entry: SpeciesEntry | undefined, autofilled: boolean): void {
  * that a name did not resolve is finding out far too late.
  */
 function renderSpeciesNote(): void {
+  renderSpeciesChange();
   const note = $('species-note');
   const typed = $<HTMLInputElement>('species').value.trim();
   const id = pickedTaxon();
@@ -264,6 +271,26 @@ function renderSpeciesNote(): void {
     note.className = 'hint species-note species-note--new';
     note.textContent = 'Not on the species list — saved as typed, and flagged for review.';
   }
+}
+
+/**
+ * Says so when the recorded species disagrees with the 2014 record, instead of
+ * asking the surveyor to declare it. Nothing to click: correcting an
+ * eleven-year-old identification is the work, not a mistake to confirm.
+ */
+function renderSpeciesChange(): void {
+  const box = $('species-changed');
+  const recorded = $<HTMLInputElement>('species').value.trim();
+  if (!speciesChanged(reference.species, reference.taxonId, recorded, pickedTaxon())) {
+    box.hidden = true;
+    box.innerHTML = '';
+    return;
+  }
+  box.hidden = false;
+  box.innerHTML =
+    `2014 recorded this tag as <strong>${escapeHtml(reference.species)}</strong>. ` +
+    `You have recorded <strong>${escapeHtml(recorded)}</strong>, ` +
+    'which is saved as a correction.';
 }
 
 function closeSuggestions(): void {
@@ -348,9 +375,9 @@ function resetForm(): void {
   }
   setPlantedUnknown(false);
   setHasPlaque(false);
+  reference = { species: '', taxonId: '' };
   setTaxon(undefined, false);
   closeSuggestions();
-  $<HTMLInputElement>('species-mismatch').checked = false;
   for (const b of $('condition-seg').querySelectorAll('[aria-checked]')) {
     b.setAttribute('aria-checked', 'false');
   }
@@ -421,7 +448,8 @@ async function save(): Promise<void> {
     tag: $<HTMLInputElement>('tag').value.trim(),
     species: speciesName,
     taxonId: pickedTaxon(),
-    speciesMismatch: $<HTMLInputElement>('species-mismatch').checked,
+    referenceSpecies: reference.species,
+    referenceTaxonId: reference.taxonId,
     lat: point.lat,
     lng: point.lng,
     accuracy: pinAdjusted ? null : (fix?.accuracy ?? null),
@@ -462,7 +490,7 @@ async function renderList(): Promise<void> {
         <div class="rec">
           <span class="rec-tag">${escapeHtml(r.tag || 'no tag')}</span>
           <span class="rec-species">${escapeHtml(r.species)}</span>
-          <span class="rec-meta">${r.dbhIn ? `${r.dbhIn}″ · ` : ''}${escapeHtml(r.condition || '—')}${r.plantedYear ? ` · ${r.plantedYear}` : r.plantedUnknown ? ' · year unknown' : ''}${r.photoName ? ' · photo' : ''}${r.dedication ? ' · plaque' : ''}${r.speciesMismatch ? ' · flagged' : ''}</span>
+          <span class="rec-meta">${r.dbhIn ? `${r.dbhIn}″ · ` : ''}${escapeHtml(r.condition || '—')}${r.plantedYear ? ` · ${r.plantedYear}` : r.plantedUnknown ? ' · year unknown' : ''}${r.photoName ? ' · photo' : ''}${r.dedication ? ' · plaque' : ''}${speciesChanged(r.referenceSpecies, r.referenceTaxonId, r.species, r.taxonId) ? ' · species changed' : ''}</span>
         </div>
         <button type="button" class="ghost-btn" data-delete="${r.id}">Delete</button>
       </li>`,
@@ -478,7 +506,7 @@ async function refreshCount(): Promise<void> {
 // ---------------------------------------------------------------- reference
 
 async function setReference(trees: ReturnType<typeof parseReference>, persist: boolean): Promise<void> {
-  reference.load(trees);
+  referenceFile.load(trees);
   if (persist) await cacheReference(trees);
   $('ref-status').textContent = `${trees.length.toLocaleString()} trees loaded. Available offline.`;
   renderTagLookup();
@@ -534,6 +562,7 @@ $('tag-result').addEventListener('click', (e) => {
 $('tag-new').addEventListener('click', () => {
   $<HTMLInputElement>('tag').value = '';
   $<HTMLInputElement>('species').dataset.autofilled = '';
+  reference = { species: '', taxonId: '' };
   renderTagLookup();
   $('species').focus();
   renderSpeciesSearch();

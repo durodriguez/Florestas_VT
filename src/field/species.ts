@@ -122,3 +122,32 @@ export function resolveExact(name: string, entries: SpeciesEntry[]): SpeciesEntr
   const hits = matchExact(name, entries);
   return hits.length === 1 ? hits[0] : undefined;
 }
+
+/**
+ * Has the surveyor recorded a different species than the 2014 inventory claims
+ * for this tag?
+ *
+ * The point of asking the app rather than the surveyor: by the time somebody
+ * has looked at the tree, typed the right name and moved on, the fact that it
+ * disagrees with 2014 is already sitting in the app. Making them also tick a
+ * box to declare it means the most valuable finding of the survey depends on
+ * remembering to do something after the work is already done.
+ *
+ * Ids are compared where both exist, because two names can mean one taxon
+ * ("Norway spruce" and "Picea abies") and a plain string compare would call
+ * that a change. Where the 2014 name is one taxa.csv does not know, there is no
+ * id to compare and the folded names are all there is.
+ */
+export function speciesChanged(
+  referenceName: string,
+  referenceTaxonId: string,
+  recordedName: string,
+  recordedTaxonId: string,
+): boolean {
+  const ref = normalizeName(referenceName);
+  const rec = normalizeName(recordedName);
+  // No tag, no 2014 record, or nothing typed yet: nothing to disagree with.
+  if (!ref || !rec) return false;
+  if (referenceTaxonId && recordedTaxonId) return referenceTaxonId !== recordedTaxonId;
+  return ref !== rec;
+}

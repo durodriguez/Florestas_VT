@@ -20,14 +20,45 @@ app and the 2014 tree list for offline use.
    inventory says that tree is, and fills in the species.
 2. **Confirm the species.** Start typing and the box suggests matches from
    `taxa.csv`; pick one and the app records the taxon itself, not just the
-   text. If the tree in front of you is not what the record claims, tick the
-   mismatch box — it is written into the notes so the desk can resolve it. This
-   is the part worth doing carefully; it turns a measuring round into a
+   text. If the tree in front of you is not what the record claims, **just
+   record what it is** — the app notices the disagreement by itself. This is
+   the part worth doing carefully; it turns a measuring round into a
    verification pass over eleven-year-old data.
 3. **Check the position.** The accuracy chip shows how good the GPS fix is.
    Tap the map to drop the pin on the tree's crown — on satellite imagery this
    usually beats the receiver, especially under canopy.
 4. Measure, photograph, note, save. The form clears for the next tree.
+
+### When the tree is not what 2014 says
+
+There used to be a tickbox here reading *This is not what the 2014 record
+says*. It is gone, and nothing replaced it on the form.
+
+The 2014 file is an eleven-year-old claim, not a fact: the identification may
+have been wrong to begin with, the tree may have been removed and replaced with
+the tag staying on the spot, a loose tag may have been nailed to a neighbour, or
+the entry may have been genus-level and you can now be specific. So the
+disagreement matters. But the app already knows about it — the species box
+resolves to a `taxon_id`, and so does the 2014 name — which made the tickbox a
+trap: the most valuable finding of the survey depended on somebody remembering
+to declare something the app could see for itself.
+
+Now it detects it. Correct the species, and the tag card says:
+
+> 2014 recorded this tag as **Picea abies**. You have recorded **Picea
+> pungens**, which is saved as a correction.
+
+Nothing to click, and **no warning when you save** — correcting an old
+identification is the work, not a mistake to confirm. The record is marked
+*species changed* in the saved list, and the export carries a line naming both
+species so whoever adjudicates it does not have to open the 2014 file.
+
+Picking the same taxon under a different name does not count: *Norway spruce*
+and *Picea abies* are one taxon, and the app compares ids rather than text.
+
+If you can see it is wrong but cannot say what it is, write that in the notes
+— "not a spruce, needles all wrong" is more use to the desk than a bare flag
+would have been.
 
 **Dedication plaques.** Tick *This tree has a plaque* and a field appears for
 what it says. Transcribe it rather than summarising it — transcription is a

@@ -19,7 +19,7 @@ import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Papa from 'papaparse';
 import { importSurvey, taxaStubs } from './lib/import.mjs';
-import { OBSERVATION_COLUMNS } from './lib/vocab.mjs';
+import { OBSERVATION_COLUMNS, QA_NOTE } from './lib/vocab.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const plantsPath = join(root, 'data', 'plants.csv');
@@ -119,6 +119,21 @@ if (result.observations.length) {
     `\n${result.observations.length} observation(s) to append` +
     `${dates.length === 1 ? `, all dated ${dates[0]}` : `, dated ${dates[0]} – ${dates.at(-1)}`}`,
   );
+}
+
+// Notes the survey app addressed to whoever is at this desk. They are in the
+// CSV either way, but a species correction buried in a cell is a species
+// correction nobody acts on.
+const deskNotes = result.observations.flatMap((o) =>
+  String(o.notes ?? '')
+    .split('. ')
+    .map((part) => part.trim())
+    .filter((part) => QA_NOTE.test(part))
+    .map((part) => `  ${o.plant_id}: ${part}`),
+);
+if (deskNotes.length) {
+  console.log(`\n${deskNotes.length} note(s) for review:`);
+  for (const note of deskNotes) console.log(note);
 }
 
 if (result.inserts.length) {

@@ -19,8 +19,17 @@ export interface SurveyRecord {
    * on an id rather than re-resolving prose weeks later.
    */
   taxonId: string;
-  /** Set when the surveyor says the tree is not what the 2014 record claims. */
-  speciesMismatch: boolean;
+  /**
+   * What the 2014 inventory claims for this tag, captured at the moment it was
+   * looked up — the reference file may not be loaded when the export is built,
+   * and this is what was actually on screen.
+   *
+   * Stored rather than a "does it disagree" flag, because the disagreement is
+   * derived from these and the recorded species, and deriving it at export time
+   * is one fact in one place. Blank for a tree with no tag or no 2014 record.
+   */
+  referenceSpecies: string;
+  referenceTaxonId: string;
   lat: number | null;
   lng: number | null;
   /** GPS accuracy in metres at the moment of capture. */
