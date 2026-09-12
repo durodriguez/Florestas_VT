@@ -29,6 +29,19 @@ app and the 2014 tree list for offline use.
    usually beats the receiver, especially under canopy.
 4. Measure, photograph, note, save. The form clears for the next tree.
 
+**Dedication plaques.** Tick *This tree has a plaque* and a field appears for
+what it says. Transcribe it rather than summarising it — transcription is a
+reliable field task and summarising is not.
+
+The tickbox is only there to keep the field off screen for the 95% of trees
+with no plaque; nothing about it is stored. A tree counts as dedicated exactly
+when the wording is filled in, which is why saving with the box ticked and the
+field empty is refused: it would record nothing at all, and the finding would
+vanish between the phone and the CSV. If you cannot read the whole plaque, type
+what you can and say so — *"Gift of the class of 19??, rest illegible"* is a
+real record. Unticking clears the field, so text typed and then dismissed
+cannot leak into the export.
+
 The GPS accuracy and whether you moved the pin are exported separately from
 your notes, into `geolocation_notes` — so a remark about how the position was
 fixed stays beside the coordinates it describes, and out of the public record,

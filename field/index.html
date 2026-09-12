@@ -88,7 +88,24 @@
       </div>
     </section>
 
-    <!-- 6. notes ---------------------------------------------------------- -->
+    <!-- 6. dedication ----------------------------------------------------- -->
+    <section class="card">
+      <span class="field-label">Dedication</span>
+      <label class="check">
+        <input type="checkbox" id="has-plaque">
+        <span>This tree has a plaque &mdash; a gift, memorial or dedication</span>
+      </label>
+      <div id="plaque-fields" hidden>
+        <label class="field-label" for="dedication">What the plaque says</label>
+        <textarea id="dedication" rows="2"
+                  placeholder="e.g. In memory of John Dewey"></textarea>
+        <p class="hint">Type it as written. If you cannot make it all out, type what you
+          can and say so &mdash; &ldquo;Gift of the class of 19??, rest illegible&rdquo; is
+          a better record than nothing.</p>
+      </div>
+    </section>
+
+    <!-- 7. notes ---------------------------------------------------------- -->
     <section class="card">
       <label class="field-label" for="notes">Notes</label>
       <textarea id="notes" rows="3" placeholder="Defects, construction damage, multiple stems…"></textarea>

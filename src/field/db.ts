@@ -39,6 +39,12 @@ export interface SurveyRecord {
   plantedYear: number | null;
   plantedUnknown: boolean;
   notes: string;
+  /**
+   * What the tree's plaque says, transcribed. Non-blank is what makes it a
+   * gift, memorial or dedicated tree — the form's tickbox only decides whether
+   * the field is on screen, and is never stored.
+   */
+  dedication: string;
   surveyedOn: string;
   surveyor: string;
   photoName: string | null;

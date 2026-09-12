@@ -26,6 +26,7 @@ const COLUMNS: Array<[string, (r: SurveyRecord) => string]> = [
   ['date', (r) => r.surveyedOn],
   ['photo', (r) => r.photoName ?? ''],
   ['geolocation_notes', (r) => geolocationNotesFor(r)],
+  ['dedication_label', (r) => r.dedication ?? ''],
   ['notes', (r) => notesFor(r)],
 ];
 

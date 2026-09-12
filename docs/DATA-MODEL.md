@@ -76,22 +76,28 @@ measurement, which is why a re-survey never rewrites one of these rows.
 | `geolocation_notes` | | how the position was arrived at — `GPS ±3 m`, `Position set by pin on imagery` |
 | `collection_id` | | Must exist in `collections.csv` |
 | `planted_year` | | blank for naturally regenerated plants |
-| `dedicated` | | `yes` for a gift, memorial or dedicated tree; otherwise blank |
 | `dedication_label` | | what the plaque says, e.g. `In memory of John Dewey` |
 
 ### Dedications
 
-Two columns, not one. A tree can be known to be a gift before anyone has found
-the wording on its plaque — which is exactly the state a surveyor is in when
-they spot a plaque they cannot read from where they are standing. `dedicated`
-alone says "this tree was given, wording not yet recorded", which a single text
-column cannot say at all.
+One column, not two. A tree is a gift, memorial or dedicated one **exactly
+when somebody has written down what its plaque says** — there is no separate
+flag. A boolean derivable from a text column is a second place for the same
+fact to live, and two columns that must agree are where a hand-edited CSV
+drifts.
 
-`dedicated` is `yes` or blank, and nothing else fails silently: any other value
-stops the build, because it drives a banner on the public record and a stray
-value must not quietly read as false. A row with a label but no flag is a slip
-rather than a contradiction, so it renders as dedicated and `npm run data`
-warns — otherwise the tree would go missing from anyone filtering that column.
+The state a flag would have carried on its own — "there is a plaque, nobody has
+transcribed it" — is better said in the label itself: *"Gift of the class of
+19??, rest illegible"* records what was actually seen, and why. That is the
+same answer this project already gives for a planting year nobody knows, which
+goes into prose rather than earning a column.
+
+The one thing that gets easier to do wrong: a source with a yes/no `memorial`
+column, mapped onto this one, would put the word "Yes" on a public record as
+though it were plaque wording. A `dedication_label` that is *only* a boolean
+word — `yes`, `Y`, `TRUE`, `1`, `no`, `false`, `0` — is refused by both the
+build and the importer. Wording that merely begins with one, like *"Yes, in
+memory of a friend"*, is fine.
 
 ### geolocation_notes, and the other notes
 

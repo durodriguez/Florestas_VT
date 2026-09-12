@@ -97,15 +97,10 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
       ? `<p class="detail-banner">This plant has been removed from the landscape. Its record is kept for historical reference.</p>`
       : '';
 
-  // The flag alone is worth showing: "this tree was given" is most of the
-  // point, and waiting until someone has transcribed the plaque would hide
-  // every dedicated tree whose wording nobody has copied down yet.
-  const dedication = plant.dedicated
-    ? `<p class="detail-dedication">${
-        plant.dedicationLabel
-          ? escapeHtml(plant.dedicationLabel)
-          : 'A gift, memorial or dedicated tree.'
-      }</p>`
+  // The wording is the whole record: a tree is a gift, memorial or dedicated
+  // one exactly when somebody has written down what its plaque says.
+  const dedication = plant.dedicationLabel
+    ? `<p class="detail-dedication">${escapeHtml(plant.dedicationLabel)}</p>`
     : '';
 
   return `

@@ -69,51 +69,31 @@ const field = (r: { plants: { fields: string[]; rows: unknown[][] } }, i: number
   r.plants.rows[i]![r.plants.fields.indexOf(name)];
 
 describe('buildDataset — dedications', () => {
-  const dedicated = (r: { plants: { fields: string[]; rows: unknown[][] } }) =>
-    r.plants.rows[0]![r.plants.fields.indexOf('dedicated')];
   const label = (r: { plants: { fields: string[]; rows: unknown[][] } }) =>
     r.plants.rows[0]![r.plants.fields.indexOf('dedication_label')];
 
-  it('carries the flag and the wording separately', () => {
-    const r = build({
-      plantRows: [plant({ dedicated: 'yes', dedication_label: 'In memory of John Dewey' })],
-    });
+  it('carries the plaque wording', () => {
+    const r = build({ plantRows: [plant({ dedication_label: 'In memory of John Dewey' })] });
     expect(r.errors).toEqual([]);
-    expect(dedicated(r)).toBe(1);
     expect(label(r)).toBe('In memory of John Dewey');
   });
 
-  it('accepts the flag on its own', () => {
-    // Known to be a gift, plaque wording not transcribed yet — which is
-    // exactly the state a surveyor is in, and is why this is two columns.
-    const r = build({ plantRows: [plant({ dedicated: 'yes' })] });
+  it('leaves an ordinary tree with nothing', () => {
+    expect(label(build())).toBeNull();
+  });
+
+  it('refuses a label that is only a yes or a no', () => {
+    // A source with a yes/no memorial column, mapped to this one, would put
+    // the word "Yes" on a public record as though it were plaque wording.
+    for (const v of ['yes', 'Y', 'TRUE', '1', 'no', 'FALSE', '0']) {
+      const r = build({ plantRows: [plant({ dedication_label: v })] });
+      expect(r.errors.join()).toMatch(/should be what the plaque says, not a yes\/no/);
+    }
+  });
+
+  it('allows wording that merely starts with one of those words', () => {
+    const r = build({ plantRows: [plant({ dedication_label: 'Yes, in memory of a friend' })] });
     expect(r.errors).toEqual([]);
-    expect(dedicated(r)).toBe(1);
-    expect(label(r)).toBeNull();
-  });
-
-  it('treats a plant with no dedication as undedicated', () => {
-    const r = build();
-    expect(dedicated(r)).toBe(0);
-    expect(label(r)).toBeNull();
-  });
-
-  it('rejects a value that is not "yes" or blank', () => {
-    // This drives a banner on the public record, so a stray value must not
-    // quietly read as false.
-    const r = build({ plantRows: [plant({ dedicated: 'maybe' })] });
-    expect(r.errors.join()).toMatch(/dedicated must be "yes" or blank/);
-  });
-
-  it('normalises the casing of the flag', () => {
-    expect(dedicated(build({ plantRows: [plant({ dedicated: ' YES ' })] }))).toBe(1);
-  });
-
-  it('shows a labelled plant as dedicated even when the flag was missed, and says so', () => {
-    const r = build({ plantRows: [plant({ dedication_label: 'A gift from the class of 1985' })] });
-    expect(r.errors).toEqual([]);
-    expect(dedicated(r)).toBe(1);
-    expect(r.warnings.join()).toMatch(/has a dedication_label but dedicated is blank/);
   });
 
   it('points a positional remark at geolocation_notes, not at observations.csv', () => {

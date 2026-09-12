@@ -25,12 +25,16 @@ export const PLANT_TYPES = [
 export const ORIGINS = ['vermont-native', 'vermont-invasive', 'introduced'];
 
 /**
- * Whether a plant is a gift, a memorial, or otherwise dedicated. A flag and a
- * label rather than one column, because a tree can be known to be a gift before
- * anyone has found the wording on its plaque — and "dedicated, wording not yet
- * recorded" is exactly the state a surveyor will be in.
+ * A gift, memorial or dedicated tree is one with `dedication_label` filled in —
+ * there is no separate flag. A boolean derivable from a text column is a second
+ * place for the same fact to live, and two columns that must agree are where a
+ * hand-edited CSV drifts.
+ *
+ * The cost is that a source with a yes/no memorial column, mapped to this one,
+ * would put the word "Yes" on a public record as if it were plaque wording.
+ * Both the build and the importer refuse a label that is only a boolean.
  */
-export const DEDICATED = 'yes';
+export const BOOLEANISH = /^(y|yes|n|no|true|false|0|1)$/i;
 
 export const TAXON_REQUIRED = ['taxon_id', 'scientific_name', 'common_name', 'family', 'genus', 'plant_type'];
 /**
@@ -65,7 +69,6 @@ export const PLANT_COLUMNS = [
   'geolocation_notes',
   'collection_id',
   'planted_year',
-  'dedicated',
   'dedication_label',
 ];
 
@@ -104,7 +107,6 @@ export const PLANT_FIELDS = [
   'surveyed_on',
   'surveyor',
   'photo',
-  'dedicated',   // 1 if this is a gift, memorial or dedicated tree, else 0
   'dedication_label',
   'notes',
   'surveys',     // how many observations this plant has

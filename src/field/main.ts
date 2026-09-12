@@ -35,6 +35,7 @@ let photoBlob: Blob | null = null;
 let photoName: string | null = null;
 let pinAdjusted = false;
 let plantedUnknown = false;
+let hasPlaque = false;
 let manualLatLng: L.LatLng | null = null;
 
 // ---------------------------------------------------------------- map
@@ -346,6 +347,7 @@ function resetForm(): void {
     $<HTMLInputElement>(id).value = '';
   }
   setPlantedUnknown(false);
+  setHasPlaque(false);
   setTaxon(undefined, false);
   closeSuggestions();
   $<HTMLInputElement>('species-mismatch').checked = false;
@@ -388,6 +390,15 @@ async function save(): Promise<void> {
       return fail(`"${plantedRaw}" is not a planting year. Enter four digits between 1700 and ${thisYear}, or press Unknown.`);
     }
   }
+  // With no separate flag column, a ticked box and an empty field would save
+  // nothing at all — the surveyor's finding would vanish between the phone and
+  // the CSV. Even "plaque present, wording illegible" survives; a tick does not.
+  if (hasPlaque && !$<HTMLTextAreaElement>('dedication').value.trim()) {
+    return fail(
+      'Type what the plaque says — even "plaque present, wording illegible" is worth ' +
+      'recording. Or untick the box if there is no plaque.',
+    );
+  }
   if (!point) return fail('No position yet. Wait for a fix, or drag the pin onto the tree.');
   if (!pinAdjusted && fix && fix.accuracy > ACCURACY_WARN_M) {
     return fail(
@@ -422,6 +433,7 @@ async function save(): Promise<void> {
     plantedYear: plantedUnknown ? null : num('planted'),
     plantedUnknown,
     notes: $<HTMLTextAreaElement>('notes').value.trim(),
+    dedication: $<HTMLTextAreaElement>('dedication').value.trim(),
     surveyedOn: $<HTMLInputElement>('date').value || stamp(),
     surveyor: $<HTMLInputElement>('surveyor').value.trim(),
     photoName,
@@ -450,7 +462,7 @@ async function renderList(): Promise<void> {
         <div class="rec">
           <span class="rec-tag">${escapeHtml(r.tag || 'no tag')}</span>
           <span class="rec-species">${escapeHtml(r.species)}</span>
-          <span class="rec-meta">${r.dbhIn ? `${r.dbhIn}″ · ` : ''}${escapeHtml(r.condition || '—')}${r.plantedYear ? ` · ${r.plantedYear}` : r.plantedUnknown ? ' · year unknown' : ''}${r.photoName ? ' · photo' : ''}${r.speciesMismatch ? ' · flagged' : ''}</span>
+          <span class="rec-meta">${r.dbhIn ? `${r.dbhIn}″ · ` : ''}${escapeHtml(r.condition || '—')}${r.plantedYear ? ` · ${r.plantedYear}` : r.plantedUnknown ? ' · year unknown' : ''}${r.photoName ? ' · photo' : ''}${r.dedication ? ' · plaque' : ''}${r.speciesMismatch ? ' · flagged' : ''}</span>
         </div>
         <button type="button" class="ghost-btn" data-delete="${r.id}">Delete</button>
       </li>`,
@@ -561,6 +573,20 @@ $('condition-seg').addEventListener('click', (e) => {
   }
 });
 
+/**
+ * The tickbox only decides whether the field is on screen: nothing about it is
+ * stored, because a tree is dedicated exactly when somebody wrote down what its
+ * plaque says. Unticking clears the text, so a box left off cannot quietly
+ * export wording typed before it was turned off.
+ */
+function setHasPlaque(on: boolean): void {
+  hasPlaque = on;
+  $<HTMLInputElement>('has-plaque').checked = on;
+  $('plaque-fields').hidden = !on;
+  if (!on) $<HTMLTextAreaElement>('dedication').value = '';
+  else $('dedication').focus();
+}
+
 /** Unknown and a typed year are mutually exclusive, so the toggle owns both. */
 function setPlantedUnknown(on: boolean): void {
   plantedUnknown = on;
@@ -574,6 +600,10 @@ function setPlantedUnknown(on: boolean): void {
     ? 'Recorded as unknown — a finding in itself, not a blank.'
     : 'Leave blank if you would rather not guess.';
 }
+
+$('has-plaque').addEventListener('change', () => {
+  setHasPlaque($<HTMLInputElement>('has-plaque').checked);
+});
 
 $('planted-unknown').addEventListener('click', () => setPlantedUnknown(!plantedUnknown));
 $('planted').addEventListener('input', () => {

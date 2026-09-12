@@ -4,11 +4,12 @@ Recorded 11 September 2026, from a list you sent. Nothing here is built yet —
 this file exists so none of it gets lost. Each item has the ask, then what I'd
 suggest and what it would cost.
 
-Roughly in the order I'd do them: 6 is small and independent, 2 and 4 follow 1.
-8 and 9 are entangled with each other and with the ArcGIS import, so they want
-one design decision rather than two. 7 and 10 are the big ones.
+Roughly in the order I'd do them: 6 is small and independent, and 4 is a
+writing job more than a coding one. 8 and 9 are entangled with each other and
+with the ArcGIS import, so they want one design decision rather than two. 7 and
+10 are the big ones.
 
-**1, 3, 5 and 11 are done** — marked below.
+**1, 2, 3, 5 and 11 are done** — marked below.
 
 ---
 
@@ -18,35 +19,47 @@ one design decision rather than two. 7 and 10 are the big ones.
 memorial trees generally, marked `yes` or blank. A second column holds the note
 — "in memory of John Dewey", "A gift from the class of 1985", "Dedicated to xyz".
 
-**Built.** `memorial` became `dedicated` (`yes` or blank) plus
-`dedication_label`. Both are on `plants.csv`, since both describe the
-individual tree.
+**Built.** `memorial` became a single `dedication_label` column. A tree is a
+gift, memorial or dedicated one exactly when somebody has written down what its
+plaque says.
 
-The flag alone is enough to show the banner, reading "A gift, memorial or
-dedicated tree" until someone transcribes the plaque — which is the whole
-reason it is two columns. Anything other than `yes` or blank stops the build;
-a label with no flag renders as dedicated and warns, since that is a slip
-rather than a contradiction. The importer accepts `yes`/`Y`/`TRUE`/`1` from
-whatever source writes it, and infers the flag from wording alone.
+It shipped first as a flag *plus* a label, on my recommendation. You pushed
+back, and you were right: I had already made the label imply the flag, so the
+flag's only unique contribution was one rare, temporary state — and it cost a
+constant, a validation rule, a consistency warning, boolean coercion across
+four spellings, and five tests. Two columns that must agree are where a
+hand-edited CSV drifts. The rare state is better said in the label itself:
+*"Gift of the class of 19??, rest illegible"* says what was seen and why.
+
+What the simplification costs: a source with a yes/no `memorial` column, mapped
+onto this one, would put "Yes" on a public record as plaque wording. Both the
+build and the importer refuse a label that is only a boolean word.
 
 Searching the map by plaque wording works: "John Dewey" finds the linden.
 
-## 2. Dedication in the survey app
+## 2. Dedication in the survey app — ✅ done, 12 September 2026
 
 **Ask.** The surveyor should be able to tick that a tree is a gift/memorial/
 dedicated tree and write a note about it.
 
-**Suggestion.** A checkbox and a text field, appearing only when the box is
-ticked — the same show-on-demand pattern the species-mismatch flag already uses,
-so the form does not grow for the 95% of trees with no plaque. Prompt the label
-field with the plaque wording rather than a free note: "type what the plaque
-says". Transcription is a reliable field task; summarising is not.
+**Built.** A *This tree has a plaque* tickbox reveals a field for what it says,
+using the same show-on-demand pattern as the species-mismatch flag, so the form
+does not grow for the 95% of trees with no plaque. It prompts for a
+transcription rather than a summary: transcription is a reliable field task and
+summarising is not.
 
-Worth pairing with a photo of the plaque, since the photo capture already
-exists and plaque text is small, weathered and easy to mistype.
+The tickbox is pure UI state and is never stored — with one column, a tree is
+dedicated exactly when the wording is filled in. That makes two behaviours
+necessary rather than optional:
 
-**Cost.** Small, but do it after #1 so the field app writes the final column
-names. An hour.
+- **Ticked with an empty field refuses to save.** It would record nothing at
+  all, and the surveyor's finding would vanish between the phone and the CSV.
+  The message says so and suggests what to type instead.
+- **Unticking clears the field**, so wording typed and then dismissed cannot
+  leak into the export.
+
+The saved list marks a tree carrying a plaque, so it is visible without opening
+the record.
 
 ## 3. `geolocation_notes`, right of `lng` — ✅ done, 11 September 2026
 

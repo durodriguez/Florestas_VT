@@ -123,9 +123,10 @@ export interface Plant {
   surveyedOn: string | null;
   surveyor: string | null;
   photo: string | null;
-  /** True for a gift, memorial or otherwise dedicated tree. */
-  dedicated: boolean;
-  /** What the plaque says, where anyone has transcribed it. */
+  /**
+   * What the plaque says. Non-blank *is* what makes a tree a gift, memorial or
+   * dedicated one — there is no separate flag to disagree with it.
+   */
   dedicationLabel: string | null;
   notes: string | null;
   /**

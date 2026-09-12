@@ -32,8 +32,7 @@
     "surveyed_on":  ["surveyed_on", "date", "survey_date", "observed_on", "created_at", "timestamp"],
     "surveyor":     ["surveyor", "observer", "recorder", "crew", "surveyed_by", "by", "author"],
     "photo":        ["photo", "photo_file", "photograph", "image", "picture", "img"],
-    "dedicated":    ["dedicated", "memorial", "gift", "is_memorial"],
-    "dedication_label": ["dedication_label", "dedication", "donor", "dedicated_to", "plaque"],
+    "dedication_label": ["dedication_label", "dedication", "memorial", "donor", "dedicated_to", "plaque"],
     "geolocation_notes": ["geolocation_notes", "position_notes", "gps_notes", "location_notes"],
     "notes":        ["notes", "note", "comments", "comment", "remarks", "description"]
   },

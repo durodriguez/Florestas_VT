@@ -7,7 +7,7 @@
 // that variation without silently guessing — anything ambiguous stops the row
 // and is reported, rather than being imported wrong.
 
-import { CONDITIONS, DEDICATED, TAXON_COLUMNS } from './vocab.mjs';
+import { BOOLEANISH, CONDITIONS, TAXON_COLUMNS } from './vocab.mjs';
 
 const trim = (v) => (typeof v === 'string' ? v.trim() : v ?? '');
 
@@ -368,20 +368,15 @@ export function importSurvey({
     // The split that matters: `record` is what the tree is, and never changes
     // because someone measured it; `observation` is one visit, appended to the
     // history rather than overwriting the visit before it.
-    // A dedication flag arrives as whatever the source writes for true —
-    // "yes", "Y", "1", "TRUE". Anything else is a value nobody meant as a
-    // boolean, and guessing at it would put a banner on the wrong tree.
-    const dedicatedRaw = get(row, 'dedicated');
+    // A source with a yes/no memorial column, mapped to this one, would put
+    // the word "Yes" on a public record as though it were plaque wording.
     const dedicationLabel = get(row, 'dedication_label');
-    let dedicated = '';
-    if (dedicatedRaw) {
-      if (!/^(y|yes|true|1)$/i.test(dedicatedRaw)) {
-        error(`"${dedicatedRaw}" in dedicated is not a yes/no value`);
-        return;
-      }
-      dedicated = DEDICATED;
-    } else if (dedicationLabel) {
-      dedicated = DEDICATED;
+    if (BOOLEANISH.test(dedicationLabel)) {
+      error(
+        `dedication_label is "${dedicationLabel}" — map the column holding the wording, ` +
+        'not a yes/no flag (see survey/mapping.json)',
+      );
+      return;
     }
 
     const record = {
@@ -391,7 +386,6 @@ export function importSurvey({
       geolocation_notes: get(row, 'geolocation_notes'),
       collection_id: collection,
       planted_year: measures.planted_year,
-      dedicated,
       dedication_label: dedicationLabel,
     };
 

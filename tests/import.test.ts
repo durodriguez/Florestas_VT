@@ -32,11 +32,11 @@ const observationRows = [
 ];
 
 const headers = ['tag', 'taxon_id', 'species', 'lat', 'lng', 'area', 'dbh_in', 'condition',
-  'date', 'geolocation_notes', 'dedicated', 'dedication_label', 'notes'];
+  'date', 'geolocation_notes', 'dedication_label', 'notes'];
 const row = (over: Record<string, string> = {}) => ({
   tag: '', taxon_id: '', species: 'Sugar maple', lat: '44.4779', lng: '-73.1955',
   area: 'University Green', dbh_in: '30', condition: 'good', date: '2026-09-01',
-  geolocation_notes: '', dedicated: '', dedication_label: '', notes: '', ...over,
+  geolocation_notes: '', dedication_label: '', notes: '', ...over,
 });
 
 const run = (rows: Record<string, string>[], over: Record<string, unknown> = {}) =>
@@ -313,39 +313,25 @@ describe('importSurvey — dedications and position notes', () => {
     expect(r.observations[0].geolocation_notes).toBeUndefined();
   });
 
-  it('takes a dedication flag and its wording', () => {
-    const r = run([row({ dedicated: 'yes', dedication_label: 'In memory of John Dewey' })]);
-    expect(r.inserts[0]).toMatchObject({
-      dedicated: 'yes', dedication_label: 'In memory of John Dewey',
-    });
+  it('takes the plaque wording', () => {
+    const r = run([row({ dedication_label: 'In memory of John Dewey' })]);
+    expect(r.inserts[0].dedication_label).toBe('In memory of John Dewey');
   });
 
-  it('accepts the ways a source writes true', () => {
-    for (const v of ['yes', 'Y', 'TRUE', '1']) {
-      expect(run([row({ dedicated: v })]).inserts[0].dedicated).toBe('yes');
-    }
+  it('leaves an ordinary tree with nothing', () => {
+    expect(run([row()]).inserts[0].dedication_label).toBe('');
   });
 
-  it('infers the flag from wording alone', () => {
-    const r = run([row({ dedication_label: 'A gift from the class of 1985' })]);
-    expect(r.inserts[0].dedicated).toBe('yes');
-  });
-
-  it('leaves an ordinary tree undedicated', () => {
-    expect(run([row()]).inserts[0].dedicated).toBe('');
-  });
-
-  it('refuses a value nobody meant as a yes or a no', () => {
-    // Guessing would put a memorial banner on the public record of a tree
-    // nobody dedicated.
-    const r = run([row({ dedicated: 'in memory of someone' })]);
+  it('refuses a yes/no column mapped onto the wording', () => {
+    // Importing it would put "Yes" on a public record as a dedication.
+    const r = run([row({ dedication_label: 'Yes' })]);
     expect(r.inserts).toHaveLength(0);
-    expect(r.issues.some((i: { message: string }) => /is not a yes\/no value/.test(i.message))).toBe(true);
+    expect(r.issues.some((i: { message: string }) => /map the column holding the wording/.test(i.message))).toBe(true);
   });
 
   it('corrects a dedication on a tree already on file', () => {
-    const r = run([row({ tag: 'UVM-2025-0007', dedicated: 'yes', dedication_label: 'Class of 1985' })]);
-    expect(r.updates[0].changes).toMatchObject({ dedicated: 'yes', dedication_label: 'Class of 1985' });
+    const r = run([row({ tag: 'UVM-2025-0007', dedication_label: 'Class of 1985' })]);
+    expect(r.updates[0].changes).toMatchObject({ dedication_label: 'Class of 1985' });
   });
 });
 

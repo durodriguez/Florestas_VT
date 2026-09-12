@@ -2,7 +2,7 @@
 // Kept free of filesystem access so the test suite can exercise it directly.
 
 import {
-  CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES, DEDICATED,
+  CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES, BOOLEANISH,
   TAXON_REQUIRED, PLANT_REQUIRED, OBSERVATION_REQUIRED,
   TAXON_NUMERIC, PLANT_NUMERIC, OBSERVATION_NUMERIC,
   OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS,
@@ -199,18 +199,11 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       }
     }
 
-    // "yes" or blank, and nothing else: this drives a banner on the public
-    // record, so a stray value must not quietly read as false.
-    const dedicatedRaw = token(row.dedicated);
-    if (dedicatedRaw && dedicatedRaw !== DEDICATED) {
-      err(where, `dedicated must be "${DEDICATED}" or blank, got "${row.dedicated}"`);
-    }
+    // A label reading "Yes" is a yes/no column that landed in a text one, and
+    // it would go onto the public record as though it were what the plaque says.
     const label = trim(row.dedication_label);
-    // A tree with plaque wording on file is self-evidently a dedicated one, so
-    // render it as such — but say so, because the blank flag is a slip and the
-    // next person to filter on that column will not find this tree.
-    if (label && !dedicatedRaw) {
-      warn(where, `has a dedication_label but dedicated is blank — set dedicated to "${DEDICATED}"`);
+    if (BOOLEANISH.test(label)) {
+      err(where, `dedication_label is "${label}" — it should be what the plaque says, not a yes/no`);
     }
 
     plantsMeta.push({
@@ -220,7 +213,6 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       lng: Number(lng.toFixed(6)),
       collection: cIdx,
       planted_year: num(row.planted_year),
-      dedicated: dedicatedRaw === DEDICATED || Boolean(label) ? 1 : 0,
       dedication_label: label || null,
     });
   });
@@ -323,7 +315,6 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       surveyed_on: latest.surveyed_on,
       surveyor: latest.surveyor,
       photo: latest.photo,
-      dedicated: plant.dedicated,
       dedication_label: plant.dedication_label,
       notes: latest.notes,
       surveys: series.length,
