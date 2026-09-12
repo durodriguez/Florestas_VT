@@ -142,6 +142,50 @@ describe('buildDataset — dedications', () => {
   });
 });
 
+describe('buildDataset — desk notes stay off the public record', () => {
+  const notes = (r: { plants: { fields: string[]; rows: unknown[][] } }) =>
+    r.plants.rows[0]![r.plants.fields.indexOf('notes')];
+
+  it('keeps what a visitor can use', () => {
+    const r = build({ observationRows: [observation({ notes: 'Leaning badly over the path' })] });
+    expect(notes(r)).toBe('Leaning badly over the path');
+  });
+
+  it('strips a note addressed to the desk', () => {
+    const r = build({
+      observationRows: [observation({
+        notes: 'SPECIES CHANGED: 2014 record for tag 884 says Picea abies; recorded as Picea pungens',
+      })],
+    });
+    expect(notes(r)).toBeNull();
+  });
+
+  it('keeps the surveyor half and drops the desk half of one note', () => {
+    const r = build({
+      observationRows: [observation({
+        notes: 'Leaning badly. SPECIES NOT ON LIST: "Ficus benjamina" was typed by hand — check it',
+      })],
+    });
+    expect(notes(r)).toBe('Leaning badly');
+  });
+
+  it('leaves an ordinary sentence that merely starts with a capital', () => {
+    const r = build({ observationRows: [observation({ notes: 'Construction fence around it' })] });
+    expect(notes(r)).toBe('Construction fence around it');
+  });
+
+  it('strips them from the history too, not just the latest', () => {
+    const r = build({
+      observationRows: [
+        observation({ surveyed_on: '2026-09-01', notes: 'SPECIES CHANGED: was Picea abies' }),
+        observation({ surveyed_on: '2028-10-14', notes: 'Fine' }),
+      ],
+    });
+    const series = r.plants.history['UVM-0001'];
+    expect(series[0]![r.plants.observationFields.indexOf('notes')]).toBeNull();
+  });
+});
+
 describe('buildDataset — observations', () => {
   it('shows the most recent observation, not the first', () => {
     const r = build({

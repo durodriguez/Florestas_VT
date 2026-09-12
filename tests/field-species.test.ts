@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { matchExact, resolveExact, searchSpecies, type SpeciesEntry } from '../src/field/species';
+import {
+  matchExact, resolveExact, searchSpecies, speciesChanged, type SpeciesEntry,
+} from '../src/field/species';
 
 /** Shaped exactly as `npm run data` writes public/field/species.json. */
 const entry = (
@@ -128,5 +130,35 @@ describe('resolveExact', () => {
     expect(resolveExact('Swedish whitebeam', ambiguous)).toBeUndefined();
     // ...and both are still offered, so the surveyor can choose.
     expect(searchSpecies('Swedish whitebeam', ambiguous)).toHaveLength(2);
+  });
+});
+
+describe('speciesChanged', () => {
+  it('is false when the surveyor confirmed what 2014 said', () => {
+    expect(speciesChanged('Picea abies', 'picea-abies', 'Picea abies', 'picea-abies')).toBe(false);
+  });
+
+  it('is true when they recorded a different taxon', () => {
+    expect(speciesChanged('Picea abies', 'picea-abies', 'Picea pungens', 'picea-pungens')).toBe(true);
+  });
+
+  it('is false when two names mean one taxon', () => {
+    // The surveyor picked "Norway spruce" from the list; 2014 wrote the
+    // botanical name. A plain string compare would call that a correction.
+    expect(speciesChanged('Picea abies', 'picea-abies', 'Norway spruce', 'picea-abies')).toBe(false);
+  });
+
+  it('falls back to the folded names when 2014 used a name taxa.csv lacks', () => {
+    expect(speciesChanged('Picea obovata', '', 'Picea abies', 'picea-abies')).toBe(true);
+    expect(speciesChanged('Picea obovata', '', '  picea   OBOVATA ', '')).toBe(false);
+  });
+
+  it('is false for a tree with no tag and no 2014 record', () => {
+    expect(speciesChanged('', '', 'Picea abies', 'picea-abies')).toBe(false);
+  });
+
+  it('is false before anything has been typed', () => {
+    // The tag has just been entered and the species box is still filling in.
+    expect(speciesChanged('Picea abies', 'picea-abies', '', '')).toBe(false);
   });
 });

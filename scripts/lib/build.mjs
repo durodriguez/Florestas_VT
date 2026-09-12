@@ -5,7 +5,7 @@ import {
   CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES, BOOLEANISH, PROSE_MAX,
   TAXON_REQUIRED, PLANT_REQUIRED, OBSERVATION_REQUIRED,
   TAXON_NUMERIC, PLANT_NUMERIC, OBSERVATION_NUMERIC,
-  OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS,
+  OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS, publicNotes,
 } from './vocab.mjs';
 import { buildSpeciesLookup } from './species.mjs';
 
@@ -284,7 +284,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       condition: condIdx,
       status: statusIdx === -1 ? 0 : statusIdx,
       photo: trim(row.photo) || null,
-      notes: trim(row.notes) || null,
+      notes: publicNotes(row.notes) || null,
     });
   });
 

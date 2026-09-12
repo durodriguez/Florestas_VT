@@ -135,6 +135,26 @@ than the horticultural columns measured, and it is what you should expect —
 facts with dates and numbers in them are easier to get slightly wrong than a
 bloom window is. **Treat the column as a good draft to check, not a reference.**
 
+### Notes addressed to the desk
+
+The survey app writes some notes for whoever imports the data rather than for a
+visitor: `SPECIES CHANGED:` when a recorded species disagrees with the 2014
+inventory, `SPECIES NOT ON LIST:` when a name was typed that `taxa.csv` does not
+know.
+
+They are kept in `observations.csv`, where the person adjudicating them reads
+them, and `npm run import` lists them in its report so a correction is not
+buried in a cell. They are **stripped before the notes reach the browser** —
+not filtered in the panel, but removed in the build, for the same reason
+`geolocation_notes` is never sent at all: the cheapest way to keep something off
+a public page is not to put it there.
+
+The convention is a shouted prefix: a note segment matching `QA_NOTE` in
+`scripts/lib/vocab.mjs` — an opening run of capitals followed by a colon — is
+desk-facing. A surveyor's own sentence beginning with a capital is not affected,
+and the two halves of a mixed note are separated, so *"Leaning badly. SPECIES
+CHANGED: …"* reaches the map as *"Leaning badly"*.
+
 ### geolocation_notes, and the other notes
 
 `geolocation_notes` sits next to the coordinates because that is what it

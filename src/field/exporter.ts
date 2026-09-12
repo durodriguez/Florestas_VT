@@ -6,6 +6,7 @@
 
 import JSZip from 'jszip';
 import type { SurveyRecord, PhotoBlob } from './db';
+import { speciesChanged } from './species';
 
 /** Column names match survey/mapping.json, so the importer needs no config. */
 const COLUMNS: Array<[string, (r: SurveyRecord) => string]> = [
@@ -54,8 +55,13 @@ function notesFor(r: SurveyRecord): string {
   if (r.plantedUnknown) {
     parts.push('Planting year recorded as unknown');
   }
-  if (r.speciesMismatch) {
-    parts.push('SPECIES MISMATCH: does not match the 2014 record for this tag — verify.');
+  // Detected, not declared: the surveyor corrected the species, and that *is*
+  // the finding. Nothing here asks them to also say so.
+  if (speciesChanged(r.referenceSpecies, r.referenceTaxonId, r.species, r.taxonId)) {
+    parts.push(
+      `SPECIES CHANGED: 2014 record for tag ${r.tag || '(none)'} says ` +
+      `${r.referenceSpecies}; recorded as ${r.species}`,
+    );
   }
   // A name the species list did not recognise is either a new taxon for
   // taxa.csv or a typo, and only someone at a desk can tell which.
