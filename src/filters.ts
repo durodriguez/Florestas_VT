@@ -110,7 +110,8 @@ const CSV_COLUMNS: Array<[string, (p: Plant) => unknown]> = [
   ['planted_year', (p) => p.plantedYear ?? ''],
   ['status', (p) => p.status],
   ['surveyed_on', (p) => p.surveyedOn ?? ''],
-  ['notes', (p) => p.notes ?? ''],
+  // No notes column: a surveyor's remarks are internal, and a downloaded file
+  // travels further than a panel row does.
 ];
 
 /** Serialise the current result set so staff can pull it into a spreadsheet. */

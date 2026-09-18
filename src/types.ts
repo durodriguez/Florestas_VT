@@ -106,7 +106,6 @@ export interface Observation {
   condition: string | null;
   status: string;
   photo: string | null;
-  notes: string | null;
 }
 
 /** A plant record after the columnar rows in plants.json are expanded. */
@@ -132,7 +131,6 @@ export interface Plant {
   dedicationLabel: string | null;
   /** One line about *this* tree — where it came from, what happened to it. */
   story: string | null;
-  notes: string | null;
   /**
    * Every observation of this plant, oldest first — empty for a plant nobody
    * has surveyed, and length 1 for most of the rest. The fields above are the

@@ -4,11 +4,11 @@ Recorded 11 September 2026, from a list you sent. Nothing here is built yet —
 this file exists so none of it gets lost. Each item has the ask, then what I'd
 suggest and what it would cost.
 
-Roughly in the order I'd do them: 6 is small and independent. 8 and 9 are
-entangled with each other and with the ArcGIS import, so they want one design
-decision rather than two. 7, 10 and 12 are the big ones.
+Roughly in the order I'd do them: 8 and 9 are entangled with each other and
+with the ArcGIS import, so they want one design decision rather than two. 7, 10
+and 12 are the big ones.
 
-**1, 2, 3, 4, 5 and 11 are done** — marked below.
+**1, 2, 3, 4, 5, 6 and 11 are done** — marked below.
 
 ---
 
@@ -135,25 +135,44 @@ The list is `public/field/species.json`, ~38 kB, cached on the device for
 offline use, and versioned so a phone picks up a new one rather than serving
 its first copy forever.
 
-## 6. Finalise the detail panel
+## 6. Finalise the detail panel — ✅ done, 18 September 2026
 
-**Ask.** The look is right; the contents need deciding. Two specifics:
-"position set by pin on imagery" should not appear — irrelevant to most users.
-And `arboretum@uvm.edu` is a placeholder that needs to be a real address.
+**Ask.** The look was right; the contents needed deciding. Specifically:
+"position set by pin on imagery" should not appear, and the contact address
+needed to be real.
 
-**Suggestion.** The positioning line is **already gone** — to-do 3 moved it to
-`geolocation_notes`, which is never sent to the browser.
+**The address.** `campustrees@uvm.edu`, deliberately not `arboretum@`: a UVM
+arboretum has not been discussed or approved, so the map should not assert the
+name anywhere a reader can see it. Three other places carried the word and were
+changed with it — the mailto subject line (which arrived in a reader's inbox as
+"Arboretum record UVM-0493", and is now derived from `siteName` so the two
+cannot drift apart), the Export CSV filename, and the survey app's browser tab.
 
-Beyond that, I'd propose the panel earns its space in this order: species and
-common name; the photo; what makes this tree interesting (dedication, story, fun
-fact); what it is (type, origin, mature size); measurements, if any; then
-provenance (surveyed date, campus) in small type at the bottom. Right now
-measurements sit higher than they deserve, given that almost no tree has any.
+The address is a **placeholder and does not yet receive mail**. A visitor who
+writes in gets a bounce rather than silence, but the correction is lost either
+way. Worth revisiting when a real mailbox exists — it is one line in
+`data/config.json`.
 
-The email is yours to choose — but it should be a shared mailbox, not a person.
-Whoever is answering these in 2029 is not whoever set it up.
+**Still open, deliberately:** `config.json`'s `publicUrl` is
+`https://uvm.edu/arboretum`. That is what QR codes encode and what gets stamped
+into metal labels, so it asserts the same unapproved name somewhere far more
+permanent than a page string — and it does not resolve. The honest placeholder
+would be the GitHub Pages URL, which works today.
 
-**Cost.** Small once the content decisions are made. The decisions are the work.
+**The panel.** The positioning line went with to-do 3. The rest:
+
+- **"This specimen" reordered** around what someone standing under the tree
+  actually wonders: Location, Condition, Planted (with age), then the
+  measurements, then Last surveyed and Coordinates as provenance. Measurements
+  used to sit above condition and age despite almost no tree having any.
+- **Coordinates stay**, last, at six decimals.
+- **"On campus: N mapped plants" stays**, and the button below it shrank from
+  "See all N Littleleaf linden" to **"Show all"** — the row above already says
+  what and how many.
+- **Notes came off**, and not only off the panel: an observation's `notes` is
+  now internal, absent from `plants.json` entirely and dropped as a column from
+  the map's Export CSV. Not sending it is a stronger guarantee than filtering
+  it, and a downloaded file travels further than a panel row does.
 
 ## 7. Ecosystem services — the i-Tree question
 

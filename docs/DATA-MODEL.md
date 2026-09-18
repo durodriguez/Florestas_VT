@@ -135,25 +135,23 @@ than the horticultural columns measured, and it is what you should expect —
 facts with dates and numbers in them are easier to get slightly wrong than a
 bloom window is. **Treat the column as a good draft to check, not a reference.**
 
-### Notes addressed to the desk
+### Notes are internal
 
-The survey app writes some notes for whoever imports the data rather than for a
-visitor: `SPECIES CHANGED:` when a recorded species disagrees with the 2014
-inventory, `SPECIES NOT ON LIST:` when a name was typed that `taxa.csv` does not
-know.
+An observation's `notes` is what the surveyor saw that day, and it stays
+between `observations.csv` and whoever reads it. **It is not sent to the
+browser at all** — not filtered on the way out, not hidden in the panel:
+absent from `plants.json`, so there is nothing to leak. Same as
+`geolocation_notes`, which has never been sent.
 
-They are kept in `observations.csv`, where the person adjudicating them reads
-them, and `npm run import` lists them in its report so a correction is not
-buried in a cell. They are **stripped before the notes reach the browser** —
-not filtered in the panel, but removed in the build, for the same reason
-`geolocation_notes` is never sent at all: the cheapest way to keep something off
-a public page is not to put it there.
+That covers the ordinary remarks ("leaning badly over the path") and the ones
+the survey app addresses to the desk with a shouted prefix — `SPECIES CHANGED:`
+when a recorded species disagrees with the 2014 inventory, `SPECIES NOT ON
+LIST:` when a name was typed that `taxa.csv` does not know. `npm run import`
+lists those in its report, using `QA_NOTE` in `scripts/lib/vocab.mjs`, so a
+correction is not buried in a cell.
 
-The convention is a shouted prefix: a note segment matching `QA_NOTE` in
-`scripts/lib/vocab.mjs` — an opening run of capitals followed by a colon — is
-desk-facing. A surveyor's own sentence beginning with a capital is not affected,
-and the two halves of a mixed note are separated, so *"Leaning badly. SPECIES
-CHANGED: …"* reaches the map as *"Leaning badly"*.
+Nor is `notes` a column in the map's **Export CSV**. A downloaded file travels
+further than a panel row does, and "internal" has to mean both.
 
 ### geolocation_notes, and the other notes
 
@@ -194,7 +192,7 @@ survey.
 | `condition` | | `excellent`, `good`, `fair`, `poor`, `dead` |
 | `status` | | `active` (default) or `removed` |
 | `photo` | | filename in `public/photos/` |
-| `notes` | | free text — what the surveyor saw that day, not how the position was fixed |
+| `notes` | | free text — what the surveyor saw that day, not how the position was fixed. Internal: never sent to the browser (see below) |
 
 The file is **ragged, not a grid**. It is not every tree once a year: if the
 2028 crew only walks Central Campus, only Central trees get 2028 rows. A tree
