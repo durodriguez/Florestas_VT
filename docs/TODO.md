@@ -6,7 +6,7 @@ suggest and what it would cost.
 
 Roughly in the order I'd do them: 6 is small and independent. 8 and 9 are
 entangled with each other and with the ArcGIS import, so they want one design
-decision rather than two. 7 and 10 are the big ones.
+decision rather than two. 7, 10 and 12 are the big ones.
 
 **1, 2, 3, 4, 5 and 11 are done** — marked below.
 
@@ -354,6 +354,87 @@ rather than cached on `plants.csv`. Deriving cannot drift; caching would make
 "show me the removed trees" a one-file lookup. Worth revisiting only if that
 query gets slow, which at 2,061 rows it will not.
 
+
+## 12. Burlington's street trees, inside the campus boundary
+
+**Ask.** Take the Burlington tree inventory, keep the trees that fall inside the
+campus boundary, and show them on the map — **off by default**, behind a filter
+checkbox. They are not part of the UVM inventory and must stay visibly separate,
+but being able to look up the trees along Main Street or College Street is worth
+having. Any species not already in `taxa.csv` would need adding.
+
+**On the name.** Of your two, *City Trees* beats *BTV Trees* — BTV is the
+airport code and locals' shorthand, and half this map's audience is a visiting
+parent who has never seen it. But I would go further and call it **Burlington
+street trees**: it says both whose they are and what they are. These are
+right-of-way trees, which is precisely why they line Main and College, and
+"street trees" tells a visitor why the campus lawns are empty of them.
+
+**Keep them in their own file.** `data/city-trees.csv`, merged into
+`plants.json` at build time with a `source` field, rather than rows in
+`plants.csv`. Two independent reasons land on the same structure:
+
+- `plants.csv` means *the UVM collection*. Accession numbers, QR labels and the
+  survey workflow all assume it. `npm run labels` must never print a label for a
+  tree the university does not own, and `npm run import` must never renumber
+  one. A separate file makes that impossible rather than merely discouraged.
+- The licence points the same way (below).
+
+They should still be real `Plant` objects in the runtime dataset, though —
+search, the detail panel, deep links and clustering all work on those, and
+looking up a Main Street tree *is* the feature. What changes is that they
+default to hidden, draw differently, and carry no accession.
+
+**Numbering.** Keep Burlington's own id with a prefix — `BTV-12345` — never a
+`UVM-` number. A UVM accession implies UVM stewardship and a QR label on the
+trunk, and once issued it is permanent.
+
+**Licence — check before building.** The Burlington-area inventories in UVM's
+FEMC archive are **CC BY-SA 4.0**, not public domain. Attribution is easy and we
+would want to credit them anyway. ShareAlike is the part to think about: it
+requires derivative works to carry the same licence, and how far that reaches
+into a combined dataset is genuinely murky for data-plus-software. Keeping the
+city data in its own file, attributed, with its licence recorded next to it, is
+the structure least likely to create a problem — which is the same structure the
+editorial argument already wanted. Worth confirming which source the CSV came
+from (the FEMC archive and Burlington's own BTVstat / Navigate Burlington portal
+may carry different terms) and asking whoever at UVM handles licensing.
+
+**Clipping.** The machinery exists: `campusAt()` in `scripts/lib/geo.mjs` is the
+same point-in-polygon test `npm run areas` uses. One caveat that matters here —
+a right-of-way tree sits in the strip between the pavement and the kerb, and
+whether that is inside the traced boundary depends on whether the boundary was
+traced to the property line or the street centreline. **The trees you most want
+are exactly the ones most likely to fall just outside.** Expect to clip to the
+boundary *plus a buffer* of a few metres, and to eyeball the result along Main
+Street before trusting it.
+
+**Species coverage is measurable before committing.** `npm run check:species`
+already reports resolution against `taxa.csv` for any CSV. Run it on the clipped
+subset first. Two things known from the full city file: the best-resolving
+column is `botanic`, not `species` (which holds things like `ash,gr patmore`),
+and over a thousand rows are `Malus spp` — genus-level, which resolves to
+`malus-sp` and should stay genus-level rather than being guessed at. The clipped
+subset should score better than the whole city did, since street trees near
+campus are the common ones.
+
+**Make the separation visible, not just structural.** A city tree on the map
+must not look like a UVM tree — a different marker (hollow rather than filled
+reads well at a glance), and a detail panel that says plainly it is a City of
+Burlington street tree, outside the UVM collection, with no accession and no QR.
+
+**Watch the counts.** `taxa[].count` drives "N mapped plants" on every record
+and the unreferenced-taxa warning in the build. Decide whether city trees count
+toward it — I would say no by default — or the map will quietly start
+overstating the size of the university's collection.
+
+**Record the snapshot.** Burlington's inventory has its own survey dates and
+will drift from ours. Note where the file came from and when it was downloaded,
+and expect to refresh it rather than maintain it.
+
+**Cost.** Medium. The clip, the merge and the filter are each small and the
+species check is a script that exists. The work is in the decisions above and in
+verifying the clip along the streets you actually care about.
 
 ---
 
