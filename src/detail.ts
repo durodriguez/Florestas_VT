@@ -158,7 +158,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
       ${t.wikipedia ? `<a class="btn" href="${escapeHtml(t.wikipedia)}" target="_blank" rel="noopener">Wikipedia</a>` : ''}
     </div>
     <p class="detail-foot">Something look wrong? Email
-      <a href="mailto:${escapeHtml(dataset.config.contactEmail)}?subject=${encodeURIComponent(`Arboretum record ${plant.id}`)}">${escapeHtml(dataset.config.contactEmail)}</a>.</p>
+      <a href="mailto:${escapeHtml(dataset.config.contactEmail)}?subject=${encodeURIComponent(`${dataset.config.siteName} record ${plant.id}`)}">${escapeHtml(dataset.config.contactEmail)}</a>.</p>
   `;
 }
 
