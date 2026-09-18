@@ -39,7 +39,6 @@ export function expandPlants(file: PlantsFile, dataset: Dataset): Plant[] {
       condition: condIdx >= 0 ? conditions[condIdx] ?? null : null,
       status: statuses[obsAt(row, 'status') as number] ?? 'active',
       photo: obsAt(row, 'photo') as string | null,
-      notes: obsAt(row, 'notes') as string | null,
     };
   };
 
@@ -66,7 +65,6 @@ export function expandPlants(file: PlantsFile, dataset: Dataset): Plant[] {
       photo: at(row, 'photo') as string | null,
       dedicationLabel: at(row, 'dedication_label') as string | null,
       story: at(row, 'story') as string | null,
-      notes: at(row, 'notes') as string | null,
       history: [],
       search: '',
     };
@@ -86,7 +84,6 @@ export function expandPlants(file: PlantsFile, dataset: Dataset): Plant[] {
         condition: plant.condition,
         status: plant.status,
         photo: plant.photo,
-        notes: plant.notes,
       }];
     }
 

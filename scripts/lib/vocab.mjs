@@ -69,23 +69,15 @@ export const PROSE_MAX = 240;
 /**
  * A note segment addressed to the desk rather than to a visitor. The survey app
  * writes these with a shouted prefix — `SPECIES CHANGED:`, `SPECIES NOT ON
- * LIST:` — and they stay in observations.csv, where whoever adjudicates them
- * reads them. They are stripped before the notes reach the browser.
+ * LIST:` — and `npm run import` lists them so a correction is not buried in a
+ * cell.
  *
- * Not a filter in the panel but a filter in the build, for the same reason
- * geolocation_notes is never sent at all: the cheapest way to keep something
- * off a public page is not to put it there.
+ * Nothing strips them any more, because observation notes are no longer sent to
+ * the browser at all: a surveyor's remarks are internal, and not sending them is
+ * a stronger guarantee than filtering them on the way out. Same reasoning as
+ * geolocation_notes, which has never been sent.
  */
 export const QA_NOTE = /^[A-Z][A-Z0-9 ]{2,}:/;
-
-/** Drop the desk-facing segments from a note, keeping what a visitor can use. */
-export function publicNotes(notes) {
-  return String(notes ?? '')
-    .split('. ')
-    .map((part) => part.trim())
-    .filter((part) => part && !QA_NOTE.test(part))
-    .join('. ');
-}
 
 /** Column order of data/plants.csv, and of the rows the importer writes. */
 export const PLANT_COLUMNS = [
@@ -139,7 +131,6 @@ export const PLANT_FIELDS = [
   'photo',
   'dedication_label',
   'story',
-  'notes',
   'surveys',     // how many observations this plant has
 ];
 
@@ -153,5 +144,4 @@ export const OBSERVATION_FIELDS = [
   'condition',   // integer index into CONDITIONS, or -1
   'status',      // integer index into STATUSES
   'photo',
-  'notes',
 ];

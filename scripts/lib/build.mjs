@@ -5,7 +5,7 @@ import {
   CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES, BOOLEANISH, PROSE_MAX,
   TAXON_REQUIRED, PLANT_REQUIRED, OBSERVATION_REQUIRED,
   TAXON_NUMERIC, PLANT_NUMERIC, OBSERVATION_NUMERIC,
-  OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS, publicNotes,
+  OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS,
 } from './vocab.mjs';
 import { buildSpeciesLookup } from './species.mjs';
 
@@ -284,7 +284,6 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       condition: condIdx,
       status: statusIdx === -1 ? 0 : statusIdx,
       photo: trim(row.photo) || null,
-      notes: publicNotes(row.notes) || null,
     });
   });
 
@@ -299,7 +298,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
   const historyOut = {};
   const NO_SURVEY = {
     surveyed_on: null, surveyor: null, dbh_in: null, height_ft: null, spread_ft: null,
-    condition: -1, status: STATUSES.indexOf('active'), photo: null, notes: null,
+    condition: -1, status: STATUSES.indexOf('active'), photo: null,
   };
 
   for (const plant of plantsMeta) {
@@ -325,7 +324,6 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       photo: latest.photo,
       dedication_label: plant.dedication_label,
       story: plant.story,
-      notes: latest.notes,
       surveys: series.length,
     };
 

@@ -121,16 +121,15 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
     <h3 class="detail-section">This specimen</h3>
     <dl class="facts">
       ${row('Location', plant.collection ? escapeHtml(plant.collection.name) : null)}
+      ${row('Condition', plant.condition ? `<span class="pill pill--${plant.condition}">${escapeHtml(titleCase(plant.condition))}</span>` : null)}
+      ${row('Planted', plant.plantedYear ? `${plant.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
       ${row('Diameter at breast height', numOr(plant.dbhIn, ' in'))}
       ${row('Height', numOr(plant.heightFt, ' ft'))}
       ${row('Canopy spread', numOr(plant.spreadFt, ' ft'))}
-      ${row('Condition', plant.condition ? `<span class="pill pill--${plant.condition}">${escapeHtml(titleCase(plant.condition))}</span>` : null)}
-      ${row('Planted', plant.plantedYear ? `${plant.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
       ${row('Last surveyed', plant.surveyedOn
         ? `${escapeHtml(surveyDate(plant.surveyedOn))}${plant.history.length > 1 ? ` (${plant.history.length} surveys)` : ''}`
         : 'Not yet surveyed')}
       ${row('Coordinates', `${plant.lat.toFixed(6)}, ${plant.lng.toFixed(6)}`)}
-      ${row('Notes', plant.notes ? escapeHtml(plant.notes) : null)}
     </dl>
 
     ${renderHistory(plant)}
@@ -151,14 +150,14 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
     </dl>
 
     <div class="detail-actions">
-      <button type="button" class="btn" data-action="same-taxon">See all ${t.count} ${escapeHtml(t.common)}</button>
+      <button type="button" class="btn" data-action="same-taxon">Show all</button>
       <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=${plant.lat},${plant.lng}"
          target="_blank" rel="noopener">Directions</a>
       <button type="button" class="btn" data-action="copy-link" data-url="${escapeHtml(shareUrl)}">Copy link</button>
       ${t.wikipedia ? `<a class="btn" href="${escapeHtml(t.wikipedia)}" target="_blank" rel="noopener">Wikipedia</a>` : ''}
     </div>
     <p class="detail-foot">Something look wrong? Email
-      <a href="mailto:${escapeHtml(dataset.config.contactEmail)}?subject=${encodeURIComponent(`Arboretum record ${plant.id}`)}">${escapeHtml(dataset.config.contactEmail)}</a>.</p>
+      <a href="mailto:${escapeHtml(dataset.config.contactEmail)}?subject=${encodeURIComponent(`${dataset.config.siteName} record ${plant.id}`)}">${escapeHtml(dataset.config.contactEmail)}</a>.</p>
   `;
 }
 
