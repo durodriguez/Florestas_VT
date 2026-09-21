@@ -5,6 +5,7 @@
   "tagline": "Every mapped tree, shrub and vine on the UVM campus.",
   "contactEmail": "campustrees@uvm.edu",
   "publicUrl": "https://uvm.edu/arboretum",
+  "photoBaseUrl": "",
   "map": {
     "center": [
       44.4777,

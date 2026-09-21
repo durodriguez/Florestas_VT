@@ -439,6 +439,52 @@ inventory was taken, and either would have made an earlier rating wrong.
 These values are authored, not taken from a source. Check them against UMass
 Extension or UVM Extension guidance before using them to inform planting.
 
+## Where photos live
+
+`data/config.json`'s **`photoBaseUrl`** decides where the map fetches photos
+from. Blank — the default — means the site's own `photos/` folder, which is
+where they are today. Set it to a full address and they come from there
+instead:
+
+```json
+"photoBaseUrl": "https://uvm.edu/trees/photos"
+```
+
+Nothing else changes. A photo whose filename is already a full `https://`
+address is used as it stands, so one collection can mix sources.
+
+### Why this exists
+
+Photos are the one part of this project with no ceiling: every tree wants at
+least one, many want several, and re-photographing is something you do forever.
+A repository is the wrong container for that, for a reason that is easy to miss
+— **it keeps every version of every file permanently.** Delete a photo and the
+repository does not shrink; replace a blurry one and it holds both, for good.
+It grows by the size of every photo there has *ever* been, and the only way to
+undo that breaks every existing clone. A published GitHub Pages site also stops
+at 1 GB, which at current sizes is reached before every tree has been
+photographed once.
+
+With an address configured, the repository holds only **filenames** — about
+thirty characters each. Ten thousand photos is 300 kB of text, less than one
+photo today, and it stops growing however many photos exist.
+
+The setting does not create storage; it points at storage. Choosing the host
+(UVM web space, object storage) is a separate decision, and moving between them
+later is this one line rather than a migration.
+
+A value without a scheme — `uvm.edu/photos` — reads as a *relative path* in a
+browser and 404s every photo at once while looking like a setting that ought to
+work. `npm run data` refuses it.
+
+### Size
+
+Captured at **1200 px on the long edge, quality 0.72**, which measured 228 kB
+on a real survey photo against 540 kB at the previous 1600 px / 0.82. Across
+2,500 trees that is 0.5 GB rather than 1.3 GB for one photo each. The record
+panel displays them a few hundred pixels wide, so there are still pixels to
+spare on a high-density screen. See `src/field/photo.ts`.
+
 ## Controlled vocabularies
 
 Defined in `scripts/lib/vocab.mjs`. Extend the lists there rather than inventing

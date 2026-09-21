@@ -5,7 +5,7 @@
  * a few hundred trees that fills the browser's storage quota mid-survey, makes
  * the export zip unwieldy, and would eventually outgrow what a static site can
  * carry. The record panel on the map displays a photo a few hundred pixels
- * wide, so a 1600 px long edge is already generous.
+ * wide, so the sizes below are still generous.
  *
  * Orientation matters as much as size: phones store a portrait shot as a
  * landscape frame plus an EXIF rotation flag. Drawing to a canvas discards that
@@ -18,8 +18,20 @@
  * between something a static site can carry and something it cannot.
  */
 
-export const MAX_EDGE = 1600;
-export const QUALITY = 0.82;
+/**
+ * Long edge in pixels, and JPEG/WebP quality.
+ *
+ * Measured on a real survey photo rather than guessed: 1600 px at 0.82 is
+ * 540 kB, and 1200 px at 0.72 is 228 kB — 58% less for an image the record
+ * panel displays a few hundred pixels wide, and which still has pixels to
+ * spare on a high-density phone screen.
+ *
+ * Across 2,500 trees that is the difference between 1.3 GB and 0.5 GB for one
+ * photo each, and it is the cheapest lever there is: two numbers, no new
+ * infrastructure, and it applies to every photo taken from here on.
+ */
+export const MAX_EDGE = 1200;
+export const QUALITY = 0.72;
 
 export interface Shrunk {
   blob: Blob;

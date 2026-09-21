@@ -89,7 +89,7 @@ importer issues a fresh accession number for them.
 
 ### Photos
 
-Every shot is resized before it is stored — 1600 px on the long edge, with the
+Every shot is resized before it is stored — 1200 px on the long edge, with the
 EXIF rotation baked in, so a portrait photo is not filed sideways. A phone
 produces about 4 MB and 12 megapixels a shot; the map shows a photo a few
 hundred pixels wide.
@@ -100,8 +100,10 @@ encode does not fail, it quietly returns PNG — several times *larger* than the
 JPEG it was meant to beat. Safari only learned to write WebP from a canvas in
 17, and iPhones are most of what a surveyor will be holding.
 
-On the one real survey photo available to measure, WebP came in about 10% under
-JPEG at matched quality. Useful across a few thousand trees, but not the 40-60%
+At 1200 px and quality 0.72 a real survey photo lands at 228 kB, against 540 kB
+at the 1600 px / 0.82 used before — the cheapest saving available, and it
+applies to every photo taken from here on. On that same photo WebP came in about
+10% under JPEG at matched quality. Useful across a few thousand trees, but not the 40-60%
 sometimes quoted for the format — that figure compares against an unoptimised
 original, and these are already resized. The filename extension follows whatever
 was actually produced.

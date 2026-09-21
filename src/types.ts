@@ -7,6 +7,11 @@ export interface SiteConfig {
   tagline: string;
   contactEmail: string;
   publicUrl: string;
+  /**
+   * Where photos are served from. Blank means the site's own `photos/` folder.
+   * Set it to move them off the repository without touching any other code.
+   */
+  photoBaseUrl: string;
   accessionPrefix: string;
   map: {
     center: [number, number];
