@@ -79,6 +79,30 @@ measurement, which is why a re-survey never rewrites one of these rows.
 | `planted_year` | | blank for naturally regenerated plants |
 | `dedication_label` | | what the plaque says, e.g. `In memory of John Dewey` |
 | `story` | | one line about *this* tree — where it came from, what happened to it |
+| `source_id` | | the id this row carried in the system it was imported from. Blank for a plant recorded here. Never sent to the browser. |
+
+### source_id, and why an import needs it
+
+An importer has to be able to run twice. The second run must recognise the
+rows the first one created, or it quietly doubles the dataset.
+
+For a tagged tree that is easy: the tag *is* the identity, and tag 763 is
+always `UVM-0763`. For an untagged one there is nothing — about a third of
+UVM's ArcGIS layer reads `Young` or is blank, and a second import would issue
+fresh accession numbers and add every one of those trees again. So the row
+keeps the id it had in the source system, and the importer matches on it
+before anything else.
+
+Two consequences worth stating:
+
+- **A record with no tag and no source id is refused**, rather than imported.
+  It would be a row nobody could ever match again.
+- **The accession, once issued, is the tree's.** If somebody tags a young tree
+  later, the import sees the same `source_id` and leaves the accession alone.
+  A number that moved would break a QR label already in the ground.
+
+It is provenance, not identity: nothing in the site reads it, and it is not
+sent to the browser, for the same reason `geolocation_notes` never was.
 
 ### Dedications
 

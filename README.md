@@ -7,12 +7,14 @@ Search and filter every mapped tree, shrub and vine on campus; tap a plant for
 its full record; scan a QR code on a physical label to land straight on that
 plant's page.
 
-> **The collection is being surveyed now.** `data/plants.csv` holds only the
-> trees that have actually been visited and positioned — six at the time of
-> writing. `data/taxa.csv` already carries all 129 species from UVM's 2014
-> inventory, so the species list runs well ahead of the mapped plants. That is
-> the intended state: a plant appears on the map when someone has stood under
-> it and recorded a position.
+> **2,052 plants are on the map**, almost all of them from UVM's ArcGIS tree
+> layer, surveyed by Erin Camire in 2023–24 and used with her permission — see
+> [docs/ARCGIS-IMPORT.md](docs/ARCGIS-IMPORT.md). What they do not have is
+> measurements: the layer records a position, a species and a health rating,
+> and nothing about trunk diameter or height. Those arrive one tree at a time,
+> from the field app, and a re-survey adds to a tree's record rather than
+> replacing it. `data/taxa.csv` carries 257 species, so the species list still
+> runs ahead of what has been mapped.
 
 ## Quick start
 
@@ -113,6 +115,7 @@ species never reaches the live site.
 | **Data model & validation rules** | [docs/DATA-MODEL.md](docs/DATA-MODEL.md) |
 | **Campus boundaries & the tracer** | [docs/CAMPUS-AREAS.md](docs/CAMPUS-AREAS.md) |
 | **Surveying and mapping trees** | [docs/FIELD-SURVEY.md](docs/FIELD-SURVEY.md) |
+| **The ArcGIS import** | [docs/ARCGIS-IMPORT.md](docs/ARCGIS-IMPORT.md) |
 | **The field survey app** | [docs/FIELD-APP.md](docs/FIELD-APP.md) |
 | **Hosting, domains, scaling** | [docs/DEPLOY.md](docs/DEPLOY.md) |
 | **What's planned next** | [docs/TODO.md](docs/TODO.md) |
@@ -125,6 +128,7 @@ species never reaches the live site.
 | `npm run data` | Validate `data/*.csv` and regenerate `public/data/`, `public/field/` and `public/species/` |
 | `npm run build` | Validate, typecheck and build to `dist/` |
 | `npm run import -- <file.csv>` | Merge a field-survey export into `data/plants.csv` and `data/observations.csv` (dry run by default) |
+| `npm run import:arcgis -- <layer.geojson>` | Load UVM's ArcGIS tree layer (dry run by default) |
 | `npm run areas` | File each plant under the campus area its coordinates fall in (dry run by default) |
 | `npm run check:species -- <file>` | Report how a source file's species names resolve against `taxa.csv` |
 | `npm run labels` | Generate QR label sheet and SVGs into `public/labels/` |

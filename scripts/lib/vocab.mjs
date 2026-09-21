@@ -92,6 +92,10 @@ export const PLANT_COLUMNS = [
   'planted_year',
   'dedication_label',
   'story',
+  // Where an imported row came from, so a re-import matches the tree it
+  // created last time instead of adding a second one. Blank for a plant we
+  // recorded ourselves. Never sent to the browser — see PLANT_FIELDS.
+  'source_id',
 ];
 
 /** Column order of data/observations.csv. */
