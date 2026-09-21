@@ -285,10 +285,20 @@ button, input, select { font: inherit; color: inherit; }
   margin: .9rem 0 0; padding: .5rem .7rem; font-size: .85rem; line-height: 1.5;
   background: var(--bg-sunk); border-left: 3px solid var(--uvm-gold);
 }
+/* Folded away by default: a fun fact is a reward for curiosity, not something
+   to read past on the way to the record. Native <details>, the same element the
+   filter facets use, so the arrow, the keyboard and screen readers all behave
+   the way they already do elsewhere on the page. */
 .detail-fact {
-  margin: .6rem 0 0; font-size: .85rem; line-height: 1.5; color: var(--text-dim);
+  margin: .7rem 0 0; font-size: .85rem; line-height: 1.5;
   padding-left: .7rem; border-left: 2px solid var(--border);
 }
+.detail-fact summary {
+  padding: .1rem 0; cursor: pointer; font-weight: 600;
+  color: var(--text-dim); list-style-position: inside;
+}
+.detail-fact summary:hover { color: var(--text); }
+.detail-fact p { margin: .3rem 0 .35rem; color: var(--text-dim); }
 
 .detail-section {
   font-size: .74rem; letter-spacing: .08em; text-transform: uppercase;
