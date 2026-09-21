@@ -12,6 +12,10 @@
  * flag, so the rotation has to be baked in — otherwise every photo comes out
  * sideways. `createImageBitmap` with `imageOrientation: 'from-image'` applies
  * it before we draw.
+ *
+ * Format is WebP where the device can write it, which at matched quality runs
+ * roughly 25-35% under JPEG. Across a few thousand trees that is the difference
+ * between something a static site can carry and something it cannot.
  */
 
 export const MAX_EDGE = 1600;
@@ -22,6 +26,31 @@ export interface Shrunk {
   width: number;
   height: number;
   originalBytes: number;
+}
+
+/**
+ * Encode, preferring WebP.
+ *
+ * The guard is not optional. A browser asked for a type it cannot write does
+ * not fail — it quietly returns PNG, which for a photograph is several times
+ * *larger* than the JPEG we were trying to beat. Safari only learned to write
+ * WebP from a canvas in 17, and iPhones are most of what will be in a
+ * surveyor's hand, so this path is the common one, not the edge case.
+ */
+async function encode(canvas: HTMLCanvasElement): Promise<Blob | null> {
+  const asType = (type: string) =>
+    new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, type, QUALITY));
+
+  const webp = await asType('image/webp');
+  if (webp && webp.type === 'image/webp') return webp;
+  return asType('image/jpeg');
+}
+
+/** The extension that matches what the encoder actually produced. */
+export function extensionFor(blob: Blob): string {
+  if (blob.type === 'image/webp') return 'webp';
+  if (blob.type === 'image/png') return 'png';
+  return 'jpg';
 }
 
 export async function shrinkPhoto(file: Blob): Promise<Shrunk> {
@@ -51,9 +80,7 @@ export async function shrinkPhoto(file: Blob): Promise<Shrunk> {
   ctx.drawImage(bitmap, 0, 0, width, height);
   bitmap.close();
 
-  const blob = await new Promise<Blob | null>((resolve) =>
-    canvas.toBlob(resolve, 'image/jpeg', QUALITY),
-  );
+  const blob = await encode(canvas);
   // If re-encoding somehow produced nothing, or made it bigger, keep the original.
   if (!blob || blob.size >= originalBytes) {
     return { blob: file, width: 0, height: 0, originalBytes };
