@@ -59,6 +59,19 @@ describe('renderSpeciesPage', () => {
     expect(page()).toContain('Jun–Jul');
   });
 
+  it('labels the fun fact and folds it away, like the map does', () => {
+    const html = page();
+    expect(html).toContain('<summary>Fun fact</summary>');
+    // <details> with no open attribute: shut until someone asks for it.
+    expect(html).toContain('<details class="fun">');
+    expect(html).not.toContain('<details class="fun" open');
+    expect(html).toContain('Linden honey is prized across Europe.');
+  });
+
+  it('leaves out the fold entirely when there is no fun fact', () => {
+    expect(page(taxon({ funFact: '' }))).not.toContain('Fun fact');
+  });
+
   it('links to the trees on the map when some are mapped', () => {
     const html = page(taxon({ count: 3 }), { areas: ['Central Campus', 'Redstone Campus'] });
     expect(html).toContain('3 mapped on campus');

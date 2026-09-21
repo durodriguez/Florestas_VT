@@ -117,7 +117,10 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config }) {
   <p class="label">${label}</p>
   ${gallery}
   ${t.description ? `<p class="desc"><strong>Description:</strong> ${esc(t.description)}</p>` : ''}
-  ${t.funFact ? `<p class="fun">${esc(t.funFact)}</p>` : ''}
+  ${t.funFact ? `<details class="fun">
+    <summary>Fun fact</summary>
+    <p>${esc(t.funFact)}</p>
+  </details>` : ''}
 
   <h2>Characteristics</h2>
   <dl class="facts">${facts}</dl>
@@ -192,10 +195,18 @@ h2 {
 .sci { margin: 0; font-size: 1.05rem; color: var(--dim); }
 .label { margin: .4rem 0 0; font-size: .82rem; color: var(--dim); }
 .desc { font-size: .95rem; }
+/* Closed by default, the same fold as the map's detail panel, so the two read
+   alike and the description is what meets the eye. */
 .fun {
-  font-size: .9rem; color: var(--dim);
+  margin: .9rem 0 0; font-size: .9rem;
   padding-left: .8rem; border-left: 2px solid var(--border);
 }
+.fun summary {
+  padding: .1rem 0; cursor: pointer; font-weight: 600;
+  color: var(--dim); list-style-position: inside;
+}
+.fun summary:hover { color: var(--ink); }
+.fun p { margin: .3rem 0 .35rem; color: var(--dim); }
 .quiet { color: var(--dim); font-size: .9rem; }
 
 .shots { list-style: none; display: grid; gap: .8rem; padding: 0; margin: 1.2rem 0 0;
