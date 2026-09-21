@@ -19,7 +19,7 @@ import {
 } from './nearby';
 import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
 import { download, stamp, toCsv, toPhotoZip } from './exporter';
-import { kb, shrinkPhoto } from './photo';
+import { extensionFor, kb, shrinkPhoto } from './photo';
 
 const BASE = import.meta.env.BASE_URL;
 const CONDITIONS = ['excellent', 'good', 'fair', 'poor', 'dead'];
@@ -550,7 +550,10 @@ async function save(): Promise<void> {
   }
 
   if (photoBlob) {
-    photoName = `${($<HTMLInputElement>('tag').value.trim() || 'untagged')}-${Date.now()}.jpg`;
+    // The extension has to follow what the encoder actually produced, not what
+    // it was asked for: a device that cannot write WebP hands back a JPEG.
+    const stem = $<HTMLInputElement>('tag').value.trim() || 'untagged';
+    photoName = `${stem}-${Date.now()}.${extensionFor(photoBlob)}`;
     await savePhoto(photoName, photoBlob);
   }
 

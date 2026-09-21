@@ -108,6 +108,24 @@ describe('buildDataset — fun facts and stories', () => {
   });
 });
 
+describe('buildDataset — photoBaseUrl', () => {
+  it('accepts a blank value, which means the site serves its own photos', () => {
+    expect(build({ config: { ...config, photoBaseUrl: '' } }).errors).toEqual([]);
+  });
+
+  it('accepts a full address', () => {
+    expect(build({ config: { ...config, photoBaseUrl: 'https://uvm.edu/trees/photos' } }).errors)
+      .toEqual([]);
+  });
+
+  it('refuses one with no scheme, which would 404 every photo at once', () => {
+    // "uvm.edu/photos" reads as a relative path in a browser, so it looks like
+    // a setting that ought to work and breaks the whole site quietly.
+    const r = build({ config: { ...config, photoBaseUrl: 'uvm.edu/photos' } });
+    expect(r.errors.join()).toMatch(/photoBaseUrl must start with http/);
+  });
+});
+
 describe('buildDataset — dedications', () => {
   const label = (r: { plants: { fields: string[]; rows: unknown[][] } }) =>
     r.plants.rows[0]![r.plants.fields.indexOf('dedication_label')];

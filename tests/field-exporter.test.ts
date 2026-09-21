@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { toCsv } from '../src/field/exporter';
+import { extensionFor } from '../src/field/photo';
 import type { SurveyRecord } from '../src/field/db';
 
 /** UVM-0493's position on the map, for the claim cases below. */
@@ -106,5 +107,23 @@ describe('toCsv — a claim is a judgement, and says so', () => {
   it('keeps the surveyor\'s own note alongside it', () => {
     const csv = toCsv([claimed({ notes: 'Storm damage on the south side' })]);
     expect(csv).toContain('Storm damage on the south side. CLAIMED BY POSITION');
+  });
+});
+
+describe('extensionFor', () => {
+  it('names the file after what the encoder actually produced', () => {
+    expect(extensionFor(new Blob([], { type: 'image/webp' }))).toBe('webp');
+    expect(extensionFor(new Blob([], { type: 'image/jpeg' }))).toBe('jpg');
+  });
+
+  it('recognises the PNG a browser returns when it cannot write the type asked for', () => {
+    // Measured, not assumed: canvas.toBlob for an unsupported type hands back
+    // PNG rather than failing, and a PNG photograph is far larger than the
+    // JPEG it was meant to beat.
+    expect(extensionFor(new Blob([], { type: 'image/png' }))).toBe('png');
+  });
+
+  it('falls back to jpg for a blob with no type', () => {
+    expect(extensionFor(new Blob([]))).toBe('jpg');
   });
 });

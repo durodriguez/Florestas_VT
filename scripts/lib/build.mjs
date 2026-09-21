@@ -56,6 +56,15 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
   const err = (where, msg) => errors.push(`${where}: ${msg}`);
   const warn = (where, msg) => warnings.push(`${where}: ${msg}`);
 
+  // ---- config ------------------------------------------------------------
+  // A photoBaseUrl without a scheme ("uvm.edu/photos") reads as a relative path
+  // in a browser, so every photo on the site 404s at once — and it looks like a
+  // setting that ought to work. Catch it here rather than on the live site.
+  const photoBase = trim(config?.photoBaseUrl);
+  if (photoBase && !/^https?:\/\//i.test(photoBase)) {
+    err('config.json', `photoBaseUrl must start with http:// or https://, got "${photoBase}"`);
+  }
+
   // ---- collections -------------------------------------------------------
   const collections = [];
   const collectionIndex = new Map();

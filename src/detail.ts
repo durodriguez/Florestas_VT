@@ -1,6 +1,7 @@
 import type { Dataset, Observation, Plant } from './types';
 import { escapeHtml } from './map';
 import { ORIGIN_LABELS, TYPE_LABELS } from './palette';
+import { photoUrl } from './photos';
 
 const MONTHS = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -88,7 +89,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
   const age = plant.plantedYear ? `${new Date().getFullYear() - plant.plantedYear} years` : null;
 
   const photo = plant.photo
-    ? `<img class="detail-photo" src="${base}photos/${encodeURIComponent(plant.photo)}"
+    ? `<img class="detail-photo" src="${escapeHtml(photoUrl(plant.photo, base, dataset.config.photoBaseUrl))}"
          alt="${escapeHtml(t.common)}, accession ${escapeHtml(plant.id)}" loading="lazy">`
     : '';
 
