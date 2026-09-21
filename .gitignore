@@ -2,6 +2,7 @@ node_modules/
 dist/
 public/data/
 public/field/species.json
+public/field/trees.json
 public/labels/
 .DS_Store
 *.local

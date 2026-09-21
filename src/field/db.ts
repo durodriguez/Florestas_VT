@@ -30,6 +30,26 @@ export interface SurveyRecord {
    */
   referenceSpecies: string;
   referenceTaxonId: string;
+  /**
+   * The accession of the mapped tree the surveyor said this is, for an untagged
+   * tree matched by position. Blank when they read a number off a trunk, or
+   * when they said none of the offered trees was it.
+   */
+  claimedPlantId: string;
+  /**
+   * How far away it was when they picked it. Kept because it is the part a
+   * reviewer needs: a match at 20 m deserves more doubt than one at 3 m, and
+   * only the export carries that doubt back to the desk.
+   */
+  claimedMeters: number | null;
+  /**
+   * Where the map has the claimed tree. Exported in place of the surveyor's own
+   * fix unless they moved the pin: claiming says "this is that tree", not "that
+   * tree is here", and standing three metres away is not new evidence about
+   * where it stands. Moving the pin *is*, and then theirs wins.
+   */
+  claimedLat: number | null;
+  claimedLng: number | null;
   lat: number | null;
   lng: number | null;
   /** GPS accuracy in metres at the moment of capture. */

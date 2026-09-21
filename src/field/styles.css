@@ -144,6 +144,41 @@ textarea { min-height: 78px; resize: vertical; }
 }
 .tag-changed strong { font-style: italic; }
 
+/* ---- nearby mapped trees ---- */
+
+.nearby { margin-top: 10px; }
+.nearby-head {
+  margin: 0 0 6px; font-size: 12.5px; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2);
+}
+.nearby-list { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 6px; }
+.nearby-opt {
+  display: grid; gap: 2px; width: 100%; min-height: var(--tap);
+  padding: 9px 11px; text-align: left; font: inherit; color: inherit;
+  background: var(--ground); border: 1.5px solid var(--rule); border-radius: 9px;
+}
+.nearby-opt:active { border-color: var(--green-2); }
+.nearby-dist { font-size: 15px; font-weight: 650; }
+.nearby-name { font-size: 14px; }
+.nearby-sci { font-style: italic; color: var(--ink-2); }
+/* A tree already surveyed is still offered — an untagged one can only be found
+   this way — but it is said out loud, because claiming it is a re-survey. */
+.nearby-seen { font-size: 12.5px; color: var(--fair); }
+.nearby-none { width: 100%; }
+
+/* What was claimed, and how far away it was: the distance is the part a
+   reviewer needs, since a match at 20 m deserves more doubt than one at 3 m. */
+.tag-claimed {
+  display: flex; flex-direction: column; gap: 3px;
+  margin-top: 10px; padding: 11px 12px; border-radius: 9px; font-size: 15px;
+  background: var(--ground); border-left: 4px solid var(--green-2);
+}
+.tag-claimed strong { font-style: italic; }
+.tag-claimed button {
+  align-self: flex-start; margin-top: 4px; padding: 5px 9px; font-size: 13px;
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 7px;
+}
+
 /* ---- species autocomplete ---- */
 
 /* The list is absolutely positioned so it floats over the cards below rather

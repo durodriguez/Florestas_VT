@@ -7,8 +7,9 @@ import { PlantMap, escapeHtml } from './map';
 import { renderDetail, renderResultItem } from './detail';
 import { legendFor, ORIGIN_LABELS, TYPE_LABELS } from './palette';
 import {
-  applyFilters, emptyFilters, facetCounts, isFilterActive, distanceMeters, toCsv,
+  applyFilters, emptyFilters, facetCounts, isFilterActive, toCsv,
 } from './filters';
+import { distanceMeters } from './geo';
 import type { ColorBy, Dataset, FilterState, Plant } from './types';
 
 const BASE = import.meta.env.BASE_URL;

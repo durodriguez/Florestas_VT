@@ -30,6 +30,16 @@
       </div>
       <div id="tag-result" class="tag-result"></div>
       <div id="species-changed" class="tag-changed" hidden></div>
+
+      <!-- Untagged trees: match on position instead of a number. -->
+      <div id="nearby" class="nearby" hidden>
+        <p class="nearby-head">Mapped trees near you</p>
+        <ul id="nearby-list" class="nearby-list"></ul>
+        <button type="button" id="nearby-none" class="ghost-btn nearby-none">
+          None of these &mdash; it is a new tree
+        </button>
+      </div>
+      <div id="claimed" class="tag-claimed" hidden></div>
     </section>
 
     <!-- 2. species -------------------------------------------------------- -->
