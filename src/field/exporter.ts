@@ -10,13 +10,16 @@ import { speciesChanged } from './species';
 
 /** Column names match survey/mapping.json, so the importer needs no config. */
 const COLUMNS: Array<[string, (r: SurveyRecord) => string]> = [
-  ['tag', (r) => r.tag],
+  // A physical tag if there is one; otherwise the accession of the mapped tree
+  // the surveyor matched by position. Both are the same question to the
+  // importer — which record is this a visit to — so both go in one column.
+  ['tag', (r) => r.tag || r.claimedPlantId || ''],
   // Both, deliberately. taxon_id is what the importer matches on, and the name
   // is what makes the file readable by the person reviewing it.
   ['taxon_id', (r) => r.taxonId ?? ''],
   ['species', (r) => r.species],
-  ['lat', (r) => (r.lat === null ? '' : r.lat.toFixed(6))],
-  ['lng', (r) => (r.lng === null ? '' : r.lng.toFixed(6))],
+  ['lat', (r) => coord(keepsMappedPosition(r) ? r.claimedLat : r.lat)],
+  ['lng', (r) => coord(keepsMappedPosition(r) ? r.claimedLng : r.lng)],
   ['area', () => ''],
   ['dbh_in', (r) => (r.dbhIn === null ? '' : String(r.dbhIn))],
   ['height_ft', (r) => (r.heightFt === null ? '' : String(r.heightFt))],
@@ -31,6 +34,21 @@ const COLUMNS: Array<[string, (r: SurveyRecord) => string]> = [
   ['notes', (r) => notesFor(r)],
 ];
 
+const coord = (v: number | null): string => (v === null ? '' : v.toFixed(6));
+
+/**
+ * Should the claimed tree keep the position the map already has for it?
+ *
+ * Yes, unless the surveyor moved the pin. A raw phone fix taken a few metres
+ * away is where the *surveyor* was, not where the tree is, and exporting it
+ * would quietly drag a curated position onto a footpath — once per visit,
+ * invisibly. Dragging the pin onto the crown is the deliberate act that says
+ * the map is wrong, and then it should win.
+ */
+function keepsMappedPosition(r: SurveyRecord): boolean {
+  return Boolean(r.claimedPlantId) && !r.pinAdjusted && r.claimedLat !== null;
+}
+
 /**
  * How this position was arrived at — which is about the coordinates, not about
  * the tree, and so belongs beside them in plants.csv rather than in the notes
@@ -38,6 +56,12 @@ const COLUMNS: Array<[string, (r: SurveyRecord) => string]> = [
  * use for, which is a second reason to keep it out of the surveyor's notes.
  */
 function geolocationNotesFor(r: SurveyRecord): string {
+  // Blank when the mapped position is being kept: this column says how the
+  // stored position was arrived at, and that has not changed. The importer
+  // skips blanks, so whatever the record already says survives — writing
+  // something here instead would overwrite "GPS ±3 m" with a remark about a
+  // decision made at import time.
+  if (keepsMappedPosition(r)) return '';
   if (r.accuracy !== null) {
     return `GPS ±${r.accuracy.toFixed(0)} m${r.pinAdjusted ? ', pin adjusted on imagery' : ''}`;
   }
@@ -61,6 +85,15 @@ function notesFor(r: SurveyRecord): string {
     parts.push(
       `SPECIES CHANGED: 2014 record for tag ${r.tag || '(none)'} says ` +
       `${r.referenceSpecies}; recorded as ${r.species}`,
+    );
+  }
+  // A tag number is certain; a match by position is a judgement made under a
+  // canopy with a 5-metre fix. Record which, and from how far, so the desk can
+  // weigh it — and so a wrong claim is findable rather than silent.
+  if (!r.tag && r.claimedPlantId) {
+    parts.push(
+      `CLAIMED BY POSITION: matched to ${r.claimedPlantId}` +
+      `${r.claimedMeters === null ? '' : ` from ${r.claimedMeters} m`}`,
     );
   }
   // A name the species list did not recognise is either a new taxon for

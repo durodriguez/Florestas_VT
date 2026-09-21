@@ -110,6 +110,12 @@ The importer does the tedious, error-prone work:
 
 - **Assigns accession numbers** in your scheme, continuing from the highest one
   already issued that year. Leave the `tag` column blank for a new plant.
+- **Treats a claimed accession as a visit to that tree.** For an untagged tree
+  the surveyor matched by position, the app puts that tree's accession in the
+  `tag` column, so the row imports as another observation of it rather than a
+  new accession. The claim and the distance it was made from are noted for
+  review, and two surveyors claiming the same tree on the same day collide on
+  the `(plant_id, surveyed_on)` rule rather than both landing.
 - **Takes the `taxon_id` where the app recorded one**, which is whenever the
   surveyor picked from the species list. An id resolved on the spot by someone
   looking at the tree beats a name re-resolved at a desk weeks later, and it

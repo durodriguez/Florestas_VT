@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import {
   applyFilters, emptyFilters, facetCounts, isFilterActive,
-  matchesQuery, distanceMeters, toCsv,
+  matchesQuery, toCsv,
 } from '../src/filters';
+import { distanceMeters } from '../src/geo';
 import { expandPlants } from '../src/data';
 import type { Dataset, Plant, Taxon } from '../src/types';
 

@@ -14,6 +14,9 @@ import {
   type SpeciesEntry, type Suggestion,
 } from './species';
 import { getMeta, setMeta } from './db';
+import {
+  describeDistance, nearbyTrees, type MappedTree, type NearbyTree,
+} from './nearby';
 import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
 import { download, stamp, toCsv, toPhotoZip } from './exporter';
 import { kb, shrinkPhoto } from './photo';
@@ -38,6 +41,14 @@ let plantedUnknown = false;
 let hasPlaque = false;
 /** What the 2014 inventory claims for the tag currently in the box. */
 let reference = { species: '', taxonId: '' };
+/** Every plant already on the map, for matching an untagged tree by position. */
+let mapped: MappedTree[] = [];
+/** The mapped tree the surveyor says this is, if they picked one. */
+let claimed: NearbyTree | null = null;
+/** Set once they say none of the offered trees is it. */
+let declinedNearby = false;
+/** Exactly what the last render put on screen, so a tap cannot mis-resolve. */
+let offered: NearbyTree[] = [];
 let manualLatLng: L.LatLng | null = null;
 
 // ---------------------------------------------------------------- map
@@ -128,6 +139,8 @@ function currentLatLng(): { lat: number; lng: number } | null {
 }
 
 function renderCoords(): void {
+  // The offered set is a function of where the surveyor is standing.
+  renderNearby();
   const p = currentLatLng();
   $('coords').textContent = p ? `${p.lat.toFixed(6)}, ${p.lng.toFixed(6)}` : '—';
 }
@@ -189,6 +202,105 @@ function renderTagLookup(): void {
           .map((t) => `<button type="button" class="tag-near" data-tag="${escapeHtml(t.tag)}">${escapeHtml(t.tag)} ${escapeHtml(t.common)}</button>`)
           .join(' ')}</span>`
       : '<span class="tag-meta">Check the digits, or record it as a new tree.</span>');
+}
+
+// ----------------------------------------------------------- nearby trees
+
+const TREES_KEY = 'mapped-trees';
+
+/**
+ * The mapped trees, cached first so matching works the moment the app opens and
+ * offline, then refreshed in the background — same shape as the species list,
+ * and same reason: a surveyor in a field cannot wait on a fetch.
+ */
+async function initTrees(): Promise<void> {
+  const cached = await getMeta<MappedTree[]>(TREES_KEY);
+  if (cached?.length) mapped = cached;
+  try {
+    // Versioned, because the service worker serves same-origin GETs cache-first
+    // and a fixed URL would freeze the map at whatever it held on day one.
+    const res = await fetch(`${BASE}field/trees.json?v=${__DATA_VERSION__}`);
+    if (!res.ok) return;
+    const fresh = (await res.json()) as MappedTree[];
+    if (Array.isArray(fresh)) {
+      mapped = fresh;
+      await setMeta(TREES_KEY, fresh);
+      renderNearby();
+    }
+  } catch {
+    /* offline, or nothing published yet — the form still works */
+  }
+}
+
+/**
+ * Offer the mapped trees around the surveyor, while there is no tag to go on.
+ *
+ * Only with the tag box empty: a number read off a trunk is certain, and
+ * position is the fallback for when there is no number, not a second opinion
+ * about one.
+ */
+function renderNearby(): void {
+  const box = $('nearby');
+  const list = $('nearby-list');
+  const point = currentLatLng();
+  const hasTag = $<HTMLInputElement>('tag').value.trim() !== '';
+
+  if (claimed || declinedNearby || hasTag || !point || mapped.length === 0) {
+    box.hidden = true;
+    list.innerHTML = '';
+    return;
+  }
+
+  const hits = nearbyTrees(point.lat, point.lng, mapped);
+  if (hits.length === 0) {
+    box.hidden = true;
+    list.innerHTML = '';
+    return;
+  }
+
+  list.innerHTML = hits
+    .map((hit, i) => `<li>
+      <button type="button" class="nearby-opt" data-nearby="${i}">
+        <span class="nearby-dist">${escapeHtml(describeDistance(hit))}</span>
+        <span class="nearby-name">${escapeHtml(hit.tree.common)}
+          <span class="nearby-sci">${escapeHtml(hit.tree.sci)}</span></span>
+        ${hit.tree.surveyed
+          ? `<span class="nearby-seen">Already surveyed ${escapeHtml(hit.tree.surveyed)} — claiming it records another visit</span>`
+          : ''}
+      </button>
+    </li>`)
+    .join('');
+  box.hidden = false;
+  // Stashed so a tap looks up what was on screen, rather than recomputing
+  // against a fix that may have moved between the render and the finger.
+  offered = hits;
+}
+
+function renderClaimed(): void {
+  const box = $('claimed');
+  if (!claimed) {
+    box.hidden = true;
+    box.innerHTML = '';
+    return;
+  }
+  box.hidden = false;
+  box.innerHTML =
+    `<span>Recording a visit to <strong>${escapeHtml(claimed.tree.id)}</strong>, ` +
+    `${escapeHtml(claimed.tree.common)}, ${escapeHtml(describeDistance(claimed))} ` +
+    'when you picked it.</span>' +
+    '<button type="button" id="claim-clear">Not this tree</button>';
+}
+
+function claim(hit: NearbyTree | null): void {
+  claimed = hit;
+  if (hit) {
+    // Seed the species from the map's record; the surveyor can still correct
+    // it, and correcting it is the point of visiting.
+    const entry = resolveExact(hit.tree.sci, species);
+    if (entry) setTaxon(entry, true);
+  }
+  renderClaimed();
+  renderNearby();
 }
 
 // ------------------------------------------------------- species autocomplete
@@ -376,6 +488,9 @@ function resetForm(): void {
   setPlantedUnknown(false);
   setHasPlaque(false);
   reference = { species: '', taxonId: '' };
+  claimed = null;
+  declinedNearby = false;
+  renderClaimed();
   setTaxon(undefined, false);
   closeSuggestions();
   for (const b of $('condition-seg').querySelectorAll('[aria-checked]')) {
@@ -450,6 +565,10 @@ async function save(): Promise<void> {
     taxonId: pickedTaxon(),
     referenceSpecies: reference.species,
     referenceTaxonId: reference.taxonId,
+    claimedPlantId: claimed?.tree.id ?? '',
+    claimedMeters: claimed ? Math.round(claimed.meters) : null,
+    claimedLat: claimed?.tree.lat ?? null,
+    claimedLng: claimed?.tree.lng ?? null,
     lat: point.lat,
     lng: point.lng,
     accuracy: pinAdjusted ? null : (fix?.accuracy ?? null),
@@ -551,7 +670,10 @@ function showScreen(which: 'form' | 'list'): void {
 renderConditions();
 $<HTMLInputElement>('date').value = stamp();
 
-$('tag').addEventListener('input', renderTagLookup);
+$('tag').addEventListener('input', () => {
+  renderTagLookup();
+  renderNearby();
+});
 $('tag-result').addEventListener('click', (e) => {
   const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-tag]');
   if (!btn) return;
@@ -592,6 +714,22 @@ $('species-list').addEventListener('click', (e) => {
 // it fires before the keyboard closing shifts the layout under the finger.
 document.addEventListener('pointerdown', (e) => {
   if (!(e.target as HTMLElement).closest('.combo')) closeSuggestions();
+});
+
+$('nearby-list').addEventListener('click', (e) => {
+  const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-nearby]');
+  if (btn) claim(offered[Number(btn.dataset.nearby)] ?? null);
+});
+// Saying no is a first-class answer, not a fallthrough. Without it the flow
+// assumes the tree must be one of the offered ones, and a wrong claim merges
+// two trees into one — the error that is genuinely hard to undo later.
+$('nearby-none').addEventListener('click', () => {
+  declinedNearby = true;
+  renderNearby();
+  $('species').focus();
+});
+$('claimed').addEventListener('click', (e) => {
+  if ((e.target as HTMLElement).id === 'claim-clear') claim(null);
 });
 
 $('condition-seg').addEventListener('click', (e) => {
@@ -729,6 +867,7 @@ window.addEventListener('beforeunload', (e) => {
 
 void initReference();
 void initSpecies();
+void initTrees();
 void refreshCount();
 gps.start();
 
@@ -746,6 +885,8 @@ Object.assign(window as unknown as Record<string, unknown>, {
     getPhoto, allRecords, currentLatLng,
     isPinAdjusted: () => pinAdjusted,
     speciesCount: () => species.length,
+    treeCount: () => mapped.length,
+    claimedId: () => claimed?.tree.id ?? '',
     pickedTaxon,
   },
 });

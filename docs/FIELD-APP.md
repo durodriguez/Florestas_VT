@@ -87,6 +87,48 @@ refused as a typo.
 Trees with no tag: press **No tag**, type the species, and carry on. The
 importer issues a fresh accession number for them.
 
+### Trees with no tag
+
+Most of campus is mapped without ever having been tagged — an inventory gives
+you a position and a species, not a number on a trunk. So for most trees there
+is nothing to type in the tag box, and the app matches on **position** instead,
+which is the one thing you and the map both have.
+
+Leave the tag box empty and, once there is a fix, **Mapped trees near you**
+lists what the map has within 25 m, nearest first:
+
+> **3 m northeast** — Littleleaf linden *Tilia cordata*
+
+Tap one and the rest of the form fills in against that tree: the record becomes
+a visit to it rather than a new accession, and the species is seeded from the
+map's record for you to confirm or correct.
+
+- **Nearest first, and nothing else.** Not sorted by species, not preferring the
+  ones nobody has surveyed. Three maples at 8, 11 and 14 m is the ordinary case,
+  and you are the one who can tell which is which — a clever sort would just
+  make one of them look like the answer.
+- **"None of these — it is a new tree" is a real answer.** A fix under a canopy
+  is routinely 5–10 m out and the map's own positions are imperfect. Use it
+  whenever you are not sure: a wrong claim merges two trees into one, which is
+  the one mistake that is genuinely hard to undo later.
+- **A tree that has already been surveyed is still offered**, and says so. An
+  untagged tree can only ever be found this way, so hiding it would make
+  re-surveying it impossible rather than merely awkward.
+- **Type a tag and the list disappears.** A number read off a trunk is certain;
+  position is the fallback for when there is no number, not a second opinion
+  about one.
+
+**Claiming a tree does not move it.** The export carries the position the map
+already has, not where you were standing — you are three metres away, and that
+is not new evidence about where the tree is. If the map has it in the wrong
+place, drag the pin onto the crown: that is the deliberate act that says so, and
+then your position wins.
+
+Every claim is recorded with the distance it was made from, so whoever imports
+the data can weigh it — `npm run import` lists them, and a match at 20 m
+deserves more doubt than one at 3 m. If two surveyors claim the same tree on the
+same day, the import refuses both rather than guessing.
+
 ### The species box
 
 Most trees on campus have no metal tag, so for most of them the tag lookup

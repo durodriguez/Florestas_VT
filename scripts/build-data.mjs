@@ -98,6 +98,32 @@ mkdirSync(fieldDir, { recursive: true });
 const speciesJson = JSON.stringify(species);
 writeFileSync(join(fieldDir, 'species.json'), speciesJson);
 
+// ---- the field app's map of what is already out there ---------------------
+// Most of campus will be mapped without ever having been tagged, so a surveyor
+// standing at a tree has no number to type. Position is the one thing they and
+// the map both have, so the app carries the mapped trees and matches on it.
+//
+// Every plant, not only the unsurveyed ones: an untagged tree that was surveyed
+// last year can only be found this way too, and hiding it would make a
+// re-survey impossible rather than merely awkward.
+const fields = result.plants.fields;
+const at = (row, name) => row[fields.indexOf(name)];
+const trees = result.plants.rows.map((row) => {
+  const taxon = result.dataset.taxa[at(row, 'taxon')];
+  return {
+    id: at(row, 'plant_id'),
+    lat: at(row, 'lat'),
+    lng: at(row, 'lng'),
+    common: taxon?.common ?? '',
+    sci: taxon?.sci ?? '',
+    // Null for a tree nobody has surveyed, which the app says out loud: it is
+    // the difference between "claim this" and "you may be re-surveying it".
+    surveyed: at(row, 'surveyed_on'),
+  };
+});
+const treesJson = JSON.stringify(trees);
+writeFileSync(join(fieldDir, 'trees.json'), treesJson);
+
 // These two files keep the same URL forever — Vite hashes JS and CSS
 // filenames, but copies public/ through untouched. Without a cache-buster a
 // returning visitor keeps seeing the plants they saw last time, however many
@@ -134,4 +160,5 @@ console.log(
 console.log(`  public/data/dataset.json  ${kb(datasetJson)}`);
 console.log(`  public/data/plants.json   ${kb(plantsJson)}`);
 console.log(`  public/field/species.json ${kb(speciesJson)}  (${species.length} taxa for the survey app)`);
+console.log(`  public/field/trees.json   ${kb(treesJson)}  (${trees.length} mapped trees to match against)`);
 console.log(`  data version              ${version}`);

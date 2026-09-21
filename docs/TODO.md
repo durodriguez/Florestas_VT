@@ -4,11 +4,10 @@ Recorded 11 September 2026, from a list you sent. Nothing here is built yet —
 this file exists so none of it gets lost. Each item has the ask, then what I'd
 suggest and what it would cost.
 
-Roughly in the order I'd do them: 8 and 9 are entangled with each other and
-with the ArcGIS import, so they want one design decision rather than two. 7, 10
+Roughly in the order I'd do them: 9 is entangled with the ArcGIS import. 7, 10
 and 12 are the big ones.
 
-**1, 2, 3, 4, 5, 6 and 11 are done** — marked below.
+**1, 2, 3, 4, 5, 6, 8 and 11 are done** — marked below.
 
 ---
 
@@ -228,40 +227,42 @@ because it would actually be true.
 **Cost.** The display and the build step: a day or two. The DBH survey: months
 of fieldwork, unless UVM's data already has it.
 
-## 8. Matching surveyed trees to untagged mapped trees
+## 8. Matching surveyed trees to untagged mapped trees — ✅ done, 21 September 2026
 
 **Ask.** Once the sustainability office data is in, many mapped trees will have
 no tag. A surveyor standing in front of a tree needs to match it to one of them.
-Open to suggestions.
 
-**Suggestion.** Match on **position**, not identity — position is the one thing
-the surveyor and the map both have.
+**Built.** Leave the tag box empty and, once there is a fix, the survey app
+lists the mapped trees within 25 m — nearest first, as "3 m northeast" with the
+species. Tap one and the record becomes a visit to that tree rather than a new
+accession; the species is seeded from the map's record to confirm or correct.
 
-In the field app, when GPS has a fix and no tag has been entered, list the
-nearest unsurveyed mapped trees within ~20 m, nearest first, each showing
-distance, species and direction. Tap one to claim it; the record carries that
-tree's id instead of creating a new one. Species acts as a tiebreak, not a
-filter — three maples at 8, 11 and 14 m is the common case, and the surveyor
-looking at the trees is better placed to pick than any sorting rule.
+`public/field/trees.json` carries the mapped trees to the phone, cached for
+offline use and versioned, exactly as the species list is.
 
-Three things this needs to get right:
+The three things the note said this had to get right:
 
-- **An explicit "none of these — new tree".** Phone GPS under a canopy is
-  routinely 5–10 m out, and the map's own positions are imperfect. A flow that
-  assumes the tree must be in the list will silently merge two trees into one,
-  which is the one error that is genuinely hard to undo later.
-- **Claims are provisional until import.** Two surveyors on the same afternoon
-  can claim the same tree. Let the import detect it rather than the app trying
-  to prevent it; it already has the machinery for conflicts.
-- **Distance in metres and a compass bearing**, not a map pin. Reading "7 m
-  northeast" beats interpreting a blue dot at arm's length in sunlight.
+- **"None of these — it is a new tree"** is a button, not a fallthrough.
+- **Claims are provisional until import.** Two surveyors claiming the same tree
+  on the same day collide on the `(plant_id, surveyed_on)` rule that came out of
+  to-do 11 — verified, and it needed no new code.
+- **Metres and a compass point**, not a map pin.
 
-This wants the mapped trees bundled into the PWA the same way as #5 — do the
-two together, since they share the plumbing.
+Two departures from the recorded suggestion, both deliberate:
 
-**Cost.** Medium-large — the most intricate item after #7, because the failure
-mode is data corruption rather than an ugly screen. Two or three days, and it
-needs a real test on campus before it is trusted.
+- **All nearby trees are offered, not only the unsurveyed ones.** Filtering by
+  survey state would have made re-surveying an untagged tree impossible, since
+  proximity is the only way to find one. Surveyed trees are offered and labelled.
+- **A claim does not move the tree.** The export carries the position the map
+  already has, and leaves `geolocation_notes` blank so the existing one
+  survives. Standing three metres away is not evidence about where a tree is,
+  and without this every claim would quietly drag a curated position onto a
+  footpath — once per visit, invisibly. Dragging the pin onto the crown is the
+  deliberate act that says the map is wrong, and then the surveyor wins.
+
+**Worth knowing:** with six mapped trees this is hard to exercise for real. It
+comes into its own with the ArcGIS import, which is what it was built for.
+It still wants a genuine test on campus before it is trusted.
 
 ## 9. Renumbering tags by campus
 
