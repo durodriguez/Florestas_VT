@@ -4,10 +4,15 @@ Recorded 11 September 2026, from a list you sent. Nothing here is built yet —
 this file exists so none of it gets lost. Each item has the ask, then what I'd
 suggest and what it would cost.
 
-Roughly in the order I'd do them: 9 is entangled with the ArcGIS import. 7, 10
-and 12 are the big ones.
+Roughly in the order I'd do them: 7, 10 and 12 are the big ones.
 
-**1, 2, 3, 4, 5, 6, 8 and 11 are done** — marked below.
+**1, 2, 3, 4, 5, 6, 8 and 11 are done** — marked below. **10 is part done.**
+
+The ArcGIS import landed on 21 September 2026 and moved three of these: it
+settled the numbering question at the heart of **9**, it left **7** blocked for
+the same reason as before (2,052 trees and still not one trunk diameter), and
+it makes **12** more attractive, because the campus now has enough trees on it
+for Burlington's street trees to sit beside rather than carry.
 
 ---
 
@@ -192,6 +197,14 @@ sites you looked at are showing precomputed numbers, not calling a live service.
 Nothing about a static site prevents doing the same: `npm run data` computes a
 number per tree at build time, and the map just displays it.
 
+**Since the ArcGIS import (21 September 2026):** the tree count went from 6 to
+2,052 and the blocker did not move. The ArcGIS layer records a position, a
+species and a health rating, and **no trunk diameter at all**. The 2014
+inventory does hold a DBH for 950 of these trees, joinable by tag — but those
+measurements are twelve years old, and DBH is the input i-Tree is most
+sensitive to, so stale numbers would produce confident-looking wrong answers.
+Deliberately left out of the import; worth revisiting only as its own decision.
+
 **The blocker.** Of six plants in `data/plants.csv`, **none** has a DBH. Without
 DBH there is no calculation — not a rough one, not a defaulted one. Any number
 shown would be invented, which is worse than showing nothing on a page with
@@ -265,6 +278,15 @@ comes into its own with the ArcGIS import, which is what it was built for.
 It still wants a genuine test on campus before it is trusted.
 
 ## 9. Renumbering tags by campus
+
+> **Now live, not hypothetical.** The ArcGIS import issued numbers for 2,046
+> trees on the rule below: a tagged tree keeps the number stamped on its tag,
+> and the ~700 untagged ones were issued from a block starting `UVM-4001`. So
+> the legacy numbers are already the primary key and already permanent, which
+> is what this item recommends. What is left is the *label* — showing a
+> campus-prefixed form alongside the accession — and that is still worth doing
+> and still cheap.
+
 
 **Ask.** `CTR0001` Central, `CNT0001` Centennial, `RST0001` Redstone, `ATH0001`
 Athletic, `TRT0001` Trinity, `SST0001` Spear Street — matched back to the legacy
@@ -505,10 +527,20 @@ verifying the clip along the streets you actually care about.
 
 ## Also outstanding (not code)
 
-- **Permission from `ecamire@uvm.edu`** before the 2,061 ArcGIS records go into
-  `data/` or get published. Hard blocker — that data is access-controlled.
+- ~~**Permission from `ecamire@uvm.edu`**~~ — **resolved, 21 September 2026.**
+  Erin Camire, who did the survey as a UVM undergraduate, has since graduated;
+  permission to use the data is in hand and the layer is imported. See
+  [ARCGIS-IMPORT.md](ARCGIS-IMPORT.md). Her email is *not* carried into the
+  repository: the `Creator` and `Editor` columns are dropped on import, and the
+  credit lives in the docs instead.
 - **Tag 762** needs an in-person check: 13 m position disagreement and a species
-  conflict (recorded *Quercus michauxii*; ArcGIS says swamp white oak).
+  conflict (recorded *Quercus michauxii*; ArcGIS says swamp white oak). The
+  import now records this on the tree's 2023 observation, so it is in the data
+  rather than only in this list.
+- **15 more tags need an in-person check** — 8 numbers found on two different
+  trees, 7 the surveyor could not read (`1818 or 1942`). `grep 'TAG ' data/observations.csv`
+  lists them.
+- **10 ArcGIS records did not import** — 8 need identifying, 2 need a position.
 - **Botanist review** of the authored descriptions and traits in `taxa.csv`.
 - **Official UVM V mark** from UVM Communications.
 - **ETS request** for `arboretum.uvm.edu/explorer/`.
