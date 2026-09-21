@@ -304,7 +304,7 @@ means deciding it while something is already broken.
 **Cost.** Generating them: an afternoon. Deciding what is permanent: worth a
 conversation before anything is generated.
 
-## 10. Photos without overloading the repo
+## 10. Photos without overloading the repo — partly done, 21 September 2026
 
 **Ask.** Photos of trees, ideally in different seasons, without the repository
 becoming unmanageable.
@@ -342,6 +342,51 @@ one photo per tree is ever filled in.
 **Cost.** Field-app resizing: half a day, and worth doing before the next survey
 regardless of where the files end up. Storage: depends entirely on what UVM can
 offer, which is worth asking about in the same conversation as the ETS request.
+
+**Built so far.**
+
+- **The field app resizes on capture** — 1200 px on the long edge, WebP where
+  the phone can encode it and JPEG otherwise, at quality 0.72. That is the
+  decision that cannot be undone, so it is made. A survey photo now lands at
+  roughly 120 KB instead of 4 MB. One correction to what I said earlier: WebP
+  came out about **10%** smaller than JPEG on a real survey photo at matched
+  quality, not the 40–60% I first claimed. Don't plan storage around the big
+  number.
+- **Photos can live anywhere** — `photoBaseUrl` in `data/config.json`. Empty
+  means "beside the site, in `photos/`", which is what happens today. Set it to
+  a UVM address and every photo is fetched from there instead, with no code
+  change and nothing in the repository but filenames. A filename that is
+  already a full `https://` address is used as-is, so one collection can mix
+  sources.
+- **A page per species**, which is the Purdue-style explorer. See below.
+
+**Species pages.** `npm run data` writes a static page for every taxon into
+`public/species/<taxon-id>/index.html`, plus an index at `public/species/`.
+They are plain HTML with one shared stylesheet: no JavaScript, readable by a
+search engine, and fast on a phone in a field. Nothing on them is newly
+authored — every word is already in `taxa.csv`.
+
+Each page carries the description and fun fact, a characteristics table that
+shows **only the facts that are recorded** (a species with no bark note shows
+no bark row, rather than an em dash that reads as "somebody looked and found
+nothing"), any campus photos of that species with the accession they came
+from, and how many are mapped and on which campus. The map's detail panel
+links out to it, and the page links back to the map filtered to that species,
+so the two halves are a loop.
+
+They are generated, not committed — `public/species/` is in `.gitignore`, the
+same arrangement as the QR labels. The URLs are `/species/tilia-cordata/`,
+which is what would be handed to UVM as-is if the site ever moves to a
+university address.
+
+**Still open.** Where the photos actually live. SharePoint is ruled out (the
+`:f:` share link is a folder *view* with no file path to append, it is
+auth-gated and CORS-blocked, the token expires, and a personal OneDrive is
+tied to one person's account — it would break the day you leave). What is
+wanted is a plain public folder on a UVM web host, which is the ETS
+conversation. Multiple photos per species also still needs a place to put them:
+today a page shows the photos taken of *mapped trees* of that species, which is
+one per surveyed tree, not a curated seasonal set.
 
 ## 11. Updating the data over time — ✅ done, 11 September 2026
 

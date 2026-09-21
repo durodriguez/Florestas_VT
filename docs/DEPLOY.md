@@ -28,6 +28,11 @@ Two options:
   `dist/` to the web root. If it will live in a subdirectory, build with
   `BASE_PATH=/arboretum/ npm run build`.
 
+`npm run build` runs `npm run data` first, so the same `BASE_PATH` also reaches
+the generated species pages under `public/species/` — their links to the map
+are absolute and need it. Building the data separately for a subdirectory means
+passing it there too: `BASE_PATH=/arboretum/ npm run data`.
+
 Whichever you choose, set `publicUrl` in `data/config.json` to the final
 address **before** printing labels — that value is what the QR codes encode.
 

@@ -155,6 +155,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
 
     <div class="detail-actions">
       <button type="button" class="btn" data-action="same-taxon">Show all</button>
+      <a class="btn" href="${base}species/${encodeURIComponent(t.id)}/">More about this species</a>
       <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=${plant.lat},${plant.lng}"
          target="_blank" rel="noopener">Directions</a>
       <button type="button" class="btn" data-action="copy-link" data-url="${escapeHtml(shareUrl)}">Copy link</button>
