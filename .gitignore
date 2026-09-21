@@ -8,3 +8,4 @@ public/labels/
 *.local
 *.csv.bak
 .data-version
+public/species/

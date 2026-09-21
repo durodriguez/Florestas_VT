@@ -4,12 +4,14 @@
 // `npm run build`). Exits non-zero on validation errors so CI catches bad data.
 
 import { createHash } from 'node:crypto';
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Papa from 'papaparse';
 import { buildDataset } from './lib/build.mjs';
 import { normalizeName } from './lib/species.mjs';
+import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS } from './lib/species-pages.mjs';
+import { photoUrl } from './lib/photo-url.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dataDir = join(root, 'data');
@@ -44,6 +46,8 @@ function readCsv(name) {
   return data;
 }
 
+const config = JSON.parse(readFileSync(join(dataDir, 'config.json'), 'utf8'));
+
 const result = buildDataset({
   taxaRows: readCsv('taxa.csv'),
   plantRows: readCsv('plants.csv'),
@@ -52,7 +56,7 @@ const result = buildDataset({
   trails: JSON.parse(readFileSync(join(dataDir, 'trails.geojson'), 'utf8')),
   campusAreas: JSON.parse(readFileSync(join(dataDir, 'campus-areas.geojson'), 'utf8')),
   aliasRows: readCsv('species-aliases.csv'),
-  config: JSON.parse(readFileSync(join(dataDir, 'config.json'), 'utf8')),
+  config,
 });
 
 for (const w of result.warnings) console.warn(`  ! ${w}`);
@@ -124,6 +128,55 @@ const trees = result.plants.rows.map((row) => {
 const treesJson = JSON.stringify(trees);
 writeFileSync(join(fieldDir, 'trees.json'), treesJson);
 
+// ---- a page per species ---------------------------------------------------
+// Real URLs rather than a query string, readable without JavaScript, and
+// nothing new authored: every word on them is already in taxa.csv.
+//
+// BASE_PATH is what the Pages deploy sets for `vite build`, and `npm run data`
+// runs inside the same step, so the two agree about where the site lives.
+const siteBase = process.env.BASE_PATH ?? '/';
+const speciesDir = join(root, 'public', 'species');
+rmSync(speciesDir, { recursive: true, force: true });
+mkdirSync(speciesDir, { recursive: true });
+writeFileSync(join(speciesDir, 'species.css'), SPECIES_CSS);
+
+// Campus photos and areas, grouped by species, so a page can show the trees
+// actually standing on campus rather than a stock image of the species.
+const photosByTaxon = new Map();
+const areasByTaxon = new Map();
+for (const row of result.plants.rows) {
+  const taxon = result.dataset.taxa[at(row, 'taxon')];
+  if (!taxon) continue;
+  const file = at(row, 'photo');
+  if (file) {
+    if (!photosByTaxon.has(taxon.id)) photosByTaxon.set(taxon.id, []);
+    photosByTaxon.get(taxon.id).push({
+      id: at(row, 'plant_id'),
+      url: photoUrl(file, siteBase, config.photoBaseUrl),
+    });
+  }
+  const c = result.dataset.collections[at(row, 'collection')];
+  if (c) {
+    if (!areasByTaxon.has(taxon.id)) areasByTaxon.set(taxon.id, new Set());
+    areasByTaxon.get(taxon.id).add(c.name);
+  }
+}
+
+for (const taxon of result.dataset.taxa) {
+  const dir = join(speciesDir, taxon.id);
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, 'index.html'), renderSpeciesPage(taxon, {
+    photos: photosByTaxon.get(taxon.id) ?? [],
+    areas: [...(areasByTaxon.get(taxon.id) ?? [])].sort(),
+    base: siteBase,
+    config,
+  }));
+}
+writeFileSync(
+  join(speciesDir, 'index.html'),
+  renderSpeciesIndex(result.dataset.taxa, { base: siteBase, config }),
+);
+
 // These two files keep the same URL forever — Vite hashes JS and CSS
 // filenames, but copies public/ through untouched. Without a cache-buster a
 // returning visitor keeps seeing the plants they saw last time, however many
@@ -161,4 +214,5 @@ console.log(`  public/data/dataset.json  ${kb(datasetJson)}`);
 console.log(`  public/data/plants.json   ${kb(plantsJson)}`);
 console.log(`  public/field/species.json ${kb(speciesJson)}  (${species.length} taxa for the survey app)`);
 console.log(`  public/field/trees.json   ${kb(treesJson)}  (${trees.length} mapped trees to match against)`);
+console.log(`  public/species/           ${result.dataset.taxa.length} species pages + an index`);
 console.log(`  data version              ${version}`);
