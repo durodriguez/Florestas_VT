@@ -23,11 +23,29 @@ only in somebody's memory is attribution that gets lost on the next refresh.
 > Inventory Data.* Available online at:
 > https://www.uvm.edu/femc/data/archive/project/burlington_vermont_street_tree_inventory/dataset/burlington-vermont-uvm-campus-tree-inventory
 
-**What was changed.** The archive's dataset has **12 fields**; the copy
-published here has six — tree number, common and scientific name, DBH, age
-class and condition. The rest, including a free-text `Notes` column and
-care-priority ratings, were left out because the field app only needs enough
-to autofill a form, and internal notes do not belong on a public URL.
+**What was changed.** The archive download carries eleven columns:
+
+```
+Tree, Common_Name, Genus, Species, Botanical, DBH, Age_Class,
+Height, Condition, Tree_Care_Priority, Notes
+```
+
+Six are published here — tree number, common and scientific name, DBH, age
+class and condition. `Genus` and `Species` are `Botanical` split in two.
+`Height` is a class (Small / Medium / Large) rather than a measurement.
+`Tree_Care_Priority` and `Notes` were left out because the field app only
+needs enough to autofill a form, and an arborist's internal notes do not
+belong on a public URL.
+
+**The published copy was verified against the source on 22 September 2026**:
+all 2,502 rows present, zero cell differences across the six shared columns.
+The reduction is faithful.
+
+**There are no coordinates in the source.** The archive page describes the
+dataset as 12 fields against the download's 11; either way, nothing in it
+locates a tree. This is recorded because it is a reasonable thing to go
+looking for twice — the survey's purpose was storm risk to buildings, which
+sounds like it would need positions, and it did not record them.
 
 **The dataset's stated purpose is worth remembering when reading it.** It was
 built to assess storm risk to buildings, not to name trees precisely. DBH,

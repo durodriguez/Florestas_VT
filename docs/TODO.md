@@ -680,10 +680,12 @@ prints that figure every run; if it stops being zero, this needs rethinking.
 
 **It cannot be finished at a desk.** `reference.csv` has no coordinates and the
 ArcGIS layer has no diameters, so a missing tag cannot be matched to a standing
-tree by position or size. Two things would change that, and both are asks
-rather than code: a 2014 source file with coordinates, if one exists, and any
-field in the ArcGIS layer the import did not read (it takes `OBJECTID`,
-`Species`, `Tag_ID`, `GlobalID`, `Health`, `CreationDate` and geometry).
+tree by position or size. The fuller 2014 file was the obvious way out and it
+is not one — the full archive download has eleven columns and no coordinate
+among them ([#16](#16-the-full-2014-download--answered-22-september-2026)).
+What remains is one ask rather than two: any field in the ArcGIS layer the
+import did not read (it takes `OBJECTID`, `Species`, `Tag_ID`, `GlobalID`,
+`Health`, `CreationDate` and geometry).
 
 **The cheap experiment.** Tags 809–818 are ten missing numbers between two
 trees eleven metres apart. Walk it and read the trunks: 2556+ tags means
@@ -693,41 +695,52 @@ distinguishes three hypotheses, and `data/coverage-gaps.csv` ranks the rest.
 **Cost.** The accounting is written and tested. The walk is an afternoon. What
 it cannot do is tell you about any individual tree.
 
-## 16. Six columns of the 2014 inventory nobody has looked at
+## 16. The full 2014 download — answered, 22 September 2026
 
-The FEMC archive lists the 2014 dataset as **2,502 records with 12 fields**.
-The copy published at `public/field/reference.csv` has **six**: tree number,
-common and scientific name, DBH, age class and condition.
+Checked. **There is nothing in it that solves anything**, and the hope that
+there might be is now closed rather than left hanging.
 
-That reduction was deliberate — [FIELD-APP.md](FIELD-APP.md) records that a
-free-text `Notes` column and care-priority ratings were dropped, because the
-field app only needs enough to autofill a form. But those do not account for
-all six, and **nobody has looked at what the rest hold.**
+The archive download has eleven columns:
 
-**Why this matters more than it sounds.** [#15](#15-1552-of-the-2014-tags-are-not-on-the-map)
-is stuck on one thing: the 2014 file has no coordinates, so a missing tag
-cannot be matched to a standing tree by position. The dataset's stated purpose
-was *"to estimate the composition and potential risk of damage to property and
-infrastructure during extreme weather events"* — and you cannot assess what a
-tree might fall on without recording where it stands. **A location column is a
-reasonable thing to expect in those six.**
+```
+Tree, Common_Name, Genus, Species, Botanical, DBH, Age_Class,
+Height, Condition, Tree_Care_Priority, Notes
+```
 
-If one is there, it collapses three open problems at once:
+**No coordinates.** The reasoning that there might be — a storm-risk
+assessment needs to know what a tree could fall on — was sound and wrong. The
+survey identified risk by tag number and left locating the trees to whoever
+held the tags.
 
-- #15 stops being an afternoon's walking and becomes a spatial join.
-- The 165 species disagreements in [#14](#14-165-trees-the-two-inventories-disagree-about)
-  can be checked tree-against-tree rather than tag-against-tag, which also
-  settles whether a "disagreement" is one tree or two.
-- The tag-vs-accession mess — tuliptree 3230 being tuliptree 0008 — becomes
-  resolvable from data instead of from inference.
+**The six columns published here are byte-for-byte identical to the source**
+on all 2,502 rows. Zero differences, zero rows missing either way. Whoever
+reduced this file did it faithfully.
 
-**Cost.** Downloading the archive file and reading its header: minutes. What
-follows depends entirely on what is in it, so there is no point planning
-further until somebody looks.
+**Three columns are genuinely new**, and the case for each is weak to fair:
 
-**Note the licence either way.** CC BY-SA 4.0. Anything imported from the
-fuller file carries the same terms as the copy already published — see
-[data/SOURCES.md](../data/SOURCES.md).
+- `Height` — **Small / Medium / Large**, not a measurement. DBH already says
+  size, and says it better. i-Tree ([#7](#7-ecosystem-services--the-i-tree-question))
+  needs a number, so this does not unblock it.
+- `Notes` — free text on **48 of 2,502 trees**. Real arborist observations:
+  *recent construction*, *soil erosion*, *stump sprout*, *dead stem*,
+  *sapsucker damage*, *verify*. Small, and genuinely interesting on those 48.
+- `Tree_Care_Priority` — **1, 2 or 3 on 1,492 trees**; N/A on the rest. The
+  strongest of the three and the only one worth arguing about. A professional
+  care ranking speaks directly to a facilities audience. Against it: it is
+  twelve years stale, and a 2014 priority-1 tree has since been dealt with,
+  or has come down.
+
+`Genus` and `Species` are just `Botanical` split in two.
+
+**Left unimported, for now.** The original reduction excluded `Notes` and the
+care ratings as *"not worth putting on a public URL"*, and that reasoning still
+holds for the file the field app serves. It would not preclude keeping them in
+a non-published file — but nothing currently needs them, and importing data
+because it exists is how a schema fills up with columns nobody reads.
+
+**If that changes**, the argument to revisit is `Tree_Care_Priority`, and the
+question to answer first is whether a 2014 care ranking is a useful thing to
+show or a misleading one.
 
 ## Also outstanding (not code)
 

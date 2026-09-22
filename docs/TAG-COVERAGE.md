@@ -105,15 +105,20 @@ one comparison that would settle it.
 Matching by size is out too — the ArcGIS layer carries no trunk diameter for
 UVM trees, which is the same gap that blocks [to-do #7](TODO.md) on i-Tree.
 
-**Two things would change that**, and both are somebody's to ask for rather
-than something to compute:
+**A fuller 2014 file was the obvious hope, and it is gone.** The complete
+archive download was checked on 22 September 2026: eleven columns, and not one
+of them is a coordinate. It adds `Genus`, `Species`, `Height` (as Small /
+Medium / Large, not a measurement), `Tree_Care_Priority` and a `Notes` column
+filled in on 48 trees. Nothing that locates anything. See
+[data/SOURCES.md](../data/SOURCES.md).
 
-- **A 2014 source file with coordinates**, if one exists. The copy in this
-  repository may be a reduced export of something richer.
-- **Anything in the ArcGIS layer this import did not read.** It takes
-  `OBJECTID`, `Species`, `Tag_ID`, `GlobalID`, `Health`, `CreationDate` and the
-  geometry. If the layer also carries a comment or previous-tag field, that is
-  the answer sitting in a column nobody has looked at.
+**What is left** is one ask rather than two: **anything in the ArcGIS layer
+this import did not read.** It takes `OBJECTID`, `Species`, `Tag_ID`,
+`GlobalID`, `Health`, `CreationDate` and the geometry. If the layer also
+carries a comment or previous-tag field, that is the answer sitting in a
+column nobody has looked at.
+
+Short of that, the walking below is the method, not a fallback.
 
 ## The cheap way to settle it
 
