@@ -380,10 +380,45 @@ describe('buildDataset', () => {
   it('summarises unreferenced taxa in one warning rather than one each', () => {
     const many = Array.from({ length: 8 }, (_, i) => taxon({ taxon_id: `t${i}`, scientific_name: `Genus sp${i}` }));
     const r = build({ taxaRows: [taxon(), ...many] });
-    const unused = r.warnings.filter((w: string) => /not referenced by any active plant/.test(w));
+    const unused = r.warnings.filter((w: string) => /on no tree on the map/.test(w));
     expect(unused).toHaveLength(1);
-    expect(unused[0]).toMatch(/8 taxa are not referenced/);
+    expect(unused[0]).toMatch(/8 taxa are on no tree on the map/);
     expect(r.errors).toEqual([]);
+  });
+
+  it('does not call a taxon unmapped when a city tree is standing on it', () => {
+    // 16 real cases: Miyabe maple and the like are on the map, just not on a
+    // UVM tree. Counting them as unmapped sends somebody looking for a species
+    // that is already out there.
+    const extra = taxon({ taxon_id: 'acer-miyabei', scientific_name: 'Acer miyabei' });
+    const r = build({
+      taxaRows: [taxon(), extra],
+      plantRows: [], observationRows: [],
+      cityTreeRows: [{
+        city_id: 'BTV-1', taxon_id: 'acer-miyabei', lat: '44.4779', lng: '-73.1955',
+        collection_id: 'green', dbh_in: '12', condition: 'good',
+      }],
+    });
+    const unused = r.warnings.filter((w: string) => /on no tree on the map/.test(w));
+    expect(unused[0]).toMatch(/1 taxa are on no tree on the map/);
+    expect(unused[0]).toMatch(/a further 1 are on Burlington street trees only/);
+    expect(r.errors).toEqual([]);
+  });
+
+  it('never lets a city tree count towards a taxon\'s mapped plants', () => {
+    // taxa[].count is what a species page reports as mapped on campus, and it
+    // means the university's collection.
+    const r = build({
+      taxaRows: [taxon()],
+      plantRows: [], observationRows: [],
+      cityTreeRows: [{
+        city_id: 'BTV-1', taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955',
+        collection_id: 'green', dbh_in: '12', condition: 'good',
+      }],
+    });
+    // One city tree of this species, and still nought mapped plants.
+    expect(r.dataset.taxa[0].count).toBe(0);
+    expect(r.dataset.cityTrees.rows).toHaveLength(1);
   });
 
   it('warns when a trail stop is not a known accession', () => {

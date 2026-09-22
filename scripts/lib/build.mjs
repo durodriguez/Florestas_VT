@@ -349,17 +349,69 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     }
   }
 
+  // ---- Burlington's street trees ------------------------------------------
+  // Validated like everything else, but kept in their own array rather than
+  // folded into plants: `plants` means the UVM collection, and every count,
+  // facet and CSV export in the app takes that literally. A city tree that
+  // slipped into that list would be claimed by the university on a page that
+  // says so.
+  const cityTrees = [];
+  // Deliberately NOT folded into taxa[].count. That count is what a species
+  // page and a plant record report as "mapped on campus", and it means the
+  // university's collection — a city tree must never inflate it. This set
+  // exists only so the unreferenced-taxa warning can tell the difference
+  // between a species nothing on the map shows and one that is on the map,
+  // just not on a UVM tree.
+  const cityTreeTaxa = new Set();
+  cityTreeRows.forEach((row, i) => {
+    const where = `city-trees.csv row ${i + 2}`;
+    const id = trim(row.city_id);
+    if (!id) return err(where, 'missing city_id');
+    const taxonIdx = taxonIndex.get(trim(row.taxon_id));
+    if (taxonIdx === undefined) {
+      return err(where, `taxon_id "${row.taxon_id}" has no matching row in taxa.csv`);
+    }
+    const lat = num(row.lat);
+    const lng = num(row.lng);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return err(where, 'lat/lng is not a number');
+    const condition = trim(row.condition);
+    if (condition && !CONDITIONS.includes(condition)) {
+      return err(where, `condition "${condition}" is not one of: ${CONDITIONS.join(', ')}`);
+    }
+    const collectionId = trim(row.collection_id);
+    if (collectionId && !collectionIndex.has(collectionId)) {
+      return err(where, `collection_id "${collectionId}" has no matching row in collections.csv`);
+    }
+    cityTreeTaxa.add(taxonIdx);
+    cityTrees.push([
+      id,
+      taxonIdx,
+      Number(lat.toFixed(6)),
+      Number(lng.toFixed(6)),
+      collectionId ? collectionIndex.get(collectionId) : -1,
+      num(row.dbh_in) ?? null,
+      condition ? CONDITIONS.indexOf(condition) : -1,
+      num(row.planted_year) ?? null,
+      trim(row.address),
+    ]);
+    return undefined;
+  });
+
   // Once a full species list is loaded, most taxa legitimately have no mapped
   // plant yet — the list runs ahead of the survey by design. Summarise rather
   // than emitting a line each, which would bury the warnings that matter.
-  const unused = taxa.filter((t) => t.count === 0);
+  const unused = taxa.filter((t, i) => t.count === 0 && !cityTreeTaxa.has(i));
+  const cityOnly = taxa.filter((t, i) => t.count === 0 && cityTreeTaxa.has(i)).length;
   if (unused.length) {
     const sample = unused.slice(0, 5).map((t) => t.id).join(', ');
     warn(
       'taxa.csv',
-      `${unused.length} taxa are not referenced by any active plant ` +
+      `${unused.length} taxa are on no tree on the map ` +
         `(${sample}${unused.length > 5 ? ', …' : ''}) — expected while the species ` +
-        'list runs ahead of the survey',
+        'list runs ahead of the survey' +
+        // Worth saying, because these look identical in taxa.csv and are not:
+        // nobody needs to go and find them, they are already out there.
+        (cityOnly ? `; a further ${cityOnly} are on Burlington street trees only` : ''),
     );
   }
 
@@ -491,46 +543,6 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
         'the boundaries are estimates. Trace the real ones at /tracer/ (docs/CAMPUS-AREAS.md)',
     );
   }
-
-  // ---- Burlington's street trees ------------------------------------------
-  // Validated like everything else, but kept in their own array rather than
-  // folded into plants: `plants` means the UVM collection, and every count,
-  // facet and CSV export in the app takes that literally. A city tree that
-  // slipped into that list would be claimed by the university on a page that
-  // says so.
-  const cityTrees = [];
-  cityTreeRows.forEach((row, i) => {
-    const where = `city-trees.csv row ${i + 2}`;
-    const id = trim(row.city_id);
-    if (!id) return err(where, 'missing city_id');
-    const taxonIdx = taxonIndex.get(trim(row.taxon_id));
-    if (taxonIdx === undefined) {
-      return err(where, `taxon_id "${row.taxon_id}" has no matching row in taxa.csv`);
-    }
-    const lat = num(row.lat);
-    const lng = num(row.lng);
-    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return err(where, 'lat/lng is not a number');
-    const condition = trim(row.condition);
-    if (condition && !CONDITIONS.includes(condition)) {
-      return err(where, `condition "${condition}" is not one of: ${CONDITIONS.join(', ')}`);
-    }
-    const collectionId = trim(row.collection_id);
-    if (collectionId && !collectionIndex.has(collectionId)) {
-      return err(where, `collection_id "${collectionId}" has no matching row in collections.csv`);
-    }
-    cityTrees.push([
-      id,
-      taxonIdx,
-      Number(lat.toFixed(6)),
-      Number(lng.toFixed(6)),
-      collectionId ? collectionIndex.get(collectionId) : -1,
-      num(row.dbh_in) ?? null,
-      condition ? CONDITIONS.indexOf(condition) : -1,
-      num(row.planted_year) ?? null,
-      trim(row.address),
-    ]);
-    return undefined;
-  });
 
   const dataset = {
     generatedAt: new Date().toISOString(),
