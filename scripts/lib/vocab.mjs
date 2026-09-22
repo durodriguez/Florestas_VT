@@ -98,6 +98,24 @@ export const PLANT_COLUMNS = [
   'source_id',
 ];
 
+/**
+ * Column order of the compact `cityTrees` row arrays. Burlington's street
+ * trees inside the campus boundary — not part of the UVM collection, and
+ * deliberately a shorter row than a plant: no accession, no dedication, no
+ * story, no survey history. A snapshot of somebody else's records.
+ */
+export const CITY_TREE_FIELDS = [
+  'city_id',
+  'taxon',        // index into taxa
+  'lat',
+  'lng',
+  'collection',   // index into collections, or -1
+  'dbhIn',
+  'condition',    // integer index into CONDITIONS, or -1
+  'plantedYear',
+  'address',
+];
+
 /** Column order of data/observations.csv. */
 export const OBSERVATION_COLUMNS = [
   'plant_id',

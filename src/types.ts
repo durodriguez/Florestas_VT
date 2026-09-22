@@ -29,6 +29,28 @@ export interface Collection {
   description: string;
 }
 
+/**
+ * One of Burlington's street trees, standing inside the campus boundary.
+ *
+ * A deliberately smaller thing than a Plant: no accession, no dedication, no
+ * story, no survey history, and no QR label. The university does not own it,
+ * and the record says only what the city's open data says.
+ */
+export interface CityTree {
+  id: string;
+  lat: number;
+  lng: number;
+  taxon: Taxon;
+  collection: Collection | null;
+  dbhIn: number | null;
+  /** One of Vocab.conditions, or '' where the city recorded no score. */
+  condition: string;
+  plantedYear: number | null;
+  address: string;
+  /** Free-text haystack, same idea as Plant.search. */
+  search: string;
+}
+
 export interface Taxon {
   id: string;
   sci: string;
@@ -83,6 +105,8 @@ export interface Dataset {
   taxa: Taxon[];
   trails: GeoJSON.FeatureCollection<GeoJSON.LineString, TrailProps>;
   campusAreas: GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon, CampusAreaProps>;
+  /** Compact rows, expanded by expandCityTrees. See CITY_TREE_FIELDS. */
+  cityTrees: { fields: string[]; rows: unknown[][] };
   counts: Record<string, number>;
 }
 

@@ -201,6 +201,49 @@ button, input, select { font: inherit; color: inherit; }
   border: 2px solid var(--uvm-gold); border-radius: 50%;
   font-weight: 650; font-variant-numeric: tabular-nums;
 }
+/* Burlington's flag colours, against UVM's green and gold. Same bubble,
+   different allegiance: blue where the UVM cluster is green, white where it
+   is gold. See BTV_BLUE in map.ts. */
+/* The toggle's own note, so nobody has to guess what the blue pins are. */
+.facet--city { border-top: 1px solid var(--border); margin-top: .2rem; padding-top: .6rem; }
+.facet-note {
+  margin: .35rem 0 0; font-size: .76rem; line-height: 1.4; color: var(--text-dim);
+  display: flex; align-items: baseline; gap: .4rem;
+}
+.city-swatch {
+  flex: none; width: .72rem; height: .72rem; border-radius: 50%;
+  background: #1d4395; border: 1.5px solid #fff;
+  box-shadow: 0 0 0 1px var(--border);
+  transform: translateY(1px);
+}
+
+.facet-count-inline { color: var(--text-dim); }
+
+/* A city tree's record says whose it is before it says anything else. */
+.detail-city-note {
+  margin: .7rem 0 0; padding: .55rem .7rem;
+  font-size: .82rem; line-height: 1.45;
+  background: rgb(29 67 149 / 8%);
+  border-left: 3px solid #1d4395;
+  border-radius: 4px;
+}
+.detail-source {
+  margin-top: 1.4rem; font-size: .76rem; line-height: 1.45; color: var(--text-dim);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .detail-city-note { background: rgb(29 67 149 / 22%); }
+}
+
+.city-cluster {
+  display: grid; place-items: center;
+  background: rgb(29 67 149 / 82%); color: #fff;
+  border: 2px solid #fff; border-radius: 50%;
+  font-weight: 650; font-variant-numeric: tabular-nums;
+}
+.city-cluster--sm { font-size: .78rem; }
+.city-cluster--md { font-size: .85rem; }
+.city-cluster--lg { font-size: .9rem; }
+
 .plant-cluster--sm { font-size: .78rem; }
 .plant-cluster--md { font-size: .85rem; }
 .plant-cluster--lg { font-size: .9rem; }

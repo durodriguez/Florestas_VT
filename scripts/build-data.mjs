@@ -56,6 +56,7 @@ const result = buildDataset({
   trails: JSON.parse(readFileSync(join(dataDir, 'trails.geojson'), 'utf8')),
   campusAreas: JSON.parse(readFileSync(join(dataDir, 'campus-areas.geojson'), 'utf8')),
   aliasRows: readCsv('species-aliases.csv'),
+  cityTreeRows: readCsv('city-trees.csv'),
   config,
 });
 
@@ -210,6 +211,9 @@ console.log(
   `  ${c.observations} observation(s) · ${c.resurveyed} plant(s) surveyed more than once · ` +
   `${c.unsurveyed} never surveyed`,
 );
+// Counted on its own line, never added to the plant total: these are
+// Burlington's trees standing inside the boundary, not the university's.
+console.log(`  ${c.cityTrees} Burlington street tree(s) inside the boundary (not UVM's)`);
 console.log(`  public/data/dataset.json  ${kb(datasetJson)}`);
 console.log(`  public/data/plants.json   ${kb(plantsJson)}`);
 console.log(`  public/field/species.json ${kb(speciesJson)}  (${species.length} taxa for the survey app)`);

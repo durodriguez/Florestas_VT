@@ -1,4 +1,4 @@
-import type { Dataset, Observation, Plant } from './types';
+import type { CityTree, Dataset, Observation, Plant, Taxon } from './types';
 import { escapeHtml } from './map';
 import { ORIGIN_LABELS, TYPE_LABELS } from './palette';
 import { photoUrl } from './photos';
@@ -9,6 +9,16 @@ const monthRange = (months: number[]): string =>
   months.length === 0 ? '—' : months.map((m) => MONTHS[m] ?? '').filter(Boolean).join('–');
 
 const titleCase = (s: string): string => (s ? s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, ' ') : '');
+
+/** The same convention, from a taxon rather than a plant. */
+function formatScientificTaxon(t: Taxon): string {
+  const parts: string[] = [];
+  if (t.genus) parts.push(`<i>${escapeHtml(t.genus)}</i>`);
+  if (t.species) parts.push(`<i>${escapeHtml(t.species)}</i>`);
+  if (t.infra) parts.push(escapeHtml(t.infra));
+  if (t.cultivar) parts.push(`&lsquo;${escapeHtml(t.cultivar)}&rsquo;`);
+  return parts.join(' ') || escapeHtml(t.sci);
+}
 
 /** Botanical convention: genus and species italic, cultivar upright in quotes. */
 function formatScientific(plant: Plant): string {
@@ -182,4 +192,59 @@ export function renderResultItem(plant: Plant, distance?: number): string {
         ${dist}
       </button>
     </li>`;
+}
+
+/**
+ * A Burlington street tree.
+ *
+ * Deliberately a leaner panel than a plant's, and the first thing it says is
+ * whose tree this is. Everything shown comes from the city's open data; there
+ * is no accession, no dedication, no story and no survey history, because the
+ * university keeps none of those for a tree it does not own.
+ */
+export function renderCityDetail(tree: CityTree, base: string): string {
+  const t = tree.taxon;
+  const age = tree.plantedYear ? `${new Date().getFullYear() - tree.plantedYear} years old` : '';
+
+  return `
+    <header class="detail-head">
+      <p class="detail-accession">${escapeHtml(tree.id)} &middot; City of Burlington</p>
+      <h2 class="detail-title">${escapeHtml(t.common)}</h2>
+      <p class="detail-sci">${formatScientificTaxon(t)}</p>
+      <p class="detail-family">${escapeHtml(t.family)} &middot; ${escapeHtml(TYPE_LABELS[t.type] ?? titleCase(t.type))}</p>
+    </header>
+
+    <p class="detail-city-note">
+      A <strong>Burlington street tree</strong>, standing inside the campus
+      boundary. It is the city's tree, not part of the UVM collection, and it
+      carries no accession number or label.
+    </p>
+
+    ${t.description ? `<p class="detail-desc"><strong>Description:</strong> ${escapeHtml(t.description)}</p>` : ''}
+    ${t.funFact ? `<details class="fun">
+      <summary>Fun fact</summary>
+      <p>${escapeHtml(t.funFact)}</p>
+    </details>` : ''}
+
+    <h3 class="detail-section">This tree</h3>
+    <dl class="facts">
+      ${row('Address', tree.address ? escapeHtml(tree.address) : null)}
+      ${row('On campus', tree.collection ? escapeHtml(tree.collection.name) : null)}
+      ${row('Condition', tree.condition
+        ? `<span class="pill pill--${tree.condition}">${escapeHtml(titleCase(tree.condition))}</span>`
+        : null)}
+      ${row('Diameter at breast height', tree.dbhIn === null ? null : `${tree.dbhIn} in`)}
+      ${row('Planted', tree.plantedYear ? `${tree.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
+      ${row('Coordinates', `${tree.lat.toFixed(6)}, ${tree.lng.toFixed(6)}`)}
+    </dl>
+
+    <div class="detail-actions">
+      <a class="btn" href="${base}species/${encodeURIComponent(t.id)}/">More about this species</a>
+    </div>
+
+    <p class="detail-source">
+      Record from the City of Burlington's public tree inventory. Anything wrong
+      with it is the city's to correct, not the university's.
+    </p>
+  `;
 }

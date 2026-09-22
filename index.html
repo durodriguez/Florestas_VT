@@ -75,6 +75,20 @@
             <span class="facet-label">Include removed plants</span>
           </label>
         </div>
+        <!-- Its own block, below the filters rather than among them: the
+             filters narrow the UVM collection, and this adds something that
+             is not part of it. -->
+        <div class="facet facet--plain facet--city">
+          <label>
+            <input type="checkbox" id="filter-city">
+            <span class="facet-label">Show Burlington street trees</span>
+          </label>
+          <p id="filter-city-note" class="facet-note">
+            <span class="city-swatch" aria-hidden="true"></span>
+            The city's trees inside campus, not part of the UVM collection.
+            <span id="filter-city-count" class="facet-count-inline"></span>
+          </p>
+        </div>
       </form>
 
       <div class="panel-results">

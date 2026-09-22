@@ -2,15 +2,15 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import './styles.css';
 
-import { loadData } from './data';
+import { expandCityTrees, loadData } from './data';
 import { PlantMap, escapeHtml } from './map';
-import { renderDetail, renderResultItem } from './detail';
+import { renderCityDetail, renderDetail, renderResultItem } from './detail';
 import { legendFor, ORIGIN_LABELS, TYPE_LABELS } from './palette';
 import {
   applyFilters, emptyFilters, facetCounts, isFilterActive, toCsv,
 } from './filters';
 import { distanceMeters } from './geo';
-import type { ColorBy, Dataset, FilterState, Plant } from './types';
+import type { CityTree, ColorBy, Dataset, FilterState, Plant } from './types';
 
 const BASE = import.meta.env.BASE_URL;
 const MAX_RESULTS_RENDERED = 250;
@@ -30,6 +30,9 @@ class App {
   private filters: FilterState = emptyFilters();
   private results: Plant[] = [];
   private selected: Plant | null = null;
+  /** Burlington's trees, expanded once and drawn only when asked for. */
+  private cityTrees: CityTree[] = [];
+  private showCity = false;
   private colorBy: ColorBy = 'type';
   private userPos: { lat: number; lng: number } | null = null;
   private readonly byId: Map<string, Plant>;
@@ -40,8 +43,10 @@ class App {
     private readonly plants: Plant[],
   ) {
     this.byId = new Map(plants.map((p) => [p.id, p]));
+    this.cityTrees = expandCityTrees(dataset);
     this.map = new PlantMap($('#map'), dataset, plants, {
       onSelect: (plant) => this.select(plant),
+      onSelectCityTree: (tree) => this.selectCityTree(tree),
       onBasemapTrouble: (name) =>
         this.toast(`The ${name} basemap is not loading. Pick another from the layers control, bottom right.`),
     });
@@ -168,6 +173,32 @@ class App {
     document.body.classList.add('has-detail');
   }
 
+  /**
+   * A Burlington tree's record. Clears any UVM selection first: one panel, and
+   * two trees selected at once would leave the map ringing one and describing
+   * the other.
+   */
+  private selectCityTree(tree: CityTree): void {
+    this.select(null);
+    const panel = $('#detail');
+    panel.hidden = false;
+    panel.innerHTML =
+      `<button type="button" class="detail-close" data-action="close-detail" aria-label="Close">&times;</button>` +
+      renderCityDetail(tree, BASE);
+    panel.scrollTop = 0;
+    document.body.classList.add('has-detail');
+  }
+
+  private renderCityTrees(): void {
+    if (!this.showCity) {
+      this.map.hideCityTrees();
+      $('#filter-city-count').textContent = '';
+      return;
+    }
+    this.map.showCityTrees(this.cityTrees);
+    $('#filter-city-count').textContent = `${this.cityTrees.length.toLocaleString()} shown`;
+  }
+
   // ---- URL state ---------------------------------------------------------
 
   private setUrlParam(key: string, value: string | null): void {
@@ -191,6 +222,12 @@ class App {
         this.setQuery(taxon.sci);
         this.map.fitTo(this.results);
       }
+    }
+
+    if (params.get('city') === '1' && this.cityTrees.length) {
+      $<HTMLInputElement>('#filter-city').checked = true;
+      this.showCity = true;
+      this.renderCityTrees();
     }
 
     const plantId = params.get('plant');
@@ -256,6 +293,14 @@ class App {
     $<HTMLInputElement>('#filter-removed').addEventListener('change', (e) => {
       this.filters.includeRemoved = (e.target as HTMLInputElement).checked;
       this.refresh();
+    });
+
+    $<HTMLInputElement>('#filter-city').addEventListener('change', (e) => {
+      this.showCity = (e.target as HTMLInputElement).checked;
+      this.renderCityTrees();
+      // In the URL, so a link can share the view somebody is actually looking
+      // at. Absent means off, which is the default either way.
+      this.setUrlParam('city', this.showCity ? '1' : null);
     });
 
     $<HTMLSelectElement>('#color-by').addEventListener('change', (e) => {

@@ -1,6 +1,6 @@
 import L from 'leaflet';
 import 'leaflet.markercluster';
-import type { CampusAreaProps, ColorBy, Dataset, Plant, TrailProps } from './types';
+import type { CampusAreaProps, CityTree, ColorBy, Dataset, Plant, TrailProps } from './types';
 import { colorFor } from './palette';
 
 /**
@@ -36,8 +36,24 @@ function basemaps(maxZoom: number): Record<string, L.TileLayer> {
 /** Below this, the five campus names overlap each other and the boundary. */
 const CAMPUS_LABEL_MIN_ZOOM = 15;
 
+/**
+ * Burlington's flag: blue and white, against UVM's green and gold.
+ *
+ * The colours are the point, not decoration. These trees belong to the city,
+ * and a visitor should be able to tell that at a glance without reading a
+ * legend — which is why the Burlington layer mirrors the UVM one exactly in
+ * shape and differs only in palette. Same circles, same clustering, same
+ * sizing; blue where UVM is green, white where UVM is gold.
+ *
+ * https://flagcolorcodes.com/burlington
+ */
+export const BTV_BLUE = '#1d4395';
+export const BTV_WHITE = '#ffffff';
+
 export interface PlantMapOptions {
   onSelect: (plant: Plant) => void;
+  /** A Burlington street tree was tapped. */
+  onSelectCityTree?: (tree: CityTree) => void;
   /** Called when the active basemap stops serving tiles. */
   onBasemapTrouble?: (layerName: string) => void;
 }
@@ -45,6 +61,14 @@ export interface PlantMapOptions {
 export class PlantMap {
   readonly map: L.Map;
   private readonly cluster: L.MarkerClusterGroup;
+  /**
+   * Its own cluster group, not a second set of markers in the UVM one. Two
+   * groups means a city tree and a university tree never merge into one
+   * cluster bubble, which would put a number on the map that answers no
+   * question anybody has.
+   */
+  private readonly cityCluster: L.MarkerClusterGroup;
+  private cityShown = false;
   private readonly trailLayer: L.GeoJSON;
   private readonly campusLayer: L.GeoJSON;
   private readonly highlight: L.CircleMarker;
@@ -102,6 +126,15 @@ export class PlantMap {
       spiderfyOnMaxZoom: true,
       showCoverageOnHover: false,
       iconCreateFunction: clusterIcon,
+    });
+
+    this.cityCluster = L.markerClusterGroup({
+      chunkedLoading: true,
+      disableClusteringAtZoom: 19,
+      maxClusterRadius: (zoom) => (zoom >= 17 ? 35 : 60),
+      spiderfyOnMaxZoom: true,
+      showCoverageOnHover: false,
+      iconCreateFunction: cityClusterIcon,
     });
 
     this.highlight = L.circleMarker([0, 0], {
@@ -202,6 +235,48 @@ export class PlantMap {
       if (marker) layers.push(marker);
     }
     this.cluster.addLayers(layers);
+  }
+
+  /**
+   * Draw Burlington's street trees, or take them away.
+   *
+   * Off by default and off until asked for: they are not part of the
+   * collection this map is about, and a visitor who has not asked for them
+   * should not have to work out which pins are which.
+   */
+  showCityTrees(trees: CityTree[]): void {
+    this.cityCluster.clearLayers();
+    const layers = trees.map((tree) => {
+      const marker = L.circleMarker([tree.lat, tree.lng], {
+        radius: cityRadiusFor(tree),
+        // Blue fill, thin white stroke — the same treatment a UVM marker gets,
+        // which is a green fill and a thin white stroke.
+        color: BTV_WHITE,
+        weight: 1.5,
+        opacity: 1,
+        fillColor: BTV_BLUE,
+        fillOpacity: 0.9,
+        pane: 'markerPane',
+      });
+      marker.bindTooltip(`${tree.taxon.common} · ${tree.id} (Burlington)`, {
+        direction: 'top',
+        offset: [0, -6],
+      });
+      marker.on('click', () => this.options.onSelectCityTree?.(tree));
+      return marker;
+    });
+    this.cityCluster.addLayers(layers);
+    if (!this.cityShown) {
+      this.cityCluster.addTo(this.map);
+      this.cityShown = true;
+    }
+  }
+
+  hideCityTrees(): void {
+    if (!this.cityShown) return;
+    this.map.removeLayer(this.cityCluster);
+    this.cityCluster.clearLayers();
+    this.cityShown = false;
   }
 
   setColorBy(mode: ColorBy, plants: Plant[]): void {
@@ -310,6 +385,34 @@ function radiusFor(plant: Plant): number {
   // Shrubs, vines and herbaceous plants have no trunk to scale by, so they get
   // the small dot rather than a diameter-derived one.
   if (plant.taxon.type !== 'deciduous-tree' && plant.taxon.type !== 'evergreen-tree') return 5;
+  if (dbh >= 30) return 10;
+  if (dbh >= 18) return 8;
+  if (dbh >= 8) return 6.5;
+  return 5.5;
+}
+
+/**
+ * The same bubble as a UVM cluster, in Burlington's colours. Identical
+ * geometry on purpose: the only thing that should read as different is whose
+ * trees they are.
+ */
+function cityClusterIcon(cluster: L.MarkerCluster): L.DivIcon {
+  const n = cluster.getChildCount();
+  const size = n < 10 ? 34 : n < 100 ? 42 : n < 1000 ? 50 : 58;
+  const label = n < 1000 ? String(n) : `${Math.round(n / 100) / 10}k`;
+  return L.divIcon({
+    html: `<span>${label}</span>`,
+    className: `city-cluster city-cluster--${n < 10 ? 'sm' : n < 100 ? 'md' : 'lg'}`,
+    iconSize: L.point(size, size),
+  });
+}
+
+/**
+ * Sized by trunk like a UVM tree. Burlington records a diameter for every one
+ * of these, so unlike the university's records there is never a fallback.
+ */
+function cityRadiusFor(tree: CityTree): number {
+  const dbh = tree.dbhIn ?? 0;
   if (dbh >= 30) return 10;
   if (dbh >= 18) return 8;
   if (dbh >= 8) return 6.5;
