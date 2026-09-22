@@ -3,6 +3,7 @@ import 'leaflet.markercluster/dist/MarkerCluster.css';
 import './styles.css';
 
 import { expandCityTrees, loadData } from './data';
+import { accessionForTag } from './accession';
 import { PlantMap, escapeHtml } from './map';
 import { renderCityDetail, renderDetail, renderResultItem } from './detail';
 import { legendFor, ORIGIN_LABELS, TYPE_LABELS } from './palette';
@@ -199,6 +200,47 @@ class App {
     $('#filter-city-count').textContent = `${this.cityTrees.length.toLocaleString()} shown`;
   }
 
+  /**
+   * Get out of the way and show what was found.
+   *
+   * On a phone the panel is a drawer over the map, and it has more staying
+   * power than it should: the way to dismiss it is a hamburger button people
+   * take a while to find. So asking for results — pressing Enter, or tapping
+   * Zoom to results — closes it. The class does nothing above the narrow
+   * breakpoint, where the panel is a permanent column, so this is safe to do
+   * unconditionally.
+   */
+  private revealResults(exact: Plant | null): void {
+    document.body.classList.remove('panel-open');
+    // Lowering the keyboard needs an explicit blur, and only matters where
+    // there is one. On a desktop, keeping focus lets you refine the search
+    // without reaching for the mouse.
+    if (window.matchMedia('(max-width: 48rem)').matches) {
+      $<HTMLInputElement>('#search').blur();
+    }
+    if (exact) this.map.focus(exact);
+    else this.map.fitTo(this.results);
+  }
+
+  /**
+   * The one plant whose tag is exactly the number typed.
+   *
+   * "772" legitimately matches UVM-0772 and UVM-2772, and the list is right to
+   * show both. But somebody typing a bare number is almost always reading it
+   * off a trunk, and the tree they are standing under is the one whose tag
+   * says 772 — not a fit that averages it with one across campus.
+   *
+   * Only counts when that plant is among the current results: a filter may
+   * have excluded it, and flying to a marker that is not drawn is worse than
+   * fitting the ones that are.
+   */
+  private exactTagMatch(query: string): Plant | null {
+    const id = accessionForTag(query);
+    if (!id) return null;
+    const plant = this.byId.get(id);
+    return plant && this.results.includes(plant) ? plant : null;
+  }
+
   // ---- URL state ---------------------------------------------------------
 
   private setUrlParam(key: string, value: string | null): void {
@@ -275,15 +317,11 @@ class App {
       if (e.key !== 'Enter') return;
       e.preventDefault();
       // The debounce may not have fired yet, so the filter is applied now
-      // rather than fitting the map to the previous query's results.
+      // rather than showing the previous query's results.
       clearTimeout(searchTimer);
       this.filters.q = search.value;
       this.refresh();
-      // Blurring is what actually lowers the keyboard. Only on the narrow
-      // layout: on a desktop there is nothing covering anything, and taking
-      // focus out of the box would just make refining a search a click longer.
-      if (window.matchMedia('(max-width: 48rem)').matches) search.blur();
-      this.map.fitTo(this.results);
+      this.revealResults(this.exactTagMatch(search.value));
     });
 
     $('#filters').addEventListener('change', (e) => {
@@ -361,7 +399,7 @@ class App {
       }
     });
 
-    $('#zoom-results').addEventListener('click', () => this.map.fitTo(this.results));
+    $('#zoom-results').addEventListener('click', () => this.revealResults(null));
 
     $('#export-csv').addEventListener('click', () => {
       const blob = new Blob([toCsv(this.results)], { type: 'text/csv;charset=utf-8' });
