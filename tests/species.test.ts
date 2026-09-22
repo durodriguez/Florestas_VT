@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildSpeciesLookup, classifyNames, normalizeName, resolveSpecies } from '../scripts/lib/species.mjs';
+import { buildSpeciesLookup, classifyNames, normalizeName, resolutionQuality, resolveSpecies } from '../scripts/lib/species.mjs';
 
 const taxa = [
   { taxon_id: 'pinus-strobus', scientific_name: 'Pinus strobus', common_name: 'Eastern white pine' },
@@ -95,5 +95,63 @@ describe('classifyNames', () => {
   it('keeps a blank alias out of the unknown pile', () => {
     const { lookup } = build();
     expect(classifyNames(['ID Needed'], lookup).unknown).toEqual([]);
+  });
+});
+
+describe('resolutionQuality', () => {
+  const taxaById = new Map<string, Record<string, string>>([
+    ['thuja-sp', { genus: 'Thuja', species: '', cultivar: '', infraspecific: '' }],
+    ['thuja-occidentalis', { genus: 'Thuja', species: 'occidentalis', cultivar: '', infraspecific: '' }],
+    ['thuja-green-giant', { genus: 'Thuja', species: '', cultivar: 'Green Giant', infraspecific: '' }],
+    ['tsuga-canadensis', { genus: 'Tsuga', species: 'canadensis', cultivar: '', infraspecific: '' }],
+  ]);
+  const assumed = new Map([['cedar', 'Chose Thuja over Juniperus']]);
+  const q = (name: string, id: string) => resolutionQuality(name, id, { taxaById, assumed });
+
+  it('calls a name the source actually gave exact', () => {
+    expect(q('White cedar', 'thuja-occidentalis').kind).toBe('exact');
+  });
+
+  it('calls a genus-deep resolution genus, and says nothing was invented', () => {
+    expect(q('Ash', 'thuja-sp').kind).toBe('genus');
+  });
+
+  it('does not call a named cultivar vague just because it has no species', () => {
+    // Thuja 'Green Giant' is a hybrid. Naming it is as specific as a species.
+    expect(q('Green Giant Arborvitae', 'thuja-green-giant').kind).toBe('exact');
+  });
+
+  it('calls a marked alias an assumption and carries the reason through', () => {
+    // This is the one that matters: "Cedar" resolved cleanly for 23 trees and
+    // counted toward "99.5% resolved" while being a choice nobody was shown.
+    expect(q('Cedar', 'thuja-sp')).toEqual({
+      kind: 'assumed', reason: 'Chose Thuja over Juniperus',
+    });
+  });
+
+  it('treats an assumption as an assumption even when the taxon is a species', () => {
+    expect(q('Cedar', 'tsuga-canadensis').kind).toBe('assumed');
+  });
+
+  it('falls back to exact rather than guessing when it has no tables', () => {
+    expect(resolutionQuality('Ash', 'thuja-sp', {}).kind).toBe('exact');
+  });
+});
+
+describe('buildSpeciesLookup assumptions', () => {
+  it('reads the assumed column, keyed the way names are looked up', () => {
+    const { assumed } = buildSpeciesLookup(
+      [{ taxon_id: 'thuja-sp', scientific_name: 'Thuja sp.', common_name: 'Arborvitae' }],
+      [{ alias: 'Cedar', taxon_id: 'thuja-sp', assumed: 'Chose Thuja over Juniperus' }],
+    );
+    expect(assumed.get('cedar')).toBe('Chose Thuja over Juniperus');
+  });
+
+  it('leaves an ordinary alias out of it', () => {
+    const { assumed } = buildSpeciesLookup(
+      [{ taxon_id: 'thuja-sp', scientific_name: 'Thuja sp.', common_name: 'Arborvitae' }],
+      [{ alias: 'Thuja', taxon_id: 'thuja-sp', note: 'just a name' }],
+    );
+    expect(assumed.size).toBe(0);
   });
 });

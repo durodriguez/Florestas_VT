@@ -76,3 +76,45 @@ export function describeDistance(hit: NearbyTree): string {
   const m = Math.round(hit.meters);
   return m < 2 ? `${m} m away` : `${m} m ${hit.heading}`;
 }
+
+/**
+ * The accession a metal tag number belongs to: tag 763 is `UVM-0763`.
+ *
+ * The same rule as `scripts/lib/arcgis.mjs`, restated because src/ is
+ * TypeScript compiled by Vite and scripts/ is Node .mjs with nothing in
+ * between. Four digits, because that is what the tags and the labels say.
+ */
+export function accessionForTag(tag: string): string | null {
+  const digits = tag.trim();
+  if (!/^\d{1,4}$/.test(digits)) return null;
+  return `UVM-${digits.padStart(4, '0')}`;
+}
+
+/**
+ * The mapped tree wearing this tag, if the current inventory has one.
+ *
+ * Checked before the 2014 file: 2,052 trees were surveyed in 2023-24 and the
+ * 2014 inventory knows nothing about the ones planted since. A surveyor typing
+ * a tag that exists should never be told there is no such tree.
+ */
+export function mappedByTag(tag: string, trees: MappedTree[]): MappedTree | undefined {
+  const id = accessionForTag(tag);
+  if (!id) return undefined;
+  return trees.find((t) => t.id === id);
+}
+
+/**
+ * Mapped trees with tags either side of the one typed, for a tag that has lost
+ * a digit to corrosion or bark. Same idea as the 2014 file's neighbours.
+ */
+export function mappedNeighbours(tag: string, trees: MappedTree[], span = 3): MappedTree[] {
+  const n = Number(tag.trim());
+  if (!Number.isInteger(n)) return [];
+  const out: MappedTree[] = [];
+  for (let i = n - span; i <= n + span; i++) {
+    if (i === n || i < 1) continue;
+    const hit = mappedByTag(String(i), trees);
+    if (hit) out.push(hit);
+  }
+  return out;
+}

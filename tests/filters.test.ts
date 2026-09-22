@@ -12,7 +12,7 @@ const taxon = (over: Partial<Taxon>): Taxon => ({
   cultivar: '', type: 'deciduous-tree', origin: 'vermont-native',
   flowerColor: '', flowerMonths: [], fruitColor: '', fruitMonths: [], fallColor: '',
   matureHeightFt: null, matureSpreadFt: null, bark: '', pests: '', soil: '',
-  zones: '', wikipedia: '', description: '', funFact: '', count: 0, ...over,
+  zones: '', wikipedia: '', description: '', funFact: '', alt: '', count: 0, ...over,
 });
 
 const dataset = {

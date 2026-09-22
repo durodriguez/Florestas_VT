@@ -44,8 +44,11 @@ Positions fall inside the campus boundary for all but 8 of them: 837 Central,
 `collection_id` rather than a guessed one.
 
 Species resolve at **99.5%** against `taxa.csv` — 128 of 129 names — because
-the alias table was built against this file before the import ran. See
-[DATA-MODEL.md](DATA-MODEL.md#species-aliasescsv).
+the alias table was built against this file before the import ran. That figure
+alone is misleading, so the import breaks it down: of the 2,051 records, **32
+were named by a judgement call** and **398 go no deeper than a genus**. Both
+are printed before anything that looks like good news. See
+[DATA-MODEL.md](DATA-MODEL.md#assumed-when-the-mapping-is-a-judgement-call).
 
 ## Accession numbers
 
@@ -98,6 +101,42 @@ That is one tree, and it needs somebody to walk out to it. Observation notes
 are internal — they are not sent to the browser at all — so a `SPECIES
 CONFLICT` marker never appears on a public record.
 
+## A finer identification is not a disagreement
+
+The layer records common names as the surveyor wrote them, and some are genus
+deep at best. "Cedar" resolves to `thuja-sp` — *Thuja*, species unstated —
+because in Vermont the word covers both northern white cedar (*Thuja
+occidentalis*) and eastern redcedar (*Juniperus virginiana*), which are not
+even the same genus. Picking Thuja was an assumption, recorded as one in
+`species-aliases.csv`.
+
+Tags **3235, 3236 and 3237** have since been identified from photographs as
+*Thuja occidentalis*: flat fan-like foliage sprays held in one plane, small
+upright woody cones rather than a juniper's fleshy blue ones, and no prickly
+juvenile needles anywhere. Their rows say `thuja-occidentalis`.
+
+The import treats that as a **refinement**, not a conflict, and reports it
+under its own heading. The two need opposite handling:
+
+- A **conflict** is a question for the field — the sources name different
+  things, and somebody has to go and look. It leaves a `SPECIES CONFLICT`
+  note on the tree.
+- A **refinement** is work already done — the source named a genus, and
+  somebody has since named the species inside it. It leaves no note, because
+  asking anyone to re-check a tree that was just checked is the opposite of
+  useful.
+
+The test is on the taxa themselves: same genus, species blank in the source
+and filled in ours. `thuja-sp` → `thuja-occidentalis` refines; `thuja-sp` →
+`juniperus-virginiana` does not, whatever the two share in common names.
+
+This will keep coming up. `Ash`, `Larch`, `Elm`, `Magnolia` and `Spirea` are
+all genus-only in the layer, and every one of them sharpens the first time
+somebody identifies a tree properly.
+
+**The other 20 cedars are still the assumption.** Three confirmed is three
+confirmed, not twenty-three.
+
 ## Running it again
 
 Safe, and verified on the real file: a second run reports **0 new plants, 0 new
@@ -116,6 +155,8 @@ untagged tree is recognised the second time — see
 - **The 15 flagged tags** — 8 disputed, 7 unreadable. `grep 'TAG ' data/observations.csv`
   lists them.
 - **The 10 skipped records** — 8 need identifying, 2 need a position.
+- **The 20 remaining `Cedar` records** — resolved to *Thuja* on an assumption,
+  with no evidence behind them. `grep -c ',thuja-sp,' data/plants.csv`.
 - **Trunk diameters.** The layer has none, so
   [to-do #7](TODO.md) (i-Tree ecosystem services) is still blocked. The 2014
   inventory holds a DBH for 950 of these trees, joinable by tag, but those

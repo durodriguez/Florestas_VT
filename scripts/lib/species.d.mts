@@ -9,7 +9,28 @@ export interface SpeciesLookup {
   lookup: Map<string, string | null>;
   conflicts: Array<{ alias: string; reason: string }>;
   byId: Map<string, Record<string, string>>;
+  /** Alias (normalized) -> why its mapping is a judgement call. */
+  assumed: Map<string, string>;
 }
+
+/**
+ * `exact` — the source named this taxon.
+ * `genus` — the source went no deeper than the genus; faithful, but vague.
+ * `assumed` — somebody chose between readings the source left open.
+ */
+export type ResolutionQuality =
+  | { kind: 'exact' }
+  | { kind: 'genus' }
+  | { kind: 'assumed'; reason: string };
+
+export declare function resolutionQuality(
+  name: unknown,
+  taxonId: string | null | undefined,
+  context?: {
+    taxaById?: Map<string, Record<string, string>>;
+    assumed?: Map<string, string>;
+  },
+): ResolutionQuality;
 
 export declare function buildSpeciesLookup(
   taxaRows: Array<Record<string, string>>,

@@ -1,12 +1,22 @@
 import { describe, it, expect } from 'vitest';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
-import { importArcgis, readTag, normalizeCondition, surveyDate, UNTAGGED_BLOCK_START } from '../scripts/lib/arcgis.mjs';
+import { importArcgis, readTag, normalizeCondition, surveyDate, isRefinement, UNTAGGED_BLOCK_START } from '../scripts/lib/arcgis.mjs';
 
 const lookup = new Map<string, string | null>([
   ['river birch', 'betula-nigra'],
   ['white pine', 'pinus-strobus'],
   ['swamp white oak', 'quercus-bicolor'],
   ['id needed', null],
+  ['cedar', 'thuja-sp'],
+]);
+
+// Only the columns isRefinement reads.
+const taxaById = new Map<string, Record<string, string>>([
+  ['thuja-sp', { genus: 'Thuja', species: '' }],
+  ['thuja-occidentalis', { genus: 'Thuja', species: 'occidentalis' }],
+  ['juniperus-virginiana', { genus: 'Juniperus', species: 'virginiana' }],
+  ['quercus-bicolor', { genus: 'Quercus', species: 'bicolor' }],
+  ['quercus-michauxii', { genus: 'Quercus', species: 'michauxii' }],
 ]);
 
 // Central Campus as a box big enough to hold the fixtures.
@@ -38,7 +48,7 @@ const feature = (over: Record<string, unknown> = {}, geom: number[] | null = [-7
 });
 
 const run = (features: unknown[], over: Record<string, unknown> = {}) =>
-  importArcgis({ features, speciesLookup: lookup, campusAreas, surveyor: 'EC', ...over });
+  importArcgis({ features, speciesLookup: lookup, taxaById, campusAreas, surveyor: 'EC', ...over });
 
 describe('readTag', () => {
   it('reads a plain number as a tag we can trust', () => {
@@ -79,6 +89,31 @@ describe('surveyDate', () => {
 
   it('gives back nothing rather than 1970 for a missing date', () => {
     expect(surveyDate(undefined)).toBe('');
+  });
+});
+
+describe('isRefinement', () => {
+  it('counts a species inside the genus the source named', () => {
+    // "Cedar" -> thuja-sp, later identified as Thuja occidentalis.
+    expect(isRefinement('thuja-sp', 'thuja-occidentalis', taxaById)).toBe(true);
+  });
+
+  it('does not count a different genus, however similar the common name', () => {
+    // Red cedar is a juniper. Sharing the word "cedar" makes it no less wrong.
+    expect(isRefinement('thuja-sp', 'juniperus-virginiana', taxaById)).toBe(false);
+  });
+
+  it('does not count two different species of one genus', () => {
+    expect(isRefinement('quercus-bicolor', 'quercus-michauxii', taxaById)).toBe(false);
+  });
+
+  it('does not count going the other way, from a species to a genus', () => {
+    expect(isRefinement('thuja-occidentalis', 'thuja-sp', taxaById)).toBe(false);
+  });
+
+  it('says no rather than guessing when a taxon is unknown', () => {
+    expect(isRefinement('thuja-sp', 'nothing-here', taxaById)).toBe(false);
+    expect(isRefinement('thuja-sp', 'thuja-occidentalis', undefined)).toBe(false);
   });
 });
 
@@ -153,6 +188,34 @@ describe('importArcgis', () => {
     expect(r.conflicts.map((c: any) => c.kind).sort()).toEqual(['position', 'species']);
     expect(r.observations[0].notes).toContain('SPECIES CONFLICT');
     expect(r.observations[0].notes).toContain('POSITION CONFLICT');
+  });
+
+  it('treats a finer identification as kept work, not a disagreement', () => {
+    // The real case: UVM-3235-3237, recorded as "Cedar" and since identified
+    // from photographs as northern white cedar.
+    const plants = [{
+      plant_id: 'UVM-3236', taxon_id: 'thuja-occidentalis',
+      lat: '44.482327', lng: '-73.195826',
+    }];
+    const r = run([feature({ Tag_ID: '3236', Species: 'Cedar' }, [-73.195826, 44.482327])], { plants });
+
+    expect(r.conflicts).toHaveLength(0);
+    expect(r.refinements).toHaveLength(1);
+    expect(r.refinements[0].plant_id).toBe('UVM-3236');
+    // Nothing for anybody to go and re-check, so no note on the tree.
+    expect(r.observations[0].notes).toBe('');
+  });
+
+  it('still calls a different genus a conflict, not a refinement', () => {
+    const plants = [{
+      plant_id: 'UVM-3236', taxon_id: 'juniperus-virginiana',
+      lat: '44.482327', lng: '-73.195826',
+    }];
+    const r = run([feature({ Tag_ID: '3236', Species: 'Cedar' }, [-73.195826, 44.482327])], { plants });
+
+    expect(r.refinements).toHaveLength(0);
+    expect(r.conflicts.map((c: any) => c.kind)).toEqual(['species']);
+    expect(r.observations[0].notes).toContain('SPECIES CONFLICT');
   });
 
   it('does not flag a position that agrees within a few metres', () => {

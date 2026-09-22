@@ -13,7 +13,7 @@
 // surveying — it is what a real inventory of a real campus looks like — but it
 // means an accession number cannot simply be the tag.
 
-import { resolveSpecies } from './species.mjs';
+import { resolveSpecies, resolutionQuality } from './species.mjs';
 import { campusAt } from './geo.mjs';
 import { CONDITIONS } from './vocab.mjs';
 
@@ -67,16 +67,40 @@ export function surveyDate(ms) {
 const coord = (n) => n.toFixed(6);
 
 /**
+ * True when the row on file names a species inside the genus the source only
+ * named. "Cedar" resolves to `thuja-sp`; a tree somebody has since identified
+ * as `thuja-occidentalis` does not disagree with that, it sharpens it.
+ *
+ * Worth separating, because the two need opposite handling: a disagreement is
+ * a question for the field, and a refinement is work already done. Reporting
+ * a refinement as a conflict would ask somebody to re-check a tree that has
+ * just been checked.
+ */
+export function isRefinement(sourceTaxonId, existingTaxonId, taxaById) {
+  const src = taxaById?.get(sourceTaxonId);
+  const cur = taxaById?.get(existingTaxonId);
+  if (!src || !cur) return false;
+  const genus = String(src.genus ?? '').trim().toLowerCase();
+  if (!genus || genus !== String(cur.genus ?? '').trim().toLowerCase()) return false;
+  // The source has to be the vaguer of the two: genus named, species blank.
+  return !String(src.species ?? '').trim() && Boolean(String(cur.species ?? '').trim());
+}
+
+/**
  * @param {object} args
  * @param {object[]} args.features       GeoJSON features from the ArcGIS layer
  * @param {object[]} args.plants         existing data/plants.csv rows
  * @param {object[]} args.observations   existing data/observations.csv rows
  * @param {Map} args.speciesLookup       from buildSpeciesLookup
+ * @param {Map} args.taxaById            taxa rows by id, for genus comparison
+ * @param {Map} args.assumed             alias -> why, from buildSpeciesLookup
  * @param {object} args.campusAreas      data/campus-areas.geojson
  * @param {string} args.surveyor         who to credit on the observations
  * @returns {{
  *   inserts: object[], observations: object[],
  *   conflicts: {plant_id: string, kind: string, message: string}[],
+ *   refinements: {plant_id: string, message: string}[],
+ *   inexact: {name: string, taxonId: string, kind: string, reason: string, records: number}[],
  *   skipped: {objectId: number, reason: string, detail: string}[],
  *   summary: object
  * }}
@@ -86,13 +110,20 @@ export function importArcgis({
   plants = [],
   observations = [],
   speciesLookup,
+  taxaById,
+  assumed,
   campusAreas,
   surveyor = '',
 }) {
   const inserts = [];
   const newObservations = [];
   const conflicts = [];
+  const refinements = [];
   const skipped = [];
+  // Names whose resolution was a judgement call or genus-deep at best, with
+  // how many trees rode in on each. Counted so the summary cannot report a
+  // guess as a clean resolve, which is how 23 cedars got named for them.
+  const inexact = new Map();
   let matched = 0;
 
   // Every accession already spoken for: rows on file, and rows this run has
@@ -157,6 +188,14 @@ export function importArcgis({
       continue;
     }
 
+    const q = resolutionQuality(rawSpecies, taxonId, { taxaById, assumed });
+    if (q.kind !== 'exact') {
+      const seen = inexact.get(rawSpecies)
+        ?? { name: rawSpecies, taxonId, kind: q.kind, reason: q.reason ?? '', records: 0 };
+      seen.records += 1;
+      inexact.set(rawSpecies, seen);
+    }
+
     const tag = readTag(p.Tag_ID);
     const sourceId = String(p.GlobalID ?? '').trim();
     const notes = [];
@@ -210,10 +249,20 @@ export function importArcgis({
       // disagreement is worth knowing about, and a report scrolls past. The
       // note rides on the observation, where it stays until somebody settles it.
       matched += 1;
-      if (String(existing.taxon_id).trim() !== taxonId) {
-        const message = `on file as ${existing.taxon_id}; ArcGIS says "${rawSpecies}" (${taxonId})`;
-        conflicts.push({ plant_id: plantId, kind: 'species', message });
-        notes.push(`SPECIES CONFLICT: ${message} — check in person`);
+      const onFileTaxon = String(existing.taxon_id).trim();
+      if (onFileTaxon !== taxonId) {
+        if (isRefinement(taxonId, onFileTaxon, taxaById)) {
+          // Not a disagreement. Say so, and leave no note on the tree: there
+          // is nothing here for anybody to go and check.
+          refinements.push({
+            plant_id: plantId,
+            message: `ArcGIS says "${rawSpecies}" (${taxonId}); identified here as ${onFileTaxon}`,
+          });
+        } else {
+          const message = `on file as ${onFileTaxon}; ArcGIS says "${rawSpecies}" (${taxonId})`;
+          conflicts.push({ plant_id: plantId, kind: 'species', message });
+          notes.push(`SPECIES CONFLICT: ${message} — check in person`);
+        }
       }
       const away = distanceMeters(Number(existing.lat), Number(existing.lng), lat, lng);
       if (away > POSITION_CONFLICT_M) {
@@ -262,6 +311,8 @@ export function importArcgis({
     inserts,
     observations: newObservations,
     conflicts,
+    refinements,
+    inexact: [...inexact.values()].sort((x, y) => y.records - x.records),
     skipped,
     summary: {
       read: features.length,
@@ -272,6 +323,11 @@ export function importArcgis({
       untagged: nextUntagged - UNTAGGED_BLOCK_START,
       skipped: skipped.length,
       conflicts: conflicts.length,
+      refinements: refinements.length,
+      assumedRecords: [...inexact.values()].filter((x) => x.kind === 'assumed')
+        .reduce((n, x) => n + x.records, 0),
+      genusRecords: [...inexact.values()].filter((x) => x.kind === 'genus')
+        .reduce((n, x) => n + x.records, 0),
       noCollection: inserts.filter((r) => !r.collection_id).length,
     },
   };

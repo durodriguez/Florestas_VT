@@ -59,6 +59,12 @@ export interface Taxon {
   description: string;
   /** One line about the species, shown on every plant of it. */
   funFact: string;
+  /**
+   * Other names this taxon answers to, lowercased and space-joined, from
+   * species-aliases.csv. Feeds the search haystack and nothing else — it is an
+   * index, not a synonym list for reading.
+   */
+  alt: string;
   count: number;
 }
 

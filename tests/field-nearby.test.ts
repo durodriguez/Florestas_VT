@@ -1,6 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { bearingDegrees, compassPoint, distanceMeters } from '../src/geo';
-import { describeDistance, nearbyTrees, type MappedTree } from '../src/field/nearby';
+import {
+  accessionForTag, describeDistance, mappedByTag, mappedNeighbours, nearbyTrees,
+  type MappedTree,
+} from '../src/field/nearby';
 
 /** A metre of latitude is about 1/111111 of a degree at this latitude. */
 const M = 1 / 111111;
@@ -112,5 +115,72 @@ describe('distanceMeters still behaves after the move to src/geo', () => {
     const a = distanceMeters(44.4779, -73.1955, 44.4716, -73.1971);
     const b = distanceMeters(44.4716, -73.1971, 44.4779, -73.1955);
     expect(a).toBeCloseTo(b, 6);
+  });
+});
+
+describe('accessionForTag', () => {
+  it('pads a tag to the four digits the labels use', () => {
+    expect(accessionForTag('763')).toBe('UVM-0763');
+    expect(accessionForTag('3235')).toBe('UVM-3235');
+    expect(accessionForTag('1')).toBe('UVM-0001');
+    expect(accessionForTag(' 763 ')).toBe('UVM-0763');
+  });
+
+  it('refuses anything that is not a tag number', () => {
+    expect(accessionForTag('')).toBeNull();
+    expect(accessionForTag('Young')).toBeNull();
+    expect(accessionForTag('1818 or 1942')).toBeNull();
+    expect(accessionForTag('12345')).toBeNull();
+  });
+});
+
+describe('mappedByTag', () => {
+  const trees = [
+    { id: 'UVM-3235', lat: 44.4823, lng: -73.1958, common: 'Northern white cedar', sci: 'Thuja occidentalis', surveyed: '2023-11-10' },
+    { id: 'UVM-3236', lat: 44.4823, lng: -73.1958, common: 'Northern white cedar', sci: 'Thuja occidentalis', surveyed: '2023-11-10' },
+    { id: 'UVM-0763', lat: 44.4760, lng: -73.1950, common: 'River birch', sci: 'Betula nigra', surveyed: '2026-09-01' },
+    { id: 'UVM-4001', lat: 44.4700, lng: -73.1990, common: 'Norway maple', sci: 'Acer platanoides', surveyed: null },
+  ];
+
+  it('finds a tag the 2014 inventory never had', () => {
+    // The bug this fixes: 3235 was surveyed in 2023 and the app said no such
+    // tree, because it only ever asked the 2014 file.
+    expect(mappedByTag('3235', trees)?.sci).toBe('Thuja occidentalis');
+  });
+
+  it('finds a tag whatever padding it is typed with', () => {
+    expect(mappedByTag('763', trees)?.id).toBe('UVM-0763');
+    expect(mappedByTag('0763', trees)?.id).toBe('UVM-0763');
+  });
+
+  it('gives back nothing for a tag on no record', () => {
+    expect(mappedByTag('9999', trees)).toBeUndefined();
+    expect(mappedByTag('Young', trees)).toBeUndefined();
+  });
+
+  it('finds a record with no survey behind it', () => {
+    // A tree somebody plotted but nobody has measured is a normal record.
+    expect(mappedByTag('4001', trees)?.surveyed).toBeNull();
+  });
+});
+
+describe('mappedNeighbours', () => {
+  const trees = [
+    { id: 'UVM-3234', lat: 0, lng: 0, common: 'Sugar maple', sci: 'Acer saccharum', surveyed: null },
+    { id: 'UVM-3236', lat: 0, lng: 0, common: 'Northern white cedar', sci: 'Thuja occidentalis', surveyed: null },
+    { id: 'UVM-3299', lat: 0, lng: 0, common: 'Red oak', sci: 'Quercus rubra', surveyed: null },
+  ];
+
+  it('offers the tags either side, for a tag that has lost a digit', () => {
+    const ids = mappedNeighbours('3235', trees).map((t) => t.id);
+    expect(ids).toEqual(['UVM-3234', 'UVM-3236']);
+  });
+
+  it('leaves out anything outside the span', () => {
+    expect(mappedNeighbours('3235', trees).map((t) => t.id)).not.toContain('UVM-3299');
+  });
+
+  it('offers nothing for a tag that is not a number', () => {
+    expect(mappedNeighbours('Young', trees)).toEqual([]);
   });
 });

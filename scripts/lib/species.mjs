@@ -48,6 +48,9 @@ export function buildSpeciesLookup(taxaRows, aliasRows = []) {
   const byId = new Map();
   const lookup = new Map();
   const conflicts = [];
+  // Aliases whose mapping is a judgement call, keyed the way names are looked
+  // up. Read here so nothing else has to know the column exists.
+  const assumed = new Map();
 
   for (const row of taxaRows) {
     const id = String(row.taxon_id ?? '').trim();
@@ -74,9 +77,38 @@ export function buildSpeciesLookup(taxaRows, aliasRows = []) {
       continue;
     }
     lookup.set(key, id);
+    const why = String(row.assumed ?? '').trim();
+    if (why) assumed.set(key, why);
   }
 
-  return { lookup, conflicts, byId };
+  return { lookup, conflicts, byId, assumed };
+}
+
+/**
+ * How much of a resolution is reading and how much is judgement. The three
+ * need saying apart, because a report that counts them together lets a guess
+ * pass as a fact — which is exactly how 23 trees became arborvitae without
+ * anybody being asked.
+ *
+ * - `exact`   the source named this taxon; nothing was decided here.
+ * - `genus`   the source named a genus and the taxon is that genus, no more.
+ *             Vaguer than a species, but faithful — no information invented.
+ *             A named cultivar is not this, even with no species epithet.
+ * - `assumed` somebody chose between readings the source left open. The
+ *             reason comes from the `assumed` column of species-aliases.csv.
+ */
+export function resolutionQuality(name, taxonId, { taxaById, assumed } = {}) {
+  const reason = assumed?.get(normalizeName(name));
+  if (reason) return { kind: 'assumed', reason };
+  const taxon = taxaById?.get(taxonId);
+  // Species blank is not enough on its own: Thuja 'Green Giant' is a hybrid
+  // cultivar with no species epithet, and naming it is as specific as naming
+  // a species. Vague means nothing below the genus at all.
+  if (taxon
+    && !String(taxon.species ?? '').trim()
+    && !String(taxon.cultivar ?? '').trim()
+    && !String(taxon.infraspecific ?? '').trim()) return { kind: 'genus' };
+  return { kind: 'exact' };
 }
 
 /**

@@ -16,7 +16,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Papa from 'papaparse';
-import { buildSpeciesLookup, classifyNames } from './lib/species.mjs';
+import { buildSpeciesLookup, classifyNames, resolutionQuality } from './lib/species.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const [file, column] = process.argv.slice(2);
@@ -34,7 +34,7 @@ const csv = (path) => Papa.parse(readFileSync(path, 'utf8'), {
   transformHeader: (h) => h.trim().replace(/^﻿/, ''),
 }).data;
 
-const { lookup, conflicts } = buildSpeciesLookup(
+const { lookup, conflicts, byId, assumed } = buildSpeciesLookup(
   csv(join(root, 'data', 'taxa.csv')),
   csv(join(root, 'data', 'species-aliases.csv')),
 );
@@ -97,9 +97,37 @@ const records = (names) => names.reduce((sum, n) => sum + (counts.get(n) ?? 0), 
 const pct = (n) => `${((n / rows.length) * 100).toFixed(1)}%`;
 
 console.log(`\n${file} · column "${field}"${column ? '' : ' (chosen as the best-resolving)'} · ${rows.length} rows, ${counts.size} distinct names\n`);
+// A resolved name is not automatically a known name. Splitting the total is
+// the whole point: a single "99.5% resolved" figure hid 23 trees that were
+// resolved by choosing a genus for them.
+const quality = { exact: [], genus: [], assumed: [] };
+const reasons = new Map();
+for (const [name, taxonId] of resolved) {
+  const q = resolutionQuality(name, taxonId, { taxaById: byId, assumed });
+  quality[q.kind].push(name);
+  if (q.reason) reasons.set(name, q.reason);
+}
+
 console.log(`  resolved             ${String(resolved.size).padStart(4)} names  ${String(records([...resolved.keys()])).padStart(6)} records  ${pct(records([...resolved.keys()]))}`);
+console.log(`    of which exact     ${String(quality.exact.length).padStart(4)} names  ${String(records(quality.exact)).padStart(6)} records`);
+console.log(`    genus only        ${String(quality.genus.length).padStart(5)} names  ${String(records(quality.genus)).padStart(6)} records`);
+console.log(`    by assumption     ${String(quality.assumed.length).padStart(5)} names  ${String(records(quality.assumed)).padStart(6)} records`);
 console.log(`  known unresolvable   ${String(unresolved.length).padStart(4)} names  ${String(records(unresolved)).padStart(6)} records`);
 console.log(`  not yet seen         ${String(unknown.length).padStart(4)} names  ${String(records(unknown)).padStart(6)} records`);
+
+if (quality.assumed.length) {
+  console.log('\nResolved by assumption — somebody chose between readings the source left open:');
+  for (const n of quality.assumed.sort((a, b) => (counts.get(b) ?? 0) - (counts.get(a) ?? 0))) {
+    console.log(`  ${String(counts.get(n)).padStart(5)}  ${n} -> ${resolved.get(n)}`);
+    console.log(`         ${reasons.get(n)}`);
+  }
+}
+if (quality.genus.length) {
+  console.log('\nGenus only — faithful to the source, but no species was named:');
+  for (const n of quality.genus.sort((a, b) => (counts.get(b) ?? 0) - (counts.get(a) ?? 0))) {
+    console.log(`  ${String(counts.get(n)).padStart(5)}  ${n} -> ${resolved.get(n)}`);
+  }
+}
 
 if (unresolved.length) {
   console.log('\nDeliberately unresolved (a blank taxon_id in species-aliases.csv):');
