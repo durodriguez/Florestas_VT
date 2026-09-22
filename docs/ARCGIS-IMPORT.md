@@ -44,8 +44,11 @@ Positions fall inside the campus boundary for all but 8 of them: 837 Central,
 `collection_id` rather than a guessed one.
 
 Species resolve at **99.5%** against `taxa.csv` — 128 of 129 names — because
-the alias table was built against this file before the import ran. See
-[DATA-MODEL.md](DATA-MODEL.md#species-aliasescsv).
+the alias table was built against this file before the import ran. That figure
+alone is misleading, so the import breaks it down: of the 2,051 records, **32
+were named by a judgement call** and **398 go no deeper than a genus**. Both
+are printed before anything that looks like good news. See
+[DATA-MODEL.md](DATA-MODEL.md#assumed-when-the-mapping-is-a-judgement-call).
 
 ## Accession numbers
 

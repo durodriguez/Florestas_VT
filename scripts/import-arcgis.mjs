@@ -54,6 +54,7 @@ const result = importArcgis({
   observations: observations.rows,
   speciesLookup: species.lookup,
   taxaById: species.byId,
+  assumed: species.assumed,
   campusAreas,
   surveyor,
 });
@@ -67,6 +68,23 @@ console.log(`  new observations    ${s.observed}`);
 console.log(`  already on file     ${s.matchedExisting} matched an accession we already had`);
 console.log(`  tagged / untagged   ${s.tagged} kept their tag number, ${s.untagged} issued from the new block`);
 if (s.noCollection) console.log(`  outside the boundary ${s.noCollection} plants have no campus area`);
+
+// Printed before anything else that looks like good news. A species name is
+// the one field on a public record that nobody can check by eye, so where it
+// came from a judgement rather than the source has to be visible.
+const assumedNames = result.inexact.filter((x) => x.kind === 'assumed');
+if (assumedNames.length) {
+  console.log(`\nResolved by assumption — ${s.assumedRecords} trees, named by a judgement call:`);
+  for (const x of assumedNames) {
+    console.log(`  ${String(x.records).padStart(5)}  "${x.name}" -> ${x.taxonId}`);
+    console.log(`         ${x.reason}`);
+  }
+}
+const genusNames = result.inexact.filter((x) => x.kind === 'genus');
+if (genusNames.length) {
+  console.log(`\nGenus only — ${s.genusRecords} trees the source never named a species for:`);
+  for (const x of genusNames) console.log(`  ${String(x.records).padStart(5)}  "${x.name}" -> ${x.taxonId}`);
+}
 
 if (result.skipped.length) {
   console.log(`\nSkipped ${result.skipped.length} — a tree needs a species before it can have a record:`);

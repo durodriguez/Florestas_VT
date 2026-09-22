@@ -277,7 +277,7 @@ area. Run it after an import, or after the campus boundaries change.
 
 ## species-aliases.csv
 
-`alias`, `taxon_id`, `note`.
+`alias`, `taxon_id`, `note`, `assumed`.
 
 Every source of plant records writes species names as prose. UVM's ArcGIS layer
 holds "White pine", "Musclewood", "Northern Katalpa" and both "Scots pine" and
@@ -310,6 +310,66 @@ yet. The three outcomes are different and an importer treats them differently:
 **Canonical names always win.** An alias that contradicts `taxa.csv` is a
 mistake in the alias file, and `npm run data` fails on it rather than letting
 it quietly override the real name. Two aliases fighting over one name fail too.
+
+### assumed: when the mapping is a judgement call
+
+**`assumed` holds the assumption in words, and is blank when there isn't one.**
+Its presence *is* the flag — there is no separate boolean, for the same reason
+[dedications](#dedications) have no `is_dedicated` column: two fields that must
+agree are where a hand-edited CSV drifts.
+
+Most aliases are a faithful reading of a messy name. A few are not. "Cedar" in
+Vermont covers northern white cedar (*Thuja occidentalis*) and eastern redcedar
+(*Juniperus virginiana*), which are different genera — mapping it to `thuja-sp`
+was somebody's choice, not the source's statement. Three aliases are marked
+this way today: `Cedar`, `Hemlock` and `Lilac`.
+
+This exists because of a specific failure. The bare word "Cedar" resolved
+cleanly for 23 trees, so it counted toward a reported **"99.5% of names
+resolved"** and appeared on no list of things to check. A guess that resolves
+is indistinguishable from a fact in a total. The reports now split it:
+
+```
+  resolved              128 names    2051 records  99.5%
+    of which exact      113 names    1621 records
+    genus only           12 names     398 records
+    by assumption         3 names      32 records
+```
+
+`resolutionQuality()` decides which, and the three mean different things:
+
+| Kind | Meaning |
+| --- | --- |
+| `exact` | the source named this taxon; nothing was decided here |
+| `genus` | the source went no deeper than the genus, and neither did we — vague, but faithful |
+| `assumed` | somebody chose between readings the source left open, and `assumed` says what they chose |
+
+A **named cultivar is `exact`**, even with no species epithet: *Thuja*
+'Green Giant' is a hybrid, and naming it is as specific as naming a species.
+Only nothing-below-the-genus counts as vague.
+
+Both `npm run check:species` and `npm run import:arcgis` print the assumptions
+before anything that looks like good news. A species name is the one field on
+a public record that a visitor cannot check by eye.
+
+### Aliases feed the search box
+
+A visitor searches for the name they know, which is often not the name on
+display: this tree is "northern white cedar" on the map and "arborvitae" at
+every nursery in the state. So `npm run data` copies each taxon's aliases onto
+it as `alt`, and the map's search haystack includes them.
+
+Two things it deliberately is not:
+
+- **Not rendered.** Nothing displays `alt`. A folded cultivar name must never
+  appear as though it were the species.
+- **Not padding.** An alias the common or scientific name already contains is
+  skipped, so the payload only carries names that add a way to find a plant.
+
+Renaming a `common_name` therefore needs care: it is itself a resolution key.
+When *Thuja occidentalis* was renamed from "Eastern arborvitae" to "Northern
+white cedar", the old name had to become an alias — nothing else resolved it,
+and dropping it would have silently broken every source that used it.
 
 ### Checking a source before importing it
 

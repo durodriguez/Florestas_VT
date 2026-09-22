@@ -137,6 +137,9 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       wikipedia: trim(row.wikipedia_url),
       description: trim(row.description),
       funFact: trim(row.fun_fact),
+      // Other names this taxon answers to, for the map's search box only.
+      // Filled from species-aliases.csv below; never rendered.
+      alt: '',
       count: 0, // filled in below
     });
   });
@@ -382,6 +385,26 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
   for (const c of conflicts) {
     err('species-aliases.csv', `alias "${c.alias}": ${c.reason}`);
   }
+  // A visitor searches for the name they know, which is often not the name on
+  // display: this tree is "northern white cedar" here and "arborvitae" to a
+  // nursery. The alias table already holds every name the sources use, so the
+  // search box may as well read from it. Search text only — nothing renders it,
+  // so a folded cultivar name never appears as though it were the species.
+  for (const row of aliasRows) {
+    const alias = trim(row.alias);
+    const aliasTaxon = trim(row.taxon_id);
+    // A blank taxon_id is a deliberate "not a species" and resolves to nothing.
+    if (!alias || !aliasTaxon) continue;
+    const idx = taxonIndex.get(aliasTaxon);
+    if (idx === undefined) continue; // already reported above
+    const taxon = taxa[idx];
+    const key = alias.toLowerCase();
+    // Skip whatever the displayed names already match, so the payload carries
+    // only names that add a way to find the plant.
+    if (`${taxon.common} ${taxon.sci}`.toLowerCase().includes(key)) continue;
+    taxon.alt = taxon.alt ? `${taxon.alt} ${key}` : key;
+  }
+
   const aliasCount = aliasRows.filter((r) => trim(r.alias)).length;
 
   // ---- campus areas ------------------------------------------------------

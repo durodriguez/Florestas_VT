@@ -94,6 +94,7 @@ export function expandPlants(file: PlantsFile, dataset: Dataset): Plant[] {
       taxon.family,
       taxon.genus,
       taxon.cultivar,
+      taxon.alt,
       collection?.name ?? '',
       plant.dedicationLabel ?? '',
       plant.story ?? '',

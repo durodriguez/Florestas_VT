@@ -470,3 +470,38 @@ describe('campus areas', () => {
     expect(build({ campusAreas: area({}, multi) }).errors.join(' ')).toMatch(/not closed/);
   });
 });
+
+describe('alias search terms', () => {
+  const aliases = [
+    { alias: 'Eastern arborvitae', taxon_id: 'acer-saccharum' },
+    { alias: 'Sugar maple', taxon_id: 'acer-saccharum' },   // already the common name
+    { alias: 'Acer saccharum', taxon_id: 'acer-saccharum' }, // already the sci name
+    { alias: 'ID Needed', taxon_id: '' },                    // deliberate non-resolve
+    { alias: 'Ghost', taxon_id: 'no-such-taxon' },
+  ];
+
+  it('carries a name the displayed ones do not cover', () => {
+    const r = buildDataset({
+      taxaRows: [taxon()], plantRows: [], collectionRows: [collection],
+      aliasRows: aliases, config,
+    });
+    expect(r.dataset.taxa[0].alt).toBe('eastern arborvitae');
+  });
+
+  it('leaves out names the common or scientific name already matches', () => {
+    const r = buildDataset({
+      taxaRows: [taxon()], plantRows: [], collectionRows: [collection],
+      aliasRows: aliases, config,
+    });
+    // Nothing gained by storing a word the haystack already contains.
+    expect(r.dataset.taxa[0].alt).not.toContain('sugar maple');
+    expect(r.dataset.taxa[0].alt).not.toContain('acer saccharum');
+  });
+
+  it('gives every taxon the field, so the shape never varies', () => {
+    const r = buildDataset({
+      taxaRows: [taxon()], plantRows: [], collectionRows: [collection], config,
+    });
+    expect(r.dataset.taxa[0].alt).toBe('');
+  });
+});
