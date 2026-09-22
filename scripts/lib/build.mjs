@@ -6,6 +6,7 @@ import {
   TAXON_REQUIRED, PLANT_REQUIRED, OBSERVATION_REQUIRED,
   TAXON_NUMERIC, PLANT_NUMERIC, OBSERVATION_NUMERIC,
   OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS,
+  CITY_TREE_FIELDS,
 } from './vocab.mjs';
 import { buildSpeciesLookup } from './species.mjs';
 
@@ -50,7 +51,7 @@ function inBounds(lat, lng, config) {
   return lat >= south && lat <= north && lng >= west && lng <= east;
 }
 
-export function buildDataset({ taxaRows, plantRows, observationRows = [], collectionRows, trails, campusAreas, aliasRows = [], config }) {
+export function buildDataset({ taxaRows, plantRows, observationRows = [], collectionRows, trails, campusAreas, aliasRows = [], cityTreeRows = [], config }) {
   const errors = [];
   const warnings = [];
   const err = (where, msg) => errors.push(`${where}: ${msg}`);
@@ -491,6 +492,46 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     );
   }
 
+  // ---- Burlington's street trees ------------------------------------------
+  // Validated like everything else, but kept in their own array rather than
+  // folded into plants: `plants` means the UVM collection, and every count,
+  // facet and CSV export in the app takes that literally. A city tree that
+  // slipped into that list would be claimed by the university on a page that
+  // says so.
+  const cityTrees = [];
+  cityTreeRows.forEach((row, i) => {
+    const where = `city-trees.csv row ${i + 2}`;
+    const id = trim(row.city_id);
+    if (!id) return err(where, 'missing city_id');
+    const taxonIdx = taxonIndex.get(trim(row.taxon_id));
+    if (taxonIdx === undefined) {
+      return err(where, `taxon_id "${row.taxon_id}" has no matching row in taxa.csv`);
+    }
+    const lat = num(row.lat);
+    const lng = num(row.lng);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return err(where, 'lat/lng is not a number');
+    const condition = trim(row.condition);
+    if (condition && !CONDITIONS.includes(condition)) {
+      return err(where, `condition "${condition}" is not one of: ${CONDITIONS.join(', ')}`);
+    }
+    const collectionId = trim(row.collection_id);
+    if (collectionId && !collectionIndex.has(collectionId)) {
+      return err(where, `collection_id "${collectionId}" has no matching row in collections.csv`);
+    }
+    cityTrees.push([
+      id,
+      taxonIdx,
+      Number(lat.toFixed(6)),
+      Number(lng.toFixed(6)),
+      collectionId ? collectionIndex.get(collectionId) : -1,
+      num(row.dbh_in) ?? null,
+      condition ? CONDITIONS.indexOf(condition) : -1,
+      num(row.planted_year) ?? null,
+      trim(row.address),
+    ]);
+    return undefined;
+  });
+
   const dataset = {
     generatedAt: new Date().toISOString(),
     config,
@@ -504,6 +545,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     taxa,
     trails: { type: 'FeatureCollection', features: trailFeatures },
     campusAreas: { type: 'FeatureCollection', features: areaFeatures },
+    cityTrees: { fields: CITY_TREE_FIELDS, rows: cityTrees },
     counts: {
       taxa: taxa.length,
       plants: plantRowsOut.length,
@@ -515,6 +557,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       trails: trailFeatures.length,
       campusAreas: areaFeatures.length,
       aliases: aliasCount,
+      cityTrees: cityTrees.length,
     },
   };
 

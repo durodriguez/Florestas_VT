@@ -17,7 +17,8 @@
     "import": "node scripts/import-survey.mjs",
     "areas": "node scripts/assign-collections.mjs",
     "check:species": "node scripts/check-species.mjs",
-    "import:arcgis": "node scripts/import-arcgis.mjs"
+    "import:arcgis": "node scripts/import-arcgis.mjs",
+    "import:city": "node scripts/import-city-trees.mjs"
   },
   "dependencies": {
     "jszip": "^3.10.1",

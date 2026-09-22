@@ -4,9 +4,9 @@ Recorded 11 September 2026, from a list you sent. Nothing here is built yet —
 this file exists so none of it gets lost. Each item has the ask, then what I'd
 suggest and what it would cost.
 
-Roughly in the order I'd do them: 7, 10 and 12 are the big ones.
+Roughly in the order I'd do them: 7 and 10 are what is left of the big ones.
 
-**1, 2, 3, 4, 5, 6, 8 and 11 are done** — marked below. **10 is part done.**
+**1, 2, 3, 4, 5, 6, 8, 11 and 12 are done** — marked below. **10 is part done.**
 
 The ArcGIS import landed on 21 September 2026 and moved three of these: it
 settled the numbering question at the heart of **9**, it left **7** blocked for
@@ -442,7 +442,7 @@ rather than cached on `plants.csv`. Deriving cannot drift; caching would make
 query gets slow, which at 2,061 rows it will not.
 
 
-## 12. Burlington's street trees, inside the campus boundary
+## 12. Burlington's street trees, inside the campus boundary — ✅ done, 22 September 2026
 
 **Ask.** Take the Burlington tree inventory, keep the trees that fall inside the
 campus boundary, and show them on the map — **off by default**, behind a filter
@@ -522,6 +522,42 @@ and expect to refresh it rather than maintain it.
 **Cost.** Medium. The clip, the merge and the filter are each small and the
 species check is a script that exists. The work is in the decisions above and in
 verifying the clip along the streets you actually care about.
+
+**Built.** 335 of Burlington's 14,429 street trees stand inside the campus
+boundary — Main St (155), South Prospect (58), South Williams (49), Colchester
+Ave (46), East Ave, College St, Summit St. On the map behind **Show Burlington
+street trees**, off by default, in Burlington's flag blue with white edges
+against UVM's green and gold. `?city=1` shares the view. Full write-up in
+[CITY-TREES.md](CITY-TREES.md).
+
+The separation went further than a `source` field, and is better for it. City
+trees live in `data/city-trees.csv` with `BTV-` ids and travel to the browser as
+their own array, so the map still reports **2,052 plants** with the layer on and
+`npm run labels` could not print a label for a city tree if it tried. The
+prediction in the ask — that two independent reasons would land on the same
+structure — held.
+
+Three things that were not obvious going in:
+
+- **The positions are not in degrees.** Burlington publishes NAD83 / Vermont
+  State Plane in *US survey feet*, and there is no projection library here. The
+  inverse Transverse Mercator is written out in `scripts/lib/vtsp.mjs` and
+  checked at the projection origin, against 68 rows that carry metres as well as
+  feet (67 agree to a centimetre), and against the street names the clip lands
+  on. Using the international foot instead would have put every tree 4 m out.
+- **63 of the 398 records inside the boundary are not trees** — stumps,
+  removals and vacant planting sites. The `site_typ` codes are undocumented, so
+  only `T` is imported and the reading is written down where somebody can
+  correct it.
+- **Species needed nothing.** 335 of 335 resolved, because the alias table was
+  built against this file months ago. The one genuine surprise was how much the
+  earlier groundwork paid off.
+
+**And a windfall:** every one of the 335 carries a trunk diameter, which is more
+than the university's own 2,052 records manage. That does not unblock #7 — city
+trees are not UVM's to report ecosystem services for — but it does mean the
+mechanism could be built and tested against real measurements before UVM has
+any.
 
 ---
 

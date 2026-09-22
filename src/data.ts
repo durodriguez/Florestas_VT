@@ -1,4 +1,4 @@
-import type { Dataset, Observation, Plant, Taxon, Collection } from './types';
+import type { CityTree, Dataset, Observation, Plant, Taxon, Collection } from './types';
 
 interface PlantsFile {
   fields: string[];
@@ -126,4 +126,48 @@ function assertOk(name: string) {
     }
     return res.json();
   };
+}
+
+/**
+ * Burlington's street trees, from the compact rows into usable objects.
+ *
+ * Deliberately a separate function from expandPlants rather than a shared one
+ * with optional fields: these two things are not the same kind of record, and
+ * a single expander would be the first step towards treating them as if they
+ * were.
+ */
+export function expandCityTrees(dataset: Dataset): CityTree[] {
+  const { fields, rows } = dataset.cityTrees ?? { fields: [], rows: [] };
+  const col = Object.fromEntries(fields.map((f, i) => [f, i])) as Record<string, number>;
+  const at = (row: unknown[], field: string) => row[col[field]!];
+  const { conditions } = dataset.vocab;
+
+  return rows.map((row) => {
+    const taxon = dataset.taxa[at(row, 'taxon') as number]!;
+    const collectionIdx = at(row, 'collection') as number;
+    const conditionIdx = at(row, 'condition') as number;
+    const tree: CityTree = {
+      id: at(row, 'city_id') as string,
+      lat: at(row, 'lat') as number,
+      lng: at(row, 'lng') as number,
+      taxon,
+      collection: collectionIdx >= 0 ? dataset.collections[collectionIdx]! : null,
+      dbhIn: (at(row, 'dbhIn') as number | null) ?? null,
+      condition: conditionIdx >= 0 ? conditions[conditionIdx]! : '',
+      plantedYear: (at(row, 'plantedYear') as number | null) ?? null,
+      address: (at(row, 'address') as string) ?? '',
+      search: '',
+    };
+    tree.search = [
+      tree.id,
+      taxon.common,
+      taxon.sci,
+      taxon.family,
+      taxon.genus,
+      taxon.alt,
+      tree.address,
+      tree.collection?.name ?? '',
+    ].join(' ').toLowerCase();
+    return tree;
+  });
 }

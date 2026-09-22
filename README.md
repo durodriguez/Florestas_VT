@@ -53,6 +53,14 @@ table listing only what is actually recorded, photos of that species taken on
 campus, and how many are mapped and where. A plant record links out to its
 species page; the species page links back to the map filtered to that species.
 
+**Burlington street trees** — 335 of the city's street trees stand inside the
+campus boundary, on Main Street, College Street, Colchester Avenue and the rest.
+They are on the map behind **Show Burlington street trees**, off by default, in
+Burlington's flag blue and white against UVM's green and gold. They are kept
+structurally separate from the collection — their own file, their own `BTV-` ids,
+their own array in the payload — because they are the city's trees, not the
+university's. See [docs/CITY-TREES.md](docs/CITY-TREES.md).
+
 **QR labels** — `npm run labels` generates a printable label sheet and
 individual QR SVGs. Each code encodes `?plant=<accession>`, so scanning a sign
 on a tree opens that record. Removed plants still resolve from their old
@@ -99,6 +107,7 @@ outdoors. Keyboard accessible; `/` focuses search, `Escape` closes a record.
 
 ```
 data/*.csv          the source of truth — humans edit these
+                    (except city-trees.csv, which is clipped from the city's)
   ↓ npm run data    validates every row, fails loudly on bad data
 public/data/*.json  compact generated files the site loads
 public/species/     a static page per species, generated at the same time
@@ -116,6 +125,7 @@ species never reaches the live site.
 | **Campus boundaries & the tracer** | [docs/CAMPUS-AREAS.md](docs/CAMPUS-AREAS.md) |
 | **Surveying and mapping trees** | [docs/FIELD-SURVEY.md](docs/FIELD-SURVEY.md) |
 | **The ArcGIS import** | [docs/ARCGIS-IMPORT.md](docs/ARCGIS-IMPORT.md) |
+| **Burlington's street trees** | [docs/CITY-TREES.md](docs/CITY-TREES.md) |
 | **The field survey app** | [docs/FIELD-APP.md](docs/FIELD-APP.md) |
 | **Hosting, domains, scaling** | [docs/DEPLOY.md](docs/DEPLOY.md) |
 | **What's planned next** | [docs/TODO.md](docs/TODO.md) |
@@ -129,6 +139,7 @@ species never reaches the live site.
 | `npm run build` | Validate, typecheck and build to `dist/` |
 | `npm run import -- <file.csv>` | Merge a field-survey export into `data/plants.csv` and `data/observations.csv` (dry run by default) |
 | `npm run import:arcgis -- <layer.geojson>` | Load UVM's ArcGIS tree layer (dry run by default) |
+| `npm run import:city -- <file.csv>` | Clip Burlington's street-tree inventory to campus (dry run by default) |
 | `npm run areas` | File each plant under the campus area its coordinates fall in (dry run by default) |
 | `npm run check:species -- <file>` | Report how a source file's species names resolve against `taxa.csv` |
 | `npm run labels` | Generate QR label sheet and SVGs into `public/labels/` |
