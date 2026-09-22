@@ -7,6 +7,7 @@ suggest and what it would cost.
 Roughly in the order I'd do them: 7 and 10 are what is left of the big ones.
 
 **1, 2, 3, 4, 5, 6, 8, 11 and 12 are done** — marked below. **10 is part done.**
+**13 was added on 22 September 2026** and is a question before it is a change.
 
 The ArcGIS import landed on 21 September 2026 and moved three of these: it
 settled the numbering question at the heart of **9**, it left **7** blocked for
@@ -561,6 +562,70 @@ any.
 
 ---
 
+## 13. Re-tagging: what happens when a tree gets a new number
+
+**What was seen.** On 21 September 2026, tree **105** on the University Green —
+an elm — was wearing a **new tag, 3497**, photographed. The tree is the same
+tree and is standing and fine. Only the number screwed to it has changed.
+
+Its observation records the new number and **nothing about its identity was
+touched**, deliberately, because this is a question about process rather than
+about one elm.
+
+**Why it is not a small thing.** This project's accession numbers *are* the tag
+numbers: tag 763 is `UVM-0763`. That was chosen on purpose — the number on the
+map should match the number on the trunk — and [ARCGIS-IMPORT.md](ARCGIS-IMPORT.md)
+spells it out. Re-tagging breaks the rule from the other end:
+
+- `plant_id` has to be **permanent**. It is in the URL, it is what a QR code
+  encodes, and it is what a bookmark or a printed label points at. Renumbering
+  `UVM-0105` to `UVM-3497` would break every one of those.
+- The metal tag is **consumable**. It corrodes, it gets engulfed by growth, it
+  falls off, and apparently it gets replaced.
+
+Two things that must both be true cannot be the same column.
+
+**What the data already suggests.** 3497 sits inside an unused run of **444
+numbers** (3357–3800) in the 2023-24 survey. The tags recorded then stop at
+3849 and are clumped: 3200-3399 is dense, 3400-3800 is completely empty. So
+either the survey never reached a block of trees, or grounds issues replacement
+tags from a range the survey did not cover. Those have different consequences
+and only grounds can say which it is.
+
+**Questions worth asking them.**
+
+1. When a tag is replaced, does the new number come from a fresh sequence, or
+   is it reused from a pool?
+2. Is there a record kept of *old number → new number*? If so that record is
+   worth more to this project than anything else on this list.
+3. Are replacements logged anywhere, or does the tag simply change and the
+   knowledge live with whoever did it?
+4. Does 3497 mean anything in their system — a block, a year, a crew?
+5. Would they be willing to tell us when they re-tag? Even a yearly list would
+   keep the map honest.
+
+**What I would build once that is answered** — not before, because the answer
+changes the shape:
+
+- A **`tag` column on `plants.csv`**, separate from `plant_id`. The accession
+  never changes; the tag is current and searchable. `UVM-0105` would keep its
+  id and gain `tag: 3497`, and typing either number would find the tree.
+- To-do **#9** already reached the same structure from the opposite direction —
+  "new id as the key, legacy id as a searchable second column, both shown". The
+  two items want the same column for different reasons, which is usually a sign
+  it is the right column.
+- The survey app would need a **"this tag is new"** path, so a surveyor finding
+  a number that resolves to nothing can say *this tree already has a record,
+  under a different number* rather than creating a duplicate.
+
+**Until then**, a re-tagged tree is a tree whose record cannot be found by the
+number on it. One is known. There may be others, and nothing currently detects
+them — the only reason this one surfaced is that somebody walked past and
+looked.
+
+**Cost.** The column and the search are half a day. The conversation is the
+whole item.
+
 ## Also outstanding (not code)
 
 - ~~**Permission from `ecamire@uvm.edu`**~~ — **resolved, 21 September 2026.**
@@ -577,6 +642,9 @@ any.
   trees, 7 the surveyor could not read (`1818 or 1942`). `grep 'TAG ' data/observations.csv`
   lists them.
 - **10 ArcGIS records did not import** — 8 need identifying, 2 need a position.
+- **Ask grounds about re-tagging** — see [#13](#13-re-tagging-what-happens-when-a-tree-gets-a-new-number).
+  Tree 105 now wears tag 3497, and nothing in the data model currently expects
+  a tag to change.
 - **Botanist review** of the authored descriptions and traits in `taxa.csv`.
 - **Official UVM V mark** from UVM Communications.
 - **ETS request** for `arboretum.uvm.edu/explorer/`.
