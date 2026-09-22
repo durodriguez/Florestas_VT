@@ -257,13 +257,33 @@ class App {
 
   private bindEvents(): void {
     let searchTimer: number | undefined;
-    $<HTMLInputElement>('#search').addEventListener('input', (e) => {
+    const search = $<HTMLInputElement>('#search');
+    search.addEventListener('input', (e) => {
       const value = (e.target as HTMLInputElement).value;
       clearTimeout(searchTimer);
       searchTimer = window.setTimeout(() => {
         this.filters.q = value;
         this.refresh();
       }, 150);
+    });
+
+    // Enter, or the magnifying glass on a phone's keyboard, means "I have
+    // finished typing — show me". On a phone the keyboard covers the results
+    // it just produced, so this dismisses it and moves the map to what was
+    // found. Without it, a search on a phone is typed blind.
+    search.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      // The debounce may not have fired yet, so the filter is applied now
+      // rather than fitting the map to the previous query's results.
+      clearTimeout(searchTimer);
+      this.filters.q = search.value;
+      this.refresh();
+      // Blurring is what actually lowers the keyboard. Only on the narrow
+      // layout: on a desktop there is nothing covering anything, and taking
+      // focus out of the box would just make refining a search a click longer.
+      if (window.matchMedia('(max-width: 48rem)').matches) search.blur();
+      this.map.fitTo(this.results);
     });
 
     $('#filters').addEventListener('change', (e) => {

@@ -101,7 +101,7 @@ refuses to write anything if a row has a problem. Dry run by default. See
 [docs/FIELD-SURVEY.md](docs/FIELD-SURVEY.md).
 
 Mobile-first throughout, since most visitors arrive by scanning a label
-outdoors. Keyboard accessible; `/` focuses search, `Escape` closes a record.
+outdoors. Keyboard accessible; `/` focuses search, `Enter` zooms the map to the results, `Escape` closes a record. On a phone, `Enter` (the magnifying glass on the keyboard) also lowers the keyboard, which is otherwise covering the results it just produced.
 
 ## How it is put together
 
