@@ -18,6 +18,7 @@
     "areas": "node scripts/assign-collections.mjs",
     "check:species": "node scripts/check-species.mjs",
     "check:inventories": "node scripts/check-inventories.mjs",
+    "check:coverage": "node scripts/check-coverage.mjs",
     "import:arcgis": "node scripts/import-arcgis.mjs",
     "import:city": "node scripts/import-city-trees.mjs",
     "areas:check": "node scripts/check-areas.mjs"

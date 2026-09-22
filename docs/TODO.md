@@ -658,6 +658,41 @@ day. Findings come back through the field app like any other survey.
 **Cost.** The check is written and tested. The fieldwork is the item, and it is
 the largest one on this list.
 
+## 15. 1,552 of the 2014 tags are not on the map
+
+The 2014 inventory tagged 2,502 trees. 950 of those numbers are on the map.
+`npm run check:coverage` accounts for the rest; full findings in
+[TAG-COVERAGE.md](TAG-COVERAGE.md).
+
+**It is not one problem.** The 1,552 are removals, lost tags, renumbering and
+campus that was never walked, mixed together in proportions that vary by area
+— Central retains 57% of its numbering, Trinity 22%. The species of the
+missing trees separates the causes: 192 missing tags across 33 species is an
+unwalked route, 37 missing tags that were all young saplings is a planting
+that did not survive, and ten paper birches in eleven metres is one clump.
+
+**Renumbering cannot explain all of it.** Even counting every new tag and every
+untagged tree as a renumbered 2014 tree, 450 are left over.
+
+**One thing is settled.** No map tag inside 1–2555 is a number 2014 never
+issued, so nothing was renumbered within the old range. `check:coverage`
+prints that figure every run; if it stops being zero, this needs rethinking.
+
+**It cannot be finished at a desk.** `reference.csv` has no coordinates and the
+ArcGIS layer has no diameters, so a missing tag cannot be matched to a standing
+tree by position or size. Two things would change that, and both are asks
+rather than code: a 2014 source file with coordinates, if one exists, and any
+field in the ArcGIS layer the import did not read (it takes `OBJECTID`,
+`Species`, `Tag_ID`, `GlobalID`, `Health`, `CreationDate` and geometry).
+
+**The cheap experiment.** Tags 809–818 are ten missing numbers between two
+trees eleven metres apart. Walk it and read the trunks: 2556+ tags means
+renumbering, bare trunks means lost tags, no trees means removal. Eleven metres
+distinguishes three hypotheses, and `data/coverage-gaps.csv` ranks the rest.
+
+**Cost.** The accounting is written and tested. The walk is an afternoon. What
+it cannot do is tell you about any individual tree.
+
 ## Also outstanding (not code)
 
 - ~~**Permission from `ecamire@uvm.edu`**~~ — **resolved, 21 September 2026.**
@@ -680,6 +715,13 @@ the largest one on this list.
 - **165 species disagreements** between the 2014 inventory and the map — see
   [#14](#14-165-trees-the-two-inventories-disagree-about). `npm run check:inventories`
   regenerates the list at any time.
+- **1,552 missing 2014 tags** — see [#15](#15-1552-of-the-2014-tags-are-not-on-the-map).
+  Related to the grounds conversation in [#13](#13-re-tagging-what-happens-when-a-tree-gets-a-new-number):
+  both turn on how UVM re-tags.
+- **Ask whoever holds the 2014 survey** whether a version with coordinates
+  exists. `public/field/reference.csv` has none, and that single column would
+  turn [#15](#15-1552-of-the-2014-tags-are-not-on-the-map) from an afternoon's
+  walking into a join.
 - **Botanist review** of the authored descriptions and traits in `taxa.csv`.
 - **Official UVM V mark** from UVM Communications.
 - **ETS request** for `arboretum.uvm.edu/explorer/`.
