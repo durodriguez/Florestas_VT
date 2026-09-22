@@ -39,9 +39,12 @@ column is not the same thing and was never wanted.
 | Issued from the untagged block | 703 |
 | Skipped | 10 |
 
-Positions fall inside the campus boundary for all but 8 of them: 837 Central,
-587 Athletic, 479 Redstone, 148 Trinity. The 8 outsiders get no
-`collection_id` rather than a guessed one.
+Positions fall inside the campus boundary for all of them: 837 Central, 587
+Athletic, 479 Redstone, 156 Trinity. Eight had no campus when this was first
+written — the boundary did not yet reach the north-east corner of Trinity. It
+does since 22 September 2026, and `npm run areas` filled them in. A tree that
+still landed outside every area would get no `collection_id` rather than a
+guessed one.
 
 Species resolve at **99.5%** against `taxa.csv` — 128 of 129 names — because
 the alias table was built against this file before the import ran. That figure

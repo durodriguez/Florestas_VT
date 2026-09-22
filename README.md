@@ -53,7 +53,7 @@ table listing only what is actually recorded, photos of that species taken on
 campus, and how many are mapped and where. A plant record links out to its
 species page; the species page links back to the map filtered to that species.
 
-**Burlington street trees** — 335 of the city's street trees stand inside the
+**Burlington street trees** — 337 of the city's street trees stand inside the
 campus boundary, on Main Street, College Street, Colchester Avenue and the rest.
 They are on the map behind **Show Burlington street trees**, off by default, in
 Burlington's flag blue and white against UVM's green and gold. They are kept

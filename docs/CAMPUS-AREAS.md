@@ -20,16 +20,21 @@ one basemap; the overlays are checkboxes, because you can have any combination.
 
 | Area | Acres |
 | --- | ---: |
-| UVM campus (boundary, two parts) | 692 |
+| UVM campus (boundary, two parts) | 695 |
 | Centennial Campus | 222 |
 | Central Campus | 164 |
 | Spear Street Campus | 151 |
 | Athletic Campus | 81 |
 | Redstone Campus | 55 |
-| Trinity Campus | 19 |
+| Trinity Campus | 21 |
 
 The six campuses tile the boundary exactly — nothing unassigned, and they sum
-to within 0.02 acres of it, which is the sliver threshold below.
+to within 0.03 acres of it, which is the sliver threshold below.
+
+**Trinity grew by 2.4 acres on 22 September 2026**, taking in the north-east
+corner off Colchester Avenue. Eight UVM trees that had stood outside every
+campus area now have one, and two more Burlington street trees fall inside the
+boundary.
 
 The boundary is a two-part MultiPolygon: the main campus, and the Spear Street
 parcel about 1.2 km south of it.
@@ -39,6 +44,26 @@ called plain **Campus areas**. Should anyone add an estimated area later, that
 one feature draws dashed, the layer regains its "(approximate)" suffix, and
 `npm run data` warns until it is replaced. All three are driven by the
 `provisional` property and need no code change either way.
+
+## Adding to an existing area
+
+The tracer exports the **whole** file, and a polygon drawn onto an area that
+already exists comes back as that area's *only* geometry — not added to what was
+there. It is added to the outer boundary correctly, so the giveaway is a
+boundary that grew by exactly as much as a campus shrank.
+
+That happened once, on the Trinity addition, and it would have deleted 6.6 of
+Trinity's 7.6 hectares. **Compare the areas before replacing the file** — an
+unchanged campus that changed size is the signal:
+
+```bash
+npm run areas:check -- ~/Downloads/campus-areas.geojson
+```
+
+The fix is a union rather than a replacement — `polygon-clipping` is already a
+dependency, and `pc.union(oldGeometry, newGeometry)` is the whole of it. Then
+re-run `npm run areas -- --write`, because an area that grew may have taken in
+plants that had no campus before.
 
 ## The tracer
 
