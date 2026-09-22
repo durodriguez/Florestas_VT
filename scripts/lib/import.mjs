@@ -7,7 +7,7 @@
 // that variation without silently guessing — anything ambiguous stops the row
 // and is reported, rather than being imported wrong.
 
-import { BOOLEANISH, CONDITIONS, TAXON_COLUMNS } from './vocab.mjs';
+import { BOOLEANISH, CONDITIONS, OBSERVATION_COLUMNS, TAXON_COLUMNS } from './vocab.mjs';
 
 const trim = (v) => (typeof v === 'string' ? v.trim() : v ?? '');
 
@@ -248,22 +248,59 @@ export function importSurvey({
   const inserts = [];
   const observations = [];
   const updates = [];
+  // Observations already on file, identical in every field — re-exports.
+  const reimported = [];
   const issues = [];
   const unknownSpecies = new Map();
 
-  // A survey already on file for this tree on this date. Importing the same
-  // export twice is the ordinary way this happens, and appending the readings
-  // again would put two versions of one visit in the history.
-  const seenObservations = new Set(
-    observationRows.map((o) => `${trim(o.plant_id)}\u0000${trim(o.surveyed_on)}`),
+  // A survey already on file for this tree on this date. The field app exports
+  // its whole saved history rather than only what is new, so every export
+  // after the first carries rows that are already in. Appending them again
+  // would put two versions of one visit in the history.
+  //
+  // But "same tree, same day" is two different situations and they must not be
+  // treated alike:
+  //
+  //   - Identical in every field. A re-export, nothing to decide. Skipped
+  //     quietly, because making somebody hand-edit a file to remove rows that
+  //     say exactly what is already on file is friction with nothing at the
+  //     end of it — and one such row blocking a batch of good ones is worse.
+  //   - The same day, saying something different. That is a disagreement about
+  //     what was seen, and the importer has no business picking a winner. It
+  //     stays an error, and it names the fields that differ so the choice can
+  //     be made by somebody who was there.
+  //
+  // The second case is not hypothetical: UVM-0101 is on file as `removed` with
+  // condition left blank, and a later export of the same visit called it
+  // `dead` — which describes a tree still standing. Silently swallowing that
+  // would have lost a real distinction.
+  const onFile = new Map(
+    observationRows.map((o) => [`${trim(o.plant_id)}\u0000${trim(o.surveyed_on)}`, o]),
+  );
+  const photosOnFile = new Set(
+    observationRows.map((o) => trim(o.photo)).filter(Boolean),
   );
   const recordObservation = (plantId, observation, error) => {
     const key = `${plantId}\u0000${observation.surveyed_on}`;
-    if (seenObservations.has(key)) {
-      error(`${plantId} already has an observation dated ${observation.surveyed_on} — already imported?`);
+    const previous = onFile.get(key);
+    if (previous) {
+      const differs = OBSERVATION_COLUMNS
+        .filter((c) => c !== 'plant_id' && c !== 'surveyed_on')
+        .filter((c) => trim(previous[c]) !== trim(observation[c]));
+      if (differs.length === 0) {
+        reimported.push({ plant_id: plantId, surveyed_on: observation.surveyed_on });
+        return false;
+      }
+      const detail = differs
+        .map((c) => `${c} "${trim(previous[c])}" → "${trim(observation[c])}"`)
+        .join('; ');
+      error(
+        `${plantId} already has a different observation dated ${observation.surveyed_on} — ${detail}. `
+        + 'Decide which is right; this importer will not choose.',
+      );
       return false;
     }
-    seenObservations.add(key);
+    onFile.set(key, { plant_id: plantId, ...observation });
     observations.push({ plant_id: plantId, ...observation });
     return true;
   };
@@ -277,6 +314,22 @@ export function importSurvey({
 
     // Skip rows that are entirely blank — trailing lines are common in exports.
     if (Object.values(row).every((v) => trim(v) === '')) return;
+
+    // This exact survey record is already in. The field app names every photo
+    // after the moment it was taken (`untagged-1790110256891.webp`), so the
+    // filename identifies one record and no other — an exact match, not a
+    // guess about position or species.
+    //
+    // It earns its place on the untagged trees. A tagged row is recognised by
+    // `(plant_id, surveyed_on)` above, but a row with no tag carries no
+    // accession, so a re-export would be issued a fresh one and added again as
+    // a second tree. Recognising the photo stops that before a number is spent
+    // on it.
+    const photoName = get(row, 'photo');
+    if (photoName && photosOnFile.has(photoName)) {
+      reimported.push({ photo: photoName, surveyed_on: get(row, 'surveyed_on') });
+      return;
+    }
 
     // --- species -----------------------------------------------------------
     // An explicit taxon_id wins. The field app fills it in when the surveyor
@@ -515,6 +568,7 @@ export function importSurvey({
     observations,
     updates,
     duplicates,
+    reimported,
     issues,
     unknownSpecies,
     unmapped,
@@ -525,6 +579,7 @@ export function importSurvey({
       observations: observations.length,
       updates: updates.length,
       duplicates: duplicates.length,
+      reimported: reimported.length,
       errors: issues.filter((i) => i.level === 'error').length,
       warnings: issues.filter((i) => i.level === 'warning').length,
     },

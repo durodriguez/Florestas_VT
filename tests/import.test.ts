@@ -385,16 +385,92 @@ describe('importSurvey — re-surveys', () => {
     expect(r.observations).toHaveLength(1);
   });
 
-  it('refuses a second observation of the same tree on the same day', () => {
+  it('refuses a second observation of the same day that says something different', () => {
+    // On file for 2025-06-01: 20 inches, note "old note". This row says 30
+    // inches and no note. Somebody has to decide which visit is right, and it
+    // is not the importer.
     const r = run([row({ tag: 'UVM-2025-0007', date: '2025-06-01' })]);
     expect(r.observations).toHaveLength(0);
-    expect(r.issues.some((i: { message: string }) => /already has an observation dated/.test(i.message))).toBe(true);
+    expect(r.summary.reimported).toBe(0);
+    const message = r.issues.find((i: { message: string }) => /already has a different observation/.test(i.message));
+    expect(message).toBeDefined();
+    // It names what differs, so the choice can be made without opening the CSV.
+    expect(message.message).toMatch(/dbh_in "20" → "30"/);
+    expect(message.message).toMatch(/notes "old note" → ""/);
   });
 
-  it('refuses the same file imported twice in one run', () => {
+  it('skips a re-exported observation that is identical, without erroring', () => {
+    // The field app exports its whole saved history, so every export after the
+    // first carries rows that are already in. Identical means there is nothing
+    // to decide, and making somebody hand-edit them out is friction with
+    // nothing at the end of it.
+    const r = run([row({ tag: 'UVM-2025-0007', date: '2025-06-01', dbh_in: '20', notes: 'old note', surveyor: 'EMR' })], {
+      headers: [...headers, 'surveyor'],
+    });
+    expect(r.observations).toHaveLength(0);
+    expect(r.summary.errors).toBe(0);
+    expect(r.summary.reimported).toBe(1);
+    expect(r.reimported[0]).toMatchObject({ plant_id: 'UVM-2025-0007', surveyed_on: '2025-06-01' });
+  });
+
+  it('records one visit when the same file is imported twice in one run', () => {
     const r = run([row({ tag: 'UVM-2025-0007' }), row({ tag: 'UVM-2025-0007' })]);
     expect(r.observations).toHaveLength(1);
-    expect(r.summary.errors).toBe(1);
+    expect(r.summary.errors).toBe(0);
+    expect(r.summary.reimported).toBe(1);
+  });
+
+  it('recognises an untagged re-export by its photo, before spending an accession', () => {
+    // A tagged row is recognised by (plant_id, surveyed_on). A row with no tag
+    // carries no accession, so without this a re-export is issued a fresh
+    // number and added as a second tree standing in the first one's place.
+    const r = run([row({ photo: 'untagged-1790110256891.webp' })], {
+      headers: [...headers, 'photo'],
+      observationRows: [
+        ...observationRows,
+        { plant_id: 'UVM-2026-0003', surveyed_on: '2026-09-22', photo: 'untagged-1790110256891.webp', status: 'active' },
+      ],
+    });
+    expect(r.inserts).toHaveLength(0);
+    expect(r.observations).toHaveLength(0);
+    expect(r.summary.errors).toBe(0);
+    expect(r.summary.reimported).toBe(1);
+    expect(r.reimported[0].photo).toBe('untagged-1790110256891.webp');
+  });
+
+  it('still imports an untagged tree whose photo is new', () => {
+    const r = run([row({ photo: 'untagged-9999999999999.webp' })], {
+      headers: [...headers, 'photo'],
+      observationRows: [
+        ...observationRows,
+        { plant_id: 'UVM-2026-0003', surveyed_on: '2026-09-22', photo: 'untagged-1790110256891.webp', status: 'active' },
+      ],
+    });
+    expect(r.inserts).toHaveLength(1);
+    expect(r.summary.reimported).toBe(0);
+  });
+
+  it('does not skip a row just because it has no photo', () => {
+    // An empty photo cell must never match an empty one on file, or every
+    // photoless row would be read as already imported.
+    const r = run([row({ photo: '' })], {
+      headers: [...headers, 'photo'],
+      observationRows: [{ plant_id: 'UVM-2025-0007', surveyed_on: '2025-06-01', photo: '', status: 'active' }],
+    });
+    expect(r.inserts).toHaveLength(1);
+    expect(r.summary.reimported).toBe(0);
+  });
+
+  it('lets good rows through while the already-imported ones are skipped', () => {
+    // The whole point. One stale row used to block the batch.
+    const r = run([
+      row({ tag: 'UVM-2025-0007', date: '2025-06-01', dbh_in: '20', notes: 'old note', surveyor: 'EMR' }),
+      row({ species: 'Red maple', lat: '44.4780', lng: '-73.1960' }),
+    ], { headers: [...headers, 'surveyor'] });
+    expect(r.summary.reimported).toBe(1);
+    expect(r.summary.errors).toBe(0);
+    expect(r.inserts).toHaveLength(1);
+    expect(r.inserts[0].taxon_id).toBe('acer-rubrum');
   });
 
   it('rejects a tag that is not an existing accession', () => {
