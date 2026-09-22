@@ -218,8 +218,13 @@ class App {
     if (window.matchMedia('(max-width: 48rem)').matches) {
       $<HTMLInputElement>('#search').blur();
     }
-    if (exact) this.map.focus(exact);
-    else this.map.fitTo(this.results);
+    // A tag names one tree, so open its record — that is what somebody typing
+    // a number off a trunk is after, and it saves them hunting for the marker
+    // that was just zoomed to. Any other search is about a set, and a record
+    // left open from the last one describes none of what is now on screen, so
+    // it goes away rather than sitting there looking current.
+    this.select(exact);
+    if (!exact) this.map.fitTo(this.results);
   }
 
   /**
