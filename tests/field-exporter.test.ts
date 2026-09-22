@@ -127,3 +127,43 @@ describe('extensionFor', () => {
     expect(extensionFor(new Blob([]))).toBe('jpg');
   });
 });
+
+describe('numbers a surveyor never entered', () => {
+  const cell = (csv: string, header: string): string => {
+    const cols = csv.split('\n')[0]!.split(',');
+    const i = cols.indexOf(header);
+    // Row values here contain no commas, so a plain split is enough.
+    return csv.split('\n')[1]!.split(',')[i] ?? '';
+  };
+
+  it('writes an empty cell for a null measurement', () => {
+    const csv = toCsv([record({ dbhIn: null, heightFt: null, spreadFt: null, plantedYear: null })]);
+    for (const h of ['dbh_in', 'height_ft', 'spread_ft', 'planted_year']) {
+      expect(cell(csv, h)).toBe('');
+    }
+  });
+
+  it('writes an empty cell for undefined, not the word "undefined"', () => {
+    // Records saved by an earlier build hold undefined where an unfilled
+    // number should be null. String(undefined) is "undefined", which reached
+    // a real export on 2026-09-01 and which the importer rightly refuses as
+    // not a number. Those records sit in a surveyor's phone and re-export
+    // every time, so this has to be handled here — nothing can go back and
+    // clean up what is already on the device.
+    const stale = record({
+      dbhIn: undefined as never,
+      heightFt: undefined as never,
+      spreadFt: undefined as never,
+      plantedYear: undefined as never,
+    });
+    const csv = toCsv([stale]);
+    expect(csv).not.toContain('undefined');
+    for (const h of ['dbh_in', 'height_ft', 'spread_ft', 'planted_year']) {
+      expect(cell(csv, h)).toBe('');
+    }
+  });
+
+  it('still writes a zero, which is a measurement and not a blank', () => {
+    expect(cell(toCsv([record({ dbhIn: 0 })]), 'dbh_in')).toBe('0');
+  });
+});

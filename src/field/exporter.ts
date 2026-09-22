@@ -9,6 +9,19 @@ import type { SurveyRecord, PhotoBlob } from './db';
 import { speciesChanged } from './species';
 
 /** Column names match survey/mapping.json, so the importer needs no config. */
+/**
+ * A number the surveyor may not have entered.
+ *
+ * Deliberately loose (`== null`), which catches undefined as well as null.
+ * Records saved by an earlier build of this app hold `undefined` where an
+ * unfilled number should be null, and `String(undefined)` is the word
+ * "undefined" — which reached a real export, and which the importer rightly
+ * refuses as not a number. Those records live in a surveyor's phone and get
+ * re-exported every time, so the fix has to be here rather than upstream:
+ * nothing can go back and clean up what is already on the device.
+ */
+const measure = (v: number | null | undefined): string => (v == null ? '' : String(v));
+
 const COLUMNS: Array<[string, (r: SurveyRecord) => string]> = [
   // A physical tag if there is one; otherwise the accession of the mapped tree
   // the surveyor matched by position. Both are the same question to the
@@ -21,11 +34,11 @@ const COLUMNS: Array<[string, (r: SurveyRecord) => string]> = [
   ['lat', (r) => coord(keepsMappedPosition(r) ? r.claimedLat : r.lat)],
   ['lng', (r) => coord(keepsMappedPosition(r) ? r.claimedLng : r.lng)],
   ['area', () => ''],
-  ['dbh_in', (r) => (r.dbhIn === null ? '' : String(r.dbhIn))],
-  ['height_ft', (r) => (r.heightFt === null ? '' : String(r.heightFt))],
-  ['spread_ft', (r) => (r.spreadFt === null ? '' : String(r.spreadFt))],
+  ['dbh_in', (r) => measure(r.dbhIn)],
+  ['height_ft', (r) => measure(r.heightFt)],
+  ['spread_ft', (r) => measure(r.spreadFt)],
   ['condition', (r) => r.condition],
-  ['planted_year', (r) => (r.plantedYear === null ? '' : String(r.plantedYear))],
+  ['planted_year', (r) => measure(r.plantedYear)],
   ['surveyor', (r) => r.surveyor],
   ['date', (r) => r.surveyedOn],
   ['photo', (r) => r.photoName ?? ''],
