@@ -160,6 +160,9 @@ untagged tree is recognised the second time — see
 - **The 10 skipped records** — 8 need identifying, 2 need a position.
 - **The 20 remaining `Cedar` records** — resolved to *Thuja* on an assumption,
   with no evidence behind them. `grep -c ',thuja-sp,' data/plants.csv`.
+- **Re-tagged trees.** Tree 105 was found wearing a new tag, 3497, in September
+  2026. The accession-is-the-tag rule above assumes a tag does not change, and
+  it evidently does. See [to-do #13](TODO.md).
 - **Trunk diameters.** The layer has none, so
   [to-do #7](TODO.md) (i-Tree ecosystem services) is still blocked. The 2014
   inventory holds a DBH for 950 of these trees, joinable by tag, but those
