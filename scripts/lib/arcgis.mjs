@@ -67,16 +67,38 @@ export function surveyDate(ms) {
 const coord = (n) => n.toFixed(6);
 
 /**
+ * True when the row on file names a species inside the genus the source only
+ * named. "Cedar" resolves to `thuja-sp`; a tree somebody has since identified
+ * as `thuja-occidentalis` does not disagree with that, it sharpens it.
+ *
+ * Worth separating, because the two need opposite handling: a disagreement is
+ * a question for the field, and a refinement is work already done. Reporting
+ * a refinement as a conflict would ask somebody to re-check a tree that has
+ * just been checked.
+ */
+export function isRefinement(sourceTaxonId, existingTaxonId, taxaById) {
+  const src = taxaById?.get(sourceTaxonId);
+  const cur = taxaById?.get(existingTaxonId);
+  if (!src || !cur) return false;
+  const genus = String(src.genus ?? '').trim().toLowerCase();
+  if (!genus || genus !== String(cur.genus ?? '').trim().toLowerCase()) return false;
+  // The source has to be the vaguer of the two: genus named, species blank.
+  return !String(src.species ?? '').trim() && Boolean(String(cur.species ?? '').trim());
+}
+
+/**
  * @param {object} args
  * @param {object[]} args.features       GeoJSON features from the ArcGIS layer
  * @param {object[]} args.plants         existing data/plants.csv rows
  * @param {object[]} args.observations   existing data/observations.csv rows
  * @param {Map} args.speciesLookup       from buildSpeciesLookup
+ * @param {Map} args.taxaById            taxa rows by id, for genus comparison
  * @param {object} args.campusAreas      data/campus-areas.geojson
  * @param {string} args.surveyor         who to credit on the observations
  * @returns {{
  *   inserts: object[], observations: object[],
  *   conflicts: {plant_id: string, kind: string, message: string}[],
+ *   refinements: {plant_id: string, message: string}[],
  *   skipped: {objectId: number, reason: string, detail: string}[],
  *   summary: object
  * }}
@@ -86,12 +108,14 @@ export function importArcgis({
   plants = [],
   observations = [],
   speciesLookup,
+  taxaById,
   campusAreas,
   surveyor = '',
 }) {
   const inserts = [];
   const newObservations = [];
   const conflicts = [];
+  const refinements = [];
   const skipped = [];
   let matched = 0;
 
@@ -210,10 +234,20 @@ export function importArcgis({
       // disagreement is worth knowing about, and a report scrolls past. The
       // note rides on the observation, where it stays until somebody settles it.
       matched += 1;
-      if (String(existing.taxon_id).trim() !== taxonId) {
-        const message = `on file as ${existing.taxon_id}; ArcGIS says "${rawSpecies}" (${taxonId})`;
-        conflicts.push({ plant_id: plantId, kind: 'species', message });
-        notes.push(`SPECIES CONFLICT: ${message} — check in person`);
+      const onFileTaxon = String(existing.taxon_id).trim();
+      if (onFileTaxon !== taxonId) {
+        if (isRefinement(taxonId, onFileTaxon, taxaById)) {
+          // Not a disagreement. Say so, and leave no note on the tree: there
+          // is nothing here for anybody to go and check.
+          refinements.push({
+            plant_id: plantId,
+            message: `ArcGIS says "${rawSpecies}" (${taxonId}); identified here as ${onFileTaxon}`,
+          });
+        } else {
+          const message = `on file as ${onFileTaxon}; ArcGIS says "${rawSpecies}" (${taxonId})`;
+          conflicts.push({ plant_id: plantId, kind: 'species', message });
+          notes.push(`SPECIES CONFLICT: ${message} — check in person`);
+        }
       }
       const away = distanceMeters(Number(existing.lat), Number(existing.lng), lat, lng);
       if (away > POSITION_CONFLICT_M) {
@@ -262,6 +296,7 @@ export function importArcgis({
     inserts,
     observations: newObservations,
     conflicts,
+    refinements,
     skipped,
     summary: {
       read: features.length,
@@ -272,6 +307,7 @@ export function importArcgis({
       untagged: nextUntagged - UNTAGGED_BLOCK_START,
       skipped: skipped.length,
       conflicts: conflicts.length,
+      refinements: refinements.length,
       noCollection: inserts.filter((r) => !r.collection_id).length,
     },
   };

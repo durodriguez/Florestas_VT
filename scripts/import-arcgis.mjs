@@ -47,11 +47,13 @@ const taxa = parse(join(root, 'data', 'taxa.csv'));
 const aliases = parse(join(root, 'data', 'species-aliases.csv'));
 const campusAreas = JSON.parse(readFileSync(join(root, 'data', 'campus-areas.geojson'), 'utf8'));
 
+const species = buildSpeciesLookup(taxa.rows, aliases.rows);
 const result = importArcgis({
   features,
   plants: plants.rows,
   observations: observations.rows,
-  speciesLookup: buildSpeciesLookup(taxa.rows, aliases.rows).lookup,
+  speciesLookup: species.lookup,
+  taxaById: species.byId,
   campusAreas,
   surveyor,
 });
@@ -74,6 +76,11 @@ if (result.skipped.length) {
 if (result.conflicts.length) {
   console.log(`\nDisagreements with what is already on file (nothing was overwritten):`);
   for (const c of result.conflicts) console.log(`  ${c.plant_id} ${c.kind}: ${c.message}`);
+}
+
+if (result.refinements.length) {
+  console.log(`\nIdentified more finely here than the source managed (kept, not a conflict):`);
+  for (const r of result.refinements) console.log(`  ${r.plant_id}: ${r.message}`);
 }
 
 const flagged = result.observations.filter((o) => o.notes);
