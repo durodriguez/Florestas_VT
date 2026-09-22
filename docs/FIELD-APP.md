@@ -269,11 +269,17 @@ The fallback is the 2014 inventory, published at
 `public/field/reference.csv`. The app fetches it on first load and caches it,
 so surveyors never have to do anything — open the app and tag lookup works.
 
+**It is FEMC's data, CC BY-SA 4.0**, and this app redistributes a copy of it.
+The credit rides in the map's attribution line and the full citation is in
+[data/SOURCES.md](../data/SOURCES.md). Anyone replacing this file is taking on
+that attribution too.
+
 Only the columns the lookup needs are published: tree number, common and
 scientific name, DBH, age class and condition. The inventory's free-text
 `Notes` column and its care-priority ratings are deliberately left out — they
 are not needed to autofill a form, and they are not worth putting on a public
-URL.
+URL. The archived dataset has **12 fields** against these six, and what the
+other columns hold has never been checked — see [to-do #16](TODO.md).
 
 A surveyor can still load a different file by hand from the Saved screen, which
 overrides the published copy on that device. Any CSV with a tree-number column

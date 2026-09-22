@@ -626,6 +626,122 @@ looked.
 **Cost.** The column and the search are half a day. The conversation is the
 whole item.
 
+## 14. 165 trees the two inventories disagree about
+
+`npm run check:inventories` compares the 2014 walk-through against the ArcGIS
+mapping for the 950 tags that appear in both. They agree on 711, one is merely
+more specific on 74, and **they disagree on 165** — 53 about the genus.
+
+Full findings in [INVENTORY-CROSSCHECK.md](INVENTORY-CROSSCHECK.md). What makes
+this a to-do rather than a bug:
+
+**Nothing here can be fixed at a desk.** Neither file is authoritative. The
+only way to settle "bur oak or swamp white oak" is to stand under the tree.
+The check produces a worklist; the work is a season of walking.
+
+**It is smaller than 165.** Ninety of them are one of sixteen repeated pairs,
+running in blocks of consecutive tags — nine lindens from UVM-1047 to UVM-1064,
+eight birches from UVM-1477 to UVM-1485. Those are plantings that one surveyor
+labelled one way and the other labelled the other. One tree settles a row.
+
+**Start with the mature ones.** Young trees disagree at 25.3% and mature ones
+at 11.3%, and the gap is probably replanting: a 2-inch sapling in 2014 can be
+dead and replaced by 2024, tag and all, in which case neither file is wrong.
+A 32-inch tree has not moved, so one of the two files is simply wrong about it
+— and a big tree is the easiest kind to name. **UVM-2553** (32", red oak vs
+scarlet oak) and **UVM-1679** (18", blue vs white spruce) are the shape of it.
+
+**Do not let it write.** No record should be changed in bulk from this, and no
+observations should be generated: an observation means somebody looked on that
+day. Findings come back through the field app like any other survey.
+
+**Cost.** The check is written and tested. The fieldwork is the item, and it is
+the largest one on this list.
+
+## 15. 1,552 of the 2014 tags are not on the map
+
+The 2014 inventory tagged 2,502 trees. 950 of those numbers are on the map.
+`npm run check:coverage` accounts for the rest; full findings in
+[TAG-COVERAGE.md](TAG-COVERAGE.md).
+
+**It is not one problem.** The 1,552 are removals, lost tags, renumbering and
+campus that was never walked, mixed together in proportions that vary by area
+— Central retains 57% of its numbering, Trinity 22%. The species of the
+missing trees separates the causes: 192 missing tags across 33 species is an
+unwalked route, 37 missing tags that were all young saplings is a planting
+that did not survive, and ten paper birches in eleven metres is one clump.
+
+**Renumbering cannot explain all of it.** Even counting every new tag and every
+untagged tree as a renumbered 2014 tree, 450 are left over.
+
+**One thing is settled.** No map tag inside 1–2555 is a number 2014 never
+issued, so nothing was renumbered within the old range. `check:coverage`
+prints that figure every run; if it stops being zero, this needs rethinking.
+
+**It cannot be finished at a desk.** `reference.csv` has no coordinates and the
+ArcGIS layer has no diameters, so a missing tag cannot be matched to a standing
+tree by position or size. The fuller 2014 file was the obvious way out and it
+is not one — the full archive download has eleven columns and no coordinate
+among them ([#16](#16-the-full-2014-download--answered-22-september-2026)).
+What remains is one ask rather than two: any field in the ArcGIS layer the
+import did not read (it takes `OBJECTID`, `Species`, `Tag_ID`, `GlobalID`,
+`Health`, `CreationDate` and geometry).
+
+**The cheap experiment.** Tags 809–818 are ten missing numbers between two
+trees eleven metres apart. Walk it and read the trunks: 2556+ tags means
+renumbering, bare trunks means lost tags, no trees means removal. Eleven metres
+distinguishes three hypotheses, and `data/coverage-gaps.csv` ranks the rest.
+
+**Cost.** The accounting is written and tested. The walk is an afternoon. What
+it cannot do is tell you about any individual tree.
+
+## 16. The full 2014 download — answered, 22 September 2026
+
+Checked. **There is nothing in it that solves anything**, and the hope that
+there might be is now closed rather than left hanging.
+
+The archive download has eleven columns:
+
+```
+Tree, Common_Name, Genus, Species, Botanical, DBH, Age_Class,
+Height, Condition, Tree_Care_Priority, Notes
+```
+
+**No coordinates.** The reasoning that there might be — a storm-risk
+assessment needs to know what a tree could fall on — was sound and wrong. The
+survey identified risk by tag number and left locating the trees to whoever
+held the tags.
+
+**The six columns published here are byte-for-byte identical to the source**
+on all 2,502 rows. Zero differences, zero rows missing either way. Whoever
+reduced this file did it faithfully.
+
+**Three columns are genuinely new**, and the case for each is weak to fair:
+
+- `Height` — **Small / Medium / Large**, not a measurement. DBH already says
+  size, and says it better. i-Tree ([#7](#7-ecosystem-services--the-i-tree-question))
+  needs a number, so this does not unblock it.
+- `Notes` — free text on **48 of 2,502 trees**. Real arborist observations:
+  *recent construction*, *soil erosion*, *stump sprout*, *dead stem*,
+  *sapsucker damage*, *verify*. Small, and genuinely interesting on those 48.
+- `Tree_Care_Priority` — **1, 2 or 3 on 1,492 trees**; N/A on the rest. The
+  strongest of the three and the only one worth arguing about. A professional
+  care ranking speaks directly to a facilities audience. Against it: it is
+  twelve years stale, and a 2014 priority-1 tree has since been dealt with,
+  or has come down.
+
+`Genus` and `Species` are just `Botanical` split in two.
+
+**Left unimported, for now.** The original reduction excluded `Notes` and the
+care ratings as *"not worth putting on a public URL"*, and that reasoning still
+holds for the file the field app serves. It would not preclude keeping them in
+a non-published file — but nothing currently needs them, and importing data
+because it exists is how a schema fills up with columns nobody reads.
+
+**If that changes**, the argument to revisit is `Tree_Care_Priority`, and the
+question to answer first is whether a 2014 care ranking is a useful thing to
+show or a misleading one.
+
 ## Also outstanding (not code)
 
 - ~~**Permission from `ecamire@uvm.edu`**~~ — **resolved, 21 September 2026.**
@@ -645,6 +761,19 @@ whole item.
 - **Ask grounds about re-tagging** — see [#13](#13-re-tagging-what-happens-when-a-tree-gets-a-new-number).
   Tree 105 now wears tag 3497, and nothing in the data model currently expects
   a tag to change.
+- **165 species disagreements** between the 2014 inventory and the map — see
+  [#14](#14-165-trees-the-two-inventories-disagree-about). `npm run check:inventories`
+  regenerates the list at any time.
+- **1,552 missing 2014 tags** — see [#15](#15-1552-of-the-2014-tags-are-not-on-the-map).
+  Related to the grounds conversation in [#13](#13-re-tagging-what-happens-when-a-tree-gets-a-new-number):
+  both turn on how UVM re-tags.
+- ~~**Ask whoever holds the 2014 survey** whether a version with coordinates
+  exists.~~ **Located, 22 September 2026.** It is FEMC's *Burlington, Vermont
+  UVM Campus Tree Inventory Data*, 2,502 records with 12 fields, CC BY-SA 4.0.
+  The copy here has six of them. See [#16](#16-six-columns-of-the-2014-inventory-nobody-has-looked-at)
+  — download the archive file and read its header.
+- **Confirm the attribution is sufficient** with whoever at UVM handles
+  licensing, before the map goes up on a university domain.
 - **Botanist review** of the authored descriptions and traits in `taxa.csv`.
 - **Official UVM V mark** from UVM Communications.
 - **ETS request** for `arboretum.uvm.edu/explorer/`.
