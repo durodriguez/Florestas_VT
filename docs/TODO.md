@@ -693,6 +693,42 @@ distinguishes three hypotheses, and `data/coverage-gaps.csv` ranks the rest.
 **Cost.** The accounting is written and tested. The walk is an afternoon. What
 it cannot do is tell you about any individual tree.
 
+## 16. Six columns of the 2014 inventory nobody has looked at
+
+The FEMC archive lists the 2014 dataset as **2,502 records with 12 fields**.
+The copy published at `public/field/reference.csv` has **six**: tree number,
+common and scientific name, DBH, age class and condition.
+
+That reduction was deliberate — [FIELD-APP.md](FIELD-APP.md) records that a
+free-text `Notes` column and care-priority ratings were dropped, because the
+field app only needs enough to autofill a form. But those do not account for
+all six, and **nobody has looked at what the rest hold.**
+
+**Why this matters more than it sounds.** [#15](#15-1552-of-the-2014-tags-are-not-on-the-map)
+is stuck on one thing: the 2014 file has no coordinates, so a missing tag
+cannot be matched to a standing tree by position. The dataset's stated purpose
+was *"to estimate the composition and potential risk of damage to property and
+infrastructure during extreme weather events"* — and you cannot assess what a
+tree might fall on without recording where it stands. **A location column is a
+reasonable thing to expect in those six.**
+
+If one is there, it collapses three open problems at once:
+
+- #15 stops being an afternoon's walking and becomes a spatial join.
+- The 165 species disagreements in [#14](#14-165-trees-the-two-inventories-disagree-about)
+  can be checked tree-against-tree rather than tag-against-tag, which also
+  settles whether a "disagreement" is one tree or two.
+- The tag-vs-accession mess — tuliptree 3230 being tuliptree 0008 — becomes
+  resolvable from data instead of from inference.
+
+**Cost.** Downloading the archive file and reading its header: minutes. What
+follows depends entirely on what is in it, so there is no point planning
+further until somebody looks.
+
+**Note the licence either way.** CC BY-SA 4.0. Anything imported from the
+fuller file carries the same terms as the copy already published — see
+[data/SOURCES.md](../data/SOURCES.md).
+
 ## Also outstanding (not code)
 
 - ~~**Permission from `ecamire@uvm.edu`**~~ — **resolved, 21 September 2026.**
@@ -718,10 +754,13 @@ it cannot do is tell you about any individual tree.
 - **1,552 missing 2014 tags** — see [#15](#15-1552-of-the-2014-tags-are-not-on-the-map).
   Related to the grounds conversation in [#13](#13-re-tagging-what-happens-when-a-tree-gets-a-new-number):
   both turn on how UVM re-tags.
-- **Ask whoever holds the 2014 survey** whether a version with coordinates
-  exists. `public/field/reference.csv` has none, and that single column would
-  turn [#15](#15-1552-of-the-2014-tags-are-not-on-the-map) from an afternoon's
-  walking into a join.
+- ~~**Ask whoever holds the 2014 survey** whether a version with coordinates
+  exists.~~ **Located, 22 September 2026.** It is FEMC's *Burlington, Vermont
+  UVM Campus Tree Inventory Data*, 2,502 records with 12 fields, CC BY-SA 4.0.
+  The copy here has six of them. See [#16](#16-six-columns-of-the-2014-inventory-nobody-has-looked-at)
+  — download the archive file and read its header.
+- **Confirm the attribution is sufficient** with whoever at UVM handles
+  licensing, before the map goes up on a university domain.
 - **Botanist review** of the authored descriptions and traits in `taxa.csv`.
 - **Official UVM V mark** from UVM Communications.
 - **ETS request** for `arboretum.uvm.edu/explorer/`.

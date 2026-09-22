@@ -130,6 +130,7 @@ species never reaches the live site.
 | **Burlington's street trees** | [docs/CITY-TREES.md](docs/CITY-TREES.md) |
 | **Where the two inventories disagree** | [docs/INVENTORY-CROSSCHECK.md](docs/INVENTORY-CROSSCHECK.md) |
 | **What became of the 2014 tags** | [docs/TAG-COVERAGE.md](docs/TAG-COVERAGE.md) |
+| **Data sources, citations and licences** | [data/SOURCES.md](data/SOURCES.md) |
 | **The field survey app** | [docs/FIELD-APP.md](docs/FIELD-APP.md) |
 | **Hosting, domains, scaling** | [docs/DEPLOY.md](docs/DEPLOY.md) |
 | **What's planned next** | [docs/TODO.md](docs/TODO.md) |

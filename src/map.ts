@@ -8,6 +8,16 @@ import { colorFor } from './palette';
  * without anyone having to manage a token. Swap in a UVM-hosted or Esri
  * organisational service here if the university prefers its own imagery.
  */
+/**
+ * The 2014 inventory is FEMC's, published CC BY-SA 4.0, and the field app
+ * ships a copy of it. Attribution that lives only in a docs file is not
+ * attribution, so it rides in the map's own credit line where anyone looking
+ * at the data can see it.
+ *
+ * data/SOURCES.md carries the full citation and what was changed.
+ */
+export const FEMC_CREDIT = '2014 inventory &copy; <a href="https://www.uvm.edu/femc/data/archive/project/burlington_vermont_street_tree_inventory/dataset/burlington-vermont-uvm-campus-tree-inventory">UVM FEMC</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>';
+
 function basemaps(maxZoom: number): Record<string, L.TileLayer> {
   const esri = 'Tiles &copy; Esri';
   const osm = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
@@ -96,6 +106,11 @@ export class PlantMap {
       zoomControl: false,
       layers: [layers.Streets!],
     });
+
+    // Rides alongside the basemap credit and stays put when the basemap is
+    // switched, because the data credit is owed regardless of which tiles
+    // are underneath.
+    this.map.attributionControl.addAttribution(FEMC_CREDIT);
 
     L.control.zoom({ position: 'bottomright' }).addTo(this.map);
     L.control.scale({ imperial: true, metric: false, position: 'bottomleft' }).addTo(this.map);
