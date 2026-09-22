@@ -232,3 +232,41 @@ describe('intersect', () => {
     expect(intersect([[square(-73.2, 44.47, 0.005)]], [[square(-73.18, 44.47, 0.005)]])).toEqual([]);
   });
 });
+
+describe('adding to an area that already exists', () => {
+  // The real failure: a corner drawn onto Trinity came back as Trinity's whole
+  // geometry, 7.59 hectares down to 0.98, while the outer boundary correctly
+  // grew by the difference. Tracing an area that is already real has to add.
+  const existing: MultiPoly = [[square(-73.196, 44.4818, 0.004)]];
+  // Overlapping the north-east corner, the way a hand-drawn addition does.
+  const corner: MultiPoly = [[square(-73.1930, 44.4845, 0.0018)]];
+
+  it('keeps every bit of what was already there', () => {
+    const merged = union(existing, corner);
+    expect(areaM2(merged)).toBeGreaterThan(areaM2(existing));
+    // Nothing of the original may fall outside the result.
+    expect(areaM2(outside(existing, merged))).toBeLessThan(1);
+  });
+
+  it('gains exactly the part of the new shape that was not already held', () => {
+    const merged = union(existing, corner);
+    const gained = areaM2(merged) - areaM2(existing);
+    const expected = areaM2(outside(corner, existing));
+    // Relative, because clipping the same region two ways leaves a few square
+    // metres between them on a shape this size — about 0.007% here.
+    expect(Math.abs(gained - expected) / expected).toBeLessThan(0.001);
+  });
+
+  it('replacing instead would have lost most of the area', () => {
+    // What the tracer used to do, stated so the regression is legible.
+    expect(areaM2(corner)).toBeLessThan(areaM2(existing) / 2);
+  });
+
+  it('adds a detached parcel as a second part rather than dropping one', () => {
+    // Spear Street sits over a kilometre from the rest and must survive.
+    const detached: MultiPoly = [[square(-73.19, 44.455, 0.003)]];
+    const merged = union(existing, detached);
+    expect(merged).toHaveLength(2);
+    expect(areaM2(merged)).toBeCloseTo(areaM2(existing) + areaM2(detached), 0);
+  });
+});

@@ -47,23 +47,37 @@ one feature draws dashed, the layer regains its "(approximate)" suffix, and
 
 ## Adding to an existing area
 
-The tracer exports the **whole** file, and a polygon drawn onto an area that
-already exists comes back as that area's *only* geometry — not added to what was
-there. It is added to the outer boundary correctly, so the giveaway is a
-boundary that grew by exactly as much as a campus shrank.
+**Trace mode adds to an area that is already real, rather than replacing it.**
+Draw a corner onto Trinity and Trinity grows by that corner; the button says
+*Add this outline to Trinity Campus* so it is clear before you commit, and the
+notice afterwards says how many acres went in:
 
-That happened once, on the Trinity addition, and it would have deleted 6.6 of
-Trinity's 7.6 hectares. **Compare the areas before replacing the file** — an
-unchanged campus that changed size is the signal:
+> Added 23 acres to Trinity Campus rather than replacing it — now 44 acres.
+> 8 acres of that reach beyond the UVM campus boundary, which has grown to
+> match. Undo last change to reverse it, or Reset to start that area over.
+
+An area that is still **provisional**, or has no geometry at all, is replaced
+instead — that is what tracing was built for, and the button reads *Save this
+outline as …*.
+
+To redraw a real area from scratch, **Reset** restores the campuses from the
+file on disk and tracing then replaces as before.
+
+This was not always so. Trace mode replaced unconditionally, and a corner added
+to Trinity on 22 September 2026 came back as Trinity's *entire* geometry — 7.59
+hectares down to 0.98 — while the outer boundary correctly grew by the
+difference. That asymmetry is the signature: a boundary that gained exactly what
+a campus lost.
+
+**Check any traced file before replacing what is on disk:**
 
 ```bash
 npm run areas:check -- ~/Downloads/campus-areas.geojson
 ```
 
-The fix is a union rather than a replacement — `polygon-clipping` is already a
-dependency, and `pc.union(oldGeometry, newGeometry)` is the whole of it. Then
-re-run `npm run areas -- --write`, because an area that grew may have taken in
-plants that had no campus before.
+It compares every area against the committed file and fails on any that shrank.
+Then re-run `npm run areas -- --write`, because an area that grew may have taken
+in plants that had no campus before.
 
 ## The tracer
 
