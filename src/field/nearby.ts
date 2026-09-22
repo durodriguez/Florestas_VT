@@ -14,6 +14,7 @@
  */
 
 import { bearingDegrees, compassPoint, distanceMeters } from '../geo';
+import { accessionForTag } from '../accession';
 
 /** One plant from public/field/trees.json, as `npm run data` writes it. */
 export interface MappedTree {
@@ -38,6 +39,9 @@ export interface NearbyTree {
  * enough that the list stays a handful rather than a page — and narrow enough
  * that a match at the far edge looks as doubtful as it is.
  */
+// Re-exported so the field app's own modules and tests keep one import.
+export { accessionForTag };
+
 export const NEARBY_RADIUS_M = 25;
 /** More than this is scrolling, which one-handed in the field is not use. */
 export const NEARBY_LIMIT = 6;
@@ -75,19 +79,6 @@ export function nearbyTrees(
 export function describeDistance(hit: NearbyTree): string {
   const m = Math.round(hit.meters);
   return m < 2 ? `${m} m away` : `${m} m ${hit.heading}`;
-}
-
-/**
- * The accession a metal tag number belongs to: tag 763 is `UVM-0763`.
- *
- * The same rule as `scripts/lib/arcgis.mjs`, restated because src/ is
- * TypeScript compiled by Vite and scripts/ is Node .mjs with nothing in
- * between. Four digits, because that is what the tags and the labels say.
- */
-export function accessionForTag(tag: string): string | null {
-  const digits = tag.trim();
-  if (!/^\d{1,4}$/.test(digits)) return null;
-  return `UVM-${digits.padStart(4, '0')}`;
 }
 
 /**

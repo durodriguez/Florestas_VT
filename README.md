@@ -101,7 +101,9 @@ refuses to write anything if a row has a problem. Dry run by default. See
 [docs/FIELD-SURVEY.md](docs/FIELD-SURVEY.md).
 
 Mobile-first throughout, since most visitors arrive by scanning a label
-outdoors. Keyboard accessible; `/` focuses search, `Enter` zooms the map to the results, `Escape` closes a record. On a phone, `Enter` (the magnifying glass on the keyboard) also lowers the keyboard, which is otherwise covering the results it just produced.
+outdoors. Keyboard accessible; `/` focuses search, `Escape` closes a record.
+
+**Submitting a search gets out of the way.** `Enter` — the magnifying glass on a phone keyboard — closes the search drawer, lowers the keyboard and moves the map to what was found. **Zoom to results** closes the drawer too. A bare tag number goes straight to that tree: typing `772` lists both UVM-0772 and UVM-2772, but the map flies to the one whose tag actually reads 772, because somebody typing a number is usually standing under it.
 
 ## How it is put together
 
