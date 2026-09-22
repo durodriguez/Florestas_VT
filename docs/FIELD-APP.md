@@ -16,8 +16,8 @@ app and the 2014 tree list for offline use.
 
 ## Using it
 
-1. **Type the tag number** stamped on the metal tag. The app shows what the 2014
-   inventory says that tree is, and fills in the species.
+1. **Type the tag number** stamped on the metal tag. The app shows what the
+   records say that tree is, and fills in the species.
 2. **Confirm the species.** Start typing and the box suggests matches from
    `taxa.csv`; pick one and the app records the taxon itself, not just the
    text. If the tree in front of you is not what the record claims, **just
@@ -227,9 +227,45 @@ updates `UVM-0772` rather than creating a second record.
 The flag is off by default, so a mistyped tag on an ordinary import is still
 refused rather than silently creating a bogus record.
 
-## The 2014 reference
+## Tag lookup: two sets of records, newest first
 
-Tag lookup uses the 2014 inventory, published at
+A typed tag is checked against **the current inventory first**, and only then
+against the 2014 file.
+
+The order matters. `data/plants.csv` holds 2,052 trees surveyed in 2023-24, and
+the 2014 inventory knows nothing about any of them planted since. Asking 2014
+first meant a surveyor could type a tag that exists, stand in front of the tree
+wearing it, and be told *"No tree 3235 in the 2014 inventory"* — which is how
+this was found. Where both know a tag, the newer identification is the one
+worth seeding.
+
+The current inventory reaches the phone as `public/field/trees.json`, which the
+app already carried for matching an untagged tree by position. A hit shows the
+accession, that the tree is already on the map, and when it was last surveyed:
+
+```
+Thuja occidentalis
+Northern white cedar
+UVM-3235 · already on the map · last surveyed 2023-11-10
+```
+
+A miss now says **"No tree 3235 in the records"** rather than blaming 2014, and
+offers neighbouring tags from both sets, since a tag that has lost a digit could
+belong to either.
+
+Two things the lookup will not do:
+
+- **It never overwrites the surveyor's own typing.** A species the surveyor
+  entered themselves survives any tag change; only an autofilled value is
+  replaced. Where the two disagree, the form says so and files it as a
+  correction.
+- **It clears an autofilled species on a miss.** Correcting a tag from 763 to
+  9999 used to leave *Betula nigra* sitting in the box, and a filled box looks
+  the same whether or not it still means anything.
+
+### The 2014 reference
+
+The fallback is the 2014 inventory, published at
 `public/field/reference.csv`. The app fetches it on first load and caches it,
 so surveyors never have to do anything — open the app and tag lookup works.
 
@@ -244,7 +280,9 @@ overrides the published copy on that device. Any CSV with a tree-number column
 and a scientific-name column will do; common header spellings are recognised.
 
 The app works without any reference at all — you just type the species yourself
-and lose the cross-check against 2014.
+and lose the cross-check against 2014. The current-inventory lookup is
+unaffected either way, since it rides on `trees.json` rather than on this
+file.
 
 ### Replacing it
 

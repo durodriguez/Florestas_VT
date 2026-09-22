@@ -15,7 +15,8 @@ import {
 } from './species';
 import { getMeta, setMeta } from './db';
 import {
-  describeDistance, nearbyTrees, type MappedTree, type NearbyTree,
+  describeDistance, mappedByTag, mappedNeighbours, nearbyTrees,
+  type MappedTree, type NearbyTree,
 } from './nearby';
 import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
 import { download, stamp, toCsv, toPhotoZip } from './exporter';
@@ -39,8 +40,13 @@ let photoName: string | null = null;
 let pinAdjusted = false;
 let plantedUnknown = false;
 let hasPlaque = false;
-/** What the 2014 inventory claims for the tag currently in the box. */
-let reference = { species: '', taxonId: '' };
+/**
+ * What the records already say about the tag currently in the box, and which
+ * records said it. `source` is shown to the surveyor, because "the 2014
+ * inventory says maple" and "we surveyed this in 2023 as maple" are different
+ * claims and a correction to one is not a correction to the other.
+ */
+let reference = { species: '', taxonId: '', source: '' };
 /** Every plant already on the map, for matching an untagged tree by position. */
 let mapped: MappedTree[] = [];
 /** The mapped tree the surveyor says this is, if they picked one. */
@@ -147,6 +153,36 @@ function renderCoords(): void {
 
 // ---------------------------------------------------------------- tag lookup
 
+/**
+ * Fill the species box from what the records say, unless the surveyor has
+ * typed something of their own. Resolving the name here means a tagged tree
+ * carries a taxon_id too, rather than only untagged ones getting the benefit.
+ */
+function seedSpecies(name: string, known: SpeciesEntry | undefined): void {
+  const input = $<HTMLInputElement>('species');
+  if (input.value.trim() && input.dataset.autofilled !== '1') return;
+  if (!name) {
+    // A tag that matches nothing must not leave the last tag's species behind
+    // it. Correcting 763 to 9999 would otherwise record a new tree as a river
+    // birch, and the box looks filled in either way.
+    input.value = '';
+    delete input.dataset.taxonId;
+    delete input.dataset.autofilled;
+    renderSpeciesNote();
+    closeSuggestions();
+    return;
+  }
+  if (known) {
+    setTaxon(known, true);
+  } else {
+    input.value = name;
+    delete input.dataset.taxonId;
+    input.dataset.autofilled = '1';
+    renderSpeciesNote();
+  }
+  closeSuggestions();
+}
+
 function renderTagLookup(): void {
   const tag = $<HTMLInputElement>('tag').value.trim();
   const box = $('tag-result');
@@ -156,50 +192,63 @@ function renderTagLookup(): void {
     box.className = 'tag-result';
     return;
   }
+  // The current inventory first. It holds every tree surveyed in 2023-24, so
+  // it knows about the ones planted since 2014 — and where both know a tag, the
+  // newer identification is the one to seed.
+  const onMap = mappedByTag(tag, mapped);
+  if (onMap) {
+    const known = resolveExact(onMap.sci, species);
+    reference = { species: onMap.sci, taxonId: known?.id ?? '', source: 'the inventory' };
+    box.className = 'tag-result tag-result--hit';
+    box.innerHTML =
+      `<strong>${escapeHtml(onMap.sci)}</strong>` +
+      `<span>${escapeHtml(onMap.common)}</span>` +
+      `<span class="tag-meta">${escapeHtml(onMap.id)} · already on the map` +
+      `${onMap.surveyed ? ` · last surveyed ${escapeHtml(onMap.surveyed)}` : ' · never surveyed'}</span>`;
+    seedSpecies(onMap.sci, known);
+    renderSpeciesChange();
+    return;
+  }
+
   if (referenceFile.size === 0) {
     box.className = 'tag-result tag-result--info';
-    box.textContent = 'No 2014 inventory loaded — type the species yourself. Load it from the Saved screen.';
+    box.textContent = `No tree ${tag} in the inventory, and no 2014 file loaded — type the species yourself. Load it from the Saved screen.`;
     return;
   }
 
   const hit = referenceFile.lookup(tag);
   if (hit) {
     const known = resolveExact(hit.botanical, species);
-    reference = { species: hit.botanical, taxonId: known?.id ?? '' };
+    reference = { species: hit.botanical, taxonId: known?.id ?? '', source: '2014' };
     box.className = 'tag-result tag-result--hit';
     box.innerHTML =
       `<strong>${escapeHtml(hit.botanical)}</strong>` +
       `<span>${escapeHtml(hit.common)}</span>` +
       `<span class="tag-meta">2014: ${escapeHtml(hit.dbh || '—')}″ DBH · ` +
       `${escapeHtml(hit.ageClass || '—')} · ${escapeHtml(hit.condition || '—')}</span>`;
-    const input = $<HTMLInputElement>('species');
-    if (!input.value.trim() || input.dataset.autofilled === '1') {
-      // The 2014 name comes from a botanical source, so it usually is a name
-      // taxa.csv knows. Resolving it here means a tagged tree carries a
-      // taxon_id too, rather than only untagged ones getting the benefit.
-      if (known) {
-        setTaxon(known, true);
-      } else {
-        input.value = hit.botanical;
-        delete input.dataset.taxonId;
-        input.dataset.autofilled = '1';
-        renderSpeciesNote();
-      }
-      closeSuggestions();
-    }
+    seedSpecies(hit.botanical, known);
     renderSpeciesChange();
     return;
   }
 
-  reference = { species: '', taxonId: '' };
+  reference = { species: '', taxonId: '', source: '' };
+  seedSpecies('', undefined);
   renderSpeciesChange();
-  const near = referenceFile.neighbours(tag);
+  // Neighbours from both sets of records, because a tag that lost a digit could
+  // belong to either. The current inventory goes first and wins a duplicate.
+  const near = new Map<string, string>();
+  for (const t of mappedNeighbours(tag, mapped)) {
+    near.set(String(Number(t.id.replace(/^UVM-/, ''))), t.common);
+  }
+  for (const t of referenceFile.neighbours(tag)) {
+    if (!near.has(t.tag)) near.set(t.tag, t.common);
+  }
   box.className = 'tag-result tag-result--miss';
   box.innerHTML =
-    `<strong>No tree ${escapeHtml(tag)} in the 2014 inventory.</strong>` +
-    (near.length
-      ? `<span class="tag-meta">Nearby tags: ${near
-          .map((t) => `<button type="button" class="tag-near" data-tag="${escapeHtml(t.tag)}">${escapeHtml(t.tag)} ${escapeHtml(t.common)}</button>`)
+    `<strong>No tree ${escapeHtml(tag)} in the records.</strong>` +
+    (near.size
+      ? `<span class="tag-meta">Nearby tags: ${[...near]
+          .map(([t, common]) => `<button type="button" class="tag-near" data-tag="${escapeHtml(t)}">${escapeHtml(t)} ${escapeHtml(common)}</button>`)
           .join(' ')}</span>`
       : '<span class="tag-meta">Check the digits, or record it as a new tree.</span>');
 }
@@ -400,7 +449,8 @@ function renderSpeciesChange(): void {
   }
   box.hidden = false;
   box.innerHTML =
-    `2014 recorded this tag as <strong>${escapeHtml(reference.species)}</strong>. ` +
+    `${escapeHtml(reference.source === '2014' ? '2014 recorded' : 'The inventory records')} this tag as ` +
+    `<strong>${escapeHtml(reference.species)}</strong>. ` +
     `You have recorded <strong>${escapeHtml(recorded)}</strong>, ` +
     'which is saved as a correction.';
 }
@@ -487,7 +537,7 @@ function resetForm(): void {
   }
   setPlantedUnknown(false);
   setHasPlaque(false);
-  reference = { species: '', taxonId: '' };
+  reference = { species: '', taxonId: '', source: '' };
   claimed = null;
   declinedNearby = false;
   renderClaimed();
@@ -687,7 +737,7 @@ $('tag-result').addEventListener('click', (e) => {
 $('tag-new').addEventListener('click', () => {
   $<HTMLInputElement>('tag').value = '';
   $<HTMLInputElement>('species').dataset.autofilled = '';
-  reference = { species: '', taxonId: '' };
+  reference = { species: '', taxonId: '', source: '' };
   renderTagLookup();
   $('species').focus();
   renderSpeciesSearch();
