@@ -523,7 +523,7 @@ and expect to refresh it rather than maintain it.
 species check is a script that exists. The work is in the decisions above and in
 verifying the clip along the streets you actually care about.
 
-**Built.** 335 of Burlington's 14,429 street trees stand inside the campus
+**Built.** 337 of Burlington's 14,429 street trees stand inside the campus
 boundary — Main St (155), South Prospect (58), South Williams (49), Colchester
 Ave (46), East Ave, College St, Summit St. On the map behind **Show Burlington
 street trees**, off by default, in Burlington's flag blue with white edges
@@ -549,11 +549,11 @@ Three things that were not obvious going in:
   removals and vacant planting sites. The `site_typ` codes are undocumented, so
   only `T` is imported and the reading is written down where somebody can
   correct it.
-- **Species needed nothing.** 335 of 335 resolved, because the alias table was
+- **Species needed nothing.** 337 of 337 resolved, because the alias table was
   built against this file months ago. The one genuine surprise was how much the
   earlier groundwork paid off.
 
-**And a windfall:** every one of the 335 carries a trunk diameter, which is more
+**And a windfall:** every one of the 337 carries a trunk diameter, which is more
 than the university's own 2,052 records manage. That does not unblock #7 — city
 trees are not UVM's to report ecosystem services for — but it does mean the
 mechanism could be built and tested against real measurements before UVM has

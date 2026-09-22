@@ -333,10 +333,16 @@ function renderPanel(rest: MultiPoly): void {
         : `Pick who gets ${moving}`;
     els.commit.disabled = !active || (!picked && !enough) || active === picked?.area;
   } else {
+    // In trace mode the button says which of the two things will happen, so
+    // nobody has to discover it by losing a campus.
+    const willAdd = Boolean(active) && mode === 'trace'
+      && !active!.provisional && areaM2(active!.geometry) > 0;
     els.commit.textContent = active
       ? mode === 'split'
         ? `Assign this shape to ${active.props.name}`
-        : `Save this outline as ${active.props.name}`
+        : willAdd
+          ? `Add this outline to ${active.props.name}`
+          : `Save this outline as ${active.props.name}`
       : 'Pick an area first';
     els.commit.disabled = !active || !enough;
   }
@@ -403,22 +409,57 @@ function commitDraft(): void {
 
   if (mode === 'trace') {
     const traced: MultiPoly = [[[...ring, ring[0]!]]];
-    active.geometry = traced;
+    // Adding to an area that already has real geometry, not replacing it.
+    //
+    // Tracing was built for areas that had nothing but a hand-drawn estimate,
+    // where replacing is the whole point. Once an area is real, somebody
+    // drawing on it is almost always adding a corner the boundary missed — and
+    // replacing then silently deletes the campus. That happened: a corner
+    // added to Trinity came back as Trinity's entire geometry, 7.59 hectares
+    // down to 0.98, with the outer boundary correctly grown by the difference.
+    //
+    // To redraw a real area from scratch instead, Reset restores the campuses
+    // from the file on disk; Undo last change reverses this one edit.
+    const adding = !active.provisional && areaM2(active.geometry) > 0;
+    // Measured before the merge, because afterwards the two are one shape.
+    const gainedAcres = adding
+      ? Math.round(areaM2(outside(traced, active.geometry)) * ACRES_PER_M2)
+      : 0;
+    active.geometry = adding ? union(active.geometry, traced) : traced;
     active.provisional = false;
+
     // A campus traced beyond the boundary — Spear Street sits over a kilometre
     // from everything else — is university land the boundary does not yet know
     // about. Merging it in keeps the boundary the union of its campuses, which
     // is what split mode's unassigned remainder is measured against. Disjoint
     // parts stay disjoint: the boundary simply becomes a MultiPolygon.
+    let beyondAcres = 0;
     if (boundary && active.props.kind === 'campus') {
       const beyond = outside(traced, boundary.geometry);
       if (areaM2(beyond) >= MIN_PIECE_M2) {
         boundary.geometry = union(boundary.geometry, traced);
-        notice =
-          `Added ${Math.round(areaM2(beyond) * ACRES_PER_M2)} acres to the ` +
-          `${boundary.props.name} boundary, which ${active.props.name} reaches beyond. ` +
-          'Undo last change if that was not intended.';
+        beyondAcres = Math.round(areaM2(beyond) * ACRES_PER_M2);
       }
+    }
+
+    // One notice covering whichever of the two happened, rather than the
+    // boundary's message quietly replacing the one about adding.
+    const parts: string[] = [];
+    if (adding) {
+      parts.push(
+        `Added ${gainedAcres} acres to ${active.props.name} rather than replacing it — ` +
+        `now ${acreLabel(active.geometry)} acres.`,
+      );
+    }
+    if (beyondAcres) {
+      parts.push(
+        `${beyondAcres} acres of that reach beyond the ${boundary!.props.name} boundary, ` +
+        'which has grown to match.',
+      );
+    }
+    if (parts.length) {
+      parts.push('Undo last change to reverse it, or Reset to start that area over.');
+      notice = parts.join(' ');
     }
   } else {
     const { assigned } = carve(unassigned(), ring);

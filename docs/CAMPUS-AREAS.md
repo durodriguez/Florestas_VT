@@ -20,16 +20,21 @@ one basemap; the overlays are checkboxes, because you can have any combination.
 
 | Area | Acres |
 | --- | ---: |
-| UVM campus (boundary, two parts) | 692 |
+| UVM campus (boundary, two parts) | 695 |
 | Centennial Campus | 222 |
 | Central Campus | 164 |
 | Spear Street Campus | 151 |
 | Athletic Campus | 81 |
 | Redstone Campus | 55 |
-| Trinity Campus | 19 |
+| Trinity Campus | 21 |
 
 The six campuses tile the boundary exactly — nothing unassigned, and they sum
-to within 0.02 acres of it, which is the sliver threshold below.
+to within 0.03 acres of it, which is the sliver threshold below.
+
+**Trinity grew by 2.4 acres on 22 September 2026**, taking in the north-east
+corner off Colchester Avenue. Eight UVM trees that had stood outside every
+campus area now have one, and two more Burlington street trees fall inside the
+boundary.
 
 The boundary is a two-part MultiPolygon: the main campus, and the Spear Street
 parcel about 1.2 km south of it.
@@ -39,6 +44,40 @@ called plain **Campus areas**. Should anyone add an estimated area later, that
 one feature draws dashed, the layer regains its "(approximate)" suffix, and
 `npm run data` warns until it is replaced. All three are driven by the
 `provisional` property and need no code change either way.
+
+## Adding to an existing area
+
+**Trace mode adds to an area that is already real, rather than replacing it.**
+Draw a corner onto Trinity and Trinity grows by that corner; the button says
+*Add this outline to Trinity Campus* so it is clear before you commit, and the
+notice afterwards says how many acres went in:
+
+> Added 23 acres to Trinity Campus rather than replacing it — now 44 acres.
+> 8 acres of that reach beyond the UVM campus boundary, which has grown to
+> match. Undo last change to reverse it, or Reset to start that area over.
+
+An area that is still **provisional**, or has no geometry at all, is replaced
+instead — that is what tracing was built for, and the button reads *Save this
+outline as …*.
+
+To redraw a real area from scratch, **Reset** restores the campuses from the
+file on disk and tracing then replaces as before.
+
+This was not always so. Trace mode replaced unconditionally, and a corner added
+to Trinity on 22 September 2026 came back as Trinity's *entire* geometry — 7.59
+hectares down to 0.98 — while the outer boundary correctly grew by the
+difference. That asymmetry is the signature: a boundary that gained exactly what
+a campus lost.
+
+**Check any traced file before replacing what is on disk:**
+
+```bash
+npm run areas:check -- ~/Downloads/campus-areas.geojson
+```
+
+It compares every area against the committed file and fails on any that shrank.
+Then re-run `npm run areas -- --write`, because an area that grew may have taken
+in plants that had no campus before.
 
 ## The tracer
 
