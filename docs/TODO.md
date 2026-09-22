@@ -626,6 +626,38 @@ looked.
 **Cost.** The column and the search are half a day. The conversation is the
 whole item.
 
+## 14. 165 trees the two inventories disagree about
+
+`npm run check:inventories` compares the 2014 walk-through against the ArcGIS
+mapping for the 950 tags that appear in both. They agree on 711, one is merely
+more specific on 74, and **they disagree on 165** — 53 about the genus.
+
+Full findings in [INVENTORY-CROSSCHECK.md](INVENTORY-CROSSCHECK.md). What makes
+this a to-do rather than a bug:
+
+**Nothing here can be fixed at a desk.** Neither file is authoritative. The
+only way to settle "bur oak or swamp white oak" is to stand under the tree.
+The check produces a worklist; the work is a season of walking.
+
+**It is smaller than 165.** Ninety of them are one of sixteen repeated pairs,
+running in blocks of consecutive tags — nine lindens from UVM-1047 to UVM-1064,
+eight birches from UVM-1477 to UVM-1485. Those are plantings that one surveyor
+labelled one way and the other labelled the other. One tree settles a row.
+
+**Start with the mature ones.** Young trees disagree at 25.3% and mature ones
+at 11.3%, and the gap is probably replanting: a 2-inch sapling in 2014 can be
+dead and replaced by 2024, tag and all, in which case neither file is wrong.
+A 32-inch tree has not moved, so one of the two files is simply wrong about it
+— and a big tree is the easiest kind to name. **UVM-2553** (32", red oak vs
+scarlet oak) and **UVM-1679** (18", blue vs white spruce) are the shape of it.
+
+**Do not let it write.** No record should be changed in bulk from this, and no
+observations should be generated: an observation means somebody looked on that
+day. Findings come back through the field app like any other survey.
+
+**Cost.** The check is written and tested. The fieldwork is the item, and it is
+the largest one on this list.
+
 ## Also outstanding (not code)
 
 - ~~**Permission from `ecamire@uvm.edu`**~~ — **resolved, 21 September 2026.**
@@ -645,6 +677,9 @@ whole item.
 - **Ask grounds about re-tagging** — see [#13](#13-re-tagging-what-happens-when-a-tree-gets-a-new-number).
   Tree 105 now wears tag 3497, and nothing in the data model currently expects
   a tag to change.
+- **165 species disagreements** between the 2014 inventory and the map — see
+  [#14](#14-165-trees-the-two-inventories-disagree-about). `npm run check:inventories`
+  regenerates the list at any time.
 - **Botanist review** of the authored descriptions and traits in `taxa.csv`.
 - **Official UVM V mark** from UVM Communications.
 - **ETS request** for `arboretum.uvm.edu/explorer/`.

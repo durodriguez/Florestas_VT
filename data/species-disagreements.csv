@@ -1,0 +1,166 @@
+plant_id,differs_at,map_taxon,map_name,inventory_2014_taxon,inventory_2014_name,inventory_2014_as_written,dbh_in_2014,age_class_2014,condition_2014
+UVM-0026,genus,pseudotsuga-menziesii,Douglas fir,abies-concolor,White fir,Fir-White,17,Semi-mature,Good
+UVM-0034,genus,betula-nigra,River birch,prunus-subhirtella,Weeping Cherry,Weeping Cherry,6,Young,Good
+UVM-0376,genus,syringa-reticulata,Japanese Tree lilac,prunus-serrulata,Flowering cherry,Cherry-Flowering,6,Semi-mature,Fair
+UVM-0377,genus,syringa-reticulata,Japanese Tree lilac,prunus-serrulata,Flowering cherry,Cherry-Flowering,7,Semi-mature,Fair
+UVM-0379,genus,acer-palmatum,Japanese maple,prunus-serrulata,Flowering cherry,Cherry-Flowering,8,Semi-mature,Fair
+UVM-0383,genus,quercus-alba,White oak,betula-nigra,River birch,Birch-River,2,Young,Fair
+UVM-0478,genus,quercus-palustris,Pin oak,gleditsia-triacanthos,Thornless Common honeylocust,Honeylocust-Thornless Common,13,Mature,Fair
+UVM-0491,genus,zelkova-serrata,Japanese zelkova,ostrya-virginiana,Eastern hophornbeam,Hornbeam-American,4,Semi-mature,Fair
+UVM-0633,genus,amelanchier-sp,Serviceberry,zelkova-serrata,Japanese zelkova,Zelkova-Japanese,5,Young,Good
+UVM-0640,genus,pseudotsuga-menziesii,Douglas fir,abies-balsamea,Balsam fir,Fir-Balsam,2,Young,Good
+UVM-0712,genus,cornus-florida,Flowering dogwood,halesia-tetraptera,Four Winged silverbell,Silverbell-Four Winged,7,Mature,Good
+UVM-0904,genus,pseudotsuga-menziesii,Douglas fir,malus-sp,Crabapple,Crabapple,5,Young,Good
+UVM-0911,genus,picea-abies,Norway spruce,thuja-occidentalis,Northern white cedar,Arborvitae-Eastern,2,Young,Fair
+UVM-0992,genus,tilia-cordata,Littleleaf linden,acer-saccharum,Sugar maple,Maple-Sugar,30,Mature,Fair
+UVM-1032,genus,quercus-rubra,Northern red oak,tilia-x-europaea,European linden,Linden-European,4,Young,Good
+UVM-1293,genus,corylus-colurna,Turkish filbert,ostrya-virginiana,Eastern hophornbeam,Hornbeam-American,2,Young,Fair
+UVM-1357,genus,pseudotsuga-menziesii,Douglas fir,abies-balsamea,Balsam fir,Fir-Balsam,1,New planting,Fair
+UVM-1429,genus,crataegus-sp,Hawthorn,malus-sp,Crabapple,Crabapple,10,Mature,Good
+UVM-1430,genus,crataegus-sp,Hawthorn,malus-sp,Crabapple,Crabapple,7,Mature,Good
+UVM-1449,genus,buxus-sempervirens,Common boxwood,acer-negundo,Boxelder,Boxelder,15,Mature,Good
+UVM-1467,genus,taxodium-distichum,Common baldcypress,metasequoia-glyptostroboides,Dawn redwood,Redwood-Dawn,2,Young,Fair
+UVM-1468,genus,taxodium-distichum,Common baldcypress,metasequoia-glyptostroboides,Dawn redwood,Redwood-Dawn,3,Young,Fair
+UVM-1626,genus,robinia-pseudoacacia,Black locust,gleditsia-triacanthos,Thornless Common honeylocust,Honeylocust-Thornless Common,8,Semi-mature,Fair
+UVM-1639,genus,gleditsia-triacanthos,Thornless Common honeylocust,salix-alba,White willow,Willow-White,11,Semi-mature,Good
+UVM-1641,genus,gleditsia-triacanthos,Thornless Common honeylocust,salix-sp,Willow,Willow,8,New planting,Good
+UVM-1644,genus,gleditsia-triacanthos,Thornless Common honeylocust,maackia-amurensis,Amur maackia,Maackia-Amur,7,Semi-mature,Good
+UVM-1650,genus,taxodium-distichum,Common baldcypress,metasequoia-glyptostroboides,Dawn redwood,Redwood-Dawn,7,Young,Good
+UVM-1699,genus,picea-glauca,White spruce,abies-concolor,White fir,Fir-White,2,Young,Good
+UVM-1719,genus,liquidambar-styraciflua,Sweetgum,nyssa-sylvatica,Black tupelo,Tupelo-Black,3,Young,Good
+UVM-1745,genus,juglans-nigra,Black walnut,fraxinus-americana,White ash,Ash-White,4,Young,Good
+UVM-1786,genus,liquidambar-styraciflua,Sweetgum,nyssa-sylvatica,Black tupelo,Tupelo-Black,3,Young,Good
+UVM-1798,genus,ulmus-glabra-camperdownii,Camperdown elm,quercus-macrocarpa,Bur oak,Oak-Bur,3,Young,Good
+UVM-1804,genus,ostrya-virginiana,Eastern hophornbeam,zelkova-serrata,Japanese zelkova,Zelkova-Japanese,16,Mature,Good
+UVM-1810,genus,acer-platanoides,Norway maple,aesculus-hippocastanum,Common horsechestnut,Horsechestnut-Common,16,Mature,Good
+UVM-1843,genus,ostrya-virginiana,Eastern hophornbeam,carpinus-caroliniana,American hornbeam,Hornbeam-American,4,Young,Fair
+UVM-1926,genus,pinus-strobus,Eastern white pine,rhamnus-cathartica,Common buckthorn,Buckthorn-European,8,Mature,Poor
+UVM-1927,genus,thuja-occidentalis,Northern white cedar,rhamnus-cathartica,Common buckthorn,Buckthorn-European,4,Mature,Poor
+UVM-2006,genus,acer-platanoides,Norway maple,picea-abies,Norway spruce,Spruce-Norway,32,Mature,Fair
+UVM-2096,genus,betula-lenta,Sweet birch,prunus-serrulata,Flowering cherry,Cherry-Flowering,11,Mature,Fair
+UVM-2097,genus,malus-sp,Crabapple,pyrus-communis,Common pear,Pear-Common,5,Semi-mature,Fair
+UVM-2100,genus,malus-sp,Crabapple,pyrus-communis,Common pear,Pear-Common,6,Semi-mature,Fair
+UVM-2140,genus,celtis-occidentalis,Hackberry,quercus-rubra,Northern red oak,Oak- Northern Red,3,Young,Fair
+UVM-2142,genus,phellodendron-amurense,Amur corktree,maackia-amurensis,Amur maackia,Maackia-Amur,8,Semi-mature,Good
+UVM-2258,genus,quercus-macrocarpa,Bur oak,pyrus-calleryana,Callery pear,Pear-Callery,1,New planting,Good
+UVM-2296,genus,larix-sp,Larch,syringa-reticulata,Japanese Tree lilac,Lilac-Japanese Tree,5,Semi-mature,Fair
+UVM-2297,genus,larix-sp,Larch,syringa-reticulata,Japanese Tree lilac,Lilac-Japanese Tree,2,Young,Fair
+UVM-2399,genus,liquidambar-styraciflua,Sweetgum,nyssa-sylvatica,Black tupelo,Tupelo-Black,3,Young,Good
+UVM-2407,genus,liquidambar-styraciflua,Sweetgum,nyssa-sylvatica,Black tupelo,Tupelo-Black,3,Young,Good
+UVM-2414,genus,juglans-nigra,Black walnut,gymnocladus-dioicus,Kentucky coffeetree,Coffeetree-Kentucky,4,Young,Good
+UVM-2416,genus,juglans-nigra,Black walnut,gymnocladus-dioicus,Kentucky coffeetree,Coffeetree-Kentucky,3,Young,Good
+UVM-2483,genus,malus-sp,Crabapple,crataegus-sp,Hawthorn,Hawthorn,7,Mature,Fair
+UVM-2499,genus,pseudotsuga-menziesii,Douglas fir,abies-balsamea,Balsam fir,Fir-Balsam,19,Mature,Poor
+UVM-2500,genus,picea-pungens,Colorado Blue spruce,abies-grandis,Grand fir,grand fir,2,Young,Fair
+UVM-0047,species,quercus-rubra,Northern red oak,quercus-macrocarpa,Bur oak,Oak-Bur,20,Semi-mature,Good
+UVM-0073,species,quercus-bicolor,Swamp White oak,quercus-robur,English oak,Oak-English,14,Semi-mature,Fair
+UVM-0129,species,quercus-rubra,Northern red oak,quercus-palustris,Pin oak,Oak-Pin,23,Mature,Fair
+UVM-0130,species,picea-glauca,White spruce,picea-pungens,Colorado Blue spruce,Spruce-Colorado Blue,14,Semi-mature,Fair
+UVM-0131,species,picea-glauca,White spruce,picea-pungens,Colorado Blue spruce,Spruce-Colorado Blue,17,Semi-mature,Fair
+UVM-0141,species,picea-pungens,Colorado Blue spruce,picea-glauca,White spruce,Spruce-White,12,Semi-mature,Fair
+UVM-0152,species,fagus-sylvatica,European beech,fagus-grandifolia,American beech,Beech-American,17,Semi-mature,Poor
+UVM-0227,species,sorbus-aucuparia,European mountain ash,sorbus-x-thuringiaca,Oakleaf mountain ash,Mountain Ash-Oakleaf,8,Semi-mature,Fair
+UVM-0234,species,picea-abies,Norway spruce,picea-glauca,White spruce,Spruce-White,17,Mature,Fair
+UVM-0236,species,acer-saccharum,Sugar maple,acer-platanoides,Norway maple,Maple-Norway,21,Mature,Fair
+UVM-0258,species,acer-saccharinum,Silver maple,acer-rubrum,Red maple,Maple-Red,11,Semi-mature,Fair
+UVM-0326,species,pinus-nigra,Austrian pine,pinus-resinosa,Red pine,Pine-Red,10,Young,Fair
+UVM-0343,species,quercus-alba,White oak,quercus-macrocarpa,Bur oak,Oak-Bur,25,Mature,Fair
+UVM-0349,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,19,Mature,Fair
+UVM-0360,species,quercus-imbricaria,Shingle oak,quercus-muehlenbergii,Chinkapin oak,Oak-Chinkapin,6,Young,Fair
+UVM-0361,species,quercus-rubra,Northern red oak,quercus-coccinea,Scarlet oak,Oak - Scarlet,8,Semi-mature,Fair
+UVM-0362,species,tilia-cordata,Littleleaf linden,tilia-tomentosa,Silver linden,Linden-Silver,14,Semi-mature,Fair
+UVM-0744,species,chamaecyparis-obtusa,Hinoki falsecypress,chamaecyparis-pisifera,Sawara falsecypress,Falsecypress-Sawara,2,Young,Good
+UVM-0761,species,quercus-alba,White oak,quercus-robur,English oak,Oak-English,2,New planting,Good
+UVM-0779,species,populus-grandidentata,Bigtooth aspen,populus-nigra,Lombardy poplar,Poplar-Lombardy,5,Semi-mature,Good
+UVM-0780,species,populus-grandidentata,Bigtooth aspen,populus-nigra,Lombardy poplar,Poplar-Lombardy,6,Semi-mature,Good
+UVM-0808,species,picea-pungens,Colorado Blue spruce,picea-glauca,White spruce,Spruce-White,2,Young,Good
+UVM-0819,species,betula-nigra,River birch,betula-papyrifera,Paper birch,Birch-Paper,3,Young,Fair
+UVM-0823,species,betula-nigra,River birch,betula-papyrifera,Paper birch,Birch-Paper,3,Young,Fair
+UVM-0824,species,betula-nigra,River birch,betula-papyrifera,Paper birch,Birch-Paper,3,Young,Fair
+UVM-0827,species,quercus-rubra,Northern red oak,quercus-palustris,Pin oak,Oak-Pin,12,Semi-mature,Fair
+UVM-0833,species,betula-nigra,River birch,betula-papyrifera,Paper birch,Birch-Paper,3,Young,Fair
+UVM-0840,species,cotinus-coggygria,Common smoketree,cotinus-obovatus,American smoketree,Smoketree-American,6,Mature,Fair
+UVM-0851,species,picea-pungens,Colorado Blue spruce,picea-glauca,White spruce,Spruce-White,2,Young,Good
+UVM-0852,species,picea-pungens,Colorado Blue spruce,picea-glauca,White spruce,Spruce-White,3,Young,Good
+UVM-0853,species,picea-pungens,Colorado Blue spruce,picea-glauca,White spruce,Spruce-White,3,Young,Fair
+UVM-1047,species,tilia-cordata,Littleleaf linden,tilia-x-europaea,European linden,Linden-European,3,Young,Good
+UVM-1048,species,tilia-cordata,Littleleaf linden,tilia-x-europaea,European linden,Linden-European,4,Young,Good
+UVM-1049,species,tilia-cordata,Littleleaf linden,tilia-x-europaea,European linden,Linden-European,4,Young,Good
+UVM-1050,species,tilia-cordata,Littleleaf linden,tilia-x-europaea,European linden,Linden-European,4,Young,Good
+UVM-1053,species,tilia-cordata,Littleleaf linden,tilia-x-europaea,European linden,Linden-European,3,Young,Good
+UVM-1054,species,tilia-cordata,Littleleaf linden,tilia-x-europaea,European linden,Linden-European,3,Young,Good
+UVM-1055,species,tilia-cordata,Littleleaf linden,tilia-x-europaea,European linden,Linden-European,3,Young,Good
+UVM-1058,species,tilia-cordata,Littleleaf linden,tilia-x-europaea,European linden,Linden-European,2,Young,Poor
+UVM-1064,species,tilia-cordata,Littleleaf linden,tilia-x-europaea,European linden,Linden-European,3,Young,Fair
+UVM-1302,species,acer-x-freemanii,Freeman's maple,acer-rubrum,Red maple,Maple-Red,3,New planting,Good
+UVM-1358,species,platanus-occidentalis,American sycamore,platanus-x-acerifolia,London planetree,Planetree-London,2,New planting,Fair
+UVM-1359,species,platanus-occidentalis,American sycamore,platanus-x-acerifolia,London planetree,Planetree-London,2,New planting,Fair
+UVM-1414,species,quercus-rubra,Northern red oak,quercus-palustris,Pin oak,Oak-Pin,14,Semi-mature,Fair
+UVM-1416,species,tilia-cordata,Littleleaf linden,tilia-x-europaea,European linden,Linden-European,3,Young,Good
+UVM-1432,species,betula-populifolia,Gray birch,betula-papyrifera,Paper birch,Birch-Paper,10,Mature,Good
+UVM-1434,species,tilia-cordata,Littleleaf linden,tilia-x-europaea,European linden,Linden-European,9,Semi-mature,Fair
+UVM-1435,species,betula-populifolia,Gray birch,betula-papyrifera,Paper birch,Birch-Paper,7,Semi-mature,Good
+UVM-1456,species,quercus-macrocarpa,Bur oak,quercus-bicolor,Swamp White oak,Oak-Swamp White,3,Young,Good
+UVM-1458,species,quercus-bicolor,Swamp White oak,quercus-robur,English oak,Oak-English,3,Young,Good
+UVM-1466,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,3,Young,Good
+UVM-1474,species,acer-x-freemanii,Freeman's maple,acer-saccharum,Sugar maple,Maple-Sugar,2,Young,Good
+UVM-1475,species,acer-x-freemanii,Freeman's maple,acer-saccharum,Sugar maple,Maple-Sugar,4,Young,Good
+UVM-1477,species,betula-papyrifera,Paper birch,betula-nigra,River birch,Birch-River,2,Young,Good
+UVM-1479,species,betula-papyrifera,Paper birch,betula-nigra,River birch,Birch-River,2,Young,Good
+UVM-1480,species,betula-papyrifera,Paper birch,betula-nigra,River birch,Birch-River,2,Young,Good
+UVM-1481,species,betula-papyrifera,Paper birch,betula-nigra,River birch,Birch-River,2,Young,Good
+UVM-1482,species,betula-papyrifera,Paper birch,betula-nigra,River birch,Birch-River,2,Young,Good
+UVM-1483,species,betula-papyrifera,Paper birch,betula-nigra,River birch,Birch-River,2,Young,Good
+UVM-1484,species,betula-papyrifera,Paper birch,betula-nigra,River birch,Birch-River,2,Young,Good
+UVM-1485,species,betula-papyrifera,Paper birch,betula-nigra,River birch,Birch-River,2,Young,Good
+UVM-1609,species,tilia-cordata,Littleleaf linden,tilia-tomentosa,Silver linden,Linden-Silver,9,Semi-mature,Good
+UVM-1645,species,betula-nigra,River birch,betula-papyrifera,Paper birch,Birch-Paper,4,Young,Good
+UVM-1646,species,betula-nigra,River birch,betula-papyrifera,Paper birch,Birch-Paper,2,Young,Good
+UVM-1679,species,picea-pungens,Colorado Blue spruce,picea-glauca,White spruce,Spruce-White,18,Mature,Fair
+UVM-1720,species,quercus-macrocarpa,Bur oak,quercus-bicolor,Swamp White oak,Oak-Swamp White,3,Young,Good
+UVM-1723,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,3,Young,Good
+UVM-1724,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,5,Young,Good
+UVM-1726,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,6,Young,Good
+UVM-1744,species,quercus-bicolor,Swamp White oak,quercus-prinus,Chestnut oak,Oak-Chestnut,4,Young,Good
+UVM-1752,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,4,Young,Good
+UVM-1753,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,5,Young,Good
+UVM-1755,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,3,Young,Good
+UVM-1756,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,4,Young,Good
+UVM-1780,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,3,Young,Good
+UVM-1791,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,3,Young,Good
+UVM-1792,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,3,Young,Good
+UVM-1797,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,5,Young,Good
+UVM-1803,species,acer-x-freemanii,Freeman's maple,acer-rubrum,Red maple,Maple-Red,4,Young,Good
+UVM-1805,species,tilia-americana,American basswood,tilia-x-europaea,European linden,Linden-European,16,Mature,Good
+UVM-1807,species,acer-x-freemanii,Freeman's maple,acer-rubrum,Red maple,Maple-Red,4,Young,Good
+UVM-1808,species,quercus-palustris,Pin oak,quercus-rubra,Northern red oak,Oak- Northern Red,12,Semi-mature,Good
+UVM-1809,species,acer-x-freemanii,Freeman's maple,acer-rubrum,Red maple,Maple-Red,5,Young,Good
+UVM-1899,species,syringa-vulgaris,Common lilac,syringa-reticulata,Japanese Tree lilac,Lilac-Japanese Tree,5,Mature,Fair
+UVM-1903,species,quercus-rubra,Northern red oak,quercus-palustris,Pin oak,Oak-Pin,25,Mature,Fair
+UVM-2002,species,acer-rubrum,Red maple,acer-saccharinum,Silver maple,Maple-Silver,13,Mature,Fair
+UVM-2003,species,acer-rubrum,Red maple,acer-saccharinum,Silver maple,Maple-Silver,14,Mature,Fair
+UVM-2004,species,acer-rubrum,Red maple,acer-saccharinum,Silver maple,Maple-Silver,20,Mature,Fair
+UVM-2018,species,picea-glauca,White spruce,picea-abies,Norway spruce,Spruce-Norway,13,Semi-mature,Fair
+UVM-2021,species,picea-glauca,White spruce,picea-abies,Norway spruce,Spruce-Norway,8,Semi-mature,Fair
+UVM-2022,species,picea-glauca,White spruce,picea-abies,Norway spruce,Spruce-Norway,13,Semi-mature,Fair
+UVM-2132,species,quercus-rubra,Northern red oak,quercus-coccinea,Scarlet oak,Oak - Scarlet,18,Semi-mature,Fair
+UVM-2134,species,quercus-rubra,Northern red oak,quercus-coccinea,Scarlet oak,Oak - Scarlet,19,Semi-mature,Fair
+UVM-2141,species,tilia-americana,American basswood,tilia-x-europaea,European linden,Linden-European,11,Semi-mature,Good
+UVM-2189,species,pinus-sylvestris,Scotch pine,pinus-nigra,Austrian pine,Pine-Austrian,10,Semi-mature,Good
+UVM-2237,species,quercus-bicolor,Swamp White oak,quercus-macrocarpa,Bur oak,Oak-Bur,3,Young,Poor
+UVM-2239,species,acer-rubrum,Red maple,acer-x-freemanii,Freeman's maple,Maple-Freeman's,9,Semi-mature,Fair
+UVM-2302,species,acer-saccharinum,Silver maple,acer-rubrum,Red maple,Maple-Red,4,Young,Good
+UVM-2310,species,quercus-macrocarpa,Bur oak,quercus-bicolor,Swamp White oak,Oak-Swamp White,3,Young,Good
+UVM-2311,species,quercus-macrocarpa,Bur oak,quercus-bicolor,Swamp White oak,Oak-Swamp White,4,Young,Good
+UVM-2314,species,quercus-macrocarpa,Bur oak,quercus-bicolor,Swamp White oak,Oak-Swamp White,4,Young,Fair
+UVM-2338,species,tilia-americana,American basswood,tilia-x-europaea,European linden,Linden-European,4,Young,Good
+UVM-2418,species,platanus-occidentalis,American sycamore,platanus-x-acerifolia,London planetree,Planetree-London,4,Young,Good
+UVM-2419,species,platanus-occidentalis,American sycamore,platanus-x-acerifolia,London planetree,Planetree-London,4,Young,Good
+UVM-2496,species,tilia-americana,American basswood,tilia-cordata,Littleleaf linden,Linden-Littleleaf,12,Semi-mature,Fair
+UVM-2498,species,prunus-sargentii,Sargent cherry,prunus-serrulata,Flowering cherry,Cherry-Flowering,7,Mature,Fair
+UVM-2523,species,tilia-americana,American basswood,tilia-x-europaea,European linden,Linden-European,14,Semi-mature,Good
+UVM-2526,species,tilia-americana,American basswood,tilia-x-europaea,European linden,Linden-European,14,Semi-mature,Fair
+UVM-2528,species,tilia-americana,American basswood,tilia-x-europaea,European linden,Linden-European,13,Semi-mature,Good
+UVM-2532,species,tilia-americana,American basswood,tilia-x-europaea,European linden,Linden-European,11,Semi-mature,Fair
+UVM-2534,species,picea-pungens,Colorado Blue spruce,picea-glauca,White spruce,Spruce-White,14,Mature,Fair
+UVM-2553,species,quercus-rubra,Northern red oak,quercus-coccinea,Scarlet oak,Oak - Scarlet,32,Mature,Good

@@ -128,6 +128,7 @@ species never reaches the live site.
 | **Surveying and mapping trees** | [docs/FIELD-SURVEY.md](docs/FIELD-SURVEY.md) |
 | **The ArcGIS import** | [docs/ARCGIS-IMPORT.md](docs/ARCGIS-IMPORT.md) |
 | **Burlington's street trees** | [docs/CITY-TREES.md](docs/CITY-TREES.md) |
+| **Where the two inventories disagree** | [docs/INVENTORY-CROSSCHECK.md](docs/INVENTORY-CROSSCHECK.md) |
 | **The field survey app** | [docs/FIELD-APP.md](docs/FIELD-APP.md) |
 | **Hosting, domains, scaling** | [docs/DEPLOY.md](docs/DEPLOY.md) |
 | **What's planned next** | [docs/TODO.md](docs/TODO.md) |
@@ -144,6 +145,7 @@ species never reaches the live site.
 | `npm run import:city -- <file.csv>` | Clip Burlington's street-tree inventory to campus (dry run by default) |
 | `npm run areas` | File each plant under the campus area its coordinates fall in (dry run by default) |
 | `npm run check:species -- <file>` | Report how a source file's species names resolve against `taxa.csv` |
+| `npm run check:inventories` | Compare the 2014 inventory against the map, tree by tree, and list every disagreement |
 | `npm run labels` | Generate QR label sheet and SVGs into `public/labels/` |
 | `npm run check:links` | Check every `wikipedia_url` in `taxa.csv` still resolves |
 | `npm test` | Run the test suite |
