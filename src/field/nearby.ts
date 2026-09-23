@@ -49,6 +49,27 @@ export const NEARBY_RADIUS_M = 25;
 export const NEARBY_LIMIT = 6;
 
 /**
+ * One colour per offered tree, so the circle on the map and the box in the
+ * list are obviously the same tree.
+ *
+ * Chosen to sit on aerial imagery, which is mostly canopy, grass, asphalt and
+ * roof: no green, because it disappears into the first two, and nothing gold
+ * or blue, because the pin is gold and the accuracy ring is blue. Every one
+ * gets a white stroke so it reads against dark and light ground alike.
+ *
+ * Colour is reinforcement, never the only signal — each box still leads with
+ * its distance and bearing, which is what a surveyor reads.
+ */
+export const NEARBY_COLOURS = [
+  '#e6194b', // red
+  '#f58231', // orange
+  '#911eb4', // purple
+  '#00c2bd', // teal
+  '#f032e6', // magenta
+  '#101820', // near-black
+] as const;
+
+/**
  * Mapped trees near a position, nearest first.
  *
  * Nearest first and nothing else: no ranking by species, no preferring the

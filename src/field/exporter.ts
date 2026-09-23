@@ -37,6 +37,9 @@ const COLUMNS: Array<[string, (r: SurveyRecord) => string]> = [
   ['dbh_in', (r) => measure(r.dbhIn)],
   ['height_ft', (r) => measure(r.heightFt)],
   ['spread_ft', (r) => measure(r.spreadFt)],
+  // Whether a tree is here at all, which the importer used to assume. A blank
+  // reads as 'active' there, so an export from an older build still imports.
+  ['status', (r) => r.status ?? 'active'],
   ['condition', (r) => r.condition],
   ['planted_year', (r) => measure(r.plantedYear)],
   ['surveyor', (r) => r.surveyor],

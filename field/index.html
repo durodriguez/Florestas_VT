@@ -71,8 +71,22 @@
       </div>
     </section>
 
-    <!-- 4. measurements --------------------------------------------------- -->
+    <!-- 4. is it there ------------------------------------------------------
+         Before the measurements, because it decides whether there is anything
+         to measure. Condition describes a tree that is here — "dead" is still
+         a standing trunk — so an absent tree has no condition at all. -->
     <section class="card">
+      <span class="field-label">Is the tree there?</span>
+      <div class="seg" id="status-seg" role="radiogroup" aria-label="Is the tree there?"></div>
+      <p class="hint" id="status-hint">
+        <strong>Gone</strong> means a stump, or a mark where it stood.
+        <strong>Nothing here</strong> means no tree and no sign there ever was one.
+        Either way, say which record you mean — type its tag or pick it from the list above.
+      </p>
+    </section>
+
+    <!-- 5. measurements --------------------------------------------------- -->
+    <section class="card" id="measurements-card">
       <span class="field-label">Measurements</span>
       <div class="grid-3">
         <label>DBH (in)<input id="dbh" type="number" inputmode="decimal" step="0.1" min="0"></label>
@@ -83,7 +97,7 @@
       <div class="seg" id="condition-seg" role="radiogroup" aria-label="Condition"></div>
     </section>
 
-    <!-- 5. photo ---------------------------------------------------------- -->
+    <!-- 6. photo ---------------------------------------------------------- -->
     <section class="card">
       <span class="field-label">Photo</span>
       <input type="file" id="photo" accept="image/*" capture="environment" hidden>
@@ -95,7 +109,7 @@
       </div>
     </section>
 
-    <!-- 6. dedication ----------------------------------------------------- -->
+    <!-- 7. dedication ----------------------------------------------------- -->
     <section class="card">
       <span class="field-label">Dedication</span>
       <label class="check">
@@ -112,7 +126,7 @@
       </div>
     </section>
 
-    <!-- 7. notes ---------------------------------------------------------- -->
+    <!-- 8. notes ---------------------------------------------------------- -->
     <section class="card">
       <label class="field-label" for="notes">Notes</label>
       <textarea id="notes" rows="3" placeholder="Defects, construction damage, multiple stems…"></textarea>

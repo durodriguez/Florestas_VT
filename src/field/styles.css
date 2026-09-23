@@ -153,10 +153,23 @@ textarea { min-height: 78px; resize: vertical; }
 }
 .nearby-list { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 6px; }
 .nearby-opt {
-  display: grid; gap: 2px; width: 100%; min-height: var(--tap);
+  display: grid; gap: 2px 8px; width: 100%; min-height: var(--tap);
+  grid-template-columns: auto 1fr;
   padding: 9px 11px; text-align: left; font: inherit; color: inherit;
   background: var(--ground); border: 1.5px solid var(--rule); border-radius: 9px;
 }
+/* Matches the circle drawn for this tree on the map above, so the list and
+   the imagery point at each other without a legend. The ring is white for the
+   same reason the map circles carry one: it has to read on any ground. */
+.nearby-dot {
+  grid-column: 1; grid-row: 1 / -1; align-self: center;
+  width: 13px; height: 13px; border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px rgb(0 0 0 / 22%);
+}
+/* Everything else belongs in the second column. Without this the auto-placed
+   children start filling column one and shoulder the swatch out of the way,
+   which puts it beside the species name rather than against the whole box. */
+.nearby-opt > :not(.nearby-dot) { grid-column: 2; }
 .nearby-opt:active { border-color: var(--green-2); }
 .nearby-dist { font-size: 15px; font-weight: 650; }
 .nearby-name { font-size: 14px; }
@@ -326,3 +339,9 @@ textarea { min-height: 78px; resize: vertical; }
 .ghost-btn.is-on {
   background: var(--green); border-color: var(--green); color: #fff; font-weight: 650;
 }
+
+/* Measurements and condition, once the surveyor says there is no tree to
+   measure. Dimmed rather than hidden, so the reason they are unavailable
+   stays on screen next to them. */
+.is-void { opacity: .45; }
+.is-void input, .is-void .seg-btn { pointer-events: none; }

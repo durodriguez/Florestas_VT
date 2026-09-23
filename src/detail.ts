@@ -107,10 +107,16 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
        </figure>`
     : '';
 
-  const removed =
-    plant.status !== 'active'
-      ? `<p class="detail-banner">This plant has been removed from the landscape. Its record is kept for historical reference.</p>`
-      : '';
+  // Two ways for a plant to be absent, and they are not the same claim. One
+  // stood here and came down; the other was recorded and never found. Saying
+  // "removed" for the second would assert a tree that may never have existed.
+  const ABSENT: Record<string, string> = {
+    removed: 'This plant has been removed from the landscape. Its record is kept for historical reference.',
+    'not-found': 'A survey went looking for this plant and found nothing. It may have gone long ago, or it may never have been here — the record is kept so the question stays visible.',
+  };
+  const removed = ABSENT[plant.status]
+    ? `<p class="detail-banner">${ABSENT[plant.status]}</p>`
+    : '';
 
   // The wording is the whole record: a tree is a gift, memorial or dedicated
   // one exactly when somebody has written down what its plaque says.

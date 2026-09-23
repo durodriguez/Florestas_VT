@@ -484,6 +484,67 @@ describe('importSurvey — re-surveys', () => {
   });
 });
 
+describe('importSurvey — a tree that is not there', () => {
+  const headersWithStatus = [...headers, 'status'];
+
+  it('records a removal against a tree already on file', () => {
+    const r = run([row({ tag: 'UVM-2025-0007', status: 'removed', date: '2026-09-21' })], {
+      headers: headersWithStatus,
+    });
+    expect(r.summary.errors).toBe(0);
+    expect(r.inserts).toHaveLength(0);
+    expect(r.observations[0]).toMatchObject({ plant_id: 'UVM-2025-0007', status: 'removed' });
+  });
+
+  it('records a tree the survey went looking for and did not find', () => {
+    const r = run([row({ tag: 'UVM-2025-0007', status: 'not-found', date: '2026-09-21' })], {
+      headers: headersWithStatus,
+    });
+    expect(r.observations[0]).toMatchObject({ status: 'not-found' });
+  });
+
+  it('needs no species, and does not blank the one on file', () => {
+    // Nobody can name a tree that is not there. The first draft left taxon_id
+    // undefined, which the corrections loop happily carried across — writing
+    // the word "undefined" over a real species, the same fault planted_year
+    // once shipped.
+    const r = run([row({ tag: 'UVM-2025-0007', species: '', status: 'removed', date: '2026-09-21' })], {
+      headers: headersWithStatus,
+    });
+    expect(r.summary.errors).toBe(0);
+    expect(r.observations[0]).toMatchObject({ status: 'removed' });
+    for (const u of r.updates) expect(u.changes).not.toHaveProperty('taxon_id');
+  });
+
+  it('refuses to bury a tree it has just invented', () => {
+    // A tag nobody has on file, reported absent, is a misread number far more
+    // often than a discovery. Creating the tree and marking it gone in one
+    // step would record a plant that never existed as one that did.
+    const r = run([row({ tag: '9911', status: 'removed' })], { headers: headersWithStatus });
+    expect(r.inserts).toHaveLength(0);
+    expect(r.issues.some((i: { message: string }) => /cannot be reported as/.test(i.message))).toBe(true);
+  });
+
+  it('refuses an absent row that names no tree at all', () => {
+    const r = run([row({ tag: '', status: 'not-found' })], { headers: headersWithStatus });
+    expect(r.inserts).toHaveLength(0);
+    expect(r.issues.some((i: { message: string }) => /has to name the tree/.test(i.message))).toBe(true);
+  });
+
+  it('refuses a status that is not one of the three', () => {
+    const r = run([row({ tag: 'UVM-2025-0007', status: 'vanished' })], { headers: headersWithStatus });
+    expect(r.issues.some((i: { message: string }) => /is not one of/.test(i.message))).toBe(true);
+  });
+
+  it('reads a blank status as active, so an older export still imports', () => {
+    const r = run([row({ tag: 'UVM-2025-0007', status: '', date: '2026-09-21' })], {
+      headers: headersWithStatus,
+    });
+    expect(r.summary.errors).toBe(0);
+    expect(r.observations[0]).toMatchObject({ status: 'active' });
+  });
+});
+
 describe('importSurvey — dates', () => {
   it('gives every new plant an observation dated by the survey', () => {
     const r = run([row()]);

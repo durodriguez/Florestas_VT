@@ -14,8 +14,9 @@ import {
   type SpeciesEntry, type Suggestion,
 } from './species';
 import { getMeta, setMeta } from './db';
+import { STATUSES, STATUS_LABELS, absent } from './status';
 import {
-  describeDistance, mappedByTag, mappedNeighbours, nearbyTrees,
+  describeDistance, mappedByTag, mappedNeighbours, nearbyTrees, NEARBY_COLOURS,
   type MappedTree, type NearbyTree,
 } from './nearby';
 import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
@@ -83,6 +84,11 @@ const pinIcon = L.divIcon({
   iconSize: [34, 34],
   iconAnchor: [17, 17],
 });
+// The mapped trees currently on offer, drawn in the same colours as the list
+// beside them. Added before the pin so the pin always sits on top of them —
+// the pin is what the surveyor is placing, and it must never be hidden.
+const nearbyLayer = L.layerGroup().addTo(map);
+
 const pin = L.marker([44.4777, -73.1956], { draggable: true, icon: pinIcon, autoPan: true }).addTo(map);
 const accuracyRing = L.circle([44.4777, -73.1956], { radius: 0, color: '#1d6fe0', weight: 1, fillOpacity: 0.1 }).addTo(map);
 
@@ -301,6 +307,7 @@ function renderNearby(): void {
   if (claimed || declinedNearby || hasTag || !point || mapped.length === 0) {
     box.hidden = true;
     list.innerHTML = '';
+    nearbyLayer.clearLayers();
     return;
   }
 
@@ -308,12 +315,33 @@ function renderNearby(): void {
   if (hits.length === 0) {
     box.hidden = true;
     list.innerHTML = '';
+    nearbyLayer.clearLayers();
     return;
   }
+
+  // Rebuilt rather than moved: the set changes as the fix drifts, and which
+  // tree holds which colour changes with it. A stale circle in an old colour
+  // would point at the wrong box.
+  nearbyLayer.clearLayers();
+  hits.forEach((hit, i) => {
+    L.circleMarker([hit.tree.lat, hit.tree.lng], {
+      radius: 7,
+      color: '#ffffff',
+      weight: 2,
+      fillColor: NEARBY_COLOURS[i % NEARBY_COLOURS.length]!,
+      fillOpacity: 0.95,
+    })
+      // Tapping the circle claims the tree, exactly as tapping its box does.
+      // Standing under a tree and pointing at it on the map is the more
+      // natural gesture of the two.
+      .on('click', () => claim(hit))
+      .addTo(nearbyLayer);
+  });
 
   list.innerHTML = hits
     .map((hit, i) => `<li>
       <button type="button" class="nearby-opt" data-nearby="${i}">
+        <span class="nearby-dot" style="background:${NEARBY_COLOURS[i % NEARBY_COLOURS.length]}"></span>
         <span class="nearby-dist">${escapeHtml(describeDistance(hit))}</span>
         <span class="nearby-name">${escapeHtml(hit.tree.common)}
           <span class="nearby-sci">${escapeHtml(hit.tree.sci)}</span></span>
@@ -535,6 +563,39 @@ function selectedCondition(): string {
   return $('condition-seg').querySelector('[aria-checked="true"]')?.getAttribute('data-condition') ?? '';
 }
 
+function renderStatuses(): void {
+  $('status-seg').innerHTML = STATUSES.map(
+    (v) => `<button type="button" class="seg-btn" role="radio" aria-checked="${v === 'active'}" data-status="${v}">${STATUS_LABELS[v]}</button>`,
+  ).join('');
+}
+
+function selectedStatus(): string {
+  return $('status-seg').querySelector('[aria-checked="true"]')?.getAttribute('data-status') ?? 'active';
+}
+
+/**
+ * An absent tree has nothing to measure and no condition — "dead" would say a
+ * trunk is standing. The inputs are disabled rather than hidden so the reason
+ * stays visible, and cleared so a number typed before the surveyor realised
+ * the tree was gone cannot be exported as a measurement of nothing.
+ *
+ * The photo stays available on purpose: a picture of the empty ground is the
+ * evidence, and is the only thing that makes the record checkable later.
+ */
+function applyStatus(): void {
+  const gone = absent(selectedStatus());
+  $('measurements-card').classList.toggle('is-void', gone);
+  for (const id of ['dbh', 'height', 'spread']) {
+    const el = $<HTMLInputElement>(id);
+    el.disabled = gone;
+    if (gone) el.value = '';
+  }
+  for (const b of $('condition-seg').querySelectorAll<HTMLButtonElement>('[aria-checked]')) {
+    b.disabled = gone;
+    if (gone) b.setAttribute('aria-checked', 'false');
+  }
+}
+
 function resetForm(): void {
   for (const id of ['tag', 'species', 'dbh', 'height', 'spread', 'notes', 'planted']) {
     $<HTMLInputElement>(id).value = '';
@@ -550,6 +611,10 @@ function resetForm(): void {
   for (const b of $('condition-seg').querySelectorAll('[aria-checked]')) {
     b.setAttribute('aria-checked', 'false');
   }
+  for (const b of $('status-seg').querySelectorAll('[aria-checked]')) {
+    b.setAttribute('aria-checked', String(b.getAttribute('data-status') === 'active'));
+  }
+  applyStatus();
   clearPhoto();
   $('tag-result').innerHTML = '';
   $('form-error').hidden = true;
@@ -576,7 +641,22 @@ async function save(): Promise<void> {
   const point = currentLatLng();
   const fix = gps.bestFix;
 
-  if (!speciesName) return fail('Enter a species before saving.');
+  // An absent tree is a statement about a record that already exists, so it
+  // needs to say which one — "nothing here" is meaningless without a tree it
+  // is denying. It does not need a species: nobody can identify what is not
+  // there, and the claimed record already carries one.
+  const status = selectedStatus();
+  if (absent(status)) {
+    const tag = $<HTMLInputElement>('tag').value.trim();
+    if (!tag && !claimed) {
+      return fail(
+        `"${STATUS_LABELS[status]}" has to say which tree. Type its tag, or pick it from the ` +
+        'mapped trees near you.',
+      );
+    }
+  } else if (!speciesName) {
+    return fail('Enter a species before saving.');
+  }
 
   const plantedRaw = $<HTMLInputElement>('planted').value.trim();
   if (!plantedUnknown && plantedRaw !== '') {
@@ -633,6 +713,7 @@ async function save(): Promise<void> {
     dbhIn: num('dbh'),
     heightFt: num('height'),
     spreadFt: num('spread'),
+    status: selectedStatus(),
     condition: selectedCondition(),
     plantedYear: plantedUnknown ? null : num('planted'),
     plantedUnknown,
@@ -725,6 +806,8 @@ function showScreen(which: 'form' | 'list'): void {
 // ---------------------------------------------------------------- wiring
 
 renderConditions();
+renderStatuses();
+applyStatus();
 $<HTMLInputElement>('date').value = stamp();
 
 $('tag').addEventListener('input', () => {
@@ -795,6 +878,15 @@ $('condition-seg').addEventListener('click', (e) => {
   for (const b of $('condition-seg').querySelectorAll('[aria-checked]')) {
     b.setAttribute('aria-checked', String(b === btn));
   }
+});
+
+$('status-seg').addEventListener('click', (e) => {
+  const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-status]');
+  if (!btn) return;
+  for (const b of $('status-seg').querySelectorAll('[aria-checked]')) {
+    b.setAttribute('aria-checked', String(b === btn));
+  }
+  applyStatus();
 });
 
 /**

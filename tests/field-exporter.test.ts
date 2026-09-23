@@ -9,6 +9,7 @@ const MAPPED = { lat: 44.476523, lng: -73.194675 };
 const record = (over: Partial<SurveyRecord> = {}): SurveyRecord => ({
   id: 1,
   tag: '',
+  status: 'active',
   species: 'Tilia cordata',
   taxonId: 'tilia-cordata',
   referenceSpecies: '',
@@ -165,5 +166,25 @@ describe('numbers a surveyor never entered', () => {
 
   it('still writes a zero, which is a measurement and not a blank', () => {
     expect(cell(toCsv([record({ dbhIn: 0 })]), 'dbh_in')).toBe('0');
+  });
+});
+
+describe('status', () => {
+  const cell = (csv: string, header: string): string => {
+    const cols = csv.split('\n')[0]!.split(',');
+    return csv.split('\n')[1]!.split(',')[cols.indexOf(header)] ?? '';
+  };
+
+  it('exports what the surveyor said about whether the tree is there', () => {
+    expect(cell(toCsv([record({ status: 'active' })]), 'status')).toBe('active');
+    expect(cell(toCsv([record({ status: 'removed' })]), 'status')).toBe('removed');
+    expect(cell(toCsv([record({ status: 'not-found' })]), 'status')).toBe('not-found');
+  });
+
+  it('falls back to active for a record saved before the column existed', () => {
+    // Records live in a surveyor's phone across app updates, so an older one
+    // has no status at all. Blank would import as active anyway, but writing
+    // it explicitly keeps the CSV readable by a person.
+    expect(cell(toCsv([record({ status: undefined as never })]), 'status')).toBe('active');
   });
 });
