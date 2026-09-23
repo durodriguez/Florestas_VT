@@ -572,10 +572,21 @@ Its observation records the new number and **nothing about its identity was
 touched**, deliberately, because this is a question about process rather than
 about one elm.
 
-**Why it is not a small thing.** This project's accession numbers *are* the tag
-numbers: tag 763 is `UVM-0763`. That was chosen on purpose — the number on the
-map should match the number on the trunk — and [ARCGIS-IMPORT.md](ARCGIS-IMPORT.md)
-spells it out. Re-tagging breaks the rule from the other end:
+**The schema side is now done, 23 September 2026.** `plants.csv` carries a
+`tag` column, accessions are no longer minted from tags, and `UVM-0105` is on
+file wearing tag 3497 with its accession untouched. Typing 3497 into the map or
+the field app reaches it. See [DATA-MODEL.md](DATA-MODEL.md#the-accession-and-the-tag-are-different-things).
+
+**What is left is the conversation**, which is the part that was always the
+item. The data can now hold whatever grounds tell us; nobody has asked them
+yet, and nothing systematically detects a tree that has been renumbered — the
+one known case surfaced because somebody walked past and looked.
+
+**Why it was not a small thing.** This project's accession numbers *were* the
+tag numbers: tag 763 is `UVM-0763`. That was chosen on purpose — the number on
+the map should match the number on the trunk — and
+[ARCGIS-IMPORT.md](ARCGIS-IMPORT.md) spells it out. Re-tagging broke the rule
+from the other end:
 
 - `plant_id` has to be **permanent**. It is in the URL, it is what a QR code
   encodes, and it is what a bookmark or a printed label points at. Renumbering

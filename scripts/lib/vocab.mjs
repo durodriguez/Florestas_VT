@@ -148,6 +148,10 @@ export const OBSERVATION_COLUMNS = [
  */
 export const PLANT_FIELDS = [
   'plant_id',
+  // Sent to the browser because search has to find a tree by the number on
+  // its trunk. That used to work by accident — "763" is a substring of
+  // "UVM-0763" — and stops working the moment the two are allowed to differ.
+  'tag',
   'taxon',       // integer index into taxa[]
   'lat',
   'lng',

@@ -101,6 +101,32 @@ Two consequences worth stating:
   later, the import sees the same `source_id` and leaves the accession alone.
   A number that moved would break a QR label already in the ground.
 
+### The accession and the tag are different things
+
+`plants.csv` carries a **`tag`** column: the number on the metal, as the metal
+reads it — `763`, not `0763` — and blank for the 708 trees that wear none.
+
+The first 1,349 accessions were minted from tags, so `UVM-0763` still reads
+like "tag 763". **That is history, not a rule.** An accession is permanent and
+is what a label and a link encode; a tag corrodes, falls off, and gets replaced
+with a different number. `UVM-0105` wears tag 3497 today.
+
+Which means a tag is **looked up, never computed**. Everything that turns a
+number read off a trunk into a record goes through the `tag` column — the map's
+search, the field app's lookup, the survey importer. The build refuses two
+trees claiming one tag, which was impossible before only because the tag *was*
+the identifier.
+
+New accessions are issued from the untagged block (`UVM-4001` and up) whether
+or not the tree wears a tag. There is one shape for a number this project
+issued, and the metal never becomes the identifier again.
+
+**Tag history is deliberately not kept.** A re-tagging overwrites the column.
+Finding out that a tree was renumbered takes somebody noticing in the field,
+and that is not something this project systematically does — so the schema
+records what is on the trunk now and does not pretend to a history it cannot
+collect.
+
 It is provenance, not identity: nothing in the site reads it, and it is not
 sent to the browser, for the same reason `geolocation_notes` never was.
 

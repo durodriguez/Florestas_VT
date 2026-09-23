@@ -14,11 +14,13 @@
  */
 
 import { bearingDegrees, compassPoint, distanceMeters } from '../geo';
-import { accessionForTag } from '../accession';
+import { normalizeTag } from '../accession';
 
 /** One plant from public/field/trees.json, as `npm run data` writes it. */
 export interface MappedTree {
   id: string;
+  /** The number on its metal tag, or '' for a tree that wears none. */
+  tag: string;
   lat: number;
   lng: number;
   common: string;
@@ -40,7 +42,7 @@ export interface NearbyTree {
  * that a match at the far edge looks as doubtful as it is.
  */
 // Re-exported so the field app's own modules and tests keep one import.
-export { accessionForTag };
+export { normalizeTag };
 
 export const NEARBY_RADIUS_M = 25;
 /** More than this is scrolling, which one-handed in the field is not use. */
@@ -89,9 +91,12 @@ export function describeDistance(hit: NearbyTree): string {
  * a tag that exists should never be told there is no such tree.
  */
 export function mappedByTag(tag: string, trees: MappedTree[]): MappedTree | undefined {
-  const id = accessionForTag(tag);
-  if (!id) return undefined;
-  return trees.find((t) => t.id === id);
+  const wanted = normalizeTag(tag);
+  if (!wanted) return undefined;
+  // Matched against the tag the tree actually wears, not against its id. Those
+  // agree for most trees and that is history rather than a rule: UVM-0105
+  // wears tag 3497, and typing 3497 has to find it.
+  return trees.find((t) => normalizeTag(String(t.tag ?? '')) === wanted);
 }
 
 /**

@@ -181,7 +181,7 @@ worker can pick this up in an afternoon and so it still builds in five years.
 1. Survey an area with the [field app](docs/FIELD-APP.md) — start with the
    University Green.
 2. Add any species not already in `data/taxa.csv`.
-3. `npm run import -- your-export.csv --adopt-tags` to see what it makes of the
+3. `npm run import -- your-export.csv` to see what it makes of the
    field data, then again with `--write`.
 4. `npm run data` until it is clean, then commit.
 5. `npm run labels`, print, and install signs.

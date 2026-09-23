@@ -95,21 +95,52 @@ Do **not** hand-edit `data/plants.csv` or `data/observations.csv` after an
 outing. Run the importer:
 
 ```bash
-npm run import -- survey/2026-09-green.csv --adopt-tags          # dry run
-npm run import -- survey/2026-09-green.csv --adopt-tags --write  # apply
+npm run import -- survey/2026-09-green.csv          # dry run
+npm run import -- survey/2026-09-green.csv --write  # apply
 ```
 
-`--adopt-tags` registers the metal tag stamped on a tree as its accession
-number, so tag 772 becomes `UVM-0772`. Use it for any export from the field
-app; see [FIELD-APP.md](FIELD-APP.md).
+Put whatever is stamped on the trunk in the `tag` column. The importer looks it
+up against the tags on file; if no tree wears it, the tree is new and gets an
+accession of its own with the tag recorded beside it. `--adopt-tags` is gone —
+see [the accession and the tag](#the-accession-and-the-tag) below.
+
+### The accession and the tag
+
+**They are different things, and they are allowed to disagree.**
+
+An accession is permanent. It is what a QR label encodes, what a shared link
+points at, and what every observation is keyed to. A tag is a piece of metal
+that corrodes, falls off and gets replaced with a different number.
+
+The first 1,349 accessions were minted from tags, so `UVM-0763` still reads
+like "tag 763", and for most trees the two do still agree. **That is history,
+not a rule.** `UVM-0105` wears tag 3497 — found in September 2026, photographed
+— and its accession did not move, because a number that moves breaks a label
+already in the ground.
+
+So a tag is looked up, never computed:
+
+- Type `3497` in the field app or the map's search box and you reach
+  `UVM-0105`, because that is the tree wearing it.
+- Type `105` and you reach nothing by tag. 105 is on no trunk any more. (The
+  map's free-text search still finds it by accession, which is a different
+  question being asked.)
+- Type `4001` and you reach nothing. `UVM-4001` is a number this project
+  invented for a tree with a bare trunk; nobody can read it off anything.
+
+A new tagged tree gets an ordinary accession from the untagged block and keeps
+its tag in the `tag` column. The number on the metal never becomes the
+identifier again.
 
 `survey/field-template.csv` shows the shape it expects, though you rarely need
 to match it exactly — see the next section.
 
 The importer does the tedious, error-prone work:
 
-- **Assigns accession numbers** in your scheme, continuing from the highest one
-  already issued that year. Leave the `tag` column blank for a new plant.
+- **Assigns accession numbers** from the untagged block, continuing from the
+  highest already issued. Leave the `tag` column blank for a tree that wears no
+  tag; fill it in for one that does, and the number goes in the `tag` column
+  rather than into the accession.
 - **Treats a claimed accession as a visit to that tree.** For an untagged tree
   the surveyor matched by position, the app puts that tree's accession in the
   `tag` column, so the row imports as another observation of it rather than a

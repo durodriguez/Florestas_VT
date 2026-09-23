@@ -161,8 +161,14 @@ untagged tree is recognised the second time — see
 - **The 20 remaining `Cedar` records** — resolved to *Thuja* on an assumption,
   with no evidence behind them. `grep -c ',thuja-sp,' data/plants.csv`.
 - **Re-tagged trees.** Tree 105 was found wearing a new tag, 3497, in September
-  2026. The accession-is-the-tag rule above assumes a tag does not change, and
-  it evidently does. See [to-do #13](TODO.md).
+  2026. The accession-is-the-tag rule this import ran under assumed a tag does
+  not change, and it evidently does — so the two have since been split apart.
+  `plants.csv` carries a `tag` column, accessions are no longer minted from
+  tags, and UVM-0105 is on file wearing 3497 with its accession untouched. The
+  accessions this import issued are unchanged; what changed is that they are
+  now opaque identifiers that happen to look like tags. See
+  [DATA-MODEL.md](DATA-MODEL.md#the-accession-and-the-tag-are-different-things)
+  and [to-do #13](TODO.md).
 - **Trunk diameters.** The layer has none, so
   [to-do #7](TODO.md) (i-Tree ecosystem services) is still blocked. The 2014
   inventory holds a DBH for 950 of these trees, joinable by tag, but those

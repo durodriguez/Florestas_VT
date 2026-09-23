@@ -3,7 +3,7 @@ import 'leaflet.markercluster/dist/MarkerCluster.css';
 import './styles.css';
 
 import { expandCityTrees, loadData } from './data';
-import { accessionForTag } from './accession';
+import { indexByTag, normalizeTag } from './accession';
 import { PlantMap, escapeHtml } from './map';
 import { renderCityDetail, renderDetail, renderResultItem } from './detail';
 import { legendFor, ORIGIN_LABELS, TYPE_LABELS } from './palette';
@@ -37,6 +37,8 @@ class App {
   private colorBy: ColorBy = 'type';
   private userPos: { lat: number; lng: number } | null = null;
   private readonly byId: Map<string, Plant>;
+  /** Trees by the number on the trunk. Built once; search hits it per keystroke. */
+  private readonly byTag: Map<string, Plant>;
   private readonly map: PlantMap;
 
   constructor(
@@ -44,6 +46,7 @@ class App {
     private readonly plants: Plant[],
   ) {
     this.byId = new Map(plants.map((p) => [p.id, p]));
+    this.byTag = indexByTag(plants);
     this.cityTrees = expandCityTrees(dataset);
     this.map = new PlantMap($('#map'), dataset, plants, {
       onSelect: (plant) => this.select(plant),
@@ -240,9 +243,12 @@ class App {
    * fitting the ones that are.
    */
   private exactTagMatch(query: string): Plant | null {
-    const id = accessionForTag(query);
-    if (!id) return null;
-    const plant = this.byId.get(id);
+    const tag = normalizeTag(query);
+    if (!tag) return null;
+    // Looked up against the tag the tree wears, not derived from its id. For
+    // most trees the two still agree, but UVM-0105 wears tag 3497 and typing
+    // 3497 has to land on it.
+    const plant = this.byTag.get(tag);
     return plant && this.results.includes(plant) ? plant : null;
   }
 
