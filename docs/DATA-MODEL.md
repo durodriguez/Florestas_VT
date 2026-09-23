@@ -130,6 +130,39 @@ collect.
 It is provenance, not identity: nothing in the site reads it, and it is not
 sent to the browser, for the same reason `geolocation_notes` never was.
 
+### The description and the fun fact must not say the same thing
+
+Every taxon carries two pieces of prose. The **description** is what the tree
+is; the **fun fact**, behind a fold, is the thing worth knowing that the
+description had no room for. When the second restates the first, opening the
+fold gives a reader nothing.
+
+`npm run check:prose` reports any entry where it does, and exits non-zero so it
+can be wired into CI. It changes nothing — the fix is a person rewriting a
+sentence.
+
+**It takes three measures, because one was not enough.** A first pass compared
+whole texts and cleared the pin oak at 30%, since its two texts diverge after a
+few words. But both *opened* with "lower branches sweep down", which is the
+part a reader meets first — and a reader noticed before the script did. So:
+
+- two openings **beginning with the same words**, three or more of them
+- a run of **five or more words** shared anywhere in the two openings
+- a whole text sharing **60%** of its vocabulary
+
+**Shared subject matter is deliberately not flagged.** A green ash naming the
+emerald ash borer in both fields is staying on topic, not repeating itself. The
+giveaway is position: an echo opens both sentences, while a subject moves about
+— it ends one and opens the other. An earlier rule that only counted words
+called that four words long and flagged it, because the article padded a
+three-word name.
+
+**When one does fire, the fix is usually not a new fact.** Most entries already
+carry one behind the restatement and only need to lead with it. Where a genuinely
+new angle is needed, check it against the parent species and the rest of the
+file first: silkworms already belong to the white mulberry, marcescence to the
+European beech, and inedible conkers to the common horsechestnut.
+
 ### Dedications
 
 One column, not two. A tree is a gift, memorial or dedicated one **exactly
