@@ -825,6 +825,96 @@ precedent for exactly that, so the pattern does not need inventing.
   mapped trees are nearby, and a crosshair with a live coordinate readout
   costs nothing. Neither is fixed by sharper imagery.
 
+## 18. Two versions of the survey app — advanced and basic
+
+**Ask.** Two builds of the field app. The **advanced** one is what we have
+been building: it can add trees and record that a tree is gone. The **basic**
+one is more limited — measurements, condition, notes, photos on trees that are
+already on the map, and nothing that changes the roster.
+
+**Who the basic tier is for: a team of undergraduates adding field data to
+trees that are already mapped.** That is the use case, and it settles more of
+this item than it first appears to. A crew is several pairs of hands filling in
+the 2,057 trees that already exist, working from the tag on the trunk; none of them
+need to invent a tree, and none of them should be the one who decides a tree is
+gone. You hold the advanced build. This is also the first time the app will be
+used by somebody who was not in the room while it was built, which raises the
+value of every hint, every disabled control and every refusal that explains
+itself — an undergraduate on their first afternoon cannot ask what a field
+means.
+
+**The line is the roster, not the form.** Almost every card in the app is safe
+in anybody's hands: DBH, height, spread, condition, notes, the photo, the
+plaque wording, the planting year. Each of those is an observation, dated and
+attributed, appended beside whatever was there before; a wrong one is visible
+and correctable because the old one is still in the file. Two things are not
+like that, and they are exactly the two you named:
+
+- **Minting an accession.** "No tag" issues a permanent number from the 4001
+  block. Accessions are opaque and never reused, so a number handed out by
+  mistake is a number that exists forever — the correction is a `removed`
+  record, not a deletion ([DATA-MODEL.md](DATA-MODEL.md), accession vs tag).
+- **Saying a tree is not there.** `removed` and `not-found` take a tree off the
+  public map. They are the right answer for a felled tree or a phantom, and the
+  wrong answer for "I could not find it in the rain."
+
+So the basic tier is the app minus the "No tag" button and minus two of the
+three status values, and the advanced tier is the app as it stands. Everything
+else is shared.
+
+**Build one app with a mode, not two apps.** A second entry point beside
+`/field/` would mean a second HTML file, a second bundle, and two copies of a
+1,000-line `main.ts` that must stay in step; the first divergence nobody
+notices is the one that eats a survey. A single build that reads its tier —
+from the URL (`/field/?mode=basic`), stored on first load — keeps one code
+path, one test suite and one thing to deploy. The cost of that choice is that
+the tier is not a security boundary: anyone who can read the URL can change it.
+
+**Which is fine, because the importer is the gate.** A phone that offers no
+"No tag" button still produces a CSV a person could hand-edit, and the export
+is a file on their own device either way. What actually protects the roster is
+`npm run import`, which refuses an unknown tag, refuses an absent row that
+names no tree, and prints every new accession it issues before writing
+anything. The tiers reduce *mistakes*, not *tampering*, and this item should
+not be sold as the latter.
+
+**The one thing a crew needs that neither tier has yet: somewhere to put a
+tree they cannot resolve.** An undergraduate standing at a trunk whose tag is
+unreadable, or at a tree with no tag at all, is the case the basic tier makes
+unrecordable — the "No tag" button is the escape hatch, and removing it removes
+the only exit. Losing that record is worse than the mistake the tier prevents,
+because the tree is right there and the surveyor is walking away from it. The
+fix is not to give the button back but to let the observation land somewhere a
+lead can resolve later: a record with a note, a photo and a position, queued
+against no accession, that the importer reports rather than writes. **This
+needs designing before the tier ships**, and it is the part of this item most
+likely to be underestimated.
+
+**What is deliberately not decided yet.**
+
+- **How a surveyor gets their tier** — a link you send, a setting on first run,
+  or a code typed once. With a crew, "a link you send" is probably it, and the
+  practical question is what happens when one of them bookmarks the page or
+  shares it with a friend. That is a survey-day question; the code follows.
+- **Whether the basic tier sees the "Is the tree there?" card at all** — hiding
+  it loses the signal that somebody looked and found nothing, which is the
+  evidence [#15](#15-1552-of-the-2014-tags-are-not-on-the-map) wants. A crew
+  walking mapped trees is exactly who will meet the phantoms, so the signal
+  matters more, not less. The middle answer is now the likely one: leave the
+  card, keep only *Still here*, and let *I could not find it* be a flagged note
+  a lead resolves, not a status the undergraduate sets.
+- **How a crew's exports come back** — several phones, several zips, the same
+  afternoon. `npm run import` already skips known duplicates and reports what
+  it issued, but nobody has yet run it against four exports from four people
+  who overlapped on a few trees.
+
+**Cost.** Small, if it is one build with a mode: a tier constant, two
+conditionals in `main.ts`, a line in the export so a record carries which tier
+produced it, and tests for both. Large, if it becomes two apps. The escape
+hatch above is its own piece of work and is the reason not to call this a
+half-day. Worth doing before the crew goes out, and the crew is the thing that
+makes it worth doing.
+
 ## Also outstanding (not code)
 
 - ~~**Permission from `ecamire@uvm.edu`**~~ — **resolved, 21 September 2026.**
