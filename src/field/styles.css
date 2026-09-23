@@ -339,3 +339,9 @@ textarea { min-height: 78px; resize: vertical; }
 .ghost-btn.is-on {
   background: var(--green); border-color: var(--green); color: #fff; font-weight: 650;
 }
+
+/* Measurements and condition, once the surveyor says there is no tree to
+   measure. Dimmed rather than hidden, so the reason they are unavailable
+   stays on screen next to them. */
+.is-void { opacity: .45; }
+.is-void input, .is-void .seg-btn { pointer-events: none; }

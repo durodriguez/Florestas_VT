@@ -3,7 +3,29 @@
 // filter panel and legend are generated from them.
 
 export const CONDITIONS = ['excellent', 'good', 'fair', 'poor', 'dead'];
-export const STATUSES = ['active', 'removed'];
+/**
+ * Whether there is a tree here at all — a different question from `condition`,
+ * which describes a tree that is. Even `dead` means a dead tree still standing,
+ * with a trunk to measure and a hazard to deal with.
+ *
+ *   active     a tree is here
+ *   removed    it stood here and was taken down; a stump or a mark says so
+ *   not-found  nothing here, and no sign there ever was
+ *
+ * The last two are deliberately separate. A removal is an event in a tree's
+ * life and belongs in its history. A not-found is a fault in the source data —
+ * the 2023-24 layer recording something that is not there — and counting the
+ * two together would hide how often that happens, which is evidence about
+ * that survey's reliability rather than about any tree.
+ *
+ * A surveyor standing on the spot often cannot tell them apart, so the field
+ * app asks what was seen rather than what it means: "gone, stump or mark"
+ * against "nothing here". The inference stays a desk decision.
+ *
+ * Appended rather than inserted: the browser payload stores a status as its
+ * index in this array, so reordering would silently rewrite every record.
+ */
+export const STATUSES = ['active', 'removed', 'not-found'];
 /**
  * What kind of plant it is. One column, seven values — trees carry their own
  * deciduous/evergreen split rather than needing a second column to say it.

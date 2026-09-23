@@ -7,7 +7,7 @@
 // that variation without silently guessing — anything ambiguous stops the row
 // and is reported, rather than being imported wrong.
 
-import { BOOLEANISH, CONDITIONS, OBSERVATION_COLUMNS, TAXON_COLUMNS } from './vocab.mjs';
+import { BOOLEANISH, CONDITIONS, OBSERVATION_COLUMNS, STATUSES, TAXON_COLUMNS } from './vocab.mjs';
 
 const trim = (v) => (typeof v === 'string' ? v.trim() : v ?? '');
 
@@ -364,6 +364,18 @@ export function importSurvey({
       return;
     }
 
+    // --- is there a tree here at all --------------------------------------
+    // Read before the species, because it decides whether one is required.
+    // Blank means 'active', so an export from a build that predates the
+    // column still imports exactly as it always did.
+    const statusRaw = get(row, 'status').toLowerCase();
+    const status = statusRaw || 'active';
+    if (!STATUSES.includes(status)) {
+      error(`status "${statusRaw}" is not one of: ${STATUSES.join(', ')}`);
+      return;
+    }
+    const absent = status !== 'active';
+
     // --- species -----------------------------------------------------------
     // An explicit taxon_id wins. The field app fills it in when the surveyor
     // picks from the species list, and an id resolved on the spot by somebody
@@ -380,6 +392,16 @@ export function importSurvey({
         error(`taxon_id "${explicitId}" is not in taxa.csv`);
         return;
       }
+    } else if (absent && !speciesRaw) {
+      // Nobody can name a tree that is not there, and the record this attaches
+      // to already carries a species. Requiring one would make the commonest
+      // absent case — a phantom nobody can identify — impossible to report.
+      //
+      // Empty rather than undefined on purpose: the corrections loop skips a
+      // blank and would carry anything else across, so undefined here writes
+      // the word "undefined" over a real taxon_id. That exact fault reached a
+      // shipped export once already, through planted_year.
+      taxonId = '';
     } else {
       if (!speciesRaw) {
         error('no species recorded');
@@ -480,6 +502,7 @@ export function importSurvey({
     };
 
     const surveyedOn = get(row, 'surveyed_on');
+
     const observation = {
       surveyed_on: surveyedOn,
       surveyor: get(row, 'surveyor'),
@@ -487,7 +510,7 @@ export function importSurvey({
       height_ft: measures.height_ft,
       spread_ft: measures.spread_ft,
       condition,
-      status: 'active',
+      status,
       photo: get(row, 'photo'),
       notes: get(row, 'notes'),
     };
@@ -530,6 +553,13 @@ export function importSurvey({
       }
 
       if (!known) {
+        // Nothing to be absent from. Recording "no tree here" against a tag
+        // nobody has on file would create the tree and bury it in one step,
+        // which is a misread tag far more often than it is a discovery.
+        if (status !== 'active') {
+          error(`"${tag}" is on no record, so it cannot be reported as "${status}"`);
+          return;
+        }
         if (!bareTag) {
           error(`"${tag}" is neither an accession on file nor a tag number`);
           return;
@@ -566,6 +596,13 @@ export function importSurvey({
       }
       if (Object.keys(changes).length > 0) updates.push({ plant_id: known, changes });
       else if (!recorded && !surveyedOn) warn(`tag "${tag}" carries nothing new to record`);
+      return;
+    }
+
+    // Same again for a row carrying no tag at all: an absent tree has to name
+    // the record it is denying, or it says nothing anybody can act on.
+    if (status !== 'active') {
+      error(`a row reported as "${status}" has to name the tree — give its tag or accession`);
       return;
     }
 

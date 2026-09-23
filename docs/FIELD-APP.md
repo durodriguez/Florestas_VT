@@ -328,6 +328,52 @@ The circles are rebuilt whenever the list is, rather than moved. The set
 changes as the fix drifts, and which tree holds which colour changes with it —
 a stale circle in an old colour would point at the wrong box.
 
+## Recording a tree that is not there
+
+The app used to describe only trees that exist. Condition runs excellent to
+dead, and **dead still means a standing trunk** — something with a diameter to
+measure and a hazard to deal with. A tree that has been taken down, or one the
+2023–24 survey recorded and nobody can find, fell through that gap entirely.
+Tree 101 reached the data only because its removal was hand-edited into
+`observations.csv`.
+
+**Is the tree there?** now sits above the measurements, with three answers:
+
+| Button | Records | What the surveyor saw |
+| --- | --- | --- |
+| Still here | `active` | a tree, with a condition |
+| Gone | `removed` | a stump, or a mark where it stood |
+| Nothing here | `not-found` | no tree, and no sign there ever was |
+
+**The last two are kept apart on purpose.** A removal is an event in a tree's
+life and belongs in its history. A not-found is a fault in the source data, and
+counting the two together would hide how often the 2023–24 layer records
+something that is not there — which is evidence about that survey rather than
+about any tree.
+
+**The labels ask what was seen, not what it means.** Standing on the spot, a
+tree removed years ago with the stump ground out looks exactly like one that
+was never there. Only the mark tells them apart, so the buttons ask about the
+mark and leave the inference to a desk.
+
+### What changes when the answer is not "still here"
+
+- **Measurements and condition are disabled and cleared.** An absent tree has
+  no diameter and no condition. They are dimmed rather than hidden so the
+  reason stays on screen beside them.
+- **The photo stays.** A picture of the empty ground is the evidence, and the
+  only thing that makes the record checkable later.
+- **A species is no longer required**, because nobody can identify what is not
+  there — the record it attaches to already carries one.
+- **It must name a tree.** "Nothing here" is meaningless without a record it is
+  denying, so the form asks for a tag or a claim from the nearby list. The
+  importer refuses the same thing from the other end: a tag nobody has on file
+  cannot be reported absent, because that is a misread number far more often
+  than it is a discovery.
+
+An export from a build predating the column still imports: a blank status
+reads as `active`.
+
 ## Known limits
 
 - **Basemap imagery needs a signal.** Tiles are deliberately not cached — a

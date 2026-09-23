@@ -14,6 +14,7 @@ import {
   type SpeciesEntry, type Suggestion,
 } from './species';
 import { getMeta, setMeta } from './db';
+import { STATUSES, STATUS_LABELS, absent } from './status';
 import {
   describeDistance, mappedByTag, mappedNeighbours, nearbyTrees, NEARBY_COLOURS,
   type MappedTree, type NearbyTree,
@@ -562,6 +563,39 @@ function selectedCondition(): string {
   return $('condition-seg').querySelector('[aria-checked="true"]')?.getAttribute('data-condition') ?? '';
 }
 
+function renderStatuses(): void {
+  $('status-seg').innerHTML = STATUSES.map(
+    (v) => `<button type="button" class="seg-btn" role="radio" aria-checked="${v === 'active'}" data-status="${v}">${STATUS_LABELS[v]}</button>`,
+  ).join('');
+}
+
+function selectedStatus(): string {
+  return $('status-seg').querySelector('[aria-checked="true"]')?.getAttribute('data-status') ?? 'active';
+}
+
+/**
+ * An absent tree has nothing to measure and no condition — "dead" would say a
+ * trunk is standing. The inputs are disabled rather than hidden so the reason
+ * stays visible, and cleared so a number typed before the surveyor realised
+ * the tree was gone cannot be exported as a measurement of nothing.
+ *
+ * The photo stays available on purpose: a picture of the empty ground is the
+ * evidence, and is the only thing that makes the record checkable later.
+ */
+function applyStatus(): void {
+  const gone = absent(selectedStatus());
+  $('measurements-card').classList.toggle('is-void', gone);
+  for (const id of ['dbh', 'height', 'spread']) {
+    const el = $<HTMLInputElement>(id);
+    el.disabled = gone;
+    if (gone) el.value = '';
+  }
+  for (const b of $('condition-seg').querySelectorAll<HTMLButtonElement>('[aria-checked]')) {
+    b.disabled = gone;
+    if (gone) b.setAttribute('aria-checked', 'false');
+  }
+}
+
 function resetForm(): void {
   for (const id of ['tag', 'species', 'dbh', 'height', 'spread', 'notes', 'planted']) {
     $<HTMLInputElement>(id).value = '';
@@ -577,6 +611,10 @@ function resetForm(): void {
   for (const b of $('condition-seg').querySelectorAll('[aria-checked]')) {
     b.setAttribute('aria-checked', 'false');
   }
+  for (const b of $('status-seg').querySelectorAll('[aria-checked]')) {
+    b.setAttribute('aria-checked', String(b.getAttribute('data-status') === 'active'));
+  }
+  applyStatus();
   clearPhoto();
   $('tag-result').innerHTML = '';
   $('form-error').hidden = true;
@@ -603,7 +641,22 @@ async function save(): Promise<void> {
   const point = currentLatLng();
   const fix = gps.bestFix;
 
-  if (!speciesName) return fail('Enter a species before saving.');
+  // An absent tree is a statement about a record that already exists, so it
+  // needs to say which one — "nothing here" is meaningless without a tree it
+  // is denying. It does not need a species: nobody can identify what is not
+  // there, and the claimed record already carries one.
+  const status = selectedStatus();
+  if (absent(status)) {
+    const tag = $<HTMLInputElement>('tag').value.trim();
+    if (!tag && !claimed) {
+      return fail(
+        `"${STATUS_LABELS[status]}" has to say which tree. Type its tag, or pick it from the ` +
+        'mapped trees near you.',
+      );
+    }
+  } else if (!speciesName) {
+    return fail('Enter a species before saving.');
+  }
 
   const plantedRaw = $<HTMLInputElement>('planted').value.trim();
   if (!plantedUnknown && plantedRaw !== '') {
@@ -660,6 +713,7 @@ async function save(): Promise<void> {
     dbhIn: num('dbh'),
     heightFt: num('height'),
     spreadFt: num('spread'),
+    status: selectedStatus(),
     condition: selectedCondition(),
     plantedYear: plantedUnknown ? null : num('planted'),
     plantedUnknown,
@@ -752,6 +806,8 @@ function showScreen(which: 'form' | 'list'): void {
 // ---------------------------------------------------------------- wiring
 
 renderConditions();
+renderStatuses();
+applyStatus();
 $<HTMLInputElement>('date').value = stamp();
 
 $('tag').addEventListener('input', () => {
@@ -822,6 +878,15 @@ $('condition-seg').addEventListener('click', (e) => {
   for (const b of $('condition-seg').querySelectorAll('[aria-checked]')) {
     b.setAttribute('aria-checked', String(b === btn));
   }
+});
+
+$('status-seg').addEventListener('click', (e) => {
+  const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-status]');
+  if (!btn) return;
+  for (const b of $('status-seg').querySelectorAll('[aria-checked]')) {
+    b.setAttribute('aria-checked', String(b === btn));
+  }
+  applyStatus();
 });
 
 /**

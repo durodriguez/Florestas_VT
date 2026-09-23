@@ -11,6 +11,14 @@ export interface SurveyRecord {
   id: number;
   /** Metal tag number from the 2014 inventory, e.g. "772". Blank for a new tree. */
   tag: string;
+  /**
+   * Whether there is a tree here at all: 'active', 'removed' or 'not-found'.
+   *
+   * Separate from condition, which describes a tree that is here — 'dead'
+   * still means a standing trunk. Recording an absent tree needs a record to
+   * attach it to, so anything but 'active' requires a tag or a claim.
+   */
+  status: string;
   /** Scientific name, seeded from the reference and confirmed by the surveyor. */
   species: string;
   /**

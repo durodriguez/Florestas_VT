@@ -28,6 +28,7 @@
     "height_ft":    ["height_ft", "height", "ht", "height_feet", "tree_height"],
     "spread_ft":    ["spread_ft", "spread", "crown_spread", "canopy_spread", "crown_width"],
     "condition":    ["condition", "cond", "health", "vigor", "vigour", "condition_rating"],
+    "status":       ["status", "present", "standing", "still_there"],
     "planted_year": ["planted_year", "planted", "year_planted", "install_year", "planting_year"],
     "surveyed_on":  ["surveyed_on", "date", "survey_date", "observed_on", "created_at", "timestamp"],
     "surveyor":     ["surveyor", "observer", "recorder", "crew", "surveyed_by", "by", "author"],
