@@ -65,9 +65,13 @@ const map = L.map($('pin-map'), {
   zoomControl: false,
   attributionControl: false,
 });
+// maxNativeZoom is the last zoom with real pixels behind it; past that Leaflet
+// upscales. This sat at 19 while the service publishes 20 over Burlington, so
+// every zoom past 19 — which is where you place a pin — was blur rather than
+// detail. 0.107 m per pixel now, against 0.213 m. z21 is not published.
 L.tileLayer(
   'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-  { maxZoom: 22, maxNativeZoom: 19 },
+  { maxZoom: 22, maxNativeZoom: 20 },
 ).addTo(map);
 
 // Leaflet's default icon resolves image URLs relative to its own CSS, which a
