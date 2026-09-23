@@ -323,7 +323,7 @@ button, input, select { font: inherit; color: inherit; }
 }
 /* When the picture was taken, so nobody reads a ten-year-old photo as how the
    tree looks today. */
-.detail-photo-date { margin-top: .3rem; font-size: .76rem; color: var(--dim); }
+.detail-photo-date { margin-top: .3rem; font-size: .76rem; color: var(--dim); text-align: right; }
 .detail-desc { font-size: .88rem; line-height: 1.5; }
 
 /* This tree's own history, and a line about the species. Both are optional
