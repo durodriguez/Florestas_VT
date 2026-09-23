@@ -34,14 +34,21 @@ function readCsv(name) {
     skipEmptyLines: 'greedy',
     transformHeader: (h) => h.trim(),
   });
-  const fatal = errors.filter((e) => e.code !== 'TooFewFields' && e.code !== 'TooManyFields');
-  if (fatal.length) {
-    console.error(`✗ could not parse data/${name}:`);
-    for (const e of fatal.slice(0, 10)) console.error(`  row ${e.row}: ${e.message}`);
+  // A row whose field count differs from the header is fatal, not a warning.
+  // It used to warn, and the warning was right there in the output and got
+  // scrolled past — while the row itself was quietly truncated at its first
+  // unquoted comma and shipped half a sentence to the browser. Anything that
+  // corrupts a value rather than rejecting it has to stop the build.
+  if (errors.length) {
+    console.error(`✗ data/${name} does not parse cleanly:`);
+    // +2 turns Papa's zero-based data row into the line number an editor shows.
+    for (const e of errors.slice(0, 10)) console.error(`  line ${e.row + 2}: ${e.message}`);
+    const mismatch = errors.some((e) => e.type === 'FieldMismatch');
+    if (mismatch) {
+      console.error('\n  A field holding a comma has to be quoted. The value is otherwise');
+      console.error('  cut at that comma and the remainder read as another column.');
+    }
     process.exit(1);
-  }
-  for (const e of errors.filter((x) => !fatal.includes(x)).slice(0, 10)) {
-    console.warn(`  ! data/${name} row ${e.row}: ${e.message}`);
   }
   return data;
 }
