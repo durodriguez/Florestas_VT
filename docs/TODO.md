@@ -753,6 +753,78 @@ because it exists is how a schema fills up with columns nobody reads.
 question to answer first is whether a 2014 care ranking is a useful thing to
 show or a misleading one.
 
+## 17. Sharper satellite imagery — dormant, revisit from the field
+
+**Half of this was free and is already done, 23 September 2026.** Both the map
+and the survey app pinned `maxNativeZoom` at 19 while Esri publishes **z20**
+over Burlington, so every zoom past 19 was Leaflet stretching the same pixels.
+Raising the cap doubled the ground detail — **0.213 m/px to 0.107 m/px** — at
+no cost, no licensing question and no hosting. z21 is not published, so 20 is
+the ceiling rather than another guess. Coverage was checked at one tile per
+campus area first, Spear Street included, because a missing tile at the native
+zoom renders blank rather than blurry.
+
+**What is left is seasonality, and it may not matter.** Esri's Burlington
+imagery is not obviously leaf-on, and canopy is easiest to read against a
+summer flight. Whether that is worth chasing is a question for somebody
+standing on the green with a phone, not for this file. Revisit only if
+placing a pin still feels imprecise at z20.
+
+### If it does come back, the groundwork is here
+
+**Google's imagery is not an option.** Google Maps and Earth terms do not
+permit extracting tiles or screenshots for use as a basemap in another
+application. It is the sharpest and most reliably leaf-on thing available, and
+it is off the table for a map published under a university domain. Worth
+writing down because it is the obvious first idea and the answer does not
+change.
+
+**The lead to pull is UVM's own Spatial Analysis Laboratory.** High-resolution
+imagery and LiDAR for Vermont, in-house, and a campus tree map is the kind of
+project they would share with. [FIELD-SURVEY.md](FIELD-SURVEY.md) already
+mentions orthophotos and LiDAR canopy as a QGIS backdrop. **This is an email,
+not a build.**
+
+Others, with their trade-offs:
+
+- **VCGI** (Vermont Center for Geographic Information) — state orthoimagery,
+  openly licensed, published as tile services. State ortho is often flown
+  leaf-*off* on purpose, so it may be sharper and worse for canopy.
+- **NAIP** (USDA) — public domain and flown in the growing season, so
+  genuinely leaf-on, but typically around 0.6 m. Right season, wrong direction
+  on sharpness.
+- **Fly the campus with a drone** — most work, best result: chosen resolution,
+  chosen season, UVM owns it outright and no licensing question at all.
+  Plausibly a student project.
+
+### Self-hosting, if imagery ever arrives
+
+Campus is **2.10 x 3.83 km, 8.03 sq km**. Whole-campus tile pyramids over that
+box:
+
+| Zoom | m/pixel | Tiles | At 25 KB each |
+| ---: | ---: | ---: | ---: |
+| 18 | 0.426 | 756 | 18.5 MB |
+| 19 | 0.213 | 2,840 | 69 MB |
+| 20 | 0.107 | 11,076 | 270 MB |
+| 21 | 0.053 | 43,992 | 1.07 GB |
+
+Too big for the repository, which keeps every version of every file forever
+and is published from a Pages site that stops at 1 GB. Fine on UVM web space
+or object storage — and `photoBaseUrl` in `data/config.json` is already the
+precedent for exactly that, so the pattern does not need inventing.
+
+### Two things that would help and are not imagery at all
+
+- **Cache tiles for offline use.** The survey app deliberately caches none, so
+  it needs a signal in the field ([FIELD-APP.md](FIELD-APP.md), known limits).
+  At z18-19 the whole campus is about 88 MB, which is genuinely cacheable, and
+  it is an improvement whoever's imagery is underneath.
+- **Give the pin something to aim at.** Blur was one reason a pin lands
+  imprecisely; having no reference is another. The app already knows which
+  mapped trees are nearby, and a crosshair with a live coordinate readout
+  costs nothing. Neither is fixed by sharper imagery.
+
 ## Also outstanding (not code)
 
 - ~~**Permission from `ecamire@uvm.edu`**~~ — **resolved, 21 September 2026.**
@@ -785,6 +857,9 @@ show or a misleading one.
   — download the archive file and read its header.
 - **Confirm the attribution is sufficient** with whoever at UVM handles
   licensing, before the map goes up on a university domain.
+- **Ask UVM's Spatial Analysis Laboratory** whether they hold leaf-on campus
+  orthoimagery — see [#17](#17-sharper-satellite-imagery--dormant-revisit-from-the-field).
+  Only worth sending if z20 still feels imprecise in the field.
 - **Botanist review** of the authored descriptions and traits in `taxa.csv`.
 - **Official UVM V mark** from UVM Communications.
 - **ETS request** for `arboretum.uvm.edu/explorer/`.
