@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { bearingDegrees, compassPoint, distanceMeters } from '../src/geo';
 import {
   describeDistance, mappedByTag, mappedNeighbours, nearbyTrees, normalizeTag,
+  NEARBY_COLOURS, NEARBY_LIMIT,
   type MappedTree,
 } from '../src/field/nearby';
 
@@ -196,5 +197,28 @@ describe('mappedNeighbours', () => {
 
   it('offers nothing for a tag that is not a number', () => {
     expect(mappedNeighbours('Young', trees)).toEqual([]);
+  });
+});
+
+describe('NEARBY_COLOURS', () => {
+  it('has a colour for every tree the list can offer', () => {
+    // The list and the map are matched by index. One colour short and two
+    // trees share one, which is worse than no colour at all.
+    expect(NEARBY_COLOURS.length).toBeGreaterThanOrEqual(NEARBY_LIMIT);
+  });
+
+  it('gives every offered tree a different colour', () => {
+    expect(new Set(NEARBY_COLOURS).size).toBe(NEARBY_COLOURS.length);
+  });
+
+  it('avoids the colours the map already spends', () => {
+    // The pin is gold and the accuracy ring is blue; a nearby circle in
+    // either would read as one of those instead of as a tree.
+    const taken = ['#ffd100', '#154734', '#1d6fe0'];
+    for (const c of NEARBY_COLOURS) expect(taken).not.toContain(c.toLowerCase());
+  });
+
+  it('is written as hex, which is what both the marker and the swatch need', () => {
+    for (const c of NEARBY_COLOURS) expect(c).toMatch(/^#[0-9a-f]{6}$/i);
   });
 });

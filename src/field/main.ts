@@ -15,7 +15,7 @@ import {
 } from './species';
 import { getMeta, setMeta } from './db';
 import {
-  describeDistance, mappedByTag, mappedNeighbours, nearbyTrees,
+  describeDistance, mappedByTag, mappedNeighbours, nearbyTrees, NEARBY_COLOURS,
   type MappedTree, type NearbyTree,
 } from './nearby';
 import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
@@ -83,6 +83,11 @@ const pinIcon = L.divIcon({
   iconSize: [34, 34],
   iconAnchor: [17, 17],
 });
+// The mapped trees currently on offer, drawn in the same colours as the list
+// beside them. Added before the pin so the pin always sits on top of them —
+// the pin is what the surveyor is placing, and it must never be hidden.
+const nearbyLayer = L.layerGroup().addTo(map);
+
 const pin = L.marker([44.4777, -73.1956], { draggable: true, icon: pinIcon, autoPan: true }).addTo(map);
 const accuracyRing = L.circle([44.4777, -73.1956], { radius: 0, color: '#1d6fe0', weight: 1, fillOpacity: 0.1 }).addTo(map);
 
@@ -301,6 +306,7 @@ function renderNearby(): void {
   if (claimed || declinedNearby || hasTag || !point || mapped.length === 0) {
     box.hidden = true;
     list.innerHTML = '';
+    nearbyLayer.clearLayers();
     return;
   }
 
@@ -308,12 +314,33 @@ function renderNearby(): void {
   if (hits.length === 0) {
     box.hidden = true;
     list.innerHTML = '';
+    nearbyLayer.clearLayers();
     return;
   }
+
+  // Rebuilt rather than moved: the set changes as the fix drifts, and which
+  // tree holds which colour changes with it. A stale circle in an old colour
+  // would point at the wrong box.
+  nearbyLayer.clearLayers();
+  hits.forEach((hit, i) => {
+    L.circleMarker([hit.tree.lat, hit.tree.lng], {
+      radius: 7,
+      color: '#ffffff',
+      weight: 2,
+      fillColor: NEARBY_COLOURS[i % NEARBY_COLOURS.length]!,
+      fillOpacity: 0.95,
+    })
+      // Tapping the circle claims the tree, exactly as tapping its box does.
+      // Standing under a tree and pointing at it on the map is the more
+      // natural gesture of the two.
+      .on('click', () => claim(hit))
+      .addTo(nearbyLayer);
+  });
 
   list.innerHTML = hits
     .map((hit, i) => `<li>
       <button type="button" class="nearby-opt" data-nearby="${i}">
+        <span class="nearby-dot" style="background:${NEARBY_COLOURS[i % NEARBY_COLOURS.length]}"></span>
         <span class="nearby-dist">${escapeHtml(describeDistance(hit))}</span>
         <span class="nearby-name">${escapeHtml(hit.tree.common)}
           <span class="nearby-sci">${escapeHtml(hit.tree.sci)}</span></span>

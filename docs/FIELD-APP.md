@@ -302,6 +302,32 @@ Overwrite `public/field/reference.csv` and merge. Phones that have already
 cached the old copy keep using it until their app cache is cleared, so bump
 `CACHE` in `public/field/sw.js` when the contents change materially.
 
+## The trees on offer are drawn on the map
+
+When there is no tag to type, the app offers the mapped trees around the
+surveyor. Each one now carries a colour, and the same colour is drawn as a
+circle on the imagery above the list — so the box and the tree point at each
+other without a legend.
+
+Six colours, one per offered tree, in `NEARBY_COLOURS`. They are chosen to sit
+on aerial imagery, which is mostly canopy, grass, asphalt and roof: no green,
+because it vanishes into the first two, and nothing gold or blue, because the
+pin is gold and the accuracy ring is blue. Each circle carries a white stroke
+so it reads against dark and light ground alike.
+
+**Colour is reinforcement, not the only signal.** Every box still leads with
+its distance and bearing, which is what a surveyor actually reads — "9 m east"
+identifies a tree whether or not the dot beside it can be told from the one
+above.
+
+**Tapping a circle claims that tree**, exactly as tapping its box does.
+Standing under a tree and pointing at it on the imagery is the more natural
+gesture of the two.
+
+The circles are rebuilt whenever the list is, rather than moved. The set
+changes as the fix drifts, and which tree holds which colour changes with it —
+a stale circle in an old colour would point at the wrong box.
+
 ## Known limits
 
 - **Basemap imagery needs a signal.** Tiles are deliberately not cached — a
