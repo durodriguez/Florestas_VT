@@ -832,6 +832,17 @@ been building: it can add trees and record that a tree is gone. The **basic**
 one is more limited — measurements, condition, notes, photos on trees that are
 already on the map, and nothing that changes the roster.
 
+**Who the basic tier is for: a team of undergraduates adding field data to
+trees that are already mapped.** That is the use case, and it settles more of
+this item than it first appears to. A crew is several pairs of hands filling in
+the 2,057 trees that already exist, working from the tag on the trunk; none of them
+need to invent a tree, and none of them should be the one who decides a tree is
+gone. You hold the advanced build. This is also the first time the app will be
+used by somebody who was not in the room while it was built, which raises the
+value of every hint, every disabled control and every refusal that explains
+itself — an undergraduate on their first afternoon cannot ask what a field
+means.
+
 **The line is the roster, not the form.** Almost every card in the app is safe
 in anybody's hands: DBH, height, spread, condition, notes, the photo, the
 plaque wording, the planting year. Each of those is an observation, dated and
@@ -867,25 +878,42 @@ names no tree, and prints every new accession it issues before writing
 anything. The tiers reduce *mistakes*, not *tampering*, and this item should
 not be sold as the latter.
 
+**The one thing a crew needs that neither tier has yet: somewhere to put a
+tree they cannot resolve.** An undergraduate standing at a trunk whose tag is
+unreadable, or at a tree with no tag at all, is the case the basic tier makes
+unrecordable — the "No tag" button is the escape hatch, and removing it removes
+the only exit. Losing that record is worse than the mistake the tier prevents,
+because the tree is right there and the surveyor is walking away from it. The
+fix is not to give the button back but to let the observation land somewhere a
+lead can resolve later: a record with a note, a photo and a position, queued
+against no accession, that the importer reports rather than writes. **This
+needs designing before the tier ships**, and it is the part of this item most
+likely to be underestimated.
+
 **What is deliberately not decided yet.**
 
 - **How a surveyor gets their tier** — a link you send, a setting on first run,
-  or a code typed once. This is a question about how you run a survey day, not
-  about the code, and the code follows whichever it is.
+  or a code typed once. With a crew, "a link you send" is probably it, and the
+  practical question is what happens when one of them bookmarks the page or
+  shares it with a friend. That is a survey-day question; the code follows.
 - **Whether the basic tier sees the "Is the tree there?" card at all** — hiding
   it loses the signal that somebody looked and found nothing, which is the
-  evidence [#15](#15-1552-of-the-2014-tags-are-not-on-the-map) wants. A middle
-  answer exists: leave the card, keep only *Still here*, and let *I could not
-  find it* be a note rather than a status.
-- **Who decides**, and whether the distinction survives contact with a real
-  crew. It may turn out that everybody who walks the campus is trusted with
-  everything, and the whole item folds.
+  evidence [#15](#15-1552-of-the-2014-tags-are-not-on-the-map) wants. A crew
+  walking mapped trees is exactly who will meet the phantoms, so the signal
+  matters more, not less. The middle answer is now the likely one: leave the
+  card, keep only *Still here*, and let *I could not find it* be a flagged note
+  a lead resolves, not a status the undergraduate sets.
+- **How a crew's exports come back** — several phones, several zips, the same
+  afternoon. `npm run import` already skips known duplicates and reports what
+  it issued, but nobody has yet run it against four exports from four people
+  who overlapped on a few trees.
 
 **Cost.** Small, if it is one build with a mode: a tier constant, two
 conditionals in `main.ts`, a line in the export so a record carries which tier
-produced it, and tests for both. Large, if it becomes two apps. Worth doing
-before a crew larger than one goes out, and not before — the shape of the
-answer depends on who that crew is.
+produced it, and tests for both. Large, if it becomes two apps. The escape
+hatch above is its own piece of work and is the reason not to call this a
+half-day. Worth doing before the crew goes out, and the crew is the thing that
+makes it worth doing.
 
 ## Also outstanding (not code)
 
