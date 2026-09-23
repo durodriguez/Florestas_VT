@@ -145,13 +145,44 @@ The importer does the tedious, error-prone work:
 - **Refuses to write anything if any row has a problem.** A skipped row means a
   tree quietly missing from the map, so it stops instead and tells you which
   line and why.
-- **Catches an accidental re-import**, twice over. A tree that already has an
-  observation on that date is refused outright — importing the same export
-  again would put two versions of one visit in the history. And because a field
-  export has no accession numbers for new plants, running the same file twice
-  would otherwise add every tree again: if most of a batch lands on top of
-  existing plants of the same species, it stops. Pass `--allow-duplicates` if
-  it really is dense new planting.
+- **Passes over what is already in, and says so.** The field app exports its
+  whole saved history rather than only what is new, so every export after the
+  first carries rows that have already been imported. Those are skipped and
+  counted, not treated as errors — a row that says exactly what is on file
+  gives nobody anything to decide, and one of them blocking a batch of good
+  rows is worse than useless. The run reports them:
+
+  ```
+  11 row(s) already on file, unchanged — skipped:
+    untagged-1790110256891.webp, 493-1788288876530.jpg, …
+    The field app exports everything it has saved, so this is expected.
+  ```
+
+  A row is recognised two ways. A **tagged** one by its accession and date. An
+  **untagged** one by its photo filename — the app names every photo after the
+  moment it was taken, so the name identifies one record and no other. That
+  matters because an untagged row carries no accession: without it a re-export
+  is issued a fresh number and added as a second tree standing where the first
+  one already is.
+
+- **But the same day saying something different is still an error.** That is a
+  disagreement about what was seen, and the importer has no business picking a
+  winner, so it names the fields that differ and stops:
+
+  ```
+  ✗ UVM-0101 already has a different observation dated 2026-09-21 —
+    condition "" → "dead"; status "removed" → "active". Decide which is
+    right; this importer will not choose.
+  ```
+
+  This is not hypothetical. UVM-0101 is on file as removed with condition left
+  blank, because there was nothing standing there to assess; a later export of
+  the same visit called it `dead`, which describes a tree still standing.
+
+- **Catches a re-import the photo check cannot see.** A row with no photo and
+  no tag has nothing to recognise it by, so the position check remains: if most
+  of a batch lands on top of existing plants of the same species, it stops.
+  Pass `--allow-duplicates` if it really is dense new planting.
 
 Dry run is the default. To stage the merged result for review without touching
 the dataset:

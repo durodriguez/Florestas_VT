@@ -121,6 +121,20 @@ if (result.observations.length) {
   );
 }
 
+// Rows that were already on file, word for word. Reported rather than passed
+// over in silence — "5 of 12 imported" should never leave somebody wondering
+// where the other seven went — but counted apart from the errors, because
+// there is nothing here to fix.
+if (result.reimported.length) {
+  // Recognised either by accession or, for a tree with no tag, by its photo.
+  const trees = [...new Set(result.reimported.map((o) => o.plant_id ?? o.photo))];
+  console.log(
+    `\n${result.reimported.length} row(s) already on file, unchanged — skipped:`,
+  );
+  console.log(`  ${trees.slice(0, 12).join(', ')}${trees.length > 12 ? ` … and ${trees.length - 12} more` : ''}`);
+  console.log('  The field app exports everything it has saved, so this is expected.');
+}
+
 // Notes the survey app addressed to whoever is at this desk. They are in the
 // CSV either way, but a species correction buried in a cell is a species
 // correction nobody acts on.
@@ -142,7 +156,7 @@ if (result.inserts.length) {
 
 console.log(
   `\n${s.inserts} new plant(s), ${s.observations} observation(s), ${s.updates} correction(s), ` +
-  `${s.errors} error(s), ${s.warnings} warning(s)`,
+  `${s.reimported} already on file, ${s.errors} error(s), ${s.warnings} warning(s)`,
 );
 
 // A row that errored was skipped entirely. Importing the rest would quietly
