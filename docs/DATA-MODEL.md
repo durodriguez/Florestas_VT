@@ -71,7 +71,7 @@ measurement, which is why a re-survey never rewrites one of these rows.
 
 | Column | Required | Notes |
 |---|---|---|
-| `plant_id` | ✅ | Accession number, e.g. `UVM-2026-0001`. **Permanent** — it is what the QR code encodes. |
+| `plant_id` | ✅ | Accession number, e.g. `UVM-0763`. **Permanent** — it is what the QR code encodes. |
 | `taxon_id` | ✅ | Must exist in `taxa.csv` |
 | `lat`, `lng` | ✅ | Decimal degrees, WGS84, 6 decimal places (~0.1 m) |
 | `geolocation_notes` | | how the position was arrived at — `GPS ±3 m`, `Position set by pin on imagery` |

@@ -3,15 +3,20 @@
 This is the part software cannot do for you. Here is a workable plan for
 getting from an empty `plants.csv` to a mapped campus.
 
-## 1. Decide the accession scheme first
+## 1. The accession scheme is already decided
 
-Pick it once and never change it. A good default:
+It was settled with the tag split, and it does not need picking again:
 
 ```
-UVM-2026-0001
-    │    └── zero-padded sequence, never reused
-    └── year the plant was accessioned
+UVM-0763
+    └── zero-padded sequence, never reused
 ```
+
+The first 1,349 numbers were minted from the metal tags, so most of them still
+read like the tag on the trunk. New numbers come from the **untagged block**,
+`UVM-4001` and up, and carry no year — the year a number was issued says
+nothing about the tree. Which number a tree wears in the field is the separate
+`tag` column; see [DATA-MODEL.md](DATA-MODEL.md).
 
 The accession number is printed on the physical label and encoded in its QR
 code, so it must be permanent. If a tree is removed, retire the number — do

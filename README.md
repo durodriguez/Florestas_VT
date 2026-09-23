@@ -159,7 +159,7 @@ species never reaches the live site.
 
 ```bash
 npm run labels -- --collection university-green
-npm run labels -- --ids UVM-2026-0001,UVM-2026-0002
+npm run labels -- --ids UVM-0763,UVM-4704
 npm run labels -- --base https://arboretum.uvm.edu/
 ```
 
