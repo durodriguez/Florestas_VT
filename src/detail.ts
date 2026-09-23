@@ -1,7 +1,7 @@
 import type { CityTree, Dataset, Observation, Plant, Taxon } from './types';
 import { escapeHtml } from './map';
 import { ORIGIN_LABELS, TYPE_LABELS } from './palette';
-import { photoUrl } from './photos';
+import { photoTaken, photoUrl } from './photos';
 
 const MONTHS = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -98,9 +98,13 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
   const shareUrl = `${location.origin}${location.pathname}?plant=${encodeURIComponent(plant.id)}`;
   const age = plant.plantedYear ? `${new Date().getFullYear() - plant.plantedYear} years` : null;
 
+  const taken = photoTaken(plant.surveyedOn);
   const photo = plant.photo
-    ? `<img class="detail-photo" src="${escapeHtml(photoUrl(plant.photo, base, dataset.config.photoBaseUrl))}"
-         alt="${escapeHtml(t.common)}, accession ${escapeHtml(plant.id)}" loading="lazy">`
+    ? `<figure class="detail-figure">
+         <img class="detail-photo" src="${escapeHtml(photoUrl(plant.photo, base, dataset.config.photoBaseUrl))}"
+           alt="${escapeHtml(t.common)}, accession ${escapeHtml(plant.id)}" loading="lazy">
+         ${taken ? `<figcaption class="detail-photo-date">Photographed ${escapeHtml(taken)}</figcaption>` : ''}
+       </figure>`
     : '';
 
   const removed =

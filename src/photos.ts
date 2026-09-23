@@ -27,3 +27,27 @@ export function photoUrl(file: string, base: string, photoBaseUrl = ''): string 
   const root = photoBaseUrl ? photoBaseUrl.replace(/\/+$/, '') + '/' : `${base}photos/`;
   return root + encodeURIComponent(file);
 }
+
+const MONTHS = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/**
+ * "2026-09-01" as "Sep 2026", for the line under a photo.
+ *
+ * The month is as precise as this wants to be. A reader wants to know how old
+ * the picture is, not which Tuesday it was taken on — and a photo with no
+ * date gets no line rather than a guess, because a caption is the one place a
+ * guess would be invisible.
+ *
+ * The date is the survey's, which is the photo's: the photo on a plant is
+ * always the one from its latest observation, so a later survey recording no
+ * photo shows none at all rather than an older one under a newer date.
+ *
+ * Mirrored by photoTaken() in scripts/lib/species-pages.mjs, which cannot
+ * import this — src/ is TypeScript compiled by Vite, scripts/ is plain .mjs.
+ */
+export function photoTaken(date: string | null): string {
+  const m = /^(\d{4})-(\d{2})/.exec(date ?? '');
+  if (!m) return '';
+  const month = MONTHS[Number(m[2])];
+  return month ? `${month} ${m[1]}` : '';
+}

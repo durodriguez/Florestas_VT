@@ -20,6 +20,21 @@ const esc = (s) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 const MONTHS = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+/**
+ * "2026-09-01" as "Sep 2026", for the line under a photo. The month is as
+ * precise as this wants to be: a reader wants to know how old the picture is.
+ *
+ * Mirrors photoTaken() in src/detail.ts. The two cannot share a module —
+ * src/ is TypeScript compiled by Vite, scripts/ is plain .mjs — so the rule
+ * is written twice on purpose, as the accession rules were.
+ */
+const photoTaken = (date) => {
+  const m = /^(\d{4})-(\d{2})/.exec(String(date ?? ''));
+  if (!m) return '';
+  const month = MONTHS[Number(m[2])];
+  return month ? `${month} ${m[1]}` : '';
+};
+
 const monthRange = (m) => (m.length ? m.map((n) => MONTHS[n] ?? '').filter(Boolean).join('–') : '');
 const titleCase = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, ' ') : '');
 
@@ -81,10 +96,13 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config }) {
   ].filter(Boolean).join(' &middot; ');
 
   const gallery = photos.length
-    ? `<ul class="shots">${photos.map((p) => `<li>
+    ? `<ul class="shots">${photos.map((p) => {
+      const taken = photoTaken(p.taken);
+      return `<li>
         <img src="${esc(p.url)}" alt="${esc(t.common)} on campus, accession ${esc(p.id)}" loading="lazy">
-        <span><a href="${esc(base)}?plant=${encodeURIComponent(p.id)}">${esc(p.id)}</a></span>
-      </li>`).join('')}</ul>`
+        <span><a href="${esc(base)}?plant=${encodeURIComponent(p.id)}">${esc(p.id)}</a>${taken ? ` &middot; ${esc(taken)}` : ''}</span>
+      </li>`;
+    }).join('')}</ul>`
     : '';
 
   // Only what is known. A species with no flower colour recorded shows no

@@ -43,6 +43,15 @@ That ceiling assumes every new tag and every untagged tree is a 2014 tree in
 disguise, which is certainly too generous. **So at least 450 of the 2014 trees
 are not on the map under any number**, and the true figure is higher.
 
+**A renumbered tree is not a problem to fix.** It is already on the map, under
+the number it wears, with a record of its own. Nothing is duplicated and
+nothing needs reconciling: the 2014 file is a reference this project reads two
+reports and a tag lookup out of, not a second copy of the collection, and no
+mapped tree draws anything from it. What renumbering costs is only the
+precision of the figure above — a tag counted as missing when the tree is
+standing there under another number. Confirming one in the field would move it
+from the first row to the second and change nothing else.
+
 ## One thing is settled
 
 **Map tags inside 1–2555 that 2014 never issued: zero.**
