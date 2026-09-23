@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { bearingDegrees, compassPoint, distanceMeters } from '../src/geo';
 import {
-  accessionForTag, describeDistance, mappedByTag, mappedNeighbours, nearbyTrees,
+  describeDistance, mappedByTag, mappedNeighbours, nearbyTrees, normalizeTag,
   type MappedTree,
 } from '../src/field/nearby';
 
@@ -13,6 +13,7 @@ const tree = (id: string, northM: number, eastM: number, over: Partial<MappedTre
   id,
   lat: HERE.lat + northM * M,
   lng: HERE.lng + (eastM * M) / Math.cos((HERE.lat * Math.PI) / 180),
+  tag: '',
   common: 'Sugar maple',
   sci: 'Acer saccharum',
   surveyed: null,
@@ -118,28 +119,31 @@ describe('distanceMeters still behaves after the move to src/geo', () => {
   });
 });
 
-describe('accessionForTag', () => {
-  it('pads a tag to the four digits the labels use', () => {
-    expect(accessionForTag('763')).toBe('UVM-0763');
-    expect(accessionForTag('3235')).toBe('UVM-3235');
-    expect(accessionForTag('1')).toBe('UVM-0001');
-    expect(accessionForTag(' 763 ')).toBe('UVM-0763');
+describe('normalizeTag', () => {
+  it('reads a tag the way the metal does, without padding', () => {
+    expect(normalizeTag('763')).toBe('763');
+    expect(normalizeTag('0763')).toBe('763');
+    expect(normalizeTag(' 763 ')).toBe('763');
+    expect(normalizeTag('1')).toBe('1');
   });
 
-  it('refuses anything that is not a tag number', () => {
-    expect(accessionForTag('')).toBeNull();
-    expect(accessionForTag('Young')).toBeNull();
-    expect(accessionForTag('1818 or 1942')).toBeNull();
-    expect(accessionForTag('12345')).toBeNull();
+  it('gives back nothing for what is not a tag number', () => {
+    expect(normalizeTag('')).toBeNull();
+    expect(normalizeTag('Young')).toBeNull();
+    expect(normalizeTag('1818 or 1942')).toBeNull();
+    expect(normalizeTag('12345')).toBeNull();
   });
 });
 
 describe('mappedByTag', () => {
   const trees = [
-    { id: 'UVM-3235', lat: 44.4823, lng: -73.1958, common: 'Northern white cedar', sci: 'Thuja occidentalis', surveyed: '2023-11-10' },
-    { id: 'UVM-3236', lat: 44.4823, lng: -73.1958, common: 'Northern white cedar', sci: 'Thuja occidentalis', surveyed: '2023-11-10' },
-    { id: 'UVM-0763', lat: 44.4760, lng: -73.1950, common: 'River birch', sci: 'Betula nigra', surveyed: '2026-09-01' },
-    { id: 'UVM-4001', lat: 44.4700, lng: -73.1990, common: 'Norway maple', sci: 'Acer platanoides', surveyed: null },
+    { id: 'UVM-3235', tag: '3235', lat: 44.4823, lng: -73.1958, common: 'Northern white cedar', sci: 'Thuja occidentalis', surveyed: '2023-11-10' },
+    { id: 'UVM-0763', tag: '763', lat: 44.4760, lng: -73.1950, common: 'River birch', sci: 'Betula nigra', surveyed: '2026-09-01' },
+    // Wears a tag that is nothing like its accession. This is the whole reason
+    // the lookup stopped being a string transform.
+    { id: 'UVM-0105', tag: '3497', lat: 44.4774, lng: -73.1999, common: 'Elm', sci: 'Ulmus sp.', surveyed: '2026-09-21' },
+    // No tag at all: plotted from the air, never found on the ground.
+    { id: 'UVM-4001', tag: '', lat: 44.4700, lng: -73.1990, common: 'Norway maple', sci: 'Acer platanoides', surveyed: null },
   ];
 
   it('finds a tag the 2014 inventory never had', () => {
@@ -153,22 +157,32 @@ describe('mappedByTag', () => {
     expect(mappedByTag('0763', trees)?.id).toBe('UVM-0763');
   });
 
-  it('gives back nothing for a tag on no record', () => {
-    expect(mappedByTag('9999', trees)).toBeUndefined();
-    expect(mappedByTag('Young', trees)).toBeUndefined();
+  it('finds a tree by the tag it wears, not the one its accession implies', () => {
+    // UVM-0105 was found wearing 3497. Typing what is on the trunk must reach
+    // it, and typing the number its accession was minted from must not — 105
+    // is not on any tree any more.
+    expect(mappedByTag('3497', trees)?.id).toBe('UVM-0105');
+    expect(mappedByTag('105', trees)).toBeUndefined();
   });
 
-  it('finds a record with no survey behind it', () => {
-    // A tree somebody plotted but nobody has measured is a normal record.
-    expect(mappedByTag('4001', trees)?.surveyed).toBeNull();
+  it('does not match an untagged tree by the digits of its accession', () => {
+    // UVM-4001 is a number this project invented for a tree with a bare trunk.
+    // Nobody can read 4001 off it, so nobody can look it up that way.
+    expect(mappedByTag('4001', trees)).toBeUndefined();
+  });
+
+  it('never matches an empty tag against an empty query', () => {
+    expect(mappedByTag('', trees)).toBeUndefined();
+    expect(mappedByTag('Young', trees)).toBeUndefined();
+    expect(mappedByTag('9999', trees)).toBeUndefined();
   });
 });
 
 describe('mappedNeighbours', () => {
   const trees = [
-    { id: 'UVM-3234', lat: 0, lng: 0, common: 'Sugar maple', sci: 'Acer saccharum', surveyed: null },
-    { id: 'UVM-3236', lat: 0, lng: 0, common: 'Northern white cedar', sci: 'Thuja occidentalis', surveyed: null },
-    { id: 'UVM-3299', lat: 0, lng: 0, common: 'Red oak', sci: 'Quercus rubra', surveyed: null },
+    { id: 'UVM-3234', tag: '3234', lat: 0, lng: 0, common: 'Sugar maple', sci: 'Acer saccharum', surveyed: null },
+    { id: 'UVM-3236', tag: '3236', lat: 0, lng: 0, common: 'Northern white cedar', sci: 'Thuja occidentalis', surveyed: null },
+    { id: 'UVM-3299', tag: '3299', lat: 0, lng: 0, common: 'Red oak', sci: 'Quercus rubra', surveyed: null },
   ];
 
   it('offers the tags either side, for a tag that has lost a digit', () => {

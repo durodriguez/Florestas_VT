@@ -146,6 +146,8 @@ export interface Observation {
 /** A plant record after the columnar rows in plants.json are expanded. */
 export interface Plant {
   id: string;
+  /** The number on its metal tag, or '' for a tree that wears none. */
+  tag: string;
   taxon: Taxon;
   lat: number;
   lng: number;

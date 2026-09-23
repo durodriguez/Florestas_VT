@@ -117,6 +117,9 @@ const trees = result.plants.rows.map((row) => {
   const taxon = result.dataset.taxa[at(row, 'taxon')];
   return {
     id: at(row, 'plant_id'),
+    // The number on the trunk, which is what a surveyor types. Not derivable
+    // from the id any more — see src/accession.ts.
+    tag: at(row, 'tag'),
     lat: at(row, 'lat'),
     lng: at(row, 'lng'),
     common: taxon?.common ?? '',

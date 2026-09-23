@@ -82,6 +82,16 @@ export const QA_NOTE = /^[A-Z][A-Z0-9 ]{2,}:/;
 /** Column order of data/plants.csv, and of the rows the importer writes. */
 export const PLANT_COLUMNS = [
   'plant_id',
+  // The number on the metal tag, as the tag reads it — "763", not "0763".
+  // Blank for a tree that wears none.
+  //
+  // Separate from plant_id on purpose. An accession is permanent and is what
+  // a QR label and a shared link encode; a tag is a piece of metal that falls
+  // off, corrodes and gets replaced with a different number. The first 1,349
+  // accessions were minted from tags and still look like them, which is why
+  // this column has to exist: it is the only place the two can disagree, and
+  // disagree they already do — tree UVM-0105 wears tag 3497.
+  'tag',
   'taxon_id',
   'lat',
   'lng',
@@ -138,6 +148,10 @@ export const OBSERVATION_COLUMNS = [
  */
 export const PLANT_FIELDS = [
   'plant_id',
+  // Sent to the browser because search has to find a tree by the number on
+  // its trunk. That used to work by accident — "763" is a substring of
+  // "UVM-0763" — and stops working the moment the two are allowed to differ.
+  'tag',
   'taxon',       // integer index into taxa[]
   'lat',
   'lng',

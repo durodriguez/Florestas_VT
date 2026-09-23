@@ -50,6 +50,7 @@ export function expandPlants(file: PlantsFile, dataset: Dataset): Plant[] {
 
     const plant: Plant = {
       id: at(row, 'plant_id') as string,
+      tag: (at(row, 'tag') as string | null) ?? '',
       taxon,
       lat: at(row, 'lat') as number,
       lng: at(row, 'lng') as number,
@@ -98,6 +99,10 @@ export function expandPlants(file: PlantsFile, dataset: Dataset): Plant[] {
       collection?.name ?? '',
       plant.dedicationLabel ?? '',
       plant.story ?? '',
+      // The number on the trunk. Needed explicitly now: it used to fall out of
+      // the id for free, because "763" is a substring of "UVM-0763", and that
+      // stopped being reliable when the two were allowed to differ.
+      plant.tag,
     ]
       .join(' ')
       .toLowerCase();

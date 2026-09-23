@@ -336,21 +336,25 @@ describe('importSurvey — dedications and position notes', () => {
 });
 
 describe('importSurvey — accessions', () => {
-  it('assigns sequential accessions in the configured scheme', () => {
+  it('issues from the untagged block, not from the year', () => {
+    // UVM-2026-0001 used to be the shape. The year recorded when a number was
+    // handed out, not when anything was planted, so it said nothing true.
     const r = run([row(), row({ lat: '44.4780' }), row({ lat: '44.4781' })]);
     expect(r.inserts.map((i: { plant_id: string }) => i.plant_id))
-      .toEqual(['UVM-2026-0001', 'UVM-2026-0002', 'UVM-2026-0003']);
+      .toEqual(['UVM-4001', 'UVM-4002', 'UVM-4003']);
   });
 
-  it('continues numbering past accessions already issued that year', () => {
-    const existing = [...plantRows, { plant_id: 'UVM-2026-0012', taxon_id: 'pinus-strobus', lat: '44.46', lng: '-73.21', status: 'active' }];
+  it('continues the block past what is already issued', () => {
+    const existing = [...plantRows, { plant_id: 'UVM-4703', taxon_id: 'pinus-strobus', lat: '44.46', lng: '-73.21', status: 'active' }];
     const r = run([row()], { plantRows: existing });
-    expect(r.inserts[0].plant_id).toBe('UVM-2026-0013');
+    expect(r.inserts[0].plant_id).toBe('UVM-4704');
   });
 
-  it('honours an explicit --year', () => {
-    const r = run([row()], { year: 2030 });
-    expect(r.inserts[0].plant_id).toBe('UVM-2030-0001');
+  it('ignores accessions below the block when deciding the next number', () => {
+    // The 1,349 minted from tags sit below 4001 and are not part of the
+    // sequence; continuing from the highest of those would collide.
+    const existing = [...plantRows, { plant_id: 'UVM-2554', taxon_id: 'pinus-strobus', lat: '44.46', lng: '-73.21', status: 'active' }];
+    expect(run([row()], { plantRows: existing }).inserts[0].plant_id).toBe('UVM-4001');
   });
 });
 
@@ -473,10 +477,10 @@ describe('importSurvey — re-surveys', () => {
     expect(r.inserts[0].taxon_id).toBe('acer-rubrum');
   });
 
-  it('rejects a tag that is not an existing accession', () => {
+  it('rejects a tag that is neither an accession nor a tag number', () => {
     const r = run([row({ tag: 'BOGUS-999' })]);
     expect(r.inserts).toHaveLength(0);
-    expect(r.issues.some((i: { message: string }) => /not an existing accession/.test(i.message))).toBe(true);
+    expect(r.issues.some((i: { message: string }) => /neither an accession on file nor a tag number/.test(i.message))).toBe(true);
   });
 });
 
@@ -507,51 +511,59 @@ describe('importSurvey — dates', () => {
   });
 });
 
-describe('importSurvey — adopting physical tags', () => {
-  it('refuses an unknown tag by default, and says how to adopt it', () => {
+describe('importSurvey — tags', () => {
+  it('records a new tagged tree with an ordinary accession and its tag beside it', () => {
+    // The old behaviour was to adopt 772 as UVM-0772. That is what welded the
+    // identifier to a piece of metal, and it is what this undoes.
     const r = run([row({ tag: '772' })]);
-    expect(r.inserts).toHaveLength(0);
-    expect(r.issues.some((i: { message: string }) => /--adopt-tags/.test(i.message))).toBe(true);
-  });
-
-  it('adopts a bare numeric tag as the accession number', () => {
-    const r = run([row({ tag: '772' })], { adoptTags: true });
     expect(r.summary.errors).toBe(0);
-    expect(r.inserts[0].plant_id).toBe('UVM-0772');
+    expect(r.inserts[0]).toMatchObject({ plant_id: 'UVM-4001', tag: '772' });
   });
 
-  it('zero-pads short tags and leaves long ones intact', () => {
-    const r = run([row({ tag: '7' }), row({ tag: '12345', lat: '44.4780' })], { adoptTags: true });
-    expect(r.inserts.map((i: { plant_id: string }) => i.plant_id)).toEqual(['UVM-0007', 'UVM-12345']);
-  });
-
-  it('treats a later survey of the same tag as another visit, not a duplicate', () => {
-    const adopted = [
+  it('finds a tree by the tag it wears, not by what its accession looks like', () => {
+    const tagged = [
       ...plantRows,
-      { plant_id: 'UVM-0772', taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955' },
+      { plant_id: 'UVM-4050', tag: '3497', taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955' },
     ];
-    const r = run([row({ tag: '772', dbh_in: '10.2' })], { adoptTags: true, plantRows: adopted });
+    const r = run([row({ tag: '3497', dbh_in: '10.2' })], { plantRows: tagged });
     expect(r.inserts).toHaveLength(0);
-    expect(r.observations[0]).toMatchObject({ plant_id: 'UVM-0772', dbh_in: '10.2' });
+    expect(r.observations[0]).toMatchObject({ plant_id: 'UVM-4050', dbh_in: '10.2' });
   });
 
-  it('still assigns a fresh accession when the tag column is blank', () => {
-    const r = run([row({ tag: '' })], { adoptTags: true });
-    expect(r.inserts[0].plant_id).toBe('UVM-2026-0001');
-  });
-
-  it('does not adopt a non-numeric tag, which is probably a typo', () => {
-    const r = run([row({ tag: 'BOGUS-1' })], { adoptTags: true });
+  it('still accepts an accession typed into the tag column', () => {
+    // A surveyor reading a record off the map has no reason to know the
+    // difference between the two kinds of number.
+    const r = run([row({ tag: 'UVM-2025-0007', dbh_in: '22' })]);
     expect(r.inserts).toHaveLength(0);
-    expect(r.issues.some((i: { message: string }) => /not an existing accession/.test(i.message))).toBe(true);
+    expect(r.observations[0]).toMatchObject({ plant_id: 'UVM-2025-0007' });
   });
 
-  it('refuses when two rows in one file adopt the same tag', () => {
-    // Two trees cannot share a physical tag number; the second is a
-    // transcription error and must not overwrite the first.
-    const r = run([row({ tag: '772' }), row({ tag: '772', lat: '44.4781' })], { adoptTags: true });
+  it('reads a padded tag as the number the metal shows', () => {
+    const tagged = [
+      ...plantRows,
+      { plant_id: 'UVM-4050', tag: '7', taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955' },
+    ];
+    expect(run([row({ tag: '0007' })], { plantRows: tagged }).inserts).toHaveLength(0);
+  });
+
+  it('assigns an accession with no tag when the tag column is blank', () => {
+    const r = run([row({ tag: '' })]);
+    expect(r.inserts[0]).toMatchObject({ plant_id: 'UVM-4001', tag: '' });
+  });
+
+  it('refuses something that is neither an accession nor a tag number', () => {
+    const r = run([row({ tag: 'BOGUS-1' })]);
+    expect(r.inserts).toHaveLength(0);
+    expect(r.issues.some((i: { message: string }) => /neither an accession on file nor a tag number/.test(i.message))).toBe(true);
+  });
+
+  it('refuses two rows in one file carrying the same tag', () => {
+    // Two trees cannot share a physical tag. Without a guard the second row
+    // would find the first through the tag index and read as a re-survey,
+    // turning a misreading into one tree that appears to have moved.
+    const r = run([row({ tag: '772' }), row({ tag: '772', lat: '44.4781' })]);
     expect(r.inserts).toHaveLength(1);
-    expect(r.issues.some((i: { message: string }) => /already in use/.test(i.message))).toBe(true);
+    expect(r.issues.some((i: { message: string }) => /two rows in this file carry tag/.test(i.message))).toBe(true);
   });
 });
 

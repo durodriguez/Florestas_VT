@@ -207,25 +207,31 @@ On the **Saved** screen:
 Then at a computer:
 
 ```bash
-npm run import -- survey-2026-09-01.csv --adopt-tags
-npm run import -- survey-2026-09-01.csv --adopt-tags --write
+npm run import -- survey-2026-09-01.csv
+npm run import -- survey-2026-09-01.csv --write
 npm run data
 ```
 
 Export before you finish for the day. The records live only in that browser's
 storage; clearing site data or losing the phone loses the work.
 
-## Physical tags become accession numbers
+## A tag is looked up, not turned into an accession
 
-`--adopt-tags` registers a metal tag as the tree's permanent accession: tag
-`772` becomes `UVM-0772`. UVM already has thousands of durably tagged trees, so
-inventing a parallel numbering scheme would only create ambiguity in the field.
+Tag `772` used to *become* accession `UVM-0772`. It no longer does, because
+that welded a permanent identifier to a piece of metal that gets replaced —
+and one already has: `UVM-0105` wears tag 3497.
 
-Re-surveying is then automatic — type `772` again next year and the importer
-updates `UVM-0772` rather than creating a second record.
+The tag now lives in its own column, and typing a number into the app searches
+it. Type `772` and you reach the tree wearing 772, whatever its accession says.
+Re-surveying still works the way it always did: type the number again next year
+and the importer adds an observation rather than a second record.
 
-The flag is off by default, so a mistyped tag on an ordinary import is still
-refused rather than silently creating a bogus record.
+A number nobody has on file is a tree nobody has recorded, so it gets an
+accession from the untagged block with its tag beside it. A mistyped tag
+therefore creates a spurious tree rather than being refused — which is what the
+position-collision check and the dry run are for. Read the dry run.
+
+See [the accession and the tag](FIELD-SURVEY.md#the-accession-and-the-tag).
 
 ## Tag lookup: two sets of records, newest first
 

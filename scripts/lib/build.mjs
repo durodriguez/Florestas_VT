@@ -151,6 +151,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
   const bounds = config?.map?.bounds;
   const plantsMeta = [];
   const seenPlantIds = new Set();
+  const seenTags = new Map();
 
   plantRows.forEach((row, i) => {
     const where = `plants.csv row ${i + 2}`;
@@ -226,8 +227,25 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       warn(where, `story is ${trim(row.story).length} characters — it is meant to be one line`);
     }
 
+    // The number on the metal tag. Validated here rather than trusted, because
+    // it is now ordinary data: before the split it could not be wrong, since
+    // it WAS the identifier and the identifier was unique by construction.
+    const tag = trim(row.tag);
+    if (tag && !/^\d{1,4}$/.test(tag)) {
+      err(where, `tag "${tag}" is not a tag number`);
+    } else if (tag) {
+      const other = seenTags.get(tag);
+      // Two trees cannot wear one number. Where the survey found that they
+      // seem to, the tag is left blank and the dispute recorded as an
+      // observation, so reaching here means a real mistake rather than a
+      // question for the field.
+      if (other) err(where, `tag "${tag}" is already on ${other}`);
+      else seenTags.set(tag, id);
+    }
+
     plantsMeta.push({
       id,
+      tag: tag || null,
       taxon: tIdx,
       lat: Number(lat.toFixed(6)),
       lng: Number(lng.toFixed(6)),
@@ -322,6 +340,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
 
     const record = {
       plant_id: plant.id,
+      tag: plant.tag,
       taxon: plant.taxon,
       lat: plant.lat,
       lng: plant.lng,

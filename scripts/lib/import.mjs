@@ -142,6 +142,31 @@ export function resolveColumns(headers, columnAliases) {
   return { resolved, unmapped };
 }
 
+/**
+ * Accessions at or above this were issued here for trees with no readable tag.
+ * Mirrors the constant in arcgis.mjs; the two importers share one block so the
+ * numbering stays contiguous whichever one issues next.
+ */
+export const UNTAGGED_BLOCK_START = 4001;
+
+/**
+ * The next free number in the untagged block.
+ *
+ * Every accession this importer issues now comes from here, including for a
+ * tree that *does* wear a tag. That is the point of splitting the two: an
+ * accession is permanent and arbitrary, and the tag goes in its own column
+ * where it can change without dragging the identifier along.
+ */
+export function nextUntagged(existingIds, prefix, start = UNTAGGED_BLOCK_START) {
+  const re = new RegExp(`^${prefix}-(\\d{4})$`, 'i');
+  let max = start - 1;
+  for (const id of existingIds) {
+    const m = String(id).match(re);
+    if (m && Number(m[1]) >= start) max = Math.max(max, Number(m[1]));
+  }
+  return max + 1;
+}
+
 /** Highest existing sequence for `PREFIX-YEAR-NNNN`, so numbering continues. */
 export function nextSequence(existingIds, prefix, year) {
   const re = new RegExp(`^${prefix}-${year}-(\\d+)$`, 'i');
@@ -231,7 +256,6 @@ export function importSurvey({
   year = new Date().getFullYear(),
   duplicateMeters = 2,
   movedMeters = 0.5,
-  adoptTags = false,
 }) {
   const { resolved, unmapped } = resolveColumns(headers, mapping.columns);
   const species = buildSpeciesLookup(taxaRows);
@@ -239,10 +263,17 @@ export function importSurvey({
   const conditions = buildConditionLookup(mapping.conditions);
 
   const existing = new Map(plantRows.map((p) => [trim(p.plant_id), p]));
+  // Trees by the number on the trunk. Only trees that wear one: a blank tag
+  // must never match a blank query.
+  const byTag = new Map(
+    plantRows
+      .filter((p) => /^\d{1,4}$/.test(trim(p.tag)))
+      .map((p) => [String(Number(trim(p.tag))), trim(p.plant_id)]),
+  );
   const prefix = config.accessionPrefix ?? 'PLANT';
   const bounds = config?.map?.bounds;
 
-  let seq = nextSequence(existing.keys(), prefix, year);
+  let seq = nextUntagged(existing.keys(), prefix);
   const takenIds = new Set(existing.keys());
 
   const inserts = [];
@@ -252,6 +283,8 @@ export function importSurvey({
   const reimported = [];
   const issues = [];
   const unknownSpecies = new Map();
+  /** Tags this run has just issued an accession for. */
+  const issuedThisRun = new Set();
 
   // A survey already on file for this tree on this date. The field app exports
   // its whole saved history rather than only what is new, so every export
@@ -433,6 +466,10 @@ export function importSurvey({
     }
 
     const record = {
+      // Always present, so every insert writes the column explicitly rather
+      // than leaving it undefined for the CSV writer to guess at. The tagged
+      // path below overrides it.
+      tag: '',
       taxon_id: taxonId,
       lat: lat.toFixed(6),
       lng: lng.toFixed(6),
@@ -477,28 +514,40 @@ export function importSurvey({
       // A bare number is a physical tag stamped on the tree. Its accession is
       // that number in the project's prefix form, so a surveyor reading "772"
       // off a metal tag and the record UVM-0772 are the same tree.
-      const bareTag = /^\d+$/.test(tag);
-      const asAccession = bareTag ? formatAccession(prefix, null, Number(tag)) : tag;
-      const known = existing.has(tag) ? tag : existing.has(asAccession) ? asAccession : null;
+      const bareTag = /^\d{1,4}$/.test(tag);
+      // Looked up against the tag column, not computed from the number. The
+      // first 1,349 accessions were minted from tags and still look like them,
+      // but that is history: UVM-0105 wears tag 3497, and a surveyor typing
+      // 3497 has to reach it.
+      //
+      // An accession typed into the tag column still works, because a surveyor
+      // reading a record off the map has no reason to know the difference.
+      const known = existing.has(tag) ? tag : (bareTag ? byTag.get(String(Number(tag))) : null) ?? null;
+
+      if (issuedThisRun.has(String(Number(tag)))) {
+        error(`two rows in this file carry tag "${tag}" — one of them is a misreading`);
+        return;
+      }
 
       if (!known) {
-        if (adoptTags && bareTag) {
-          // First survey of an already-tagged tree: adopt the tag as its
-          // accession rather than issuing a parallel number nobody can read
-          // in the field.
-          if (takenIds.has(asAccession)) {
-            error(`tag "${tag}" maps to ${asAccession}, which is already in use`);
-            return;
-          }
-          takenIds.add(asAccession);
-          inserts.push({ plant_id: asAccession, ...record });
-          if (surveyedOn) recordObservation(asAccession, observation, error);
+        if (!bareTag) {
+          error(`"${tag}" is neither an accession on file nor a tag number`);
           return;
         }
-        error(
-          `tag "${tag}" is not an existing accession — leave the column blank to assign a new ` +
-          'one, or pass --adopt-tags to register physical tags as accession numbers',
-        );
+        // A tagged tree nobody has recorded yet. It gets an ordinary accession
+        // from the untagged block and keeps its tag in the tag column, which
+        // is the whole shape of the split: the number on the metal never
+        // becomes the identifier again.
+        const id = formatAccession(prefix, null, seq++);
+        takenIds.add(id);
+        // Registered so a second row cannot claim the same tag. Without this
+        // the second would find the first through byTag and be read as a
+        // re-survey of it, quietly turning a transcription error into one
+        // tree that appears to have moved.
+        issuedThisRun.add(String(Number(tag)));
+        byTag.set(String(Number(tag)), id);
+        inserts.push({ plant_id: id, ...record, tag: String(Number(tag)) });
+        if (surveyedOn) recordObservation(id, observation, error);
         return;
       }
       // The visit itself is always recorded. Only corrections to the tree's
@@ -520,8 +569,8 @@ export function importSurvey({
       return;
     }
 
-    let id = formatAccession(prefix, year, seq++);
-    while (takenIds.has(id)) id = formatAccession(prefix, year, seq++);
+    let id = formatAccession(prefix, null, seq++);
+    while (takenIds.has(id)) id = formatAccession(prefix, null, seq++);
     takenIds.add(id);
     inserts.push({ plant_id: id, ...record });
     if (surveyedOn) recordObservation(id, observation, error);
