@@ -149,6 +149,7 @@ species never reaches the live site.
 | `npm run check:species -- <file>` | Report how a source file's species names resolve against `taxa.csv` |
 | `npm run check:inventories` | Compare the 2014 inventory against the map, tree by tree, and list every disagreement |
 | `npm run check:coverage` | Account for the 2014 tags that are not on the map, and rank the gaps worth walking |
+| `npm run check:prose` | Report any taxon whose fun fact merely restates its description |
 | `npm run labels` | Generate QR label sheet and SVGs into `public/labels/` |
 | `npm run check:links` | Check every `wikipedia_url` in `taxa.csv` still resolves |
 | `npm test` | Run the test suite |
