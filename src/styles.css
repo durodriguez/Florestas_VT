@@ -316,10 +316,14 @@ button, input, select { font: inherit; color: inherit; }
   margin: .9rem 0 0; padding: .5rem .7rem; font-size: .85rem;
   background: var(--bg-sunk); border-left: 3px solid var(--uvm-green-light);
 }
+.detail-figure { margin: 1rem 0 0; }
 .detail-photo {
-  display: block; width: 100%; height: auto; margin: 1rem 0 0;
+  display: block; width: 100%; height: auto;
   border-radius: var(--radius);
 }
+/* When the picture was taken, so nobody reads a ten-year-old photo as how the
+   tree looks today. */
+.detail-photo-date { margin-top: .3rem; font-size: .76rem; color: var(--dim); }
 .detail-desc { font-size: .88rem; line-height: 1.5; }
 
 /* This tree's own history, and a line about the species. Both are optional
