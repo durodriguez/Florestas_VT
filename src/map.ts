@@ -32,9 +32,14 @@ function basemaps(maxZoom: number): Record<string, L.TileLayer> {
       maxNativeZoom: 19,
       attribution: osm,
     }),
+    // Native to z20 over Burlington, which is twice the ground detail of the
+    // z19 this used to stop at: 0.107 m per pixel against 0.213 m. Everything
+    // above the native zoom is Leaflet stretching the same pixels, so the cap
+    // was throwing away half the resolution the service actually serves.
+    // Checked against the tile over the green; z21 is not published.
     Satellite: L.tileLayer(
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-      { maxZoom, maxNativeZoom: 19, attribution: `${esri}, Maxar, Earthstar Geographics` },
+      { maxZoom, maxNativeZoom: 20, attribution: `${esri}, Maxar, Earthstar Geographics` },
     ),
     Topographic: L.tileLayer(
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
