@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import Papa from 'papaparse';
 import { toCsv } from '../src/field/exporter';
 import { extensionFor } from '../src/field/photo';
 import type { SurveyRecord } from '../src/field/db';
@@ -14,6 +15,7 @@ const record = (over: Partial<SurveyRecord> = {}): SurveyRecord => ({
   taxonId: 'tilia-cordata',
   referenceSpecies: '',
   referenceTaxonId: '',
+  referenceSource: '',
   claimedPlantId: '',
   claimedMeters: null,
   claimedLat: null,
@@ -186,5 +188,64 @@ describe('status', () => {
     // has no status at all. Blank would import as active anyway, but writing
     // it explicitly keeps the CSV readable by a person.
     expect(cell(toCsv([record({ status: undefined as never })]), 'status')).toBe('active');
+  });
+});
+
+describe('the note when a species is corrected', () => {
+  // Parsed properly rather than split on commas: the clause is joined with the
+  // others into one field, and a note that quotes a name would break a split.
+  const notes = (r: SurveyRecord): string => {
+    const rows = Papa.parse<Record<string, string>>(toCsv([r]).trim(), {
+      header: true, skipEmptyLines: true,
+    });
+    expect(rows.errors).toEqual([]);
+    return rows.data[0]!.notes!;
+  };
+
+  const corrected = (over: Partial<SurveyRecord> = {}) =>
+    record({
+      referenceSpecies: 'Acer saccharinum', referenceTaxonId: 'acer-saccharinum',
+      species: 'Quercus bicolor', taxonId: 'quercus-bicolor', ...over,
+    });
+
+  it('names the 2014 file and the tag when that is what was read', () => {
+    const n = notes(corrected({ tag: '1099', referenceSource: '2014' }));
+    expect(n).toContain('the 2014 file records tag 1099 as Acer saccharinum');
+    expect(n).toContain('recorded as Quercus bicolor');
+  });
+
+  it('names the inventory, not the 2014 file, when that is what was read', () => {
+    // The note used to say "2014 record" whichever source the app had used, so
+    // it named the wrong file every time the map answered first.
+    const n = notes(corrected({ tag: '1099', referenceSource: 'the inventory' }));
+    expect(n).toContain('the inventory records tag 1099 as');
+    expect(n).not.toContain('2014');
+  });
+
+  it('names the claimed accession for a tree with no tag', () => {
+    // It used to say "tag (none)", which names no tree and reads like a bug.
+    const n = notes(corrected({
+      claimedPlantId: 'UVM-1099', claimedMeters: 4, referenceSource: 'the inventory',
+    }));
+    expect(n).toContain('the inventory records UVM-1099 as Acer saccharinum');
+    expect(n).not.toContain('(none)');
+  });
+
+  it('claims nothing about the source for a record saved before it was stored', () => {
+    const n = notes(corrected({ tag: '1099', referenceSource: undefined as never }));
+    expect(n).toContain('an earlier record records tag 1099 as');
+  });
+
+  it('says nothing at all when the recorded species matches the reference', () => {
+    // The case the 24 September export got wrong: a tree claimed by position,
+    // its species seeded from the map, agreeing with the map — and a note
+    // nonetheless, because the reference still held a previous tag's lookup.
+    const n = notes(record({
+      claimedPlantId: 'UVM-1099', claimedMeters: 4,
+      referenceSpecies: 'Quercus bicolor', referenceTaxonId: 'quercus-bicolor',
+      referenceSource: 'the inventory',
+      species: 'Quercus bicolor', taxonId: 'quercus-bicolor',
+    }));
+    expect(n).not.toContain('SPECIES CHANGED');
   });
 });

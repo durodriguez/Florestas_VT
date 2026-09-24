@@ -45,13 +45,28 @@ to declare something the app could see for itself.
 
 Now it detects it. Correct the species, and the tag card says:
 
-> 2014 recorded this tag as **Picea abies**. You have recorded **Picea
-> pungens**, which is saved as a correction.
+> The 2014 file records tag **1421** as **Picea abies**. You have recorded
+> **Picea pungens**, which is saved as a correction.
 
 Nothing to click, and **no warning when you save** — correcting an old
 identification is the work, not a mistake to confirm. The record is marked
 *species changed* in the saved list, and the export carries a line naming both
 species so whoever adjudicates it does not have to open the 2014 file.
+
+**What it compares against depends on how you identified the tree**, and the
+message names it either way: the 2014 file or the current inventory, and the
+tag you typed or the accession you claimed by position. Claiming a tree makes
+that tree's own record the thing your species is measured against — which is
+what you would expect, and was not what happened until 24 September 2026.
+
+Until then, emptying the tag box left the previous tag's lookup in place, and a
+tree claimed by position afterwards was compared against it. On the Green that
+put *"SPECIES CHANGED: 2014 record for tag (none) says Acer saccharinum"* on
+UVM-1099, a swamp white oak that both records agree about and always did. The
+note reached the import before anyone read it against `reference.csv`. If you
+see a species-change message naming a tree you have not touched, that is the
+shape of it — but both holes are closed, and the message now names its source
+and its subject so a wrong one is obvious on the phone rather than at the desk.
 
 Picking the same taxon under a different name does not count: *Norway spruce*
 and *Picea abies* are one taxon, and the app compares ids rather than text.

@@ -193,6 +193,22 @@ function seedSpecies(name: string, known: SpeciesEntry | undefined): void {
   closeSuggestions();
 }
 
+/**
+ * The record a species correction is measured against, when no tag is in the
+ * box: the claimed tree's own entry on the map, or nothing at all.
+ *
+ * Every path that drops a tag has to come back through here. Emptying the box
+ * used to leave the previous tag's lookup in place, and a tree then claimed by
+ * position was compared against it — which put a false "SPECIES CHANGED: 2014
+ * record for tag (none) says Acer saccharinum" on UVM-1099 in the 24 September
+ * export. The tree is a swamp white oak in both records and always was.
+ */
+function baselineReference(): typeof reference {
+  if (!claimed) return { species: '', taxonId: '', source: '' };
+  const entry = resolveExact(claimed.tree.sci, species);
+  return { species: claimed.tree.sci, taxonId: entry?.id ?? '', source: 'the inventory' };
+}
+
 function renderTagLookup(): void {
   const tag = $<HTMLInputElement>('tag').value.trim();
   const box = $('tag-result');
@@ -200,6 +216,8 @@ function renderTagLookup(): void {
   if (!tag) {
     box.innerHTML = '';
     box.className = 'tag-result';
+    reference = baselineReference();
+    renderSpeciesChange();
     return;
   }
   // The current inventory first. It holds every tree surveyed in 2023-24, so
@@ -380,8 +398,13 @@ function claim(hit: NearbyTree | null): void {
     const entry = resolveExact(hit.tree.sci, species);
     if (entry) setTaxon(entry, true);
   }
+  // Claiming a tree says which record this visit belongs to, so it also says
+  // what a correction would be a correction *of*. Taking that from the claim
+  // rather than from whatever was looked up last is the whole fix.
+  reference = baselineReference();
   renderClaimed();
   renderNearby();
+  renderSpeciesChange();
 }
 
 // ------------------------------------------------------- species autocomplete
@@ -479,10 +502,17 @@ function renderSpeciesChange(): void {
     box.innerHTML = '';
     return;
   }
+  // Name the tree the way the surveyor identified it. "This tag" was wrong
+  // whenever they had claimed one by position, which is most of the untagged
+  // campus — and a sentence that describes the wrong thing is not a warning.
+  const tag = $<HTMLInputElement>('tag').value.trim();
+  const subject = tag ? `tag ${tag}` : claimed ? claimed.tree.id : 'this tree';
+  // "Ulmus sp." already ends in a stop; a second one reads as a typo.
+  const stop = /\.$/.test(reference.species) ? '' : '.';
   box.hidden = false;
   box.innerHTML =
-    `${escapeHtml(reference.source === '2014' ? '2014 recorded' : 'The inventory records')} this tag as ` +
-    `<strong>${escapeHtml(reference.species)}</strong>. ` +
+    `${escapeHtml(reference.source === '2014' ? 'The 2014 file records' : 'The inventory records')} ` +
+    `${escapeHtml(subject)} as <strong>${escapeHtml(reference.species)}</strong>${stop} ` +
     `You have recorded <strong>${escapeHtml(recorded)}</strong>, ` +
     'which is saved as a correction.';
 }
@@ -702,6 +732,7 @@ async function save(): Promise<void> {
     taxonId: pickedTaxon(),
     referenceSpecies: reference.species,
     referenceTaxonId: reference.taxonId,
+    referenceSource: reference.source,
     claimedPlantId: claimed?.tree.id ?? '',
     claimedMeters: claimed ? Math.round(claimed.meters) : null,
     claimedLat: claimed?.tree.lat ?? null,
@@ -824,7 +855,7 @@ $('tag-result').addEventListener('click', (e) => {
 $('tag-new').addEventListener('click', () => {
   $<HTMLInputElement>('tag').value = '';
   $<HTMLInputElement>('species').dataset.autofilled = '';
-  reference = { species: '', taxonId: '', source: '' };
+  reference = baselineReference();
   renderTagLookup();
   $('species').focus();
   renderSpeciesSearch();

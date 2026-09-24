@@ -12,8 +12,8 @@ UVM-0725,725,tilia-tomentosa,44.477036,-73.194429,"Mapped in UVM's ArcGIS tree l
 UVM-0726,726,tilia-tomentosa,44.477063,-73.194441,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,118fd01e-8251-4f6d-9a44-752231bd1bde
 UVM-0727,727,tilia-tomentosa,44.477078,-73.194445,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,49081458-17c3-482d-b387-0909a2dc2af0
 UVM-4001,,gleditsia-triacanthos,44.477269,-73.194611,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e481dd1e-8ec8-48ed-92b4-f6011bdb34c5
-UVM-0731,731,gleditsia-triacanthos,44.477329,-73.194487,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,daaef83c-b476-41da-836c-8dec9bf7d303
-UVM-4002,,prunus-sargentii,44.477106,-73.195080,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,eadce6d8-6093-4b89-aaa6-6e167703a47a
+UVM-0731,731,gleditsia-triacanthos,44.477344,-73.194495,Position set by pin on imagery,central,,,,daaef83c-b476-41da-836c-8dec9bf7d303
+UVM-4002,,prunus-sargentii,44.477106,-73.195080,Position set by pin on imagery,central,,,,eadce6d8-6093-4b89-aaa6-6e167703a47a
 UVM-4003,,prunus-sargentii,44.476911,-73.195049,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b25e1339-8846-4470-885e-77b097e7d5e7
 UVM-4004,,prunus-sargentii,44.476982,-73.195073,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,82d3fc6a-399c-4357-8d97-746ebc48efb8
 UVM-0747,747,prunus-sargentii,44.477039,-73.195183,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,9665fd33-499e-4bec-aa0b-c00729799652
@@ -72,7 +72,7 @@ UVM-0770,770,taxodium-distichum,44.476637,-73.194729,"Mapped in UVM's ArcGIS tre
 UVM-0769,769,taxodium-distichum,44.476635,-73.194712,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,daa71df2-017b-4ece-9961-4266e4d2ba85
 UVM-0768,768,taxodium-distichum,44.476631,-73.194694,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,98c23b00-2502-4b2f-8af8-825a5572c116
 UVM-0767,767,ulmus-sp,44.476515,-73.194701,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,2b09d9f6-27d5-4dfa-a601-650434d71d5d
-UVM-0640,640,pseudotsuga-menziesii,44.475855,-73.194925,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,d4df57d6-c47c-4dbe-9ce8-5b37a187db98
+UVM-0640,640,pseudotsuga-menziesii,44.475855,-73.194925,Position set by pin on imagery,central,,,,d4df57d6-c47c-4dbe-9ce8-5b37a187db98
 UVM-0636,636,morus-alba,44.475555,-73.194761,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,abf3f853-aefb-4f1d-8adc-6b42786f52d4
 UVM-3822,3822,zelkova-serrata,44.475481,-73.194748,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,082f8549-b4aa-4781-8155-5bfe1799f46c
 UVM-3823,3823,zelkova-serrata,44.475350,-73.194628,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,fa2730d2-4cf9-4650-ae41-f0509f4bae66
@@ -367,13 +367,13 @@ UVM-0515,515,stewartia-pseudocamellia,44.478574,-73.194406,"Mapped in UVM's ArcG
 UVM-0516,516,carpinus-caroliniana,44.478648,-73.194365,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,42ad7732-7d09-4691-8a31-956b6b152129
 UVM-0514,514,carpinus-caroliniana,44.478673,-73.194437,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,898fcfd7-cd10-4262-8e2e-79bf613be080
 UVM-0513,513,carpinus-caroliniana,44.478690,-73.194503,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,f66b6d56-2d10-4651-8e2d-cd8efbdf8a62
-UVM-1080,1080,quercus-rubra,44.477978,-73.194989,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,d56a7719-72e3-4c31-90e1-79e8bbae8615
-UVM-1083,1083,quercus-rubra,44.477928,-73.195053,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,6e68789a-4300-4305-ae2d-62eda3e7c722
+UVM-1080,1080,quercus-rubra,44.477978,-73.194989,Position set by pin on imagery,central,,,,d56a7719-72e3-4c31-90e1-79e8bbae8615
+UVM-1083,1083,quercus-rubra,44.477913,-73.195083,GPS ±3 m,central,,,,6e68789a-4300-4305-ae2d-62eda3e7c722
 UVM-1084,1084,quercus-rubra,44.477886,-73.195027,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,63a91149-c10b-4223-9572-131fba713752
 UVM-1085,1085,quercus-rubra,44.477872,-73.195033,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,98137902-277e-4795-8171-9f068257f44c
 UVM-1086,1086,quercus-rubra,44.477866,-73.195086,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,8fe4820f-15f2-4f5e-8e93-a6c110d837e4
 UVM-1087,1087,quercus-rubra,44.477873,-73.195140,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,37f126f3-e0fa-4f15-8c54-dc2cad6660b2
-UVM-1088,1088,quercus-rubra,44.477777,-73.195067,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e33b649b-cd3a-4722-8e62-bcecfb0536d7
+UVM-1088,1088,quercus-rubra,44.477777,-73.195067,Position set by pin on imagery,central,,,,e33b649b-cd3a-4722-8e62-bcecfb0536d7
 UVM-1100,1100,quercus-rubra,44.477724,-73.195175,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,3bfedeee-1189-4e97-ba66-08452fc2ddae
 UVM-4088,,quercus-rubra,44.477889,-73.195401,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,90f72c5a-a724-4cf6-ab0c-ce0a435882e5
 UVM-4089,,quercus-rubra,44.477876,-73.195497,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,bdd9fcb4-dbab-4891-be93-5fd6a395bd02
@@ -382,7 +382,9 @@ UVM-4091,,acer-saccharum,44.477749,-73.195427,"Mapped in UVM's ArcGIS tree layer
 UVM-4092,,quercus-palustris,44.477683,-73.195390,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ad70d90d-9d1a-468e-b73e-e1c3caa8e6a9
 UVM-4093,,quercus-palustris,44.477612,-73.195390,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,162fab22-17a9-4419-8911-12b1e560cdac
 UVM-4094,,quercus-imbricaria,44.477564,-73.195339,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,4ef90b1a-16da-41c1-b40a-0ee61b96135c
-UVM-1099,1099,quercus-bicolor,44.477626,-73.195202,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,d4509f54-e41c-4eb4-bcbc-0b5023d4ab23
+UVM-1099,1099,quercus-bicolor,44.477650,-73.195174,Position set by pin on imagery,central,,"Patty Pellet 1969-1990
+Physical Therapy
+Class of 1991",,d4509f54-e41c-4eb4-bcbc-0b5023d4ab23
 UVM-1097,1097,acer-platanoides-crimson-king,44.477494,-73.195188,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ad947ec3-e333-426f-88a2-406ca7646985
 UVM-4095,,quercus-palustris,44.477634,-73.195737,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,12431d5f-59fd-410d-a02d-804b5d720fe5
 UVM-4096,,quercus-palustris,44.477681,-73.195804,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c07d3824-511e-4a2f-bca9-f23589704b39
@@ -2051,8 +2053,21 @@ UVM-4700,,acer-platanoides,44.469645,-73.199101,"Mapped in UVM's ArcGIS tree lay
 UVM-4701,,acer-platanoides,44.469659,-73.199107,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,dd38476f-4906-4191-a9df-2ef975b1ec6c
 UVM-4702,,acer-platanoides,44.469670,-73.199092,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,7bdd02d2-ed81-4753-b550-7d94f815838b
 UVM-4703,,acer-platanoides,44.469681,-73.199111,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,630ef896-12e1-474b-aada-fca126778536
-UVM-4704,,gleditsia-triacanthos,44.478459,-73.201477,Position set by pin on imagery,central,,,,""
-UVM-4705,,gleditsia-triacanthos,44.478200,-73.201528,Position set by pin on imagery,central,,,,""
-UVM-4706,,acer-x-freemanii,44.477818,-73.201807,Position set by pin on imagery,central,,,,""
-UVM-4707,,acer-x-freemanii,44.477869,-73.201807,Position set by pin on imagery,central,,,,""
+UVM-4704,,gleditsia-triacanthos,44.478459,-73.201477,Position set by pin on imagery,central,,,,"
+"
+UVM-4705,,gleditsia-triacanthos,44.478200,-73.201528,Position set by pin on imagery,central,,,,"
+"
+UVM-4706,,acer-x-freemanii,44.477818,-73.201807,Position set by pin on imagery,central,,,,"
+"
+UVM-4707,,acer-x-freemanii,44.477869,-73.201807,Position set by pin on imagery,central,,,,"
+"
 UVM-4708,,acer-x-freemanii,44.477907,-73.201810,Position set by pin on imagery,central,,,,
+UVM-4709,,betula-nigra,44.476115,-73.194967,Position set by pin on imagery,central,,"In loving memory of Kendra Lindsay Bowers 7/20/1994 - 2/1/2014
+A cappella ZEST singer and environmental science student
+""Look at the land with wide eyes and a careful touch""
+-Kendra",,
+UVM-4711,,prunus-sargentii,44.477203,-73.195115,Position set by pin on imagery,central,,,,
+UVM-4712,,prunus-sargentii,44.477276,-73.195118,Position set by pin on imagery,central,,,,
+UVM-4713,,prunus-sargentii,44.477363,-73.195147,Position set by pin on imagery,central,,,,
+UVM-4714,,prunus-sargentii,44.477370,-73.194965,Position set by pin on imagery,central,,,,"
+"
