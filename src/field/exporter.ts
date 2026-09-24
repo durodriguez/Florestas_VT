@@ -85,6 +85,28 @@ function geolocationNotesFor(r: SurveyRecord): string {
 }
 
 /**
+ * Which record the disagreement is with. The note used to say "2014 record"
+ * whichever source the app had read, so half of them named the wrong file.
+ *
+ * A record saved before the source was stored has none; it gets a phrase that
+ * claims nothing rather than a guess.
+ */
+function referenceHolder(r: SurveyRecord): string {
+  if (r.referenceSource === '2014') return 'the 2014 file';
+  return r.referenceSource ? 'the inventory' : 'an earlier record';
+}
+
+/**
+ * Which tree it is about — the number off the trunk, or the accession the
+ * surveyor claimed. It used to say "tag (none)" for a claimed tree, naming
+ * neither and reading like a missing value rather than a match by position.
+ */
+function referenceSubject(r: SurveyRecord): string {
+  if (r.tag) return `tag ${r.tag}`;
+  return r.claimedPlantId || 'this tree';
+}
+
+/**
  * What the surveyor saw. Field observations that have no column of their own
  * are folded in here, so nothing they flagged is silently dropped on export.
  */
@@ -99,7 +121,7 @@ function notesFor(r: SurveyRecord): string {
   // the finding. Nothing here asks them to also say so.
   if (speciesChanged(r.referenceSpecies, r.referenceTaxonId, r.species, r.taxonId)) {
     parts.push(
-      `SPECIES CHANGED: 2014 record for tag ${r.tag || '(none)'} says ` +
+      `SPECIES CHANGED: ${referenceHolder(r)} records ${referenceSubject(r)} as ` +
       `${r.referenceSpecies}; recorded as ${r.species}`,
     );
   }

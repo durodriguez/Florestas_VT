@@ -39,6 +39,15 @@ export interface SurveyRecord {
   referenceSpecies: string;
   referenceTaxonId: string;
   /**
+   * Which record the two above came from — `2014` for the archive file, `the
+   * inventory` for the map's own, `''` when nothing was looked up.
+   *
+   * Carried so the exported note can name what disagreed. It used to say "2014
+   * record" whatever the source, which was wrong half the time and unfalsifiable
+   * at a desk.
+   */
+  referenceSource: string;
+  /**
    * The accession of the mapped tree the surveyor said this is, for an untagged
    * tree matched by position. Blank when they read a number off a trunk, or
    * when they said none of the offered trees was it.
