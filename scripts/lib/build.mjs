@@ -142,8 +142,23 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       // Filled from species-aliases.csv below; never rendered.
       alt: '',
       count: 0, // filled in below
+      // The taxon a named variety belongs to — 'Red Sunset' to red maple,
+      // 'Prairifire' to crabapple — or '' for anything that is not a variety.
+      // "Show all" on a species includes its varieties through this.
+      parent: '',
+      groupCount: 0, // count plus the counts of its varieties; filled in below
     });
   });
+
+  // A variety's parent is the row with the same genus, species and infra and
+  // no cultivar. Matching on those fields rather than on names keeps a
+  // look-alike out: Autumn Blaze is sold as a red maple, but its species is
+  // x freemanii, so it belongs to Freeman's maple.
+  const speciesKey = (t) => [t.genus, t.species, t.infra].join('|');
+  const bySpecies = new Map(taxa.filter((t) => !t.cultivar).map((t) => [speciesKey(t), t.id]));
+  for (const t of taxa) {
+    if (t.cultivar) t.parent = bySpecies.get(speciesKey(t)) ?? '';
+  }
 
   // ---- plants ------------------------------------------------------------
   // Identity only: what the tree is and where it stands. Nothing here is a
@@ -367,6 +382,10 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       historyOut[plant.id] = series.map((o) => OBSERVATION_FIELDS.map((f) => o[f]));
     }
   }
+
+  const taxonById = new Map(taxa.map((t) => [t.id, t]));
+  for (const t of taxa) t.groupCount += t.count;
+  for (const t of taxa) if (t.parent) taxonById.get(t.parent).groupCount += t.count;
 
   // ---- Burlington's street trees ------------------------------------------
   // Validated like everything else, but kept in their own array rather than

@@ -11,6 +11,7 @@ import {
   applyFilters, emptyFilters, facetCounts, isFilterActive, toCsv,
 } from './filters';
 import { distanceMeters } from './geo';
+import { initPanelSplit } from './panel-split';
 import type { CityTree, ColorBy, Dataset, FilterState, Plant } from './types';
 
 const BASE = import.meta.env.BASE_URL;
@@ -60,6 +61,7 @@ class App {
     $('#site-tagline').textContent = dataset.config.tagline;
 
     this.buildFilterUi();
+    initPanelSplit($('.panel'), $('#filters'), $('#panel-split'));
     this.bindEvents();
     this.refresh();
     this.applyUrlState();
@@ -132,6 +134,7 @@ class App {
     }
     this.map.show(this.results);
     this.renderCityTrees();
+    this.renderTaxonFilter();
     this.renderResults();
     this.renderFacetCounts();
     this.renderLegend();
@@ -280,7 +283,7 @@ class App {
     if (taxonId) {
       const taxon = this.dataset.taxa.find((t) => t.id === taxonId);
       if (taxon) {
-        this.setQuery(taxon.sci);
+        this.setTaxon(taxon.id);
         this.map.fitTo(this.results);
       }
     }
@@ -308,10 +311,28 @@ class App {
     }
   }
 
-  private setQuery(q: string): void {
-    $<HTMLInputElement>('#search').value = q;
-    this.filters.q = q;
+  /**
+   * Narrow the map to one taxon, or lift that, keeping the URL in step so a
+   * shared link reproduces the view. Choosing a species replaces whatever was
+   * typed: the two are different questions, and leaving an old search in place
+   * would silently hide some of the species just asked for.
+   */
+  private setTaxon(taxonId: string | null): void {
+    this.filters.taxon = taxonId;
+    if (taxonId !== null) {
+      $<HTMLInputElement>('#search').value = '';
+      this.filters.q = '';
+    }
+    this.setUrlParam('taxon', taxonId);
     this.refresh();
+  }
+
+  private renderTaxonFilter(): void {
+    const id = this.filters.taxon;
+    const taxon = id === null ? undefined : this.dataset.taxa.find((t) => t.id === id);
+    $('#taxon-filter').hidden = !taxon;
+    $('#taxon-filter-name').textContent = taxon?.common ?? '';
+    $('#taxon-filter-name').title = taxon?.sci ?? '';
   }
 
   // ---- events ------------------------------------------------------------
@@ -324,9 +345,15 @@ class App {
       clearTimeout(searchTimer);
       searchTimer = window.setTimeout(() => {
         this.filters.q = value;
-        this.refresh();
+        // Typing is a new question, so it lifts a species chosen by "Show
+        // all" — otherwise a search for another tree would find nothing and
+        // not say why.
+        if (value.trim() !== '' && this.filters.taxon !== null) this.setTaxon(null);
+        else this.refresh();
       }, 150);
     });
+
+    $('#taxon-filter-clear').addEventListener('click', () => this.setTaxon(null));
 
     // Enter, or the magnifying glass on a phone's keyboard, means "I have
     // finished typing — show me". On a phone the keyboard covers the results
@@ -339,7 +366,8 @@ class App {
       // rather than showing the previous query's results.
       clearTimeout(searchTimer);
       this.filters.q = search.value;
-      this.refresh();
+      if (search.value.trim() !== '' && this.filters.taxon !== null) this.setTaxon(null);
+      else this.refresh();
       this.revealResults(this.exactTagMatch(search.value));
     });
 
@@ -392,6 +420,7 @@ class App {
       $<HTMLFormElement>('#filters').reset();
       $<HTMLInputElement>('#search').value = '';
       $('#filter-dbh-value').textContent = 'Any size';
+      this.setUrlParam('taxon', null);
       this.map.clearFocus();
       this.map.resetView();
       this.refresh();
@@ -407,7 +436,7 @@ class App {
       if (!el) return;
       if (el.dataset.action === 'close-detail') this.select(null);
       if (el.dataset.action === 'same-taxon' && this.selected) {
-        this.setQuery(this.selected.taxon.sci);
+        this.setTaxon(this.selected.taxon.id);
         this.map.fitTo(this.results);
       }
       if (el.dataset.action === 'copy-link') {

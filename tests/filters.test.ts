@@ -12,7 +12,8 @@ const taxon = (over: Partial<Taxon>): Taxon => ({
   cultivar: '', type: 'deciduous-tree', origin: 'vermont-native',
   flowerColor: '', flowerMonths: [], fruitColor: '', fruitMonths: [], fallColor: '',
   matureHeightFt: null, matureSpreadFt: null, bark: '', pests: '', soil: '',
-  zones: '', wikipedia: '', description: '', funFact: '', alt: '', count: 0, ...over,
+  zones: '', wikipedia: '', description: '', funFact: '', alt: '', count: 0,
+  parent: '', groupCount: 0, ...over,
 });
 
 const dataset = {
@@ -75,6 +76,25 @@ describe('matchesQuery', () => {
 
   it('is case-insensitive', () => {
     expect(matchesQuery(plants[0]!, 'SUGAR MAPLE')).toBe(true);
+  });
+
+  it('matches a finished word only as a whole word, so "red" is not "Redstone"', () => {
+    const onRedstone = { search: 'uvm-0200 norway maple acer platanoides sapindaceae acer redstone campus' };
+    const redMaple = { search: 'uvm-0201 red maple acer rubrum sapindaceae acer central campus' };
+    expect(matchesQuery(onRedstone, 'red maple')).toBe(false);
+    expect(matchesQuery(redMaple, 'red maple')).toBe(true);
+    // The word still being typed is a part-match, so results keep up.
+    expect(matchesQuery(redMaple, 'red mapl')).toBe(true);
+    expect(matchesQuery(onRedstone, 'red')).toBe(true);
+    // Once finished, it is a word like any other.
+    expect(matchesQuery(onRedstone, 'red ')).toBe(false);
+    // Searching across fields still works when the words are whole.
+    expect(matchesQuery(onRedstone, 'maple redstone')).toBe(true);
+    expect(matchesQuery(onRedstone, 'maple redst')).toBe(true);
+  });
+
+  it('still lists every tag containing a number typed on its own', () => {
+    expect(matchesQuery({ search: 'uvm-2772 2772' }, '772')).toBe(true);
   });
 
   it('requires every term, so extra words narrow the result', () => {
@@ -237,5 +257,72 @@ describe('applyFilters on Burlington street trees', () => {
   it('are all shown when no filter is set', () => {
     expect(isFilterActive(base())).toBe(false);
     expect(applyFilters(city, base()).map((t) => t.id)).toEqual(['BTV-1', 'BTV-2']);
+  });
+});
+
+describe('the taxon filter', () => {
+  // Two taxa whose names overlap the way Red maple and Autumn Blaze do: the
+  // hybrid lists "acer rubrum 'autumn blaze'" among its alternative names, so
+  // a text search for "Acer rubrum" finds both.
+  const overlap = {
+    ...dataset,
+    taxa: [
+      taxon({ id: 'acer-rubrum', sci: 'Acer rubrum', common: 'Red maple', family: 'Sapindaceae', genus: 'Acer' }),
+      taxon({ id: 'acer-x-freemanii-autumn-blaze', sci: "Acer × freemanii 'Jeffersred'", common: 'Autumn Blaze maple',
+        family: 'Sapindaceae', genus: 'Acer', alt: "acer rubrum 'autumn blaze'" }),
+    ],
+  } as unknown as Dataset;
+  const trees = expandPlants({
+    fields,
+    rows: [
+      ['UVM-0101', 0, 44.4779, -73.1955, 0, 12, null, null, 1, null, 0, null, null, null, null, null],
+      ['UVM-0102', 1, 44.4780, -73.1950, 0, 14, null, null, 1, null, 0, null, null, null, null, null],
+    ],
+  }, overlap);
+
+  it('matches the taxon exactly, where a name search also finds a look-alike', () => {
+    expect(applyFilters(trees, { ...emptyFilters(), q: 'Acer rubrum' })).toHaveLength(2);
+    expect(applyFilters(trees, { ...emptyFilters(), taxon: 'acer-rubrum' }).map((p) => p.id)).toEqual(['UVM-0101']);
+  });
+
+  it('includes the named varieties of the species', () => {
+    const withVariety = {
+      ...overlap,
+      taxa: [...(overlap as any).taxa,
+        taxon({ id: 'acer-rubrum-red-sunset', sci: "Acer rubrum 'Red Sunset'", common: 'Red Sunset red maple',
+          genus: 'Acer', species: 'rubrum', cultivar: 'Red Sunset', parent: 'acer-rubrum' })],
+    } as unknown as Dataset;
+    const three = expandPlants({
+      fields,
+      rows: [
+        ['UVM-0101', 0, 44.4779, -73.1955, 0, 12, null, null, 1, null, 0, null, null, null, null, null],
+        ['UVM-0102', 1, 44.4780, -73.1950, 0, 14, null, null, 1, null, 0, null, null, null, null, null],
+        ['UVM-0103', 2, 44.4781, -73.1951, 0, 10, null, null, 1, null, 0, null, null, null, null, null],
+      ],
+    }, withVariety);
+    expect(applyFilters(three, { ...emptyFilters(), taxon: 'acer-rubrum' }).map((p) => p.id))
+      .toEqual(['UVM-0101', 'UVM-0103']);
+    // A variety's own "Show all" is that variety alone.
+    expect(applyFilters(three, { ...emptyFilters(), taxon: 'acer-rubrum-red-sunset' }).map((p) => p.id))
+      .toEqual(['UVM-0103']);
+  });
+
+  it('counts as an active filter, so "Clear all" appears', () => {
+    expect(isFilterActive({ ...emptyFilters(), taxon: 'acer-rubrum' })).toBe(true);
+  });
+
+  it('applies to city trees as well', () => {
+    const city = expandCityTrees({
+      ...overlap,
+      cityTrees: {
+        fields: ['city_id', 'taxon', 'lat', 'lng', 'collection', 'dbhIn', 'heightFt',
+          'spreadFt', 'condition', 'plantedYear', 'address'],
+        rows: [
+          ['BTV-1', 0, 44.4779, -73.1955, 0, 12, 30, 25, 1, null, '1 Main St'],
+          ['BTV-2', 1, 44.4716, -73.1971, 1, 20, 50, 20, 2, null, '2 Main St'],
+        ],
+      },
+    } as unknown as Dataset);
+    expect(applyFilters(city, { ...emptyFilters(), taxon: 'acer-rubrum' }).map((t) => t.id)).toEqual(['BTV-1']);
   });
 });

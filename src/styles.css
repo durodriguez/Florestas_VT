@@ -102,8 +102,25 @@ button, input, select { font: inherit; color: inherit; }
 }
 #search:focus-visible { outline: 2px solid var(--uvm-green-light); outline-offset: 1px; }
 
+/* The species chosen by "Show all": said out loud, because the search box no
+   longer shows what is filtering, and one tap from gone. */
+.taxon-filter {
+  display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+  margin: .5rem 0 0; padding: .35rem .35rem .35rem .75rem;
+  border: 1px solid var(--border); border-left: 3px solid var(--uvm-green-light);
+  border-radius: var(--radius); background: var(--bg-sunk); font-size: .85rem;
+}
+.taxon-filter[hidden] { display: none; }
+.taxon-filter-clear {
+  flex: 0 0 auto; width: 1.9rem; height: 1.9rem; border: 0; border-radius: var(--radius);
+  background: none; color: var(--text-dim); font-size: 1.2rem; line-height: 1; cursor: pointer;
+}
+.taxon-filter-clear:hover { background: var(--border); color: var(--text); }
+.taxon-filter-clear:focus-visible { outline: 2px solid var(--uvm-green-light); }
+
 .panel-filters {
   border-bottom: 1px solid var(--border);
+  /* The default split; dragging the divider below overrides it. */
   max-height: 40%; overflow-y: auto; flex: 0 0 auto;
 }
 
@@ -136,6 +153,22 @@ button, input, select { font: inherit; color: inherit; }
   border-radius: var(--radius); background: var(--bg-sunk);
 }
 .range-value { margin: .35rem 0 0; font-size: .8rem; color: var(--text-dim); }
+
+/* The divider between filters and results. Tall enough to grab with a
+   finger; the visible grip is small so it reads as a handle, not a rule. */
+.panel-split {
+  flex: 0 0 auto; height: 14px; margin-top: -1px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: row-resize; touch-action: none; user-select: none;
+  border-bottom: 1px solid var(--border); background: var(--bg);
+}
+.panel-split-grip {
+  width: 2.5rem; height: 4px; border-radius: 99px; background: var(--border);
+  transition: background .12s ease;
+}
+.panel-split:hover .panel-split-grip,
+.panel-split.is-dragging .panel-split-grip { background: var(--uvm-green-light); }
+.panel-split:focus-visible { outline: 2px solid var(--uvm-green-light); outline-offset: -2px; }
 
 /* ---- results ---------------------------------------------------------- */
 

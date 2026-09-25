@@ -33,12 +33,18 @@ legend.
 
 **Search** — free text across common name, scientific name, family, cultivar,
 campus area and accession number. Every term must match, so extra words narrow
-the result.
+the result. A word you have finished typing matches whole words only, so "red
+maple" finds red maples and not every maple on Redstone Campus; the word still
+being typed can match part of one, so results keep up as you type.
 
 **Filters** — faceted and combinable: plant type (seven categories, trees split
 deciduous/evergreen), origin including Vermont-invasive, campus area, family, condition, flowering month, minimum trunk diameter, and
 whether to include removed plants. Each option shows a live count, computed
 with its own facet relaxed so the alternatives stay clickable.
+**Show all** on a record narrows the map to exactly that species — the same
+number the record gives as mapped on campus — and says so under the search
+box, with a × to lift it. Typing a new search lifts it too. Every filter
+applies to the Burlington street trees as well, when they are shown.
 
 **Plant records** — accession, species description, DBH, height, spread,
 condition, planting year, age, last survey date, coordinates, notes, gift and
