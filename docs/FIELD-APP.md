@@ -230,6 +230,34 @@ npm run data
 Export before you finish for the day. The records live only in that browser's
 storage; clearing site data or losing the phone loses the work.
 
+### The order matters: export, import, check, then clear
+
+**Do not clear the phone before a survey.** Nothing is gained by it and the
+afternoon's work is at risk until the import has actually landed. The order is:
+
+1. **Export** from the phone — CSV and photo zip.
+2. **Import** at a computer, dry run first, then `--write`.
+3. **Check what it says.** It prints what it added, what it skipped as already
+   on file, and anything it refused.
+4. **Only then clear the phone.**
+
+Steps 2 and 3 are why clearing first is the wrong instinct: the importer can
+refuse a row, and until it has not, the phone holds the only copy.
+
+**Re-exporting old records is free.** The app exports everything it has saved,
+so a phone that was never cleared sends last month's trees again. The importer
+recognises a row identical to one on file, skips it, and says how many — on 24
+September it skipped eleven without being asked. What it will *not* do is
+silently overwrite: a row that matches an existing `(tree, date)` but disagrees
+about anything is refused, and a person decides. That is the case worth
+understanding, because it is the one that stops the import.
+
+**Each device keeps its own records.** There is no account and no sync, so a
+phone's saved trees never appear on a laptop, and a laptop showing zero saved
+records is not a fault — it is a different browser. Survey on one device and
+export from that same device; a tree begun on the phone cannot be finished on
+the laptop.
+
 ## A tag is looked up, not turned into an accession
 
 Tag `772` used to *become* accession `UVM-0772`. It no longer does, because
