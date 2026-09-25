@@ -186,12 +186,12 @@ if (!flag('write') && !opt('out')) {
 // Staging to --out writes one file for review, so both halves have to go in it
 // — splitting them would hand back a plants file whose observations vanished.
 if (outPath !== plantsPath) {
-  writeFileSync(outPath, Papa.unparse([...plants.rows, ...newRows], { columns: header }) + '\n');
+  writeFileSync(outPath, Papa.unparse([...plants.rows, ...newRows], { columns: header, newline: '\n' }) + '\n');
   const stem = outPath.replace(/\.csv$/i, '');
   const obsOut = `${stem}-observations.csv`;
   writeFileSync(
     obsOut,
-    Papa.unparse(result.observations, { columns: OBSERVATION_COLUMNS }) + '\n',
+    Papa.unparse(result.observations, { columns: OBSERVATION_COLUMNS, newline: '\n' }) + '\n',
   );
   console.log(`\n✓ wrote ${opt('out')} and ${obsOut.slice(root.length + 1)} — review, then copy over data/`);
   console.log('  Note: the observations file holds only the new rows, to append.');
@@ -202,23 +202,27 @@ copyFileSync(plantsPath, `${plantsPath}.bak`);
 copyFileSync(observationsPath, `${observationsPath}.bak`);
 
 if (result.updates.length > 0) {
+  // Every write here says newline: '\n'. Papa's default is \r\n, while every
+  // other script writes \n, and a file holding both is misread by the next
+  // script to parse it: a bare \n at the end of a \r\n file becomes part of
+  // the last field. That is how six plants came to have a source_id of "\n".
   // Corrections touch existing lines, so the file has to be rewritten whole.
   const byId = new Map(result.updates.map((u) => [u.plant_id, u.changes]));
   const merged = plants.rows.map((row) => {
     const changes = byId.get(row.plant_id?.trim());
     return changes ? { ...row, ...changes } : row;
   });
-  writeFileSync(plantsPath, Papa.unparse([...merged, ...newRows], { columns: header }) + '\n');
+  writeFileSync(plantsPath, Papa.unparse([...merged, ...newRows], { columns: header, newline: '\n' }) + '\n');
 } else if (newRows.length > 0) {
   // Inserts only — append so the diff shows just the new lines.
-  const lines = Papa.unparse(newRows, { columns: header, header: false });
+  const lines = Papa.unparse(newRows, { columns: header, header: false, newline: '\n' });
   writeFileSync(plantsPath, readFileSync(plantsPath, 'utf8').replace(/\n*$/, '\n') + lines + '\n');
 }
 
 // Observations are only ever appended. Nothing already in the file is read,
 // rewritten or reordered, which is what keeps a past survey a past survey.
 if (result.observations.length > 0) {
-  const lines = Papa.unparse(result.observations, { columns: OBSERVATION_COLUMNS, header: false });
+  const lines = Papa.unparse(result.observations, { columns: OBSERVATION_COLUMNS, header: false, newline: '\n' });
   writeFileSync(
     observationsPath,
     readFileSync(observationsPath, 'utf8').replace(/\n*$/, '\n') + lines + '\n',

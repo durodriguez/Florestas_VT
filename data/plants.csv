@@ -259,14 +259,14 @@ UVM-3210,3210,ulmus-sp,44.476522,-73.198818,"Mapped in UVM's ArcGIS tree layer, 
 UVM-3211,3211,ulmus-sp,44.476606,-73.198892,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,f3d032e7-e20b-44d6-a82b-9cbe6bf2027e
 UVM-0310,310,malus-sp,44.476687,-73.198788,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,02ee8eb4-0b7b-4707-b4e7-e861b4270618
 UVM-0309,309,malus-sp,44.476630,-73.198698,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,4b8b35de-6177-494b-a35c-62e707fe14c8
-UVM-0308,308,picea-abies,44.476670,-73.198613,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c30dbae4-702d-4e63-bef1-e06a265cef54
+UVM-0308,308,picea-abies,44.476677,-73.198633,Position set by pin on imagery,central,,,,c30dbae4-702d-4e63-bef1-e06a265cef54
 UVM-0314,314,acer-saccharum,44.476721,-73.198914,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,7949ef51-c30b-4430-bbee-5503a1905723
 UVM-0313,313,acer-saccharum,44.476824,-73.198927,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,3ace58ee-c734-4c6e-b5bf-ba8497f61fff
-UVM-0311,311,quercus-palustris,44.476763,-73.198829,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,8a404d68-4090-4ef1-8e57-565080eb9be8
+UVM-0311,311,quercus-palustris,44.476815,-73.198863,Position set by pin on imagery,central,,,,8a404d68-4090-4ef1-8e57-565080eb9be8
 UVM-0312,312,malus-sp,44.476845,-73.198700,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c73bf00c-7b4f-4098-bc23-f366966f933e
-UVM-0307,307,picea-abies,44.476763,-73.198646,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,91fbd758-ab9c-4b9b-864b-40968f9539d8
-UVM-0306,306,ginkgo-biloba,44.476778,-73.198539,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,a3cb10d8-b06b-4cfb-b91d-5adb9cb8f37b
-UVM-0304,304,ginkgo-biloba,44.476876,-73.198359,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,eaa32a0d-4c93-4665-8e94-7ec36a96e6d2
+UVM-0307,307,picea-abies,44.476807,-73.198648,Position set by pin on imagery,central,,,,91fbd758-ab9c-4b9b-864b-40968f9539d8
+UVM-0306,306,ginkgo-biloba,44.476818,-73.198537,Position set by pin on imagery,central,,,,a3cb10d8-b06b-4cfb-b91d-5adb9cb8f37b
+UVM-0304,304,ginkgo-biloba,44.476891,-73.198336,Position set by pin on imagery,central,,,,eaa32a0d-4c93-4665-8e94-7ec36a96e6d2
 UVM-0305,305,ginkgo-biloba,44.476796,-73.198322,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,788bc493-b26c-44c9-80a4-ce49b1e368be
 UVM-0298,298,acer-platanoides,44.477205,-73.198742,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0e35aa5a-2e17-4ad9-945c-cb5e5ca82ab4
 UVM-0299,299,acer-platanoides,44.477208,-73.198706,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,5a8dd19d-7930-405f-86af-527455810adb
@@ -2053,14 +2053,10 @@ UVM-4700,,acer-platanoides,44.469645,-73.199101,"Mapped in UVM's ArcGIS tree lay
 UVM-4701,,acer-platanoides,44.469659,-73.199107,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,dd38476f-4906-4191-a9df-2ef975b1ec6c
 UVM-4702,,acer-platanoides,44.469670,-73.199092,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,7bdd02d2-ed81-4753-b550-7d94f815838b
 UVM-4703,,acer-platanoides,44.469681,-73.199111,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,630ef896-12e1-474b-aada-fca126778536
-UVM-4704,,gleditsia-triacanthos,44.478459,-73.201477,Position set by pin on imagery,central,,,,"
-"
-UVM-4705,,gleditsia-triacanthos,44.478200,-73.201528,Position set by pin on imagery,central,,,,"
-"
-UVM-4706,,acer-x-freemanii,44.477818,-73.201807,Position set by pin on imagery,central,,,,"
-"
-UVM-4707,,acer-x-freemanii,44.477869,-73.201807,Position set by pin on imagery,central,,,,"
-"
+UVM-4704,,gleditsia-triacanthos,44.478459,-73.201477,Position set by pin on imagery,central,,,,
+UVM-4705,,gleditsia-triacanthos,44.478200,-73.201528,Position set by pin on imagery,central,,,,
+UVM-4706,,acer-x-freemanii,44.477818,-73.201807,Position set by pin on imagery,central,,,,
+UVM-4707,,acer-x-freemanii,44.477869,-73.201807,Position set by pin on imagery,central,,,,
 UVM-4708,,acer-x-freemanii,44.477907,-73.201810,Position set by pin on imagery,central,,,,
 UVM-4709,,betula-nigra,44.476115,-73.194967,Position set by pin on imagery,central,,"In loving memory of Kendra Lindsay Bowers 7/20/1994 - 2/1/2014
 A cappella ZEST singer and environmental science student
@@ -2069,5 +2065,5 @@ A cappella ZEST singer and environmental science student
 UVM-4711,,prunus-sargentii,44.477203,-73.195115,Position set by pin on imagery,central,,,,
 UVM-4712,,prunus-sargentii,44.477276,-73.195118,Position set by pin on imagery,central,,,,
 UVM-4713,,prunus-sargentii,44.477363,-73.195147,Position set by pin on imagery,central,,,,
-UVM-4714,,prunus-sargentii,44.477370,-73.194965,Position set by pin on imagery,central,,,,"
-"
+UVM-4714,,prunus-sargentii,44.477370,-73.194965,Position set by pin on imagery,central,,,,
+UVM-4715,,ginkgo-biloba,44.476984,-73.198434,Position set by pin on imagery,central,,,,
