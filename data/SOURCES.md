@@ -69,6 +69,28 @@ given directly, 21 September 2026. See [ARCGIS-IMPORT.md](../docs/ARCGIS-IMPORT.
 boundary. Open data from the City of Burlington. See
 [CITY-TREES.md](../docs/CITY-TREES.md).
 
+**`data/city-trees-source.csv`** — all 14,429, so the clip can be redone when
+the campus boundary moves without going back to the city for the export. It is
+the city's file reduced to the twelve columns `npm run import:city` reads:
+
+```
+X, Y, site_id, site_typ, botanic, diameter, conditn, planted,
+add_num, add_str, modified, GlobalID
+```
+
+**Forty-five columns were dropped, and two of them for a reason rather than
+for size.** The export carries `creator` and `inspectr`, naming nineteen
+individual city staff — the same kind of column the ArcGIS import drops, and
+dropped here on the same rule: a named person's identifier does not belong in
+a public repository because a script happened to read past it.
+
+**Verified on 25 September 2026**: re-clipping `data/city-trees.csv` from this
+reduced file reproduces the committed 337 rows byte for byte. It is a faithful
+substitute for the 5.4 MB original, at 2.0 MB.
+
+It is a source, not site data — the build does not publish it, and nothing in
+the browser reads it.
+
 Note that the FEMC archive also carries Burlington-area inventories under
 **CC BY-SA 4.0**, and the city's own portal may carry different terms. The
 committed file came from the city's public export; if it is ever re-sourced

@@ -116,7 +116,28 @@ Two of those are worth a note:
 **Every one of the 337 has a trunk diameter**, which is more than can be said
 for the university's own records — see [to-do #7](TODO.md) on i-Tree.
 
-## Refreshing it
+## Refreshing it, and re-clipping when the boundary moves
+
+The whole city is committed as `data/city-trees-source.csv` — 14,429 trees,
+reduced to the twelve columns this importer reads. So widening the campus
+boundary does not mean going back to the city for another export:
+
+```bash
+npm run import:city -- data/city-trees-source.csv            # dry run
+npm run import:city -- data/city-trees-source.csv --write
+npm run data
+```
+
+Edit `data/campus-areas.geojson` first, and whatever now falls inside comes in
+on the next clip. Trees that fall back outside leave the same way, which is
+the point of rewriting rather than merging.
+
+Two things the reduced file is not. It is **not** the city's full export —
+forty-five columns are gone, including `creator` and `inspectr`, which name
+individual city staff and are dropped on the rule the ArcGIS import already
+follows. And it is **not** a live copy: Burlington's inventory changes on its
+own schedule, so re-download from the city when currency matters more than
+convenience. What is committed reproduces today's `city-trees.csv` exactly.
 
 The file is rewritten from the source every time, not merged. Nothing in it is
 hand-edited, which is what makes that safe. Rows are sorted by id so a refresh
