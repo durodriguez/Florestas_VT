@@ -348,6 +348,11 @@ function renderNearby(): void {
       weight: 2,
       fillColor: NEARBY_COLOURS[i % NEARBY_COLOURS.length]!,
       fillOpacity: 0.95,
+      // Without this the tap also reaches the map underneath, which reads it
+      // as "put the pin here": the claimed tree was moved to wherever the
+      // finger landed and marked as positioned on imagery, when a claim must
+      // never move a tree.
+      bubblingMouseEvents: false,
     })
       // Tapping the circle claims the tree, exactly as tapping its box does.
       // Standing under a tree and pointing at it on the map is the more
@@ -652,6 +657,7 @@ function resetForm(): void {
   manualLatLng = null;
   gps.reset();
   renderCoords();
+  refreshDate();
 }
 
 function clearPhoto(): void {
@@ -839,7 +845,20 @@ function showScreen(which: 'form' | 'list'): void {
 renderConditions();
 renderStatuses();
 applyStatus();
-$<HTMLInputElement>('date').value = stamp();
+// The date defaults to today, and keeps defaulting to today. An installed app
+// is not reloaded when the phone brings it back, so setting it once at load
+// left a phone opened on 23 September filing a 25 September survey under the
+// 23rd. It is refreshed whenever the app comes back to the screen and after
+// every save — unless the surveyor has typed a date, which is then theirs.
+let dateTouched = false;
+function refreshDate(): void {
+  if (!dateTouched) $<HTMLInputElement>('date').value = stamp();
+}
+refreshDate();
+$('date').addEventListener('input', () => { dateTouched = true; });
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') refreshDate();
+});
 
 $('tag').addEventListener('input', () => {
   renderTagLookup();

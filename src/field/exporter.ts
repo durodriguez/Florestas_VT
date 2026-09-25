@@ -168,4 +168,12 @@ export function download(blob: Blob, filename: string): void {
   setTimeout(() => URL.revokeObjectURL(url), 30_000);
 }
 
-export const stamp = (): string => new Date().toISOString().slice(0, 10);
+/**
+ * Today's date where the surveyor is standing, as YYYY-MM-DD. Not
+ * toISOString(), which is the date in UTC: from 8 pm on a Vermont summer
+ * evening that is already tomorrow, and a survey would be filed a day late.
+ */
+export const stamp = (now: Date = new Date()): string => {
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+};

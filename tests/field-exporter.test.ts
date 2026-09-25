@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import Papa from 'papaparse';
-import { toCsv } from '../src/field/exporter';
+import { stamp, toCsv } from '../src/field/exporter';
 import { extensionFor } from '../src/field/photo';
 import type { SurveyRecord } from '../src/field/db';
 
@@ -247,5 +247,19 @@ describe('the note when a species is corrected', () => {
       species: 'Quercus bicolor', taxonId: 'quercus-bicolor',
     }));
     expect(n).not.toContain('SPECIES CHANGED');
+  });
+});
+
+describe('stamp', () => {
+  it('gives the local date, not the UTC one', () => {
+    // 9:30 pm on 25 September where the surveyor is standing. In any zone
+    // west of Greenwich that is already the 26th in UTC, which is the date
+    // toISOString() used to file it under.
+    const evening = new Date(2026, 8, 25, 21, 30);
+    expect(stamp(evening)).toBe('2026-09-25');
+  });
+
+  it('pads month and day', () => {
+    expect(stamp(new Date(2026, 0, 5, 12))).toBe('2026-01-05');
   });
 });
