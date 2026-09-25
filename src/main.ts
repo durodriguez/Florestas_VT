@@ -11,6 +11,7 @@ import {
   applyFilters, emptyFilters, facetCounts, isFilterActive, toCsv,
 } from './filters';
 import { distanceMeters } from './geo';
+import { initPanelSplit } from './panel-split';
 import type { CityTree, ColorBy, Dataset, FilterState, Plant } from './types';
 
 const BASE = import.meta.env.BASE_URL;
@@ -60,6 +61,7 @@ class App {
     $('#site-tagline').textContent = dataset.config.tagline;
 
     this.buildFilterUi();
+    initPanelSplit($('.panel'), $('#filters'), $('#panel-split'));
     this.bindEvents();
     this.refresh();
     this.applyUrlState();
