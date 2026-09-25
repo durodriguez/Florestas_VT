@@ -44,8 +44,9 @@ boundary.
 on Central, the north side along Pearl Street and South Williams Street, two
 stretches of the south side along Main Street, and a corner by Mansfield
 Avenue; on Spear Street, the length of the parcel's north edge. No UVM tree
-changed campus. Street trees are what stand in strips like these, so the
-Burlington clip is re-run after a change like this one — see
+changed campus, but 27 Burlington street trees came inside the boundary, all
+on Central; the Spear Street strip has none. The city clip has to be re-run
+after any change like this one — see
 [CITY-TREES.md](CITY-TREES.md#refreshing-it).
 
 The boundary is a two-part MultiPolygon: the main campus, and the Spear Street
