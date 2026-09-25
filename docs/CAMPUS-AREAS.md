@@ -20,13 +20,16 @@ one basemap; the overlays are checkboxes, because you can have any combination.
 
 | Area | Acres |
 | --- | ---: |
-| UVM campus (boundary, two parts) | 695 |
-| Centennial Campus | 222 |
-| Central Campus | 164 |
-| Spear Street Campus | 151 |
-| Athletic Campus | 81 |
-| Redstone Campus | 55 |
-| Trinity Campus | 21 |
+| UVM campus (boundary, two parts) | 697.5 |
+| Centennial Campus | 221.8 |
+| Central Campus | 164.4 |
+| Spear Street Campus | 152.3 |
+| Athletic Campus | 82.4 |
+| Redstone Campus | 55.2 |
+| Trinity Campus | 21.3 |
+
+As of 25 September 2026, measured by `npm run areas:check`, which prints the
+same figures for whatever file it is given.
 
 The six campuses tile the boundary exactly — nothing unassigned, and they sum
 to within 0.03 acres of it, which is the sliver threshold below.
@@ -35,6 +38,16 @@ to within 0.03 acres of it, which is the sliver threshold below.
 corner off Colchester Avenue. Eight UVM trees that had stood outside every
 campus area now have one, and two more Burlington street trees fall inside the
 boundary.
+
+**Central and Spear Street grew on 25 September 2026** — 1.2 and 1.5 acres,
+2.7 in all, and nothing shrank. The additions are thin strips along the edges:
+on Central, the north side along Pearl Street and South Williams Street, two
+stretches of the south side along Main Street, and a corner by Mansfield
+Avenue; on Spear Street, the length of the parcel's north edge. No UVM tree
+changed campus, but 27 Burlington street trees came inside the boundary, all
+on Central; the Spear Street strip has none. The city clip has to be re-run
+after any change like this one — see
+[CITY-TREES.md](CITY-TREES.md#refreshing-it).
 
 The boundary is a two-part MultiPolygon: the main campus, and the Spear Street
 parcel about 1.2 km south of it.

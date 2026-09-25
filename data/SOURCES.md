@@ -65,7 +65,7 @@ given directly, 21 September 2026. See [ARCGIS-IMPORT.md](../docs/ARCGIS-IMPORT.
 
 ## 3. The City of Burlington street tree inventory
 
-**`data/city-trees.csv`** — 337 trees, clipped from 14,429 to the campus
+**`data/city-trees.csv`** — 364 trees, clipped from 14,429 to the campus
 boundary. Open data from the City of Burlington. See
 [CITY-TREES.md](../docs/CITY-TREES.md).
 

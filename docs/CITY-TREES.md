@@ -4,7 +4,7 @@ Main Street, College Street and Colchester Avenue run through the middle of
 campus, and their trees are as much a part of walking across it as the ones the
 university owns. A visitor does not care who holds the deed.
 
-**337 of them stand inside the campus boundary**, out of the 14,429 in the
+**364 of them stand inside the campus boundary**, out of the 14,429 in the
 city's inventory. They are on the map, off by default, behind **Show Burlington
 street trees**.
 
@@ -81,20 +81,20 @@ inverse Transverse Mercator. It is checked three ways:
 
 ## What is left out, and why
 
-Of the 400 city records inside the boundary, **63 are not standing trees**:
+Of the 436 city records inside the boundary, **72 are not standing trees**:
 
 | `site_typ` | Left out | Reading |
 | --- | --- | --- |
-| `T` | — kept, 337 | a standing tree |
-| `S` | 51 | a stump |
+| `T` | — kept, 364 | a standing tree |
+| `S` | 58 | a stump |
 | `R` | 8 | removed |
-| `P` | 4 | a vacant planting site |
+| `P` | 6 | a vacant planting site |
 
 The codes are not documented in the export, so those readings come from the
 data: `T` and `S` both carry a species and a diameter, while `R` and `P` mostly
 carry neither and `P`'s diameter is zero.
 
-Only `T` is imported. Being wrong about `S` costs 51 records; being wrong the
+Only `T` is imported. Being wrong about `S` costs 58 records; being wrong the
 other way would draw stumps on a map of trees, so the safer error is the one
 taken. If somebody at the city confirms the codes, this is one line to change.
 
@@ -113,7 +113,7 @@ Two of those are worth a note:
   ArcGIS import keeps one: a refresh has to recognise a row rather than add it
   again.
 
-**Every one of the 337 has a trunk diameter**, which is more than can be said
+**Every one of the 364 has a trunk diameter**, which is more than can be said
 for the university's own records — see [to-do #7](TODO.md) on i-Tree.
 
 ## Refreshing it
@@ -122,7 +122,14 @@ The file is rewritten from the source every time, not merged. Nothing in it is
 hand-edited, which is what makes that safe. Rows are sorted by id so a refresh
 diffs cleanly and shows only what actually changed in Burlington's records.
 
-Species resolved at **100%** on the clip — 337 of 337, 309 exact and 28
+Species resolved at **100%** on the clip — 364 of 364, 333 exact and 31
 genus-only — because `species-aliases.csv` was built against this file before
 any of this was written. A name the table has never seen is reported and that
 tree is left out, rather than stopping the clip.
+
+**A boundary change is a reason to refresh.** The clip uses the boundary
+exactly, with no margin, so moving an edge moves which trees are in. On 25
+September 2026 Central and Spear Street were extended at their edges, and
+re-running the clip against the same city export added 27 trees —
+15 on Pearl Street, 9 on Main Street, 2 on Colchester Avenue and 1 on
+Mansfield Avenue, all on Central — and changed none of the 337 already there.
