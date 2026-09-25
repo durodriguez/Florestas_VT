@@ -409,6 +409,8 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       Number(lng.toFixed(6)),
       collectionId ? collectionIndex.get(collectionId) : -1,
       num(row.dbh_in) ?? null,
+      num(row.height_ft) ?? null,
+      num(row.spread_ft) ?? null,
       condition ? CONDITIONS.indexOf(condition) : -1,
       num(row.planted_year) ?? null,
       trim(row.address),

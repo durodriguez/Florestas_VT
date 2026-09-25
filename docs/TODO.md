@@ -65,6 +65,14 @@ sites you looked at are showing precomputed numbers, not calling a live service.
 Nothing about a static site prevents doing the same: `npm run data` computes a
 number per tree at build time, and the map just displays it.
 
+**Something to build it against (25 September 2026).** The 364 Burlington
+street trees on campus each carry a diameter, a height and a crown spread
+(`data/city-trees.csv`), so the calculation can be written and checked against
+real numbers before UVM has any. It unblocks the *mechanism*, not the item:
+they are the city's trees, many records date from 2013–14, and the heights
+and spreads come in five-foot steps. See
+[CITY-TREES.md](CITY-TREES.md#what-each-tree-carries).
+
 **Since the ArcGIS import (21 September 2026):** the tree count went from 6 to
 2,052 and the blocker did not move. The ArcGIS layer records a position, a
 species and a health rating, and **no trunk diameter at all**. The 2014

@@ -110,6 +110,8 @@ describe('importCityTrees', () => {
     site_typ: STANDING_TREE,
     botanic: 'Tilia cordata',
     diameter: '14',
+    height: '25',
+    spread: '20',
     conditn: '80',
     planted: '2012',
     add_num: '284',
@@ -129,6 +131,8 @@ describe('importCityTrees', () => {
       taxon_id: 'tilia-cordata',
       collection_id: 'central',
       dbh_in: '14',
+      height_ft: '25',
+      spread_ft: '20',
       condition: 'good',
       planted_year: '2012',
       address: '284 East Ave',
@@ -183,6 +187,14 @@ describe('importCityTrees', () => {
 
   it('leaves a diameter of zero blank rather than recording nought inches', () => {
     expect(run([row({ diameter: '0' })]).inserts[0].dbh_in).toBe('');
+  });
+
+  it('leaves a height or spread of zero blank, the same as a diameter', () => {
+    const t = run([row({ height: '0', spread: '' })]).inserts[0];
+    expect(t.height_ft).toBe('');
+    expect(t.spread_ft).toBe('');
+    // A missing height is not a reason to drop the tree.
+    expect(t.dbh_in).toBe('14');
   });
 
   it('leaves out a planting year that is not one', () => {

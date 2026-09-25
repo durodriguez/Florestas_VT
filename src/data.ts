@@ -158,6 +158,10 @@ export function expandCityTrees(dataset: Dataset): CityTree[] {
       taxon,
       collection: collectionIdx >= 0 ? dataset.collections[collectionIdx]! : null,
       dbhIn: (at(row, 'dbhIn') as number | null) ?? null,
+      // `?? null` also covers a dataset.json cached from before these fields
+      // existed, where the column is simply absent.
+      heightFt: (at(row, 'heightFt') as number | null) ?? null,
+      spreadFt: (at(row, 'spreadFt') as number | null) ?? null,
       condition: conditionIdx >= 0 ? conditions[conditionIdx]! : '',
       plantedYear: (at(row, 'plantedYear') as number | null) ?? null,
       address: (at(row, 'address') as string) ?? '',

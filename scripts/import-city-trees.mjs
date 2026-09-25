@@ -47,6 +47,8 @@ console.log(`  outside the campus boundary  ${s.offCampus} (not this project's b
 console.log(`  inside, but not imported     ${s.skipped}`);
 console.log(`  kept                         ${s.kept} standing street trees`);
 console.log(`  of those, with a diameter    ${s.withDbh}`);
+console.log(`  with a height                ${s.withHeight}`);
+console.log(`  with a crown spread          ${s.withSpread}`);
 console.log(`  with a planting year         ${s.withYear}`);
 console.log('');
 for (const [area, n] of Object.entries(s.byArea).sort((a, b) => b[1] - a[1])) {

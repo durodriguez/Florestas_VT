@@ -143,6 +143,8 @@ export const CITY_TREE_FIELDS = [
   'lng',
   'collection',   // index into collections, or -1
   'dbhIn',
+  'heightFt',
+  'spreadFt',
   'condition',    // integer index into CONDITIONS, or -1
   'plantedYear',
   'address',

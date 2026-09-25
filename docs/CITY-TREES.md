@@ -100,21 +100,31 @@ taken. If somebody at the city confirms the codes, this is one line to change.
 
 ## What each tree carries
 
-`city_id`, `taxon_id`, `lat`, `lng`, `collection_id`, `dbh_in`, `condition`,
-`planted_year`, `address`, `recorded_on`, `source_id`.
+`city_id`, `taxon_id`, `lat`, `lng`, `collection_id`, `dbh_in`, `height_ft`,
+`spread_ft`, `condition`, `planted_year`, `address`, `recorded_on`, `source_id`.
 
-Two of those are worth a note:
+Three of those are worth a note:
 
 - **`condition`** is mapped, not measured. Burlington scores 0–100; this project
   names five grades. The four scores inside the boundary are 90 → excellent,
   80 → good, 70 → fair, 50 → poor. `conditionFromScore()` holds the mapping in
   one place so it is readable rather than buried in an expression.
+- **`height_ft` and `spread_ft`** are in feet, which the export does not say
+  and the values do: on campus they run from 10 to 45, and a 45-metre street
+  tree does not exist. They also come **only in steps of five** — 10, 15, 20,
+  25 — which reads as an estimate by eye rather than a measurement, the way a
+  street-tree crew usually records them. Good enough to describe a tree on its
+  record panel; worth remembering before anything is calculated from them.
 - **`source_id`** is Burlington's `GlobalID`, kept for the same reason the
   ArcGIS import keeps one: a refresh has to recognise a row rather than add it
   again.
 
-**Every one of the 364 has a trunk diameter**, which is more than can be said
-for the university's own records — see [to-do #7](TODO.md) on i-Tree.
+**Every one of the 364 has a trunk diameter, a height and a crown spread**,
+which is more than can be said for the university's own records — see
+[to-do #7](TODO.md) on i-Tree. That makes them a test bed for the calculation,
+with two cautions: over a third of the campus records were last edited in
+2013–14, and they are the city's trees, so any benefit worked out from them is
+not the university's to claim.
 
 ## Refreshing it
 

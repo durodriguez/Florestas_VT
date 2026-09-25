@@ -421,6 +421,25 @@ describe('buildDataset', () => {
     expect(r.dataset.cityTrees.rows).toHaveLength(1);
   });
 
+  it('carries a city tree\'s height and spread through to the browser', () => {
+    const r = build({
+      taxaRows: [taxon()],
+      plantRows: [], observationRows: [],
+      cityTreeRows: [
+        { city_id: 'BTV-1', taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955',
+          collection_id: 'green', dbh_in: '12', height_ft: '25', spread_ft: '20', condition: 'good' },
+        { city_id: 'BTV-2', taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955',
+          collection_id: 'green', dbh_in: '12', height_ft: '', spread_ft: '', condition: 'good' },
+      ],
+    });
+    const { fields, rows } = r.dataset.cityTrees;
+    const at = (row: unknown[], f: string) => row[fields.indexOf(f)];
+    expect(at(rows[0], 'heightFt')).toBe(25);
+    expect(at(rows[0], 'spreadFt')).toBe(20);
+    expect(at(rows[1], 'heightFt')).toBeNull();
+    expect(at(rows[1], 'spreadFt')).toBeNull();
+  });
+
   it('warns when a trail stop is not a known accession', () => {
     const r = build({
       trails: {
