@@ -226,8 +226,7 @@ export function renderCityDetail(tree: CityTree, base: string): string {
 
     <p class="detail-city-note">
       A <strong>Burlington street tree</strong>, standing inside the campus
-      boundary. It is the city's tree, not part of the UVM collection, and it
-      carries no accession number or label.
+      boundary. It is the city's tree, not part of the UVM collection.
     </p>
 
     ${t.description ? `<p class="detail-desc"><strong>Description:</strong> ${escapeHtml(t.description)}</p>` : ''}
