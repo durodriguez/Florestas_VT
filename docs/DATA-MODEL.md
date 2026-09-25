@@ -193,6 +193,26 @@ new angle is needed, check it against the parent species and the rest of the
 file first: silkworms already belong to the white mulberry, marcescence to the
 European beech, and inedible conkers to the common horsechestnut.
 
+### Describe the plant, not the record
+
+The description and fun fact are about the species as a reader would meet it —
+what it looks like, how to tell it apart, what it is known for. They say
+nothing about **how it got into the data**: not which survey recorded it, not
+that it was entered without a species or cultivar, not that it is mapped for
+removal or worth identifying. That is inventory bookkeeping, it means nothing
+to a visitor, and it goes stale the next time somebody walks the campus.
+
+The same goes for claims about **what is on campus** — "nearly all campus
+specimens are named cultivars", "grown here as the contorted form". A taxon
+row is shown for every tree of that species, and for the city's trees too; a
+statement about the collection belongs in the data, where it can be counted,
+not in prose, where it cannot.
+
+A genus-level row (`Acer sp.`, `Malus sp.`) is the case this is easiest to get
+wrong, because the only thing distinctive about the record *is* the missing
+species. Describe the genus instead: what every maple, or every crabapple, has
+in common. Removed on 25 September 2026 from 25 entries that had drifted.
+
 ### Dedications
 
 One column, not two. A tree is a gift, memorial or dedicated one **exactly
