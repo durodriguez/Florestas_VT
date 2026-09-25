@@ -16,6 +16,7 @@ export type Filterable = Pick<Plant | CityTree, 'taxon' | 'collection' | 'dbhIn'
 export function emptyFilters(): FilterState {
   return {
     q: '',
+    taxon: null,
     types: new Set(),
     origins: new Set(),
     conditions: new Set(),
@@ -30,6 +31,7 @@ export function emptyFilters(): FilterState {
 export function isFilterActive(f: FilterState): boolean {
   return (
     f.q.trim() !== '' ||
+    f.taxon !== null ||
     f.types.size > 0 ||
     f.origins.size > 0 ||
     f.conditions.size > 0 ||
@@ -57,6 +59,7 @@ const inSet = (set: Set<string>, value: string | null): boolean =>
 
 export function matchesFilters(plant: Filterable, f: FilterState): boolean {
   if (!f.includeRemoved && (plant.status ?? 'active') !== 'active') return false;
+  if (f.taxon !== null && plant.taxon.id !== f.taxon) return false;
   if (!inSet(f.types, plant.taxon.type)) return false;
   if (!inSet(f.origins, plant.taxon.origin)) return false;
   if (!inSet(f.conditions, plant.condition)) return false;

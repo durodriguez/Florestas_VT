@@ -184,6 +184,13 @@ export type ColorBy = 'type' | 'origin' | 'condition' | 'collection';
 
 export interface FilterState {
   q: string;
+  /**
+   * One taxon id, or null. Set by "Show all" on a record and by a species
+   * page's link to the map, and matched exactly: a text search for "Acer
+   * rubrum" also finds any tree whose alternative names mention it, which is
+   * how a Freeman maple once turned up among the red maples.
+   */
+  taxon: string | null;
   types: Set<string>;
   origins: Set<string>;
   conditions: Set<string>;

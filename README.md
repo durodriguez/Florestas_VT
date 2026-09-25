@@ -39,6 +39,10 @@ the result.
 deciduous/evergreen), origin including Vermont-invasive, campus area, family, condition, flowering month, minimum trunk diameter, and
 whether to include removed plants. Each option shows a live count, computed
 with its own facet relaxed so the alternatives stay clickable.
+**Show all** on a record narrows the map to exactly that species — the same
+number the record gives as mapped on campus — and says so under the search
+box, with a × to lift it. Typing a new search lifts it too. Every filter
+applies to the Burlington street trees as well, when they are shown.
 
 **Plant records** — accession, species description, DBH, height, spread,
 condition, planting year, age, last survey date, coordinates, notes, gift and

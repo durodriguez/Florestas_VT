@@ -239,3 +239,48 @@ describe('applyFilters on Burlington street trees', () => {
     expect(applyFilters(city, base()).map((t) => t.id)).toEqual(['BTV-1', 'BTV-2']);
   });
 });
+
+describe('the taxon filter', () => {
+  // Two taxa whose names overlap the way Red maple and Autumn Blaze do: the
+  // hybrid lists "acer rubrum 'autumn blaze'" among its alternative names, so
+  // a text search for "Acer rubrum" finds both.
+  const overlap = {
+    ...dataset,
+    taxa: [
+      taxon({ id: 'acer-rubrum', sci: 'Acer rubrum', common: 'Red maple', family: 'Sapindaceae', genus: 'Acer' }),
+      taxon({ id: 'acer-x-freemanii-autumn-blaze', sci: "Acer × freemanii 'Jeffersred'", common: 'Autumn Blaze maple',
+        family: 'Sapindaceae', genus: 'Acer', alt: "acer rubrum 'autumn blaze'" }),
+    ],
+  } as unknown as Dataset;
+  const trees = expandPlants({
+    fields,
+    rows: [
+      ['UVM-0101', 0, 44.4779, -73.1955, 0, 12, null, null, 1, null, 0, null, null, null, null, null],
+      ['UVM-0102', 1, 44.4780, -73.1950, 0, 14, null, null, 1, null, 0, null, null, null, null, null],
+    ],
+  }, overlap);
+
+  it('matches the taxon exactly, where a name search also finds a look-alike', () => {
+    expect(applyFilters(trees, { ...emptyFilters(), q: 'Acer rubrum' })).toHaveLength(2);
+    expect(applyFilters(trees, { ...emptyFilters(), taxon: 'acer-rubrum' }).map((p) => p.id)).toEqual(['UVM-0101']);
+  });
+
+  it('counts as an active filter, so "Clear all" appears', () => {
+    expect(isFilterActive({ ...emptyFilters(), taxon: 'acer-rubrum' })).toBe(true);
+  });
+
+  it('applies to city trees as well', () => {
+    const city = expandCityTrees({
+      ...overlap,
+      cityTrees: {
+        fields: ['city_id', 'taxon', 'lat', 'lng', 'collection', 'dbhIn', 'heightFt',
+          'spreadFt', 'condition', 'plantedYear', 'address'],
+        rows: [
+          ['BTV-1', 0, 44.4779, -73.1955, 0, 12, 30, 25, 1, null, '1 Main St'],
+          ['BTV-2', 1, 44.4716, -73.1971, 1, 20, 50, 20, 2, null, '2 Main St'],
+        ],
+      },
+    } as unknown as Dataset);
+    expect(applyFilters(city, { ...emptyFilters(), taxon: 'acer-rubrum' }).map((t) => t.id)).toEqual(['BTV-1']);
+  });
+});

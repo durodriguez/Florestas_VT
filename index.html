@@ -31,6 +31,11 @@
         <label class="visually-hidden" for="search">Search plants</label>
         <input id="search" type="search" autocomplete="off" spellcheck="false"
                placeholder="Name, family or metal tag#…">
+        <p id="taxon-filter" class="taxon-filter" hidden>
+          <span>Showing only <strong id="taxon-filter-name"></strong></span>
+          <button type="button" id="taxon-filter-clear" class="taxon-filter-clear"
+                  aria-label="Show every species again">&times;</button>
+        </p>
       </div>
 
       <form id="filters" class="panel-filters">

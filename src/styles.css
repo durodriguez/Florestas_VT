@@ -102,6 +102,22 @@ button, input, select { font: inherit; color: inherit; }
 }
 #search:focus-visible { outline: 2px solid var(--uvm-green-light); outline-offset: 1px; }
 
+/* The species chosen by "Show all": said out loud, because the search box no
+   longer shows what is filtering, and one tap from gone. */
+.taxon-filter {
+  display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+  margin: .5rem 0 0; padding: .35rem .35rem .35rem .75rem;
+  border: 1px solid var(--border); border-left: 3px solid var(--uvm-green-light);
+  border-radius: var(--radius); background: var(--bg-sunk); font-size: .85rem;
+}
+.taxon-filter[hidden] { display: none; }
+.taxon-filter-clear {
+  flex: 0 0 auto; width: 1.9rem; height: 1.9rem; border: 0; border-radius: var(--radius);
+  background: none; color: var(--text-dim); font-size: 1.2rem; line-height: 1; cursor: pointer;
+}
+.taxon-filter-clear:hover { background: var(--border); color: var(--text); }
+.taxon-filter-clear:focus-visible { outline: 2px solid var(--uvm-green-light); }
+
 .panel-filters {
   border-bottom: 1px solid var(--border);
   max-height: 40%; overflow-y: auto; flex: 0 0 auto;
