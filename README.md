@@ -7,14 +7,15 @@ Search and filter every mapped tree, shrub and vine on campus; tap a plant for
 its full record; scan a QR code on a physical label to land straight on that
 plant's page.
 
-> **2,052 plants are on the map**, almost all of them from UVM's ArcGIS tree
+> **2,060 plants are on the map**, almost all of them from UVM's ArcGIS tree
 > layer, surveyed by Erin Camire in 2023–24 and used with her permission — see
 > [docs/ARCGIS-IMPORT.md](docs/ARCGIS-IMPORT.md). What they do not have is
 > measurements: the layer records a position, a species and a health rating,
 > and nothing about trunk diameter or height. Those arrive one tree at a time,
 > from the field app, and a re-survey adds to a tree's record rather than
 > replacing it. `data/taxa.csv` carries 257 species, so the species list still
-> runs ahead of what has been mapped.
+> runs ahead of what has been mapped. Two more records are kept but hidden by
+> default — one tree removed, one a survey could not find — for 2,062 in all.
 
 ## Quick start
 

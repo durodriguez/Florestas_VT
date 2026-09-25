@@ -11,6 +11,9 @@ npm run check:coverage -- --csv  # data/coverage-gaps.csv
 
 ## The accounting
 
+Figures as of 25 September 2026. The check recounts every run, so it is the
+place to look for today's numbers; this page is for what they mean.
+
 | The 2014 side | |
 | --- | ---: |
 | Tagged in 2014, numbers 1–2555 | 2,502 |
@@ -21,10 +24,10 @@ npm run check:coverage -- --csv  # data/coverage-gaps.csv
 | --- | ---: |
 | Carrying a 2014 number | 950 |
 | Carrying a real metal tag above 2555 | 399 |
-| Carrying no readable tag at all | 703 |
-| | **2,052** |
+| Carrying no readable tag at all | 713 |
+| | **2,062** |
 
-Those 703 are numbered `UVM-4001` and up. **That block is this project's own
+Those 713 are numbered `UVM-4001` and up. **That block is this project's own
 invention**, issued by the importer to trees with nothing on the trunk. They
 are not tags in the 4000s and nobody will find one stamped on a tree.
 
@@ -36,11 +39,11 @@ on the trees by somebody between 2014 and 2023.
 | | |
 | --- | ---: |
 | Missing 2014 tags | 1,552 |
-| Trees that could be a renumbered one, at most | 1,102 |
-| **Left over even then** | **450** |
+| Trees that could be a renumbered one, at most | 1,112 |
+| **Left over even then** | **440** |
 
 That ceiling assumes every new tag and every untagged tree is a 2014 tree in
-disguise, which is certainly too generous. **So at least 450 of the 2014 trees
+disguise, which is certainly too generous. **So at least 440 of the 2014 trees
 are not on the map under any number**, and the true figure is higher.
 
 **A renumbered tree is not a problem to fix.** It is already on the map, under
@@ -75,7 +78,7 @@ not tag loss, and not renumbering either.
 
 | Area | 2014 tag | New tag | Untagged | Not traceable to 2014 |
 | --- | ---: | ---: | ---: | ---: |
-| Central | 478 | 135 | 225 | 43% |
+| Central | 478 | 135 | 235 | 44% |
 | Athletic | 292 | 80 | 210 | 50% |
 | Redstone | 146 | 104 | 226 | **69%** |
 | Trinity | 34 | 80 | 42 | **78%** |

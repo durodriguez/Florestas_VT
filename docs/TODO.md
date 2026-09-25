@@ -73,8 +73,9 @@ measurements are twelve years old, and DBH is the input i-Tree is most
 sensitive to, so stale numbers would produce confident-looking wrong answers.
 Deliberately left out of the import; worth revisiting only as its own decision.
 
-**The blocker.** Of six plants in `data/plants.csv`, **none** has a DBH. Without
-DBH there is no calculation — not a rough one, not a defaulted one. Any number
+**The blocker.** Of the 2,062 plants in `data/plants.csv`, **none** has a DBH —
+not even the few surveyed in the field since the import. Without DBH there is
+no calculation — not a rough one, not a defaulted one. Any number
 shown would be invented, which is worse than showing nothing on a page with
 UVM's name on it.
 
@@ -85,7 +86,7 @@ UVM's name on it.
    for a DBH field before anyone re-measures 2,000 trees by hand.
 2. Once a real fraction of trees have DBH, add the calculation.
 3. Show benefits only on trees that have one, plus a campus-wide total that
-   says how many trees it covers. "2,061 trees sequester X" when 300 have been
+   says how many trees it covers. "2,060 trees sequester X" when 300 have been
    measured is a fabrication; "the 300 trees measured so far sequester X" is a
    fact, and a better argument for finishing the survey.
 
@@ -367,7 +368,7 @@ unwalked route, 37 missing tags that were all young saplings is a planting
 that did not survive, and ten paper birches in eleven metres is one clump.
 
 **Renumbering cannot explain all of it.** Even counting every new tag and every
-untagged tree as a renumbered 2014 tree, 450 are left over.
+untagged tree as a renumbered 2014 tree, 440 are left over.
 
 **One thing is settled.** No map tag inside 1–2555 is a number 2014 never
 issued, so nothing was renumbered within the old range. `check:coverage`
@@ -471,7 +472,7 @@ already on the map, and nothing that changes the roster.
 **Who the basic tier is for: a team of undergraduates adding field data to
 trees that are already mapped.** That is the use case, and it settles more of
 this item than it first appears to. A crew is several pairs of hands filling in
-the 2,057 trees that already exist, working from the tag on the trunk; none of them
+the 2,000-odd trees that already exist, working from the tag on the trunk; none of them
 need to invent a tree, and none of them should be the one who decides a tree is
 gone. You hold the advanced build. This is also the first time the app will be
 used by somebody who was not in the room while it was built, which raises the
