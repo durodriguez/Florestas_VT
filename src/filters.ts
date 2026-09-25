@@ -1,4 +1,17 @@
-import type { FilterState, Plant } from './types';
+import type { CityTree, FilterState, Plant } from './types';
+
+/**
+ * Anything the filters can be run over: a UVM plant or a Burlington street
+ * tree. The filter panel is one set of controls over one map, so a species,
+ * family or campus chosen there has to thin out both layers — otherwise
+ * "Show all" on a species leaves every city tree of every species standing.
+ * A city tree has no `status` and needs none: only standing trees are
+ * imported, so it counts as active.
+ */
+export type Filterable = Pick<Plant | CityTree, 'taxon' | 'collection' | 'dbhIn' | 'search'> & {
+  condition: string | null;
+  status?: string;
+};
 
 export function emptyFilters(): FilterState {
   return {
@@ -33,7 +46,7 @@ export function isFilterActive(f: FilterState): boolean {
  * plant's haystack, so "red oak green" narrows rather than widens — the
  * behaviour people expect from a search box.
  */
-export function matchesQuery(plant: Plant, q: string): boolean {
+export function matchesQuery(plant: Pick<Filterable, 'search'>, q: string): boolean {
   const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
   return terms.every((t) => plant.search.includes(t));
 }
@@ -42,8 +55,8 @@ export function matchesQuery(plant: Plant, q: string): boolean {
 const inSet = (set: Set<string>, value: string | null): boolean =>
   set.size === 0 || (value !== null && set.has(value));
 
-export function matchesFilters(plant: Plant, f: FilterState): boolean {
-  if (!f.includeRemoved && plant.status !== 'active') return false;
+export function matchesFilters(plant: Filterable, f: FilterState): boolean {
+  if (!f.includeRemoved && (plant.status ?? 'active') !== 'active') return false;
   if (!inSet(f.types, plant.taxon.type)) return false;
   if (!inSet(f.origins, plant.taxon.origin)) return false;
   if (!inSet(f.conditions, plant.condition)) return false;
@@ -55,7 +68,7 @@ export function matchesFilters(plant: Plant, f: FilterState): boolean {
   return true;
 }
 
-export function applyFilters(plants: Plant[], f: FilterState): Plant[] {
+export function applyFilters<T extends Filterable>(plants: T[], f: FilterState): T[] {
   return plants.filter((p) => matchesFilters(p, f));
 }
 

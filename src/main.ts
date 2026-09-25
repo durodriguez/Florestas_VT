@@ -131,6 +131,7 @@ class App {
       );
     }
     this.map.show(this.results);
+    this.renderCityTrees();
     this.renderResults();
     this.renderFacetCounts();
     this.renderLegend();
@@ -199,8 +200,15 @@ class App {
       $('#filter-city-count').textContent = '';
       return;
     }
-    this.map.showCityTrees(this.cityTrees);
-    $('#filter-city-count').textContent = `${this.cityTrees.length.toLocaleString()} shown`;
+    // The same filters as the UVM layer, so the two never disagree about what
+    // is being looked at. They stay out of the result list and the counts,
+    // which are the university's collection.
+    const shown = applyFilters(this.cityTrees, this.filters);
+    const total = this.cityTrees.length;
+    this.map.showCityTrees(shown);
+    $('#filter-city-count').textContent = shown.length === total
+      ? `${total.toLocaleString()} shown`
+      : `${shown.length.toLocaleString()} of ${total.toLocaleString()} shown`;
   }
 
   /**
