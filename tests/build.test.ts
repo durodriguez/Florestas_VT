@@ -421,6 +421,33 @@ describe('buildDataset', () => {
     expect(r.dataset.cityTrees.rows).toHaveLength(1);
   });
 
+  it('links a named variety to its species, and counts it towards the species\' group', () => {
+    const r = build({
+      taxaRows: [
+        taxon({ taxon_id: 'acer-rubrum', scientific_name: 'Acer rubrum', common_name: 'Red maple', species: 'rubrum' }),
+        taxon({ taxon_id: 'acer-rubrum-red-sunset', scientific_name: "Acer rubrum 'Red Sunset'",
+          common_name: 'Red Sunset red maple', species: 'rubrum', cultivar: 'Red Sunset' }),
+        // Sold as a red maple, but a different species: must not join the group.
+        taxon({ taxon_id: 'acer-x-freemanii-autumn-blaze', scientific_name: "Acer x freemanii 'Autumn Blaze'",
+          common_name: 'Autumn Blaze maple', species: 'x freemanii', cultivar: 'Autumn Blaze' }),
+      ],
+      plantRows: [
+        plant({ plant_id: 'UVM-0001', taxon_id: 'acer-rubrum' }),
+        plant({ plant_id: 'UVM-0002', taxon_id: 'acer-rubrum-red-sunset' }),
+        plant({ plant_id: 'UVM-0003', taxon_id: 'acer-x-freemanii-autumn-blaze' }),
+      ],
+      observationRows: [
+        observation({ plant_id: 'UVM-0001' }), observation({ plant_id: 'UVM-0002' }), observation({ plant_id: 'UVM-0003' }),
+      ],
+    });
+    const t = Object.fromEntries(r.dataset.taxa.map((x: any) => [x.id, x]));
+    expect(t['acer-rubrum-red-sunset'].parent).toBe('acer-rubrum');
+    expect(t['acer-x-freemanii-autumn-blaze'].parent).toBe(''); // no x freemanii species row here
+    expect(t['acer-rubrum'].parent).toBe('');
+    expect(t['acer-rubrum'].count).toBe(1);
+    expect(t['acer-rubrum'].groupCount).toBe(2);
+  });
+
   it('carries a city tree\'s height and spread through to the browser', () => {
     const r = build({
       taxaRows: [taxon()],

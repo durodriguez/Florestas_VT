@@ -90,6 +90,10 @@ export interface Taxon {
    */
   alt: string;
   count: number;
+  /** For a named variety, the id of the species it belongs to; otherwise ''. */
+  parent: string;
+  /** `count` plus the counts of this taxon's named varieties. */
+  groupCount: number;
 }
 
 export interface Vocab {
@@ -186,9 +190,10 @@ export interface FilterState {
   q: string;
   /**
    * One taxon id, or null. Set by "Show all" on a record and by a species
-   * page's link to the map, and matched exactly: a text search for "Acer
-   * rubrum" also finds any tree whose alternative names mention it, which is
-   * how a Freeman maple once turned up among the red maples.
+   * page's link to the map. Matches that taxon and its named varieties by id,
+   * not by name: a text search for "Acer rubrum" also finds any tree whose
+   * alternative names mention it, which is how a Freeman maple once turned up
+   * among the red maples.
    */
   taxon: string | null;
   types: Set<string>;

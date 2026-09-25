@@ -170,7 +170,10 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
       ${row('Soil', t.soil ? escapeHtml(t.soil) : null)}
       ${row('Pests and disease', t.pests ? escapeHtml(t.pests) : null)}
       ${row('Hardiness zones', t.zones)}
-      ${row('On campus', `${t.count} mapped ${t.count === 1 ? 'plant' : 'plants'}`)}
+      ${row('On campus', `${t.count} mapped ${t.count === 1 ? 'plant' : 'plants'}${
+        // "Show all" includes varieties, so the row says so rather than
+        // promising a number the map then overshoots.
+        t.groupCount > t.count ? `, plus ${t.groupCount - t.count} of named varieties` : ''}`)}
     </dl>
 
     <div class="detail-actions">

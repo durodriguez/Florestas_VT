@@ -43,14 +43,34 @@ export function isFilterActive(f: FilterState): boolean {
   );
 }
 
+const isWordChar = (c: string | undefined): boolean => c !== undefined && /[a-z0-9]/.test(c);
+
+/** `term` appears in `text` as a whole word, not inside a longer one. */
+function hasWord(text: string, term: string): boolean {
+  for (let i = text.indexOf(term); i !== -1; i = text.indexOf(term, i + 1)) {
+    if (!isWordChar(text[i - 1]) && !isWordChar(text[i + term.length])) return true;
+  }
+  return false;
+}
+
 /**
- * Free-text match. Every whitespace-separated term must appear somewhere in the
- * plant's haystack, so "red oak green" narrows rather than widens — the
- * behaviour people expect from a search box.
+ * Free-text match. Every whitespace-separated term must appear in the plant's
+ * haystack, so "red oak green" narrows rather than widens — the behaviour
+ * people expect from a search box.
+ *
+ * A word the visitor has finished typing must match a whole word; only the
+ * one still being typed may match part of one. Otherwise "red maple" finds
+ * every maple on Redstone Campus, because "red" is inside "redstone" — and
+ * searching everything a tree is known by, campus included, is the point.
+ * The last word stays a part-match so results keep up while typing: "red
+ * mapl" already finds the red maples, and a bare "772" still lists UVM-2772.
  */
 export function matchesQuery(plant: Pick<Filterable, 'search'>, q: string): boolean {
-  const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
-  return terms.every((t) => plant.search.includes(t));
+  const query = q.toLowerCase();
+  const terms = query.split(/\s+/).filter(Boolean);
+  // A trailing space means the last word is finished too.
+  const typing = /\s$/.test(query) ? -1 : terms.length - 1;
+  return terms.every((t, i) => (i === typing ? plant.search.includes(t) : hasWord(plant.search, t)));
 }
 
 /** A set filter is inactive when empty; otherwise the value must be a member. */
@@ -59,7 +79,9 @@ const inSet = (set: Set<string>, value: string | null): boolean =>
 
 export function matchesFilters(plant: Filterable, f: FilterState): boolean {
   if (!f.includeRemoved && (plant.status ?? 'active') !== 'active') return false;
-  if (f.taxon !== null && plant.taxon.id !== f.taxon) return false;
+  // The taxon itself or one of its named varieties: "Show all" on red maple
+  // includes 'Red Sunset'.
+  if (f.taxon !== null && plant.taxon.id !== f.taxon && plant.taxon.parent !== f.taxon) return false;
   if (!inSet(f.types, plant.taxon.type)) return false;
   if (!inSet(f.origins, plant.taxon.origin)) return false;
   if (!inSet(f.conditions, plant.condition)) return false;

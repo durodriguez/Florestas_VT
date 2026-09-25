@@ -33,7 +33,9 @@ legend.
 
 **Search** — free text across common name, scientific name, family, cultivar,
 campus area and accession number. Every term must match, so extra words narrow
-the result.
+the result. A word you have finished typing matches whole words only, so "red
+maple" finds red maples and not every maple on Redstone Campus; the word still
+being typed can match part of one, so results keep up as you type.
 
 **Filters** — faceted and combinable: plant type (seven categories, trees split
 deciduous/evergreen), origin including Vermont-invasive, campus area, family, condition, flowering month, minimum trunk diameter, and
