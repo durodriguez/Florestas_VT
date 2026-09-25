@@ -981,6 +981,9 @@ Things that need a person rather than a commit.
   lists them.
 - **10 ArcGIS records did not import** — 8 need identifying, 2 need a position.
 - **Botanist review** of the authored descriptions and traits in `taxa.csv`.
+  169 species had their description or fun fact rewritten on 25–26 September
+  2026; [SPECIES-TEXT-REVIEW.md](SPECIES-TEXT-REVIEW.md) lists the claims to
+  check first and every species to read.
 - **Official UVM V mark** from UVM Communications.
 - **ETS request** for `arboretum.uvm.edu/explorer/`.
 
