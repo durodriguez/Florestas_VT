@@ -157,6 +157,36 @@ giveaway is position: an echo opens both sentences, while a subject moves about
 called that four words long and flagged it, because the article padded a
 three-word name.
 
+#### What it cannot do, so nobody tries to tune it into doing it
+
+All three measures count shared vocabulary, and three entries walked past
+them — the Sunburst honeylocust and both zelkovas, each caught by a person
+reading the page rather than by the script. Measured across the file on
+25 September 2026:
+
+| entry | shared vocabulary | should be |
+| --- | ---: | --- |
+| Green ash | 43% | **not** flagged |
+| Japanese zelkova | 38% | flagged |
+| Columnar Japanese zelkova | 18% | flagged |
+
+**The entry that has to pass scores higher than the two that have to fail**,
+so no threshold separates them, and lowering one only flags entries that share
+a subject. The columnar zelkova shares almost nothing: *"strictly columnar,
+far too wide"* against *"narrow upright, a few feet of width"* is one claim in
+two vocabularies. There is nothing there to count.
+
+A second measure was tried — scoring the fun fact's *opening clause* against
+the whole description, which is closer to the real fault. It ranked ten
+legitimate entries above the worst offender: *"Emerald ash borer"*, *"Dutch
+elm disease"* and *"Its roots release juglone"* all score 100%, because they
+open by naming a subject rather than by repeating a claim. Subject against
+predicate is grammar, not vocabulary. The columnar zelkova came 107th of 257.
+
+So this check finds **literal echo, not paraphrase**, and that is a property
+of the method rather than of its numbers. Paraphrase is found by reading the
+pages, which is how all three of those were found.
+
 **When one does fire, the fix is usually not a new fact.** Most entries already
 carry one behind the restatement and only need to lead with it. Where a genuinely
 new angle is needed, check it against the parent species and the rest of the
