@@ -107,9 +107,9 @@ export function describeDistance(hit: NearbyTree): string {
 /**
  * The mapped tree wearing this tag, if the current inventory has one.
  *
- * Checked before the 2014 file: 2,052 trees were surveyed in 2023-24 and the
- * 2014 inventory knows nothing about the ones planted since. A surveyor typing
- * a tag that exists should never be told there is no such tree.
+ * Checked before the 2014 file: the map's trees were surveyed from 2023-24 on,
+ * and the 2014 inventory knows nothing about the ones planted since. A surveyor
+ * typing a tag that exists should never be told there is no such tree.
  */
 export function mappedByTag(tag: string, trees: MappedTree[]): MappedTree | undefined {
   const wanted = normalizeTag(tag);

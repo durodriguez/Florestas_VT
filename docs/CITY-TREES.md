@@ -30,8 +30,8 @@ This is the whole design, not a disclaimer:
   one.
 - **Their own array in the payload.** `dataset.cityTrees`, not merged into
   plants. Every count, facet and CSV export in the app takes "plants" to mean
-  the UVM collection, and they are right to. The map still says **2,052
-  plants** with the city layer on.
+  the UVM collection, and they are right to. The map's plant count is
+  **the same with the city layer on as off**.
 - **Their own search.** They do not appear in the plant result list. Typing
   `BTV-` finds nothing, because the list is the university's collection.
 - **Their own record panel.** It opens saying `BTV-886 · City of Burlington` and

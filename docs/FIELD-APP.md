@@ -281,9 +281,9 @@ See [the accession and the tag](FIELD-SURVEY.md#the-accession-and-the-tag).
 A typed tag is checked against **the current inventory first**, and only then
 against the 2014 file.
 
-The order matters. `data/plants.csv` holds 2,052 trees surveyed in 2023-24, and
-the 2014 inventory knows nothing about any of them planted since. Asking 2014
-first meant a surveyor could type a tag that exists, stand in front of the tree
+The order matters. `data/plants.csv` holds the trees surveyed from 2023-24 on,
+and the 2014 inventory knows nothing about any of them planted after it. Asking
+2014 first meant a surveyor could type a tag that exists, stand in front of the tree
 wearing it, and be told *"No tree 3235 in the 2014 inventory"* — which is how
 this was found. Where both know a tag, the newer identification is the one
 worth seeding.
