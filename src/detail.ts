@@ -244,6 +244,8 @@ export function renderCityDetail(tree: CityTree, base: string): string {
         ? `<span class="pill pill--${tree.condition}">${escapeHtml(titleCase(tree.condition))}</span>`
         : null)}
       ${row('Diameter at breast height', tree.dbhIn === null ? null : `${tree.dbhIn} in`)}
+      ${row('Height', tree.heightFt === null ? null : `${tree.heightFt} ft`)}
+      ${row('Canopy spread', tree.spreadFt === null ? null : `${tree.spreadFt} ft`)}
       ${row('Planted', tree.plantedYear ? `${tree.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
       ${row('Coordinates', `${tree.lat.toFixed(6)}, ${tree.lng.toFixed(6)}`)}
     </dl>

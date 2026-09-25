@@ -43,6 +43,8 @@ export interface CityTree {
   taxon: Taxon;
   collection: Collection | null;
   dbhIn: number | null;
+  heightFt: number | null;
+  spreadFt: number | null;
   /** One of Vocab.conditions, or '' where the city recorded no score. */
   condition: string;
   plantedYear: number | null;

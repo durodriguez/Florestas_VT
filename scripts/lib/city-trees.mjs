@@ -23,6 +23,8 @@ export const CITY_TREE_COLUMNS = [
   'lng',
   'collection_id',
   'dbh_in',
+  'height_ft',
+  'spread_ft',
   'condition',
   'planted_year',
   'address',
@@ -38,7 +40,7 @@ export const CITY_TREE_COLUMNS = [
  * carry neither and `P` has a diameter of zero. That reads as tree, stump,
  * removed and vacant planting site.
  *
- * Only `T` is imported. Being wrong about `S` costs 51 records inside the
+ * Only `T` is imported. Being wrong about `S` costs 58 records inside the
  * boundary; being wrong the other way would draw stumps on a map of trees, so
  * the safer error is the one taken.
  */
@@ -81,6 +83,15 @@ export function recordedOn(value) {
 }
 
 const coord = (n) => n.toFixed(6);
+
+/**
+ * A positive measurement as the source wrote it, or '' for the 0s and blanks —
+ * nought inches or nought feet is a field left empty, not a measurement.
+ */
+function measure(value) {
+  const n = Number(String(value ?? '').trim());
+  return Number.isFinite(n) && n > 0 ? String(n) : '';
+}
 
 /** A planting year, or '' for the 0s and blanks the source is full of. */
 function plantedYear(value) {
@@ -144,7 +155,6 @@ export function importCityTrees({ rows, speciesLookup, campusAreas }) {
     if (seen.has(cityId)) { skip('duplicate site_id'); continue; }
     seen.add(cityId);
 
-    const dbh = Number(row.diameter);
     byArea[area] = (byArea[area] ?? 0) + 1;
     inserts.push({
       city_id: cityId,
@@ -152,7 +162,12 @@ export function importCityTrees({ rows, speciesLookup, campusAreas }) {
       lat: coord(lat),
       lng: coord(lng),
       collection_id: area,
-      dbh_in: Number.isFinite(dbh) && dbh > 0 ? String(dbh) : '',
+      dbh_in: measure(row.diameter),
+      // Feet, like the university's own height_ft and spread_ft. The export
+      // does not say so; the values do — 10 to 45 on campus, in steps of 5,
+      // which is a street tree in feet and nothing at all in metres.
+      height_ft: measure(row.height),
+      spread_ft: measure(row.spread),
       condition: conditionFromScore(row.conditn),
       planted_year: plantedYear(row.planted),
       address: formatAddress(row.add_num, row.add_str),
@@ -176,6 +191,8 @@ export function importCityTrees({ rows, speciesLookup, campusAreas }) {
       skipped: Object.values(skipped).reduce((n, v) => n + v, 0),
       byArea,
       withDbh: inserts.filter((r) => r.dbh_in).length,
+      withHeight: inserts.filter((r) => r.height_ft).length,
+      withSpread: inserts.filter((r) => r.spread_ft).length,
       withYear: inserts.filter((r) => r.planted_year).length,
     },
   };
