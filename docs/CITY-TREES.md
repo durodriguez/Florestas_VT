@@ -34,6 +34,11 @@ This is the whole design, not a disclaimer:
   **the same with the city layer on as off**.
 - **Their own search.** They do not appear in the plant result list. Typing
   `BTV-` finds nothing, because the list is the university's collection.
+- **The same filters, though.** A species, family, campus, condition or
+  diameter chosen in the filter panel — or "Show all" on a record — thins the
+  city layer exactly as it thins the university's, so the map never shows one
+  species of UVM tree among every species of city tree. The layer's count
+  reads "16 of 364 shown" while a filter is set.
 - **Their own record panel.** It opens saying `BTV-886 · City of Burlington` and
   states in the first paragraph whose tree it is, then ends by naming the
   city's inventory as the source.
