@@ -254,8 +254,7 @@ export function renderCityDetail(tree: CityTree, base: string): string {
     </div>
 
     <p class="detail-source">
-      Record from the City of Burlington's public tree inventory. Anything wrong
-      with it is the city's to correct, not the university's.
+      Record from the City of Burlington's public tree inventory.
     </p>
   `;
 }
