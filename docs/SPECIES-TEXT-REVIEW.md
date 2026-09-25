@@ -71,6 +71,7 @@ Less doubtful, but each rests on one remembered detail:
 - [ ] **Shantung maple** — seed oil rich in nervonic acid, grown as a crop in China
 - [ ] **Serviceberry** — the burial-service story is labelled folklore; is that fair?
 - [ ] **Larch (genus)** — tamarack root-and-trunk joints used as ship's knees
+- [ ] **Amber Glow dawn redwood** — description says the foliage "emerges pink-amber and holds a coppery cast all season". Its fall colour was recorded as pink and corrected to orange on 26 September 2026; the spring and summer colour may carry the same mistake
 
 ## 2. Every rewritten species
 
