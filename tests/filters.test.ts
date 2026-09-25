@@ -4,7 +4,7 @@ import {
   matchesQuery, toCsv,
 } from '../src/filters';
 import { distanceMeters } from '../src/geo';
-import { expandPlants } from '../src/data';
+import { expandCityTrees, expandPlants } from '../src/data';
 import type { Dataset, Plant, Taxon } from '../src/types';
 
 const taxon = (over: Partial<Taxon>): Taxon => ({
@@ -203,5 +203,39 @@ describe('toCsv', () => {
   it('carries no notes column, because a surveyor\'s remarks are internal', () => {
     // A downloaded file travels further than a panel row does.
     expect(toCsv(plants).split('\n')[0]).not.toContain('notes');
+  });
+});
+
+describe('applyFilters on Burlington street trees', () => {
+  // fields mirror scripts/lib/vocab.mjs CITY_TREE_FIELDS
+  const city = expandCityTrees({
+    ...dataset,
+    cityTrees: {
+      fields: ['city_id', 'taxon', 'lat', 'lng', 'collection', 'dbhIn', 'heightFt',
+        'spreadFt', 'condition', 'plantedYear', 'address'],
+      rows: [
+        ['BTV-1', 0, 44.4779, -73.1955, 0, 12, 30, 25, 1, null, '1 Main St'],
+        ['BTV-2', 1, 44.4716, -73.1971, 1, 20, 50, 20, 2, null, '2 Main St'],
+      ],
+    },
+  } as unknown as Dataset);
+  const base = () => emptyFilters();
+
+  it('are thinned by the same controls as UVM trees', () => {
+    // "Show all" on a species searches its scientific name.
+    expect(applyFilters(city, { ...base(), q: 'Acer saccharum' }).map((t) => t.id)).toEqual(['BTV-1']);
+    expect(applyFilters(city, { ...base(), families: new Set(['Pinaceae']) }).map((t) => t.id)).toEqual(['BTV-2']);
+    expect(applyFilters(city, { ...base(), collections: new Set(['green']) }).map((t) => t.id)).toEqual(['BTV-1']);
+    expect(applyFilters(city, { ...base(), minDbh: 15 }).map((t) => t.id)).toEqual(['BTV-2']);
+  });
+
+  it('count as standing, since only standing trees are imported', () => {
+    expect(applyFilters(city, base())).toHaveLength(2);
+    expect(applyFilters(city, { ...base(), includeRemoved: true })).toHaveLength(2);
+  });
+
+  it('are all shown when no filter is set', () => {
+    expect(isFilterActive(base())).toBe(false);
+    expect(applyFilters(city, base()).map((t) => t.id)).toEqual(['BTV-1', 'BTV-2']);
   });
 });
