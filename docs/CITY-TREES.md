@@ -35,8 +35,8 @@ This is the whole design, not a disclaimer:
 - **Their own search.** They do not appear in the plant result list. Typing
   `BTV-` finds nothing, because the list is the university's collection.
 - **Their own record panel.** It opens saying `BTV-886 · City of Burlington` and
-  states in the first paragraph whose tree it is, then ends by pointing
-  corrections at the city rather than the university.
+  states in the first paragraph whose tree it is, then ends by naming the
+  city's inventory as the source.
 
 ## Blue and white, against green and gold
 
