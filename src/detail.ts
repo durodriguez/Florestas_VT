@@ -233,7 +233,7 @@ export function renderCityDetail(tree: CityTree, base: string): string {
     </p>
 
     ${t.description ? `<p class="detail-desc"><strong>Description:</strong> ${escapeHtml(t.description)}</p>` : ''}
-    ${t.funFact ? `<details class="fun">
+    ${t.funFact ? `<details class="detail-fact">
       <summary>Fun fact</summary>
       <p>${escapeHtml(t.funFact)}</p>
     </details>` : ''}
