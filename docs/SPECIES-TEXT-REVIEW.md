@@ -92,6 +92,44 @@ The Amber Glow dawn redwood's description and pest note were corrected the
 same day from its introducer's and two other nurseries' descriptions (golden
 new growth with a burgundy tinge, yellow through summer, no sun scorch).
 
+## Origin labels: checked against USDA PLANTS
+
+On 27 September 2026 each species' `origin` (Vermont native, introduced,
+Vermont invasive) was compared with its native status in the
+[USDA PLANTS Database](https://plants.usda.gov/). 157 of the 191 species
+matched a USDA record; the rest are hybrids and garden trees USDA does not
+list, all but one labelled introduced.
+
+- Every species labelled **Vermont native** is native to the lower 48 states
+  in USDA. None was wrongly called native.
+- Every species labelled **Vermont invasive** is introduced in USDA, except
+  black locust, which is native to the Appalachians and invasive here — as
+  its entry already says.
+- Thirty species labelled **introduced** are native elsewhere in the United
+  States (tuliptree, black locust's relatives, baldcypress, Douglas fir and
+  others). None is native to Vermont as far as is known, but USDA's
+  state-by-state data could not be reached, so that last step rests on
+  general knowledge. Worth a glance: **river birch**, which grows wild in
+  neighbouring states.
+- The check could not test the **Vermont invasive** labels against Vermont's
+  own noxious weed list: USDA's service returns those fields empty.
+
+Found along the way, for a person to settle:
+
+- [ ] **Apple serviceberry** (and **Autumn Brilliance**) — labelled Vermont
+  native. It is a hybrid of two native serviceberries that occurs wild where
+  they meet, but the trees sold are nursery selections. Native, or introduced?
+- [ ] **Chestnut oak** — listed as *Quercus prinus*. USDA files that name under
+  swamp chestnut oak (*Q. michauxii*); most current sources call chestnut oak
+  *Q. montana*, as its description says. Which name should the record use?
+- [ ] **Laurel oak** (*Quercus hemisphaerica*) — USDA folds it into
+  *Q. laurifolia*. A taxonomic difference, not an error.
+- [ ] **Common apple** (*Malus domestica*) — USDA calls it *Malus pumila*. The
+  same.
+
+Corrected: pin cherry's scientific name was misspelled *Prunus pennsylvanica*;
+it is *P. pensylvanica*, with one n.
+
 ## 2. Every rewritten species
 
 Ticking a box means somebody who knows the tree has read both its
