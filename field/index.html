@@ -21,16 +21,41 @@
   </header>
 
   <main id="screen-form" class="screen">
-    <!-- 1. tag ------------------------------------------------------------ -->
-    <section class="card">
-      <label class="field-label" for="tag">Metal tag number</label>
-      <div class="tag-row">
+    <!-- 0. what kind of visit -------------------------------------------------
+         Asked first because everything after it depends on the answer. The
+         map now comes from the 2023-24 inventory, so most visits are to a tree
+         that is already on it; a tag number is one way of saying which. -->
+    <section class="card" id="card-mode">
+      <span class="field-label">What are you recording?</span>
+      <div class="seg seg--mode" id="mode-seg" role="radiogroup" aria-label="What are you recording?">
+        <button type="button" class="seg-btn" role="radio" aria-checked="false" data-mode="update">
+          Update a mapped tree<small>Already on the map</small>
+        </button>
+        <button type="button" class="seg-btn" role="radio" aria-checked="false" data-mode="new">
+          Add a new tree<small>Not on the map yet</small>
+        </button>
+      </div>
+    </section>
+
+    <!-- 1. which tree / does it have a tag ------------------------------------ -->
+    <section class="card" id="card-tag">
+      <div data-only="update">
+        <label class="field-label" for="tag">Which tree?</label>
+        <p class="hint">Type the number on its metal tag, or pick it from the trees near you.</p>
+      </div>
+      <div data-only="new">
+        <span class="field-label">Does it have a metal tag?</span>
+        <div class="seg seg--2" id="has-tag-seg" role="radiogroup" aria-label="Does it have a metal tag?">
+          <button type="button" class="seg-btn" role="radio" aria-checked="false" data-has-tag="yes">Yes</button>
+          <button type="button" class="seg-btn" role="radio" aria-checked="false" data-has-tag="no">No</button>
+        </div>
+      </div>
+      <div class="tag-row" id="tag-row">
         <input id="tag" type="text" inputmode="numeric" autocomplete="off"
-               placeholder="e.g. 772" enterkeyhint="search">
-        <button type="button" id="tag-new" class="ghost-btn">No tag</button>
+               placeholder="Tag number, e.g. 772" enterkeyhint="search"
+               aria-label="Metal tag number">
       </div>
       <div id="tag-result" class="tag-result"></div>
-      <div id="species-changed" class="tag-changed" hidden></div>
 
       <!-- Untagged trees: match on position instead of a number. -->
       <div id="nearby" class="nearby" hidden>
@@ -44,8 +69,9 @@
     </section>
 
     <!-- 2. species -------------------------------------------------------- -->
-    <section class="card">
+    <section class="card" id="card-species">
       <label class="field-label" for="species">Species</label>
+      <p class="hint" data-only="update">Filled in from the map. Change it only if the record is wrong.</p>
       <div class="combo">
         <input id="species" type="text" autocomplete="off" autocapitalize="off"
                spellcheck="false" placeholder="Scientific or common name"
@@ -55,17 +81,24 @@
             aria-label="Matching species" hidden></ul>
       </div>
       <p id="species-note" class="hint species-note"></p>
+      <div id="species-changed" class="tag-changed" hidden></div>
     </section>
 
     <!-- 3. position ------------------------------------------------------- -->
-    <section class="card">
+    <section class="card" id="card-position">
       <div class="card-head">
-        <span class="field-label">Position</span>
+        <span class="field-label" data-only="none">Mapped trees around you</span>
+        <span class="field-label" data-only="new">Position</span>
+        <span class="field-label" data-only="update">Map</span>
         <span id="gps-accuracy" class="accuracy">—</span>
       </div>
       <div id="gps-status" class="gps-status">Waiting for location…</div>
-      <div id="pin-map" class="pin-map" aria-label="Drag the pin onto the tree"></div>
-      <p class="hint">Tap the map to place the pin on the tree's crown, or drag it. Imagery beats GPS under canopy.</p>
+      <div id="pin-map" class="pin-map" aria-label="Map of the trees around you"></div>
+      <p class="hint" id="start-note" data-only="none"></p>
+      <p class="hint" data-only="new">Tap the map to place the pin on the tree's crown, or drag it. Imagery beats GPS under canopy.</p>
+      <p class="hint" id="pin-hint-update" data-only="update"></p>
+      <div id="dup-warn" class="tag-result tag-result--info" hidden></div>
+      <button type="button" id="move-tree" class="ghost-btn" data-only="update" hidden>Its mapped position is wrong</button>
       <div class="btn-row">
         <button type="button" id="gps-recapture" class="ghost-btn">Re-read GPS</button>
         <span id="coords" class="coords">—</span>
@@ -73,16 +106,15 @@
     </section>
 
     <!-- 4. is it there ------------------------------------------------------
-         Before the measurements, because it decides whether there is anything
-         to measure. Condition describes a tree that is here — "dead" is still
-         a standing trunk — so an absent tree has no condition at all. -->
-    <section class="card">
+         Update only: a new tree is here by definition. Before the
+         measurements, because it decides whether there is anything to
+         measure. -->
+    <section class="card" id="card-status">
       <span class="field-label">Is the tree there?</span>
       <div class="seg" id="status-seg" role="radiogroup" aria-label="Is the tree there?"></div>
       <p class="hint" id="status-hint">
         <strong>Gone</strong> means a stump, or a mark where it stood.
         <strong>Nothing here</strong> means no tree and no sign there ever was one.
-        Either way, say which record you mean — type its tag or pick it from the list above.
       </p>
     </section>
 
@@ -99,7 +131,7 @@
     </section>
 
     <!-- 6. photo ---------------------------------------------------------- -->
-    <section class="card">
+    <section class="card" id="card-photo">
       <span class="field-label">Photo</span>
       <input type="file" id="photo" accept="image/*" capture="environment" hidden>
       <button type="button" id="photo-btn" class="big-btn">Take photo</button>
@@ -111,12 +143,13 @@
     </section>
 
     <!-- 7. dedication ----------------------------------------------------- -->
-    <section class="card">
+    <section class="card" id="card-dedication">
       <span class="field-label">Dedication</span>
       <label class="check">
         <input type="checkbox" id="has-plaque">
         <span>This tree has a plaque &mdash; a gift, memorial or dedication</span>
       </label>
+      <p id="plaque-on-record" class="hint" hidden></p>
       <div id="plaque-fields" hidden>
         <label class="field-label" for="dedication">What the plaque says</label>
         <textarea id="dedication" rows="2"
@@ -128,7 +161,7 @@
     </section>
 
     <!-- 8. notes ---------------------------------------------------------- -->
-    <section class="card">
+    <section class="card" id="card-notes">
       <label class="field-label" for="notes">Notes</label>
       <textarea id="notes" rows="3" placeholder="Defects, construction damage, multiple stems…"></textarea>
       <div class="grid-2">
@@ -144,9 +177,10 @@
       <p id="planted-note" class="hint">Leave blank if you would rather not guess.</p>
     </section>
 
+    <p id="update-wait" class="hint hint--foot" hidden>Pick the tree above to carry on.</p>
     <div id="form-error" class="form-error" hidden></div>
     <button type="button" id="save" class="save-btn">Save this tree</button>
-    <p class="hint hint--foot">Saved on this phone only. Export before you finish for the day.</p>
+    <p id="save-foot" class="hint hint--foot">Saved on this phone only. Export before you finish for the day.</p>
   </main>
 
   <!-- saved list ---------------------------------------------------------- -->

@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { bearingDegrees, compassPoint, distanceMeters } from '../src/geo';
 import {
-  describeDistance, mappedByTag, mappedNeighbours, nearbyTrees, normalizeTag,
-  NEARBY_COLOURS, NEARBY_LIMIT,
+  describeDistance, likelyDuplicate, mappedByTag, mappedByTagOrId, mappedNeighbours, nearbyTrees,
+  normalizeTag, DUPLICATE_M, NEARBY_COLOURS, NEARBY_LIMIT,
   type MappedTree,
 } from '../src/field/nearby';
 
@@ -220,5 +220,33 @@ describe('NEARBY_COLOURS', () => {
 
   it('is written as hex, which is what both the marker and the swatch need', () => {
     for (const c of NEARBY_COLOURS) expect(c).toMatch(/^#[0-9a-f]{6}$/i);
+  });
+});
+
+describe('mappedByTagOrId', () => {
+  const trees = [tree('UVM-0105', 0, 0, { tag: '3497' }), tree('UVM-4001', 5, 0)];
+
+  it('finds a tree by the number on its tag', () => {
+    expect(mappedByTagOrId('3497', trees)?.id).toBe('UVM-0105');
+  });
+
+  it('finds a tree by the accession read off the map, in any case', () => {
+    expect(mappedByTagOrId('uvm-4001', trees)?.id).toBe('UVM-4001');
+  });
+
+  it('does not read an accession number as a tag', () => {
+    // UVM-0105 wears 3497; typing 105 must not reach it through its id.
+    expect(mappedByTagOrId('105', trees)).toBeUndefined();
+  });
+});
+
+describe('likelyDuplicate', () => {
+  it('names a mapped tree the new one has been placed on top of', () => {
+    const hit = likelyDuplicate(HERE.lat, HERE.lng, [tree('UVM-1', 3, 0), tree('UVM-2', 1, 1)]);
+    expect(hit?.tree.id).toBe('UVM-2');
+  });
+
+  it(`says nothing beyond ${DUPLICATE_M} m`, () => {
+    expect(likelyDuplicate(HERE.lat, HERE.lng, [tree('UVM-1', DUPLICATE_M + 2, 0)])).toBeNull();
   });
 });

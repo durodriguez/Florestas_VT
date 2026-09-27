@@ -1,7 +1,7 @@
 # The field survey app
 
 An installable web app at **`/field/`** on the same site as the map. It records
-one tree at a time — tag, species, position, measurements, photo — stores
+one tree at a time — which tree, species, position, measurements, photo — stores
 everything on the phone, and exports a CSV that `npm run import` reads.
 
 There is no server and no account. Nothing leaves the device until you export.
@@ -16,18 +16,57 @@ app and the 2014 tree list for offline use.
 
 ## Using it
 
-1. **Type the tag number** stamped on the metal tag. The app shows what the
-   records say that tree is, and fills in the species.
-2. **Confirm the species.** Start typing and the box suggests matches from
-   `taxa.csv`; pick one and the app records the taxon itself, not just the
-   text. If the tree in front of you is not what the record claims, **just
-   record what it is** — the app notices the disagreement by itself. This is
-   the part worth doing carefully; it turns a measuring round into a
-   verification pass over eleven-year-old data.
-3. **Check the position.** The accuracy chip shows how good the GPS fix is.
-   Tap the map to drop the pin on the tree's crown — on satellite imagery this
-   usually beats the receiver, especially under canopy.
-4. Measure, photograph, note, save. The form clears for the next tree.
+The app opens on one question — **what are you recording?** — with a map
+underneath of every mapped tree within 40 m of you. The map is there so the
+answer is something you can see rather than guess: if the tree in front of you
+has a dot, it is already mapped, and tapping the dot opens it for an update. If
+it has none, it is a new tree. (Positions on the map and from the phone are
+both a few metres out, so in a tight group look at the crowns, not only the
+dots. On a tagged tree, typing the tag settles it.)
+
+It used to start with the metal tag, which made sense while the work ran off
+the 2014 inventory. Now the map comes from the 2023–24 inventory, so most
+visits are to a tree already on it, and the first question is *which one*.
+
+### Update a mapped tree
+
+1. **Which tree.** Type the number on its metal tag (or its UVM number from the
+   map), or pick it from **Mapped trees near you** — the list or the coloured
+   dots. Nothing else appears until a tree is picked.
+2. **Is the tree there?** Still here, Gone, or Nothing here — see
+   [below](#recording-a-tree-that-is-not-there).
+3. **Species**, filled in from the map. Change it only if the record is wrong;
+   the app notices the correction by itself.
+4. **Dedication.** A plaque on record is filled in, to check against the
+   plaque; a tree without one can be given one. The app cannot *remove* a
+   dedication on record — a blank is read as "no change" — so say so in the
+   notes if a plaque has gone.
+5. Photo, measurements and condition, notes. Save.
+
+**The tree keeps its mapped position** unless you press **Its mapped position
+is wrong** and move the pin. Until then a tap on the map does nothing, so a
+finger that misses a dot cannot drag a curated position onto a footpath. For
+the same reason an update needs no GPS fix unless the tree is being moved.
+
+### Add a new tree
+
+1. **Does it have a metal tag?** Yes opens a box for the number. A tag the map
+   already has is refused, with **Update that record instead**; a tag in the
+   2014 file fills in the species.
+2. **Species.** Start typing and the box suggests matches from `taxa.csv`; pick
+   one and the app records the taxon itself, not just the text.
+3. **Dedication**, if there is a plaque.
+4. **Position.** The accuracy chip shows how good the GPS fix is. Tap the map
+   to drop the pin on the tree's crown — on satellite imagery this usually
+   beats the receiver, especially under canopy. If the pin lands within 5 m of
+   a mapped tree the app says so and offers **Update it instead**; it is a
+   warning, not a refusal, because hedges and clumps really are that close.
+5. Photo, measurements and condition, notes. Save.
+
+There is no "is the tree there?" question for a new tree. The importer issues a
+fresh accession number, with the tag beside it if there is one.
+
+After a save the form clears and goes back to the opening question.
 
 ### When the tree is not what 2014 says
 
@@ -99,9 +138,6 @@ leaving it blank means nobody has looked yet. Unknown is written into the notes
 so that distinction survives the export. A year outside 1700 to the present is
 refused as a typo.
 
-Trees with no tag: press **No tag**, type the species, and carry on. The
-importer issues a fresh accession number for them.
-
 ### Photos
 
 Every shot is resized before it is stored — 1200 px on the long edge, with the
@@ -130,8 +166,8 @@ you a position and a species, not a number on a trunk. So for most trees there
 is nothing to type in the tag box, and the app matches on **position** instead,
 which is the one thing you and the map both have.
 
-Leave the tag box empty and, once there is a fix, **Mapped trees near you**
-lists what the map has within 25 m, nearest first:
+In an update, leave the tag box empty and, once there is a fix, **Mapped trees
+near you** lists what the map has within 25 m, nearest first:
 
 > **3 m northeast** — Littleleaf linden *Tilia cordata*
 
@@ -143,9 +179,9 @@ map's record for you to confirm or correct.
   ones nobody has surveyed. Three maples at 8, 11 and 14 m is the ordinary case,
   and you are the one who can tell which is which — a clever sort would just
   make one of them look like the answer.
-- **"None of these — it is a new tree" is a real answer.** A fix under a canopy
-  is routinely 5–10 m out and the map's own positions are imperfect. Use it
-  whenever you are not sure: a wrong claim merges two trees into one, which is
+- **"None of these — it is a new tree" is a real answer**, and switches to
+  adding one. A fix under a canopy is routinely 5–10 m out and the map's own
+  positions are imperfect. Use it whenever you are not sure: a wrong claim merges two trees into one, which is
   the one mistake that is genuinely hard to undo later.
 - **A tree that has already been surveyed is still offered**, and says so. An
   untagged tree can only ever be found this way, so hiding it would make
@@ -157,8 +193,10 @@ map's record for you to confirm or correct.
 **Claiming a tree does not move it.** The export carries the position the map
 already has, not where you were standing — you are three metres away, and that
 is not new evidence about where the tree is. If the map has it in the wrong
-place, drag the pin onto the crown: that is the deliberate act that says so, and
-then your position wins.
+place, press **Its mapped position is wrong** and move the pin onto the crown:
+that is the deliberate act that says so, and then your position wins. This now
+applies to a tree found by typing its tag, too — it used to export the phone's
+position for those.
 
 Every claim is recorded with the distance it was made from, so whoever imports
 the data can weigh it — `npm run import` lists them, and a match at 20 m
@@ -382,7 +420,7 @@ measure and a hazard to deal with. A tree that has been taken down, or one the
 Tree 101 reached the data only because its removal was hand-edited into
 `observations.csv`.
 
-**Is the tree there?** now sits above the measurements, with three answers:
+**Is the tree there?** is asked in an update only, before the measurements, with three answers:
 
 | Button | Records | What the surveyor saw |
 | --- | --- | --- |
@@ -411,7 +449,7 @@ mark and leave the inference to a desk.
 - **A species is no longer required**, because nobody can identify what is not
   there — the record it attaches to already carries one.
 - **It must name a tree.** "Nothing here" is meaningless without a record it is
-  denying, so the form asks for a tag or a claim from the nearby list. The
+  denying, which is why it is only asked once an update has picked one. The
   importer refuses the same thing from the other end: a tag nobody has on file
   cannot be reported absent, because that is a misread number far more often
   than it is a discovery.

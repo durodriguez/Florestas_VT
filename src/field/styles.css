@@ -346,3 +346,22 @@ textarea { min-height: 78px; resize: vertical; }
    stays on screen next to them. */
 .is-void { opacity: .45; }
 .is-void input, .is-void .seg-btn { pointer-events: none; }
+
+/* ---- add or update ------------------------------------------------------ */
+/* Parts of a card that belong to one kind of visit only. Before a choice is
+   made neither shows, and main.ts hides every card but the question. */
+body:not([data-mode="new"]) [data-only="new"],
+body:not([data-mode="update"]) [data-only="update"],
+body[data-mode] [data-only="none"] { display: none !important; }
+
+.seg--2 { grid-template-columns: 1fr 1fr; }
+.seg--mode { grid-template-columns: 1fr 1fr; }
+.seg--mode .seg-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px; min-height: 64px; font-size: 15.5px; font-weight: 650; line-height: 1.2;
+}
+.seg--mode .seg-btn small { font-size: 12px; font-weight: 450; opacity: .8; }
+.tag-result .inline-btn {
+  justify-self: start; margin-top: 4px; padding: 6px 12px; border-radius: 8px;
+  border: 1.5px solid var(--green-2); background: #fff; color: var(--green); font-weight: 600;
+}

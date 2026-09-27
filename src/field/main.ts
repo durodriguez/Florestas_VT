@@ -16,12 +16,13 @@ import {
 import { getMeta, setMeta } from './db';
 import { STATUSES, STATUS_LABELS, absent } from './status';
 import {
-  describeDistance, mappedByTag, mappedNeighbours, nearbyTrees, NEARBY_COLOURS,
+  describeDistance, likelyDuplicate, mappedByTagOrId, mappedNeighbours, nearbyTrees, NEARBY_COLOURS,
   type MappedTree, type NearbyTree,
 } from './nearby';
 import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
 import { download, stamp, toCsv, toPhotoZip } from './exporter';
 import { extensionFor, kb, shrinkPhoto } from './photo';
+import { ALL_CARDS, CARDS, visibleCards, type Mode } from './modes';
 
 const BASE = import.meta.env.BASE_URL;
 const CONDITIONS = ['excellent', 'good', 'fair', 'poor', 'dead'];
@@ -52,8 +53,24 @@ let reference = { species: '', taxonId: '', source: '' };
 let mapped: MappedTree[] = [];
 /** The mapped tree the surveyor says this is, if they picked one. */
 let claimed: NearbyTree | null = null;
-/** Set once they say none of the offered trees is it. */
-let declinedNearby = false;
+/** How the claim was made: a tag typed, or a tree picked by position. */
+let claimedBy: 'tag' | 'position' = 'position';
+/**
+ * Which kind of visit this is. Asked first, because the 2023-24 inventory put
+ * most of campus on the map already: the usual visit is to a tree that is on
+ * it, and the question is which one — not what its tag says.
+ */
+let mode: Mode | null = null;
+/** New trees only: whether it wears a metal tag. Null until answered. */
+let hasTag: boolean | null = null;
+/**
+ * Update only: whether the surveyor has said the map has this tree in the
+ * wrong place. Until then the map is for finding the tree, and a tap on it
+ * must not move a curated position.
+ */
+let movingTree = false;
+/** The dedication text a claimed tree brought with it, to tell an edit from a prefill. */
+let prefilledDedication = '';
 /** Exactly what the last render put on screen, so a tap cannot mis-resolve. */
 let offered: NearbyTree[] = [];
 let manualLatLng: L.LatLng | null = null;
@@ -101,9 +118,14 @@ function movePin(to: L.LatLng): void {
 
 pin.on('dragend', () => movePin(pin.getLatLng()));
 
+/** Whether a tap or drag on the map places the tree. */
+const pinPlaces = (): boolean => mode === 'new' || (mode === 'update' && movingTree);
+
 // Tapping is far easier than dragging a small target one-handed in gloves, and
 // it does not depend on touch-drag behaviour varying between devices.
-map.on('click', (e: L.LeafletMouseEvent) => movePin(e.latlng));
+map.on('click', (e: L.LeafletMouseEvent) => {
+  if (pinPlaces()) movePin(e.latlng);
+});
 
 // ---------------------------------------------------------------- gps
 
@@ -141,7 +163,9 @@ function onGps(state: GpsState): void {
         : 'Good fix.';
 
   accuracyRing.setLatLng([fix.lat, fix.lng]).setRadius(fix.accuracy);
-  if (!pinAdjusted) {
+  // Not while an update is moving a tree: the pin is on the tree then, and
+  // snapping it back to the surveyor would undo the move they are making.
+  if (!pinAdjusted && !movingTree) {
     pin.setLatLng([fix.lat, fix.lng]);
     map.setView([fix.lat, fix.lng], Math.max(map.getZoom(), 19));
   }
@@ -157,8 +181,32 @@ function currentLatLng(): { lat: number; lng: number } | null {
 function renderCoords(): void {
   // The offered set is a function of where the surveyor is standing.
   renderNearby();
+  renderDuplicate();
   const p = currentLatLng();
   $('coords').textContent = p ? `${p.lat.toFixed(6)}, ${p.lng.toFixed(6)}` : '—';
+}
+
+let duplicate: NearbyTree | null = null;
+
+/**
+ * A new tree placed on top of a mapped one is usually the mapped one. Said,
+ * not enforced: a hedge or a clump really does put two trees that close.
+ */
+function renderDuplicate(): void {
+  const box = $('dup-warn');
+  const p = currentLatLng();
+  duplicate = mode === 'new' && p ? likelyDuplicate(p.lat, p.lng, mapped) : null;
+  if (!duplicate) {
+    box.hidden = true;
+    box.innerHTML = '';
+    return;
+  }
+  box.hidden = false;
+  box.innerHTML =
+    `<span><strong>${escapeHtml(duplicate.tree.common)}</strong> ${escapeHtml(duplicate.tree.id)} ` +
+    `is already mapped ${Math.round(duplicate.meters)} m from the pin.</span>` +
+    '<span class="tag-meta">If this is that tree, update it rather than adding it again.</span>' +
+    '<button type="button" class="inline-btn" id="dup-update">Update it instead</button>';
 }
 
 // ---------------------------------------------------------------- tag lookup
@@ -209,6 +257,16 @@ function baselineReference(): typeof reference {
   return { species: claimed.tree.sci, taxonId: entry?.id ?? '', source: 'the inventory' };
 }
 
+/** A mapped tree as a claim, measured from wherever the surveyor stands. */
+function asClaim(tree: MappedTree): NearbyTree {
+  const p = currentLatLng();
+  if (!p) return { tree, meters: 0, heading: '' };
+  return nearbyTrees(p.lat, p.lng, [tree], { radiusM: Infinity })[0]!;
+}
+
+/** The mapped tree a typed tag — or an accession read off the map — names. */
+const mappedFor = (typed: string): MappedTree | undefined => mappedByTagOrId(typed, mapped);
+
 function renderTagLookup(): void {
   const tag = $<HTMLInputElement>('tag').value.trim();
   const box = $('tag-result');
@@ -216,35 +274,34 @@ function renderTagLookup(): void {
   if (!tag) {
     box.innerHTML = '';
     box.className = 'tag-result';
+    // A tree claimed by its tag stops being claimed when the tag goes.
+    if (claimed && claimedBy === 'tag') claim(null);
     reference = baselineReference();
     renderSpeciesChange();
     return;
   }
   // The current inventory first. It holds every tree surveyed in 2023-24, so
-  // it knows about the ones planted since 2014 — and where both know a tag, the
-  // newer identification is the one to seed.
-  const onMap = mappedByTag(tag, mapped);
+  // it knows about the ones planted since 2014.
+  const onMap = mappedFor(tag);
   if (onMap) {
-    const known = resolveExact(onMap.sci, species);
-    reference = { species: onMap.sci, taxonId: known?.id ?? '', source: 'the inventory' };
-    box.className = 'tag-result tag-result--hit';
+    if (mode === 'update') {
+      // Typing the tag is the same answer as picking the tree from the list,
+      // and gets the same treatment — including keeping its mapped position.
+      box.innerHTML = '';
+      box.className = 'tag-result';
+      if (claimed?.tree.id !== onMap.id) claim(asClaim(onMap), 'tag');
+      return;
+    }
+    box.className = 'tag-result tag-result--miss';
     box.innerHTML =
-      `<strong>${escapeHtml(onMap.sci)}</strong>` +
-      `<span>${escapeHtml(onMap.common)}</span>` +
-      `<span class="tag-meta">${escapeHtml(onMap.id)} · already on the map` +
-      `${onMap.surveyed ? ` · last surveyed ${escapeHtml(onMap.surveyed)}` : ' · never surveyed'}</span>`;
-    seedSpecies(onMap.sci, known);
-    renderSpeciesChange();
+      `<strong>Tag ${escapeHtml(tag)} is already on the map</strong>` +
+      `<span>${escapeHtml(onMap.common)} · ${escapeHtml(onMap.id)}</span>` +
+      '<button type="button" class="inline-btn" data-switch-update>Update that record instead</button>';
     return;
   }
+  if (claimed && claimedBy === 'tag') claim(null);
 
-  if (referenceFile.size === 0) {
-    box.className = 'tag-result tag-result--info';
-    box.textContent = `No tree ${tag} in the inventory, and no 2014 file loaded — type the species yourself. Load it from the Saved screen.`;
-    return;
-  }
-
-  const hit = referenceFile.lookup(tag);
+  const hit = referenceFile.size ? referenceFile.lookup(tag) : undefined;
   if (hit) {
     const known = resolveExact(hit.botanical, species);
     reference = { species: hit.botanical, taxonId: known?.id ?? '', source: '2014' };
@@ -253,7 +310,11 @@ function renderTagLookup(): void {
       `<strong>${escapeHtml(hit.botanical)}</strong>` +
       `<span>${escapeHtml(hit.common)}</span>` +
       `<span class="tag-meta">2014: ${escapeHtml(hit.dbh || '—')}″ DBH · ` +
-      `${escapeHtml(hit.ageClass || '—')} · ${escapeHtml(hit.condition || '—')}</span>`;
+      `${escapeHtml(hit.ageClass || '—')} · ${escapeHtml(hit.condition || '—')}</span>` +
+      (mode === 'update'
+        ? '<span class="tag-meta">In the 2014 inventory but not on the map, so to the map it is a new tree.</span>' +
+          '<button type="button" class="inline-btn" data-switch-new>Add it as a new tree</button>'
+        : '');
     seedSpecies(hit.botanical, known);
     renderSpeciesChange();
     return;
@@ -262,6 +323,12 @@ function renderTagLookup(): void {
   reference = { species: '', taxonId: '', source: '' };
   seedSpecies('', undefined);
   renderSpeciesChange();
+  if (mode === 'new') {
+    // A tag nobody has on file is what a new tree's tag usually is.
+    box.className = 'tag-result tag-result--info';
+    box.innerHTML = `<span>Tag ${escapeHtml(tag)} is not in any record — it will be saved with the new tree.</span>`;
+    return;
+  }
   // Neighbours from both sets of records, because a tag that lost a digit could
   // belong to either. The current inventory goes first and wins a duplicate.
   const near = new Map<string, string>();
@@ -273,12 +340,12 @@ function renderTagLookup(): void {
   }
   box.className = 'tag-result tag-result--miss';
   box.innerHTML =
-    `<strong>No tree ${escapeHtml(tag)} in the records.</strong>` +
+    `<strong>No tree ${escapeHtml(tag)} on the map.</strong>` +
     (near.size
       ? `<span class="tag-meta">Nearby tags: ${[...near]
           .map(([t, common]) => `<button type="button" class="tag-near" data-tag="${escapeHtml(t)}">${escapeHtml(t)} ${escapeHtml(common)}</button>`)
           .join(' ')}</span>`
-      : '<span class="tag-meta">Check the digits, or record it as a new tree.</span>');
+      : '<span class="tag-meta">Check the digits, or clear the box and pick the tree from the list.</span>');
 }
 
 // ----------------------------------------------------------- nearby trees
@@ -320,9 +387,22 @@ function renderNearby(): void {
   const box = $('nearby');
   const list = $('nearby-list');
   const point = currentLatLng();
-  const hasTag = $<HTMLInputElement>('tag').value.trim() !== '';
+  const typed = $<HTMLInputElement>('tag').value.trim() !== '';
 
-  if (claimed || declinedNearby || hasTag || !point || mapped.length === 0) {
+  if (claimed) {
+    // The chosen tree stays on the map, ringed, so the surveyor can see which
+    // one they said it was — and where the map has it, if that is the question.
+    box.hidden = true;
+    list.innerHTML = '';
+    nearbyLayer.clearLayers();
+    L.circleMarker([claimed.tree.lat, claimed.tree.lng], {
+      radius: 9, color: '#ffffff', weight: 3, fillColor: '#FFD100', fillOpacity: 1,
+      bubblingMouseEvents: false, interactive: false,
+    }).addTo(nearbyLayer);
+    return;
+  }
+  if (mode === null) return renderStartMap(point);
+  if (mode !== 'update' || typed || !point || mapped.length === 0) {
     box.hidden = true;
     list.innerHTML = '';
     nearbyLayer.clearLayers();
@@ -380,6 +460,60 @@ function renderNearby(): void {
   offered = hits;
 }
 
+/**
+ * How far the opening map looks. Wider than the pick list, because its job is
+ * to answer "is this tree on the map at all?" — and a tree whose mapped
+ * position is 30 m off is still on the map.
+ */
+const START_RADIUS_M = 40;
+
+/**
+ * The opening screen: every mapped tree around the surveyor, before they say
+ * whether they are adding or updating, so the answer is something they can
+ * see rather than guess. Tapping one is the answer — it opens that tree in an
+ * update.
+ */
+function renderStartMap(point: { lat: number; lng: number } | null): void {
+  $('nearby').hidden = true;
+  $('nearby-list').innerHTML = '';
+  nearbyLayer.clearLayers();
+  const note = $('start-note');
+  if (!point) {
+    note.textContent = 'Waiting for your location to show the mapped trees around you…';
+    return;
+  }
+  if (mapped.length === 0) {
+    note.textContent = 'The mapped trees have not loaded yet.';
+    return;
+  }
+  const hits = nearbyTrees(point.lat, point.lng, mapped, { radiusM: START_RADIUS_M, limit: Infinity });
+  // The nearest keep the colours the update list will give them, so a dot
+  // seen here is the same colour in the next step.
+  hits.forEach((hit, i) => {
+    const colour = i < NEARBY_COLOURS.length ? NEARBY_COLOURS[i]! : '#ffffff';
+    L.circleMarker([hit.tree.lat, hit.tree.lng], {
+      radius: 7,
+      color: i < NEARBY_COLOURS.length ? '#ffffff' : '#101820',
+      weight: 2,
+      fillColor: colour,
+      fillOpacity: 0.95,
+      bubblingMouseEvents: false,
+    })
+      .bindTooltip(`${hit.tree.common} · ${hit.tree.id}`, { direction: 'top', offset: [0, -6] })
+      .on('click', () => {
+        setMode('update');
+        claim(hit);
+      })
+      .addTo(nearbyLayer);
+  });
+  const within = `within ${START_RADIUS_M} m of you`;
+  note.textContent = hits.length === 0
+    ? `No mapped trees ${within}. The tree in front of you is almost certainly a new one.`
+    : `${hits.length === 1 ? 'One mapped tree' : `${hits.length} mapped trees`} ${within}. ` +
+      'If the tree in front of you is one of them, tap its dot to update it. ' +
+      'If it has no dot, it is a new tree.';
+}
+
 function renderClaimed(): void {
   const box = $('claimed');
   if (!claimed) {
@@ -387,21 +521,48 @@ function renderClaimed(): void {
     box.innerHTML = '';
     return;
   }
+  const t = claimed.tree;
   box.hidden = false;
   box.innerHTML =
-    `<span>Recording a visit to <strong>${escapeHtml(claimed.tree.id)}</strong>, ` +
-    `${escapeHtml(claimed.tree.common)}, ${escapeHtml(describeDistance(claimed))} ` +
-    'when you picked it.</span>' +
+    `<span>Updating <strong>${escapeHtml(t.common)}</strong> ${escapeHtml(t.id)}` +
+    (t.tag ? ` · tag ${escapeHtml(t.tag)}` : ' · no tag') +
+    (claimedBy === 'position' ? ` · ${escapeHtml(describeDistance(claimed))} when you picked it` : '') +
+    `<br><span class="tag-meta">${t.surveyed ? `Last surveyed ${escapeHtml(t.surveyed)}` : 'Never surveyed since it was mapped'}</span></span>` +
     '<button type="button" id="claim-clear">Not this tree</button>';
 }
 
-function claim(hit: NearbyTree | null): void {
+function claim(hit: NearbyTree | null, by: 'tag' | 'position' = 'position'): void {
+  const wasTag = claimed !== null && claimedBy === 'tag';
   claimed = hit;
+  claimedBy = by;
+  setMovingTree(false);
   if (hit) {
     // Seed the species from the map's record; the surveyor can still correct
     // it, and correcting it is the point of visiting.
     const entry = resolveExact(hit.tree.sci, species);
     if (entry) setTaxon(entry, true);
+    // What the plaque says, as far as the map knows, so it is checked rather
+    // than typed again — and so a tree without one can be given one.
+    prefilledDedication = hit.tree.dedication ?? '';
+    const box = $<HTMLTextAreaElement>('dedication');
+    if (prefilledDedication) {
+      setHasPlaque(true, false);
+      box.value = prefilledDedication;
+    } else if (!box.value.trim()) {
+      setHasPlaque(false);
+    }
+    map.setView([hit.tree.lat, hit.tree.lng], Math.max(map.getZoom(), 19));
+  } else {
+    // Undo only what the claim put there, never what the surveyor typed.
+    if (wasTag) $<HTMLInputElement>('tag').value = '';
+    if ($<HTMLTextAreaElement>('dedication').value === prefilledDedication) setHasPlaque(false);
+    prefilledDedication = '';
+    // Only a species the claim filled in; one the surveyor typed stays.
+    if ($<HTMLInputElement>('species').dataset.autofilled === '1') {
+      $<HTMLInputElement>('species').value = '';
+      setTaxon(undefined, false);
+    }
+    if (wasTag) renderTagLookup();
   }
   // Claiming a tree says which record this visit belongs to, so it also says
   // what a correction would be a correction *of*. Taking that from the claim
@@ -410,6 +571,103 @@ function claim(hit: NearbyTree | null): void {
   renderClaimed();
   renderNearby();
   renderSpeciesChange();
+  renderPlaqueOnRecord();
+  renderMode();
+}
+
+// ------------------------------------------------------------------- modes
+
+const FOOT = ['update-wait', 'form-error', 'save', 'save-foot'];
+
+function setMode(next: Mode | null): void {
+  if (next === mode) return;
+  mode = next;
+  // A claim, a tag and an absence all belong to one kind of visit. Carried
+  // into the other they would say something the surveyor did not.
+  if (claimed) claim(null);
+  hasTag = null;
+  renderHasTag();
+  $<HTMLInputElement>('tag').value = '';
+  for (const b of $('status-seg').querySelectorAll('[aria-checked]')) {
+    b.setAttribute('aria-checked', String(b.getAttribute('data-status') === 'active'));
+  }
+  applyStatus();
+  if (next === 'update') {
+    // The pin marks the surveyor again, not a tree they placed for a new one.
+    pinAdjusted = false;
+    manualLatLng = null;
+    const fix = gps.bestFix;
+    if (fix) pin.setLatLng([fix.lat, fix.lng]);
+  }
+  renderMode();
+  renderTagLookup();
+  renderCoords();
+}
+
+function renderMode(): void {
+  if (mode) document.body.dataset.mode = mode;
+  else delete document.body.dataset.mode;
+  for (const b of $('mode-seg').querySelectorAll('[data-mode]')) {
+    b.setAttribute('aria-checked', String(b.getAttribute('data-mode') === mode));
+  }
+  const main = $('screen-form');
+  const order = mode ? CARDS[mode] : [];
+  for (const id of order) main.appendChild($(id));
+  for (const id of FOOT) main.appendChild($(id));
+  // An update shows nothing past the map until it knows which tree: every
+  // answer after that is an answer about one particular tree.
+  const waiting = mode === 'update' && !claimed;
+  // Before a choice, the map is shown under the question: whether the tree is
+  // already mapped is exactly what decides the answer.
+  if (!mode) main.appendChild($('card-position'));
+  const shown = new Set(visibleCards(mode, claimed !== null));
+  for (const id of ALL_CARDS) $(id).hidden = !shown.has(id);
+  $('update-wait').hidden = !waiting;
+  for (const id of ['save', 'save-foot']) $(id).hidden = !mode || waiting;
+  if (!mode) $('form-error').hidden = true;
+
+  // In a new tree the tag box waits on "yes"; in an update it is always there.
+  $('tag-row').hidden = mode === 'new' ? hasTag !== true : claimed !== null && claimedBy === 'position';
+  $<HTMLInputElement>('tag').disabled = mode === 'update' && claimed !== null && claimedBy === 'position';
+  $('move-tree').hidden = !(mode === 'update' && claimed);
+  $('pin-hint-update').textContent = claimed
+    ? movingTree
+      ? 'Tap the map or drag the pin to where the tree really stands. That position replaces the mapped one.'
+      : 'The gold dot is where the map has this tree. Its position is kept unless you say it is wrong.'
+    : 'The blue ring is you. Tap a coloured dot, or its line in the list, to pick that tree.';
+  if (pin.dragging) {
+    if (pinPlaces()) pin.dragging.enable();
+    else pin.dragging.disable();
+  }
+  setTimeout(() => map.invalidateSize(), 50);
+}
+
+function renderHasTag(): void {
+  for (const b of $('has-tag-seg').querySelectorAll('[data-has-tag]')) {
+    const v = b.getAttribute('data-has-tag') === 'yes';
+    b.setAttribute('aria-checked', String(hasTag === v));
+  }
+}
+
+/**
+ * Update only. Saying the map is wrong is a deliberate act, so it is a button:
+ * the pin jumps to the mapped position and can then be moved. Taking it back
+ * restores the mapped position exactly.
+ */
+function setMovingTree(on: boolean): void {
+  movingTree = on;
+  const btn = $('move-tree');
+  btn.textContent = on ? 'Keep the mapped position' : 'Its mapped position is wrong';
+  btn.classList.toggle('is-on', on);
+  if (on && claimed) {
+    pin.setLatLng([claimed.tree.lat, claimed.tree.lng]);
+  } else if (!on && mode === 'update') {
+    pinAdjusted = false;
+    manualLatLng = null;
+    const fix = gps.bestFix;
+    if (fix) pin.setLatLng([fix.lat, fix.lng]);
+  }
+  if (mode) renderMode();
 }
 
 // ------------------------------------------------------- species autocomplete
@@ -639,7 +897,8 @@ function resetForm(): void {
   setHasPlaque(false);
   reference = { species: '', taxonId: '', source: '' };
   claimed = null;
-  declinedNearby = false;
+  prefilledDedication = '';
+  movingTree = false;
   renderClaimed();
   setTaxon(undefined, false);
   closeSuggestions();
@@ -658,6 +917,7 @@ function resetForm(): void {
   gps.reset();
   renderCoords();
   refreshDate();
+  setMode(null);
 }
 
 function clearPhoto(): void {
@@ -681,18 +941,22 @@ async function save(): Promise<void> {
   // needs to say which one — "nothing here" is meaningless without a tree it
   // is denying. It does not need a species: nobody can identify what is not
   // there, and the claimed record already carries one.
-  const status = selectedStatus();
-  if (absent(status)) {
-    const tag = $<HTMLInputElement>('tag').value.trim();
-    if (!tag && !claimed) {
-      return fail(
-        `"${STATUS_LABELS[status]}" has to say which tree. Type its tag, or pick it from the ` +
-        'mapped trees near you.',
-      );
-    }
-  } else if (!speciesName) {
-    return fail('Enter a species before saving.');
+  const typedTag = $<HTMLInputElement>('tag').value.trim();
+  if (mode === 'update' && !claimed) {
+    return fail('Say which tree this is first. Type its tag, or pick it from the mapped trees near you.');
   }
+  if (mode === 'new') {
+    if (hasTag === null) return fail('Say whether the tree has a metal tag.');
+    if (hasTag && !typedTag) return fail('Type the tag number, or answer No if it has none.');
+    const onMap = hasTag ? mappedFor(typedTag) : undefined;
+    if (onMap) {
+      return fail(`Tag ${typedTag} is already on the map as ${onMap.id}. Update that record instead of adding it again.`);
+    }
+  }
+  // An absent tree needs no species: nobody can identify what is not there,
+  // and the claimed record already carries one.
+  const status = mode === 'update' ? selectedStatus() : 'active';
+  if (!absent(status) && !speciesName) return fail('Enter a species before saving.');
 
   const plantedRaw = $<HTMLInputElement>('planted').value.trim();
   if (!plantedUnknown && plantedRaw !== '') {
@@ -711,8 +975,11 @@ async function save(): Promise<void> {
       'recording. Or untick the box if there is no plaque.',
     );
   }
-  if (!point) return fail('No position yet. Wait for a fix, or drag the pin onto the tree.');
-  if (!pinAdjusted && fix && fix.accuracy > ACCURACY_WARN_M) {
+  // A mapped tree keeps its mapped position unless the surveyor moved it, so
+  // an update needs no fix at all — only a new or moved tree does.
+  const keepsMapped = mode === 'update' && !pinAdjusted;
+  if (!point && !keepsMapped) return fail('No position yet. Wait for a fix, or drag the pin onto the tree.');
+  if (!keepsMapped && !pinAdjusted && fix && fix.accuracy > ACCURACY_WARN_M) {
     return fail(
       `The GPS fix is only ±${fix.accuracy.toFixed(0)} m, which will put this tree in the wrong place. ` +
       'Wait for it to improve, or drag the pin onto the tree to override.',
@@ -722,7 +989,7 @@ async function save(): Promise<void> {
   if (photoBlob) {
     // The extension has to follow what the encoder actually produced, not what
     // it was asked for: a device that cannot write WebP hands back a JPEG.
-    const stem = $<HTMLInputElement>('tag').value.trim() || 'untagged';
+    const stem = (mode === 'new' ? typedTag : claimed?.tree.tag || claimed?.tree.id) || 'untagged';
     photoName = `${stem}-${Date.now()}.${extensionFor(photoBlob)}`;
     await savePhoto(photoName, photoBlob);
   }
@@ -732,25 +999,31 @@ async function save(): Promise<void> {
     return v === '' ? null : Number(v);
   };
 
+  // Where the record sits: the surveyor's fix for a new or moved tree, and
+  // for an update without a fix, the mapped position the exporter keeps anyway.
+  const at = point ?? { lat: claimed!.tree.lat, lng: claimed!.tree.lng };
+
   await saveRecord({
-    tag: $<HTMLInputElement>('tag').value.trim(),
+    // The number on the trunk. For an update that is the tree's own tag from
+    // the map — an accession typed into the box is carried by claimedPlantId.
+    tag: mode === 'new' ? (hasTag ? typedTag : '') : (claimed?.tree.tag ?? ''),
     species: speciesName,
     taxonId: pickedTaxon(),
     referenceSpecies: reference.species,
     referenceTaxonId: reference.taxonId,
     referenceSource: reference.source,
     claimedPlantId: claimed?.tree.id ?? '',
-    claimedMeters: claimed ? Math.round(claimed.meters) : null,
+    claimedMeters: claimed && point ? Math.round(claimed.meters) : null,
     claimedLat: claimed?.tree.lat ?? null,
     claimedLng: claimed?.tree.lng ?? null,
-    lat: point.lat,
-    lng: point.lng,
-    accuracy: pinAdjusted ? null : (fix?.accuracy ?? null),
+    lat: at.lat,
+    lng: at.lng,
+    accuracy: pinAdjusted || !point ? null : (fix?.accuracy ?? null),
     pinAdjusted,
     dbhIn: num('dbh'),
     heightFt: num('height'),
     spreadFt: num('spread'),
-    status: selectedStatus(),
+    status,
     condition: selectedCondition(),
     plantedYear: plantedUnknown ? null : num('planted'),
     plantedUnknown,
@@ -782,7 +1055,7 @@ async function renderList(): Promise<void> {
     .map(
       (r) => `<li>
         <div class="rec">
-          <span class="rec-tag">${escapeHtml(r.tag || 'no tag')}</span>
+          <span class="rec-tag">${escapeHtml(r.claimedPlantId ? `${r.claimedPlantId} · update` : r.tag ? `tag ${r.tag} · new` : 'new · no tag')}</span>
           <span class="rec-species">${escapeHtml(r.species)}</span>
           <span class="rec-meta">${r.dbhIn ? `${r.dbhIn}″ · ` : ''}${escapeHtml(r.condition || '—')}${r.plantedYear ? ` · ${r.plantedYear}` : r.plantedUnknown ? ' · year unknown' : ''}${r.photoName ? ' · photo' : ''}${r.dedication ? ' · plaque' : ''}${speciesChanged(r.referenceSpecies, r.referenceTaxonId, r.species, r.taxonId) ? ' · species changed' : ''}</span>
         </div>
@@ -845,6 +1118,7 @@ function showScreen(which: 'form' | 'list'): void {
 renderConditions();
 renderStatuses();
 applyStatus();
+renderMode();
 // The date defaults to today, and keeps defaulting to today. An installed app
 // is not reloaded when the phone brings it back, so setting it once at load
 // left a phone opened on 23 September filing a 25 September survey under the
@@ -870,14 +1144,6 @@ $('tag-result').addEventListener('click', (e) => {
   $<HTMLInputElement>('tag').value = btn.dataset.tag!;
   $<HTMLInputElement>('species').dataset.autofilled = '1';
   renderTagLookup();
-});
-$('tag-new').addEventListener('click', () => {
-  $<HTMLInputElement>('tag').value = '';
-  $<HTMLInputElement>('species').dataset.autofilled = '';
-  reference = baselineReference();
-  renderTagLookup();
-  $('species').focus();
-  renderSpeciesSearch();
 });
 $('species').addEventListener('input', renderSpeciesSearch);
 $('species').addEventListener('focus', renderSpeciesSearch);
@@ -914,10 +1180,51 @@ $('nearby-list').addEventListener('click', (e) => {
 // assumes the tree must be one of the offered ones, and a wrong claim merges
 // two trees into one — the error that is genuinely hard to undo later.
 $('nearby-none').addEventListener('click', () => {
-  declinedNearby = true;
-  renderNearby();
-  $('species').focus();
+  setMode('new');
+  $('card-tag').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
+$('mode-seg').addEventListener('click', (e) => {
+  const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-mode]');
+  if (btn) setMode(btn.dataset.mode as Mode);
+});
+$('has-tag-seg').addEventListener('click', (e) => {
+  const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-has-tag]');
+  if (!btn) return;
+  hasTag = btn.dataset.hasTag === 'yes';
+  if (!hasTag) $<HTMLInputElement>('tag').value = '';
+  renderHasTag();
+  renderMode();
+  renderTagLookup();
+  if (hasTag) $('tag').focus();
+});
+// "Update that record instead" and "Add it as a new tree": the surveyor chose
+// the wrong door, and the app can see which one they meant.
+$('tag-result').addEventListener('click', (e) => {
+  const el = e.target as HTMLElement;
+  const tag = $<HTMLInputElement>('tag').value.trim();
+  if (el.closest('[data-switch-update]')) {
+    const tree = mappedFor(tag);
+    setMode('update');
+    if (tree) {
+      $<HTMLInputElement>('tag').value = tag;
+      claim(asClaim(tree), 'tag');
+    }
+  } else if (el.closest('[data-switch-new]')) {
+    setMode('new');
+    hasTag = true;
+    renderHasTag();
+    $<HTMLInputElement>('tag').value = tag;
+    renderMode();
+    renderTagLookup();
+  }
+});
+$('dup-warn').addEventListener('click', (e) => {
+  if (!(e.target as HTMLElement).closest('#dup-update') || !duplicate) return;
+  const hit = duplicate;
+  setMode('update');
+  claim(hit);
+});
+$('move-tree').addEventListener('click', () => setMovingTree(!movingTree));
 $('claimed').addEventListener('click', (e) => {
   if ((e.target as HTMLElement).id === 'claim-clear') claim(null);
 });
@@ -945,12 +1252,25 @@ $('status-seg').addEventListener('click', (e) => {
  * plaque says. Unticking clears the text, so a box left off cannot quietly
  * export wording typed before it was turned off.
  */
-function setHasPlaque(on: boolean): void {
+function setHasPlaque(on: boolean, focus = true): void {
   hasPlaque = on;
   $<HTMLInputElement>('has-plaque').checked = on;
   $('plaque-fields').hidden = !on;
   if (!on) $<HTMLTextAreaElement>('dedication').value = '';
-  else $('dedication').focus();
+  else if (focus) $('dedication').focus();
+  renderPlaqueOnRecord();
+}
+
+/**
+ * Says what the map already holds, so a plaque on record is confirmed rather
+ * than retyped — and so nobody reads an empty box as "no dedication on file".
+ */
+function renderPlaqueOnRecord(): void {
+  const note = $('plaque-on-record');
+  note.hidden = !(mode === 'update' && claimed);
+  note.textContent = prefilledDedication
+    ? 'On record — check it against the plaque and correct it if it differs.'
+    : 'No dedication on record for this tree.';
 }
 
 /** Unknown and a typed year are mutually exclusive, so the toggle owns both. */
@@ -1086,6 +1406,7 @@ Object.assign(window as unknown as Record<string, unknown>, {
     speciesCount: () => species.length,
     treeCount: () => mapped.length,
     claimedId: () => claimed?.tree.id ?? '',
+    mode: () => mode,
     pickedTaxon,
   },
 });

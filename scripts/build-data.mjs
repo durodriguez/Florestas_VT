@@ -134,6 +134,9 @@ const trees = result.plants.rows.map((row) => {
     // Null for a tree nobody has surveyed, which the app says out loud: it is
     // the difference between "claim this" and "you may be re-surveying it".
     surveyed: at(row, 'surveyed_on'),
+    // So an update shows the plaque on record rather than an empty box. Left
+    // out when there is none, which is nearly every tree.
+    ...(at(row, 'dedication_label') ? { dedication: at(row, 'dedication_label') } : {}),
   };
 });
 const treesJson = JSON.stringify(trees);
