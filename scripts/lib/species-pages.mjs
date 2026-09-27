@@ -77,7 +77,7 @@ function shell({ title, description, base, body, depth }) {
 </head>
 <body>
 <header class="bar">
-  <a class="bar-home" href="${esc(base)}">UVM Trees</a>
+  <a class="bar-home" href="${esc(base)}"><img class="bar-mark" src="${up}../uvm-mark.svg" alt="" width="30" height="30">UVM Trees</a>
   <a class="bar-link" href="${esc(base)}species/">All species</a>
 </header>
 ${body}
@@ -200,7 +200,8 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
   padding: .7rem 1rem; background: var(--green); border-bottom: 3px solid var(--gold);
 }
 .bar a { color: #fff; text-decoration: none; }
-.bar-home { font-weight: 700; }
+.bar-home { font-weight: 700; display: flex; align-items: center; gap: .55rem; }
+.bar-mark { flex: 0 0 auto; display: block; }
 .bar-link { margin-left: auto; font-size: .9rem; opacity: .9; }
 .bar a:hover { text-decoration: underline; }
 
