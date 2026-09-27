@@ -71,7 +71,26 @@ Less doubtful, but each rests on one remembered detail:
 - [ ] **Shantung maple** — seed oil rich in nervonic acid, grown as a crop in China
 - [ ] **Serviceberry** — the burial-service story is labelled folklore; is that fair?
 - [ ] **Larch (genus)** — tamarack root-and-trunk joints used as ship's knees
-- [ ] **Amber Glow dawn redwood** — description says the foliage "emerges pink-amber and holds a coppery cast all season". Its fall colour was recorded as pink and corrected to orange on 26 September 2026; the spring and summer colour may carry the same mistake
+
+## Characteristics: where the sources disagree
+
+On 27 September 2026 the characteristics columns (heights, spreads, zones,
+colours, months) were compared with the Morton Arboretum's tree and shrub
+pages. 175 of the 257 taxa matched a page. The rule was to change a value
+only where Morton and a second source agreed it was clearly wrong; nothing
+met it, which says the table holds up where Morton covers it. These are the
+disagreements a person who knows the trees should settle:
+
+- [ ] **Seven-son flower** — we say yellow fall colour; Morton says "little to no fall color"
+- [ ] **Russian olive** — we say zones 2–7; Morton says 3–10
+- [ ] **Chinese juniper** — we say 18 ft; Morton says 50–60 ft (Wikipedia: 3–65 ft, "very variable")
+- [ ] **Bigleaf linden** — we say hardy to zone 3; Morton says zone 5
+- [ ] **Sugar maple**, **katsura**, **black oak** — our fall colours (orange, orange, red) against Morton's yellow; Chicago against Vermont, probably, but worth a look
+- [ ] **American sycamore** — we say yellow fall colour; Morton says brown
+
+The Amber Glow dawn redwood's description and pest note were corrected the
+same day from its introducer's and two other nurseries' descriptions (golden
+new growth with a burgundy tinge, yellow through summer, no sun scorch).
 
 ## 2. Every rewritten species
 
