@@ -60,6 +60,7 @@ input, textarea, button, select { font: inherit; color: inherit; }
   border-bottom: 3px solid var(--gold);
 }
 .bar h1 { flex: 1; }
+.bar-mark { flex: 0 0 auto; display: block; }
 .bar-btn {
   display: flex; align-items: center; gap: 7px;
   min-height: 40px; padding: 0 12px;
