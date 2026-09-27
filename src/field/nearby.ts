@@ -27,6 +27,8 @@ export interface MappedTree {
   sci: string;
   /** Date of its most recent survey, or null if nobody has surveyed it. */
   surveyed: string | null;
+  /** What its plaque says, when the map records one. Absent otherwise. */
+  dedication?: string;
 }
 
 export interface NearbyTree {
@@ -134,4 +136,25 @@ export function mappedNeighbours(tag: string, trees: MappedTree[], span = 3): Ma
     if (hit) out.push(hit);
   }
   return out;
+}
+
+/**
+ * The mapped tree a surveyor means by what they typed: the number on its
+ * metal tag, or its accession read off the map. An update accepts either, and
+ * a "new" tree that turns out to be one of these is not new.
+ */
+export function mappedByTagOrId(typed: string, trees: MappedTree[]): MappedTree | undefined {
+  const id = typed.trim().toUpperCase();
+  return mappedByTag(typed, trees) ?? trees.find((t) => t.id.toUpperCase() === id);
+}
+
+/** Metres within which a "new" tree is more likely a mapped one. */
+export const DUPLICATE_M = 5;
+
+/**
+ * The mapped tree a new one has been placed on top of, if any. A warning, not a
+ * refusal: a hedge or a clump really does put two trees that close.
+ */
+export function likelyDuplicate(lat: number, lng: number, trees: MappedTree[]): NearbyTree | null {
+  return nearbyTrees(lat, lng, trees, { radiusM: DUPLICATE_M, limit: 1 })[0] ?? null;
 }
