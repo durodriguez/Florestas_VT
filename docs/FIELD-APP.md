@@ -319,9 +319,11 @@ The fallback is the 2014 inventory, published at
 so surveyors never have to do anything — open the app and tag lookup works.
 
 **It is FEMC's data, CC BY-SA 4.0**, and this app redistributes a copy of it.
-The credit rides in the map's attribution line and the full citation is in
-[data/SOURCES.md](../data/SOURCES.md). Anyone replacing this file is taking on
-that attribution too.
+Neither the map nor the survey app shows a credit for it: the public map uses
+nothing from it, and the survey app is an internal data-entry tool, not a
+public page. The full citation and licence are in
+[data/SOURCES.md](../data/SOURCES.md), and that is where to put a credit back if
+the app is ever opened to the public.
 
 Only the columns the lookup needs are published: tree number, common and
 scientific name, DBH, age class and condition. The inventory's free-text
