@@ -15,6 +15,8 @@
  * authored here; this is a second view of data the map already carries.
  */
 
+import { createHash } from 'node:crypto';
+
 const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -73,7 +75,7 @@ function shell({ title, description, base, body, depth }) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="stylesheet" href="${up}species.css">
+<link rel="stylesheet" href="${up}species.css?v=${CSS_VERSION}">
 </head>
 <body>
 <header class="bar">
@@ -197,7 +199,10 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
 
 .bar {
   display: flex; align-items: center; gap: 1rem;
-  padding: .7rem 1rem; background: var(--green); border-bottom: 3px solid var(--gold);
+  /* On a wide screen the header's ends line up with the content column
+     (.page: 44rem wide, 1rem padding) rather than the window's edges. */
+  padding: .7rem max(1rem, calc((100% - 44rem) / 2 + 1rem));
+  background: var(--green); border-bottom: 3px solid var(--gold);
 }
 .bar a { color: #fff; text-decoration: none; }
 .bar-home { font-weight: 700; display: flex; align-items: center; gap: .55rem; }
@@ -264,3 +269,11 @@ h2 {
   .fact dt { font-size: .78rem; }
 }
 `;
+
+/**
+ * The stylesheet's name never changes, so a browser that has it cached keeps
+ * the old one after a deploy — the species pages then show new markup under an
+ * old stylesheet. Asking for species.css?v=<hash of its content> makes each
+ * change a new address, and an unchanged stylesheet keeps its cache.
+ */
+const CSS_VERSION = createHash('sha256').update(SPECIES_CSS).digest('hex').slice(0, 10);

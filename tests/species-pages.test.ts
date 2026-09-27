@@ -36,7 +36,8 @@ describe('renderSpeciesPage', () => {
   it('reaches the stylesheet from one directory down', () => {
     // The page is written to species/<id>/index.html and the stylesheet to
     // species/species.css, so exactly one ../ stands between them. Two 404s.
-    expect(page()).toContain('href="../species.css"');
+    // ?v= carries a hash of the stylesheet so a cached old copy is never used.
+    expect(page()).toMatch(/href="\.\.\/species\.css\?v=[0-9a-f]{10}"/);
   });
 
   it('carries the species through to the title and the headings', () => {
@@ -99,7 +100,7 @@ describe('renderSpeciesPage', () => {
     expect(html).toContain('href="/Florestas_VT/"');
     expect(html).toContain('href="/Florestas_VT/species/"');
     // Still relative: the stylesheet sits beside the page either way.
-    expect(html).toContain('href="../species.css"');
+    expect(html).toMatch(/href="\.\.\/species\.css\?v=[0-9a-f]{10}"/);
   });
 
   it('escapes text that came from the CSV', () => {
@@ -117,7 +118,7 @@ describe('renderSpeciesPage', () => {
 describe('renderSpeciesIndex', () => {
   it('reaches the stylesheet in its own directory', () => {
     // The index IS species/index.html, so no ../ at all.
-    expect(renderSpeciesIndex([taxon()], { base: '/', config })).toContain('href="species.css"');
+    expect(renderSpeciesIndex([taxon()], { base: '/', config })).toMatch(/href="species\.css\?v=[0-9a-f]{10}"/);
   });
 
   it('sorts by common name and links to each page', () => {
