@@ -123,10 +123,8 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
   // Laid out line for line as the plaque is: the text keeps the surveyor's
   // line breaks, and the stylesheet shows them rather than running it together.
   const dedication = plant.dedicationLabel
-    ? `<section class="detail-dedication" aria-label="Dedication plaque">
-        <p class="detail-dedication-head">Dedication plaque</p>
-        <p class="detail-dedication-text">${escapeHtml(plant.dedicationLabel)}</p>
-      </section>`
+    ? `<h3 class="detail-section">Dedication plaque</h3>
+      <p class="detail-dedication">${escapeHtml(plant.dedicationLabel)}</p>`
     : '';
 
   return `
@@ -139,13 +137,13 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
     </header>
     ${removed}
     ${photo}
-    ${dedication}
     ${plant.story ? `<p class="detail-story">${escapeHtml(plant.story)}</p>` : ''}
     ${t.description ? `<p class="detail-desc"><strong>Description:</strong> ${escapeHtml(t.description)}</p>` : ''}
     ${t.funFact ? `<details class="detail-fact">
       <summary>Fun fact</summary>
       <p>${escapeHtml(t.funFact)}</p>
     </details>` : ''}
+    ${dedication}
 
     <h3 class="detail-section">This specimen</h3>
     <dl class="facts">
