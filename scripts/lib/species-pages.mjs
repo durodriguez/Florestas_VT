@@ -77,7 +77,7 @@ function shell({ title, description, base, body, depth }) {
 </head>
 <body>
 <header class="bar">
-  <a class="bar-home" href="${esc(base)}"><img class="bar-mark" src="${up}../uvm-mark.svg" alt="" width="30" height="30">UVM Trees</a>
+  <a class="bar-home" href="${esc(base)}"><img class="bar-mark" src="${up}../uvm-mark.png" alt="" width="30" height="30">UVM Trees</a>
   <a class="bar-link" href="${esc(base)}species/">All species</a>
 </header>
 ${body}

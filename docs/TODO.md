@@ -984,7 +984,10 @@ Things that need a person rather than a commit.
   169 species had their description or fun fact rewritten on 25–26 September
   2026; [SPECIES-TEXT-REVIEW.md](SPECIES-TEXT-REVIEW.md) lists the claims to
   check first and every species to read.
-- **Official UVM V mark** from UVM Communications.
+- **UVM V mark** — the official mark is in place since 27 September 2026
+  (`public/uvm-mark.png`, from UVM's own social-media avatar, cropped to its
+  circle). UVM Communications may still prefer a particular web file or want
+  to approve the use; worth mentioning in the ETS conversation.
 - **ETS request** for `arboretum.uvm.edu/explorer/`.
 
 Three conversations are yours to have when you want them, and are listed here
