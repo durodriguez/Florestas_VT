@@ -319,7 +319,9 @@ The fallback is the 2014 inventory, published at
 so surveyors never have to do anything — open the app and tag lookup works.
 
 **It is FEMC's data, CC BY-SA 4.0**, and this app redistributes a copy of it.
-The credit rides in the map's attribution line and the full citation is in
+It is credited on the survey app's *2014 inventory reference* card, the only
+place the data is used — the public map shows nothing from it and carries
+only its basemap credit — and the full citation is in
 [data/SOURCES.md](../data/SOURCES.md). Anyone replacing this file is taking on
 that attribution too.
 
