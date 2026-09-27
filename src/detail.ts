@@ -120,8 +120,13 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
 
   // The wording is the whole record: a tree is a gift, memorial or dedicated
   // one exactly when somebody has written down what its plaque says.
+  // Laid out line for line as the plaque is: the text keeps the surveyor's
+  // line breaks, and the stylesheet shows them rather than running it together.
   const dedication = plant.dedicationLabel
-    ? `<p class="detail-dedication">${escapeHtml(plant.dedicationLabel)}</p>`
+    ? `<section class="detail-dedication" aria-label="Dedication plaque">
+        <p class="detail-dedication-head">Dedication plaque</p>
+        <p class="detail-dedication-text">${escapeHtml(plant.dedicationLabel)}</p>
+      </section>`
     : '';
 
   return `

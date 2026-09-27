@@ -318,6 +318,11 @@ describe('importSurvey — dedications and position notes', () => {
     expect(r.inserts[0].dedication_label).toBe('In memory of John Dewey');
   });
 
+  it('keeps the plaque\'s line breaks', () => {
+    const text = 'In loving memory of Kendra Lindsay Bowers 7/20/1994 - 2/1/2014\nA cappella ZEST singer and environmental science student\n"Look at the land with wide eyes and a careful touch"\n-Kendra';
+    expect(run([row({ dedication_label: text })]).inserts[0].dedication_label).toBe(text);
+  });
+
   it('leaves an ordinary tree with nothing', () => {
     expect(run([row()]).inserts[0].dedication_label).toBe('');
   });

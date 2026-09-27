@@ -349,6 +349,13 @@ button, input, select { font: inherit; color: inherit; }
   margin: .9rem 0 0; padding: .5rem .7rem; font-size: .85rem;
   background: var(--bg-sunk); border-left: 3px solid var(--uvm-green-light);
 }
+.detail-dedication-head {
+  margin: 0 0 .25rem; font-size: .7rem; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--text-dim);
+}
+/* pre-line: one line on the plaque, one line here. Without it the browser
+   folds the surveyor's line breaks into spaces. */
+.detail-dedication-text { margin: 0; white-space: pre-line; }
 .detail-figure { margin: 1rem 0 0; }
 .detail-photo {
   display: block; width: 100%; height: auto;

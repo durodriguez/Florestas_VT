@@ -263,3 +263,11 @@ describe('stamp', () => {
     expect(stamp(new Date(2026, 0, 5, 12))).toBe('2026-01-05');
   });
 });
+
+describe('toCsv — dedication wording', () => {
+  it('keeps the plaque\'s line breaks through the CSV', () => {
+    const text = 'In loving memory of Kendra Lindsay Bowers 7/20/1994 - 2/1/2014\nA cappella ZEST singer and environmental science student\n"Look at the land with wide eyes and a careful touch"\n-Kendra';
+    const [row] = Papa.parse<Record<string, string>>(toCsv([record({ dedication: text })]), { header: true }).data;
+    expect(row!.dedication_label).toBe(text);
+  });
+});
