@@ -1,7 +1,7 @@
 alias,taxon_id,note,assumed
 White pine,pinus-strobus,,
 Weeping white pine,pinus-strobus,Cultivar not distinguished,
-Honey locust,gleditsia-triacanthos,,
+Honey locust,gleditsia-triacanthos-inermis,,Taken as the thornless form: the wild species is heavily thorned and is not what gets planted
 Crab apple,malus-sp,,
 Apple,malus-domestica,,
 Red oak,quercus-rubra,,
@@ -193,3 +193,5 @@ Syringa reticulate ssp.pekinensis'Sundak',syringa-pekinensis,Misspelling; 'Sunda
 Halesia carolina,halesia-tetraptera,Usually treated as a synonym of H. tetraptera,
 Chamaecyparis nootkatensis,callitropsis-nootkatensis,"Synonym. The species has moved between Chamaecyparis, Xanthocyparis, Cupressus and Callitropsis; the 2014 inventory uses the older genus. One tree, one taxon.",
 Nootka falsecypress,callitropsis-nootkatensis,"Synonym of Alaska cedar — see Chamaecyparis nootkatensis.",
+Thornless Common honeylocust,gleditsia-triacanthos-inermis,The species' common name here until September 2026; it names the thornless form,
+Gleditsia triacanthos var. inermis,gleditsia-triacanthos-inermis,Written as a variety in older sources; the Morton Arboretum and this project use f. inermis,

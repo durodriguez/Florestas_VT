@@ -260,7 +260,7 @@ other was already there and has not been reviewed either.
 - [ ] **Red Sunset red maple** (*Acer rubrum 'Red Sunset'*, `acer-rubrum-red-sunset`): fun fact
 - [ ] **Redosier dogwood** (*Cornus sericea*, `cornus-sericea`): fun fact
 - [ ] **River birch** (*Betula nigra*, `betula-nigra`): fun fact
-- [ ] **Ruby Lace honeylocust** (*Gleditsia triacanthos var. inermis 'Ruby Lace'*, `gleditsia-triacanthos-inermis-ruby-lace`): fun fact
+- [ ] **Ruby Lace honeylocust** (*Gleditsia triacanthos f. inermis 'Ruby Lace'*, `gleditsia-triacanthos-inermis-ruby-lace`): fun fact
 - [ ] **Russian olive** (*Elaeagnus angustifolia*, `elaeagnus-angustifolia`): description
 - [ ] **Sargent cherry** (*Prunus sargentii*, `prunus-sargentii`): fun fact
 - [ ] **Saucer magnolia** (*Magnolia x soulangiana*, `magnolia-x-soulangiana`): fun fact
@@ -286,8 +286,8 @@ other was already there and has not been reviewed either.
 - [ ] **Sweetgum** (*Liquidambar styraciflua*, `liquidambar-styraciflua`): fun fact
 - [ ] **Tamarack** (*Larix laricina*, `larix-laricina`): description + fun fact
 - [ ] **Tatarian maple** (*Acer tataricum*, `acer-tataricum`): fun fact
-- [ ] **Thornless Common honeylocust** (*Gleditsia triacanthos*, `gleditsia-triacanthos`): fun fact
-- [ ] **Thornless honeylocust** (*Gleditsia triacanthos var. inermis*, `gleditsia-triacanthos-inermis`): description
+- [ ] **Common honeylocust** (*Gleditsia triacanthos*, `gleditsia-triacanthos`): fun fact
+- [ ] **Thornless honeylocust** (*Gleditsia triacanthos f. inermis*, `gleditsia-triacanthos-inermis`): description
 - [ ] **Three-flower maple** (*Acer triflorum*, `acer-triflorum`): fun fact
 - [ ] **Turkish filbert** (*Corylus colurna*, `corylus-colurna`): description + fun fact
 - [ ] **Variegated tuliptree** (*Liriodendron tulipifera 'Aureomarginatum'*, `liriodendron-tulipifera-aureomarginatum`): fun fact
