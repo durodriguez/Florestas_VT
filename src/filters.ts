@@ -11,6 +11,8 @@ import type { CityTree, FilterState, Plant } from './types';
 export type Filterable = Pick<Plant | CityTree, 'taxon' | 'collection' | 'dbhIn' | 'search'> & {
   condition: string | null;
   status?: string;
+  /** Plaque wording. City trees carry none, so they never match "dedicated". */
+  dedicationLabel?: string | null;
 };
 
 export function emptyFilters(): FilterState {
@@ -24,6 +26,7 @@ export function emptyFilters(): FilterState {
     families: new Set(),
     bloomMonth: null,
     minDbh: null,
+    dedicated: false,
     includeRemoved: false,
   };
 }
@@ -39,6 +42,7 @@ export function isFilterActive(f: FilterState): boolean {
     f.families.size > 0 ||
     f.bloomMonth !== null ||
     f.minDbh !== null ||
+    f.dedicated ||
     f.includeRemoved
   );
 }
@@ -89,6 +93,7 @@ export function matchesFilters(plant: Filterable, f: FilterState): boolean {
   if (!inSet(f.families, plant.taxon.family)) return false;
   if (f.bloomMonth !== null && !plant.taxon.flowerMonths.includes(f.bloomMonth)) return false;
   if (f.minDbh !== null && (plant.dbhIn === null || plant.dbhIn < f.minDbh)) return false;
+  if (f.dedicated && !plant.dedicationLabel) return false;
   if (f.q.trim() !== '' && !matchesQuery(plant, f.q)) return false;
   return true;
 }
