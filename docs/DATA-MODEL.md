@@ -358,7 +358,7 @@ accession-to-label relationship one-to-one.
 
 Add a final observation with `status` set to `removed` rather than deleting
 anything. The tree's whole life stays readable, the record stays reachable from
-its old QR code and from the map's "include removed plants" option, and the
+its old QR code or a link to it, and the
 campus's landscape history is preserved instead of edited away.
 
 `npm run labels` reads status the same way, so a tree that came down in 2029

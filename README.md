@@ -37,10 +37,13 @@ the result. A word you have finished typing matches whole words only, so "red
 maple" finds red maples and not every maple on Redstone Campus; the word still
 being typed can match part of one, so results keep up as you type.
 
-**Filters** — faceted and combinable: plant type (seven categories, trees split
-deciduous/evergreen), origin including Vermont-invasive, campus area, family, condition, flowering month, minimum trunk diameter, and
-whether to include removed plants. Each option shows a live count, computed
-with its own facet relaxed so the alternatives stay clickable.
+**Filters** — faceted and combinable, in this order: campus area, plant type
+(seven categories, trees split deciduous/evergreen), family, origin including
+Vermont-invasive, condition, minimum trunk diameter, flowering month, and
+whether the plant has a dedication plaque. Each option shows a live count,
+computed with its own facet relaxed so the alternatives stay clickable.
+Removed and missing plants are left off the map; one opens only from its old
+QR label or link.
 **Show all** on a record narrows the map to exactly that species — the same
 number the record gives as mapped on campus — and says so under the search
 box, with a × to lift it. Typing a new search lifts it too. Every filter

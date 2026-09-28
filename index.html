@@ -30,7 +30,7 @@
       <div class="panel-search">
         <label class="visually-hidden" for="search">Search plants</label>
         <input id="search" type="search" autocomplete="off" spellcheck="false"
-               placeholder="Name, family or metal tag#…">
+               placeholder="Plant name, family or tag #">
         <p id="taxon-filter" class="taxon-filter" hidden>
           <span>Showing only <strong id="taxon-filter-name"></strong></span>
           <button type="button" id="taxon-filter-clear" class="taxon-filter-clear"
@@ -39,32 +39,25 @@
       </div>
 
       <form id="filters" class="panel-filters">
-        <details open>
-          <summary>Plant type</summary>
-          <div id="facet-type" class="facet"></div>
-        </details>
-        <details>
-          <summary>Origin</summary>
-          <div id="facet-origin" class="facet"></div>
-        </details>
         <details>
           <summary>Campus area</summary>
           <div id="facet-collection" class="facet"></div>
+        </details>
+        <details open>
+          <summary>Plant type</summary>
+          <div id="facet-type" class="facet"></div>
         </details>
         <details>
           <summary>Family</summary>
           <div id="facet-family" class="facet facet--scroll"></div>
         </details>
         <details>
-          <summary>Condition</summary>
-          <div id="facet-condition" class="facet"></div>
+          <summary>Origin</summary>
+          <div id="facet-origin" class="facet"></div>
         </details>
         <details>
-          <summary>In flower during</summary>
-          <div class="facet">
-            <label class="visually-hidden" for="filter-bloom">Flowering month</label>
-            <select id="filter-bloom"></select>
-          </div>
+          <summary>Condition</summary>
+          <div id="facet-condition" class="facet"></div>
         </details>
         <details>
           <summary>Trunk size</summary>
@@ -74,12 +67,23 @@
             <p id="filter-dbh-value" class="range-value">Any size</p>
           </div>
         </details>
-        <div class="facet facet--plain">
-          <label>
-            <input type="checkbox" id="filter-removed">
-            <span class="facet-label">Include removed and missing plants</span>
-          </label>
-        </div>
+        <details>
+          <summary>Flowering month</summary>
+          <div class="facet">
+            <label class="visually-hidden" for="filter-bloom">Flowering month</label>
+            <select id="filter-bloom"></select>
+          </div>
+        </details>
+        <details>
+          <summary>Dedication</summary>
+          <div class="facet">
+            <label>
+              <input type="checkbox" id="filter-dedicated">
+              <span class="facet-label">Has a dedication plaque</span>
+              <span id="dedicated-count" class="facet-count">0</span>
+            </label>
+          </div>
+        </details>
         <!-- Its own block, below the filters rather than among them: the
              filters narrow the UVM collection, and this adds something that
              is not part of it. -->

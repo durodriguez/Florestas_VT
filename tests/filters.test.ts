@@ -43,7 +43,7 @@ const plants: Plant[] = expandPlants({
   fields,
   rows: [
     ['UVM-0001', 0, 44.4779, -73.1955, 0, 32, 68, 55, 1, 1908, 0, null, null, null, null, null],
-    ['UVM-0002', 0, 44.4780, -73.1950, 0, 6, 20, 15, 0, 2018, 0, null, null, null, null, null],
+    ['UVM-0002', 0, 44.4780, -73.1950, 0, 6, 20, 15, 0, 2018, 0, null, null, null, 'Class of 1991', null],
     ['UVM-0003', 1, 44.4716, -73.1971, 1, 34, 88, 42, 1, 1895, 0, null, null, null, null, null],
     ['UVM-0004', 2, 44.4767, -73.1849, 1, null, 12, 10, 1, null, 0, null, null, null, null, null],
     ['UVM-0005', 0, 44.4770, -73.1965, 0, 29, 64, 50, 4, 1912, 1, null, null, null, null, null],
@@ -109,6 +109,11 @@ describe('applyFilters', () => {
   it('hides removed plants by default and shows them on request', () => {
     expect(applyFilters(plants, base()).map((p) => p.id)).not.toContain('UVM-0005');
     expect(applyFilters(plants, { ...base(), includeRemoved: true })).toHaveLength(5);
+  });
+
+  it('narrows to plants with a dedication plaque', () => {
+    expect(applyFilters(plants, { ...base(), dedicated: true }).map((p) => p.id)).toEqual(['UVM-0002']);
+    expect(isFilterActive({ ...base(), dedicated: true })).toBe(true);
   });
 
   it('filters by plant type', () => {

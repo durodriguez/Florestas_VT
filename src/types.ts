@@ -203,5 +203,11 @@ export interface FilterState {
   families: Set<string>;
   bloomMonth: number | null;
   minDbh: number | null;
+  /** Only plants whose plaque wording is on record. */
+  dedicated: boolean;
+  /**
+   * Not a control any more: set only when a QR code lands on a removed or
+   * missing plant, so its old label still opens it.
+   */
   includeRemoved: boolean;
 }

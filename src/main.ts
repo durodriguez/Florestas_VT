@@ -110,6 +110,13 @@ class App {
     update('#facet-condition', 'conditions', (p) => p.condition);
     update('#facet-collection', 'collections', (p) => p.collection?.id ?? null);
     update('#facet-family', 'families', (p) => p.taxon.family);
+
+    // With its own choice relaxed, like the others, so the number says how
+    // many ticking it would show rather than dropping to what is on screen.
+    const relaxed = { ...this.filters, dedicated: false };
+    $('#dedicated-count').textContent = String(
+      applyFilters(this.plants, relaxed).filter((p) => p.dedicationLabel).length,
+    );
   }
 
   private renderLegend(): void {
@@ -300,7 +307,6 @@ class App {
       if (plant) {
         // A removed or filtered-out plant must still resolve from its QR code.
         if (plant.status !== 'active') {
-          $<HTMLInputElement>('#filter-removed').checked = true;
           this.filters.includeRemoved = true;
           this.refresh();
         }
@@ -395,8 +401,8 @@ class App {
       this.refresh();
     });
 
-    $<HTMLInputElement>('#filter-removed').addEventListener('change', (e) => {
-      this.filters.includeRemoved = (e.target as HTMLInputElement).checked;
+    $<HTMLInputElement>('#filter-dedicated').addEventListener('change', (e) => {
+      this.filters.dedicated = (e.target as HTMLInputElement).checked;
       this.refresh();
     });
 
