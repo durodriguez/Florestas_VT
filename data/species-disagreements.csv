@@ -5,7 +5,7 @@ UVM-0376,genus,syringa-reticulata,Japanese Tree lilac,prunus-serrulata,Flowering
 UVM-0377,genus,syringa-reticulata,Japanese Tree lilac,prunus-serrulata,Flowering cherry,Cherry-Flowering,7,Semi-mature,Fair
 UVM-0379,genus,acer-palmatum,Japanese maple,prunus-serrulata,Flowering cherry,Cherry-Flowering,8,Semi-mature,Fair
 UVM-0383,genus,quercus-alba,White oak,betula-nigra,River birch,Birch-River,2,Young,Fair
-UVM-0478,genus,quercus-palustris,Pin oak,gleditsia-triacanthos,Thornless Common honeylocust,Honeylocust-Thornless Common,13,Mature,Fair
+UVM-0478,genus,quercus-palustris,Pin oak,gleditsia-triacanthos,Common honeylocust,Honeylocust-Thornless Common,13,Mature,Fair
 UVM-0491,genus,zelkova-serrata,Japanese zelkova,ostrya-virginiana,Eastern hophornbeam,Hornbeam-American,4,Semi-mature,Fair
 UVM-0633,genus,amelanchier-sp,Serviceberry,zelkova-serrata,Japanese zelkova,Zelkova-Japanese,5,Young,Good
 UVM-0640,genus,pseudotsuga-menziesii,Douglas fir,abies-balsamea,Balsam fir,Fir-Balsam,2,Young,Good
@@ -21,10 +21,10 @@ UVM-1430,genus,crataegus-sp,Hawthorn,malus-sp,Crabapple,Crabapple,7,Mature,Good
 UVM-1449,genus,buxus-sempervirens,Common boxwood,acer-negundo,Boxelder,Boxelder,15,Mature,Good
 UVM-1467,genus,taxodium-distichum,Common baldcypress,metasequoia-glyptostroboides,Dawn redwood,Redwood-Dawn,2,Young,Fair
 UVM-1468,genus,taxodium-distichum,Common baldcypress,metasequoia-glyptostroboides,Dawn redwood,Redwood-Dawn,3,Young,Fair
-UVM-1626,genus,robinia-pseudoacacia,Black locust,gleditsia-triacanthos,Thornless Common honeylocust,Honeylocust-Thornless Common,8,Semi-mature,Fair
-UVM-1639,genus,gleditsia-triacanthos,Thornless Common honeylocust,salix-alba,White willow,Willow-White,11,Semi-mature,Good
-UVM-1641,genus,gleditsia-triacanthos,Thornless Common honeylocust,salix-sp,Willow,Willow,8,New planting,Good
-UVM-1644,genus,gleditsia-triacanthos,Thornless Common honeylocust,maackia-amurensis,Amur maackia,Maackia-Amur,7,Semi-mature,Good
+UVM-1626,genus,robinia-pseudoacacia,Black locust,gleditsia-triacanthos,Common honeylocust,Honeylocust-Thornless Common,8,Semi-mature,Fair
+UVM-1639,genus,gleditsia-triacanthos-inermis,Thornless honeylocust,salix-alba,White willow,Willow-White,11,Semi-mature,Good
+UVM-1641,genus,gleditsia-triacanthos-inermis,Thornless honeylocust,salix-sp,Willow,Willow,8,New planting,Good
+UVM-1644,genus,gleditsia-triacanthos-inermis,Thornless honeylocust,maackia-amurensis,Amur maackia,Maackia-Amur,7,Semi-mature,Good
 UVM-1650,genus,taxodium-distichum,Common baldcypress,metasequoia-glyptostroboides,Dawn redwood,Redwood-Dawn,7,Young,Good
 UVM-1699,genus,picea-glauca,White spruce,abies-concolor,White fir,Fir-White,2,Young,Good
 UVM-1719,genus,liquidambar-styraciflua,Sweetgum,nyssa-sylvatica,Black tupelo,Tupelo-Black,3,Young,Good
