@@ -531,8 +531,30 @@ function renderClaimed(): void {
     '<button type="button" id="claim-clear">Not this tree</button>';
 }
 
+/**
+ * Take back what the last claim filled in, and only that: a dedication or a
+ * species the surveyor typed themselves stays. Run before every new claim as
+ * well as on letting go, so going straight from one tree to another cannot
+ * leave the first tree's plaque on the second.
+ */
+function undoPrefill(): void {
+  if (prefilledDedication && $<HTMLTextAreaElement>('dedication').value === prefilledDedication) {
+    setHasPlaque(false);
+  }
+  prefilledDedication = '';
+  if ($<HTMLInputElement>('species').dataset.autofilled === '1') {
+    $<HTMLInputElement>('species').value = '';
+    setTaxon(undefined, false);
+  }
+}
+
+/**
+ * Says which mapped tree this visit is to, or that it is to none. Never
+ * touches the tag box: the tag lookup calls this as a number is typed, and
+ * clearing the box there wiped a tag half-way through typing it.
+ */
 function claim(hit: NearbyTree | null, by: 'tag' | 'position' = 'position'): void {
-  const wasTag = claimed !== null && claimedBy === 'tag';
+  if (claimed) undoPrefill();
   claimed = hit;
   claimedBy = by;
   setMovingTree(false);
@@ -552,17 +574,6 @@ function claim(hit: NearbyTree | null, by: 'tag' | 'position' = 'position'): voi
       setHasPlaque(false);
     }
     map.setView([hit.tree.lat, hit.tree.lng], Math.max(map.getZoom(), 19));
-  } else {
-    // Undo only what the claim put there, never what the surveyor typed.
-    if (wasTag) $<HTMLInputElement>('tag').value = '';
-    if ($<HTMLTextAreaElement>('dedication').value === prefilledDedication) setHasPlaque(false);
-    prefilledDedication = '';
-    // Only a species the claim filled in; one the surveyor typed stays.
-    if ($<HTMLInputElement>('species').dataset.autofilled === '1') {
-      $<HTMLInputElement>('species').value = '';
-      setTaxon(undefined, false);
-    }
-    if (wasTag) renderTagLookup();
   }
   // Claiming a tree says which record this visit belongs to, so it also says
   // what a correction would be a correction *of*. Taking that from the claim
@@ -610,16 +621,23 @@ function renderMode(): void {
   for (const b of $('mode-seg').querySelectorAll('[data-mode]')) {
     b.setAttribute('aria-checked', String(b.getAttribute('data-mode') === mode));
   }
-  const main = $('screen-form');
   const order = mode ? CARDS[mode] : [];
-  for (const id of order) main.appendChild($(id));
-  for (const id of FOOT) main.appendChild($(id));
+  // Before a choice, the map is shown under the question: whether the tree is
+  // already mapped is exactly what decides the answer.
+  //
+  // Only what is out of place is moved. Moving a node takes it out of the
+  // page for an instant, and a text box that leaves the page loses focus — on
+  // a phone that drops the keyboard. Re-appending every card on each render
+  // did exactly that to the tag box, once per digit that matched a tree.
+  let prev: Element = $('card-mode');
+  for (const id of [...(mode ? order : ['card-position']), ...FOOT]) {
+    const el = $(id);
+    if (prev.nextElementSibling !== el) prev.after(el);
+    prev = el;
+  }
   // An update shows nothing past the map until it knows which tree: every
   // answer after that is an answer about one particular tree.
   const waiting = mode === 'update' && !claimed;
-  // Before a choice, the map is shown under the question: whether the tree is
-  // already mapped is exactly what decides the answer.
-  if (!mode) main.appendChild($('card-position'));
   const shown = new Set(visibleCards(mode, claimed !== null));
   for (const id of ALL_CARDS) $(id).hidden = !shown.has(id);
   $('update-wait').hidden = !waiting;
@@ -1134,9 +1152,27 @@ document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') refreshDate();
 });
 
-$('tag').addEventListener('input', () => {
+/**
+ * Looked up once the surveyor stops typing, not on every digit. Most short
+ * numbers are tags too, so "620" passed through tree 62 on its way, and in an
+ * update that chose tree 62 mid-word. Enter, or leaving the box, looks up at
+ * once.
+ */
+const TAG_PAUSE_MS = 700;
+let tagTimer: number | undefined;
+function lookUpTagNow(): void {
+  clearTimeout(tagTimer);
+  tagTimer = undefined;
   renderTagLookup();
   renderNearby();
+}
+$('tag').addEventListener('input', () => {
+  clearTimeout(tagTimer);
+  tagTimer = window.setTimeout(lookUpTagNow, TAG_PAUSE_MS);
+});
+$('tag').addEventListener('change', lookUpTagNow);
+$('tag').addEventListener('keydown', (e) => {
+  if ((e as KeyboardEvent).key === 'Enter') lookUpTagNow();
 });
 $('tag-result').addEventListener('click', (e) => {
   const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-tag]');
@@ -1226,7 +1262,14 @@ $('dup-warn').addEventListener('click', (e) => {
 });
 $('move-tree').addEventListener('click', () => setMovingTree(!movingTree));
 $('claimed').addEventListener('click', (e) => {
-  if ((e.target as HTMLElement).id === 'claim-clear') claim(null);
+  if ((e.target as HTMLElement).id !== 'claim-clear') return;
+  // "Not this tree" is the one place the tag goes too: the tag is what chose it.
+  const byTag = claimedBy === 'tag';
+  claim(null);
+  if (byTag) {
+    $<HTMLInputElement>('tag').value = '';
+    renderTagLookup();
+  }
 });
 
 $('condition-seg').addEventListener('click', (e) => {

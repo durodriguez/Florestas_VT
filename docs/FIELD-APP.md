@@ -32,7 +32,10 @@ visits are to a tree already on it, and the first question is *which one*.
 
 1. **Which tree.** Type the number on its metal tag (or its UVM number from the
    map), or pick it from **Mapped trees near you** — the list or the coloured
-   dots. Nothing else appears until a tree is picked.
+   dots. Nothing else appears until a tree is picked. A typed number is looked up
+   once you stop typing (or press Enter), not digit by digit: most short
+   numbers are tags too, and "620" used to pick tree 62 on the way — and close
+   the phone's keyboard while doing it.
 2. **Is the tree there?** Still here, Gone, or Nothing here — see
    [below](#recording-a-tree-that-is-not-there).
 3. **Species**, filled in from the map. Change it only if the record is wrong;
