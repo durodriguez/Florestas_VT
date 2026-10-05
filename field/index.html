@@ -133,8 +133,17 @@
     <!-- 6. photo ---------------------------------------------------------- -->
     <section class="card" id="card-photo">
       <span class="field-label">Photo</span>
+      <!-- Two inputs, because one cannot do both: `capture` sends the phone
+           straight to a bare in-app camera, and leaving it off opens the
+           library, where a photo taken with the phone's own camera app — with
+           its full settings — is waiting. -->
       <input type="file" id="photo" accept="image/*" capture="environment" hidden>
-      <button type="button" id="photo-btn" class="big-btn">Take photo</button>
+      <input type="file" id="photo-library" accept="image/*" hidden>
+      <div class="photo-btns">
+        <button type="button" id="photo-btn" class="big-btn">Take photo</button>
+        <button type="button" id="photo-library-btn" class="big-btn">Choose from library</button>
+      </div>
+      <p id="photo-older" class="hint" hidden></p>
       <div id="photo-preview" class="photo-preview" hidden>
         <img id="photo-img" alt="Photo of this tree">
         <p id="photo-size" class="hint"></p>

@@ -286,6 +286,7 @@ textarea { min-height: 78px; resize: vertical; }
 }
 
 .photo-preview { display: flex; flex-direction: column; gap: 9px; }
+.photo-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .photo-preview img {
   width: 100%; max-height: 240px; object-fit: cover;
   border-radius: 10px; border: 1px solid var(--rule);

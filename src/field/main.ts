@@ -952,6 +952,8 @@ function clearPhoto(): void {
   $('photo-preview').hidden = true;
   $('photo-size').textContent = '';
   $<HTMLInputElement>('photo').value = '';
+  $<HTMLInputElement>('photo-library').value = '';
+  $('photo-older').hidden = true;
   const img = $<HTMLImageElement>('photo-img');
   if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
   img.removeAttribute('src');
@@ -1347,10 +1349,24 @@ $('planted').addEventListener('input', () => {
   if (plantedUnknown) setPlantedUnknown(false);
 });
 
-$('photo-btn').addEventListener('click', () => $('photo').click());
-$('photo').addEventListener('change', async (e) => {
+/**
+ * A photo from either button. The library one is there for photos taken with
+ * the phone's own camera app, which has settings the in-app camera does not;
+ * both are shrunk the same way afterwards.
+ */
+async function takePhoto(e: Event): Promise<void> {
   const file = (e.target as HTMLInputElement).files?.[0];
   if (!file) return;
+  // The map dates a photo by the survey it came with. A library photo from an
+  // earlier day would be shown under today's date, so say so while it can be
+  // swapped. lastModified is the capture time on most phones, but not all —
+  // hence a note, not a refusal.
+  const older = $('photo-older');
+  const takenOn = stamp(new Date(file.lastModified));
+  const surveyedOn = $<HTMLInputElement>('date').value || stamp();
+  older.hidden = !file.lastModified || takenOn >= surveyedOn;
+  older.textContent = `This photo looks like it was taken on ${takenOn}. It will be shown as photographed ` +
+    `on the survey date, ${surveyedOn} — set the date in Notes if that is wrong.`;
   $('photo-size').textContent = 'Processing…';
   $('photo-preview').hidden = false;
 
@@ -1363,7 +1379,11 @@ $('photo').addEventListener('change', async (e) => {
   $('photo-size').textContent = shrunk.width
     ? `${shrunk.width}×${shrunk.height} · ${kb(shrunk.blob.size)} (from ${kb(shrunk.originalBytes)})`
     : kb(shrunk.blob.size);
-});
+}
+$('photo-btn').addEventListener('click', () => $('photo').click());
+$('photo-library-btn').addEventListener('click', () => $('photo-library').click());
+$('photo').addEventListener('change', (e) => void takePhoto(e));
+$('photo-library').addEventListener('change', (e) => void takePhoto(e));
 $('photo-clear').addEventListener('click', clearPhoto);
 
 $('gps-recapture').addEventListener('click', () => {

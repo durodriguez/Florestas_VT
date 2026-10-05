@@ -143,6 +143,13 @@ refused as a typo.
 
 ### Photos
 
+**Take photo** opens a bare in-app camera; **Choose from library** takes a
+photo already on the phone — one taken with the phone's own camera app, with
+its focus, exposure and HDR settings. Either is resized the same way below, so
+the library route buys a better-exposed picture, not a bigger one. A library
+photo older than the survey date gets a note saying so, because the map dates
+every photo by the survey it arrived with.
+
 Every shot is resized before it is stored — 1200 px on the long edge, with the
 EXIF rotation baked in, so a portrait photo is not filed sideways. A phone
 produces about 4 MB and 12 megapixels a shot; the map shows a photo a few
