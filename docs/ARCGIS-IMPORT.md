@@ -155,6 +155,8 @@ untagged tree is recognised the second time — see
 
 - **Tag 762** — the species and position conflict above, needing an in-person
   check.
+- **The Redstone white pine grove** — positions there are off by up to 41 m,
+  and some points sit on a parking lot. See [to-do #19](TODO.md).
 - **The 15 flagged tags** — 8 disputed, 7 unreadable. `grep 'TAG ' data/observations.csv`
   lists them.
 - **The 10 skipped records** — 8 need identifying, 2 need a position.

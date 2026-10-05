@@ -562,6 +562,35 @@ makes it worth doing.
 
 ---
 
+## 19. The Redstone white pine grove is mapped in the wrong places [open: fieldwork]
+
+Found on the 5 October 2026 survey. The 2023–24 layer's positions in the white
+pine grove on Redstone Campus (roughly 44.4704–44.4718 N, 73.1975–73.1990 W:
+87 mapped plants, 68 of them white pines) do not match the ground, by more than
+GPS error can explain:
+
+- **UVM-2702** was mapped among leafless broadleaf trees on the east side of
+  the grove, where no pine stands. Its tag was found on a pine **41 m** away.
+- **UVM-2777** was found **22 m** from its mapped position.
+- **A column of points sits on the asphalt of the parking lot** on the grove's
+  west side, where no tree can be.
+
+Both moves were made by pin on the satellite imagery and imported as they
+stand; the surveyor confirmed both. The two records now say "Position set by
+pin on imagery".
+
+**One loose end from those moves.** UVM-2777's corrected position is 2.7 m from
+**UVM-4593**, an untagged white pine whose record already carries a tag dispute
+from the source ("tag 2764 is also on UVM-2764"). Either two pines really stand
+that close, or UVM-4593 is a second point for the same tree. Look when next in
+the grove.
+
+**What to do.** Walk the grove with the survey app and move each pin onto its
+crown — the same thing that fixed 2702 and 2777. Start with the points on the
+parking lot, which are wrong by definition. Do not shift the grove in bulk from
+a desk: the errors run in different directions and distances, so there is no
+single offset to apply.
+
 ## Finished
 
 ## 1. Rename `memorial`, add `dedication_label` [done, 11 September 2026]
