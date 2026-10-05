@@ -32,7 +32,10 @@ visits are to a tree already on it, and the first question is *which one*.
 
 1. **Which tree.** Type the number on its metal tag (or its UVM number from the
    map), or pick it from **Mapped trees near you** — the list or the coloured
-   dots. Nothing else appears until a tree is picked.
+   dots. Nothing else appears until a tree is picked. A typed number is looked up
+   once you stop typing (or press Enter), not digit by digit: most short
+   numbers are tags too, and "620" used to pick tree 62 on the way — and close
+   the phone's keyboard while doing it.
 2. **Is the tree there?** Still here, Gone, or Nothing here — see
    [below](#recording-a-tree-that-is-not-there).
 3. **Species**, filled in from the map. Change it only if the record is wrong;
@@ -140,6 +143,13 @@ refused as a typo.
 
 ### Photos
 
+**Take photo** opens a bare in-app camera; **Choose from library** takes a
+photo already on the phone — one taken with the phone's own camera app, with
+its focus, exposure and HDR settings. Either is resized the same way below, so
+the library route buys a better-exposed picture, not a bigger one. A library
+photo older than the survey date gets a note saying so, because the map dates
+every photo by the survey it arrived with.
+
 Every shot is resized before it is stored — 1200 px on the long edge, with the
 EXIF rotation baked in, so a portrait photo is not filed sideways. A phone
 produces about 4 MB and 12 megapixels a shot; the map shows a photo a few
@@ -169,7 +179,11 @@ which is the one thing you and the map both have.
 In an update, leave the tag box empty and, once there is a fix, **Mapped trees
 near you** lists what the map has within 25 m, nearest first:
 
-> **3 m northeast** — Littleleaf linden *Tilia cordata*
+> **3 m northeast** `Tag 1421` — Littleleaf linden *Tilia cordata* · UVM-1421
+
+Each entry shows the tree's metal tag beside the distance (or "No tag"), and
+its accession underneath, so a tagged tree can be matched by the number on its
+trunk rather than by distance alone.
 
 Tap one and the rest of the form fills in against that tree: the record becomes
 a visit to it rather than a new accession, and the species is seeded from the

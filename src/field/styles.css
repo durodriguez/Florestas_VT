@@ -173,6 +173,14 @@ textarea { min-height: 78px; resize: vertical; }
 .nearby-opt > :not(.nearby-dot) { grid-column: 2; }
 .nearby-opt:active { border-color: var(--green-2); }
 .nearby-dist { font-size: 15px; font-weight: 650; }
+/* Styled like the stamped metal itself, so it reads as the thing to match. */
+.nearby-tag {
+  display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 6px;
+  background: #e4e7e5; border: 1px solid #c3c9c5; color: var(--ink);
+  font-size: 14px; font-weight: 700; letter-spacing: .03em; vertical-align: 1px;
+}
+.nearby-tag--none { background: none; border-style: dashed; color: var(--ink-2); font-weight: 500; }
+.nearby-acc { font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
 .nearby-name { font-size: 14px; }
 .nearby-sci { font-style: italic; color: var(--ink-2); }
 /* A tree already surveyed is still offered — an untagged one can only be found
@@ -278,6 +286,7 @@ textarea { min-height: 78px; resize: vertical; }
 }
 
 .photo-preview { display: flex; flex-direction: column; gap: 9px; }
+.photo-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .photo-preview img {
   width: 100%; max-height: 240px; object-fit: cover;
   border-radius: 10px; border: 1px solid var(--rule);
