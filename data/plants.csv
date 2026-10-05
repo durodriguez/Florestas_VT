@@ -1097,7 +1097,7 @@ UVM-2852,2852,picea-pungens,44.472338,-73.197345,"Mapped in UVM's ArcGIS tree la
 UVM-1684,1684,picea-abies,44.472279,-73.197412,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,aa5f2277-9285-4f08-84fe-8812ac4b703e
 UVM-1687,1687,picea-abies,44.472303,-73.197291,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,8ae01e01-0366-418f-b051-37f9fa1d8b4f
 UVM-2851,2851,picea-abies,44.472224,-73.197492,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,42cd7bcb-f738-4360-9996-92f2db6c002d
-UVM-4325,,picea-abies,44.472166,-73.197468,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,6e338b05-3c5c-4ea8-b783-45c93876d8b0
+UVM-4325,,picea-abies,44.472201,-73.197384,Position set by pin on imagery,athletic,,,,6e338b05-3c5c-4ea8-b783-45c93876d8b0
 UVM-4326,,picea-abies,44.472107,-73.197466,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,59b6a865-86d5-48e9-b71f-08e25aa7e3f6
 UVM-1682,1682,picea-abies,44.472161,-73.197556,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,ae3f2e73-de94-4c12-841d-ce6858d7f4be
 UVM-2850,2850,picea-abies,44.472115,-73.197541,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,cce0bf99-3d41-412b-a4a5-90aa71bdcefe
@@ -1130,7 +1130,7 @@ UVM-4332,,tilia-americana,44.473358,-73.196515,"Mapped in UVM's ArcGIS tree laye
 UVM-4333,,quercus-rubra,44.473355,-73.196411,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,d18771e5-c9ef-4e35-9b5f-2213f10feda8
 UVM-1727,1727,quercus-rubra,44.473421,-73.196353,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,2ac0db29-8fcd-485f-bf75-27b7adb9cd24
 UVM-1726,1726,quercus-bicolor,44.473474,-73.196381,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,3ad6e0b0-590e-43fd-bd30-377a43428983
-UVM-1736,1736,acer-rubrum,44.473534,-73.196579,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,48e25bde-dc85-4636-8452-8ed07b508f8a
+UVM-1736,1736,acer-rubrum,44.473544,-73.196549,Position set by pin on imagery,athletic,,,,48e25bde-dc85-4636-8452-8ed07b508f8a
 UVM-4334,,acer-rubrum,44.473614,-73.196511,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,2e45d598-4596-41cd-b827-24078d7079c0
 UVM-1725,1725,quercus-rubra,44.473525,-73.196327,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,9fc508cd-944d-44f7-be73-fba617cfaeba
 UVM-1724,1724,quercus-bicolor,44.473503,-73.196275,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,2f014822-16dd-4949-baae-184cc07bf0ce
@@ -1486,7 +1486,7 @@ UVM-2386,2386,fraxinus-sp,44.472137,-73.194952,"Mapped in UVM's ArcGIS tree laye
 UVM-2385,2385,fraxinus-sp,44.472081,-73.194937,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,730d3057-6e85-40b2-aa97-7c7ff2ac38be
 UVM-2384,2384,fraxinus-sp,44.472006,-73.194924,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,e0aa24be-eef2-4d85-9e46-55fc9d36288c
 UVM-3340,3340,fraxinus-sp,44.472069,-73.195073,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,10d1820f-0a06-4133-b8a6-8900742910dd
-UVM-3341,3341,fraxinus-sp,44.472002,-73.195071,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,141f9ab2-86bb-448f-b688-13234a5a7e64
+UVM-3341,3341,fraxinus-sp,44.472026,-73.195076,Position set by pin on imagery,athletic,,,,141f9ab2-86bb-448f-b688-13234a5a7e64
 UVM-4451,,hamamelis-virginiana,44.472017,-73.195251,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,044b2414-76c5-417b-98ff-073a75a463a5
 UVM-4452,,hamamelis-virginiana,44.472041,-73.195214,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,41dfa8f5-c189-4193-b34e-02cf62e6bca8
 UVM-4453,,cercis-canadensis,44.472041,-73.195302,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,4dc364a0-cf47-4cfe-8fa7-30bd328ed57f
@@ -1915,7 +1915,7 @@ UVM-2789,2789,pinus-strobus,44.471219,-73.198926,"Mapped in UVM's ArcGIS tree la
 UVM-2790,2790,pinus-strobus,44.471201,-73.198887,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,776d3bb8-a68e-441b-8fd4-cd5a5258be8c
 UVM-2791,2791,pinus-strobus,44.471196,-73.198724,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,0de5bd60-233c-40be-91fb-b1d277aae6b3
 UVM-2706,2706,quercus-rubra,44.471175,-73.198598,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,f0b173f8-f21b-440c-8f37-8167f69009f7
-UVM-2777,2777,pinus-strobus,44.471122,-73.198384,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,ba34efe5-5b1b-48d9-aa75-36d289b1c21e
+UVM-2777,2777,pinus-strobus,44.470981,-73.198183,Position set by pin on imagery,redstone,,,,ba34efe5-5b1b-48d9-aa75-36d289b1c21e
 UVM-4594,,pinus-strobus,44.471188,-73.198170,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,45736f60-9771-491d-8078-056f9a23af84
 UVM-4595,,pinus-strobus,44.471255,-73.198262,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,263fccc3-38f5-4194-8cc5-d7bc88e114be
 UVM-4596,,pinus-strobus,44.471278,-73.198246,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,72305ba3-ffc0-455d-a2a4-2c3f33d5447f
@@ -1957,7 +1957,7 @@ UVM-4610,,pinus-strobus,44.471501,-73.198454,"Mapped in UVM's ArcGIS tree layer,
 UVM-2704,2704,pinus-strobus,44.471475,-73.198372,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,52681d06-2ee9-4502-9745-03ae171e0dcc
 UVM-2703,2703,pinus-strobus,44.471443,-73.198362,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,184f864a-93d7-4c99-b4ad-f66bcad53673
 UVM-2705,2705,pinus-strobus,44.471449,-73.198316,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,035f8ed6-0102-44cc-9198-41c58ce6e5d1
-UVM-2702,2702,pinus-strobus,44.471465,-73.198107,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,c71eaa7c-da34-4781-b426-81643083bd00
+UVM-2702,2702,pinus-strobus,44.471135,-73.197883,Position set by pin on imagery,redstone,,,,c71eaa7c-da34-4781-b426-81643083bd00
 UVM-4611,,ulmus-sp,44.475272,-73.193704,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c85592ee-b0ec-428c-ae8b-b3c2b4af3e76
 UVM-1429,1429,crataegus-sp,44.473219,-73.194744,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,add50391-912b-4d58-a0b7-a1987d519389
 UVM-1430,1430,crataegus-sp,44.473222,-73.194674,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,c4817d3f-5dda-46ab-87fc-7ce47196ef52
@@ -2067,3 +2067,5 @@ UVM-4712,,prunus-sargentii,44.477276,-73.195118,Position set by pin on imagery,c
 UVM-4713,,prunus-sargentii,44.477363,-73.195147,Position set by pin on imagery,central,,,,
 UVM-4714,,prunus-sargentii,44.477370,-73.194965,Position set by pin on imagery,central,,,,
 UVM-4715,,ginkgo-biloba,44.476984,-73.198434,Position set by pin on imagery,central,,,,
+UVM-4716,,acer-x-freemanii,44.472035,-73.197379,Position set by pin on imagery,redstone,,,,
+UVM-4717,,acer-x-freemanii,44.472226,-73.197085,Position set by pin on imagery,redstone,,,,
