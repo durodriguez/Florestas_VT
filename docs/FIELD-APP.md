@@ -172,7 +172,11 @@ which is the one thing you and the map both have.
 In an update, leave the tag box empty and, once there is a fix, **Mapped trees
 near you** lists what the map has within 25 m, nearest first:
 
-> **3 m northeast** — Littleleaf linden *Tilia cordata*
+> **3 m northeast** `Tag 1421` — Littleleaf linden *Tilia cordata* · UVM-1421
+
+Each entry shows the tree's metal tag beside the distance (or "No tag"), and
+its accession underneath, so a tagged tree can be matched by the number on its
+trunk rather than by distance alone.
 
 Tap one and the rest of the form fills in against that tree: the record becomes
 a visit to it rather than a new accession, and the species is seeded from the

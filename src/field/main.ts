@@ -441,13 +441,21 @@ function renderNearby(): void {
       .addTo(nearbyLayer);
   });
 
+  // The tag leads, beside the distance: a surveyor standing at a tagged tree
+  // matches the number on the trunk against this, which no distance can do.
+  // The accession is there for one with no tag, and to tie the choice to the
+  // record on the map.
   list.innerHTML = hits
     .map((hit, i) => `<li>
       <button type="button" class="nearby-opt" data-nearby="${i}">
         <span class="nearby-dot" style="background:${NEARBY_COLOURS[i % NEARBY_COLOURS.length]}"></span>
-        <span class="nearby-dist">${escapeHtml(describeDistance(hit))}</span>
+        <span class="nearby-dist">${escapeHtml(describeDistance(hit))}
+          ${hit.tree.tag
+            ? `<span class="nearby-tag">Tag ${escapeHtml(hit.tree.tag)}</span>`
+            : '<span class="nearby-tag nearby-tag--none">No tag</span>'}</span>
         <span class="nearby-name">${escapeHtml(hit.tree.common)}
           <span class="nearby-sci">${escapeHtml(hit.tree.sci)}</span></span>
+        <span class="nearby-acc">${escapeHtml(hit.tree.id)}</span>
         ${hit.tree.surveyed
           ? `<span class="nearby-seen">Already surveyed ${escapeHtml(hit.tree.surveyed)} — claiming it records another visit</span>`
           : ''}
