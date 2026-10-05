@@ -582,8 +582,9 @@ pin on imagery".
 **One loose end from those moves.** UVM-2777's corrected position is 2.7 m from
 **UVM-4593**, an untagged white pine whose record already carries a tag dispute
 from the source ("tag 2764 is also on UVM-2764"). Either two pines really stand
-that close, or UVM-4593 is a second point for the same tree. Look when next in
-the grove.
+that close, or UVM-4593 is a second point for the same tree. The surveyor's
+judgement is that 4593 is misplaced like the rest, and that **every position in
+the grove needs correcting**, not only the ones caught so far.
 
 **What to do.** Walk the grove with the survey app and move each pin onto its
 crown — the same thing that fixed 2702 and 2777. Start with the points on the
