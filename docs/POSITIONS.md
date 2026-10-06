@@ -26,6 +26,46 @@ Every move is kept in the browser as it is made, so closing the tab or a crash
 loses nothing; the bar says so, and says plainly if the browser refuses to
 save. The moves live in that one browser on that one computer until exported.
 
+## Your own imagery, privately
+
+**My imagery** in the side panel lays your own images — Google Earth prints,
+for instance — over the satellite layer, under the trees. They are read from
+your disk and kept in **this browser only** (its IndexedDB storage): never
+uploaded, committed or published. That is the condition for using Google
+Earth prints at all; Earth's terms do not allow them to be served as a map
+layer, and this repository and its site are public ([to-do #17](TODO.md)).
+
+1. **Add images and .geprint files** — choose the images and their `.geprint`
+   files together. A pair is matched by name: `UVM_Campus_MainSt.jpg` with
+   `UVM_Campus_MainSt.geprint`.
+2. Each image is placed from its `.geprint` first. That is **a rough guess**:
+   the file records Earth's camera, not the image's corners, and the corners
+   depend on a field of view it does not store. Expect it tens of metres out.
+3. **Align** each image by matching points. Click a sharp feature on your
+   image — a building corner, a path junction — then the same feature on the
+   satellite map, which is shown with your image hidden. Two points fix it, if
+   they are spread across and down the image; each one after that improves it,
+   and the panel says how far the points disagree, in metres. Zoom in to click:
+   the precision is the screen pixel. Aim for four or five points and under a
+   metre.
+4. Every image aligned teaches the tool Earth's real field of view and offset,
+   so the next ones start closer.
+
+Overlapping images simply lie on top of each other; nothing is stitched or
+trimmed. Only images in view are drawn, so fourteen large prints do not slow
+the page. **Opacity** blends them with the satellite layer; **Show** turns them
+all off.
+
+Two limits to know. **The images stay with that browser** — another computer,
+another browser, or clearing site data means adding and aligning them again.
+**The print is not perfectly flat**: Earth leaves a 2–3° tilt, and tall
+buildings lean slightly. Align on features at ground level, and the residual
+the panel reports is the honest measure of what is left.
+
+Whether positions traced off Google's imagery may go into a published dataset
+is a question for Google's terms, not for this tool; check before relying on
+it for many trees.
+
 ## Getting the moves onto the map
 
 1. **Export moves** downloads `positions-<date>.csv`.

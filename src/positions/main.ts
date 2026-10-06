@@ -6,6 +6,7 @@ import { loadData } from '../data';
 import { normalizeTag } from '../accession';
 import { TYPE_LABELS } from '../palette';
 import type { Plant } from '../types';
+import { initImagery } from './imagery';
 import {
   applyMove, movedMeters, movesToCsv, reconcile, today,
   type Move, type Moves,
@@ -47,6 +48,9 @@ const undoStack: Array<{ id: string; prev: Move | undefined }> = [];
 // ---------------------------------------------------------------- map
 
 const map = L.map($('map'), { zoomControl: true, maxZoom: 22, preferCanvas: true });
+// A view from the start, not only once the trees arrive: saved imagery is
+// restored before then, and Leaflet cannot place anything on a map with none.
+map.setView([44.4777, -73.1956], 17);
 const imagery = L.tileLayer(
   'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
   { maxZoom: 22, maxNativeZoom: 20, attribution: 'Imagery © Esri, Maxar, Earthstar Geographics' },
@@ -341,7 +345,22 @@ $<HTMLInputElement>('find').addEventListener('keydown', (e) => {
 
 // Clicking empty map deselects. A click on a dot never reaches here: the dot
 // stops it on mousedown.
-map.on('click', () => {
+// The trees step aside while an image is being aligned: clicks then belong
+// to the alignment, and the dots would hide the features being matched.
+const myImagery = initImagery(map, {
+  onAligning: (on) => {
+    for (const layer of [dotLayer, labelLayer, ghostLayer]) {
+      if (on) map.removeLayer(layer);
+      else layer.addTo(map);
+    }
+    map.getContainer().classList.toggle('is-aligning', on);
+    if (on) select(null, false);
+    else drawLabels();
+  },
+});
+
+map.on('click', (e: L.LeafletMouseEvent) => {
+  if (myImagery.click(e.latlng)) return;
   if (Date.now() - dragEndedAt > 300) select(null, false);
 });
 
@@ -353,7 +372,10 @@ document.addEventListener('keydown', (e) => {
     return;
   }
   if (typing) return;
-  if (e.key === 'Escape') return select(null, false);
+  if (e.key === 'Escape') {
+    if (myImagery.isAligning()) return myImagery.cancel();
+    return select(null, false);
+  }
   const step = { ArrowUp: [1, 0], ArrowDown: [-1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1] }[e.key];
   if (!step || !selected) return;
   e.preventDefault();
@@ -432,5 +454,11 @@ Object.assign(window as unknown as Record<string, unknown>, {
       return [box.left + pt.x, box.top + pt.y];
     },
     selected: () => selected,
+    imagery: myImagery,
+    screenOf: (lat: number, lng: number) => {
+      const pt = map.latLngToContainerPoint([lat, lng]);
+      const box = map.getContainer().getBoundingClientRect();
+      return [box.left + pt.x, box.top + pt.y];
+    },
   },
 });

@@ -40,6 +40,33 @@
         </ul>
       </details>
 
+      <details class="imagery" id="imagery">
+        <summary>My imagery <span id="img-count" class="count">0</span></summary>
+        <p class="hint">Your own images, such as Google Earth prints. Kept in this
+          browser only — never uploaded or published.</p>
+        <label class="ghost-btn add-btn">Add images and .geprint files…
+          <input type="file" id="img-add" multiple accept=".jpg,.jpeg,.png,.webp,.geprint" hidden>
+        </label>
+        <p id="img-msg" class="hint img-msg"></p>
+        <div class="img-controls">
+          <label><input type="checkbox" id="img-show" checked> Show</label>
+          <label class="opacity">Opacity <input type="range" id="img-opacity" min="0" max="100" value="100"></label>
+        </div>
+        <ul id="img-list" class="img-list"></ul>
+        <p id="img-empty" class="hint">No images added yet.</p>
+        <p id="img-usage" class="hint"></p>
+      </details>
+
+      <section id="align-panel" class="card align-panel" hidden>
+        <span id="align-title" class="name"></span>
+        <p id="align-step" class="align-step"></p>
+        <p id="align-fit" class="hint"></p>
+        <div class="align-actions">
+          <button type="button" id="align-undo" class="ghost-btn">Undo last point</button>
+          <button type="button" id="align-done" class="bar-btn">Done</button>
+        </div>
+      </section>
+
       <div class="moves-head">
         <span class="label">Moves <span id="move-count" class="count">0</span></span>
         <button type="button" id="undo" class="ghost-btn" disabled>Undo last</button>
