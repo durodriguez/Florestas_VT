@@ -12,8 +12,8 @@
 
 import L from 'leaflet';
 import {
-  calibrate, estimateBounds, fitBounds, parseGeprint, pixelAt,
-  type Bounds, type Camera, type Pair,
+  calibrate, estimateBounds, fitBounds, fitPlacement, matrix3dFor, parseGeprint, placementFromBounds,
+  type Bounds, type Camera, type Pair, type Placement,
 } from './imagery-math';
 
 interface Stored {
@@ -31,7 +31,77 @@ interface Stored {
 
 interface Live extends Stored {
   url: string;
-  overlay: L.ImageOverlay;
+  overlay: WarpedImage;
+}
+
+/**
+ * An image drawn onto any four corners, not only a rectangle. Leaflet's own
+ * image overlay can only stretch a picture to a box, and a tilted print is not
+ * a box; this hands the browser a CSS perspective transform that puts each
+ * corner exactly where the fit says. Redrawn on every zoom, hidden during the
+ * zoom animation itself rather than drawn wrong for a quarter of a second.
+ */
+class WarpedImage extends L.Layer {
+  private el: HTMLImageElement | null = null;
+  private corners: Array<[number, number]> = [];
+  private opacity = 1;
+
+  constructor(private url: string, private width: number, private height: number, private pane: string) {
+    super();
+  }
+
+  setCorners(corners: Array<[number, number]>): void {
+    this.corners = corners;
+    this.update();
+  }
+
+  setOpacity(o: number): void {
+    this.opacity = o;
+    if (this.el) this.el.style.opacity = String(o);
+  }
+
+  onAdd(map: L.Map): this {
+    const el = document.createElement('img');
+    el.src = this.url;
+    el.alt = '';
+    el.draggable = false;
+    Object.assign(el.style, {
+      position: 'absolute', left: '0', top: '0', transformOrigin: '0 0',
+      width: `${this.width}px`, height: `${this.height}px`, maxWidth: 'none',
+      pointerEvents: 'none', userSelect: 'none', opacity: String(this.opacity),
+    });
+    map.getPane(this.pane)!.appendChild(el);
+    this.el = el;
+    map.on('zoomend viewreset', this.update, this);
+    map.on('zoomstart', this.hide, this);
+    this.update();
+    return this;
+  }
+
+  onRemove(map: L.Map): this {
+    map.off('zoomend viewreset', this.update, this);
+    map.off('zoomstart', this.hide, this);
+    this.el?.remove();
+    this.el = null;
+    return this;
+  }
+
+  private hide(): void {
+    if (this.el) this.el.style.visibility = 'hidden';
+  }
+
+  private update(): void {
+    const map = this._map as L.Map | undefined;
+    if (!this.el || !map || this.corners.length !== 4) return;
+    const pts = this.corners.map(([lat, lng]) => {
+      const p = map.latLngToLayerPoint([lat, lng]);
+      return [p.x, p.y] as [number, number];
+    });
+    const m = matrix3dFor(this.width, this.height, pts);
+    if (!m) return;
+    this.el.style.transform = `matrix3d(${m.join(',')})`;
+    this.el.style.visibility = '';
+  }
 }
 
 const DB = 'uvm-tree-positions';
@@ -59,6 +129,8 @@ async function tx<T>(mode: IDBTransactionMode, run: (s: IDBObjectStore) => IDBRe
 }
 
 const strip = ({ url: _u, overlay: _o, ...rest }: Live): Stored => rest;
+
+const boxOf = (corners: Array<[number, number]>): L.LatLngBounds => L.latLngBounds(corners);
 const put = (img: Live) => tx('readwrite', (s) => s.put(strip(img)));
 
 // ---------------------------------------------------------------- helpers
@@ -114,16 +186,25 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
   }
 
   /**
+   * Where an image lies, in full: the tilt-corrected fit once it has four good
+   * points, the stretch before that, and the estimate before it has any.
+   */
+  function placementOf(img: Stored): Placement {
+    const fit = img.pairs.length >= 2 ? fitPlacement(img.pairs, img.width, img.height) : null;
+    return fit ?? placementFromBounds(boundsOf(img), img.width, img.height);
+  }
+
+  /**
    * Only what is in view is on the map. Fourteen 8,000-pixel photographs held
    * decoded at once is gigabytes; one or two at a time is fine.
    */
   function refresh(): void {
     const view = map.getBounds().pad(0.2);
     for (const img of images) {
-      const b = boundsOf(img);
-      img.overlay.setBounds(L.latLngBounds(b));
+      const corners = placementOf(img).corners;
+      img.overlay.setCorners(corners);
       const aligningThis = align?.img === img;
-      const want = aligningThis ? align!.stage === 'image' : showAll && !img.hidden && !align && view.intersects(L.latLngBounds(b));
+      const want = aligningThis ? align!.stage === 'image' : showAll && !img.hidden && !align && view.intersects(boxOf(corners));
       if (want && !map.hasLayer(img.overlay)) img.overlay.addTo(map);
       if (!want && map.hasLayer(img.overlay)) map.removeLayer(img.overlay);
       img.overlay.setOpacity(aligningThis ? 1 : opacity);
@@ -133,7 +214,8 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
 
   function live(s: Stored): Live {
     const url = URL.createObjectURL(s.blob);
-    const overlay = L.imageOverlay(url, L.latLngBounds(boundsOf(s)), { pane: PANE, interactive: false });
+    const overlay = new WarpedImage(url, s.width, s.height, PANE);
+    overlay.setCorners(placementOf(s).corners);
     return { ...s, url, overlay };
   }
 
@@ -143,8 +225,9 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
     $('img-count').textContent = String(images.length);
     $('img-empty').hidden = images.length > 0;
     $('img-list').innerHTML = images.map((img) => {
+      const kind = img.aligned ? placementOf(img).kind : null;
       const status = img.aligned
-        ? `<span class="img-ok">Aligned · ±${(img.rms ?? 0).toFixed(1)} m over ${img.pairs.length} points</span>`
+        ? `<span class="img-ok">Aligned · ${kind === 'tilt' ? 'tilt-corrected' : 'stretched'} · ±${(img.rms ?? 0).toFixed(1)} m over ${img.pairs.length} points</span>`
         : `<span class="img-todo">Not aligned${img.cam ? ' · placed from its .geprint' : ' · no .geprint'}</span>`;
       return `<li>
         <button type="button" class="go img-name" data-img-go="${esc(img.id)}">${esc(img.id)}</button>
@@ -218,7 +301,7 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
     refresh();
     render();
     const first = images.find((i) => !i.aligned);
-    if (first) map.fitBounds(L.latLngBounds(boundsOf(first)));
+    if (first) map.fitBounds(boxOf(placementOf(first).corners));
   }
 
   function removeLive(img: Live): void {
@@ -240,7 +323,7 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
     align = { img, stage: 'image', pending: null, markers: L.layerGroup().addTo(map) };
     img.hidden = false;
     hooks.onAligning(true);
-    map.fitBounds(L.latLngBounds(boundsOf(img)));
+    map.fitBounds(boxOf(placementOf(img).corners));
     drawPairMarkers();
     refresh();
     render();
@@ -273,7 +356,7 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
     if (!align) return false;
     const { img } = align;
     if (align.stage === 'image') {
-      const [px, py] = pixelAt(boundsOf(img), img.width, img.height, latlng.lat, latlng.lng);
+      const [px, py] = placementOf(img).toImage(latlng.lat, latlng.lng);
       if (px < 0 || py < 0 || px > img.width || py > img.height) return true;
       align.pending = [px, py];
       align.stage = 'map';
@@ -291,9 +374,11 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
   }
 
   function refit(img: Live): void {
-    const fit = fitBounds(img.pairs, img.width, img.height);
-    img.aligned = fit ? fit.bounds : null;
-    img.rms = fit ? fit.rms : null;
+    // `aligned` stays the straight stretch: it is what teaches the next
+    // images their scale and offset. The residual is the best fit's.
+    const stretch = fitBounds(img.pairs, img.width, img.height);
+    img.aligned = stretch ? stretch.bounds : null;
+    img.rms = stretch ? placementOf(img).rms : null;
     void put(img);
     render();
   }
@@ -302,7 +387,7 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
     const box = $('align-panel');
     if (!align) { box.hidden = true; return; }
     const { img, stage } = align;
-    const fit = fitBounds(img.pairs, img.width, img.height);
+    const fit = img.pairs.length >= 2 ? fitPlacement(img.pairs, img.width, img.height) : null;
     box.hidden = false;
     $('align-title').textContent = `Aligning ${img.id}`;
     $('align-step').innerHTML = stage === 'image'
@@ -312,9 +397,15 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
       ? 'Use points far apart: one near each corner is best.'
       : !fit
         ? `${img.pairs.length} point(s). ${img.pairs.length < 2 ? 'One more' : 'Points further apart, across and down the image,'} needed to place it.`
-        : `${img.pairs.length} points · off by ±${fit.rms.toFixed(1)} m on average` +
+        : `${img.pairs.length} points · <strong>${fit.kind === 'tilt' ? 'tilt-corrected' : 'stretched'}</strong> · ` +
+          `off by ±${fit.rms.toFixed(1)} m on average` +
           ` (worst ${Math.max(...fit.residuals).toFixed(1)} m, point ${fit.residuals.indexOf(Math.max(...fit.residuals)) + 1}).` +
-          (img.pairs.length < 4 ? ' Two or three more points will show how good it is.' : '');
+          (fit.note ? ` ${fit.note}` : '') +
+          (img.pairs.length < 4
+            ? ` ${4 - img.pairs.length} more for the tilt correction.`
+            : img.pairs.length === 4 && fit.kind === 'tilt'
+              ? ' Four points always fit exactly — add two more to see how good it really is.'
+              : '');
     $<HTMLButtonElement>('align-undo').disabled = img.pairs.length === 0 && stage === 'image';
   }
 
@@ -353,7 +444,7 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
       return id ? images.find((i) => i.id === id) : undefined;
     };
     const go = pick('data-img-go');
-    if (go) return void map.fitBounds(L.latLngBounds(boundsOf(go)));
+    if (go) return void map.fitBounds(boxOf(placementOf(go).corners));
     const al = pick('data-img-align');
     if (al) return startAlign(al);
     const hide = pick('data-img-hide');
@@ -393,7 +484,10 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
     isAligning: () => align !== null,
     cancel: () => stopAlign(true),
     /** For the browser test. */
-    debug: () => images.map((i) => ({ id: i.id, width: i.width, height: i.height, aligned: i.aligned, rms: i.rms, pairs: i.pairs.length, bounds: boundsOf(i) })),
+    debug: () => images.map((i) => {
+      const p = placementOf(i);
+      return { id: i.id, width: i.width, height: i.height, aligned: i.aligned, rms: i.rms, pairs: i.pairs.length, bounds: boundsOf(i), kind: p.kind, corners: p.corners };
+    }),
     stage: () => align?.stage ?? null,
   };
 }

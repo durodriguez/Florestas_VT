@@ -48,7 +48,15 @@ layer, and this repository and its site are public ([to-do #17](TODO.md)).
    and the panel says how far the points disagree, in metres. Zoom in to click:
    the precision is the screen pixel. Aim for four or five points and under a
    metre.
-4. Every image aligned teaches the tool Earth's real field of view and offset,
+4. **Four or more points switch on the tilt correction.** With two or three,
+   the image is stretched as a rectangle — which fits a tilted print in one
+   place and not another, metres out elsewhere. From four, it is warped into
+   the slightly uneven four-sided shape a tilted camera actually produces, and
+   fits the whole print. Four points always fit exactly, which proves nothing:
+   **six or more** let the residual say how good it is. If a mis-matched point
+   would fold the image into a bow-tie, the tool refuses the warp, keeps the
+   stretch, and says so — undo the worst point (the panel names it) and redo it.
+5. Every image aligned teaches the tool Earth's real field of view and offset,
    so the next ones start closer.
 
 Overlapping images simply lie on top of each other; nothing is stitched or
@@ -58,9 +66,12 @@ all off.
 
 Two limits to know. **The images stay with that browser** — another computer,
 another browser, or clearing site data means adding and aligning them again.
-**The print is not perfectly flat**: Earth leaves a 2–3° tilt, and tall
-buildings lean slightly. Align on features at ground level, and the residual
-the panel reports is the honest measure of what is left.
+**The tilt correction removes the tilt, not everything.** Campus is not flat,
+and Google's imagery and the satellite layer each correct for hills in their
+own way, so some mismatch varies from place to place and no single warp
+removes it. Tall buildings lean, so align on features at ground level. The
+residual the panel reports is the honest measure of what is left; where it
+matters, align with points around the trees you are working on.
 
 Whether positions traced off Google's imagery may go into a published dataset
 is a question for Google's terms, not for this tool; check before relying on
