@@ -271,3 +271,35 @@ describe('toCsv — dedication wording', () => {
     expect(row!.dedication_label).toBe(text);
   });
 });
+
+describe('the note when a trunk tag disagrees with the record', () => {
+  const notes = (r: SurveyRecord): string => {
+    const [row] = Papa.parse<Record<string, string>>(toCsv([r]), { header: true }).data;
+    return row!.notes ?? '';
+  };
+
+  it('flags a tag that differs from the claimed tree\'s, and leaves the tag column alone', () => {
+    const r = claimed({ tag: '3326', claimedPlantId: 'UVM-3326', tagOnTrunk: '3849' });
+    expect(notes(r)).toContain('TAG MISMATCH: the trunk reads 3849; UVM-3326 is on file as tag 3326');
+    // The visit still belongs to the tree the surveyor picked.
+    expect(cell(r, 'tag')).toBe('3326');
+  });
+
+  it('passes on a tag found on a tree the map has none for', () => {
+    expect(notes(claimed({ tagOnTrunk: '4100' }))).toContain(
+      'TAG ON TRUNK: the trunk reads 4100; UVM-0493 is on file with no tag',
+    );
+  });
+
+  it('says nothing when the reading agrees, leading zeros and all', () => {
+    expect(notes(claimed({ tag: '620', tagOnTrunk: '0620' }))).not.toContain('TAG');
+  });
+
+  it('keeps a part-legible reading as typed', () => {
+    expect(notes(claimed({ tag: '3849', tagOnTrunk: '38?9' }))).toContain('the trunk reads 38?9');
+  });
+
+  it('says nothing for a record saved before the field existed', () => {
+    expect(notes(claimed())).not.toContain('TAG');
+  });
+});

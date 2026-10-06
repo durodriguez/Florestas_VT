@@ -294,8 +294,49 @@ either the survey never reached a block of trees, or grounds issues replacement
 tags from a range the survey did not cover. Those have different consequences
 and only grounds can say which it is.
 
+**A second case, October 2026, and a worse one.** The ash mapped as
+**UVM-3326** (tag 3326 in the 2023-24 survey, Athletic Campus) was found
+wearing tag **3849**, photographed. In the same survey 3849 belongs to
+**UVM-3849, a Norway spruce 233 m away**. Neither number is in the 2014 file, so
+both tags date from after 2014. Both accession numbers were copied from the tag
+numbers the 2023-24 surveyor recorded — this project only invents numbers from
+UVM-4001 up, for trees with no usable tag — so "3326" on the ash is a field
+reading, not ours.
+
+This is not a renumbering like tree 105, where a tree simply gained a new
+number. Here a number already on file for one tree is on another, and the map
+cannot tell which record is right. Possible explanations, each with a
+different fix:
+
+- the 2023-24 survey wrote down the wrong number for one of the two trees;
+- the tag was nailed to the wrong tree;
+- the same number was issued twice.
+
+**Nothing has been changed on either record.** Both are as the 2023-24 survey
+left them. Two things to check before asking grounds, because each rules an
+explanation in or out:
+
+- **Does the spruce, UVM-3849, also wear 3849?** If it does, the number has
+  been issued twice.
+- **Does the ash wear any other tag, such as 3326?**
+
+There could be more of these. **Since 6 October 2026 the survey app looks for
+them**: a typed tag whose tree is mapped more than 50 m away is stopped and
+questioned rather than claimed, and a tree picked from the map has a **Tag on
+the trunk** box whose disagreements arrive at import as `TAG MISMATCH` notes.
+The ash would have been caught both ways. See
+[FIELD-APP.md](FIELD-APP.md#update-a-mapped-tree).
+
 **Questions worth asking them.**
 
+0. How are tags issued and recorded — who assigns the number, and where is the
+   list? Can the same number end up on two trees?
+0. **What range of numbers do they issue?** This project issues accessions
+   from UVM-4001 up for untagged trees, on the assumption that no real tag is
+   above 3849, the highest the 2023-24 survey recorded. If grounds has tags at
+   4001 or above, an accession like UVM-4100 will be read as tag 4100 by
+   anyone looking at it. Records stay correct (the tag is its own column), but
+   the block may need to move.
 1. When a tag is replaced, does the new number come from a fresh sequence, or
    is it reused from a pool?
 2. Is there a record kept of *old number → new number*? If so that record is

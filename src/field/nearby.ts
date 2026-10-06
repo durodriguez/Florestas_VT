@@ -148,6 +148,15 @@ export function mappedByTagOrId(typed: string, trees: MappedTree[]): MappedTree 
   return mappedByTag(typed, trees) ?? trees.find((t) => t.id.toUpperCase() === id);
 }
 
+/**
+ * How far a typed tag's tree may be mapped from the surveyor before the app
+ * stops and asks. Mapped positions are known to be off by up to 41 m in the
+ * Redstone pine grove, so this is generous; a tag whose tree is mapped further
+ * away than this is far more likely on a different tree than the record says —
+ * tag 3849, on an ash, is on file for a spruce 233 m off.
+ */
+export const TAG_FAR_M = 50;
+
 /** Metres within which a "new" tree is more likely a mapped one. */
 export const DUPLICATE_M = 5;
 

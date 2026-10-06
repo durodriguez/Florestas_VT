@@ -46,6 +46,23 @@ visits are to a tree already on it, and the first question is *which one*.
    notes if a plaque has gone.
 5. Photo, measurements and condition, notes. Save.
 
+**A typed tag whose tree is mapped more than 50 m away is not taken on
+trust.** The app stops and says so, because that is far more often a tag on a
+different tree than the record says than a tree mapped 50 m out — tag 3849 was
+found on an ash whose record says 3326, and on file 3849 is a spruce 233 m
+off. Two ways on: **Pick the tree in front of me** offers the trees around you
+and carries the reading to whichever you pick; **It is UVM-… — the map has it
+in the wrong place** takes the far record and puts the pin on you to correct
+its position.
+
+**A tree picked from the map asks what its tag reads.** The **Tag on the
+trunk** box on the picked tree's card takes the number on the metal, if there
+is one. Agreement is noted on screen and nothing more. A different number, or a
+tag on a tree the map has none for, goes in the export as a `TAG MISMATCH` or
+`TAG ON TRUNK` note, which `npm run import` lists for review. It never changes
+the tree's tag: which number is right is a question for the records and for
+grounds, not for the importer.
+
 **The tree keeps its mapped position** unless you press **Its mapped position
 is wrong** and move the pin. Until then a tap on the map does nothing, so a
 finger that misses a dot cannot drag a curated position onto a footpath. For

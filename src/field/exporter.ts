@@ -7,6 +7,7 @@
 import JSZip from 'jszip';
 import type { SurveyRecord, PhotoBlob } from './db';
 import { speciesChanged } from './species';
+import { normalizeTag } from '../accession';
 
 /** Column names match survey/mapping.json, so the importer needs no config. */
 /**
@@ -132,6 +133,19 @@ function notesFor(r: SurveyRecord): string {
     parts.push(
       `CLAIMED BY POSITION: matched to ${r.claimedPlantId}` +
       `${r.claimedMeters === null ? '' : ` from ${r.claimedMeters} m`}`,
+    );
+  }
+  // The tag the surveyor read on a tree they picked from the map. Agreement is
+  // not news; anything else is, and only someone with the records and grounds'
+  // answer can say which number is right.
+  // A part-legible reading ("38?9") is still worth passing on, as typed.
+  const raw = (r.tagOnTrunk ?? '').trim();
+  const read = normalizeTag(raw) ?? raw;
+  if (read && r.claimedPlantId && read !== (normalizeTag(r.tag) ?? r.tag)) {
+    parts.push(
+      r.tag
+        ? `TAG MISMATCH: the trunk reads ${read}; ${r.claimedPlantId} is on file as tag ${r.tag}`
+        : `TAG ON TRUNK: the trunk reads ${read}; ${r.claimedPlantId} is on file with no tag`,
     );
   }
   // A name the species list did not recognise is either a new taxon for
