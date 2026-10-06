@@ -105,6 +105,13 @@ between areas that already have owners, labelling pieces too small to find;
 *Trace* clicks out an outline from scratch. It saves nothing; it hands you a GeoJSON file to commit.
 See [docs/CAMPUS-AREAS.md](docs/CAMPUS-AREAS.md).
 
+**Position editor** — an internal tool at `/positions/` for correcting where
+trees sit, at a desk: every mapped tree on satellite imagery, drag a dot onto its
+crown, dozens or hundreds in a session, saved in the browser as you go.
+**Export moves** hands you a file that `npm run positions` applies. A correction
+is not a survey visit and the public map does not show it as one. See
+[docs/POSITIONS.md](docs/POSITIONS.md).
+
 **Survey intake** — `npm run import` merges a field export into the dataset:
 assigns accession numbers, resolves species from common or scientific names,
 normalises `EXC`/`Very Good`/`g` onto the condition vocabulary, reads whatever
@@ -144,6 +151,7 @@ species never reaches the live site.
 | **What became of the 2014 tags** | [docs/TAG-COVERAGE.md](docs/TAG-COVERAGE.md) |
 | **Data sources, citations and licences** | [data/SOURCES.md](data/SOURCES.md) |
 | **The field survey app** | [docs/FIELD-APP.md](docs/FIELD-APP.md) |
+| **Correcting positions at a desk** | [docs/POSITIONS.md](docs/POSITIONS.md) |
 | **Hosting, domains, scaling** | [docs/DEPLOY.md](docs/DEPLOY.md) |
 | **What's planned next** | [docs/TODO.md](docs/TODO.md) |
 
@@ -155,6 +163,7 @@ species never reaches the live site.
 | `npm run data` | Validate `data/*.csv` and regenerate `public/data/`, `public/field/` and `public/species/` |
 | `npm run build` | Validate, typecheck and build to `dist/` |
 | `npm run import -- <file.csv>` | Merge a field-survey export into `data/plants.csv` and `data/observations.csv` (dry run by default) |
+| `npm run positions -- <positions.csv>` | Apply position corrections exported from `/positions/` to `data/plants.csv` (dry run by default) |
 | `npm run import:arcgis -- <layer.geojson>` | Load UVM's ArcGIS tree layer (dry run by default) |
 | `npm run import:city -- <file.csv>` | Clip Burlington's street-tree inventory to campus (dry run by default) |
 | `npm run areas` | File each plant under the campus area its coordinates fall in (dry run by default) |
