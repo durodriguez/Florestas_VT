@@ -47,6 +47,12 @@
         <label class="ghost-btn add-btn">Add images and .geprint files…
           <input type="file" id="img-add" multiple accept=".jpg,.jpeg,.png,.webp,.geprint" hidden>
         </label>
+        <div class="img-files">
+          <button type="button" id="align-export" class="ghost-btn" disabled>Export alignments</button>
+          <label class="ghost-btn">Import alignments
+            <input type="file" id="align-import" accept=".json,application/json" hidden>
+          </label>
+        </div>
         <p id="img-msg" class="hint img-msg"></p>
         <div class="img-controls">
           <label><input type="checkbox" id="img-show" checked> Show</label>

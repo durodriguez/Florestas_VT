@@ -15,6 +15,7 @@ import {
   calibrate, estimateBounds, fitBounds, fitPlacement, matrix3dFor, parseGeprint, placementFromBounds,
   type Bounds, type Camera, type Pair, type Placement,
 } from './imagery-math';
+import { alignmentsToJson, matchAlignments, parseAlignments, type Alignment } from './alignments';
 
 interface Stored {
   id: string;
@@ -105,6 +106,24 @@ class WarpedImage extends L.Layer {
 }
 
 const DB = 'uvm-tree-positions';
+/** Imported alignments whose images have not been added yet. */
+const PENDING = 'uvm-tree-positions/pending-alignments';
+
+function loadPending(): Alignment[] {
+  try {
+    const raw = localStorage.getItem(PENDING);
+    return raw ? (JSON.parse(raw) as Alignment[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function savePending(list: Alignment[]): void {
+  try {
+    if (list.length) localStorage.setItem(PENDING, JSON.stringify(list));
+    else localStorage.removeItem(PENDING);
+  } catch { /* the import message already said what happened */ }
+}
 const STORE = 'imagery';
 const PANE = 'my-imagery';
 
@@ -241,6 +260,7 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
     }).join('');
     renderAlign();
     void renderUsage();
+    $<HTMLButtonElement>('align-export').disabled = !images.some((i) => i.pairs.length);
   }
 
   async function renderUsage(): Promise<void> {
@@ -271,6 +291,7 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
     try { await navigator.storage?.persist?.(); } catch { /* best effort */ }
 
     let added = 0;
+    let fromFile = 0;
     const problems: string[] = [];
     for (const f of pictures) {
       message(`Reading ${f.name}…`);
@@ -287,6 +308,14 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
         images.sort((a, b) => a.id.localeCompare(b.id));
         await put(img);
         added += 1;
+        // An alignment imported before its image: applied now it is here.
+        const pending = loadPending();
+        const waiting = pending.find((a) => a.id === id && a.width === width && a.height === height);
+        if (waiting) {
+          applyAlignment(img, waiting);
+          savePending(pending.filter((a) => a !== waiting));
+          fromFile += 1;
+        }
       } catch (err) {
         problems.push(`${f.name}: ${(err as Error).message}`);
       }
@@ -294,6 +323,7 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
     const unpaired = pictures.filter((f) => !prints.has(stem(f.name))).length;
     message(
       `Added ${added} image(s).` +
+      (fromFile ? ` ${fromFile} aligned from an imported file.` : '') +
       (unpaired ? ` ${unpaired} had no matching .geprint and were placed in the middle of the view.` : '') +
       (problems.length ? ` Problems: ${problems.join('; ')}.` : ''),
       problems.length > 0,
@@ -383,6 +413,53 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
     render();
   }
 
+  function applyAlignment(img: Live, a: Alignment): void {
+    img.pairs = a.pairs.map((p) => ({ ...p }));
+    if (!img.cam && a.cam) img.cam = a.cam;
+    refit(img);
+  }
+
+  // ---------------------------------------------------------------- files
+
+  function exportAlignments(): void {
+    const json = alignmentsToJson(images);
+    const d = new Date();
+    const p = (n: number) => String(n).padStart(2, '0');
+    const url = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `alignments-${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 30_000);
+    message(`Exported the alignments of ${images.filter((i) => i.pairs.length).length} image(s). Keep the file with your images.`);
+  }
+
+  async function importAlignments(file: File): Promise<void> {
+    const parsed = parseAlignments(await file.text());
+    if (typeof parsed === 'string') return message(parsed, true);
+    const { apply, replacing, wait, mismatched } = matchAlignments(parsed, images);
+    if (replacing.length && !confirm(
+      `${replacing.length} image(s) here already have different alignment points (${replacing.join(', ')}). Replace them with the ones in the file?`,
+    )) {
+      return message('Nothing imported.');
+    }
+    if (align) stopAlign(true);
+    for (const a of apply) applyAlignment(images.find((i) => i.id === a.id)!, a);
+    // Waiting ones replace any older waiting copy of the same image.
+    const ids = new Set(wait.map((a) => a.id));
+    savePending([...loadPending().filter((a) => !ids.has(a.id)), ...wait]);
+    refresh();
+    render();
+    message(
+      `Applied ${apply.length} alignment(s).` +
+      (wait.length ? ` ${wait.length} will apply when you add their images (${wait.map((a) => a.id).join(', ')}).` : '') +
+      (mismatched.length ? ` Not applied — same name but a different image size here: ${mismatched.join(', ')}.` : ''),
+      mismatched.length > 0,
+    );
+  }
+
   function renderAlign(): void {
     const box = $('align-panel');
     if (!align) { box.hidden = true; return; }
@@ -464,6 +541,12 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
     }
   });
   $('align-done').addEventListener('click', () => stopAlign(true));
+  $('align-export').addEventListener('click', exportAlignments);
+  $('align-import').addEventListener('change', (e) => {
+    const input = e.target as HTMLInputElement;
+    const f = input.files?.[0];
+    if (f) void importAlignments(f).finally(() => { input.value = ''; });
+  });
   $('align-undo').addEventListener('click', undoPoint);
 
   // ---------------------------------------------------------------- start
