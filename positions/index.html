@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Correct the mapped positions of campus trees on satellite imagery.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#154734">
+  <title>Tree positions — UVM Trees</title>
+</head>
+<body>
+  <header class="bar">
+    <img class="bar-mark" src="/uvm-mark.png" alt="" width="28" height="28">
+    <h1>Tree positions</h1>
+    <span id="save-state" class="save-state"></span>
+    <button type="button" id="export" class="bar-btn" disabled>Export moves</button>
+  </header>
+
+  <main class="layout">
+    <aside class="side">
+      <label class="find">
+        <span class="visually-hidden">Find a tree</span>
+        <input id="find" type="search" autocomplete="off" spellcheck="false"
+               placeholder="Find a tag or UVM number, then Enter">
+      </label>
+      <p id="find-msg" class="hint find-msg"></p>
+
+      <section id="selected" class="card" hidden></section>
+
+      <details class="help">
+        <summary>How it works</summary>
+        <ul>
+          <li><strong>Drag any dot</strong> onto the crown it belongs to. No need to select it first.</li>
+          <li>With a tree selected, the <strong>arrow keys</strong> nudge it 0.2 m (1 m with Shift).</li>
+          <li><strong>Ctrl+Z</strong> (⌘Z) undoes the last move. <strong>Esc</strong> deselects.</li>
+          <li>Moved trees turn gold, with a line back to where the record had them.</li>
+          <li>Every move is kept in this browser as you go. When you are done,
+            <strong>Export moves</strong> and send the file — <code>npm run positions</code>
+            applies it. A move is not a survey visit, and the public map will not show it as one.</li>
+        </ul>
+      </details>
+
+      <div class="moves-head">
+        <span class="label">Moves <span id="move-count" class="count">0</span></span>
+        <button type="button" id="undo" class="ghost-btn" disabled>Undo last</button>
+      </div>
+      <p id="moves-note" class="hint" hidden></p>
+      <ol id="moves" class="moves"></ol>
+      <p id="moves-empty" class="hint">No moves yet.</p>
+      <button type="button" id="clear" class="danger-btn" disabled>Clear all moves</button>
+    </aside>
+
+    <div id="map" class="map" aria-label="Map of campus trees on satellite imagery"></div>
+  </main>
+
+  <script type="module" src="../src/positions/main.ts"></script>
+</body>
+</html>

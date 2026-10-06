@@ -627,8 +627,11 @@ that close, or UVM-4593 is a second point for the same tree. The surveyor's
 judgement is that 4593 is misplaced like the rest, and that **every position in
 the grove needs correcting**, not only the ones caught so far.
 
-**What to do.** Walk the grove with the survey app and move each pin onto its
-crown — the same thing that fixed 2702 and 2777. Start with the points on the
+**What to do.** Correct the grove in [`/positions/`](POSITIONS.md), the desk
+tool built for this on 6 October 2026: drag each dot onto its crown on the
+imagery, export, `npm run positions`. Where the imagery cannot settle which
+crown is which, walk it with the survey app — the same thing that fixed 2702
+and 2777. Start with the points on the
 parking lot, which are wrong by definition. Do not shift the grove in bulk from
 a desk: the errors run in different directions and distances, so there is no
 single offset to apply.
