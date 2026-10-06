@@ -992,7 +992,7 @@ UVM-4264,,pinus-nigra,44.482761,-73.195656,"Mapped in UVM's ArcGIS tree layer, 2
 UVM-4265,,pinus-nigra,44.482794,-73.195612,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,21d73804-64e0-4274-b9c3-ff4227c81c48
 UVM-4266,,pinus-nigra,44.482839,-73.195554,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,86b461fc-98ed-4d01-a78e-fb989d967401
 UVM-3238,3238,pinus-nigra,44.482870,-73.195480,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,dca754d7-bf07-4158-a185-174352142d39
-UVM-2865,2865,tilia-americana,44.474628,-73.195299,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,dc7c9ada-de0b-45e7-8b25-a70847987d6c
+UVM-2865,2865,tilia-americana,44.474652,-73.195312,"Position corrected on imagery, 2026-10-06",athletic,,,,dc7c9ada-de0b-45e7-8b25-a70847987d6c
 UVM-2866,2866,ulmus-sp,44.474573,-73.195426,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,d4847f24-13a5-4713-8476-074aef42aac6
 UVM-1627,1627,salix-sp,44.474371,-73.195707,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,80b74a47-0467-447f-90ec-08b02faacb08
 UVM-4267,,robinia-pseudoacacia,44.474390,-73.195740,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,ef7952d7-4835-4b34-9287-493f52c28ae0
@@ -1004,10 +1004,10 @@ UVM-4270,,quercus-bicolor,44.474260,-73.195803,"Mapped in UVM's ArcGIS tree laye
 UVM-4271,,quercus-rubra,44.474247,-73.195949,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,4bfd3350-5318-4587-afcc-cd1f4bbc1ae9
 UVM-4272,,catalpa-speciosa,44.474330,-73.195847,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,509d25a3-31c4-4ca1-b35c-142aa5f1d87d
 UVM-4273,,quercus-bicolor,44.474334,-73.195946,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,eeda11fe-7aa0-4c55-8078-ed731fc74adb
-UVM-2869,2869,zelkova-serrata,44.474555,-73.195819,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,6dbe5f16-8609-45e0-a0a4-29696d8da36f
-UVM-2868,2868,zelkova-serrata,44.474614,-73.195756,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,467b9296-0e95-4439-aa61-49b99aa36867
-UVM-4274,,zelkova-serrata,44.474660,-73.195713,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,41041536-9ed0-4b16-b67d-7390e0cc08c6
-UVM-4275,,zelkova-serrata,44.474661,-73.195521,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,164f5684-9f05-4414-8956-fab891730fd3
+UVM-2869,2869,zelkova-serrata,44.474573,-73.195793,"Position corrected on imagery, 2026-10-06",athletic,,,,6dbe5f16-8609-45e0-a0a4-29696d8da36f
+UVM-2868,2868,zelkova-serrata,44.474622,-73.195744,"Position corrected on imagery, 2026-10-06",athletic,,,,467b9296-0e95-4439-aa61-49b99aa36867
+UVM-4274,,zelkova-serrata,44.474676,-73.195694,"Position corrected on imagery, 2026-10-06",athletic,,,,41041536-9ed0-4b16-b67d-7390e0cc08c6
+UVM-4275,,zelkova-serrata,44.474683,-73.195558,"Position corrected on imagery, 2026-10-06",athletic,,,,164f5684-9f05-4414-8956-fab891730fd3
 UVM-4276,,picea-glauca,44.474730,-73.195815,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,cdb451b4-6c69-441f-98c8-e8bb1550cd53
 UVM-1619,1619,acer-platanoides,44.474654,-73.195882,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,ac446738-91a0-4582-a179-d8308f724ad8
 UVM-1617,1617,crataegus-sp,44.474800,-73.195859,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,4a0862de-7113-4b7f-810e-4cc259227e1c
