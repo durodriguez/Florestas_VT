@@ -17,6 +17,7 @@ import { getMeta, setMeta } from './db';
 import { STATUSES, STATUS_LABELS, absent } from './status';
 import {
   describeDistance, likelyDuplicate, mappedByTagOrId, mappedNeighbours, nearbyTrees, NEARBY_COLOURS,
+  normalizeTag, TAG_FAR_M,
   type MappedTree, type NearbyTree,
 } from './nearby';
 import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
@@ -69,6 +70,16 @@ let hasTag: boolean | null = null;
  * must not move a curated position.
  */
 let movingTree = false;
+/**
+ * The number on the metal tag of a tree picked from the map, as read off the
+ * trunk. Sent as a note when it disagrees with the record — never as the tag.
+ */
+let tagOnTrunk = '';
+/**
+ * A tag typed in an update that belongs to a tree mapped far away, carried
+ * over to whichever tree the surveyor then picks as the one in front of them.
+ */
+let pendingTagRead = '';
 /** The dedication text a claimed tree brought with it, to tell an edit from a prefill. */
 let prefilledDedication = '';
 /** Exactly what the last render put on screen, so a tap cannot mis-resolve. */
@@ -285,11 +296,27 @@ function renderTagLookup(): void {
   const onMap = mappedFor(tag);
   if (onMap) {
     if (mode === 'update') {
+      const hit = asClaim(onMap);
+      // A tag whose tree is mapped far from here is not taken on trust. Tag
+      // 3849 was found on an ash; on file it is a spruce 233 m away, and
+      // claiming it would have filed the visit, photo and all, on the spruce.
+      if (currentLatLng() && hit.meters > TAG_FAR_M && claimed?.tree.id !== onMap.id) {
+        if (claimed && claimedBy === 'tag') claim(null);
+        box.className = 'tag-result tag-result--miss';
+        box.innerHTML =
+          `<strong>Tag ${escapeHtml(tag)} is on file for a tree ${Math.round(hit.meters)} m from you</strong>` +
+          `<span>${escapeHtml(onMap.common)} · ${escapeHtml(onMap.id)}</span>` +
+          '<span class="tag-meta">If this tag is on the tree in front of you, the records disagree. ' +
+          'Pick the tree from the map, and the tag goes with it as a note for the desk.</span>' +
+          '<button type="button" class="inline-btn" data-tag-elsewhere>Pick the tree in front of me</button>' +
+          `<button type="button" class="inline-btn" data-tag-far-claim>It is ${escapeHtml(onMap.id)} — the map has it in the wrong place</button>`;
+        return;
+      }
       // Typing the tag is the same answer as picking the tree from the list,
       // and gets the same treatment — including keeping its mapped position.
       box.innerHTML = '';
       box.className = 'tag-result';
-      if (claimed?.tree.id !== onMap.id) claim(asClaim(onMap), 'tag');
+      if (claimed?.tree.id !== onMap.id) claim(hit, 'tag');
       return;
     }
     box.className = 'tag-result tag-result--miss';
@@ -463,6 +490,11 @@ function renderNearby(): void {
     </li>`)
     .join('');
   box.hidden = false;
+  const pending = $('nearby-pending');
+  pending.hidden = !pendingTagRead;
+  pending.innerHTML = pendingTagRead
+    ? `Tag <strong>${escapeHtml(pendingTagRead)}</strong> read on the trunk. Pick the tree it is on.`
+    : '';
   // Stashed so a tap looks up what was on screen, rather than recomputing
   // against a fix that may have moved between the render and the finger.
   offered = hits;
@@ -536,7 +568,34 @@ function renderClaimed(): void {
     (t.tag ? ` · tag ${escapeHtml(t.tag)}` : ' · no tag') +
     (claimedBy === 'position' ? ` · ${escapeHtml(describeDistance(claimed))} when you picked it` : '') +
     `<br><span class="tag-meta">${t.surveyed ? `Last surveyed ${escapeHtml(t.surveyed)}` : 'Never surveyed since it was mapped'}</span></span>` +
+    // Picked by position, so nobody has yet said what its tag reads. Asked
+    // here, beside the tree it is about, rather than trusted from the record.
+    (claimedBy === 'position'
+      ? `<label class="tag-read">Tag on the trunk
+           <input id="tag-read" type="text" inputmode="numeric" autocomplete="off"
+                  value="${escapeHtml(tagOnTrunk)}" placeholder="${t.tag ? `File: ${escapeHtml(t.tag)}` : 'None on file'}"></label>
+         <span id="tag-read-note" class="tag-meta tag-read-note"></span>`
+      : '') +
     '<button type="button" id="claim-clear">Not this tree</button>';
+  renderTagReadNote();
+}
+
+/** Says whether the reading agrees with the record, as it is typed. */
+function renderTagReadNote(): void {
+  const note = document.getElementById('tag-read-note');
+  if (!note || !claimed) return;
+  const raw = tagOnTrunk.trim();
+  const read = normalizeTag(raw) ?? raw;
+  const onFile = claimed.tree.tag ? (normalizeTag(claimed.tree.tag) ?? claimed.tree.tag) : '';
+  const differs = read !== '' && read !== onFile;
+  note.className = `tag-meta tag-read-note${differs ? ' tag-read-note--differs' : ''}`;
+  note.textContent = !read
+    ? ''
+    : !differs
+      ? 'Matches the record.'
+      : onFile
+        ? `Differs from the record (${onFile}) — flagged for the desk. The tree's records are not changed.`
+        : 'This tree has no tag on file — the reading is passed to the desk.';
 }
 
 /**
@@ -565,6 +624,9 @@ function claim(hit: NearbyTree | null, by: 'tag' | 'position' = 'position'): voi
   if (claimed) undoPrefill();
   claimed = hit;
   claimedBy = by;
+  // A reading carried from a far-away tag belongs to the tree picked next.
+  tagOnTrunk = hit && by === 'position' ? pendingTagRead : '';
+  if (hit) pendingTagRead = '';
   setMovingTree(false);
   if (hit) {
     // Seed the species from the map's record; the surveyor can still correct
@@ -607,6 +669,7 @@ function setMode(next: Mode | null): void {
   hasTag = null;
   renderHasTag();
   $<HTMLInputElement>('tag').value = '';
+  pendingTagRead = '';
   for (const b of $('status-seg').querySelectorAll('[aria-checked]')) {
     b.setAttribute('aria-checked', String(b.getAttribute('data-status') === 'active'));
   }
@@ -924,6 +987,8 @@ function resetForm(): void {
   reference = { species: '', taxonId: '', source: '' };
   claimed = null;
   prefilledDedication = '';
+  tagOnTrunk = '';
+  pendingTagRead = '';
   movingTree = false;
   renderClaimed();
   setTaxon(undefined, false);
@@ -1041,6 +1106,7 @@ async function save(): Promise<void> {
     referenceTaxonId: reference.taxonId,
     referenceSource: reference.source,
     claimedPlantId: claimed?.tree.id ?? '',
+    tagOnTrunk: mode === 'update' && claimedBy === 'position' ? tagOnTrunk.trim() : '',
     claimedMeters: claimed && point ? Math.round(claimed.meters) : null,
     claimedLat: claimed?.tree.lat ?? null,
     claimedLng: claimed?.tree.lng ?? null,
@@ -1255,6 +1321,28 @@ $('tag-result').addEventListener('click', (e) => {
       $<HTMLInputElement>('tag').value = tag;
       claim(asClaim(tree), 'tag');
     }
+  } else if (el.closest('[data-tag-elsewhere]')) {
+    // The tag is on this tree, whatever the record says. Keep the reading,
+    // clear the box so the trees around the surveyor are offered, and attach
+    // the reading to whichever one they pick.
+    pendingTagRead = tag;
+    $<HTMLInputElement>('tag').value = '';
+    lookUpTagNow();
+    $('nearby').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (el.closest('[data-tag-far-claim]')) {
+    const tree = mappedFor(tag);
+    if (tree) {
+      claim(asClaim(tree), 'tag');
+      // Saying the map has it in the wrong place is saying it is here, where
+      // the surveyor stands: the pin starts on them, ready to be nudged onto
+      // the crown, rather than on the far-off spot the map has.
+      setMovingTree(true);
+      const here = currentLatLng();
+      if (here) {
+        movePin(L.latLng(here.lat, here.lng));
+        map.setView([here.lat, here.lng], Math.max(map.getZoom(), 19));
+      }
+    }
   } else if (el.closest('[data-switch-new]')) {
     setMode('new');
     hasTag = true;
@@ -1271,6 +1359,11 @@ $('dup-warn').addEventListener('click', (e) => {
   claim(hit);
 });
 $('move-tree').addEventListener('click', () => setMovingTree(!movingTree));
+$('claimed').addEventListener('input', (e) => {
+  if ((e.target as HTMLElement).id !== 'tag-read') return;
+  tagOnTrunk = (e.target as HTMLInputElement).value;
+  renderTagReadNote();
+});
 $('claimed').addEventListener('click', (e) => {
   if ((e.target as HTMLElement).id !== 'claim-clear') return;
   // "Not this tree" is the one place the tag goes too: the tag is what chose it.
@@ -1278,7 +1371,9 @@ $('claimed').addEventListener('click', (e) => {
   claim(null);
   if (byTag) {
     $<HTMLInputElement>('tag').value = '';
-    renderTagLookup();
+    // Both, not only the lookup: the nearby list was drawn while the tag was
+    // still in the box, and stays hidden until it is drawn again.
+    lookUpTagNow();
   }
 });
 

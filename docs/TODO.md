@@ -298,7 +298,10 @@ and only grounds can say which it is.
 **UVM-3326** (tag 3326 in the 2023-24 survey, Athletic Campus) was found
 wearing tag **3849**, photographed. In the same survey 3849 belongs to
 **UVM-3849, a Norway spruce 233 m away**. Neither number is in the 2014 file, so
-both tags date from after 2014.
+both tags date from after 2014. Both accession numbers were copied from the tag
+numbers the 2023-24 surveyor recorded — this project only invents numbers from
+UVM-4001 up, for trees with no usable tag — so "3326" on the ash is a field
+reading, not ours.
 
 This is not a renumbering like tree 105, where a tree simply gained a new
 number. Here a number already on file for one tree is on another, and the map
@@ -317,13 +320,23 @@ explanation in or out:
   been issued twice.
 - **Does the ash wear any other tag, such as 3326?**
 
-There could be more of these. Nothing finds them except somebody reading the
-trunk and comparing.
+There could be more of these. **Since 6 October 2026 the survey app looks for
+them**: a typed tag whose tree is mapped more than 50 m away is stopped and
+questioned rather than claimed, and a tree picked from the map has a **Tag on
+the trunk** box whose disagreements arrive at import as `TAG MISMATCH` notes.
+The ash would have been caught both ways. See
+[FIELD-APP.md](FIELD-APP.md#update-a-mapped-tree).
 
 **Questions worth asking them.**
 
 0. How are tags issued and recorded — who assigns the number, and where is the
    list? Can the same number end up on two trees?
+0. **What range of numbers do they issue?** This project issues accessions
+   from UVM-4001 up for untagged trees, on the assumption that no real tag is
+   above 3849, the highest the 2023-24 survey recorded. If grounds has tags at
+   4001 or above, an accession like UVM-4100 will be read as tag 4100 by
+   anyone looking at it. Records stay correct (the tag is its own column), but
+   the block may need to move.
 1. When a tag is replaced, does the new number come from a fresh sequence, or
    is it reused from a pool?
 2. Is there a record kept of *old number → new number*? If so that record is

@@ -187,6 +187,11 @@ textarea { min-height: 78px; resize: vertical; }
    this way — but it is said out loud, because claiming it is a re-survey. */
 .nearby-seen { font-size: 12.5px; color: var(--fair); }
 .nearby-none { width: 100%; }
+.nearby-pending { margin: 0 0 8px; color: var(--ink); }
+.tag-read { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 14px; }
+.tag-read input { width: 7.5em; font-size: 18px; font-weight: 650; letter-spacing: .03em; }
+.tag-read-note:empty { display: none; }
+.tag-read-note--differs { color: var(--poor); font-weight: 600; }
 
 /* What was claimed, and how far away it was: the distance is the part a
    reviewer needs, since a match at 20 m deserves more doubt than one at 3 m. */

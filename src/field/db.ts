@@ -91,6 +91,14 @@ export interface SurveyRecord {
    * the field is on screen, and is never stored.
    */
   dedication: string;
+  /**
+   * The number on the metal tag, read off the trunk of a tree picked from the
+   * map rather than found by its tag. Blank when nobody read one. Never sent
+   * as the tag: a reading that disagrees with the record is a question for the
+   * desk, not a correction, so it travels as a note. Absent on records saved
+   * before it existed.
+   */
+  tagOnTrunk?: string;
   surveyedOn: string;
   surveyor: string;
   photoName: string | null;
