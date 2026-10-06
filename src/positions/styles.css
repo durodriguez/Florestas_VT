@@ -128,3 +128,5 @@ button, input { font: inherit; color: inherit; }
   background: #ff2d55; color: #fff; font: 700 11px/1 var(--font); border: 2px solid #fff;
 }
 .leaflet-container.is-aligning { cursor: crosshair; }
+.img-files { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
+.img-files .ghost-btn { text-align: center; padding: .35rem; }

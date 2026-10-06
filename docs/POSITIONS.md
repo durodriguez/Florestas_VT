@@ -64,8 +64,20 @@ trimmed. Only images in view are drawn, so fourteen large prints do not slow
 the page. **Opacity** blends them with the satellite layer; **Show** turns them
 all off.
 
-Two limits to know. **The images stay with that browser** — another computer,
-another browser, or clearing site data means adding and aligning them again.
+**The images stay with that browser** — another computer, another browser,
+clearing site data, or Safari after a week away means adding them again. The
+alignments need not be redone:
+
+- **Export alignments** saves every image's matched points to
+  `alignments-<date>.json` — a few kilobytes, no images. Keep it with the
+  images, and export again after aligning more.
+- **Import alignments** on any computer puts them back. Add the images first or
+  the file first, either works: an alignment for an image not yet added waits
+  for it. An image here with the same name but a different pixel size is a
+  different picture, and is refused; one that already has different points is
+  replaced only after asking.
+
+The other limit:
 **The tilt correction removes the tilt, not everything.** Campus is not flat,
 and Google's imagery and the satellite layer each correct for hills in their
 own way, so some mismatch varies from place to place and no single warp
