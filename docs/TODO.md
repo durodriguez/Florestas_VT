@@ -669,7 +669,8 @@ data, and should be corrected once it arrives.
   match cleanly. Dense stands, where crowns merge, will not: the Redstone pine
   grove is exactly that case.
 - **Unsurveyable areas.** Treetop counts from above miss the trees under the
-  canopy, so in woods they **undercount**. A sounder method combines canopy
+  canopy, so in woods they **undercount**, less so with dense leaf-off data
+  that reaches the smaller trees. A sounder method combines canopy
   from LiDAR with a few field plots: counts per plot, scaled up to the
   canopy's area. This is also how i-Tree Eco's *sample* projects work. A tree
   in those areas would not appear on the map individually; it would be a
@@ -680,16 +681,34 @@ data, and should be corrected once it arrives.
 
 **Questions for SAL.** They decide what is possible.
 
+- **Point density (points per square metre). This matters most.** The
+  scanner looks almost straight down, and a trunk is a narrow, vertical target.
+  At about 2 points/m² (from memory, roughly the standard US statewide
+  specification) a trunk often gets no hits at all: the data shows branches
+  and ground, not stems. From about 8/m², or from a drone, trunks start to
+  show, and positions and counts can come from the stems themselves.
+- **Leaf-on or leaf-off.** This matters second, and cuts both ways.
+  - **Leaf-off** sends more pulses through to trunks, smaller trees and the
+    ground, which suits all three uses above. Dense *and* leaf-off would be the
+    best case. It is the better season for counting the trees under the
+    canopy in Centennial Woods.
+  - **Leaf-on** gives solid crowns. Treetops are easier to pick out, and crowns
+    can be measured, but smaller trees hide underneath.
+  - **Conifers** look the same either way.
+  - **Sparse and leaf-off** still gives a usable layer of treetops for
+    open-grown trees and conifers, but not positions or counts from the stems.
 - **Flight year.** Trees planted or removed since then will differ.
-- **Leaf-on or leaf-off.** Statewide LiDAR is usually flown leaf-off, which
-  shows the ground well and deciduous crowns poorly. That matters for all
-  three uses.
-- **Point density.**
 - **Derived layers.** They may already have a canopy height model or a tree
   canopy layer, such as the one behind their Burlington Tree Canopy
   assessment.
 - **Terms.** This repository and its site are **public**. Positions derived
   from their data would be published, so the terms must allow it.
+
+**A possible bonus: crown measurements.** Leaf-on LiDAR can measure crown width
+and height to crown base. These are the fields i-Tree had to guess for the
+city's trees ([7](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-citys-trees-7-october-2026)), and its pollution and runoff figures rest on those guesses.
+That is not a reason to ask for it, and one flight is unlikely to give both
+trunks (leaf-off) and crowns (leaf-on).
 
 If SAL cannot share it, Vermont's statewide LiDAR is distributed publicly
 through VCGI. It is unchecked how recent or dense it is over campus.
