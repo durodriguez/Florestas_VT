@@ -751,19 +751,18 @@ sample was pulled and looked at:
 All of it is as of April 2023. A crown peak is not always above the trunk,
 especially on a leaning tree.
 
-**First step, done 7 October 2026.** A crown-peak layer for main campus, made
-from the public data and shown in `/positions/`. Details are in
-[LIDAR.md](LIDAR.md).
+**First step, 7 October 2026.** Crown peaks across the whole campus boundary
+(8,284), made from the public data and drawn in `/positions/`. Details are in
+[LIDAR.md](LIDAR.md). Surveyed city trees sit a median 1.3 m from theirs.
 
-- **2,521 peaks.** Surveyed city trees sit a median 1.3 m from theirs.
-- **526 mapped trees** have a peak 2–8 m away: suggested moves, to check on the
-  imagery.
-- **1,252 mapped trees** have no peak within 8 m. They are small, planted since,
-  or in the wrong place.
-- **1,385 peaks** have no mapped tree within 8 m: candidates for use 3.
+An attempt to pair peaks with mapped trees, and suggest moves one tree at a
+time, was taken out the same day. Checking hundreds of trees one by one
+defeats the purpose, and the pairing hid what the data shows: the evergreen
+clump at Trinity tags 2646–2648 is one crown with one peak, so two of its trees
+read as "no peak".
 
-**Next:** walk a sample of each list, to learn how often the suggestions are
-right before relying on them.
+**Next:** look at the peaks against the imagery for patterns before automating
+anything. Compare them with the tree centroids Ernie Buford sent.
 
 SAL may still save steps: a canopy layer with buildings already removed, or
 leaf-on data for crown measurements.

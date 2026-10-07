@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Crown peaks for UVM's main campus, from Vermont's 2023 statewide LiDAR.
+"""Crown peaks across UVM's campus, from Vermont's 2023 statewide LiDAR.
 
 Each peak is the highest point of a tree crown, as seen from the air: a
 place where a tree is, independent of where any inventory says it is. The
@@ -36,7 +36,7 @@ from scipy import ndimage
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = 'https://usgs-lidar-public.s3.amazonaws.com/VT_Statewide_2_A23/'
 SOURCE_NAME = 'USGS 3DEP VT_Statewide_2_A23 (Vermont 2023 QL1 lidar), flown 21 April 2023, leaf-off'
-CAMPUSES = ('central', 'trinity', 'redstone', 'athletic')   # "main campus": where the inventory is
+AREA = 'campus-boundary'   # the whole of UVM's land in Burlington, Centennial and Spear Street included
 R = 6378137.0
 
 # ---- tuning, each with its reason ------------------------------------------
@@ -71,11 +71,11 @@ def to_latlng(x: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
 
 
 def campus_polygons() -> list[list[tuple[float, float]]]:
-    """Outer rings of the main-campus areas, as (lng, lat)."""
+    """Outer rings of the campus boundary's parts, as (lng, lat)."""
     areas = json.loads((ROOT / 'data' / 'campus-areas.geojson').read_text())
     rings = []
     for f in areas['features']:
-        if f['properties'].get('area_id') not in CAMPUSES:
+        if f['properties'].get('area_id') != AREA:
             continue
         g = f['geometry']
         polys = g['coordinates'] if g['type'] == 'MultiPolygon' else [g['coordinates']]
@@ -268,46 +268,50 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--cache', type=Path, default=Path(os.environ.get('XDG_CACHE_HOME', Path.home() / '.cache')) / 'uvm-trees-lidar')
     ap.add_argument('--out', type=Path, default=ROOT / 'data' / 'crown-peaks.csv')
-    ap.add_argument('--raster', type=Path, help='also save the canopy height raster here (.npz), for inspection')
-    ap.add_argument('--from-raster', type=Path, help='reuse a raster saved with --raster instead of reading the points')
+    ap.add_argument('--raster', type=Path, help='also save each part\'s height raster as <name>-1.npz, <name>-2.npz…, for inspection')
+    ap.add_argument('--from-raster', type=Path, help='reuse rasters saved with --raster (same name) instead of reading the points')
     args = ap.parse_args()
 
-    rings = campus_polygons()
-    lngs = [p[0] for r in rings for p in r]
-    lats = [p[1] for r in rings for p in r]
-    lat0 = (min(lats) + max(lats)) / 2
-    k = 1 / math.cos(math.radians(lat0))       # Web Mercator stretch at this latitude
-    cell = CELL_M * k
-    x0, y0 = to_merc(min(lats), min(lngs))
-    x1, y1 = to_merc(max(lats), max(lngs))
-    box = (x0 - MARGIN_M * k, y0 - MARGIN_M * k, x1 + MARGIN_M * k, y1 + MARGIN_M * k)
+    # Each part of the boundary separately: one box round both would mostly
+    # be the city between them.
+    found = []
+    src = None
+    for part, ring in enumerate(campus_polygons()):
+        lngs = [p[0] for p in ring]
+        lats = [p[1] for p in ring]
+        lat0 = (min(lats) + max(lats)) / 2
+        k = 1 / math.cos(math.radians(lat0))       # Web Mercator stretch at this latitude
+        cell = CELL_M * k
+        x0, y0 = to_merc(min(lats), min(lngs))
+        x1, y1 = to_merc(max(lats), max(lngs))
+        box = (x0 - MARGIN_M * k, y0 - MARGIN_M * k, x1 + MARGIN_M * k, y1 + MARGIN_M * k)
+        print(f'Part {part + 1}: {(box[2]-box[0])/k:.0f} × {(box[3]-box[1])/k:.0f} m', file=sys.stderr)
+        saved_at = lambda prefix: prefix.with_name(f'{prefix.stem}-{part + 1}.npz')
+        if args.from_raster:
+            saved = np.load(saved_at(args.from_raster))
+            height, n_other, n_multi, n_ground = (saved['height'].astype(float), saved['n_other'],
+                                                  saved['n_multi'], saved['n_ground'])
+            box, cell = tuple(saved['box']), float(saved['cell'])
+        else:
+            src = src or Source(SOURCE, args.cache)
+            height, n_other, n_multi, n_ground, _ = rasterize(src, box, cell)
+            if args.raster:
+                np.savez_compressed(saved_at(args.raster), height=height.astype(np.float32), n_other=n_other,
+                                    n_multi=n_multi, n_ground=n_ground, box=np.array(box), cell=cell)
 
-    print(f'Main campus ({", ".join(CAMPUSES)}): {(box[2]-box[0])/k:.0f} × {(box[3]-box[1])/k:.0f} m', file=sys.stderr)
-    if args.from_raster:
-        saved = np.load(args.from_raster)
-        height, n_other, n_multi, n_ground = (saved['height'].astype(float), saved['n_other'],
-                                              saved['n_multi'], saved['n_ground'])
-        box, cell = tuple(saved['box']), float(saved['cell'])
-    else:
-        height, n_other, n_multi, n_ground, _ = rasterize(Source(SOURCE, args.cache), box, cell)
-    if args.raster and not args.from_raster:
-        np.savez_compressed(args.raster, height=height.astype(np.float32), n_other=n_other, n_multi=n_multi, n_ground=n_ground,
-                            box=np.array(box), cell=cell)
+        rows, cols, top_h, _ = find_peaks(height, n_other, n_multi, n_ground, CELL_M)
+        lat, lng = to_latlng(box[0] + (cols + 0.5) * cell, box[1] + (rows + 0.5) * cell)
+        keep = inside(lng, lat, [ring])
+        found += list(zip(lat[keep], lng[keep], top_h[keep]))
+        del height, n_other, n_multi, n_ground
 
-    rows, cols, top_h, _ = find_peaks(height, n_other, n_multi, n_ground, CELL_M)
-    x = box[0] + (cols + 0.5) * cell
-    y = box[1] + (rows + 0.5) * cell
-    lat, lng = to_latlng(x, y)
-    keep = inside(lng, lat, rings)
-    order = np.lexsort((lng[keep], -lat[keep]))
-    lat, lng, top_h = lat[keep][order], lng[keep][order], top_h[keep][order]
-
+    found.sort(key=lambda p: (-p[0], p[1]))           # north to south, then west to east
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open('w') as f:
         f.write('peak_id,lat,lng,height_m\n')
-        for i, (a, b, h) in enumerate(zip(lat, lng, top_h), 1):
+        for i, (a, b, h) in enumerate(found, 1):
             f.write(f'P{i:04d},{a:.6f},{b:.6f},{h:.1f}\n')
-    print(f'✓ {len(lat)} crown peaks on main campus → {args.out.relative_to(ROOT) if args.out.is_relative_to(ROOT) else args.out}', file=sys.stderr)
+    print(f'✓ {len(found)} crown peaks on campus → {args.out.relative_to(ROOT) if args.out.is_relative_to(ROOT) else args.out}', file=sys.stderr)
     print(f'  source: {SOURCE_NAME}', file=sys.stderr)
 
 

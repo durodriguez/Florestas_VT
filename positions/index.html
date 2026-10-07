@@ -41,23 +41,13 @@
       </details>
 
       <details class="lidar" id="lidar" hidden>
-        <summary>LiDAR crown peaks</summary>
-        <p class="hint">Tops of tree crowns in Vermont's statewide LiDAR, flown
-          <strong>21 April 2023</strong> (leaf-off). A peak shows that a tree stood there, not
-          which tree. Each tree is paired with the nearest peak no closer tree has taken.
-          Suggestions only — check each on the imagery.</p>
-        <ul class="lidar-lists">
-          <li><span><span id="lidar-off" class="count">0</span> trees with a crown peak 2–8 m away</span>
-            <button type="button" class="ghost-btn" data-next="off">Next</button></li>
-          <li><span><span id="lidar-none" class="count">0</span> trees with no crown peak within 8 m</span>
-            <button type="button" class="ghost-btn" data-next="none">Next</button></li>
-          <li><span><span id="lidar-orphan" class="count">0</span> crown peaks with no mapped tree within 8 m
-            <span class="key-orphan" aria-hidden="true"></span></span>
-            <button type="button" class="ghost-btn" data-next="orphan">Next</button></li>
-        </ul>
+        <summary>LiDAR crown peaks <span id="lidar-count" class="count">0</span> <span class="key-peak" aria-hidden="true"></span></summary>
+        <p class="hint">Tops of tree crowns found in Vermont's statewide LiDAR, flown
+          <strong>21 April 2023</strong> (leaf-off), across the whole campus boundary. A peak
+          shows that a tree stood there, not which tree. Trees under about 3 m, crowns
+          merged in a clump, and trees overhanging buildings give no peak. The layers
+          button turns them off. Details: <code>docs/LIDAR.md</code>.</p>
         <p id="lidar-msg" class="hint"></p>
-        <p class="hint">No peak is expected for trees under about 3 m, for most planted after
-          April 2023, or where crowns merge in a grove. Details: <code>docs/LIDAR.md</code>.</p>
       </details>
 
       <details class="imagery" id="imagery">

@@ -1,11 +1,21 @@
 # Crown peaks from LiDAR
 
-`data/crown-peaks.csv` lists **2,521 crown peaks** on main campus (Central,
-Trinity, Redstone and Athletic). A peak is the top of a tree's crown, seen from
-the air in Vermont's statewide LiDAR. It records that a tree stood there, but
-not which tree. [`/positions/`](POSITIONS.md#lidar-crown-peaks) compares the
-peaks with the mapped trees and suggests corrections, which a person accepts or
-ignores. This is the first step of [to-do 20](TODO.md).
+`data/crown-peaks.csv` lists **8,284 crown peaks** inside the campus boundary,
+Centennial Woods and Spear Street included. A peak is the top of a tree's crown,
+seen from the air in Vermont's statewide LiDAR. It records that a tree stood
+there, but not which tree. [`/positions/`](POSITIONS.md#lidar-crown-peaks)
+draws them over the imagery and the mapped trees. Nothing pairs them with trees
+yet: the first job is to look at them and see what patterns hold. This is part
+of [to-do 20](TODO.md).
+
+| Area | Peaks |
+|---|---|
+| Centennial | 4,685 |
+| Central | 1,365 |
+| Spear Street | 1,077 |
+| Redstone | 503 |
+| Athletic | 374 |
+| Trinity | 279 |
 
 ## Where the data comes from
 
@@ -14,7 +24,7 @@ ignores. This is the first step of [to-do 20](TODO.md).
 | Collection | Vermont statewide LiDAR, 2023, USGS quality level 1 (≥ 8 points/m²) |
 | Copy used | USGS 3DEP `VT_Statewide_2_A23`, cloud-optimised (Entwine) copy on `usgs-lidar-public` |
 | Flown | **21 April 2023**, leaf-off (read from the points' own timestamps) |
-| Over campus | 49 million points, about 10 per m² |
+| Over campus | 131 million points; 10 per m² at Central, nearer 30 where flight lines overlap |
 | Licence | Public domain (US federal); the peaks can be published freely |
 
 The points are classified only as *ground* or *unclassified*, so buildings and
@@ -32,7 +42,8 @@ python3 scripts/lidar/crown_peaks.py              # → data/crown-peaks.csv
 npm run data                                      # → public/data/crown-peaks.json
 ```
 
-The first run downloads about 300 MB and takes a few minutes. The download is
+The first run downloads about 1 GB and takes about seven minutes. Each part of
+the boundary (the main block, and Spear Street) is read separately. The download is
 cached (in `~/.cache/uvm-trees-lidar`, or wherever `--cache` says), so later
 runs take seconds. `--raster file.npz` saves the height raster for inspection,
 and `--from-raster` reruns from it without the points. The raw points are never
@@ -64,40 +75,17 @@ Each choice, and the reason for it, is a named constant at the top of
 ## How good it is
 
 **Positions.** Burlington's street trees have surveyed positions. Their nearest
-peak is a **median 1.3 m** away: a crown's top is not exactly above its trunk.
-That is the method's own error, so `/positions/` treats a tree within 2 m of its
-peak as agreeing.
+peak is a **median 1.3 m** away, because a crown's top is not exactly above its
+trunk. That is the best these peaks can do.
 
-**Against the 2,045 mapped UVM trees** (standing trees only; shrubs left out):
+**Counts.** One peak is not one tree:
 
-| | Trees |
-|---|---|
-| A peak within 2 m: record and LiDAR agree | 267 |
-| A peak 2–8 m away: **a suggested move** | 526 |
-| No peak within 8 m | 1,252 |
-
-**"No peak" does not mean the tree is wrong.** In April 2023, 484 of the 1,252
-had nothing taller than 3 m within 2 m of their dot. That covers three cases:
-
-- trees too small or young to show;
-- trees planted since;
-- dots in the wrong place, as in the Redstone pine grove ([19](TODO.md)).
-
-Most of the rest are trees whose crowns merge with a neighbour's, so that one
-peak serves two trees.
-
-**1,385 peaks have no mapped tree within 8 m.** They bunch along wooded edges:
-
-- the ravine on the east side;
-- Redstone's southwest corner;
-- the yards on Central Campus's west side.
-
-These are the candidates for trees not yet inventoried. Some will be large
-shrubs, or trees just outside UVM land on a boundary drawn from a map.
-
-**The suggestions are a starting point for checking, not corrections in
-themselves.** A peak 5 m from a tree may belong to the tree next to it. Check
-each one on the imagery before accepting it.
+- **Clumps merge.** Two tops closer than the search radius count as one peak.
+  The radius is about 4 m for an 18 m tree. The white pines tagged 2646–2648 on
+  Trinity are one crown 12 m wide in the LiDAR, with one peak.
+- **Big crowns can split.** A broad, flat-topped crown may give two peaks.
+- **Woods undercount.** Trees under the canopy have no peak of their own, so the
+  4,685 in Centennial are crowns at the top of the canopy, not a tree count.
 
 ## Known limits
 
@@ -105,5 +93,4 @@ each one on the imagery before accepting it.
 - **Leaf-off.** Crowns show as branches only, which is enough for peaks but not
   for crown measurements.
 - **Trunks do not show** at this density. Every position here is a crown top.
-- **Merged crowns** in groves and woods yield fewer peaks than trees.
 - **Trees overhanging buildings** fall inside the building outline and are lost.
