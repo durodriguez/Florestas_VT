@@ -99,9 +99,12 @@ guide (Eco resources page):
 | Crown health | 13% dieback | sequestration, leaf area |
 | Crown light exposure | class 2–3 | growth (carbon sequestration), forecasts |
 
-Crown width is supplied; height to crown base, percent crown missing and crown
-light exposure are not, so those three defaults are what the pollution and
-runoff figures — and, through crown light exposure, sequestration — rest on.
+In i-Tree's setup, crown width is not a field of its own: it is one of four
+under a single **Crown size** box, with height to live top, height to crown
+base and percent crown missing. The city has only the width, so Crown size is
+left unticked and the width is predicted too. That means the crown defaults
+above are what the pollution and runoff figures rest on. Crown light exposure
+also affects sequestration.
 
 ### Land use
 
@@ -140,10 +143,20 @@ software has moved on.
   Windows machine.
 - **Project:** new project, *complete inventory*, English units. Location:
   United States → Vermont → Chittenden County → Burlington. Weather and
-  pollution year: the latest offered. Data fields to collect: DBH, total
-  height, crown width, crown health, street tree, public tree, land use.
-  Leave height to crown base, percent crown missing and crown light exposure
-  unticked — their defaults are above.
+  pollution year: the latest offered. On *Data Collection Options*, tick:
+
+  - species and DBH (*Measured*);
+  - tree address;
+  - land use;
+  - street tree;
+  - map (GPS) coordinates;
+  - public/private (*Default Public*);
+  - total tree height;
+  - crown health, set to **Condition**, not Dieback;
+  - **User Tree ID**.
+
+  Leave Crown size, crown light exposure, energy and the management fields
+  unticked.
 - **Import:** the import wizard, pointed at the `.xlsx`. Match each column to
   the i-Tree field of the same name. Map *Tree ID* to Tree ID and *User Tree
   ID* to User Tree ID. Then match values: species names should all be found;
