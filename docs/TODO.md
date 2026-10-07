@@ -686,7 +686,9 @@ data, and should be corrected once it arrives.
   At about 2 points/m² (from memory, roughly the standard US statewide
   specification) a trunk often gets no hits at all: the data shows branches
   and ground, not stems. From about 8/m², or from a drone, trunks start to
-  show, and positions and counts can come from the stems themselves.
+  show, and positions and counts can come from the stems themselves. *The
+  public 2023 data, below, puts this to the test: at about 10/m² leaf-off,
+  trunks still barely show.*
 - **Leaf-on or leaf-off.** This matters second, and cuts both ways.
   - **Leaf-off** sends more pulses through to trunks, smaller trees and the
     ground, which suits all three uses above. Dense *and* leaf-off would be the
@@ -710,8 +712,54 @@ city's trees ([7](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-
 That is not a reason to ask for it, and one flight is unlikely to give both
 trunks (leaf-off) and crowns (leaf-on).
 
-If SAL cannot share it, Vermont's statewide LiDAR is distributed publicly
-through VCGI. It is unchecked how recent or dense it is over campus.
+### The public data, checked on 7 October 2026
+
+If SAL cannot share theirs, the public data is a workable substitute. A
+sample was pulled and looked at:
+
+- **What it is.** Vermont's 2023 statewide collection, flown to the USGS QL1
+  standard (at least 8 points/m²). Published by VCGI, with the raw points
+  served by USGS as `VT_Statewide_2_A23` (the campus part). **Public domain**,
+  so derived positions can be published without asking anyone.
+- **Where to get it.** VCGI's own site blocks the environment this was checked
+  from. The USGS copy in the cloud does not: its points can be fetched area by
+  area, without downloading whole tiles. An 80 m square took under a minute.
+- **Measured in an 80 m square around UVM-0493**, the littleleaf linden on
+  Central Campus:
+  - **About 10 points/m².** The USGS tile index gives about 19 for the tiles
+    around it. The difference is not explained yet.
+  - **Flown on 21 April 2023, so leaf-off.** This was read from the points'
+    own timestamps.
+  - **Points come in two classes only: ground, and everything else.**
+    Buildings and trees are not separated. They have to be told apart by
+    building outlines, or by roofs' flat surfaces.
+  - **The crown is clear.** It shows as a distinct round crown about 14 m
+    across and 16 m tall, even leaf-off, and the map's pin is within about a
+    metre of its centre.
+  - **The trunk is not.** There are almost no points between the ground and
+    about 5 m. The work therefore rests on **crown peaks, not trunks**.
+
+**So, for the three uses:**
+
+1. Position suggestions from crown peaks are the most achievable. They work
+   for open-grown trees and are harder in merged groves.
+2. Woods counts are an estimate: crown peaks corrected by a few counted field
+   plots.
+3. Untraced trees are crown peaks on main campus with no mapped tree nearby,
+   filtered by height. They become a worklist for the survey app.
+
+All of it is as of April 2023. A crown peak is not always above the trunk,
+especially on a leaning tree.
+
+**First step, when wanted:** a crown-peak layer for main campus compared with
+the mapped trees, giving a list of suggested moves and a list of unmatched
+peaks. That is a focused session or two. Its tools are installed for that
+session only; nothing is added to the site, and the raw points are not
+committed. Its accuracy is known only once a sample of suggestions has been
+walked.
+
+SAL may still save steps: a canopy layer with buildings already removed, or
+leaf-on data for crown measurements.
 
 ## Finished
 
