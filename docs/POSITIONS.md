@@ -22,6 +22,11 @@ with its tag number, or `#` and its accession if it has none.
 - Moved trees turn **gold**, with a dashed line back to where the record had
   them. **Reset** on any move puts that tree back.
 
+The **campus boundary** is drawn over the imagery — the outer edge in gold, the
+lines between campuses in white, with their names — and switched off from the
+layers button at the top right. It is outline only and never takes a click, so
+it cannot get in the way of dragging a tree.
+
 Every move is kept in the browser as it is made, so closing the tab or a crash
 loses nothing; the bar says so, and says plainly if the browser refuses to
 save. The moves live in that one browser on that one computer until exported.
@@ -59,10 +64,19 @@ layer, and this repository and its site are public ([to-do #17](TODO.md)).
 5. Every image aligned teaches the tool Earth's real field of view and offset,
    so the next ones start closer.
 
-Overlapping images simply lie on top of each other; nothing is stitched or
-trimmed. Only images in view are drawn, so fourteen large prints do not slow
-the page. **Opacity** blends them with the satellite layer; **Show** turns them
-all off.
+**Where images overlap, the one with the lowest error is on top.** The list is
+in that order, numbered from 1. Error only counts once it has been measured:
+an image needs five or more points to rank by it — four always fit exactly and
+report zero, which proves nothing — so those rank below, then stretched images,
+then unaligned ones. Nothing is merged into one picture: at campus size and
+this resolution that would be hundreds of megapixels, beyond what a browser
+draws, for a result that looks the same. Only images in view are drawn, so
+fourteen large prints do not slow the page.
+
+**Show all** and **Hide all** set every image's own Show/Hide at once.
+**Imagery on** turns the whole layer off and on for a quick comparison with the
+satellite layer, and each image keeps its own setting. **Opacity** blends them
+with the satellite layer.
 
 **The images stay with that browser** — another computer, another browser,
 clearing site data, or Safari after a week away means adding them again. The
