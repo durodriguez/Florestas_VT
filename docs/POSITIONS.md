@@ -42,6 +42,30 @@ A peak shows that a tree stood there in April 2023, not which tree. A clump
 of crowns can give a single peak, and nothing pairs peaks with mapped trees.
 They are there to look at alongside the imagery and the dots.
 
+## Tree crowns from SAL, privately
+
+**Tree crowns (SAL)** in the side panel loads the Spatial Analysis Lab's
+*Tree Centroids Derived from LiDAR for Burlington, VT, 2023*: the file Ernie
+Buford sent. It holds each crown's centre, height and radius. Choose the `.zip`
+as it came, or its `.shp`, `.dbf` and `.prj` together. Each crown is drawn as a
+violet circle of its radius, with a dot at its centre, under the trees.
+
+- **Only crowns inside the campus boundary, or within 30 m of it, are kept.**
+  That is about 8,000 of the city's 112,000.
+- **The file stays in this browser** (IndexedDB), as *My imagery* does. It is
+  never uploaded, committed or published: SAL has not been asked about
+  publishing it. **Remove from this browser** deletes it. Another computer or
+  browser needs it loaded again.
+- **It is read without a GIS library.** Only SAL's projection is understood:
+  Vermont State Plane in US feet. A file in any other projection is refused
+  with a message, not guessed at.
+
+SAL's crowns are not this project's [peaks](#lidar-crown-peaks). They come from
+the same April 2023 flight, but by a different and more careful method, which
+uses a hand-checked canopy outline and splits it into crowns. Against
+Burlington's surveyed street trees, half have a SAL centre within 2 m, against
+a third for the peaks.
+
 ## Your own imagery, privately
 
 **My imagery** in the side panel lays your own images — Google Earth prints,

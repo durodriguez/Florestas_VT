@@ -8,6 +8,7 @@ import { TYPE_LABELS } from '../palette';
 import type { Plant } from '../types';
 import { initImagery } from './imagery';
 import { parsePeaks, type Peak, type PeaksFile } from './peaks';
+import { loadCrowns, nearRings, readCrownFiles, saveCrowns, type SavedCrowns } from './crowns';
 import {
   applyMove, movedMeters, movesToCsv, reconcile, today,
   type Move, type Moves,
@@ -76,6 +77,9 @@ const ghostLayer = L.layerGroup().addTo(map);
 const dotLayer = L.layerGroup().addTo(map);
 const labelLayer = L.layerGroup().addTo(map);
 const peakLayer = L.layerGroup();
+const crownLayer = L.layerGroup();
+/** Where crowns are kept from a city-wide file: inside the campus boundary, or within 30 m of it. */
+let crownArea: ((lat: number, lng: number) => boolean) | null = null;
 
 const fillFor = (p: Plant): string =>
   moves[p.id] ? MOVED_FILL : (FILL[p.taxon.type] ?? OTHER_FILL);
@@ -472,6 +476,13 @@ loadData(BASE).then(({ dataset, plants: all }) => {
   save();
   renderMoves();
 
+  const boundary = dataset.campusAreas.features.find((f) => f.properties.kind === 'boundary');
+  if (boundary?.geometry.type === 'MultiPolygon') {
+    crownArea = nearRings(boundary.geometry.coordinates.map((poly) => poly[0] as Array<[number, number]>), 30);
+  } else if (boundary?.geometry.type === 'Polygon') {
+    crownArea = nearRings([boundary.geometry.coordinates[0] as Array<[number, number]>], 30);
+  }
+  restoreCrowns();
   // The LiDAR layer is extra: if it fails, the tool still works without it.
   loadPeaks().catch((err: Error) => { $('lidar-msg').textContent = `LiDAR layer not loaded: ${err.message}`; });
 }).catch((err: Error) => {
@@ -496,6 +507,72 @@ async function loadPeaks(): Promise<void> {
   $('lidar').hidden = false;
 }
 
+// ---------------------------------------------------------------- crowns (SAL, private)
+
+const CROWN = '#c9a2ff';
+let crownsShown = false;
+
+function drawCrowns(saved: SavedCrowns | null): void {
+  crownLayer.clearLayers();
+  $('crowns-remove').hidden = !saved;
+  $('crowns-count').textContent = saved ? saved.crowns.length.toLocaleString() : '0';
+  $('crowns-msg').textContent = saved
+    ? `${saved.name}, loaded ${saved.loaded}. Kept in this browser only.`
+    : '';
+  if (!saved) {
+    if (crownsShown) layersControl.removeLayer(crownLayer);
+    map.removeLayer(crownLayer);
+    crownsShown = false;
+    return;
+  }
+  for (const c of saved.crowns) {
+    L.circle([c.lat, c.lng], { renderer, radius: c.radius, interactive: false, color: CROWN, weight: 1.25, opacity: 0.9, fill: false }).addTo(crownLayer);
+    L.circleMarker([c.lat, c.lng], { renderer, radius: 1.5, interactive: false, color: CROWN, weight: 1, fill: true, fillColor: CROWN, fillOpacity: 1 }).addTo(crownLayer);
+  }
+  if (!crownsShown) layersControl.addOverlay(crownLayer, 'Tree crowns (SAL, my file)');
+  crownsShown = true;
+  crownLayer.addTo(map);
+  // Trees stay on top: they are what gets dragged.
+  dotLayer.eachLayer((l) => (l as L.CircleMarker).bringToFront());
+  if (selected) styleDot(selected);
+}
+
+async function restoreCrowns(): Promise<void> {
+  try {
+    drawCrowns(await loadCrowns());
+  } catch {
+    $('crowns-msg').textContent = 'This browser will not store the crowns; they will need loading again next time.';
+  }
+}
+
+$<HTMLInputElement>('crowns-add').addEventListener('change', async (e) => {
+  const input = e.target as HTMLInputElement;
+  const files = [...(input.files ?? [])];
+  input.value = '';
+  if (!files.length || !crownArea) return;
+  const msg = $('crowns-msg');
+  msg.textContent = 'Reading…';
+  try {
+    const area = crownArea;
+    const crowns = await readCrownFiles(files, (c) => area(c.lat, c.lng));
+    if (!crowns.length) throw new Error('none of its crowns are on or near campus');
+    const saved: SavedCrowns = { name: files.map((f) => f.name).join(', '), loaded: today(), crowns };
+    drawCrowns(saved);
+    try {
+      await saveCrowns(saved);
+    } catch {
+      msg.textContent += ' This browser refused to store them, so they last until the tab closes.';
+    }
+  } catch (err) {
+    msg.textContent = `Could not read it: ${(err as Error).message}.`;
+  }
+});
+
+$('crowns-remove').addEventListener('click', async () => {
+  drawCrowns(null);
+  await saveCrowns(null).catch(() => undefined);
+});
+
 // Surfaced for the browser test.
 Object.assign(window as unknown as Record<string, unknown>, {
   __positions: {
@@ -512,6 +589,7 @@ Object.assign(window as unknown as Record<string, unknown>, {
     },
     selected: () => selected,
     peaks: () => peaks.length,
+    crowns: () => crownLayer.getLayers().length / 2,
     imagery: myImagery,
     screenOf: (lat: number, lng: number) => {
       const pt = map.latLngToContainerPoint([lat, lng]);

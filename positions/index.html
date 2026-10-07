@@ -50,6 +50,19 @@
         <p id="lidar-msg" class="hint"></p>
       </details>
 
+      <details class="lidar" id="crowns">
+        <summary>Tree crowns (SAL) <span id="crowns-count" class="count">0</span> <span class="key-crown" aria-hidden="true"></span></summary>
+        <p class="hint">The Spatial Analysis Lab's LiDAR tree centroids, 2023: each crown's
+          centre and its radius, drawn as a circle. Load the <code>.zip</code> as SAL sent it (or its
+          <code>.shp</code>, <code>.dbf</code> and <code>.prj</code> together). Kept in this browser only —
+          never uploaded or published. Only crowns on or near campus are kept.</p>
+        <label class="ghost-btn add-btn">Load SAL crown file…
+          <input type="file" id="crowns-add" multiple accept=".zip,.shp,.dbf,.prj" hidden>
+        </label>
+        <p id="crowns-msg" class="hint"></p>
+        <button type="button" id="crowns-remove" class="ghost-btn" hidden>Remove from this browser</button>
+      </details>
+
       <details class="imagery" id="imagery">
         <summary>My imagery <span id="img-count" class="count">0</span></summary>
         <p class="hint">Your own images, such as Google Earth prints. Kept in this

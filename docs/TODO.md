@@ -761,8 +761,26 @@ defeats the purpose, and the pairing hid what the data shows: the evergreen
 clump at Trinity tags 2646–2648 is one crown with one peak, so two of its trees
 read as "no peak".
 
-**Next:** look at the peaks against the imagery for patterns before automating
-anything. Compare them with the tree centroids Ernie Buford sent.
+**SAL's tree centroids, 7 October 2026.** Ernie Buford sent SAL's *Tree Centroids
+Derived from LiDAR for Burlington, VT, 2023* (Paige Brochu, SAL, December 2024):
+
+- 111,912 crowns citywide, each with height and radius; 6,641 inside the
+  campus boundary;
+- made from a hand-edited canopy outline split into crowns;
+- against surveyed city trees, a median 2.0 m to the nearest centre, against
+  5.2 m for this project's peaks.
+
+`/positions/` draws them as crown circles from a file loaded on the user's own
+computer, kept in that browser only ([POSITIONS.md](POSITIONS.md)), because
+**SAL has not been asked whether it may be published.** Their radius is also
+the crown width i-Tree had to guess ([7](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-citys-trees-7-october-2026)).
+
+**Next:**
+
+1. Look at peaks and crowns against the imagery for patterns before
+   automating anything.
+2. Ask SAL whether the centroids may be published, or used to derive published
+   positions.
 
 SAL may still save steps: a canopy layer with buildings already removed, or
 leaf-on data for crown measurements.
