@@ -6,7 +6,7 @@ stale, which is how this file got untidy in the first place.
 
 | # | Item | Status |
 |---|---|---|
-| 7 | [Ecosystem services — the i-Tree question](#7-ecosystem-services--the-i-tree-question-blocked-no-diameters) | **blocked** |
+| 7 | [Ecosystem services — the i-Tree question](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-citys-trees-7-october-2026) | **in progress** |
 | 9 | [Renumbering tags by campus](#9-renumbering-tags-by-campus-open-the-label-not-the-numbering) | **open** |
 | 10 | [Photos without overloading the repo](#10-photos-without-overloading-the-repo-part-done-21-september-2026) | **part done** |
 | 13 | [Re-tagging: a tree gets a new number](#13-re-tagging-what-happens-when-a-tree-gets-a-new-number-open-ask-grounds) | **open** |
@@ -14,6 +14,8 @@ stale, which is how this file got untidy in the first place.
 | 15 | [1,552 of the 2014 tags are not on the map](#15-1552-of-the-2014-tags-are-not-on-the-map-open-fieldwork) | **open** |
 | 17 | [Sharper satellite imagery](#17-sharper-satellite-imagery-dormant-revisit-from-the-field) | *dormant* |
 | 18 | [Two versions of the survey app](#18-two-versions-of-the-survey-app--advanced-and-basic-open) | **open** |
+| 19 | [The Redstone pine grove, mapped in the wrong places](#19-the-redstone-white-pine-grove-is-mapped-in-the-wrong-places-open-fieldwork) | **open** |
+| 20 | [LiDAR from the Spatial Analysis Laboratory](#20-lidar-from-the-spatial-analysis-laboratory-waiting-on-sal-7-october-2026) | *waiting* |
 | 1 | [Rename `memorial`, add `dedication_label`](#1-rename-memorial-add-dedication_label-done-11-september-2026) | done |
 | 2 | [Dedication in the survey app](#2-dedication-in-the-survey-app-done-12-september-2026) | done |
 | 3 | [`geolocation_notes`, right of `lng`](#3-geolocation_notes-right-of-lng-done-11-september-2026) | done |
@@ -641,6 +643,57 @@ parking lot, which are wrong by definition. Do not shift the grove in bulk from
 a desk: the errors run in different directions and distances, so there is no
 single offset to apply.
 
+## 20. LiDAR from the Spatial Analysis Laboratory [waiting on SAL, 7 October 2026]
+
+**7 October 2026:** you emailed **Ernie Buford** at UVM's Spatial Analysis
+Laboratory (SAL) to ask about their LiDAR data. The hope is that SAL will
+share it for this project. Nothing here waits on it; it would add to the
+fieldwork, not replace it.
+
+You see three uses for it.
+
+1. **Automate position adjustments, so trees are accurately geolocated.**
+   Today [`/positions/`](POSITIONS.md) moves dots by hand ([19](#19-the-redstone-white-pine-grove-is-mapped-in-the-wrong-places-open-fieldwork)).
+2. **Estimate the number of trees in areas that cannot be surveyed
+   completely.** Examples are Centennial Woods and parts of Spear Street.
+3. **Estimate how many trees on main campus have not been inventoried, and
+   locate them.**
+
+**What each one would take.** This is a first view, written before seeing the
+data, and should be corrected once it arrives.
+
+- **Positions.** LiDAR gives a height surface of the canopy. Each local high
+  point in it is a likely treetop. The tool would offer the nearest treetop as
+  a *suggested* move for each mapped tree, for a person to accept in
+  `/positions/`. It would not move trees on its own. Open-grown trees should
+  match cleanly. Dense stands, where crowns merge, will not: the Redstone pine
+  grove is exactly that case.
+- **Unsurveyable areas.** Treetop counts from above miss the trees under the
+  canopy, so in woods they **undercount**. A sounder method combines canopy
+  from LiDAR with a few field plots: counts per plot, scaled up to the
+  canopy's area. This is also how i-Tree Eco's *sample* projects work. A tree
+  in those areas would not appear on the map individually; it would be a
+  stated estimate with a margin of error.
+- **Trees not yet inventoried.** These would be treetops on main campus with
+  no mapped tree within a few metres. They would form a worklist for the
+  survey app: places to walk to, not trees to add from a desk.
+
+**Questions for SAL.** They decide what is possible.
+
+- **Flight year.** Trees planted or removed since then will differ.
+- **Leaf-on or leaf-off.** Statewide LiDAR is usually flown leaf-off, which
+  shows the ground well and deciduous crowns poorly. That matters for all
+  three uses.
+- **Point density.**
+- **Derived layers.** They may already have a canopy height model or a tree
+  canopy layer, such as the one behind their Burlington Tree Canopy
+  assessment.
+- **Terms.** This repository and its site are **public**. Positions derived
+  from their data would be published, so the terms must allow it.
+
+If SAL cannot share it, Vermont's statewide LiDAR is distributed publicly
+through VCGI. It is unchecked how recent or dense it is over campus.
+
 ## Finished
 
 ## 1. Rename `memorial`, add `dedication_label` [done, 11 September 2026]
@@ -1074,4 +1127,6 @@ so they are not forgotten rather than because anything is waiting on them:
 UVM licensing, about whether the attribution is sufficient before the map goes
 on a university domain; grounds, about re-tagging ([13](#13-re-tagging-what-happens-when-a-tree-gets-a-new-number-open-ask-grounds)); and UVM's
 Spatial Analysis Laboratory, about leaf-on orthoimagery ([17](#17-sharper-satellite-imagery-dormant-revisit-from-the-field)), which is
-only worth asking if z20 disappoints in the field.
+only worth asking if z20 disappoints in the field. The LiDAR question went to
+SAL on 7 October 2026 ([20](#20-lidar-from-the-spatial-analysis-laboratory-waiting-on-sal-7-october-2026)); the imagery question
+could ride along on the reply.
