@@ -1,44 +1,39 @@
 // Translating this project's taxa into the names i-Tree Eco looks up.
 //
-// i-Tree models at species level (genus where that is all there is), so a
-// cultivar is its species: 'Princeton' is an American elm to the model, and
-// a growth rate does not change with a trade name. A few names this project
-// uses are newer than i-Tree's species list; those are mapped back, and every
-// translation is reported so it can be checked in i-Tree's species step.
+// Checked against i-Tree's own species list (i-Tree_Eco_species_list_1.17.2023
+// .csv, from the Eco resources page): every name this produces for the city's
+// campus trees is on it. i-Tree models at species level, or variety where it
+// lists one, so a cultivar is its species — 'Princeton' is an American elm to
+// the model; growth does not change with a trade name. i-Tree writes varieties
+// as "v.", not "var.". A few names here are newer than i-Tree's list and are
+// mapped back. Every translation is reported, so the import can be checked.
 
 /** Names i-Tree knows by an older or different form. */
 const RENAMED = {
   'scandosorbus-intermedia': ['Sorbus intermedia', 'Scandosorbus is a recent split from Sorbus'],
-  'quercus-x-warei': ['Quercus', 'a hybrid i-Tree is unlikely to list; modelled as oak'],
+  'quercus-x-warei': ['Quercus', 'Ware oak is not on i-Tree\'s list; modelled as oak'],
 };
 
 /**
- * @param {{taxon_id: string, scientific_name: string, genus: string, species: string, infraspecific: string, cultivar: string}} t
+ * @param {{taxon_id: string, scientific_name: string, genus: string, cultivar: string}} t
  * @returns {{ name: string, note: string }}
  */
 export function itreeName(t) {
   const renamed = RENAMED[t.taxon_id];
   if (renamed) return { name: renamed[0], note: renamed[1] };
 
-  const genus = String(t.genus ?? '').trim();
-  const species = String(t.species ?? '').trim();
-  const infra = String(t.infraspecific ?? '').trim();
-  const cultivar = String(t.cultivar ?? '').trim();
-
-  // Genus only ("Malus sp."): i-Tree has genus-level entries.
-  if (!species) return { name: genus, note: cultivar ? `cultivar '${cultivar}' modelled as its genus` : 'genus only' };
-
-  let name = `${genus} ${species}`;
+  const sci = String(t.scientific_name ?? '').trim();
+  const cultivar = String(t.cultivar ?? '').trim() || (sci.match(/['‘’"]([^'‘’"]+)['‘’"]/)?.[1] ?? '');
+  // The cultivar comes off, and "Malus sp." is the genus to i-Tree.
+  const botanical = sci.replace(/\s*['‘’"][^'‘’"]+['‘’"]/g, '').replace(/\s+sp\.$/, '').trim() || String(t.genus ?? '');
+  const genusOnly = !botanical.includes(' ');
   const notes = [];
-  // Thornless honeylocust is var. inermis in most species lists, including
-  // the USDA's; this project writes f. inermis, after the Morton Arboretum.
-  if (infra === 'f. inermis') {
-    name += ' var. inermis';
-    notes.push('f. inermis written as var. inermis');
-  } else if (infra) {
-    notes.push(`${infra} modelled as the species`);
-  }
-  if (cultivar) notes.push(`cultivar '${cultivar}' modelled as its species`);
+  if (cultivar) notes.push(`cultivar '${cultivar}' modelled as its ${genusOnly ? 'genus' : 'species'}`);
+  else if (genusOnly) notes.push('genus only');
+  // i-Tree writes varieties "v.". Thornless honeylocust, a form here (f. inermis,
+  // after the Morton Arboretum), is listed there as v. inermis.
+  const name = botanical.replace(/ (?:var\.|f\.) /, ' v. ');
+  if (name !== botanical) notes.push(`written "${name}" as on i-Tree's list`);
   return { name, note: notes.join('; ') };
 }
 

@@ -24,23 +24,41 @@ stores and shows its output — nothing here imitates the model.
 ### 1. The inventory file
 
 ```bash
-npm run itree:export          # → itree-export/city-trees-itree.csv
+npm run itree:export          # → itree-export/city-trees-itree.xlsx
 ```
 
-One row per tree: Burlington's id (`BTV-…`, so results join back), species,
-DBH (in), total height (ft), crown width (ft, the city's single spread used for
-both directions), condition, street tree, date measured, coordinates and
-address. The file is not committed: it is rebuilt from `data/city-trees.csv`
-whenever it is needed.
+An **Excel file, not CSV**: i-Tree's importer takes `.xls` or `.xlsx` only, and
+a number stored as text is the usual reason records fail, so every cell is
+typed — numbers as numbers, dates as dates. Columns are named after i-Tree's
+own fields:
 
-**Names are translated for i-Tree**, and every translation is printed:
+| Column | From | Note |
+|---|---|---|
+| Tree ID | Burlington's site number | i-Tree needs a whole number above zero |
+| User Tree ID | `BTV-…` | what the results are joined back on |
+| Species, Common Name | taxa | translated, below |
+| DBH (in), Total Height (ft) | the city | |
+| Crown Width (ft) | the city's spread | one value; i-Tree's import takes one |
+| Crown Health | the city's condition | approximate, below |
+| Street Tree, Public Tree | `Y` | all are city street trees |
+| Land Use | `Institutional` | see [land use](#land-use) |
+| Survey Date | date measured | 22 trees have none |
+| Latitude, Longitude, Tree Address | the city | |
+
+The file is not committed: it is rebuilt from `data/city-trees.csv` whenever it
+is needed.
+
+**Names are translated for i-Tree**, and every translation is printed. All 40
+names that come out are on i-Tree's species list
+(`i-Tree_Eco_species_list_1.17.2023.csv`, from the Eco resources page):
 
 - Cultivars are modelled as their species — 'Princeton' is an American elm to
   the model; growth does not change with a trade name.
 - Genus-only records (*Malus*, *Ulmus*) stay at genus.
-- Thornless honeylocust is written *var. inermis*, as most species lists have it.
+- Forms and varieties are written **v.**, as i-Tree's list writes them:
+  thornless honeylocust is *Gleditsia triacanthos v. inermis*.
 - *Scandosorbus intermedia* is written *Sorbus intermedia*, its older name.
-- *Quercus × warei* is modelled as *Quercus*.
+- *Quercus × warei* is not on the list, and is modelled as *Quercus*.
 
 **Know what the numbers will rest on:**
 
@@ -70,37 +88,78 @@ to assume; they are shown as estimates and say so. Energy effects are not
 computed. No value is invented for the missing crown fields in the export: a
 made-up crown measurement looks like data.
 
+**What i-Tree assumes for a field left out** — from its *Data Limitations*
+guide (Eco resources page):
+
+| Field left out | i-Tree uses | Affects |
+|---|---|---|
+| Land use | Residential | growth (carbon sequestration), structural value |
+| Height to crown base, crown width | predicted from DBH by regression | leaf area → pollution, runoff |
+| Percent crown missing | 13% | leaf area → pollution, runoff |
+| Crown health | 13% dieback | sequestration, leaf area |
+| Crown light exposure | class 2–3 | growth (carbon sequestration), forecasts |
+
+Crown width is supplied; height to crown base, percent crown missing and crown
+light exposure are not, so those three defaults are what the pollution and
+runoff figures — and, through crown light exposure, sequestration — rest on.
+
+### Land use
+
+The export says **Institutional** for every tree, rather than leaving
+i-Tree to assume Residential. The Eco field manual (v6) puts *colleges* under
+Institutional, and classes a tree on an ordinary street by **the nearest land
+use beside the road** — only limited-access highways, railways and airports
+count as Transportation. Inside the campus boundary that neighbour is the
+university. A tree whose nearer side faces private houses across the street
+would strictly be Residential; at campus edges that may be a few trees, and is
+not corrected tree by tree here.
+
+### Crown light exposure
+
+Left to i-Tree's default (2–3 of 5 sides lit). It is a field observation —
+how many of the crown's four sides and top get direct light — and the city did
+not record it. Many street trees are open-grown (4–5), so the default probably
+**understates** their growth, and with it carbon sequestration; carbon
+*storage* does not use it. Recording it is one tap per tree and a candidate for
+the field app.
+
 **Condition is an approximation.** i-Tree's condition classes are bands of
 crown dieback; the city's *good / fair / poor* is an overall rating, and may
 not have been judged the same way.
 
 ### 2–5. In i-Tree Eco
 
-Written from i-Tree Eco version 6 and the methods summary above. The user's
-manuals are on www.itreetools.org, which could not be reached from where this
-was prepared, so check each step against the screen and correct this file where
-the software has moved on. **One thing to note down when choosing data fields:
-what i-Tree does with the crown fields left unticked** (height to crown base,
-percent crown missing, crown light exposure) — that is what the pollution and
-runoff figures will rest on.
+From i-Tree Eco v6's own guides on www.itreetools.org (resources → Eco): the
+*Eco Guide to Importing an Existing Inventory*, the *Field Manual* and *Data
+Limitations*. Check each step against the screen; correct this file where the
+software has moved on.
 
-- **Install:** i-Tree Eco is a free download from itreetools.org (an account is
-  needed). It is **desktop Windows software** — the methods summary lists it as
-  a desktop program, and i-Tree Design, the web tool, is for placing a few
-  trees around one house, not for importing an inventory; on a Mac it needs Windows running in a
-  virtual machine, or a Windows computer on campus.
-- **Project:** a new project, *complete inventory*, English units. Location:
+- **Install:** i-Tree Eco is a free download from itreetools.org. It is
+  **Windows software (Windows 10 or later)** and does not run on a Mac or Linux
+  except inside Windows — Parallels, Boot Camp on older Macs, or a campus
+  Windows machine.
+- **Project:** new project, *complete inventory*, English units. Location:
   United States → Vermont → Chittenden County → Burlington. Weather and
-  pollution year: the latest offered. Choose the data fields to match the file:
-  DBH, total height, crown width, condition (crown health/dieback), street tree.
-- **Import:** the inventory import wizard; map each column to its i-Tree field.
-  Where i-Tree does not recognise a species, pick the closest from its list and
-  note it here.
+  pollution year: the latest offered. Data fields to collect: DBH, total
+  height, crown width, crown health, street tree, public tree, land use.
+  Leave height to crown base, percent crown missing and crown light exposure
+  unticked — their defaults are above.
+- **Import:** the import wizard, pointed at the `.xlsx`. Match each column to
+  the i-Tree field of the same name. Map *Tree ID* to Tree ID and *User Tree
+  ID* to User Tree ID. Then match values: species names should all be found;
+  *Fair / Good / Poor* to crown health classes; *Institutional* to land use;
+  *Y* to yes.
 - **Submit:** i-Tree checks the data, then sends it for processing; results come
-  back to the program, usually within the hour.
+  back to the program.
 - **Export:** the **individual tree** results — carbon storage, gross carbon
   sequestration, avoided runoff, pollution removal, and their dollar values —
-  as an Excel or CSV file, keeping the `ID` column.
+  as an Excel or CSV file, **keeping the User Tree ID column**.
+
+**i-Tree's funding.** The Forest Service has stopped funding i-Tree; the tools
+are kept running on one-off grants, with a promise of six months' notice before
+a core tool goes offline. Export and keep the results file as soon as it
+exists. i-Tree runs open office hours for questions (next: Thursday
+8 October 2026, 2 pm ET).
 
 ### 6. Back here
 
@@ -114,3 +173,7 @@ trees it covers and when they were measured.
 - **7 October 2026** — step 1 done: 364 trees exported. Re-checked against the
   Forest Service's methods summary: Eco is the right tool, carbon is fully
   supported by this data, pollution and runoff only partly.
+- **7 October 2026** — re-checked against i-Tree's own guides: the export is
+  now Excel with i-Tree's field names; every species name is on its list; land
+  use set to Institutional; crown light exposure left to the default. Next:
+  steps 2–5, on a Windows computer.
