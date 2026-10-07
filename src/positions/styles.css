@@ -144,3 +144,13 @@ button, input { font: inherit; color: inherit; }
   text-shadow: 0 0 3px #000, 0 0 3px #000, 0 0 5px #000;
 }
 .leaflet-tooltip.campus-name::before { display: none; }
+
+/* LiDAR crown peaks */
+.lidar { font-size: .85rem; display: flex; flex-direction: column; }
+.lidar summary { cursor: pointer; font-weight: 600; color: var(--text-dim); }
+.lidar[open] > :not(summary) { margin-top: .45rem; }
+.lidar-lists { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .35rem; }
+.lidar-lists li { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.key-orphan { display: inline-block; width: .7em; height: .7em; border-radius: 50%; border: 2px solid #ff7a00; background: rgba(255, 122, 0, .35); vertical-align: -1px; }
+.card .lidar-note { font-size: .82rem; color: #8a3f00; }
+.card .lidar-note.is-ok { color: var(--text-dim); }

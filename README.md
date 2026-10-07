@@ -152,6 +152,7 @@ species never reaches the live site.
 | **Data sources, citations and licences** | [data/SOURCES.md](data/SOURCES.md) |
 | **The field survey app** | [docs/FIELD-APP.md](docs/FIELD-APP.md) |
 | **Correcting positions at a desk** | [docs/POSITIONS.md](docs/POSITIONS.md) |
+| **Crown peaks from LiDAR** | [docs/LIDAR.md](docs/LIDAR.md) |
 | **Hosting, domains, scaling** | [docs/DEPLOY.md](docs/DEPLOY.md) |
 | **Ecosystem services with i-Tree** | [docs/ITREE.md](docs/ITREE.md) |
 | **What's planned next** | [docs/TODO.md](docs/TODO.md) |
@@ -172,6 +173,7 @@ species never reaches the live site.
 | `npm run check:inventories` | Compare the 2014 inventory against the map, tree by tree, and list every disagreement |
 | `npm run check:coverage` | Account for the 2014 tags that are not on the map, and rank the gaps worth walking |
 | `npm run check:prose` | Report any taxon whose fun fact merely restates its description |
+| `python3 scripts/lidar/crown_peaks.py` | Find crown peaks in the 2023 LiDAR for `/positions/` (Python; see `docs/LIDAR.md`) |
 | `npm run photos` | Check every photo is WebP ≤ 1200 px; `-- --write` converts any that are not |
 | `npm run itree:export` | Write the i-Tree Eco inventory file for the city's campus trees (see `docs/ITREE.md`) |
 | `npm run labels` | Generate QR label sheet and SVGs into `public/labels/` |

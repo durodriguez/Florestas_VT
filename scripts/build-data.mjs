@@ -82,6 +82,24 @@ const plantsJson = JSON.stringify(result.plants);
 writeFileSync(join(outDir, 'dataset.json'), datasetJson);
 writeFileSync(join(outDir, 'plants.json'), plantsJson);
 
+// ---- crown peaks, for /positions/ only -------------------------------------
+// Tree tops found in the April 2023 LiDAR by scripts/lidar/crown_peaks.py (see
+// docs/LIDAR.md). The desk tool compares them with the mapped trees; the
+// public map never loads them. Optional: without the file the tool simply has
+// no LiDAR layer.
+const peaksFile = 'crown-peaks.csv';
+if (existsSync(join(dataDir, peaksFile))) {
+  const rows = readCsv(peaksFile).map((r, i) => {
+    const row = [r.peak_id, Number(r.lat), Number(r.lng), Number(r.height_m)];
+    if (!r.peak_id || row.slice(1).some((n) => !Number.isFinite(n))) {
+      console.error(`✗ data/${peaksFile} line ${i + 2} is not a peak: ${JSON.stringify(r)}`);
+      process.exit(1);
+    }
+    return row;
+  });
+  writeFileSync(join(outDir, 'crown-peaks.json'), JSON.stringify({ fields: ['id', 'lat', 'lng', 'height_m'], rows }));
+}
+
 // ---- the field app's species list ----------------------------------------
 // Just enough to autocomplete a name offline and hand back a taxon_id: no
 // descriptions, no horticultural columns. Search keys are normalised here,
@@ -207,7 +225,8 @@ writeFileSync(
 const version = createHash('sha256')
   .update(
     ['taxa.csv', 'plants.csv', 'observations.csv', 'collections.csv', 'trails.geojson',
-      'campus-areas.geojson', 'species-aliases.csv', 'config.json']
+      'campus-areas.geojson', 'species-aliases.csv', 'config.json', 'city-trees.csv', peaksFile]
+      .filter((name) => existsSync(join(dataDir, name)))
       .map((name) => readFileSync(join(dataDir, name)))
       .reduce((a, b) => Buffer.concat([a, b]), Buffer.alloc(0)),
   )

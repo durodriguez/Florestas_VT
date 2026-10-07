@@ -1,0 +1,4 @@
+# For scripts/lidar/crown_peaks.py only; the site needs none of this.
+numpy>=1.26
+scipy>=1.11
+laspy[lazrs]>=2.5
