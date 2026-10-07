@@ -170,13 +170,33 @@ software has moved on.
 
   Leave Crown size, crown light exposure, energy and the management fields
   unticked.
-- **Import:** the import wizard, pointed at the `.xlsx`. Match each column to
-  the i-Tree field of the same name. Map *Tree ID* to Tree ID and *User Tree
-  ID* to User Tree ID. Then match values: species names should all be found;
-  the condition classes (`90% - 95%` and so on) to i-Tree's own; *Institutional* to land use;
-  *Y* to yes.
-- **Submit:** i-Tree checks the data, then sends it for processing; results come
-  back to the program.
+- **Import:** Data tab → **Trees** first; only then does **Import** become
+  active. Point the wizard at the `.xlsx` and tick *first row contains column
+  headers*. Click each column and pick its Eco field:
+
+  | Column | Eco field | Field type |
+  |---|---|---|
+  | Tree ID | ID | |
+  | User Tree ID | User Tree ID | |
+  | Species | Species | scientific name |
+  | Common Name | *not assigned* | |
+  | DBH (in) | DBH 1 (in) | |
+  | Total Height (ft) | Total Height (ft) | |
+  | Crown Width (ft) | *not assigned* (Crown size is off) | |
+  | Crown Health | Crown: Condition | **Description**, values mapped |
+  | Street Tree, Public Tree | Street Tree?, Public? | |
+  | Land Use | Land Use | **Description**, values mapped |
+  | Survey Date | Survey Date | |
+  | Latitude, Longitude | Latitude, Longitude | |
+  | Tree Address | Address | |
+
+  Then confirm the value matches. Every species, condition class and
+  *Institutional* should match i-Tree's own. Afterwards, check that the
+  Crown: Condition column shows percentages, not *Not Entered*.
+- **Check Data, then submit** (Reports tab). Check Data warns that no PM10
+  station is assigned: none of the stations near Burlington measures it, so
+  **PM10 removal is not estimated**. Processing happens on i-Tree's servers,
+  and an email says when it is done; then *Retrieve Results*.
 - **Export:** the **individual tree** results — carbon storage, gross carbon
   sequestration, avoided runoff, pollution removal, and their dollar values —
   as an Excel or CSV file, **keeping the User Tree ID column**.
@@ -203,3 +223,10 @@ trees it covers and when they were measured.
   now Excel with i-Tree's field names; every species name is on its list; land
   use set to Institutional; crown light exposure left to the default. Next:
   steps 2–5, on a Windows computer.
+- **7 October 2026** — steps 2–4 done in i-Tree Eco v6.0.41: 364 trees
+  imported and submitted. The settings were complete inventory, English units
+  and Burlington, VT, with the 2024 weather and pollution year. Weather and
+  precipitation came from station 726170-14742 (Burlington airport, 6 km
+  away). Pollution came from Chittenden for O3, PM2.5 and CO (CO rated Poor),
+  Rutland for NO2 and Essex NY for SO2. No station measures PM10. Benefit
+  prices are i-Tree's defaults. Waiting on processing.
