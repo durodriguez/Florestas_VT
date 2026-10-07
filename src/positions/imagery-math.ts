@@ -370,3 +370,29 @@ export function fitPlacement(pairs: Pair[], width: number, height: number): Plac
     rms,
   };
 }
+
+// ---------------------------------------------------------------- stacking
+
+export interface Rankable {
+  id: string;
+  aligned: boolean;
+  points: number;
+  rms: number | null;
+}
+
+/**
+ * Best first: the order images are stacked in, so that wherever two overlap,
+ * the more trustworthy one is on top.
+ *
+ * "Lowest error" only means something once the error has been measured: four
+ * points fit exactly and report zero, which is no evidence at all. So images
+ * with five or more points come first, by residual; then aligned images with
+ * fewer, then unaligned ones. Ties by name, so the order never shuffles.
+ */
+export function rankImages<T extends Rankable>(images: T[]): T[] {
+  const tier = (i: Rankable) => (!i.aligned ? 3 : i.points >= 5 ? 0 : i.points >= 4 ? 1 : 2);
+  return [...images].sort((a, b) =>
+    tier(a) - tier(b) ||
+    (tier(a) === 0 ? (a.rms ?? Infinity) - (b.rms ?? Infinity) : 0) ||
+    a.id.localeCompare(b.id));
+}

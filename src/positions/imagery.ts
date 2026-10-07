@@ -12,7 +12,7 @@
 
 import L from 'leaflet';
 import {
-  calibrate, estimateBounds, fitBounds, fitPlacement, matrix3dFor, parseGeprint, placementFromBounds,
+  calibrate, estimateBounds, fitBounds, fitPlacement, matrix3dFor, parseGeprint, placementFromBounds, rankImages,
   type Bounds, type Camera, type Pair, type Placement,
 } from './imagery-math';
 import { alignmentsToJson, matchAlignments, parseAlignments, type Alignment } from './alignments';
@@ -61,6 +61,13 @@ class WarpedImage extends L.Layer {
     if (this.el) this.el.style.opacity = String(o);
   }
 
+  private z = 0;
+  /** Stacking within the imagery pane: higher is drawn on top. */
+  setZ(z: number): void {
+    this.z = z;
+    if (this.el) this.el.style.zIndex = String(z);
+  }
+
   onAdd(map: L.Map): this {
     const el = document.createElement('img');
     el.src = this.url;
@@ -69,7 +76,7 @@ class WarpedImage extends L.Layer {
     Object.assign(el.style, {
       position: 'absolute', left: '0', top: '0', transformOrigin: '0 0',
       width: `${this.width}px`, height: `${this.height}px`, maxWidth: 'none',
-      pointerEvents: 'none', userSelect: 'none', opacity: String(this.opacity),
+      pointerEvents: 'none', userSelect: 'none', opacity: String(this.opacity), zIndex: String(this.z),
     });
     map.getPane(this.pane)!.appendChild(el);
     this.el = el;
@@ -217,8 +224,17 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
    * Only what is in view is on the map. Fourteen 8,000-pixel photographs held
    * decoded at once is gigabytes; one or two at a time is fine.
    */
+  /** Best first — see rankImages. The list and the stacking both follow it. */
+  const ranked = (): Live[] =>
+    rankImages(images.map((i) => ({ id: i.id, aligned: i.aligned !== null, points: i.pairs.length, rms: i.rms, img: i })))
+      .map((r) => r.img);
+
   function refresh(): void {
     const view = map.getBounds().pad(0.2);
+    // Wherever two overlap, the one with the lowest measured error is on top.
+    // Before this the order was whichever the page happened to draw last.
+    const order = ranked();
+    order.forEach((img, i) => img.overlay.setZ(order.length - i));
     for (const img of images) {
       const corners = placementOf(img).corners;
       img.overlay.setCorners(corners);
@@ -243,13 +259,14 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
   function render(): void {
     $('img-count').textContent = String(images.length);
     $('img-empty').hidden = images.length > 0;
-    $('img-list').innerHTML = images.map((img) => {
+    $('img-list').innerHTML = ranked().map((img, rank) => {
       const kind = img.aligned ? placementOf(img).kind : null;
       const status = img.aligned
         ? `<span class="img-ok">Aligned · ${kind === 'tilt' ? 'tilt-corrected' : 'stretched'} · ±${(img.rms ?? 0).toFixed(1)} m over ${img.pairs.length} points</span>`
         : `<span class="img-todo">Not aligned${img.cam ? ' · placed from its .geprint' : ' · no .geprint'}</span>`;
       return `<li>
-        <button type="button" class="go img-name" data-img-go="${esc(img.id)}">${esc(img.id)}</button>
+        <span class="img-head"><span class="img-rank" title="Stacking order: 1 is on top where images overlap">${rank + 1}</span>
+          <button type="button" class="go img-name" data-img-go="${esc(img.id)}">${esc(img.id)}</button></span>
         ${status}
         <span class="img-actions">
           <button type="button" class="ghost-btn" data-img-align="${esc(img.id)}">${img.aligned ? 'Re-align' : 'Align'}</button>
@@ -320,7 +337,8 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
         problems.push(`${f.name}: ${(err as Error).message}`);
       }
     }
-    const unpaired = pictures.filter((f) => !prints.has(stem(f.name))).length;
+    // Only those left sitting at a guess: an image aligned from a file is not.
+    const unpaired = pictures.filter((f) => !prints.has(stem(f.name)) && !images.find((i) => i.id === stem(f.name))?.aligned).length;
     message(
       `Added ${added} image(s).` +
       (fromFile ? ` ${fromFile} aligned from an imported file.` : '') +
@@ -514,6 +532,22 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
     showAll = (e.target as HTMLInputElement).checked;
     refresh();
   });
+  // Every image's own Show/Hide at once, rather than one by one.
+  const setAllHidden = (hidden: boolean) => {
+    for (const img of images) {
+      if (img.hidden === hidden) continue;
+      img.hidden = hidden;
+      void put(img);
+    }
+    if (!hidden && !showAll) {
+      showAll = true;
+      $<HTMLInputElement>('img-show').checked = true;
+    }
+    refresh();
+    render();
+  };
+  $('img-show-all').addEventListener('click', () => setAllHidden(false));
+  $('img-hide-all').addEventListener('click', () => setAllHidden(true));
   $('img-list').addEventListener('click', (e) => {
     const el = e.target as HTMLElement;
     const pick = (attr: string) => {

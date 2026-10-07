@@ -55,9 +55,15 @@
         </div>
         <p id="img-msg" class="hint img-msg"></p>
         <div class="img-controls">
-          <label><input type="checkbox" id="img-show" checked> Show</label>
+          <label title="Turns the whole layer off and on; each image keeps its own Show/Hide"><input type="checkbox" id="img-show" checked> Imagery on</label>
           <label class="opacity">Opacity <input type="range" id="img-opacity" min="0" max="100" value="100"></label>
         </div>
+        <div class="img-files">
+          <button type="button" id="img-show-all" class="ghost-btn">Show all</button>
+          <button type="button" id="img-hide-all" class="ghost-btn">Hide all</button>
+        </div>
+        <p class="hint">Listed in stacking order: where images overlap, the one with the
+          lowest error (1) is drawn on top.</p>
         <ul id="img-list" class="img-list"></ul>
         <p id="img-empty" class="hint">No images added yet.</p>
         <p id="img-usage" class="hint"></p>

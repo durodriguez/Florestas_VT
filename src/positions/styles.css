@@ -130,3 +130,9 @@ button, input { font: inherit; color: inherit; }
 .leaflet-container.is-aligning { cursor: crosshair; }
 .img-files { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
 .img-files .ghost-btn { text-align: center; padding: .35rem; }
+.img-head { display: flex; align-items: center; gap: .4rem; }
+.img-rank {
+  display: inline-grid; place-items: center; min-width: 1.4em; height: 1.4em; border-radius: 99px;
+  background: var(--bg-sunk); border: 1px solid var(--border); font-size: .72rem; font-weight: 700; color: var(--text-dim);
+}
+.img-controls > label:first-child { white-space: nowrap; }

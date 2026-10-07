@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  applyH, calibrate, estimateBounds, fitBounds, fitH, fitPlacement, invertH, matrix3dFor, parseGeprint, pixelAt,
+  applyH, calibrate, estimateBounds, fitBounds, fitH, fitPlacement, invertH, matrix3dFor, parseGeprint, pixelAt, rankImages,
   type Bounds, type Camera, type H, type Pair,
 } from '../src/positions/imagery-math';
 
@@ -200,5 +200,26 @@ describe('fitPlacement', () => {
     const fit = fitPlacement(pairs, W, H)!;
     expect(fit.kind).toBe('tilt');
     expect(Math.max(...fit.residuals)).toBeGreaterThan(1);
+  });
+});
+
+describe('rankImages', () => {
+  const r = (id: string, aligned: boolean, points: number, rms: number | null) => ({ id, aligned, points, rms });
+
+  it('puts the lowest measured error on top', () => {
+    const order = rankImages([r('A', true, 8, 1.4), r('B', true, 9, 0.6), r('C', true, 12, 0.9)]).map((i) => i.id);
+    expect(order).toEqual(['B', 'C', 'A']);
+  });
+
+  it('does not let an unmeasured four-point fit win on its zero', () => {
+    const order = rankImages([r('Four', true, 4, 0), r('Eight', true, 8, 1.8)]).map((i) => i.id);
+    expect(order).toEqual(['Eight', 'Four']);
+  });
+
+  it('ranks stretched below tilt-measured, and unaligned last, ties by name', () => {
+    const order = rankImages([
+      r('Z-unaligned', false, 0, null), r('Stretch', true, 3, 0.2), r('A-unaligned', false, 0, null), r('Good', true, 6, 2.5),
+    ]).map((i) => i.id);
+    expect(order).toEqual(['Good', 'Stretch', 'A-unaligned', 'Z-unaligned']);
   });
 });

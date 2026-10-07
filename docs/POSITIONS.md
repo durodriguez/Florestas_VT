@@ -59,10 +59,19 @@ layer, and this repository and its site are public ([to-do #17](TODO.md)).
 5. Every image aligned teaches the tool Earth's real field of view and offset,
    so the next ones start closer.
 
-Overlapping images simply lie on top of each other; nothing is stitched or
-trimmed. Only images in view are drawn, so fourteen large prints do not slow
-the page. **Opacity** blends them with the satellite layer; **Show** turns them
-all off.
+**Where images overlap, the one with the lowest error is on top.** The list is
+in that order, numbered from 1. Error only counts once it has been measured:
+an image needs five or more points to rank by it — four always fit exactly and
+report zero, which proves nothing — so those rank below, then stretched images,
+then unaligned ones. Nothing is merged into one picture: at campus size and
+this resolution that would be hundreds of megapixels, beyond what a browser
+draws, for a result that looks the same. Only images in view are drawn, so
+fourteen large prints do not slow the page.
+
+**Show all** and **Hide all** set every image's own Show/Hide at once.
+**Imagery on** turns the whole layer off and on for a quick comparison with the
+satellite layer, and each image keeps its own setting. **Opacity** blends them
+with the satellite layer.
 
 **The images stay with that browser** — another computer, another browser,
 clearing site data, or Safari after a week away means adding them again. The
