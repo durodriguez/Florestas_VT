@@ -51,14 +51,43 @@ whenever it is needed.
 - They are **the city's trees**, not UVM's, and any figure from them is labelled
   that way.
 
+### What the data supports, and what it does not
+
+From the Forest Service's own summary of the methods — *Understanding i-Tree:
+Summary of Programs and Methods*, GTR-NRS-200
+(<https://research.fs.usda.gov/treesearch/61514>), written to i-Tree 6.1 —
+Table 2 says which field measurements feed which result. Against this data:
+
+| Result | Needs | Here |
+|---|---|---|
+| Carbon storage; gross and net carbon sequestration | species, DBH, total height, condition | **all present** |
+| Air pollution removal, avoided runoff, transpiration, oxygen | **leaf area**, from crown width *and* height to crown base, percent crown missing, crown light exposure | crown width only |
+| Energy effects on buildings | distance and direction to the nearest building | **absent** |
+
+So **carbon is the solid result**, and is the one to lead with. Pollution and
+runoff rest on leaf area, and leaf area here rests on crown values i-Tree has
+to assume; they are shown as estimates and say so. Energy effects are not
+computed. No value is invented for the missing crown fields in the export: a
+made-up crown measurement looks like data.
+
+**Condition is an approximation.** i-Tree's condition classes are bands of
+crown dieback; the city's *good / fair / poor* is an overall rating, and may
+not have been judged the same way.
+
 ### 2–5. In i-Tree Eco
 
-Written from i-Tree Eco version 6. i-Tree's site cannot be reached from where
-this was prepared, so check each step against the screen, and correct this
-file where the software has moved on.
+Written from i-Tree Eco version 6 and the methods summary above. The user's
+manuals are on www.itreetools.org, which could not be reached from where this
+was prepared, so check each step against the screen and correct this file where
+the software has moved on. **One thing to note down when choosing data fields:
+what i-Tree does with the crown fields left unticked** (height to crown base,
+percent crown missing, crown light exposure) — that is what the pollution and
+runoff figures will rest on.
 
 - **Install:** i-Tree Eco is a free download from itreetools.org (an account is
-  needed). It is **Windows software**; on a Mac it needs Windows running in a
+  needed). It is **desktop Windows software** — the methods summary lists it as
+  a desktop program, and i-Tree Design, the web tool, is for placing a few
+  trees around one house, not for importing an inventory; on a Mac it needs Windows running in a
   virtual machine, or a Windows computer on campus.
 - **Project:** a new project, *complete inventory*, English units. Location:
   United States → Vermont → Chittenden County → Burlington. Weather and
@@ -82,4 +111,6 @@ trees it covers and when they were measured.
 
 ## Status
 
-- **7 October 2026** — step 1 done: 364 trees exported.
+- **7 October 2026** — step 1 done: 364 trees exported. Re-checked against the
+  Forest Service's methods summary: Eco is the right tool, carbon is fully
+  supported by this data, pollution and runoff only partly.
