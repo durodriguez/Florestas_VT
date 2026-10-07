@@ -1,7 +1,11 @@
 # Plant photographs
 
-Drop JPEGs here and reference the filename in the `photo` column of
-`data/plants.csv`. They are served at `<base>photos/<filename>`.
+Every photo is **WebP, at most 1200 px on the long edge** — what the field
+app writes. Put photos in `public/photos/` with the filename in the `photo`
+column, then run `npm run photos` — it lists any photo that is not to the
+standard (a JPEG from an older iPhone, a full-size camera shot), and
+`npm run photos -- --write` converts them and renames their references in the
+data. The tests fail while any photo is another type.
 
-Resize to about 1200 px on the long edge — full-resolution phone photos make
-the site slow on campus wifi.
+They are served at `<base>photos/<filename>`. A phone that cannot write WebP
+(Safari before 17) sends JPEG; the conversion brings it into line.

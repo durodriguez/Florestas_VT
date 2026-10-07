@@ -265,9 +265,12 @@ export.
 
 ## 7. Photographs
 
-Drop JPEGs in `public/photos/` and put the filename in the `photo` column.
-Resize to about 1200 px on the long edge — full-resolution phone photos will
-make the site slow on campus wifi.
+Every photo is **WebP, at most 1200 px on the long edge** — what the field
+app writes. Put photos in `public/photos/` with the filename in the `photo`
+column, then run `npm run photos` — it lists any photo that is not to the
+standard (a JPEG from an older iPhone, a full-size camera shot), and
+`npm run photos -- --write` converts them and renames their references in the
+data. The tests fail while any photo is another type.
 
 ## 8. Print the labels
 

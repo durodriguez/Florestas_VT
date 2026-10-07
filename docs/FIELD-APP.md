@@ -293,6 +293,7 @@ Then at a computer:
 ```bash
 npm run import -- survey-2026-09-01.csv
 npm run import -- survey-2026-09-01.csv --write
+npm run photos -- --write    # any photo the phone sent as JPEG becomes WebP
 npm run data
 ```
 
