@@ -751,19 +751,36 @@ sample was pulled and looked at:
 All of it is as of April 2023. A crown peak is not always above the trunk,
 especially on a leaning tree.
 
-**First step, done 7 October 2026.** A crown-peak layer for main campus, made
-from the public data and shown in `/positions/`. Details are in
-[LIDAR.md](LIDAR.md).
+**First step, 7 October 2026.** Crown peaks across the whole campus boundary
+(8,284), made from the public data and drawn in `/positions/`. Details are in
+[LIDAR.md](LIDAR.md). Surveyed city trees sit a median 1.3 m from theirs.
 
-- **2,521 peaks.** Surveyed city trees sit a median 1.3 m from theirs.
-- **526 mapped trees** have a peak 2–8 m away: suggested moves, to check on the
-  imagery.
-- **1,252 mapped trees** have no peak within 8 m. They are small, planted since,
-  or in the wrong place.
-- **1,385 peaks** have no mapped tree within 8 m: candidates for use 3.
+An attempt to pair peaks with mapped trees, and suggest moves one tree at a
+time, was taken out the same day. Checking hundreds of trees one by one
+defeats the purpose, and the pairing hid what the data shows: the evergreen
+clump at Trinity tags 2646–2648 is one crown with one peak, so two of its trees
+read as "no peak".
 
-**Next:** walk a sample of each list, to learn how often the suggestions are
-right before relying on them.
+**SAL's tree centroids, 7 October 2026.** Ernie Buford sent SAL's *Tree Centroids
+Derived from LiDAR for Burlington, VT, 2023* (Paige Brochu, SAL, December 2024):
+
+- 111,912 crowns citywide, each with height and radius; 6,641 inside the
+  campus boundary;
+- made from a hand-edited canopy outline split into crowns;
+- against surveyed city trees, a median 2.0 m to the nearest centre, against
+  5.2 m for this project's peaks.
+
+`/positions/` draws them as crown circles from a file loaded on the user's own
+computer, kept in that browser only ([POSITIONS.md](POSITIONS.md)), because
+**SAL has not been asked whether it may be published.** Their radius is also
+the crown width i-Tree had to guess ([7](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-citys-trees-7-october-2026)).
+
+**Next:**
+
+1. Look at peaks and crowns against the imagery for patterns before
+   automating anything.
+2. Ask SAL whether the centroids may be published, or used to derive published
+   positions.
 
 SAL may still save steps: a canopy layer with buildings already removed, or
 leaf-on data for crown measurements.

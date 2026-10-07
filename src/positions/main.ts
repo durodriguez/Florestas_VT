@@ -7,7 +7,8 @@ import { normalizeTag } from '../accession';
 import { TYPE_LABELS } from '../palette';
 import type { Plant } from '../types';
 import { initImagery } from './imagery';
-import { AGREE_M, MATCH_M, pairPeaks, parsePeaks, type Pairing, type Peak, type PeaksFile } from './peaks';
+import { parsePeaks, type Peak, type PeaksFile } from './peaks';
+import { loadCrowns, nearRings, readCrownFiles, saveCrowns, type SavedCrowns } from './crowns';
 import {
   applyMove, movedMeters, movesToCsv, reconcile, today,
   type Move, type Moves,
@@ -45,10 +46,8 @@ let moves: Moves = {};
 let stale = new Set<string>();
 let selected: string | null = null;
 const undoStack: Array<{ id: string; prev: Move | undefined }> = [];
-/** LiDAR crown peaks, if the build has them, and their pairing with the trees as they stand now. */
+/** LiDAR crown peaks, if the build has them. */
 let peaks: Peak[] = [];
-let cityClaimants: Array<{ id: string; lat: number; lng: number }> = [];
-let pairing: Pairing = { byTree: new Map(), orphans: [] };
 
 // ---------------------------------------------------------------- map
 
@@ -78,7 +77,9 @@ const ghostLayer = L.layerGroup().addTo(map);
 const dotLayer = L.layerGroup().addTo(map);
 const labelLayer = L.layerGroup().addTo(map);
 const peakLayer = L.layerGroup();
-const hintLayer = L.layerGroup().addTo(map);
+const crownLayer = L.layerGroup();
+/** Where crowns are kept from a city-wide file: inside the campus boundary, or within 30 m of it. */
+let crownArea: ((lat: number, lng: number) => boolean) | null = null;
 
 const fillFor = (p: Plant): string =>
   moves[p.id] ? MOVED_FILL : (FILL[p.taxon.type] ?? OTHER_FILL);
@@ -186,7 +187,6 @@ function afterChange(id: string): void {
   const m = moves[id];
   dots.get(id)?.setLatLng(m ? m.to : home.get(id)!);
   styleDot(id);
-  repair();
   drawGhosts();
   drawLabels();
   save();
@@ -282,8 +282,7 @@ function renderSelected(): void {
       ? `<span class="moved">Moved ${movedMeters(m).toFixed(1)} m</span>
          <button type="button" class="ghost-btn" data-reset="${esc(p.id)}">Put it back where the record has it</button>`
       : '<span class="hint">Not moved. Drag the dot, or use the arrow keys.</span>'}
-    ${lidarLine(p.id)}`;
-  drawHint();
+`;
 }
 
 function select(id: string | null, pan: boolean): void {
@@ -321,10 +320,7 @@ $('moves').addEventListener('click', (e) => {
 $('selected').addEventListener('click', (e) => {
   const el = e.target as HTMLElement;
   const reset = el.closest<HTMLElement>('[data-reset]');
-  if (reset) return resetTree(reset.dataset.reset!);
-  const toPeak = el.closest<HTMLElement>('[data-to-peak]');
-  const hit = toPeak ? pairing.byTree.get(toPeak.dataset.toPeak!) : undefined;
-  if (hit) commit(toPeak!.dataset.toPeak!, [hit.peak.lat, hit.peak.lng]);
+  if (reset) resetTree(reset.dataset.reset!);
 });
 
 function resetTree(id: string): void {
@@ -480,10 +476,13 @@ loadData(BASE).then(({ dataset, plants: all }) => {
   save();
   renderMoves();
 
-  cityClaimants = dataset.cityTrees.rows.map((r) => {
-    const col = Object.fromEntries(dataset.cityTrees.fields.map((f, i) => [f, i])) as Record<string, number>;
-    return { id: String(r[col.city_id!]), lat: Number(r[col.lat!]), lng: Number(r[col.lng!]) };
-  });
+  const boundary = dataset.campusAreas.features.find((f) => f.properties.kind === 'boundary');
+  if (boundary?.geometry.type === 'MultiPolygon') {
+    crownArea = nearRings(boundary.geometry.coordinates.map((poly) => poly[0] as Array<[number, number]>), 30);
+  } else if (boundary?.geometry.type === 'Polygon') {
+    crownArea = nearRings([boundary.geometry.coordinates[0] as Array<[number, number]>], 30);
+  }
+  restoreCrowns();
   // The LiDAR layer is extra: if it fails, the tool still works without it.
   loadPeaks().catch((err: Error) => { $('lidar-msg').textContent = `LiDAR layer not loaded: ${err.message}`; });
 }).catch((err: Error) => {
@@ -493,116 +492,85 @@ loadData(BASE).then(({ dataset, plants: all }) => {
 
 // ---------------------------------------------------------------- LiDAR
 
-const isTree = (p: Plant): boolean => p.taxon.type.endsWith('-tree');
-
 async function loadPeaks(): Promise<void> {
   const res = await fetch(`${BASE}data/crown-peaks.json?v=${__DATA_VERSION__}`).catch(() => null);
   if (!res?.ok) return;            // a build without the file simply has no LiDAR layer
   peaks = parsePeaks((await res.json()) as PeaksFile);
-  layersControl.addOverlay(peakLayer, 'LiDAR crown peaks (April 2023)');
-  peakLayer.addTo(map);
-  $('lidar').hidden = false;
-  repair();
-}
-
-/** Pair the peaks with the trees where they stand now, moves included. */
-function repair(): void {
-  if (!peaks.length) return;
-  const trees = plants.filter(isTree).map((p) => {
-    const at = dots.get(p.id)!.getLatLng();
-    return { id: p.id, lat: at.lat, lng: at.lng };
-  });
-  pairing = pairPeaks([...trees, ...cityClaimants], peaks);
-  drawPeaks();
-  renderLidar();
-}
-
-function drawPeaks(): void {
-  peakLayer.clearLayers();
-  const orphan = new Set(pairing.orphans.map((p) => p.id));
   for (const p of peaks) {
-    const lone = orphan.has(p.id);
     L.circleMarker([p.lat, p.lng], {
-      renderer, interactive: false, radius: lone ? 4 : 3,
-      color: lone ? '#ff7a00' : '#ffffff', weight: lone ? 2 : 1.25,
-      fill: lone, fillColor: '#ff7a00', fillOpacity: 0.35, dashArray: lone ? undefined : '2 2',
+      renderer, interactive: false, radius: 3, color: '#ff7a00', weight: 1.5, fill: true, fillColor: '#ff7a00', fillOpacity: 0.25,
     }).addTo(peakLayer);
   }
+  layersControl.addOverlay(peakLayer, 'LiDAR crown peaks (April 2023)');
+  peakLayer.addTo(map);
+  $('lidar-count').textContent = peaks.length.toLocaleString();
+  $('lidar').hidden = false;
 }
 
-/** The suggestion lists, nearest-first along the campus from north to south. */
-function suggestionLists() {
-  const north = (a: { lat: number }, b: { lat: number }) => b.lat - a.lat;
-  const offPeak: Plant[] = [];
-  const noPeak: Plant[] = [];
-  for (const p of plants) {
-    if (!isTree(p)) continue;
-    const hit = pairing.byTree.get(p.id);
-    if (!hit) noPeak.push(p);
-    else if (hit.distance > AGREE_M) offPeak.push(p);
-  }
-  return { offPeak: offPeak.sort(north), noPeak: noPeak.sort(north), orphans: [...pairing.orphans].sort(north) };
-}
+// ---------------------------------------------------------------- crowns (SAL, private)
 
-function renderLidar(): void {
-  const { offPeak, noPeak, orphans } = suggestionLists();
-  $('lidar-off').textContent = String(offPeak.length);
-  $('lidar-none').textContent = String(noPeak.length);
-  $('lidar-orphan').textContent = String(orphans.length);
-}
+const CROWN = '#c9a2ff';
+let crownsShown = false;
 
-function lidarLine(id: string): string {
-  const p = byId.get(id);
-  if (!peaks.length || !p || !isTree(p)) return '';
-  const hit = pairing.byTree.get(id);
-  if (!hit) {
-    return `<span class="lidar-note">LiDAR: no crown peak within ${MATCH_M} m in April 2023 — a small or young tree,
-      one planted since, or a dot in the wrong place.</span>`;
-  }
-  const what = `crown peak ${hit.distance.toFixed(1)} m away, ${hit.peak.height.toFixed(0)} m tall in April 2023`;
-  if (hit.distance <= AGREE_M) return `<span class="lidar-note is-ok">LiDAR agrees: ${what}.</span>`;
-  return `<span class="lidar-note">LiDAR: ${what}. Check it is this tree's crown before moving.</span>
-    <button type="button" class="ghost-btn" data-to-peak="${esc(id)}">Move to the crown peak</button>`;
-}
-
-/** A line from the selected tree to its peak, so the suggestion can be judged on the imagery. */
-function drawHint(): void {
-  hintLayer.clearLayers();
-  const hit = selected ? pairing.byTree.get(selected) : undefined;
-  if (!selected || !hit) return;
-  const at = dots.get(selected)!.getLatLng();
-  L.polyline([at, [hit.peak.lat, hit.peak.lng]], { renderer, color: '#ff7a00', weight: 2, dashArray: '3 5', interactive: false }).addTo(hintLayer);
-  L.circleMarker([hit.peak.lat, hit.peak.lng], { renderer, radius: 7, color: '#ff7a00', weight: 2, fill: false, interactive: false }).addTo(hintLayer);
-}
-
-/** Step through a list from the item after the current one, wrapping round. */
-function stepThrough<T extends { lat: number; lng: number }>(list: T[], current: (t: T) => boolean, go: (t: T) => void): void {
-  if (!list.length) return;
-  const i = list.findIndex(current);
-  go(list[(i + 1) % list.length]!);
-}
-
-let orphanAt = -1;
-$('lidar').addEventListener('click', (e) => {
-  const which = (e.target as HTMLElement).closest<HTMLElement>('[data-next]')?.dataset.next;
-  if (!which) return;
-  const lists = suggestionLists();
-  if (which === 'orphan') {
-    if (!lists.orphans.length) return;
-    orphanAt = (orphanAt + 1) % lists.orphans.length;
-    const p = lists.orphans[orphanAt]!;
-    select(null, false);
-    map.setView([p.lat, p.lng], Math.max(map.getZoom(), 20));
-    hintLayer.clearLayers();
-    L.circleMarker([p.lat, p.lng], { renderer, radius: 12, color: '#ff7a00', weight: 3, fill: false, interactive: false }).addTo(hintLayer);
-    $('lidar-msg').textContent = `Crown peak ${p.height.toFixed(0)} m tall, no mapped tree within ${MATCH_M} m (${orphanAt + 1} of ${lists.orphans.length}).`;
+function drawCrowns(saved: SavedCrowns | null): void {
+  crownLayer.clearLayers();
+  $('crowns-remove').hidden = !saved;
+  $('crowns-count').textContent = saved ? saved.crowns.length.toLocaleString() : '0';
+  $('crowns-msg').textContent = saved
+    ? `${saved.name}, loaded ${saved.loaded}. Kept in this browser only.`
+    : '';
+  if (!saved) {
+    if (crownsShown) layersControl.removeLayer(crownLayer);
+    map.removeLayer(crownLayer);
+    crownsShown = false;
     return;
   }
-  const list = which === 'off' ? lists.offPeak : lists.noPeak;
-  stepThrough(list, (p) => p.id === selected, (p) => {
-    select(p.id, true);
-    $('lidar-msg').textContent = `${list.indexOf(p) + 1} of ${list.length}`;
-  });
+  for (const c of saved.crowns) {
+    L.circle([c.lat, c.lng], { renderer, radius: c.radius, interactive: false, color: CROWN, weight: 1.25, opacity: 0.9, fill: false }).addTo(crownLayer);
+    L.circleMarker([c.lat, c.lng], { renderer, radius: 1.5, interactive: false, color: CROWN, weight: 1, fill: true, fillColor: CROWN, fillOpacity: 1 }).addTo(crownLayer);
+  }
+  if (!crownsShown) layersControl.addOverlay(crownLayer, 'Tree crowns (SAL, my file)');
+  crownsShown = true;
+  crownLayer.addTo(map);
+  // Trees stay on top: they are what gets dragged.
+  dotLayer.eachLayer((l) => (l as L.CircleMarker).bringToFront());
+  if (selected) styleDot(selected);
+}
+
+async function restoreCrowns(): Promise<void> {
+  try {
+    drawCrowns(await loadCrowns());
+  } catch {
+    $('crowns-msg').textContent = 'This browser will not store the crowns; they will need loading again next time.';
+  }
+}
+
+$<HTMLInputElement>('crowns-add').addEventListener('change', async (e) => {
+  const input = e.target as HTMLInputElement;
+  const files = [...(input.files ?? [])];
+  input.value = '';
+  if (!files.length || !crownArea) return;
+  const msg = $('crowns-msg');
+  msg.textContent = 'Reading…';
+  try {
+    const area = crownArea;
+    const crowns = await readCrownFiles(files, (c) => area(c.lat, c.lng));
+    if (!crowns.length) throw new Error('none of its crowns are on or near campus');
+    const saved: SavedCrowns = { name: files.map((f) => f.name).join(', '), loaded: today(), crowns };
+    drawCrowns(saved);
+    try {
+      await saveCrowns(saved);
+    } catch {
+      msg.textContent += ' This browser refused to store them, so they last until the tab closes.';
+    }
+  } catch (err) {
+    msg.textContent = `Could not read it: ${(err as Error).message}.`;
+  }
+});
+
+$('crowns-remove').addEventListener('click', async () => {
+  drawCrowns(null);
+  await saveCrowns(null).catch(() => undefined);
 });
 
 // Surfaced for the browser test.
@@ -620,7 +588,8 @@ Object.assign(window as unknown as Record<string, unknown>, {
       return [box.left + pt.x, box.top + pt.y];
     },
     selected: () => selected,
-    lidar: () => ({ peaks: peaks.length, ...Object.fromEntries(Object.entries(suggestionLists()).map(([k, v]) => [k, v.length])) }),
+    peaks: () => peaks.length,
+    crowns: () => crownLayer.getLayers().length / 2,
     imagery: myImagery,
     screenOf: (lat: number, lng: number) => {
       const pt = map.latLngToContainerPoint([lat, lng]);
