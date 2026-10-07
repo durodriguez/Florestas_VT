@@ -58,7 +58,12 @@ const imagery = L.tileLayer(
 const streets = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 22, maxNativeZoom: 19, attribution: '© OpenStreetMap contributors',
 });
-L.control.layers({ 'Satellite': imagery, 'Streets': streets }, undefined, { position: 'topright' }).addTo(map);
+const layersControl = L.control.layers({ 'Satellite': imagery, 'Streets': streets }, undefined, { position: 'topright' }).addTo(map);
+
+// Campus outlines: above the surveyor's own imagery (250), below the trees.
+map.createPane('campus');
+map.getPane('campus')!.style.zIndex = '300';
+map.getPane('campus')!.style.pointerEvents = 'none';
 L.control.scale({ imperial: false }).addTo(map);
 
 // Generous tolerance: a 6 px dot is a small target, and the job is grabbing
@@ -398,6 +403,32 @@ window.addEventListener('beforeunload', (e) => {
 // ---------------------------------------------------------------- start
 
 loadData(BASE).then(({ dataset, plants: all }) => {
+  // Lines only, in colours that read on aerial imagery — the explorer's
+  // dark greens and tinted fills vanish into canopy. Never interactive: a
+  // polygon that took clicks would make the trees inside it undraggable.
+  const campus = L.geoJSON(dataset.campusAreas, {
+    pane: 'campus',
+    interactive: false,
+    style: (f) => {
+      const outline = f?.properties?.kind === 'boundary';
+      return {
+        color: outline ? '#ffd100' : '#ffffff',
+        weight: outline ? 3 : 1.5,
+        opacity: outline ? 0.95 : 0.75,
+        dashArray: f?.properties?.provisional ? '6 6' : undefined,
+        fill: false,
+      };
+    },
+    onEachFeature: (f, layer) => {
+      if (f.properties?.kind !== 'campus') return;
+      layer.bindTooltip(esc(String(f.properties.name)), {
+        permanent: true, direction: 'center', className: 'campus-name', interactive: false, pane: 'campus',
+      });
+    },
+  }).addTo(map);
+  const provisional = dataset.campusAreas.features.some((f) => f.properties.provisional);
+  layersControl.addOverlay(campus, `Campus boundary${provisional ? ' (approximate)' : ''}`);
+
   const cfg = dataset.config.map;
   map.setView(cfg.center, 17);
 

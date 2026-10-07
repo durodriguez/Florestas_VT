@@ -22,6 +22,11 @@ with its tag number, or `#` and its accession if it has none.
 - Moved trees turn **gold**, with a dashed line back to where the record had
   them. **Reset** on any move puts that tree back.
 
+The **campus boundary** is drawn over the imagery — the outer edge in gold, the
+lines between campuses in white, with their names — and switched off from the
+layers button at the top right. It is outline only and never takes a click, so
+it cannot get in the way of dragging a tree.
+
 Every move is kept in the browser as it is made, so closing the tab or a crash
 loses nothing; the bar says so, and says plainly if the browser refuses to
 save. The moves live in that one browser on that one computer until exported.
