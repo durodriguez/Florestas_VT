@@ -38,11 +38,24 @@ export function itreeName(t) {
 }
 
 /**
- * i-Tree Eco's condition classes are crown-dieback bands named Excellent,
- * Good, Fair, Poor, Critical, Dying and Dead — the city's four words are a
- * subset, so they carry across as they are.
+ * i-Tree Eco records crown health as one of 22 condition classes, each a band
+ * of percent condition (100 minus percent dieback), written "90% - 95%". The
+ * words Excellent, Good, Fair, Poor, Critical, Dying and Dead are only its
+ * reporting groups, and an import that gives the words leaves the trees with
+ * no condition. So each of the city's words becomes the input class in the
+ * middle of its reporting group (Good is 90-99%, Fair 75-89%, Poor 50-74%);
+ * for Good, i-Tree's own help calls 90% - 95% the good class.
  */
+const CONDITION = {
+  excellent: '100%',
+  good: '90% - 95%',
+  fair: '80% - 85%',
+  poor: '60% - 65%',
+  critical: '35% - 40%',
+  dying: '10% - 15%',
+  dead: '0%',
+};
+
 export function itreeCondition(c) {
-  const v = String(c ?? '').trim().toLowerCase();
-  return { excellent: 'Excellent', good: 'Good', fair: 'Fair', poor: 'Poor', critical: 'Critical', dying: 'Dying', dead: 'Dead' }[v] ?? '';
+  return CONDITION[String(c ?? '').trim().toLowerCase()] ?? '';
 }

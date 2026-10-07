@@ -39,7 +39,7 @@ own fields:
 | Species, Common Name | taxa | translated, below |
 | DBH (in), Total Height (ft) | the city | |
 | Crown Width (ft) | the city's spread | one value; i-Tree's import takes one |
-| Crown Health | the city's condition | approximate, below |
+| Crown Health | the city's condition | as a percent class, below |
 | Street Tree, Public Tree | `Y` | all are city street trees |
 | Land Use | `Institutional` | see [land use](#land-use) |
 | Survey Date | date measured | 22 trees have none |
@@ -99,9 +99,12 @@ guide (Eco resources page):
 | Crown health | 13% dieback | sequestration, leaf area |
 | Crown light exposure | class 2–3 | growth (carbon sequestration), forecasts |
 
-Crown width is supplied; height to crown base, percent crown missing and crown
-light exposure are not, so those three defaults are what the pollution and
-runoff figures — and, through crown light exposure, sequestration — rest on.
+In i-Tree's setup, crown width is not a field of its own: it is one of four
+under a single **Crown size** box, with height to live top, height to crown
+base and percent crown missing. The city has only the width, so Crown size is
+left unticked and the width is predicted too. That means the crown defaults
+above are what the pollution and runoff figures rest on. Crown light exposure
+also affects sequestration.
 
 ### Land use
 
@@ -123,9 +126,22 @@ not record it. Many street trees are open-grown (4–5), so the default probably
 *storage* does not use it. Recording it is one tap per tree and a candidate for
 the field app.
 
-**Condition is an approximation.** i-Tree's condition classes are bands of
-crown dieback; the city's *good / fair / poor* is an overall rating, and may
-not have been judged the same way.
+**Condition is an approximation.** i-Tree takes crown health as one of 22
+classes of percent condition (100 minus percent dieback), written like
+`90% - 95%`. *Excellent, Good, Fair, Poor* are only its reporting groups, and
+importing those words leaves every tree with no condition. So the export
+writes each of the city's words as the class in the middle of its i-Tree group:
+
+| City | i-Tree class | i-Tree reports it as |
+|---|---|---|
+| excellent (1 tree) | `100%` | Excellent (100%) |
+| good (192) | `90% - 95%` | Good (90–99%) |
+| fair (147) | `80% - 85%` | Fair (75–89%) |
+| poor (24) | `60% - 65%` | Poor (50–74%) |
+
+The city's *good / fair / poor* is an overall rating, not a measured dieback,
+so this is a translation, not a measurement. Condition feeds carbon
+sequestration (a tree in poor health grows less), not carbon storage.
 
 ### 2–5. In i-Tree Eco
 
@@ -140,17 +156,47 @@ software has moved on.
   Windows machine.
 - **Project:** new project, *complete inventory*, English units. Location:
   United States → Vermont → Chittenden County → Burlington. Weather and
-  pollution year: the latest offered. Data fields to collect: DBH, total
-  height, crown width, crown health, street tree, public tree, land use.
-  Leave height to crown base, percent crown missing and crown light exposure
-  unticked — their defaults are above.
-- **Import:** the import wizard, pointed at the `.xlsx`. Match each column to
-  the i-Tree field of the same name. Map *Tree ID* to Tree ID and *User Tree
-  ID* to User Tree ID. Then match values: species names should all be found;
-  *Fair / Good / Poor* to crown health classes; *Institutional* to land use;
-  *Y* to yes.
-- **Submit:** i-Tree checks the data, then sends it for processing; results come
-  back to the program.
+  pollution year: the latest offered. On *Data Collection Options*, tick:
+
+  - species and DBH (*Measured*);
+  - tree address;
+  - land use;
+  - street tree;
+  - map (GPS) coordinates;
+  - public/private (*Default Public*);
+  - total tree height;
+  - crown health, set to **Condition**, not Dieback;
+  - **User Tree ID**.
+
+  Leave Crown size, crown light exposure, energy and the management fields
+  unticked.
+- **Import:** Data tab → **Trees** first; only then does **Import** become
+  active. Point the wizard at the `.xlsx` and tick *first row contains column
+  headers*. Click each column and pick its Eco field:
+
+  | Column | Eco field | Field type |
+  |---|---|---|
+  | Tree ID | ID | |
+  | User Tree ID | User Tree ID | |
+  | Species | Species | scientific name |
+  | Common Name | *not assigned* | |
+  | DBH (in) | DBH 1 (in) | |
+  | Total Height (ft) | Total Height (ft) | |
+  | Crown Width (ft) | *not assigned* (Crown size is off) | |
+  | Crown Health | Crown: Condition | **Description**, values mapped |
+  | Street Tree, Public Tree | Street Tree?, Public? | |
+  | Land Use | Land Use | **Description**, values mapped |
+  | Survey Date | Survey Date | |
+  | Latitude, Longitude | Latitude, Longitude | |
+  | Tree Address | Address | |
+
+  Then confirm the value matches. Every species, condition class and
+  *Institutional* should match i-Tree's own. Afterwards, check that the
+  Crown: Condition column shows percentages, not *Not Entered*.
+- **Check Data, then submit** (Reports tab). Check Data warns that no PM10
+  station is assigned: none of the stations near Burlington measures it, so
+  **PM10 removal is not estimated**. Processing happens on i-Tree's servers,
+  and an email says when it is done; then *Retrieve Results*.
 - **Export:** the **individual tree** results — carbon storage, gross carbon
   sequestration, avoided runoff, pollution removal, and their dollar values —
   as an Excel or CSV file, **keeping the User Tree ID column**.
@@ -177,3 +223,10 @@ trees it covers and when they were measured.
   now Excel with i-Tree's field names; every species name is on its list; land
   use set to Institutional; crown light exposure left to the default. Next:
   steps 2–5, on a Windows computer.
+- **7 October 2026** — steps 2–4 done in i-Tree Eco v6.0.41: 364 trees
+  imported and submitted. The settings were complete inventory, English units
+  and Burlington, VT, with the 2024 weather and pollution year. Weather and
+  precipitation came from station 726170-14742 (Burlington airport, 6 km
+  away). Pollution came from Chittenden for O3, PM2.5 and CO (CO rated Poor),
+  Rutland for NO2 and Essex NY for SO2. No station measures PM10. Benefit
+  prices are i-Tree's defaults. Waiting on processing.
