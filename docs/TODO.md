@@ -15,7 +15,7 @@ stale, which is how this file got untidy in the first place.
 | 17 | [Sharper satellite imagery](#17-sharper-satellite-imagery-dormant-revisit-from-the-field) | *dormant* |
 | 18 | [Two versions of the survey app](#18-two-versions-of-the-survey-app--advanced-and-basic-open) | **open** |
 | 19 | [The Redstone pine grove, mapped in the wrong places](#19-the-redstone-white-pine-grove-is-mapped-in-the-wrong-places-open-fieldwork) | **open** |
-| 20 | [LiDAR from the Spatial Analysis Laboratory](#20-lidar-from-the-spatial-analysis-laboratory-waiting-on-sal-7-october-2026) | *waiting* |
+| 20 | [LiDAR from the Spatial Analysis Laboratory](#20-lidar-from-the-spatial-analysis-laboratory-in-progress-crown-peaks-in-positions-7-october-2026) | **in progress** |
 | 1 | [Rename `memorial`, add `dedication_label`](#1-rename-memorial-add-dedication_label-done-11-september-2026) | done |
 | 2 | [Dedication in the survey app](#2-dedication-in-the-survey-app-done-12-september-2026) | done |
 | 3 | [`geolocation_notes`, right of `lng`](#3-geolocation_notes-right-of-lng-done-11-september-2026) | done |
@@ -643,7 +643,7 @@ parking lot, which are wrong by definition. Do not shift the grove in bulk from
 a desk: the errors run in different directions and distances, so there is no
 single offset to apply.
 
-## 20. LiDAR from the Spatial Analysis Laboratory [waiting on SAL, 7 October 2026]
+## 20. LiDAR from the Spatial Analysis Laboratory [in progress: crown peaks in /positions/, 7 October 2026]
 
 **7 October 2026:** you emailed **Ernie Buford** at UVM's Spatial Analysis
 Laboratory (SAL) to ask about their LiDAR data. The hope is that SAL will
@@ -751,12 +751,19 @@ sample was pulled and looked at:
 All of it is as of April 2023. A crown peak is not always above the trunk,
 especially on a leaning tree.
 
-**First step, when wanted:** a crown-peak layer for main campus compared with
-the mapped trees, giving a list of suggested moves and a list of unmatched
-peaks. That is a focused session or two. Its tools are installed for that
-session only; nothing is added to the site, and the raw points are not
-committed. Its accuracy is known only once a sample of suggestions has been
-walked.
+**First step, done 7 October 2026.** A crown-peak layer for main campus, made
+from the public data and shown in `/positions/`. Details are in
+[LIDAR.md](LIDAR.md).
+
+- **2,521 peaks.** Surveyed city trees sit a median 1.3 m from theirs.
+- **526 mapped trees** have a peak 2–8 m away: suggested moves, to check on the
+  imagery.
+- **1,252 mapped trees** have no peak within 8 m. They are small, planted since,
+  or in the wrong place.
+- **1,385 peaks** have no mapped tree within 8 m: candidates for use 3.
+
+**Next:** walk a sample of each list, to learn how often the suggestions are
+right before relying on them.
 
 SAL may still save steps: a canopy layer with buildings already removed, or
 leaf-on data for crown measurements.
@@ -1195,5 +1202,5 @@ UVM licensing, about whether the attribution is sufficient before the map goes
 on a university domain; grounds, about re-tagging ([13](#13-re-tagging-what-happens-when-a-tree-gets-a-new-number-open-ask-grounds)); and UVM's
 Spatial Analysis Laboratory, about leaf-on orthoimagery ([17](#17-sharper-satellite-imagery-dormant-revisit-from-the-field)), which is
 only worth asking if z20 disappoints in the field. The LiDAR question went to
-SAL on 7 October 2026 ([20](#20-lidar-from-the-spatial-analysis-laboratory-waiting-on-sal-7-october-2026)); the imagery question
+SAL on 7 October 2026 ([20](#20-lidar-from-the-spatial-analysis-laboratory-in-progress-crown-peaks-in-positions-7-october-2026)); the imagery question
 could ride along on the reply.

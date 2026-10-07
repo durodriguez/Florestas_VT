@@ -31,6 +31,31 @@ Every move is kept in the browser as it is made, so closing the tab or a crash
 loses nothing; the bar says so, and says plainly if the browser refuses to
 save. The moves live in that one browser on that one computer until exported.
 
+## LiDAR crown peaks
+
+The tool also shows **crown peaks**: the tops of tree crowns in Vermont's
+statewide LiDAR, flown on 21 April 2023 ([LIDAR.md](LIDAR.md)). They are drawn
+as small dashed rings. An **orange** ring is a peak with no mapped tree within
+8 m. The layers button at the top right turns them off.
+
+Each tree is paired with the nearest peak that no closer tree has taken. City
+street trees take part, so their crowns are never offered to a UVM tree. Select
+a tree and the panel says one of three things:
+
+- **LiDAR agrees** — a peak within 2 m. Nothing to do.
+- **A crown peak 2–8 m away** — an orange line shows where. If the imagery
+  confirms that crown is this tree's, **Move to the crown peak** makes the move.
+  It is an ordinary move: undo, reset and export work as for a drag.
+- **No crown peak within 8 m** — a small or young tree, one planted since, or
+  a dot in the wrong place. The imagery decides.
+
+**LiDAR crown peaks** in the side panel counts each kind. Its **Next** buttons
+step through them north to south. The third list goes to peaks with no mapped
+tree at all: candidates for trees nobody has inventoried, to walk to with the
+survey app rather than add from a desk.
+
+The suggestions are hints. A peak 5 m from a tree may well be its neighbour's.
+
 ## Your own imagery, privately
 
 **My imagery** in the side panel lays your own images — Google Earth prints,
