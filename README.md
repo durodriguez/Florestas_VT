@@ -153,6 +153,7 @@ species never reaches the live site.
 | **The field survey app** | [docs/FIELD-APP.md](docs/FIELD-APP.md) |
 | **Correcting positions at a desk** | [docs/POSITIONS.md](docs/POSITIONS.md) |
 | **Hosting, domains, scaling** | [docs/DEPLOY.md](docs/DEPLOY.md) |
+| **Ecosystem services with i-Tree** | [docs/ITREE.md](docs/ITREE.md) |
 | **What's planned next** | [docs/TODO.md](docs/TODO.md) |
 
 ## Commands
@@ -171,6 +172,7 @@ species never reaches the live site.
 | `npm run check:inventories` | Compare the 2014 inventory against the map, tree by tree, and list every disagreement |
 | `npm run check:coverage` | Account for the 2014 tags that are not on the map, and rank the gaps worth walking |
 | `npm run check:prose` | Report any taxon whose fun fact merely restates its description |
+| `npm run itree:export` | Write the i-Tree Eco inventory file for the city's campus trees (see `docs/ITREE.md`) |
 | `npm run labels` | Generate QR label sheet and SVGs into `public/labels/` |
 | `npm run check:links` | Check every `wikipedia_url` in `taxa.csv` still resolves |
 | `npm test` | Run the test suite |

@@ -45,7 +45,12 @@ instrument the whole correction strategy runs on.
 
 ## Open
 
-## 7. Ecosystem services — the i-Tree question [blocked: no diameters]
+## 7. Ecosystem services — the i-Tree question [in progress on the city's trees, 7 October 2026]
+
+**Under way on Burlington's 364 street trees on campus**, which carry diameters:
+`npm run itree:export` writes the i-Tree Eco inventory, and
+[ITREE.md](ITREE.md) is the round trip, step by step. UVM's own trees remain
+blocked on DBH, as below.
 
 
 **Ask.** Purdue and Missouri both show carbon sequestered, air pollution
