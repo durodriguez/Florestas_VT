@@ -36,8 +36,9 @@ describe('itreeName', () => {
 });
 
 describe('itreeCondition', () => {
-  it('carries the city\'s words across as i-Tree\'s classes', () => {
-    expect(['excellent', 'good', 'fair', 'poor', '', 'odd'].map(itreeCondition)).toEqual(['Excellent', 'Good', 'Fair', 'Poor', '', '']);
+  it('turns the city\'s words into i-Tree\'s percent condition classes', () => {
+    expect(['excellent', 'Good', 'fair', 'poor', 'dead', '', 'odd'].map(itreeCondition))
+      .toEqual(['100%', '90% - 95%', '80% - 85%', '60% - 65%', '0%', '', '']);
   });
 });
 

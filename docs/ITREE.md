@@ -39,7 +39,7 @@ own fields:
 | Species, Common Name | taxa | translated, below |
 | DBH (in), Total Height (ft) | the city | |
 | Crown Width (ft) | the city's spread | one value; i-Tree's import takes one |
-| Crown Health | the city's condition | approximate, below |
+| Crown Health | the city's condition | as a percent class, below |
 | Street Tree, Public Tree | `Y` | all are city street trees |
 | Land Use | `Institutional` | see [land use](#land-use) |
 | Survey Date | date measured | 22 trees have none |
@@ -126,9 +126,22 @@ not record it. Many street trees are open-grown (4–5), so the default probably
 *storage* does not use it. Recording it is one tap per tree and a candidate for
 the field app.
 
-**Condition is an approximation.** i-Tree's condition classes are bands of
-crown dieback; the city's *good / fair / poor* is an overall rating, and may
-not have been judged the same way.
+**Condition is an approximation.** i-Tree takes crown health as one of 22
+classes of percent condition (100 minus percent dieback), written like
+`90% - 95%`. *Excellent, Good, Fair, Poor* are only its reporting groups, and
+importing those words leaves every tree with no condition. So the export
+writes each of the city's words as the class in the middle of its i-Tree group:
+
+| City | i-Tree class | i-Tree reports it as |
+|---|---|---|
+| excellent (1 tree) | `100%` | Excellent (100%) |
+| good (192) | `90% - 95%` | Good (90–99%) |
+| fair (147) | `80% - 85%` | Fair (75–89%) |
+| poor (24) | `60% - 65%` | Poor (50–74%) |
+
+The city's *good / fair / poor* is an overall rating, not a measured dieback,
+so this is a translation, not a measurement. Condition feeds carbon
+sequestration (a tree in poor health grows less), not carbon storage.
 
 ### 2–5. In i-Tree Eco
 
@@ -160,7 +173,7 @@ software has moved on.
 - **Import:** the import wizard, pointed at the `.xlsx`. Match each column to
   the i-Tree field of the same name. Map *Tree ID* to Tree ID and *User Tree
   ID* to User Tree ID. Then match values: species names should all be found;
-  *Fair / Good / Poor* to crown health classes; *Institutional* to land use;
+  the condition classes (`90% - 95%` and so on) to i-Tree's own; *Institutional* to land use;
   *Y* to yes.
 - **Submit:** i-Tree checks the data, then sends it for processing; results come
   back to the program.
