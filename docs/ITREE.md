@@ -19,7 +19,7 @@ stores and shows its output — nothing here imitates the model.
 | 3 | you | Import the file and match the species |
 | 4 | you | Submit the project; i-Tree processes it on its servers |
 | 5 | you | Export the per-tree results and send them back |
-| 6 | here | Store the results with their provenance; show them on the map |
+| 6 | here | `npm run itree:import` stores the results; then show them on the map |
 
 ### 1. The inventory file
 
@@ -197,9 +197,15 @@ software has moved on.
   station is assigned: none of the stations near Burlington measures it, so
   **PM10 removal is not estimated**. Processing happens on i-Tree's servers,
   and an email says when it is done; then *Retrieve Results*.
-- **Export:** the **individual tree** results — carbon storage, gross carbon
-  sequestration, avoided runoff, pollution removal, and their dollar values —
-  as an Excel or CSV file, **keeping the User Tree ID column**.
+- **Export:** on the Reports tab, first set the **Settings** group: tick
+  **User Tree ID** (and Coordinates), with **English** units and
+  **Scientific** names. Then **Individual Level Results → Tree Benefits and
+  Costs → Summary**: one row per tree, with replacement value, carbon storage,
+  gross carbon sequestration, avoided runoff, pollution removal, oxygen and
+  their dollar values. Save it from the report viewer **as CSV**. PDF also
+  works for reading, but CSV needs no parsing. The User ID column is what joins
+  each row back; i-Tree renumbers its own Tree ID 1, 2, 3… and drops the site
+  numbers it was sent.
 
 **i-Tree's funding.** The Forest Service has stopped funding i-Tree; the tools
 are kept running on one-off grants, with a promise of six months' notice before
@@ -209,10 +215,57 @@ exists. i-Tree runs open office hours for questions (next: Thursday
 
 ### 6. Back here
 
-The results file will be stored as `data/` alongside the trees it describes,
-with the i-Tree version, the location and the weather/pollution year recorded
-with it, and shown on the map labelled **Powered by i-Tree** — with how many
-trees it covers and when they were measured.
+```bash
+npm run itree:import -- path/to/Tree_BenefitsCosts_Summary.csv
+                              # → data/itree-city-trees.csv
+```
+
+The import checks every row against `data/city-trees.csv`: the User ID must be
+a known tree, appear once, sit where the city puts it (to 0.00001°) and carry
+the same DBH. Every tree that was sent must come back. Any failure, and nothing
+is written.
+
+**`data/itree-city-trees.csv`** keeps one row per tree, by `city_id`:
+
+| Column | i-Tree's column |
+|---|---|
+| `replacement_usd` | Replacement Value ($) |
+| `carbon_storage_lb`, `carbon_storage_usd` | Carbon Storage |
+| `carbon_sequestration_lb_yr`, `carbon_sequestration_usd_yr` | Gross Carbon Sequestration |
+| `avoided_runoff_gal_yr`, `avoided_runoff_usd_yr` | Avoided Runoff |
+| `pollution_removal_oz_yr`, `pollution_removal_usd_yr` | Pollution Removal |
+| `oxygen_lb_yr` | Oxygen Production |
+| `total_benefits_usd_yr` | Total Annual Benefits |
+
+Not kept: species, DBH and coordinates, which only echo `city-trees.csv` and
+are checked instead; and Carbon Avoided and Energy Savings, which are N/A for
+every tree because energy effects need distance and direction to buildings.
+i-Tree's **Total Annual Benefits is carbon sequestration + avoided runoff +
+pollution removal** at its prices; with energy savings missing, it understates
+what these trees do. Energy savings are often a street tree's largest single
+benefit.
+
+**`data/itree-run.json`** records the run, since the results file does not:
+model version, project, weather and pollution years and stations, and the
+prices used. It is kept by hand, so update it with each new run.
+
+**On the map:** not yet. It will be labeled **Powered by i-Tree**, and will say
+how many trees it covers and that they are the city's.
+
+**Totals for the 364 trees** (8 October 2026 results):
+
+| | Amount | Value |
+|---|---|---|
+| Carbon stored | 127,780 lb | $27,647 |
+| Carbon taken up (gross) | 2,774 lb/yr | $600/yr |
+| Stormwater runoff avoided | 35,148 gal/yr | $314/yr |
+| Air pollution removed | 657 oz/yr | $184/yr |
+| Oxygen produced | 7,396 lb/yr | not valued |
+| **Total annual benefits** | | **$1,099/yr** |
+| Replacement value | | $371,262 |
+
+These are i-Tree's printed totals. Summing the rounded per-tree values gives
+a few pounds or ounces less.
 
 ## Status
 
@@ -230,3 +283,7 @@ trees it covers and when they were measured.
   away). Pollution came from Chittenden for O3, PM2.5 and CO (CO rated Poor),
   Rutland for NO2 and Essex NY for SO2. No station measures PM10. Benefit
   prices are i-Tree's defaults. Waiting on processing.
+- **8 October 2026** — step 5 done: results came back for all 364 trees and
+  are stored by `npm run itree:import`. Every row matched by ID, position and
+  DBH. The CSV and the PDF of the same report agree to the last digit. Next:
+  show them on the map.
