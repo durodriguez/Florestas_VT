@@ -16,6 +16,7 @@ stale, which is how this file got untidy in the first place.
 | 18 | [Two versions of the survey app](#18-two-versions-of-the-survey-app--advanced-and-basic-open) | **open** |
 | 19 | [The Redstone pine grove, mapped in the wrong places](#19-the-redstone-white-pine-grove-is-mapped-in-the-wrong-places-open-fieldwork) | **open** |
 | 20 | [LiDAR from the Spatial Analysis Laboratory](#20-lidar-from-the-spatial-analysis-laboratory-in-progress-crown-peaks-in-positions-7-october-2026) | **in progress** |
+| 21 | [A "Did you know…?" bubble on the map](#21-a-did-you-know-bubble-on-the-map-idea-8-october-2026) | *idea* |
 | 1 | [Rename `memorial`, add `dedication_label`](#1-rename-memorial-add-dedication_label-done-11-september-2026) | done |
 | 2 | [Dedication in the survey app](#2-dedication-in-the-survey-app-done-12-september-2026) | done |
 | 3 | [`geolocation_notes`, right of `lng`](#3-geolocation_notes-right-of-lng-done-11-september-2026) | done |
@@ -784,6 +785,55 @@ the crown width i-Tree had to guess ([7](#7-ecosystem-services--the-i-tree-quest
 
 SAL may still save steps: a canopy layer with buildings already removed, or
 leaf-on data for crown measurements.
+
+## 21. A "Did you know…?" bubble on the map [idea, 8 October 2026]
+
+**The idea.** A small floating bubble, banner or card appears when someone
+first lands on the map. It runs through random facts about UVM's trees, or
+trees in general, and can be closed with an ×. Facts could be about a
+species, a single tree, or the collection as a whole: the longest-lived or
+tallest species on campus, why a baldcypress drops its needles in winter,
+how much carbon the campus trees take up, the threat emerald ash borer poses
+to ash trees, and dozens more. (The examples first suggested were
+illustrations, not claims to verify.)
+
+**Two kinds of fact, from two sources:**
+
+- **Counted from the data, so always current.** For example:
+  - the most common species ("Eastern white pine is the most common tree on
+    campus: 183 of them");
+  - how many of a given species there are ("There are 27 ginkgos on campus");
+  - the species with a single tree on campus;
+  - how many trees each campus has;
+  - how many are native to Vermont.
+
+  These can be generated when the site is built, so they change as the
+  inventory does and are never out of date.
+- **Written by hand,** about species or trees in general. Every species in
+  `taxa.csv` already has a fun fact (257 of them), shown in each tree's record
+  and under a botanist's review ([SPECIES-TEXT-REVIEW.md](SPECIES-TEXT-REVIEW.md)),
+  so there is a ready-made pool. New ones, especially any with a number in
+  them such as carbon per tree, should carry their source. Facts about the
+  collection's age or carbon wait on measurements and i-Tree
+  ([7](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-citys-trees-7-october-2026)).
+
+**How it could work, when built:**
+
+- **Keep written facts in a file of their own,** say `data/facts.csv`: the
+  text, its source, and optionally the tree or species it is about. The data
+  build checks the file like the others, and adds the counted facts. A fact
+  about a tree or species can open its record or species page when tapped.
+- **Show it once, then step aside.** It appears on a first visit. Closing it
+  keeps it closed (remembered in the browser), and a small "Did you know?"
+  button can bring it back.
+- **Never cover what someone came for.** A visitor arriving from a QR label
+  (`?plant=`) wants that tree, so the bubble waits or stays away. On a phone
+  it must not cover the map's controls or the search box.
+- **Accessible.** Readable by screen readers, closable from the keyboard, and
+  with no sliding animation for anyone who has asked their device to reduce
+  motion.
+- **Random, but not repetitive:** shuffle the facts and avoid showing the
+  same one twice in a row.
 
 ## Finished
 
