@@ -54,16 +54,14 @@ describe('renderCityDetail', () => {
     expect(html.indexOf('Ecosystem services')).toBeLessThan(html.indexOf('About Hackberry'));
   });
 
-  it('links to the i-Tree page at the foot of the panel', () => {
+  it('ends with the city as the source, and no i-Tree link', () => {
     const html = renderCityDetail(tree({ itree: estimates }), '/site/');
-    expect(html).toContain('<a href="/site/itree/">i-Tree estimates</a>');
-    expect(html.lastIndexOf('i-Tree estimates')).toBeGreaterThan(html.indexOf('More about this species'));
+    expect(html).not.toContain('i-Tree estimates');
+    expect(html).not.toContain('/site/itree/');
   });
 
-  it('leaves the section and the link out for a tree i-Tree has no estimate for', () => {
-    const html = renderCityDetail(tree(), '/');
-    expect(html).not.toContain('Ecosystem services');
-    expect(html).not.toContain('itree/');
+  it('leaves the section out for a tree i-Tree has no estimate for', () => {
+    expect(renderCityDetail(tree(), '/')).not.toContain('Ecosystem services');
   });
 });
 

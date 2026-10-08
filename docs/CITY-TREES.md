@@ -44,8 +44,7 @@ This is the whole design, not a disclaimer:
   **ecosystem services** from i-Tree Eco, folded and ending "Powered by i-Tree"
   ([ITREE.md](ITREE.md#6-back-here)), then the same *About* section a UVM
   plant has, without its count of UVM plants on campus. The panel ends by
-  naming the city's inventory as the source, and links the i-Tree estimates
-  page.
+  naming the city's inventory as the source.
 
 ## Blue and white, against green and gold
 

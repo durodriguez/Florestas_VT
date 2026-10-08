@@ -315,7 +315,6 @@ export function renderCityDetail(tree: CityTree, base: string): string {
 
     <p class="detail-source">
       Record from the City of Burlington's public tree inventory.
-      ${tree.itree ? `<br><a href="${base}itree/">i-Tree estimates</a>` : ''}
     </p>
   `;
 }
