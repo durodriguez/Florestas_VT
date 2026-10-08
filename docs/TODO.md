@@ -767,6 +767,14 @@ Derived from LiDAR for Burlington, VT, 2023* (Paige Brochu, SAL, December 2024):
 
 - 111,912 crowns citywide, each with height and radius; 6,641 inside the
   campus boundary;
+- **covering the City of Burlington only.** The file stops at the city line,
+  so the parts of campus in South Burlington have no SAL crowns: about a
+  third of Centennial, most of Spear Street and the south edge of Athletic.
+  **Compare it with the crown peaks only where both exist.** Over the same
+  ground, SAL has more crowns than there are peaks on every campus but
+  Centennial, where the two are close (2,842 against 2,982). A first
+  comparison over the whole campus missed this, and wrongly found more peaks
+  than crowns in the woods;
 - made from a hand-edited canopy outline split into crowns;
 - against surveyed city trees, a median 2.0 m to the nearest centre, against
   5.2 m for this project's peaks.
