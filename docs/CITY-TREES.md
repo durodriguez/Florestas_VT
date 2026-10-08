@@ -41,7 +41,7 @@ This is the whole design, not a disclaimer:
   reads "16 of 364 shown" while a filter is set.
 - **Their own record panel.** It opens saying `BTV-886 · City of Burlington` and
   states in the first paragraph whose tree it is. Under *This tree* come its
-  **ecosystem services** from i-Tree Eco, folded
+  **ecosystem services** from i-Tree Eco, folded and ending "Powered by i-Tree"
   ([ITREE.md](ITREE.md#6-back-here)), then the same *About* section a UVM
   plant has, without its count of UVM plants on campus. The panel ends by
   naming the city's inventory as the source, and links the i-Tree estimates

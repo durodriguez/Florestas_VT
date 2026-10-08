@@ -49,6 +49,8 @@ describe('renderCityDetail', () => {
     expect(html).toContain('about 5.9 lb a year');
     expect(html).toContain('<dd>about $1 a year</dd>');
     expect(html).not.toContain('How these are estimated');
+    // i-Tree's credit, last inside the fold: seen whenever the figures are.
+    expect(html).toMatch(/Powered by <a href="https:\/\/www\.itreetools\.org\/"[^>]*>i-Tree<\/a>\s*<\/p>\s*<\/details>/);
     expect(html.indexOf('Ecosystem services')).toBeLessThan(html.indexOf('About Hackberry'));
   });
 

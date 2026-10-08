@@ -397,6 +397,7 @@ button, input, select { font: inherit; color: inherit; }
   list-style-position: inside;
 }
 .detail-services .facts { margin-top: .45rem; }
+.detail-powered { margin: .5rem 0 0; font-size: .74rem; color: var(--text-dim); }
 
 .facts { margin: 0; display: grid; gap: .4rem; }
 .fact { display: grid; grid-template-columns: 9rem 1fr; gap: .5rem; font-size: .84rem; }

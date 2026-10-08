@@ -255,6 +255,9 @@ function ecosystemServices(e: CityTreeItree): string {
         ${row('Oxygen produced', `${roughly(e.oxygenLbYr, 'lb')} a year`)}
         ${row('Total yearly benefits', `${roughlyDollars(e.benefitsUsdYr)} a year`)}
       </dl>
+      <p class="detail-powered">
+        Powered by <a href="https://www.itreetools.org/" target="_blank" rel="noopener">i-Tree</a>
+      </p>
     </details>`;
 }
 
