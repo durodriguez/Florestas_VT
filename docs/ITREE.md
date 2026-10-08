@@ -19,7 +19,7 @@ stores and shows its output — nothing here imitates the model.
 | 3 | you | Import the file and match the species |
 | 4 | you | Submit the project; i-Tree processes it on its servers |
 | 5 | you | Export the per-tree results and send them back |
-| 6 | here | `npm run itree:import` stores the results; then show them on the map |
+| 6 | here | `npm run itree:import` stores the results; `npm run data` puts them on the map |
 
 ### 1. The inventory file
 
@@ -249,8 +249,16 @@ benefit.
 model version, project, weather and pollution years and stations, and the
 prices used. It is kept by hand, so update it with each new run.
 
-**On the map:** not yet. It will be labeled **Powered by i-Tree**, and will say
-how many trees it covers and that they are the city's.
+**On the map,** a city tree's panel has an **Ecosystem services** part under
+*This tree*: carbon stored, carbon absorbed, runoff avoided, pollution removed
+and oxygen produced, each by amount, then the total yearly benefits in
+dollars. Figures are rounded to two significant figures and said as "about":
+the inputs (a diameter to the inch, a height in five-foot steps) carry no
+more. A total under a dollar reads "less than $1". A folded *How these are
+estimated* note says what the figures rest on, that carbon is the firmest,
+and that the dollar total leaves out energy savings. Then **Powered by
+i-Tree**. `npm run data` checks `itree-city-trees.csv` against
+`city-trees.csv` again on every build.
 
 **Totals for the 364 trees** (8 October 2026 results):
 
@@ -285,5 +293,6 @@ a few pounds or ounces less.
   prices are i-Tree's defaults. Waiting on processing.
 - **8 October 2026** — step 5 done: results came back for all 364 trees and
   are stored by `npm run itree:import`. Every row matched by ID, position and
-  DBH. The CSV and the PDF of the same report agree to the last digit. Next:
-  show them on the map.
+  DBH. The CSV and the PDF of the same report agree to the last digit.
+- **8 October 2026** — step 6 done: each city tree's panel shows its
+  ecosystem services and yearly benefits, labeled Powered by i-Tree.

@@ -165,8 +165,20 @@ export function expandCityTrees(dataset: Dataset): CityTree[] {
       condition: conditionIdx >= 0 ? conditions[conditionIdx]! : '',
       plantedYear: (at(row, 'plantedYear') as number | null) ?? null,
       address: (at(row, 'address') as string) ?? '',
+      itree: null,
       search: '',
     };
+    const carbonStoredLb = at(row, 'carbonStoredLb') as number | null | undefined;
+    if (carbonStoredLb !== null && carbonStoredLb !== undefined) {
+      tree.itree = {
+        carbonStoredLb,
+        carbonPerYearLb: at(row, 'carbonPerYearLb') as number,
+        runoffGalYr: at(row, 'runoffGalYr') as number,
+        pollutionOzYr: at(row, 'pollutionOzYr') as number,
+        oxygenLbYr: at(row, 'oxygenLbYr') as number,
+        benefitsUsdYr: at(row, 'benefitsUsdYr') as number,
+      };
+    }
     tree.search = [
       tree.id,
       taxon.common,

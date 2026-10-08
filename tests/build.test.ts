@@ -467,6 +467,42 @@ describe('buildDataset', () => {
     expect(at(rows[1], 'spreadFt')).toBeNull();
   });
 
+  it('joins i-Tree estimates onto the city trees they belong to', () => {
+    const city = (id: string) => ({ city_id: id, taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955',
+      collection_id: 'green', dbh_in: '12', height_ft: '25', spread_ft: '20', condition: 'good' });
+    const estimate = { city_id: 'BTV-1', carbon_storage_lb: '288.3', carbon_sequestration_lb_yr: '13.2',
+      avoided_runoff_gal_yr: '84.4', pollution_removal_oz_yr: '1.3', oxygen_lb_yr: '35.2', total_benefits_usd_yr: '4.08' };
+    const r = build({
+      taxaRows: [taxon()], plantRows: [], observationRows: [],
+      cityTreeRows: [city('BTV-1'), city('BTV-2')],
+      itreeRows: [estimate],
+      itreeRun: { model: 'i-Tree Eco v6.0.41', resultsDate: '2026-10-08', weatherYear: 2024 },
+    });
+    expect(r.errors).toEqual([]);
+    const { fields, rows } = r.dataset.cityTrees;
+    const at = (row: unknown[], f: string) => row[fields.indexOf(f)];
+    expect(at(rows[0], 'carbonStoredLb')).toBe(288.3);
+    expect(at(rows[0], 'oxygenLbYr')).toBe(35.2);
+    expect(at(rows[0], 'benefitsUsdYr')).toBe(4.08);
+    expect(at(rows[1], 'carbonStoredLb')).toBeNull();
+    expect(r.dataset.itree.model).toBe('i-Tree Eco v6.0.41');
+    expect(r.dataset.counts.itreeResults).toBe(1);
+  });
+
+  it('refuses an i-Tree estimate for a tree that is not there, or with no run behind it', () => {
+    const city = { city_id: 'BTV-1', taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955' };
+    const estimate = { carbon_storage_lb: '1', carbon_sequestration_lb_yr: '1', avoided_runoff_gal_yr: '1',
+      pollution_removal_oz_yr: '1', oxygen_lb_yr: '1', total_benefits_usd_yr: '1' };
+    const r = build({
+      taxaRows: [taxon()], plantRows: [], observationRows: [],
+      cityTreeRows: [city],
+      itreeRows: [{ ...estimate, city_id: 'BTV-9' }, { ...estimate, city_id: 'BTV-1', total_benefits_usd_yr: 'N/A' }],
+    });
+    expect(r.errors.join('\n')).toMatch(/BTV-9.*no matching row/);
+    expect(r.errors.join('\n')).toMatch(/total_benefits_usd_yr "N\/A"/);
+    expect(r.errors.join('\n')).toMatch(/itree-run\.json: missing/);
+  });
+
   it('warns when a trail stop is not a known accession', () => {
     const r = build({
       trails: {

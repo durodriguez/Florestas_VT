@@ -148,6 +148,13 @@ export const CITY_TREE_FIELDS = [
   'condition',    // integer index into CONDITIONS, or -1
   'plantedYear',
   'address',
+  // From i-Tree Eco (data/itree-city-trees.csv), or null with no result.
+  'carbonStoredLb',
+  'carbonPerYearLb',
+  'runoffGalYr',
+  'pollutionOzYr',
+  'oxygenLbYr',
+  'benefitsUsdYr',
 ];
 
 /** Column order of data/observations.csv. */

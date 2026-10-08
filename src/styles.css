@@ -389,6 +389,13 @@ button, input, select { font: inherit; color: inherit; }
   padding-bottom: .3rem; border-bottom: 1px solid var(--border);
 }
 
+/* A part of the section above it, so quieter than .detail-section. */
+.detail-subsection {
+  font-size: .8rem; font-weight: 650; color: var(--text);
+  margin: 1rem 0 .45rem;
+}
+.detail-powered { margin: .5rem 0 0; font-size: .74rem; color: var(--text-dim); }
+
 .facts { margin: 0; display: grid; gap: .4rem; }
 .fact { display: grid; grid-template-columns: 9rem 1fr; gap: .5rem; font-size: .84rem; }
 .fact dt { color: var(--text-dim); }
