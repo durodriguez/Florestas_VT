@@ -11,6 +11,7 @@ import Papa from 'papaparse';
 import { buildDataset } from './lib/build.mjs';
 import { normalizeName } from './lib/species.mjs';
 import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS } from './lib/species-pages.mjs';
+import { renderItreePage } from './lib/itree-page.mjs';
 import { photoUrl } from './lib/photo-url.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -220,6 +221,18 @@ writeFileSync(
   renderSpeciesIndex(result.dataset.taxa, { base: siteBase, config }),
 );
 
+// ---- the i-Tree page -------------------------------------------------------
+// What a city tree's "i-Tree estimates" link opens (docs/ITREE.md). Written
+// only when there are results to describe.
+const itreeDir = join(root, 'public', 'itree');
+rmSync(itreeDir, { recursive: true, force: true });
+if (result.dataset.itree) {
+  mkdirSync(itreeDir, { recursive: true });
+  writeFileSync(join(itreeDir, 'index.html'), renderItreePage(
+    result.dataset.itree, readCsv('itree-city-trees.csv'), { base: siteBase, config },
+  ));
+}
+
 // These two files keep the same URL forever — Vite hashes JS and CSS
 // filenames, but copies public/ through untouched. Without a cache-buster a
 // returning visitor keeps seeing the plants they saw last time, however many
@@ -263,4 +276,5 @@ console.log(`  public/data/plants.json   ${kb(plantsJson)}`);
 console.log(`  public/field/species.json ${kb(speciesJson)}  (${species.length} taxa for the survey app)`);
 console.log(`  public/field/trees.json   ${kb(treesJson)}  (${trees.length} mapped trees to match against)`);
 console.log(`  public/species/           ${result.dataset.taxa.length} species pages + an index`);
+if (result.dataset.itree) console.log('  public/itree/             the i-Tree estimates page');
 console.log(`  data version              ${version}`);

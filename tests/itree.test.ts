@@ -3,6 +3,8 @@ import JSZip from 'jszip';
 // @ts-expect-error — plain .mjs, no type declarations
 import { itreeName, itreeCondition, readItreeResults } from '../scripts/lib/itree.mjs';
 // @ts-expect-error — plain .mjs, no type declarations
+import { renderItreePage } from '../scripts/lib/itree-page.mjs';
+// @ts-expect-error — plain .mjs, no type declarations
 import { colName, excelDate, writeXlsx } from '../scripts/lib/xlsx.mjs';
 
 const t = (over: Record<string, string>) => ({ taxon_id: 'x', scientific_name: '', genus: '', cultivar: '', ...over });
@@ -117,5 +119,36 @@ describe('readItreeResults', () => {
   it('refuses a value that is not a number', () => {
     const errors = readItreeResults([result({ 'Carbon Storage (lb)': 'N/A' }), result(second)], city).errors;
     expect(errors).toEqual(['row 2: BTV-886 has "N/A" for Carbon Storage (lb)']);
+  });
+});
+
+describe('renderItreePage', () => {
+  const run = {
+    model: 'i-Tree Eco v6.0.41', resultsDate: '2026-10-08', weatherYear: 2024, weatherStation: '726170-14742',
+    pollutionYear: 2024, pollutionStations: 'Chittenden County', prices: "i-Tree's defaults", notEstimated: 'Energy savings',
+  };
+  const est = (over: Record<string, string> = {}) => ({
+    city_id: 'BTV-1', carbon_storage_lb: '1000', carbon_sequestration_lb_yr: '10', avoided_runoff_gal_yr: '100',
+    pollution_removal_oz_yr: '2', oxygen_lb_yr: '20', total_benefits_usd_yr: '4.5', ...over,
+  });
+  const html = renderItreePage(run, [est(), est({ city_id: 'BTV-2' })], { base: '/site/', config: { siteName: 'UVM Trees' } });
+
+  it('explains the estimates, with the run they came from', () => {
+    expect(html).toContain('<h1>i-Tree estimates</h1>');
+    expect(html).toContain('By i-Tree Eco v6.0.41, based on species');
+    expect(html).toContain("Burlington's 2024");
+    expect(html).toContain('It underestimates total value.');
+    expect(html).toContain('the 2 <strong>City of Burlington street trees</strong>');
+  });
+
+  it('totals the trees it covers', () => {
+    expect(html).toContain('<dd>2,000 lb</dd>');
+    expect(html).toContain('<dd>$9 a year</dd>');
+  });
+
+  it('sits one folder below the site, beside the species pages', () => {
+    expect(html).toContain('href="../species/species.css"');
+    expect(html).toContain('src="../uvm-mark.png"');
+    expect(html).toContain('Powered by <a href="https://www.itreetools.org/">i-Tree</a>');
   });
 });

@@ -34,29 +34,34 @@ describe('renderCityDetail', () => {
     expect(html).toContain('Corky, warty ridges');
   });
 
-  it('never counts the city tree as part of the UVM collection', () => {
+  it('leaves out the UVM collection count, which never includes a city tree', () => {
     const html = renderCityDetail(tree(), '/');
-    expect(html).toContain('In the UVM collection');
-    expect(html).toContain('None mapped');
-    expect(html).not.toContain('On campus</dt><dd>0');
+    expect(html).not.toContain('mapped plant');
+    expect(html).not.toContain('In the UVM collection');
   });
 
-  it('shows each ecosystem service by amount, then the yearly total', () => {
-    const html = renderCityDetail(tree({ itree: estimates }), '/', { model: 'i-Tree Eco v6.0.41', resultsDate: '2026-10-08', weatherYear: 2024 });
-    expect(html).toContain('Ecosystem services');
+  it('shows each ecosystem service by amount, folded, then the yearly total', () => {
+    const html = renderCityDetail(tree({ itree: estimates }), '/site/');
+    expect(html).toMatch(/<details class="detail-services">\s*<summary>Ecosystem services<\/summary>/);
     expect(html).toContain('about 35 lb');
     expect(html).toContain('about 2.2 lb a year');
     expect(html).toContain('about 51 gallons a year');
     expect(html).toContain('about 5.9 lb a year');
-    expect(html).toContain('about $1 a year');
-    expect(html).toContain('Powered by');
-    expect(html).toContain('By i-Tree Eco v6.0.41, based on species');
-    expect(html).toContain('2024 weather');
+    expect(html).toContain('<dd>about $1 a year</dd>');
+    expect(html).not.toContain('How these are estimated');
     expect(html.indexOf('Ecosystem services')).toBeLessThan(html.indexOf('About Hackberry'));
   });
 
-  it('leaves the section out for a tree i-Tree has no estimate for', () => {
-    expect(renderCityDetail(tree(), '/')).not.toContain('Ecosystem services');
+  it('links to the i-Tree page at the foot of the panel', () => {
+    const html = renderCityDetail(tree({ itree: estimates }), '/site/');
+    expect(html).toContain('<a href="/site/itree/">i-Tree estimates</a>');
+    expect(html.lastIndexOf('i-Tree estimates')).toBeGreaterThan(html.indexOf('More about this species'));
+  });
+
+  it('leaves the section and the link out for a tree i-Tree has no estimate for', () => {
+    const html = renderCityDetail(tree(), '/');
+    expect(html).not.toContain('Ecosystem services');
+    expect(html).not.toContain('itree/');
   });
 });
 

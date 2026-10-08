@@ -389,12 +389,14 @@ button, input, select { font: inherit; color: inherit; }
   padding-bottom: .3rem; border-bottom: 1px solid var(--border);
 }
 
-/* A part of the section above it, so quieter than .detail-section. */
-.detail-subsection {
-  font-size: .8rem; font-weight: 650; color: var(--text);
-  margin: 1rem 0 .45rem;
+/* A city tree's i-Tree figures: part of "This tree", folded so the record
+   stays short, and quieter than a .detail-section heading. */
+.detail-services { margin: 1rem 0 0; }
+.detail-services summary {
+  padding: .1rem 0; cursor: pointer; font-size: .84rem; font-weight: 650;
+  list-style-position: inside;
 }
-.detail-powered { margin: .5rem 0 0; font-size: .74rem; color: var(--text-dim); }
+.detail-services .facts { margin-top: .45rem; }
 
 .facts { margin: 0; display: grid; gap: .4rem; }
 .fact { display: grid; grid-template-columns: 9rem 1fr; gap: .5rem; font-size: .84rem; }

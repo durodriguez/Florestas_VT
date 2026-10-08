@@ -1,4 +1,4 @@
-import type { CityTree, CityTreeItree, Dataset, ItreeRun, Observation, Plant, Taxon } from './types';
+import type { CityTree, CityTreeItree, Dataset, Observation, Plant, Taxon } from './types';
 import { escapeHtml } from './map';
 import { ORIGIN_LABELS, TYPE_LABELS } from './palette';
 import { photoTaken, photoUrl } from './photos';
@@ -95,10 +95,12 @@ function growth(plant: Plant): string {
 
 /**
  * The species, as both panels describe it. A UVM plant and a city tree of the
- * same species share everything here; what differs is whose tree it is, and
- * that is said above this, not in it.
+ * same species share everything here but the campus count; what differs is
+ * whose tree it is, and that is said above this, not in it.
  */
-function aboutTaxon(t: Taxon, cityTree = false): string {
+function aboutTaxon(t: Taxon, countOnCampus = true): string {
+  // Left off a city tree's panel: the count is of UVM's plants, and beside a
+  // city tree it would seem to include the one being looked at.
   const mapped = `${t.count} mapped ${t.count === 1 ? 'plant' : 'plants'}${
     // "Show all" includes varieties, so the row says so rather than
     // promising a number the map then overshoots.
@@ -116,11 +118,7 @@ function aboutTaxon(t: Taxon, cityTree = false): string {
       ${row('Soil', t.soil ? escapeHtml(t.soil) : null)}
       ${row('Pests and disease', t.pests ? escapeHtml(t.pests) : null)}
       ${row('Hardiness zones', t.zones)}
-      ${cityTree
-        // Beside a city tree, "on campus" would seem to count the tree being
-        // looked at, which is never in this number.
-        ? row('In the UVM collection', t.groupCount ? mapped : 'None mapped')
-        : row('On campus', mapped)}
+      ${countOnCampus ? row('On campus', mapped) : ''}
     </dl>
   `;
 }
@@ -240,42 +238,24 @@ function roughlyDollars(n: number): string {
 }
 
 /**
- * What i-Tree Eco estimates this tree does, under "This tree": each service by
- * its amount, then the yearly dollar total. Carbon is the figure the city's
- * measurements fully support; runoff, pollution and oxygen rest on a leaf area
- * i-Tree had to estimate, and the explanation says so (docs/ITREE.md).
+ * What i-Tree Eco estimates this tree does, folded under "This tree": each
+ * service by its amount, then the yearly dollar total, unemphasized because it
+ * is the least meaningful of them. What the figures rest on is on the i-Tree
+ * page the panel links to at its foot, not here (docs/ITREE.md).
  */
-function ecosystemServices(e: CityTreeItree, run: ItreeRun | null): string {
+function ecosystemServices(e: CityTreeItree): string {
   return `
-    <h4 class="detail-subsection">Ecosystem services</h4>
-    <dl class="facts">
-      ${row('Carbon stored', roughly(e.carbonStoredLb, 'lb'))}
-      ${row('Carbon absorbed', `${roughly(e.carbonPerYearLb, 'lb')} a year`)}
-      ${row('Stormwater runoff avoided', `${roughly(e.runoffGalYr, 'gallons')} a year`)}
-      ${row('Air pollution removed', `${roughly(e.pollutionOzYr, 'oz')} a year`)}
-      ${row('Oxygen produced', `${roughly(e.oxygenLbYr, 'lb')} a year`)}
-      ${row('Total yearly benefits', `<strong>${roughlyDollars(e.benefitsUsdYr)} a year</strong>`)}
-    </dl>
-    <details class="detail-fact">
-      <summary>How these are estimated</summary>
-      <p>
-        By ${escapeHtml(run?.model ?? 'i-Tree Eco')}, based on species, trunk
-        diameter, height and condition as last measured, with Burlington's
-        ${run?.weatherYear ?? ''} weather and air quality.
-      </p>
-      <p>
-        Carbon is the firmest figure. Runoff, pollution and oxygen depend on
-        the tree's leaf area, which is estimated rather than measured.
-      </p>
-      <p>
-        The yearly benefits total counts only the quantified services, leaving
-        out energy savings and other ecosystem services such as wildlife
-        habitat and aesthetic value. It underestimates total value.
-      </p>
-    </details>
-    <p class="detail-powered">
-      Powered by <a href="https://www.itreetools.org/" target="_blank" rel="noopener">i-Tree</a>
-    </p>`;
+    <details class="detail-services">
+      <summary>Ecosystem services</summary>
+      <dl class="facts">
+        ${row('Carbon stored', roughly(e.carbonStoredLb, 'lb'))}
+        ${row('Carbon absorbed', `${roughly(e.carbonPerYearLb, 'lb')} a year`)}
+        ${row('Stormwater runoff avoided', `${roughly(e.runoffGalYr, 'gallons')} a year`)}
+        ${row('Air pollution removed', `${roughly(e.pollutionOzYr, 'oz')} a year`)}
+        ${row('Oxygen produced', `${roughly(e.oxygenLbYr, 'lb')} a year`)}
+        ${row('Total yearly benefits', `${roughlyDollars(e.benefitsUsdYr)} a year`)}
+      </dl>
+    </details>`;
 }
 
 /**
@@ -286,7 +266,7 @@ function ecosystemServices(e: CityTreeItree, run: ItreeRun | null): string {
  * is no accession, no dedication, no story and no survey history, because the
  * university keeps none of those for a tree it does not own.
  */
-export function renderCityDetail(tree: CityTree, base: string, itree: ItreeRun | null = null): string {
+export function renderCityDetail(tree: CityTree, base: string): string {
   const t = tree.taxon;
   const age = tree.plantedYear ? `${new Date().getFullYear() - tree.plantedYear} years old` : '';
 
@@ -322,9 +302,9 @@ export function renderCityDetail(tree: CityTree, base: string, itree: ItreeRun |
       ${row('Planted', tree.plantedYear ? `${tree.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
       ${row('Coordinates', `${tree.lat.toFixed(6)}, ${tree.lng.toFixed(6)}`)}
     </dl>
-    ${tree.itree ? ecosystemServices(tree.itree, itree) : ''}
+    ${tree.itree ? ecosystemServices(tree.itree) : ''}
 
-    ${aboutTaxon(t, true)}
+    ${aboutTaxon(t, false)}
 
     <div class="detail-actions">
       <a class="btn" href="${base}species/${encodeURIComponent(t.id)}/">More about this species</a>
@@ -332,6 +312,7 @@ export function renderCityDetail(tree: CityTree, base: string, itree: ItreeRun |
 
     <p class="detail-source">
       Record from the City of Burlington's public tree inventory.
+      ${tree.itree ? `<br><a href="${base}itree/">i-Tree estimates</a>` : ''}
     </p>
   `;
 }

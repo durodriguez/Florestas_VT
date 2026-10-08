@@ -41,11 +41,11 @@ This is the whole design, not a disclaimer:
   reads "16 of 364 shown" while a filter is set.
 - **Their own record panel.** It opens saying `BTV-886 · City of Burlington` and
   states in the first paragraph whose tree it is. Under *This tree* come its
-  **ecosystem services** from i-Tree Eco ([ITREE.md](ITREE.md#6-back-here)),
-  then the same *About* section a UVM plant has. Its last row reads *In the
-  UVM collection* rather than *On campus*, because that count never includes
-  the city tree being looked at. The panel ends by naming the city's inventory
-  as the source.
+  **ecosystem services** from i-Tree Eco, folded
+  ([ITREE.md](ITREE.md#6-back-here)), then the same *About* section a UVM
+  plant has, without its count of UVM plants on campus. The panel ends by
+  naming the city's inventory as the source, and links the i-Tree estimates
+  page.
 
 ## Blue and white, against green and gold
 
