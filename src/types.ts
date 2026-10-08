@@ -49,8 +49,28 @@ export interface CityTree {
   condition: string;
   plantedYear: number | null;
   address: string;
+  /** i-Tree Eco's estimates for this tree, or null where there are none. */
+  itree: CityTreeItree | null;
   /** Free-text haystack, same idea as Plant.search. */
   search: string;
+}
+
+export interface CityTreeItree {
+  carbonStoredLb: number;
+  carbonPerYearLb: number;
+  runoffGalYr: number;
+  pollutionOzYr: number;
+  oxygenLbYr: number;
+  /** Carbon, runoff and pollution together, at i-Tree's default prices. */
+  benefitsUsdYr: number;
+}
+
+/** The i-Tree Eco run behind the estimates: data/itree-run.json. */
+export interface ItreeRun {
+  model: string;
+  resultsDate: string;
+  weatherYear: number;
+  [key: string]: unknown;
 }
 
 export interface Taxon {
@@ -113,6 +133,8 @@ export interface Dataset {
   campusAreas: GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon, CampusAreaProps>;
   /** Compact rows, expanded by expandCityTrees. See CITY_TREE_FIELDS. */
   cityTrees: { fields: string[]; rows: unknown[][] };
+  /** The run behind the city trees' i-Tree estimates, or null without them. */
+  itree?: ItreeRun | null;
   counts: Record<string, number>;
 }
 

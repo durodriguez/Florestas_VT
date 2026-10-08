@@ -6,7 +6,7 @@ stale, which is how this file got untidy in the first place.
 
 | # | Item | Status |
 |---|---|---|
-| 7 | [Ecosystem services — the i-Tree question](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-citys-trees-7-october-2026) | **in progress** |
+| 7 | [Ecosystem services — the i-Tree question](#7-ecosystem-services--the-i-tree-question-in-progress-city-trees-done-8-october-2026) | **in progress** |
 | 9 | [Renumbering tags by campus](#9-renumbering-tags-by-campus-open-the-label-not-the-numbering) | **open** |
 | 10 | [Photos without overloading the repo](#10-photos-without-overloading-the-repo-part-done-21-september-2026) | **part done** |
 | 13 | [Re-tagging: a tree gets a new number](#13-re-tagging-what-happens-when-a-tree-gets-a-new-number-open-ask-grounds) | **open** |
@@ -48,10 +48,12 @@ instrument the whole correction strategy runs on.
 
 ## Open
 
-## 7. Ecosystem services — the i-Tree question [in progress on the city's trees, 7 October 2026]
+## 7. Ecosystem services — the i-Tree question [in progress: city trees done, 8 October 2026]
 
-**Under way on Burlington's 364 street trees on campus**, which carry diameters:
-`npm run itree:export` writes the i-Tree Eco inventory, and
+**Results are in for Burlington's 364 street trees on campus**, which carry
+diameters. `npm run itree:export` wrote the i-Tree Eco inventory; i-Tree's
+per-tree results came back on 8 October and `npm run itree:import` stored them
+in `data/itree-city-trees.csv`, and each city tree's panel now shows them.
 [ITREE.md](ITREE.md) is the round trip, step by step. UVM's own trees remain
 blocked on DBH, as below.
 
@@ -709,7 +711,7 @@ data, and should be corrected once it arrives.
 
 **A possible bonus: crown measurements.** Leaf-on LiDAR can measure crown width
 and height to crown base. These are the fields i-Tree had to guess for the
-city's trees ([7](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-citys-trees-7-october-2026)), and its pollution and runoff figures rest on those guesses.
+city's trees ([7](#7-ecosystem-services--the-i-tree-question-in-progress-city-trees-done-8-october-2026)), and its pollution and runoff figures rest on those guesses.
 That is not a reason to ask for it, and one flight is unlikely to give both
 trunks (leaf-off) and crowns (leaf-on).
 
@@ -782,7 +784,7 @@ Derived from LiDAR for Burlington, VT, 2023* (Paige Brochu, SAL, December 2024):
 `/positions/` draws them as crown circles from a file loaded on the user's own
 computer, kept in that browser only ([POSITIONS.md](POSITIONS.md)), because
 **SAL has not been asked whether it may be published.** Their radius is also
-the crown width i-Tree had to guess ([7](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-citys-trees-7-october-2026)).
+the crown width i-Tree had to guess ([7](#7-ecosystem-services--the-i-tree-question-in-progress-city-trees-done-8-october-2026)).
 
 **Next:**
 
@@ -823,7 +825,7 @@ illustrations, not claims to verify.)
   so there is a ready-made pool. New ones, especially any with a number in
   them such as carbon per tree, should carry their source. Facts about the
   collection's age or carbon wait on measurements and i-Tree
-  ([7](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-citys-trees-7-october-2026)).
+  ([7](#7-ecosystem-services--the-i-tree-question-in-progress-city-trees-done-8-october-2026)).
 
 **How it could work, when built:**
 

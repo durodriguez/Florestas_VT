@@ -51,7 +51,7 @@ function inBounds(lat, lng, config) {
   return lat >= south && lat <= north && lng >= west && lng <= east;
 }
 
-export function buildDataset({ taxaRows, plantRows, observationRows = [], collectionRows, trails, campusAreas, aliasRows = [], cityTreeRows = [], config }) {
+export function buildDataset({ taxaRows, plantRows, observationRows = [], collectionRows, trails, campusAreas, aliasRows = [], cityTreeRows = [], itreeRows = [], itreeRun = null, config }) {
   const errors = [];
   const warnings = [];
   const err = (where, msg) => errors.push(`${where}: ${msg}`);
@@ -401,6 +401,29 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
   // between a species nothing on the map shows and one that is on the map,
   // just not on a UVM tree.
   const cityTreeTaxa = new Set();
+
+  // i-Tree Eco's estimates for these trees, by city_id. Checked against
+  // city-trees.csv once already, by `npm run itree:import`; checked again
+  // here because either file can change after that.
+  const ITREE_KEPT = [
+    'carbon_storage_lb', 'carbon_sequestration_lb_yr', 'avoided_runoff_gal_yr',
+    'pollution_removal_oz_yr', 'oxygen_lb_yr', 'total_benefits_usd_yr',
+  ];
+  const cityIds = new Set(cityTreeRows.map((r) => trim(r.city_id)));
+  const itreeById = new Map();
+  itreeRows.forEach((row, i) => {
+    const where = `itree-city-trees.csv row ${i + 2}`;
+    const id = trim(row.city_id);
+    if (!cityIds.has(id)) return err(where, `city_id "${id}" has no matching row in city-trees.csv`);
+    if (itreeById.has(id)) return err(where, `${id} appears twice`);
+    const values = ITREE_KEPT.map((key) => num(row[key]));
+    const bad = ITREE_KEPT.find((key, k) => !Number.isFinite(values[k]) || values[k] < 0);
+    if (bad) return err(where, `${bad} "${row[bad]}" is not a number of zero or more`);
+    itreeById.set(id, values);
+    return undefined;
+  });
+  if (itreeRows.length && !itreeRun) err('itree-run.json', 'missing: i-Tree results need the run that made them');
+
   cityTreeRows.forEach((row, i) => {
     const where = `city-trees.csv row ${i + 2}`;
     const id = trim(row.city_id);
@@ -433,6 +456,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       condition ? CONDITIONS.indexOf(condition) : -1,
       num(row.planted_year) ?? null,
       trim(row.address),
+      ...(itreeById.get(id) ?? ITREE_KEPT.map(() => null)),
     ]);
     return undefined;
   });
@@ -598,6 +622,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     trails: { type: 'FeatureCollection', features: trailFeatures },
     campusAreas: { type: 'FeatureCollection', features: areaFeatures },
     cityTrees: { fields: CITY_TREE_FIELDS, rows: cityTrees },
+    itree: itreeById.size ? itreeRun : null,
     counts: {
       taxa: taxa.length,
       plants: plantRowsOut.length,
@@ -610,6 +635,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       campusAreas: areaFeatures.length,
       aliases: aliasCount,
       cityTrees: cityTrees.length,
+      itreeResults: itreeById.size,
     },
   };
 

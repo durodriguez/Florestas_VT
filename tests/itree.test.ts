@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import JSZip from 'jszip';
 // @ts-expect-error — plain .mjs, no type declarations
-import { itreeName, itreeCondition } from '../scripts/lib/itree.mjs';
+import { itreeName, itreeCondition, readItreeResults } from '../scripts/lib/itree.mjs';
 // @ts-expect-error — plain .mjs, no type declarations
 import { colName, excelDate, writeXlsx } from '../scripts/lib/xlsx.mjs';
 
@@ -63,5 +63,59 @@ describe('xlsx', () => {
   });
   it('refuses text in a number column rather than writing it as text', async () => {
     await expect(writeXlsx([{ header: 'DBH', type: 'number' }], [['12in']])).rejects.toThrow(/A2/);
+  });
+});
+
+describe('readItreeResults', () => {
+  const city = [
+    { city_id: 'BTV-886', lat: '44.474829', lng: '-73.190863', dbh_in: '14' },
+    { city_id: 'BTV-887', lat: '44.474706', lng: '-73.19083', dbh_in: '8' },
+  ];
+  // As i-Tree Eco v6 writes them: thousands commas, N/A, and a non-breaking
+  // space in one header.
+  const result = (over: Record<string, string> = {}) => ({
+    'Tree ID': '1', 'Species Name': 'Quercus macrocarpa', 'DBH (in)': '14.0',
+    'Replacement Value ($)': '2,139.42', 'Carbon Storage (lb)': '1,247.2', 'Carbon Storage ($)': '166.32',
+    'Gross Carbon Sequestration (lb/yr)': '14.3', 'Gross Carbon Sequestration ($/yr)': '3.09',
+    'Avoided Runoff (gal/yr)': '204.6', 'Avoided Runoff ($/yr)': '1.83',
+    'Carbon Avoided (lb/yr)': 'N/A', 'Carbon Avoided ($/yr)': 'N/A',
+    'Pollution Removal (oz/yr)': '3.2', 'Pollution Removal ($/yr)': '1.15',
+    'Oxygen Production\u00a0(lb/yr)': '38.1', 'Energy Savings ($/yr)': 'N/A',
+    'Total Annual Benefits ($/yr)': '6.08',
+    xCoordinate: '-73.190863', yCoordinate: '44.474829', 'User ID': 'BTV-886',
+    ...over,
+  });
+  const second = { 'User ID': 'BTV-887', 'DBH (in)': '8.0', xCoordinate: '-73.19083', yCoordinate: '44.474706' };
+
+  it('keeps the estimates, by city_id, as plain numbers', () => {
+    const { rows, errors } = readItreeResults([result(), result(second)], city);
+    expect(errors).toEqual([]);
+    expect(rows[0]).toMatchObject({ city_id: 'BTV-886', replacement_usd: '2139.42', carbon_storage_lb: '1247.2', oxygen_lb_yr: '38.1' });
+    expect(rows[0]).not.toHaveProperty('energy_savings_usd_yr');
+  });
+
+  it('refuses a file without the User ID column', () => {
+    const { 'User ID': _, ...noId } = result();
+    expect(readItreeResults([noId], city).errors[0]).toMatch(/User Tree ID ticked/);
+  });
+
+  it('refuses unknown, repeated and missing trees', () => {
+    const errors = readItreeResults([result({ 'User ID': 'BTV-1' }), result(), result()], city).errors.join('\n');
+    expect(errors).toMatch(/BTV-1" is not in/);
+    expect(errors).toMatch(/BTV-886 appears twice/);
+    expect(errors).toMatch(/1 tree\(s\) sent to i-Tree have no result: BTV-887/);
+  });
+
+  it('refuses a tree i-Tree has somewhere else, or at another size', () => {
+    const errors = readItreeResults([result({ yCoordinate: '44.475' }), result({ ...second, 'DBH (in)': '9.0' })], city).errors;
+    expect(errors).toEqual([
+      'row 2: BTV-886 is not where data/city-trees.csv puts it',
+      'row 3: BTV-887 has DBH 9.0 in i-Tree but 8 here',
+    ]);
+  });
+
+  it('refuses a value that is not a number', () => {
+    const errors = readItreeResults([result({ 'Carbon Storage (lb)': 'N/A' }), result(second)], city).errors;
+    expect(errors).toEqual(['row 2: BTV-886 has "N/A" for Carbon Storage (lb)']);
   });
 });

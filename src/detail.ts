@@ -1,4 +1,4 @@
-import type { CityTree, Dataset, Observation, Plant, Taxon } from './types';
+import type { CityTree, CityTreeItree, Dataset, ItreeRun, Observation, Plant, Taxon } from './types';
 import { escapeHtml } from './map';
 import { ORIGIN_LABELS, TYPE_LABELS } from './palette';
 import { photoTaken, photoUrl } from './photos';
@@ -93,6 +93,38 @@ function growth(plant: Plant): string {
     from ${first.dbhIn}&Prime; to ${last.dbhIn}&Prime;.</p>`;
 }
 
+/**
+ * The species, as both panels describe it. A UVM plant and a city tree of the
+ * same species share everything here; what differs is whose tree it is, and
+ * that is said above this, not in it.
+ */
+function aboutTaxon(t: Taxon, cityTree = false): string {
+  const mapped = `${t.count} mapped ${t.count === 1 ? 'plant' : 'plants'}${
+    // "Show all" includes varieties, so the row says so rather than
+    // promising a number the map then overshoots.
+    t.groupCount > t.count ? `, plus ${t.groupCount - t.count} of named varieties` : ''}`;
+  return `
+    <h3 class="detail-section">About ${escapeHtml(t.common)}</h3>
+    <dl class="facts">
+      ${row('Plant type', TYPE_LABELS[t.type] ?? titleCase(t.type))}
+      ${row('Flowers', `${titleCase(t.flowerColor) || '—'}${t.flowerMonths.length ? ` &middot; ${monthRange(t.flowerMonths)}` : ''}`)}
+      ${row('Fruit', `${titleCase(t.fruitColor) || '—'}${t.fruitMonths.length ? ` &middot; ${monthRange(t.fruitMonths)}` : ''}`)}
+      ${row('Fall color', titleCase(t.fallColor))}
+      ${row('Mature height', numOr(t.matureHeightFt, ' ft'))}
+      ${row('Mature spread', numOr(t.matureSpreadFt, ' ft'))}
+      ${row('Bark', t.bark ? escapeHtml(t.bark) : null)}
+      ${row('Soil', t.soil ? escapeHtml(t.soil) : null)}
+      ${row('Pests and disease', t.pests ? escapeHtml(t.pests) : null)}
+      ${row('Hardiness zones', t.zones)}
+      ${cityTree
+        // Beside a city tree, "on campus" would seem to count the tree being
+        // looked at, which is never in this number.
+        ? row('In the UVM collection', t.groupCount ? mapped : 'None mapped')
+        : row('On campus', mapped)}
+    </dl>
+  `;
+}
+
 export function renderDetail(plant: Plant, dataset: Dataset, base: string): string {
   const t = plant.taxon;
   const shareUrl = `${location.origin}${location.pathname}?plant=${encodeURIComponent(plant.id)}`;
@@ -161,23 +193,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
 
     ${renderHistory(plant)}
 
-    <h3 class="detail-section">About ${escapeHtml(t.common)}</h3>
-    <dl class="facts">
-      ${row('Plant type', TYPE_LABELS[t.type] ?? titleCase(t.type))}
-      ${row('Flowers', `${titleCase(t.flowerColor) || '—'}${t.flowerMonths.length ? ` &middot; ${monthRange(t.flowerMonths)}` : ''}`)}
-      ${row('Fruit', `${titleCase(t.fruitColor) || '—'}${t.fruitMonths.length ? ` &middot; ${monthRange(t.fruitMonths)}` : ''}`)}
-      ${row('Fall color', titleCase(t.fallColor))}
-      ${row('Mature height', numOr(t.matureHeightFt, ' ft'))}
-      ${row('Mature spread', numOr(t.matureSpreadFt, ' ft'))}
-      ${row('Bark', t.bark ? escapeHtml(t.bark) : null)}
-      ${row('Soil', t.soil ? escapeHtml(t.soil) : null)}
-      ${row('Pests and disease', t.pests ? escapeHtml(t.pests) : null)}
-      ${row('Hardiness zones', t.zones)}
-      ${row('On campus', `${t.count} mapped ${t.count === 1 ? 'plant' : 'plants'}${
-        // "Show all" includes varieties, so the row says so rather than
-        // promising a number the map then overshoots.
-        t.groupCount > t.count ? `, plus ${t.groupCount - t.count} of named varieties` : ''}`)}
-    </dl>
+    ${aboutTaxon(t)}
 
     <div class="detail-actions">
       <button type="button" class="btn" data-action="same-taxon">Show all</button>
@@ -211,6 +227,61 @@ export function renderResultItem(plant: Plant, distance?: number): string {
 }
 
 /**
+ * A model's estimate, said as one: two significant figures, because the inputs
+ * (a diameter to the inch, a height in five-foot steps) carry no more.
+ */
+export function roughly(n: number, unit: string): string {
+  if (n < 0.1) return `less than 0.1 ${unit}`;
+  return `about ${Number(n.toPrecision(2)).toLocaleString('en-US')} ${unit}`;
+}
+
+function roughlyDollars(n: number): string {
+  return n < 1 ? 'less than $1' : `about $${Math.round(n).toLocaleString('en-US')}`;
+}
+
+/**
+ * What i-Tree Eco estimates this tree does, under "This tree": each service by
+ * its amount, then the yearly dollar total. Carbon is the figure the city's
+ * measurements fully support; runoff, pollution and oxygen rest on a leaf area
+ * i-Tree had to estimate, and the explanation says so (docs/ITREE.md).
+ */
+function ecosystemServices(e: CityTreeItree, run: ItreeRun | null): string {
+  return `
+    <h4 class="detail-subsection">Ecosystem services</h4>
+    <dl class="facts">
+      ${row('Carbon stored', roughly(e.carbonStoredLb, 'lb'))}
+      ${row('Carbon absorbed', `${roughly(e.carbonPerYearLb, 'lb')} a year`)}
+      ${row('Stormwater runoff avoided', `${roughly(e.runoffGalYr, 'gallons')} a year`)}
+      ${row('Air pollution removed', `${roughly(e.pollutionOzYr, 'oz')} a year`)}
+      ${row('Oxygen produced', `${roughly(e.oxygenLbYr, 'lb')} a year`)}
+      ${row('Total yearly benefits', `<strong>${roughlyDollars(e.benefitsUsdYr)} a year</strong>`)}
+    </dl>
+    <details class="detail-fact">
+      <summary>How these are estimated</summary>
+      <p>
+        By ${escapeHtml(run?.model ?? 'i-Tree Eco')}, the US Forest Service's
+        tree model, from this tree's species, trunk diameter, height and
+        condition as the city last measured them, with Burlington's
+        ${run?.weatherYear ?? ''} weather and air quality.
+      </p>
+      <p>
+        Carbon is the firmest figure. Runoff, pollution and oxygen depend on
+        the tree's leaf area, which i-Tree had to estimate: the city did not
+        record the full shape of the crown.
+      </p>
+      <p>
+        The yearly total adds the carbon absorbed, runoff avoided and
+        pollution removed, at i-Tree's standard prices. It leaves out energy
+        savings, which depend on how far the tree is from a building, so the
+        tree is likely worth more.
+      </p>
+    </details>
+    <p class="detail-powered">
+      Powered by <a href="https://www.itreetools.org/" target="_blank" rel="noopener">i-Tree</a>
+    </p>`;
+}
+
+/**
  * A Burlington street tree.
  *
  * Deliberately a leaner panel than a plant's, and the first thing it says is
@@ -218,7 +289,7 @@ export function renderResultItem(plant: Plant, distance?: number): string {
  * is no accession, no dedication, no story and no survey history, because the
  * university keeps none of those for a tree it does not own.
  */
-export function renderCityDetail(tree: CityTree, base: string): string {
+export function renderCityDetail(tree: CityTree, base: string, itree: ItreeRun | null = null): string {
   const t = tree.taxon;
   const age = tree.plantedYear ? `${new Date().getFullYear() - tree.plantedYear} years old` : '';
 
@@ -254,6 +325,9 @@ export function renderCityDetail(tree: CityTree, base: string): string {
       ${row('Planted', tree.plantedYear ? `${tree.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
       ${row('Coordinates', `${tree.lat.toFixed(6)}, ${tree.lng.toFixed(6)}`)}
     </dl>
+    ${tree.itree ? ecosystemServices(tree.itree, itree) : ''}
+
+    ${aboutTaxon(t, true)}
 
     <div class="detail-actions">
       <a class="btn" href="${base}species/${encodeURIComponent(t.id)}/">More about this species</a>

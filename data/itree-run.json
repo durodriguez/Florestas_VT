@@ -1,0 +1,15 @@
+{
+  "about": "The i-Tree Eco run behind data/itree-city-trees.csv. Kept by hand: the results file does not carry these. See docs/ITREE.md.",
+  "model": "i-Tree Eco v6.0.41",
+  "project": "BTVtrees, series BTVtrees_UVM, year 2026",
+  "location": "Burlington, Chittenden County, Vermont",
+  "trees": "Burlington's 364 street trees inside the campus boundary, as the city measured them 2013–2023",
+  "resultsDate": "2026-10-08",
+  "report": "Individual Level Results → Tree Benefits and Costs → Summary, English units, scientific names, CSV",
+  "weatherYear": 2024,
+  "weatherStation": "726170-14742, Burlington airport; 39.5 in of rain in the year",
+  "pollutionYear": 2024,
+  "pollutionStations": "Chittenden County for O3, PM2.5 and CO; Rutland for NO2; Essex County, NY for SO2. No station near Burlington measures PM10, so PM10 removal is not estimated.",
+  "prices": "i-Tree's defaults: carbon $0.21636/lb; avoided runoff $0.009/gal; pollution per lb CO $0.93, O3 $1.80, NO2 $0.24, SO2 $0.07, PM2.5 $52.95",
+  "notEstimated": "Energy savings and carbon avoided: they need each tree's distance and direction to the nearest building, which the city did not record."
+}

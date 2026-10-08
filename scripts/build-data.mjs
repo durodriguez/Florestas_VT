@@ -64,6 +64,14 @@ const result = buildDataset({
   campusAreas: JSON.parse(readFileSync(join(dataDir, 'campus-areas.geojson'), 'utf8')),
   aliasRows: readCsv('species-aliases.csv'),
   cityTreeRows: readCsv('city-trees.csv'),
+  // i-Tree Eco's results for the city's trees (docs/ITREE.md). Optional, like
+  // the crown peaks: without them the city trees simply show no estimates.
+  ...(existsSync(join(dataDir, 'itree-city-trees.csv')) && {
+    itreeRows: readCsv('itree-city-trees.csv'),
+    itreeRun: existsSync(join(dataDir, 'itree-run.json'))
+      ? JSON.parse(readFileSync(join(dataDir, 'itree-run.json'), 'utf8'))
+      : null,
+  }),
   config,
 });
 
@@ -225,7 +233,7 @@ writeFileSync(
 const version = createHash('sha256')
   .update(
     ['taxa.csv', 'plants.csv', 'observations.csv', 'collections.csv', 'trails.geojson',
-      'campus-areas.geojson', 'species-aliases.csv', 'config.json', 'city-trees.csv', peaksFile]
+      'campus-areas.geojson', 'species-aliases.csv', 'config.json', 'city-trees.csv', 'itree-city-trees.csv', 'itree-run.json', peaksFile]
       .filter((name) => existsSync(join(dataDir, name)))
       .map((name) => readFileSync(join(dataDir, name)))
       .reduce((a, b) => Buffer.concat([a, b]), Buffer.alloc(0)),
@@ -248,7 +256,8 @@ console.log(
 );
 // Counted on its own line, never added to the plant total: these are
 // Burlington's trees standing inside the boundary, not the university's.
-console.log(`  ${c.cityTrees} Burlington street tree(s) inside the boundary (not UVM's)`);
+console.log(`  ${c.cityTrees} Burlington street tree(s) inside the boundary (not UVM's)` +
+  (c.itreeResults ? `, ${c.itreeResults} with i-Tree estimates` : ''));
 console.log(`  public/data/dataset.json  ${kb(datasetJson)}`);
 console.log(`  public/data/plants.json   ${kb(plantsJson)}`);
 console.log(`  public/field/species.json ${kb(speciesJson)}  (${species.length} taxa for the survey app)`);

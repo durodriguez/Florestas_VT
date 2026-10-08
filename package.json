@@ -25,7 +25,8 @@
     "itree:export": "node scripts/export-itree.mjs",
     "photos": "node scripts/standardize-photos.mjs",
     "import:city": "node scripts/import-city-trees.mjs",
-    "areas:check": "node scripts/check-areas.mjs"
+    "areas:check": "node scripts/check-areas.mjs",
+    "itree:import": "node scripts/import-itree.mjs"
   },
   "dependencies": {
     "jszip": "^3.10.1",

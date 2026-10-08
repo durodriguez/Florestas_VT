@@ -1,6 +1,6 @@
 # Where the data came from, and under what terms
 
-Three outside datasets feed this project. Each is recorded here with its
+Three outside datasets feed this project, and one model's output. Each is recorded here with its
 source, its licence and what was done to it, because attribution that lives
 only in somebody's memory is attribution that gets lost on the next refresh.
 
@@ -73,6 +73,18 @@ Note that the FEMC archive also carries Burlington-area inventories under
 **CC BY-SA 4.0**, and the city's own portal may carry different terms. The
 committed file came from the city's public export; if it is ever re-sourced
 from FEMC, the licence line above applies to it too.
+
+## 4. i-Tree Eco results for the city's trees
+
+**`data/itree-city-trees.csv`** — estimates for the 364 trees in
+`data/city-trees.csv`, made with **i-Tree Eco v6.0.41** (USDA Forest Service
+and partners, <https://www.itreetools.org/>) on 8 October 2026. The run's
+settings are in `data/itree-run.json`; the steps are in
+[ITREE.md](../docs/ITREE.md).
+
+They are model output from the city's measurements, not measurements. They are
+reduced from i-Tree's per-tree report to its value columns, and nothing else
+was changed. Shown publicly, they are credited **Powered by i-Tree**.
 
 ## On ShareAlike
 
