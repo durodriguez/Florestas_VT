@@ -790,48 +790,39 @@ leaf-on data for crown measurements.
 
 **The idea.** A small floating bubble, banner or card appears when someone
 first lands on the map. It runs through random facts about UVM's trees, or
-trees in general, and can be closed with an ×. The examples given:
+trees in general, and can be closed with an ×. Facts could be about a
+species, a single tree, or the collection as a whole: the longest-lived or
+tallest species on campus, why a baldcypress drops its needles in winter,
+how much carbon the campus trees take up, the threat emerald ash borer poses
+to ash trees, and dozens more. (The examples first suggested were
+illustrations, not claims to verify.)
 
-- which species on campus is the longest-lived, the tallest, the most ancient
-  lineage, and the youngest;
-- a particular tree, and what makes its species unusual: UVM-0772, a
-  baldcypress, is a conifer that drops its needles every winter;
-- the oldest tree on main campus;
-- how much carbon a red maple takes up in a year;
-- how many species a single mature Norway spruce supports;
-- how much carbon UVM's trees remove, and oxygen they produce, each year
-  all together;
-- that emerald ash borer (EAB) threatens the campus's ash trees;
-- and dozens more like these.
+**Two kinds of fact, from two sources:**
 
-**What already exists.** Every species in `taxa.csv` already has a reviewed
-fun fact (257 of them), shown in each tree's record. They are a ready-made
-pool, and they are being checked by a botanist
-([SPECIES-TEXT-REVIEW.md](SPECIES-TEXT-REVIEW.md)).
+- **Counted from the data, so always current.** For example:
+  - the most common species ("Eastern white pine is the most common tree on
+    campus: 183 of them");
+  - how many of a given species there are ("There are 27 ginkgos on campus");
+  - the species with a single tree on campus;
+  - how many trees each campus has;
+  - how many are native to Vermont.
 
-**Every fact must be true, and checked before it is shown.** A bubble on the
-landing page is the most visible text on the site. Several of the examples
-above need care first:
-
-- **The baldcypress row has five trees, not four.** UVM-0772 stands with
-  UVM-0768 to 0771; there are 12 baldcypresses on campus in all. The data
-  answered this one; the name of the nearby building still needs checking.
-- **"The oldest tree on main campus" is not known.** UVM-0058, a northern red
-  oak, is the strongest candidate: it had the largest trunk in the 2014
-  inventory (49″). But no tree on campus has been aged. Until one is measured
-  or cored, the fact has to say "largest", or "probably among the oldest".
-- **Carbon and oxygen totals wait on i-Tree** ([7](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-citys-trees-7-october-2026)). Figures for a single species,
-  such as a red maple's carbon or the species a Norway spruce supports, need a
-  published source, and that source should be recorded with the fact.
-- **EAB on campus** needs confirming with Grounds or the state, and is worth
-  pairing with what is being done about it. The map has 69 ash trees.
+  These can be generated when the site is built, so they change as the
+  inventory does and are never out of date.
+- **Written by hand,** about species or trees in general. Every species in
+  `taxa.csv` already has a fun fact (257 of them), shown in each tree's record
+  and under a botanist's review ([SPECIES-TEXT-REVIEW.md](SPECIES-TEXT-REVIEW.md)),
+  so there is a ready-made pool. New ones, especially any with a number in
+  them such as carbon per tree, should carry their source. Facts about the
+  collection's age or carbon wait on measurements and i-Tree
+  ([7](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-citys-trees-7-october-2026)).
 
 **How it could work, when built:**
 
-- **Keep the facts in a file of their own,** say `data/facts.csv`: the text,
-  its source, and optionally the tree or species it is about. The data build
-  checks the file like the others. A fact about a tree can open that tree's
-  record when tapped.
+- **Keep written facts in a file of their own,** say `data/facts.csv`: the
+  text, its source, and optionally the tree or species it is about. The data
+  build checks the file like the others, and adds the counted facts. A fact
+  about a tree or species can open its record or species page when tapped.
 - **Show it once, then step aside.** It appears on a first visit. Closing it
   keeps it closed (remembered in the browser), and a small "Did you know?"
   button can bring it back.
