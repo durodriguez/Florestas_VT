@@ -256,7 +256,8 @@ dollars. Figures are rounded to two significant figures and said as "about":
 the inputs (a diameter to the inch, a height in five-foot steps) carry no
 more. A total under a dollar reads "less than $1". A folded *How these are
 estimated* note says what the figures rest on, that carbon is the firmest,
-and that the dollar total leaves out energy savings. Then **Powered by
+and that the dollar total leaves out energy savings and unquantified
+services such as wildlife habitat and aesthetic value. Then **Powered by
 i-Tree**. `npm run data` checks `itree-city-trees.csv` against
 `city-trees.csv` again on every build.
 
