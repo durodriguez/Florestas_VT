@@ -1212,6 +1212,11 @@ Things that need a person rather than a commit.
   circle). UVM Communications may still prefer a particular web file or want
   to approve the use; worth mentioning in the ETS conversation.
 - **ETS request** for `arboretum.uvm.edu/explorer/`.
+- **UVM-0100, the dawn redwood on the Green**, has a planting story to add
+  to its record. The story is waiting on the planting year and the planter's
+  permission to be named. The tree is thought to be about 30 years old, despite
+  its 40″ trunk in 2014. It has been stressed by dry summers since the Green's
+  irrigation was removed, and a field-app visit should record that.
 
 Three conversations are yours to have when you want them, and are listed here
 so they are not forgotten rather than because anything is waiting on them:
