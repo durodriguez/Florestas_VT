@@ -72,6 +72,16 @@ committed.
 Each choice, and the reason for it, is a named constant at the top of
 `scripts/lidar/crown_peaks.py`.
 
+## Comparing with SAL's tree centroids
+
+UVM's Spatial Analysis Lab has its own crowns for Burlington, made from the
+same 2023 flight by a more careful method. They are loaded privately in
+`/positions/` ([POSITIONS.md](POSITIONS.md#tree-crowns-from-sal-privately)).
+**SAL's file covers the City of Burlington only.** About a third of
+Centennial, most of Spear Street and the south edge of Athletic lie in South
+Burlington, where only the peaks exist. Any comparison of counts must be made
+over the ground both cover, or it compares different areas.
+
 ## How good it is
 
 **Positions.** Burlington's street trees have surveyed positions. Their nearest
