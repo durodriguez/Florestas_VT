@@ -49,16 +49,13 @@ describe('renderCityDetail', () => {
     expect(html).toContain('about 5.9 lb a year');
     expect(html).toContain('<dd>about $1 a year</dd>');
     expect(html).not.toContain('How these are estimated');
+    // i-Tree's credit, last inside the fold: seen whenever the figures are.
+    // It opens our page on the estimates, which links i-Tree in turn.
+    expect(html).toMatch(/Powered by <a href="\/site\/itree\/">i-Tree<\/a>\s*<\/p>\s*<\/details>/);
     expect(html.indexOf('Ecosystem services')).toBeLessThan(html.indexOf('About Hackberry'));
   });
 
-  it('links to the i-Tree page at the foot of the panel', () => {
-    const html = renderCityDetail(tree({ itree: estimates }), '/site/');
-    expect(html).toContain('<a href="/site/itree/">i-Tree estimates</a>');
-    expect(html.lastIndexOf('i-Tree estimates')).toBeGreaterThan(html.indexOf('More about this species'));
-  });
-
-  it('leaves the section and the link out for a tree i-Tree has no estimate for', () => {
+  it('leaves the section and its link out for a tree i-Tree has no estimate for', () => {
     const html = renderCityDetail(tree(), '/');
     expect(html).not.toContain('Ecosystem services');
     expect(html).not.toContain('itree/');
