@@ -259,21 +259,18 @@ function ecosystemServices(e: CityTreeItree, run: ItreeRun | null): string {
     <details class="detail-fact">
       <summary>How these are estimated</summary>
       <p>
-        By ${escapeHtml(run?.model ?? 'i-Tree Eco')}, the US Forest Service's
-        tree model, from this tree's species, trunk diameter, height and
-        condition as the city last measured them, with Burlington's
+        By ${escapeHtml(run?.model ?? 'i-Tree Eco')}, based on species, trunk
+        diameter, height and condition as last measured, with Burlington's
         ${run?.weatherYear ?? ''} weather and air quality.
       </p>
       <p>
         Carbon is the firmest figure. Runoff, pollution and oxygen depend on
-        the tree's leaf area, which i-Tree had to estimate: the city did not
-        record the full shape of the crown.
+        the tree's leaf area, which is estimated rather than measured.
       </p>
       <p>
-        The yearly total adds the carbon absorbed, runoff avoided and
-        pollution removed, at i-Tree's standard prices. It leaves out energy
-        savings, which depend on how far the tree is from a building, so the
-        tree is likely worth more.
+        The yearly benefits total counts only the quantified services, leaving
+        out energy savings and other ecosystem services such as wildlife
+        habitat and aesthetic value. It underestimates total value.
       </p>
     </details>
     <p class="detail-powered">

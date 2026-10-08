@@ -50,6 +50,8 @@ describe('renderCityDetail', () => {
     expect(html).toContain('about 5.9 lb a year');
     expect(html).toContain('about $1 a year');
     expect(html).toContain('Powered by');
+    expect(html).toContain('By i-Tree Eco v6.0.41, based on species');
+    expect(html).toContain('2024 weather');
     expect(html.indexOf('Ecosystem services')).toBeLessThan(html.indexOf('About Hackberry'));
   });
 
