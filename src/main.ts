@@ -199,7 +199,7 @@ class App {
     panel.hidden = false;
     panel.innerHTML =
       `<button type="button" class="detail-close" data-action="close-detail" aria-label="Close">&times;</button>` +
-      renderCityDetail(tree, BASE, this.dataset.itree ?? null);
+      renderCityDetail(tree, BASE);
     panel.scrollTop = 0;
     document.body.classList.add('has-detail');
   }

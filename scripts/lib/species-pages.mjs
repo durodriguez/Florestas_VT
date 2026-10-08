@@ -15,7 +15,7 @@
  * authored here; this is a second view of data the map already carries.
  */
 
-const esc = (s) =>
+export const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
@@ -58,14 +58,20 @@ function sciHtml(t) {
   return parts.join(' ') || esc(t.sci);
 }
 
-const row = (label, value) =>
+export const row = (label, value) =>
   value === null || value === undefined || value === '' ? ''
     : `<div class="fact"><dt>${esc(label)}</dt><dd>${value}</dd></div>`;
 
-function shell({ title, description, base, body, depth }) {
+/**
+ * The page around a body. `depth` counts folders below /species/; a page
+ * outside it (the i-Tree page) passes `root`, its relative path to the site.
+ */
+export function shell({ title, description, base, body, depth = 0, root = null }) {
   // Relative, so the pages work under a project path (/Florestas_VT/) and at a
   // domain root alike, without the generator having to know which.
   const up = '../'.repeat(depth);
+  const css = root === null ? `${up}species.css` : `${root}species/species.css`;
+  const mark = root === null ? `${up}../uvm-mark.png` : `${root}uvm-mark.png`;
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -73,11 +79,11 @@ function shell({ title, description, base, body, depth }) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="stylesheet" href="${up}species.css">
+<link rel="stylesheet" href="${css}">
 </head>
 <body>
 <header class="bar">
-  <a class="bar-home" href="${esc(base)}"><img class="bar-mark" src="${up}../uvm-mark.png" alt="" width="30" height="30">UVM Trees</a>
+  <a class="bar-home" href="${esc(base)}"><img class="bar-mark" src="${mark}" alt="" width="30" height="30">UVM Trees</a>
   <a class="bar-link" href="${esc(base)}species/">All species</a>
 </header>
 ${body}
