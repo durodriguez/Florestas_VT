@@ -240,10 +240,11 @@ function roughlyDollars(n: number): string {
 /**
  * What i-Tree Eco estimates this tree does, folded under "This tree": each
  * service by its amount, then the yearly dollar total, unemphasized because it
- * is the least meaningful of them. What the figures rest on is on the i-Tree
- * page the panel links to at its foot, not here (docs/ITREE.md).
+ * is the least meaningful of them. "Powered by i-Tree" closes it and opens
+ * our i-Tree page, which says what the figures rest on and links i-Tree itself
+ * (docs/ITREE.md).
  */
-function ecosystemServices(e: CityTreeItree): string {
+function ecosystemServices(e: CityTreeItree, base: string): string {
   return `
     <details class="detail-services">
       <summary>Ecosystem services</summary>
@@ -256,7 +257,7 @@ function ecosystemServices(e: CityTreeItree): string {
         ${row('Total yearly benefits', `${roughlyDollars(e.benefitsUsdYr)} a year`)}
       </dl>
       <p class="detail-powered">
-        Powered by <a href="https://www.itreetools.org/" target="_blank" rel="noopener">i-Tree</a>
+        Powered by <a href="${base}itree/">i-Tree</a>
       </p>
     </details>`;
 }
@@ -305,7 +306,7 @@ export function renderCityDetail(tree: CityTree, base: string): string {
       ${row('Planted', tree.plantedYear ? `${tree.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
       ${row('Coordinates', `${tree.lat.toFixed(6)}, ${tree.lng.toFixed(6)}`)}
     </dl>
-    ${tree.itree ? ecosystemServices(tree.itree) : ''}
+    ${tree.itree ? ecosystemServices(tree.itree, base) : ''}
 
     ${aboutTaxon(t, false)}
 
