@@ -588,7 +588,9 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
   void (async () => {
     try {
       const stored = await tx<Stored[]>('readonly', (s) => s.getAll() as IDBRequest<Stored[]>);
-      for (const s of stored.sort((a, b) => a.id.localeCompare(b.id))) images.push(live(s));
+      // Hidden on every page load, without saving that: drawing fourteen large
+      // prints at once is slow, and the person asks for the ones they need.
+      for (const s of stored.sort((a, b) => a.id.localeCompare(b.id))) images.push(live({ ...s, hidden: true }));
     } catch {
       message('This browser will not store images, so they would be lost on reload.', true);
     }

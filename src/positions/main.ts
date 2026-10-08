@@ -502,7 +502,7 @@ async function loadPeaks(): Promise<void> {
     }).addTo(peakLayer);
   }
   layersControl.addOverlay(peakLayer, 'LiDAR crown peaks (April 2023)');
-  peakLayer.addTo(map);
+  if ($<HTMLInputElement>('lidar-show').checked) peakLayer.addTo(map);
   $('lidar-count').textContent = peaks.length.toLocaleString();
   $('lidar').hidden = false;
 }
@@ -522,6 +522,7 @@ function drawCrowns(saved: SavedCrowns | null): void {
   if (!saved) {
     if (crownsShown) layersControl.removeLayer(crownLayer);
     map.removeLayer(crownLayer);
+    $<HTMLInputElement>('crowns-show').disabled = true;
     crownsShown = false;
     return;
   }
@@ -531,7 +532,8 @@ function drawCrowns(saved: SavedCrowns | null): void {
   }
   if (!crownsShown) layersControl.addOverlay(crownLayer, 'Tree crowns (SAL, my file)');
   crownsShown = true;
-  crownLayer.addTo(map);
+  $<HTMLInputElement>('crowns-show').disabled = false;
+  if ($<HTMLInputElement>('crowns-show').checked) crownLayer.addTo(map);
   // Trees stay on top: they are what gets dragged.
   dotLayer.eachLayer((l) => (l as L.CircleMarker).bringToFront());
   if (selected) styleDot(selected);
@@ -573,6 +575,25 @@ $('crowns-remove').addEventListener('click', async () => {
   await saveCrowns(null).catch(() => undefined);
 });
 
+// The two LiDAR layers turn on and off from the side panel as well as the
+// layers button; each follows the other.
+const layerToggles: Array<[string, L.LayerGroup]> = [['lidar-show', peakLayer], ['crowns-show', crownLayer]];
+for (const [id, layer] of layerToggles) {
+  // The box sits in the section's heading: ticking it must not also open or
+  // close the section.
+  $<HTMLInputElement>(id).closest('label')!.addEventListener('click', (e) => e.stopPropagation());
+  $<HTMLInputElement>(id).addEventListener('change', (e) => {
+    if ((e.target as HTMLInputElement).checked) layer.addTo(map);
+    else map.removeLayer(layer);
+  });
+}
+const syncToggle = (on: boolean) => (e: L.LayersControlEvent) => {
+  const hit = layerToggles.find(([, layer]) => layer === e.layer);
+  if (hit) $<HTMLInputElement>(hit[0]).checked = on;
+};
+map.on('overlayadd', syncToggle(true));
+map.on('overlayremove', syncToggle(false));
+
 // Surfaced for the browser test.
 Object.assign(window as unknown as Record<string, unknown>, {
   __positions: {
@@ -589,6 +610,7 @@ Object.assign(window as unknown as Record<string, unknown>, {
     },
     selected: () => selected,
     peaks: () => peaks.length,
+    layersOn: () => ({ peaks: map.hasLayer(peakLayer), crowns: map.hasLayer(crownLayer) }),
     crowns: () => crownLayer.getLayers().length / 2,
     imagery: myImagery,
     screenOf: (lat: number, lng: number) => {
