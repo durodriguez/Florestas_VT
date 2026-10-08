@@ -41,7 +41,8 @@
       </details>
 
       <details class="lidar" id="lidar" hidden>
-        <summary>LiDAR crown peaks <span id="lidar-count" class="count">0</span> <span class="key-peak" aria-hidden="true"></span></summary>
+        <summary>LiDAR crown peaks <span id="lidar-count" class="count">0</span> <span class="key-peak" aria-hidden="true"></span>
+          <label class="layer-toggle" title="Show or hide the peaks on the map"><input type="checkbox" id="lidar-show" checked> Show</label></summary>
         <p class="hint">Tops of tree crowns found in Vermont's statewide LiDAR, flown
           <strong>21 April 2023</strong> (leaf-off), across the whole campus boundary. A peak
           shows that a tree stood there, not which tree. Trees under about 3 m, crowns
@@ -51,7 +52,8 @@
       </details>
 
       <details class="lidar" id="crowns">
-        <summary>Tree crowns (SAL) <span id="crowns-count" class="count">0</span> <span class="key-crown" aria-hidden="true"></span></summary>
+        <summary>Tree crowns (SAL) <span id="crowns-count" class="count">0</span> <span class="key-crown" aria-hidden="true"></span>
+          <label class="layer-toggle" title="Show or hide the crowns on the map"><input type="checkbox" id="crowns-show" checked disabled> Show</label></summary>
         <p class="hint">The Spatial Analysis Lab's LiDAR tree centroids, 2023: each crown's
           centre and its radius, drawn as a circle. Load the <code>.zip</code> as SAL sent it (or its
           <code>.shp</code>, <code>.dbf</code> and <code>.prj</code> together). Kept in this browser only —
@@ -85,6 +87,7 @@
           <button type="button" id="img-show-all" class="ghost-btn">Show all</button>
           <button type="button" id="img-hide-all" class="ghost-btn">Hide all</button>
         </div>
+        <p class="hint">Images start hidden each time this page opens, so it loads quickly. <strong>Show all</strong>, or Show on one image, draws them.</p>
         <p class="hint">Listed in stacking order: where images overlap, the one with the
           lowest error (1) is drawn on top.</p>
         <ul id="img-list" class="img-list"></ul>

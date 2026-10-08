@@ -36,7 +36,8 @@ save. The moves live in that one browser on that one computer until exported.
 The tool also shows **crown peaks** as small orange circles: the tops of tree
 crowns in Vermont's statewide LiDAR, flown on 21 April 2023
 ([LIDAR.md](LIDAR.md)). There are 8,284 across the whole campus boundary. The
-layers button at the top right turns them off.
+**Show** box in the section's heading turns them off and on, as does the
+layers button at the top right; the two stay in step.
 
 A peak shows that a tree stood there in April 2023, not which tree. A clump
 of crowns can give a single peak, and nothing pairs peaks with mapped trees.
@@ -49,9 +50,13 @@ They are there to look at alongside the imagery and the dots.
 Buford sent. It holds each crown's centre, height and radius. Choose the `.zip`
 as it came, or its `.shp`, `.dbf` and `.prj` together. Each crown is drawn as a
 violet circle of its radius, with a dot at its centre, under the trees.
+Its own **Show** box turns them off and on.
 
 - **Only crowns inside the campus boundary, or within 30 m of it, are kept.**
   That is about 8,000 of the city's 112,000.
+- **SAL's file stops at Burlington's city line,** so the parts of campus in
+  South Burlington have no crowns: most of Centennial Woods, the east of
+  Spear Street and the south edge of Athletic. The crown peaks cover them.
 - **The file stays in this browser** (IndexedDB), as *My imagery* does. It is
   never uploaded, committed or published: SAL has not been asked about
   publishing it. **Remove from this browser** deletes it. Another computer or
@@ -107,6 +112,9 @@ then unaligned ones. Nothing is merged into one picture: at campus size and
 this resolution that would be hundreds of megapixels, beyond what a browser
 draws, for a result that looks the same. Only images in view are drawn, so
 fourteen large prints do not slow the page.
+
+**Images start hidden each time the page opens,** so it loads quickly with
+many large prints stored. **Show all**, or **Show** on one image, draws them.
 
 **Show all** and **Hide all** set every image's own Show/Hide at once.
 **Imagery on** turns the whole layer off and on for a quick comparison with the
