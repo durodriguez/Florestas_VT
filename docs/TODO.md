@@ -16,6 +16,7 @@ stale, which is how this file got untidy in the first place.
 | 18 | [Two versions of the survey app](#18-two-versions-of-the-survey-app--advanced-and-basic-open) | **open** |
 | 19 | [The Redstone pine grove, mapped in the wrong places](#19-the-redstone-white-pine-grove-is-mapped-in-the-wrong-places-open-fieldwork) | **open** |
 | 20 | [LiDAR from the Spatial Analysis Laboratory](#20-lidar-from-the-spatial-analysis-laboratory-in-progress-crown-peaks-in-positions-7-october-2026) | **in progress** |
+| 21 | [A "Did you know…?" bubble on the map](#21-a-did-you-know-bubble-on-the-map-idea-8-october-2026) | *idea* |
 | 1 | [Rename `memorial`, add `dedication_label`](#1-rename-memorial-add-dedication_label-done-11-september-2026) | done |
 | 2 | [Dedication in the survey app](#2-dedication-in-the-survey-app-done-12-september-2026) | done |
 | 3 | [`geolocation_notes`, right of `lng`](#3-geolocation_notes-right-of-lng-done-11-september-2026) | done |
@@ -784,6 +785,64 @@ the crown width i-Tree had to guess ([7](#7-ecosystem-services--the-i-tree-quest
 
 SAL may still save steps: a canopy layer with buildings already removed, or
 leaf-on data for crown measurements.
+
+## 21. A "Did you know…?" bubble on the map [idea, 8 October 2026]
+
+**The idea.** A small floating bubble, banner or card appears when someone
+first lands on the map. It runs through random facts about UVM's trees, or
+trees in general, and can be closed with an ×. The examples given:
+
+- which species on campus is the longest-lived, the tallest, the most ancient
+  lineage, and the youngest;
+- a particular tree, and what makes its species unusual: UVM-0772, a
+  baldcypress, is a conifer that drops its needles every winter;
+- the oldest tree on main campus;
+- how much carbon a red maple takes up in a year;
+- how many species a single mature Norway spruce supports;
+- how much carbon UVM's trees remove, and oxygen they produce, each year
+  all together;
+- that emerald ash borer (EAB) threatens the campus's ash trees;
+- and dozens more like these.
+
+**What already exists.** Every species in `taxa.csv` already has a reviewed
+fun fact (257 of them), shown in each tree's record. They are a ready-made
+pool, and they are being checked by a botanist
+([SPECIES-TEXT-REVIEW.md](SPECIES-TEXT-REVIEW.md)).
+
+**Every fact must be true, and checked before it is shown.** A bubble on the
+landing page is the most visible text on the site. Several of the examples
+above need care first:
+
+- **The baldcypress row has five trees, not four.** UVM-0772 stands with
+  UVM-0768 to 0771; there are 12 baldcypresses on campus in all. The data
+  answered this one; the name of the nearby building still needs checking.
+- **"The oldest tree on main campus" is not known.** UVM-0058, a northern red
+  oak, is the strongest candidate: it had the largest trunk in the 2014
+  inventory (49″). But no tree on campus has been aged. Until one is measured
+  or cored, the fact has to say "largest", or "probably among the oldest".
+- **Carbon and oxygen totals wait on i-Tree** ([7](#7-ecosystem-services--the-i-tree-question-in-progress-on-the-citys-trees-7-october-2026)). Figures for a single species,
+  such as a red maple's carbon or the species a Norway spruce supports, need a
+  published source, and that source should be recorded with the fact.
+- **EAB on campus** needs confirming with Grounds or the state, and is worth
+  pairing with what is being done about it. The map has 69 ash trees.
+
+**How it could work, when built:**
+
+- **Keep the facts in a file of their own,** say `data/facts.csv`: the text,
+  its source, and optionally the tree or species it is about. The data build
+  checks the file like the others. A fact about a tree can open that tree's
+  record when tapped.
+- **Show it once, then step aside.** It appears on a first visit. Closing it
+  keeps it closed (remembered in the browser), and a small "Did you know?"
+  button can bring it back.
+- **Never cover what someone came for.** A visitor arriving from a QR label
+  (`?plant=`) wants that tree, so the bubble waits or stays away. On a phone
+  it must not cover the map's controls or the search box.
+- **Accessible.** Readable by screen readers, closable from the keyboard, and
+  with no sliding animation for anyone who has asked their device to reduce
+  motion.
+- **Random, but not repetitive:** shuffle the facts and avoid showing the
+  same one twice in a row.
 
 ## Finished
 
