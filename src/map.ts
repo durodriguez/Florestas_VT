@@ -86,6 +86,8 @@ export class PlantMap {
    * removed on its own, from the panel, so the group is only their container.
    */
   private readonly campusLayer: L.GeoJSON;
+  /** Campus names by area_id: shown with the outline, or with their own area. */
+  private readonly campusLabels: Map<string, L.Tooltip>;
   /** True while campus areas are changed from code, not the layers control. */
   private quietCampus = false;
   private readonly highlight: L.CircleMarker;
@@ -190,6 +192,7 @@ export class PlantMap {
       ...dataset.campusAreas,
       features: dataset.campusAreas.features.filter((f) => f.properties.kind !== 'boundary'),
     });
+    this.campusLabels = campusLabels(dataset.campusAreas);
 
     // Overlays are checkboxes in the same control as the basemap radio buttons,
     // so the outline toggles on and off without disturbing the chosen basemap.
@@ -431,7 +434,7 @@ export class PlantMap {
       if (want && !this.map.hasLayer(layer)) {
         this.map.addLayer(layer);
         // Back under the tree dots, which share its drawing surface.
-        (layer as L.Path).bringToBack();
+        if (layer instanceof L.Path || layer instanceof L.FeatureGroup) layer.bringToBack();
       } else if (!want && this.map.hasLayer(layer)) {
         this.map.removeLayer(layer);
       }
@@ -444,6 +447,8 @@ export class PlantMap {
     this.outlineLayer.eachLayer((layer) => { outlineWanted ||= ids.has(idOf(layer)); });
     place(this.outlineLayer, outlineWanted);
     this.campusLayer.eachLayer((layer) => place(layer, ids.has(idOf(layer))));
+    // One name per campus, whichever of the two asked for it.
+    for (const [id, label] of this.campusLabels) place(label, outlineWanted || ids.has(id));
   }
 
 
@@ -473,19 +478,31 @@ function campusAreas(
         fillOpacity: 0.08,
       };
     },
-    onEachFeature: (feature, layer) => {
-      const p = feature.properties as CampusAreaProps;
-      // The outer boundary has no sensible centre to label — the sub-campus
-      // names sit inside it, and a seventh label there would collide.
-      if (p.kind !== 'campus') return;
-      layer.bindTooltip(escapeHtml(p.name), {
-        permanent: true,
-        direction: 'center',
-        className: 'campus-label',
-        interactive: false,
-      });
-    },
   });
+}
+
+/**
+ * Each campus area's name, at the point Leaflet itself would centre a label
+ * on that polygon. Kept apart from the polygons so a name can show with the
+ * whole-campus outline as well as with its own area, and only ever once. The
+ * outline has no label of its own: the campus names sit inside it.
+ */
+function campusLabels(
+  collection: GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon, CampusAreaProps>,
+): Map<string, L.Tooltip> {
+  const labels = new Map<string, L.Tooltip>();
+  for (const f of collection.features) {
+    if (f.properties.kind !== 'campus') continue;
+    const ring = f.geometry.type === 'Polygon' ? f.geometry.coordinates[0]! : f.geometry.coordinates[0]![0]!;
+    const centre = L.PolyUtil.polygonCenter(ring.map(([lng, lat]) => L.latLng(lat!, lng!)), L.CRS.EPSG3857);
+    labels.set(
+      f.properties.area_id,
+      L.tooltip({ permanent: true, direction: 'center', className: 'campus-label', interactive: false })
+        .setLatLng(centre)
+        .setContent(escapeHtml(f.properties.name)),
+    );
+  }
+  return labels;
 }
 
 /** Bigger trunks read as bigger dots, which makes specimen trees findable. */
