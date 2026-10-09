@@ -472,11 +472,15 @@ body.is-loading .layout { opacity: .35; }
   body.panel-open .panel { transform: none; }
   /* While the drawer is open, the map beside it is one big "close" button: a
      touch there slides the drawer away instead of reaching the map, so it
-     cannot also select a tree or start a drag nobody meant. */
-  body.panel-open .panel-scrim {
+     cannot also select a tree or start a drag nobody meant. The light shade
+     says so, fading in and out with the drawer's slide. Kept in place but
+     inert while closed, so the fade has something to run on. */
+  .panel-scrim {
     display: block; position: absolute; top: var(--topbar-h); right: 0; bottom: 0; left: 0;
-    z-index: 940;
+    z-index: 940; background: rgb(0 0 0 / 22%);
+    opacity: 0; pointer-events: none; transition: opacity .22s ease;
   }
+  body.panel-open .panel-scrim { opacity: 1; pointer-events: auto; }
   .panel-filters { max-height: 45%; }
   .detail { width: 100%; top: auto; height: 72%; border-left: 0; border-top: 1px solid var(--border); }
   .map-controls { max-width: 10rem; padding: .4rem; }
