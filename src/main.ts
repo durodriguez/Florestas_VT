@@ -54,6 +54,7 @@ class App {
       onSelectCityTree: (tree) => this.selectCityTree(tree),
       onBasemapTrouble: (name) =>
         this.toast(`The ${name} basemap is not loading. Pick another from the layers control, bottom right.`),
+      onCampusAreasChange: (visible) => { $<HTMLInputElement>('#show-campus').checked = visible; },
     });
 
     document.title = dataset.config.siteName;
@@ -299,6 +300,9 @@ class App {
 
     if (params.get('city') === '1' && this.cityTrees.length) {
       $<HTMLInputElement>('#filter-city').checked = true;
+      // Opened, so a shared link does not show city trees with the switch
+      // that explains them folded out of sight.
+      $<HTMLDetailsElement>('#layer-city').open = true;
       this.showCity = true;
       this.renderCityTrees();
     }
@@ -415,6 +419,11 @@ class App {
       // at. Absent means off, which is the default either way.
       this.setUrlParam('city', this.showCity ? '1' : null);
     });
+
+    $<HTMLInputElement>('#show-campus').addEventListener('change', (e) => {
+      this.map.toggleCampusAreas((e.target as HTMLInputElement).checked);
+    });
+    $('#show-campus-note').hidden = !this.dataset.campusAreas.features.some((f) => f.properties.provisional);
 
     $<HTMLSelectElement>('#color-by').addEventListener('change', (e) => {
       this.colorBy = (e.target as HTMLSelectElement).value as ColorBy;

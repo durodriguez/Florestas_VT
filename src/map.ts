@@ -62,6 +62,8 @@ export interface PlantMapOptions {
   onSelectCityTree?: (tree: CityTree) => void;
   /** Called when the active basemap stops serving tiles. */
   onBasemapTrouble?: (layerName: string) => void;
+  /** The campus areas were switched on or off from the map's own layers control. */
+  onCampusAreasChange?: (visible: boolean) => void;
 }
 
 export class PlantMap {
@@ -188,6 +190,13 @@ export class PlantMap {
         { position: 'bottomright', collapsed: true },
       )
       .addTo(this.map);
+    // The panel has its own switch for the campus areas; tell it when this
+    // control is used instead, so the two never disagree.
+    const campusChanged = (visible: boolean) => (e: L.LayersControlEvent) => {
+      if (e.layer === this.campusLayer) this.options.onCampusAreasChange?.(visible);
+    };
+    this.map.on('overlayadd', campusChanged(true));
+    this.map.on('overlayremove', campusChanged(false));
 
     this.watchTiles(layers);
     this.map.on('zoomend', () => this.updateCampusLabels());

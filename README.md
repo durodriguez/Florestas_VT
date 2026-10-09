@@ -70,8 +70,10 @@ search is used.
 
 **Burlington street trees** — 364 of the city's street trees stand inside the
 campus boundary, on Main Street, College Street, Colchester Avenue and the rest.
-They are on the map behind **Show Burlington street trees**, off by default, in
-Burlington's flag blue and white against UVM's green and gold. They are kept
+They are on the map behind **Show Burlington street trees**, off by default,
+folded under *City trees* below the filters, in Burlington's flag blue and white
+against UVM's green and gold. Under it, *Campus boundaries* switches the campus
+outlines off and on (on by default), as the map's own layers control does. They are kept
 structurally separate from the collection — their own file, their own `BTV-` ids,
 their own array in the payload — because they are the city's trees, not the
 university's. See [docs/CITY-TREES.md](docs/CITY-TREES.md).
