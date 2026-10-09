@@ -139,6 +139,8 @@ const CSV_COLUMNS: Array<[string, (p: Plant) => unknown]> = [
   ['height_ft', (p) => p.heightFt ?? ''],
   ['spread_ft', (p) => p.spreadFt ?? ''],
   ['condition', (p) => p.condition ?? ''],
+  // Blank when the condition is from the latest visit, as most are.
+  ['condition_recorded_on', (p) => p.conditionOn ?? ''],
   ['planted_year', (p) => p.plantedYear ?? ''],
   ['status', (p) => p.status],
   ['surveyed_on', (p) => p.surveyedOn ?? ''],

@@ -178,7 +178,11 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
     <h3 class="detail-section">This specimen</h3>
     <dl class="facts">
       ${row('Location', plant.collection ? escapeHtml(plant.collection.name) : null)}
-      ${row('Condition', plant.condition ? `<span class="pill pill--${plant.condition}">${escapeHtml(titleCase(plant.condition))}</span>` : null)}
+      ${row('Condition', plant.condition
+        ? `<span class="pill pill--${plant.condition}">${escapeHtml(titleCase(plant.condition))}</span>${
+          // From an earlier visit than the latest: say how old it is.
+          plant.conditionOn ? ` <span class="fact-when">(${escapeHtml(surveyDate(plant.conditionOn))})</span>` : ''}`
+        : null)}
       ${row('Planted', plant.plantedYear ? `${plant.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
       ${row('Diameter at breast height', numOr(plant.dbhIn, ' in'))}
       ${row('Height', numOr(plant.heightFt, ' ft'))}

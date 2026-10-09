@@ -59,6 +59,8 @@ export function expandPlants(file: PlantsFile, dataset: Dataset): Plant[] {
       heightFt: at(row, 'height_ft') as number | null,
       spreadFt: at(row, 'spread_ft') as number | null,
       condition: condIdx >= 0 ? conditions[condIdx] ?? null : null,
+      // `?? null` also covers a plants.json cached from before the field existed.
+      conditionOn: (at(row, 'condition_on') as string | null | undefined) ?? null,
       plantedYear: at(row, 'planted_year') as number | null,
       status: statuses[at(row, 'status') as number] ?? 'active',
       surveyedOn: at(row, 'surveyed_on') as string | null,

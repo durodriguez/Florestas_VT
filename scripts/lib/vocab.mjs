@@ -191,6 +191,7 @@ export const PLANT_FIELDS = [
   'height_ft',
   'spread_ft',
   'condition',   // integer index into CONDITIONS, or -1
+  'condition_on', // the visit that condition is from, when not the latest
   'planted_year',
   'status',      // integer index into STATUSES
   'surveyed_on',

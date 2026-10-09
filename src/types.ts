@@ -183,7 +183,10 @@ export interface Plant {
   dbhIn: number | null;
   heightFt: number | null;
   spreadFt: number | null;
+  /** The latest condition recorded, which may be from an earlier visit. */
   condition: string | null;
+  /** When `condition` is from an earlier visit than the latest, that visit's date. */
+  conditionOn: string | null;
   plantedYear: number | null;
   status: string;
   surveyedOn: string | null;

@@ -467,6 +467,45 @@ describe('buildDataset', () => {
     expect(at(rows[1], 'spreadFt')).toBeNull();
   });
 
+  it('keeps the last recorded condition, with its date, through a visit that left it blank', () => {
+    const r = build({
+      observationRows: [
+        observation({ surveyed_on: '2023-12-19', condition: 'good' }),
+        observation({ surveyed_on: '2026-10-08', condition: '' }),
+      ],
+    });
+    expect(r.errors).toEqual([]);
+    const conditions = r.dataset.vocab.conditions;
+    expect(conditions[field(r, 0, 'condition') as number]).toBe('good');
+    expect(field(r, 0, 'condition_on')).toBe('2023-12-19');
+    // Everything else still comes from the latest visit.
+    expect(field(r, 0, 'surveyed_on')).toBe('2026-10-08');
+  });
+
+  it('gives no date when the latest visit recorded the condition itself', () => {
+    const r = build({
+      observationRows: [
+        observation({ surveyed_on: '2023-12-19', condition: 'good' }),
+        observation({ surveyed_on: '2026-10-08', condition: 'fair' }),
+      ],
+    });
+    expect(r.dataset.vocab.conditions[field(r, 0, 'condition') as number]).toBe('fair');
+    expect(field(r, 0, 'condition_on')).toBeNull();
+  });
+
+  it('does not carry a condition onto a tree last found removed or not found', () => {
+    for (const status of ['removed', 'not-found']) {
+      const r = build({
+        observationRows: [
+          observation({ surveyed_on: '2023-12-19', condition: 'good' }),
+          observation({ surveyed_on: '2026-10-08', condition: '', status }),
+        ],
+      });
+      expect(field(r, 0, 'condition')).toBe(-1);
+      expect(field(r, 0, 'condition_on')).toBeNull();
+    }
+  });
+
   it('joins i-Tree estimates onto the city trees they belong to', () => {
     const city = (id: string) => ({ city_id: id, taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955',
       collection_id: 'green', dbh_in: '12', height_ft: '25', spread_ft: '20', condition: 'good' });

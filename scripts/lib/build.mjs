@@ -352,6 +352,14 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     // A mapped tree nobody has surveyed yet is a normal state, not an error —
     // it is most of what a municipal inventory gives you.
     const latest = series.at(-1) ?? NO_SURVEY;
+    // A visit that only took a photo leaves condition blank, and that is not a
+    // statement that the tree has none. So a standing tree keeps the last
+    // condition anyone recorded, with that visit's date to say how old it is.
+    // Not a removed one: a stump is not still in good condition.
+    const active = latest.status === STATUSES.indexOf('active');
+    const assessed = latest.condition >= 0 || !active
+      ? latest
+      : series.findLast((o) => o.condition >= 0) ?? latest;
 
     const record = {
       plant_id: plant.id,
@@ -363,7 +371,8 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       dbh_in: latest.dbh_in,
       height_ft: latest.height_ft,
       spread_ft: latest.spread_ft,
-      condition: latest.condition,
+      condition: assessed.condition,
+      condition_on: assessed === latest ? null : assessed.surveyed_on,
       planted_year: plant.planted_year,
       status: latest.status,
       surveyed_on: latest.surveyed_on,
