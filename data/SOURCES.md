@@ -84,7 +84,34 @@ settings are in `data/itree-run.json`; the steps are in
 
 They are model output from the city's measurements, not measurements. They are
 reduced from i-Tree's per-tree report to its value columns, and nothing else
-was changed. Shown publicly, they are credited **Powered by i-Tree**.
+was changed.
+
+**Terms.** i-Tree's end-user license agreement
+(<https://api.itreetools.org/eula>) releases the *i-Tree Software Suite* to
+the public domain, on condition that credit is given to the **i-Tree
+Cooperative**:
+
+- USDA Forest Service
+- Davey Tree Expert Co.
+- National Arbor Day Foundation
+- Society of Municipal Arborists
+- International Society of Arboriculture
+- Casey Trees
+
+Users may not claim it as their own work. i-Tree's own pages add that i-Tree
+is a registered trademark to be credited, and offer "Powered by i-Tree" logos
+for the purpose
+(<https://www.itreetools.org/support/resources-overview/marketing-i-tree>).
+
+**How it is credited here.** Every city tree's *Ecosystem services* ends
+"Powered by i-Tree". That links the site's i-Tree estimates page (`/itree/`),
+which names the model and version and links i-Tree's own site.
+
+**What is not confirmed.** The license was read from search excerpts on
+9 October 2026: its page was not reachable from where this was written. It may
+predate Eco v6, and the Cooperative's membership may have changed. The license
+screen in the i-Tree Eco v6 installer is the version that applies; check it
+against the above, or ask info@itreetools.org.
 
 ## On ShareAlike
 

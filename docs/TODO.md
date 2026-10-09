@@ -108,6 +108,17 @@ UVM's name on it.
    measured is a fabrication; "the 300 trees measured so far sequester X" is a
    fact, and a better argument for finishing the survey.
 
+**Before UVM's own inventory goes to i-Tree, clear it with Grounds.** i-Tree's
+license (see [SOURCES.md](../data/SOURCES.md#4-i-tree-eco-results-for-the-citys-trees))
+says data run through the model is treated as **public-domain data** that
+others may use and distribute, credited to whoever submitted it. That cost
+nothing for the city's trees, which were open data already. UVM's trees are
+on this map for anyone to see, but showing them is not the same as releasing
+the inventory for anyone to reuse and redistribute. Running it through i-Tree
+would, on those terms, do that. That is the university's decision, not this
+project's. Check the Eco v6 installer's own license text first, since the
+version read here may be out of date.
+
 **Three ways to get the numbers,** cheapest first:
 
 - **Export to i-Tree and import the results.** Run the inventory through i-Tree
