@@ -12,6 +12,7 @@ import { buildDataset } from './lib/build.mjs';
 import { normalizeName } from './lib/species.mjs';
 import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS } from './lib/species-pages.mjs';
 import { renderItreePage } from './lib/itree-page.mjs';
+import { SPECIES_SEARCH_JS } from './lib/species-search.mjs';
 import { photoUrl } from './lib/photo-url.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -180,6 +181,7 @@ const speciesDir = join(root, 'public', 'species');
 rmSync(speciesDir, { recursive: true, force: true });
 mkdirSync(speciesDir, { recursive: true });
 writeFileSync(join(speciesDir, 'species.css'), SPECIES_CSS);
+writeFileSync(join(speciesDir, 'search.js'), SPECIES_SEARCH_JS);
 
 // Campus photos and areas, grouped by species, so a page can show the trees
 // actually standing on campus rather than a stock image of the species.
