@@ -94,11 +94,14 @@ describe('renderSpeciesPage', () => {
     expect(html).toContain('href="/?plant=UVM-0493"');
   });
 
-  it('has the species search under the bar', () => {
+  it('has the species search in the bar, with a magnifier for narrow screens', () => {
     const html = page();
     expect(html).toContain('<script src="../search.js" defer></script>');
-    expect(html).toContain('id="species-q"');
-    expect(html.indexOf('id="species-q"')).toBeLessThan(html.indexOf('<h1>'));
+    const bar = html.slice(html.indexOf('<header class="bar">'), html.indexOf('</header>'));
+    expect(bar).toContain('id="species-q"');
+    expect(bar.indexOf('id="species-q"')).toBeGreaterThan(bar.indexOf('All species'));
+    expect(bar).toContain('class="search-open" aria-label="Search species"');
+    expect(bar).toContain('class="search-close" aria-label="Close search"');
     expect(renderSpeciesIndex([taxon()], { base: '/', config })).toContain('<script src="search.js" defer></script>');
   });
 

@@ -62,9 +62,11 @@ phone outdoors. Each page shows the description and fun fact, a characteristics
 table listing only what is actually recorded, and how many are mapped and
 where, with photos of that species taken on campus. A plant record links out to
 its species page; the species page links back to the map filtered to that
-species. The one script, `species/search.js`, is the search box under the bar:
-it suggests species by common name, scientific name or any alias, ranked as the
-survey app ranks them, and fetches the species list only once the box is used.
+species. The one script, `species/search.js`, is the species search in the
+green bar: a box after "All species" on a wide screen, a magnifier that opens it
+on a phone. It suggests species by common name, scientific name or any alias,
+ranked as the survey app ranks them, and fetches the species list only once the
+search is used.
 
 **Burlington street trees** — 364 of the city's street trees stand inside the
 campus boundary, on Main Street, College Street, Colchester Avenue and the rest.
