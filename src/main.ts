@@ -469,6 +469,13 @@ class App {
     $('#toggle-panel').addEventListener('click', () => {
       document.body.classList.toggle('panel-open');
     });
+    // On a phone, touching the map beside the open drawer closes it. On
+    // pointerdown rather than click, so it answers the touch at once, drag or
+    // tap; the layer only exists while the drawer is open (styles.css).
+    $('.panel-scrim').addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      document.body.classList.remove('panel-open');
+    });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && this.selected) this.select(null);

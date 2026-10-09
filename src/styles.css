@@ -208,6 +208,7 @@ button, input, select { font: inherit; color: inherit; }
 /* ---- map -------------------------------------------------------------- */
 
 .map-wrap { position: relative; min-width: 0; }
+.panel-scrim { display: none; }
 #map { position: absolute; inset: 0; background: var(--bg-sunk); }
 
 .map-controls {
@@ -469,6 +470,13 @@ body.is-loading .layout { opacity: .35; }
     box-shadow: var(--shadow);
   }
   body.panel-open .panel { transform: none; }
+  /* While the drawer is open, the map beside it is one big "close" button: a
+     touch there slides the drawer away instead of reaching the map, so it
+     cannot also select a tree or start a drag nobody meant. */
+  body.panel-open .panel-scrim {
+    display: block; position: absolute; top: var(--topbar-h); right: 0; bottom: 0; left: 0;
+    z-index: 940;
+  }
   .panel-filters { max-height: 45%; }
   .detail { width: 100%; top: auto; height: 72%; border-left: 0; border-top: 1px solid var(--border); }
   .map-controls { max-width: 10rem; padding: .4rem; }
