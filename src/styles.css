@@ -240,6 +240,14 @@ button, input, select { font: inherit; color: inherit; }
    is gold. See BTV_BLUE in map.ts. */
 /* The toggle's own note, so nobody has to guess what the blue pins are. */
 /* The double line: the last filter's bottom border, a gap, then this. */
+/* "Filters" and "Layers": the right panel's section headings (.detail-section),
+   set into the left panel's rows. */
+.panel-heading {
+  margin: 0; padding: .7rem .75rem .3rem;
+  font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text-dim); border-bottom: 1px solid var(--border);
+}
+/* The double line: the last filter's bottom border, a gap, then this. */
 .panel-layers { border-top: 1px solid var(--border); margin-top: .2rem; }
 .facet-note {
   margin: .35rem 0 0; font-size: .76rem; line-height: 1.4; color: var(--text-dim);
