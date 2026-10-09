@@ -127,8 +127,11 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config }) {
     row('Hardiness zones', esc(t.zones)),
   ].join('');
 
+  // Photos of the trees on campus belong with them: under what says how many
+  // there are and where, above the button that shows them on the map.
   const where = t.count > 0
     ? `<p>${t.count} mapped on campus${areas.length ? ` &mdash; ${areas.map(esc).join(', ')}` : ''}.</p>
+       ${gallery}
        <p><a class="btn" href="${esc(base)}?taxon=${encodeURIComponent(t.id)}">Show them on the map</a></p>`
     // Most of taxa.csv is a species list running ahead of the survey, and
     // saying so is more use than an empty section.
@@ -139,7 +142,6 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config }) {
   <h1>${esc(t.common)}</h1>
   <p class="sci">${sciHtml(t)}</p>
   <p class="label">${label}</p>
-  ${gallery}
   ${t.description ? `<p class="desc"><strong>Description:</strong> ${esc(t.description)}</p>` : ''}
   ${t.funFact ? `<details class="fun">
     <summary>Fun fact</summary>
