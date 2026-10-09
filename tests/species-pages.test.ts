@@ -94,6 +94,21 @@ describe('renderSpeciesPage', () => {
     expect(html).toContain('href="/?plant=UVM-0493"');
   });
 
+  it('has the species search under the bar', () => {
+    const html = page();
+    expect(html).toContain('<script src="../search.js" defer></script>');
+    expect(html).toContain('id="species-q"');
+    expect(html.indexOf('id="species-q"')).toBeLessThan(html.indexOf('<h1>'));
+    expect(renderSpeciesIndex([taxon()], { base: '/', config })).toContain('<script src="search.js" defer></script>');
+  });
+
+  it('puts Wikipedia in one row beside Show them on the map', () => {
+    const html = page();
+    expect(html).toMatch(/<p class="actions"><a class="btn" href="\/\?taxon=tilia-cordata">Show them on the map<\/a>\s*<a class="btn" href="https:\/\/en\.wikipedia\.org\/wiki\/Tilia_cordata" rel="noopener">Wikipedia<\/a><\/p>/);
+    // With nothing mapped there is no map button, and Wikipedia stands alone.
+    expect(page(taxon({ count: 0 }))).toMatch(/<p class="actions"><a class="btn" href="https:\/\/en\.wikipedia[^"]*" rel="noopener">Wikipedia<\/a><\/p>/);
+  });
+
   it('puts the photos in On campus, under its text and above its button', () => {
     const html = page(taxon(), {
       photos: [{ id: 'UVM-0493', url: 'https://uvm.edu/photos/493.webp' }],

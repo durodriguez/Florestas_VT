@@ -78,6 +78,8 @@ export class PlantMap {
   private readonly trailLayer: L.GeoJSON;
   private readonly campusLayer: L.GeoJSON;
   private readonly highlight: L.CircleMarker;
+  /** The same yellow ring, for a result the mouse is over in the list. */
+  private readonly hoverRing: L.CircleMarker;
   private readonly markers = new Map<string, L.CircleMarker>();
   private locationMarker: L.CircleMarker | null = null;
   private colorBy: ColorBy = 'type';
@@ -155,6 +157,22 @@ export class PlantMap {
       interactive: false,
     });
 
+    // Its own ring rather than the selection's, so pointing at a result
+    // never moves the ring off the tree that is actually selected. In a pane
+    // above the markers: a tree inside a collapsed cluster is ringed around the
+    // cluster's bubble, which would otherwise cover the ring.
+    this.map.createPane('hover-ring').style.zIndex = '650';
+    this.map.getPane('hover-ring')!.style.pointerEvents = 'none';
+    this.hoverRing = L.circleMarker([0, 0], {
+      pane: 'hover-ring',
+      radius: 16,
+      color: '#ffd100',
+      weight: 4,
+      opacity: 0,
+      fill: false,
+      interactive: false,
+    });
+
     this.campusLayer = campusAreas(dataset.campusAreas);
 
     // Overlays are checkboxes in the same control as the basemap radio buttons,
@@ -181,6 +199,7 @@ export class PlantMap {
     this.cluster.addTo(this.map);
     this.trailLayer.addTo(this.map);
     this.highlight.addTo(this.map);
+    this.hoverRing.addTo(this.map);
   }
 
   /**
@@ -307,6 +326,28 @@ export class PlantMap {
     } else {
       this.map.setView(latlng, zoom);
     }
+  }
+
+  /**
+   * Ring a plant without moving the map, for a result being pointed at in the
+   * list; null takes the ring away. A plant inside a collapsed cluster has no
+   * dot of its own on screen, so the ring goes round the cluster instead.
+   */
+  hover(plant: Plant | null): void {
+    if (!plant) {
+      this.hoverRing.setStyle({ opacity: 0 });
+      return;
+    }
+    const marker = this.markers.get(plant.id);
+    // The typings say Marker; circle markers work the same at run time.
+    const shown: L.Layer | null = marker && this.cluster.hasLayer(marker)
+      ? this.cluster.getVisibleParent(marker as unknown as L.Marker)
+      : null;
+    const inCluster = shown instanceof L.MarkerCluster;
+    this.hoverRing
+      .setLatLng(inCluster ? shown.getLatLng() : [plant.lat, plant.lng])
+      .setRadius(inCluster ? 25 : 16)
+      .setStyle({ opacity: 1 });
   }
 
   clearFocus(): void {

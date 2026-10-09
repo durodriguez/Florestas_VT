@@ -156,6 +156,8 @@ class App {
 
     const shown = this.results.slice(0, MAX_RESULTS_RENDERED);
     const pos = this.userPos;
+    // The list is about to be replaced, and the result being pointed at with it.
+    this.map.hover(null);
     $('#results').innerHTML = shown
       .map((p) =>
         renderResultItem(p, pos ? distanceMeters(pos.lat, pos.lng, p.lat, p.lng) : undefined),
@@ -436,6 +438,18 @@ class App {
       const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-plant]');
       if (btn) this.select(this.byId.get(btn.dataset.plant!) ?? null);
     });
+    // Pointing at a result rings its tree on the map, as selecting it does.
+    // A mouse only: a tap is a selection, and on a touch screen a hover ring
+    // would stay behind with nothing to take it away.
+    const hovered = (e: Event) =>
+      this.byId.get((e.target as HTMLElement).closest<HTMLElement>('[data-plant]')?.dataset.plant ?? '') ?? null;
+    $('#results').addEventListener('pointerover', (e) => {
+      if (e.pointerType === 'mouse') this.map.hover(hovered(e));
+    });
+    $('#results').addEventListener('pointerleave', () => this.map.hover(null));
+    // The same for keyboard users tabbing down the list.
+    $('#results').addEventListener('focusin', (e) => this.map.hover(hovered(e)));
+    $('#results').addEventListener('focusout', () => this.map.hover(null));
 
     $('#detail').addEventListener('click', (e) => {
       const el = (e.target as HTMLElement).closest<HTMLElement>('[data-action]');

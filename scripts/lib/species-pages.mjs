@@ -15,6 +15,8 @@
  * authored here; this is a second view of data the map already carries.
  */
 
+import { SEARCH_FORM } from './species-search.mjs';
+
 export const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -66,7 +68,7 @@ export const row = (label, value) =>
  * The page around a body. `depth` counts folders below /species/; a page
  * outside it (the i-Tree page) passes `root`, its relative path to the site.
  */
-export function shell({ title, description, base, body, depth = 0, root = null }) {
+export function shell({ title, description, base, body, depth = 0, root = null, search = false }) {
   // Relative, so the pages work under a project path (/Florestas_VT/) and at a
   // domain root alike, without the generator having to know which.
   const up = '../'.repeat(depth);
@@ -80,13 +82,13 @@ export function shell({ title, description, base, body, depth = 0, root = null }
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="stylesheet" href="${css}">
-</head>
+${search ? `<script src="${up}search.js" defer></script>\n` : ''}</head>
 <body>
 <header class="bar">
   <a class="bar-home" href="${esc(base)}"><img class="bar-mark" src="${mark}" alt="" width="30" height="30">UVM Trees</a>
   <a class="bar-link" href="${esc(base)}species/">All species</a>
 </header>
-${body}
+${search ? `<div class="search-wrap">${SEARCH_FORM}</div>\n` : ''}${body}
 </body>
 </html>
 `;
@@ -131,12 +133,19 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config }) {
   // there are and where, above the button that shows them on the map.
   const where = t.count > 0
     ? `<p>${t.count} mapped on campus${areas.length ? ` &mdash; ${areas.map(esc).join(', ')}` : ''}.</p>
-       ${gallery}
-       <p><a class="btn" href="${esc(base)}?taxon=${encodeURIComponent(t.id)}">Show them on the map</a></p>`
+       ${gallery}`
     // Most of taxa.csv is a species list running ahead of the survey, and
     // saying so is more use than an empty section.
     : `<p class="quiet">None mapped yet. The species list runs ahead of the
        survey, so this one may be on campus without having been recorded.</p>`;
+
+  // One row of buttons, as the map's record panel has: the map first, then
+  // Wikipedia beside it.
+  const buttons = [
+    t.count > 0 ? `<a class="btn" href="${esc(base)}?taxon=${encodeURIComponent(t.id)}">Show them on the map</a>` : '',
+    t.wikipedia ? `<a class="btn" href="${esc(t.wikipedia)}" rel="noopener">Wikipedia</a>` : '',
+  ].filter(Boolean);
+  const actions = buttons.length ? `<p class="actions">${buttons.join('\n    ')}</p>` : '';
 
   const body = `<main class="page">
   <h1>${esc(t.common)}</h1>
@@ -154,7 +163,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config }) {
   <h2>On campus</h2>
   ${where}
 
-  ${t.wikipedia ? `<p><a class="btn" href="${esc(t.wikipedia)}" rel="noopener">Wikipedia</a></p>` : ''}
+  ${actions}
   <p class="foot">Something look wrong? Email
     <a href="mailto:${esc(config.contactEmail)}?subject=${encodeURIComponent(`${config.siteName} species ${t.id}`)}">${esc(config.contactEmail)}</a>.</p>
 </main>`;
@@ -162,7 +171,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config }) {
   return shell({
     title: `${t.common} (${t.sci}) — ${config.siteName}`,
     description: t.description || `${t.common}, ${t.sci}, on the ${config.institution} campus.`,
-    base, body, depth: 1,
+    base, body, depth: 1, search: true,
   });
 }
 
@@ -187,7 +196,7 @@ export function renderSpeciesIndex(taxa, { base, config }) {
   return shell({
     title: `Species — ${config.siteName}`,
     description: `Every tree, shrub and vine in the ${config.siteName} species list.`,
-    base, body, depth: 0,
+    base, body, depth: 0, search: true,
   });
 }
 
@@ -242,8 +251,8 @@ h2 {
 .shots span { display: block; font-size: .76rem; color: var(--dim); margin-top: .25rem; }
 .shots a { color: inherit; }
 
-.facts { margin: 0; display: grid; gap: .45rem; }
-.fact { display: grid; grid-template-columns: 10rem 1fr; gap: .6rem; font-size: .88rem; }
+.facts { margin: 0; display: grid; gap: .3rem; }
+.fact { display: grid; grid-template-columns: 10rem 1fr; gap: .6rem; font-size: .88rem; line-height: 1.45; }
 .fact dt { color: var(--dim); }
 .fact dd { margin: 0; }
 
@@ -253,6 +262,29 @@ h2 {
   background: var(--sunk); border: 1px solid var(--border); border-radius: 8px;
 }
 .btn:hover { border-color: var(--green-light); }
+.actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+.actions .btn { margin: 0; }
+
+/* Species search, under the bar on every species page. Hidden until its
+   script runs, since without it the box would do nothing. */
+.search-wrap { max-width: 44rem; margin: 0 auto; padding: 1rem 1rem 0; }
+.search { position: relative; }
+.search input {
+  width: 100%; box-sizing: border-box; padding: .55rem .75rem; font: inherit; font-size: .95rem;
+  color: var(--ink); background: var(--sunk); border: 1px solid var(--border); border-radius: 8px;
+}
+.search input:focus { outline: 2px solid var(--green-light); outline-offset: 1px; }
+.hits {
+  position: absolute; z-index: 10; left: 0; right: 0; top: calc(100% + .25rem);
+  list-style: none; margin: 0; padding: .25rem 0; background: var(--bg);
+  border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 6px 18px rgb(0 0 0 / 14%);
+}
+.hits a { display: block; padding: .45rem .75rem; color: inherit; text-decoration: none; }
+.hits a:hover, .hits [aria-selected="true"] a { background: var(--sunk); }
+.hit-common { font-weight: 600; }
+.hit-sci { font-style: italic; color: var(--dim); font-size: .88rem; margin-left: .3rem; }
+.hit-none { padding: .45rem .75rem; color: var(--dim); font-size: .9rem; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 .index { list-style: none; padding: 0; margin: 1.2rem 0 0; }
 .index li {
@@ -268,7 +300,9 @@ h2 {
 .foot { margin-top: 2rem; font-size: .8rem; color: var(--dim); }
 
 @media (max-width: 30rem) {
-  .fact { grid-template-columns: 1fr; gap: 0; }
+  /* Stacked label over value, so each row is two lines: kept tight. */
+  .facts { gap: .3rem; }
+  .fact { grid-template-columns: 1fr; gap: 0; line-height: 1.3; }
   .fact dt { font-size: .78rem; }
   /* Two photos a row on a phone, where the 13rem minimum above would leave
      one, full width, and push "Show them on the map" screens down. */
