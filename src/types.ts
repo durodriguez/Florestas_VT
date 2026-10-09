@@ -16,6 +16,8 @@ export interface SiteConfig {
   map: {
     center: [number, number];
     zoom: number;
+    /** The starting zoom on a phone-width screen; `zoom` when absent. */
+    phoneZoom?: number;
     minZoom: number;
     maxZoom: number;
     bounds: [[number, number], [number, number]];
