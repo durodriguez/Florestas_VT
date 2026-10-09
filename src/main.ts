@@ -54,7 +54,8 @@ class App {
       onSelectCityTree: (tree) => this.selectCityTree(tree),
       onBasemapTrouble: (name) =>
         this.toast(`The ${name} basemap is not loading. Pick another from the layers control, bottom right.`),
-      onCampusAreasChange: (visible) => { $<HTMLInputElement>('#show-campus').checked = visible; },
+      // The map's own "Campus areas" box is all or nothing.
+      onCampusAreasChange: (visible) => this.setCampusAreas(visible ? this.allCampusAreas() : new Set()),
     });
 
     document.title = dataset.config.siteName;
@@ -196,6 +197,52 @@ class App {
    * two trees selected at once would leave the map ringing one and describing
    * the other.
    */
+  /** Every campus area's id, outline first, as campus-areas.geojson lists them. */
+  private allCampusAreas(): Set<string> {
+    return new Set(this.dataset.campusAreas.features.map((f) => f.properties.area_id));
+  }
+
+  /**
+   * The Campus boundaries section: one box per area, and an "All" box over
+   * them that is ticked when every area shows, empty when none does, and
+   * part-filled in between. A click shows everything, or, when everything
+   * already shows, hides it all.
+   */
+  private buildCampusToggles(): void {
+    const features = this.dataset.campusAreas.features;
+    $('#campus-area-toggles').innerHTML = features.map((f) => {
+      const p = f.properties;
+      const name = p.kind === 'boundary' ? 'Whole-campus outline' : p.name;
+      return `<label>
+        <input type="checkbox" data-area="${escapeHtml(p.area_id)}" checked>
+        <span class="area-swatch${p.kind === 'boundary' ? ' area-swatch--outline' : ''}" style="--swatch:${escapeHtml(p.color ?? '#154734')}" aria-hidden="true"></span>
+        <span class="facet-label">${escapeHtml(name)}</span>
+      </label>`;
+    }).join('');
+    $('#show-campus-note').hidden = !features.some((f) => f.properties.provisional);
+
+    $('#campus-area-toggles').addEventListener('change', () => {
+      const ids = new Set(
+        [...document.querySelectorAll<HTMLInputElement>('#campus-area-toggles input:checked')].map((i) => i.dataset.area!),
+      );
+      this.setCampusAreas(ids);
+    });
+    $<HTMLInputElement>('#show-campus').addEventListener('change', (e) => {
+      this.setCampusAreas((e.target as HTMLInputElement).checked ? this.allCampusAreas() : new Set());
+    });
+  }
+
+  /** Show these campus areas, and make every box in the section agree. */
+  private setCampusAreas(ids: Set<string>): void {
+    const boxes = document.querySelectorAll<HTMLInputElement>('#campus-area-toggles input');
+    for (const box of boxes) box.checked = ids.has(box.dataset.area!);
+    const all = $<HTMLInputElement>('#show-campus');
+    // Part-filled reads as unticked underneath, so a click on it shows all.
+    all.checked = ids.size === boxes.length;
+    all.indeterminate = ids.size > 0 && ids.size < boxes.length;
+    this.map.showCampusAreas(ids);
+  }
+
   private selectCityTree(tree: CityTree): void {
     this.select(null);
     const panel = $('#detail');
@@ -420,10 +467,7 @@ class App {
       this.setUrlParam('city', this.showCity ? '1' : null);
     });
 
-    $<HTMLInputElement>('#show-campus').addEventListener('change', (e) => {
-      this.map.toggleCampusAreas((e.target as HTMLInputElement).checked);
-    });
-    $('#show-campus-note').hidden = !this.dataset.campusAreas.features.some((f) => f.properties.provisional);
+    this.buildCampusToggles();
 
     $<HTMLSelectElement>('#color-by').addEventListener('change', (e) => {
       this.colorBy = (e.target as HTMLSelectElement).value as ColorBy;

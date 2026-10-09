@@ -89,6 +89,18 @@
              the filters narrow the UVM collection, and these add to the map
              things that are not part of it. -->
         <h2 class="panel-heading panel-layers">Layers</h2>
+        <details id="layer-campus">
+          <summary>Campus boundaries</summary>
+          <div class="facet">
+            <label>
+              <input type="checkbox" id="show-campus" checked>
+              <span class="facet-label">All campus boundaries</span>
+            </label>
+            <!-- One per area, filled in from campus-areas.geojson. -->
+            <div id="campus-area-toggles" class="facet-sub"></div>
+            <p id="show-campus-note" class="facet-note" hidden>Some boundaries are approximate.</p>
+          </div>
+        </details>
         <details id="layer-city">
           <summary>City trees</summary>
           <div class="facet">
@@ -101,16 +113,6 @@
               The city's trees inside campus, not part of the UVM collection.
               <span id="filter-city-count" class="facet-count-inline"></span>
             </p>
-          </div>
-        </details>
-        <details id="layer-campus">
-          <summary>Campus boundaries</summary>
-          <div class="facet">
-            <label>
-              <input type="checkbox" id="show-campus" checked>
-              <span class="facet-label">Show campus boundaries</span>
-            </label>
-            <p id="show-campus-note" class="facet-note" hidden>Some boundaries are approximate.</p>
           </div>
         </details>
       </form>

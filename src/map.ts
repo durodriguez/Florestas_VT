@@ -79,6 +79,8 @@ export class PlantMap {
   private cityShown = false;
   private readonly trailLayer: L.GeoJSON;
   private readonly campusLayer: L.GeoJSON;
+  /** True while campus areas are changed from code, not the layers control. */
+  private quietCampus = false;
   private readonly highlight: L.CircleMarker;
   /** The same yellow ring, for a result the mouse is over in the list. */
   private readonly hoverRing: L.CircleMarker;
@@ -191,9 +193,11 @@ export class PlantMap {
       )
       .addTo(this.map);
     // The panel has its own switch for the campus areas; tell it when this
-    // control is used instead, so the two never disagree.
+    // control is used instead, so the two never disagree. Leaflet fires these
+    // for any add or remove, not only a click in the control, so changes the
+    // panel itself makes (and the first add, below) are kept quiet.
     const campusChanged = (visible: boolean) => (e: L.LayersControlEvent) => {
-      if (e.layer === this.campusLayer) this.options.onCampusAreasChange?.(visible);
+      if (e.layer === this.campusLayer && !this.quietCampus) this.options.onCampusAreasChange?.(visible);
     };
     this.map.on('overlayadd', campusChanged(true));
     this.map.on('overlayremove', campusChanged(false));
@@ -204,7 +208,9 @@ export class PlantMap {
 
     this.buildMarkers(plants);
     // Added before the clusters so the polygons sit under the tree markers.
+    this.quietCampus = true;
     this.campusLayer.addTo(this.map);
+    this.quietCampus = false;
     this.cluster.addTo(this.map);
     this.trailLayer.addTo(this.map);
     this.highlight.addTo(this.map);
@@ -393,10 +399,41 @@ export class PlantMap {
     else this.trailLayer.remove();
   }
 
-  toggleCampusAreas(visible: boolean): void {
-    if (visible) this.campusLayer.addTo(this.map);
-    else this.campusLayer.remove();
+  /**
+   * Show exactly these campus areas, by area_id; the rest are hidden. With
+   * none left the whole layer comes off the map, so the layers control's
+   * "Campus areas" box reads unticked, as it should.
+   */
+  showCampusAreas(ids: ReadonlySet<string>): void {
+    this.quietCampus = true;
+    try {
+      this.applyCampusAreas(ids);
+    } finally {
+      this.quietCampus = false;
+    }
   }
+
+  private applyCampusAreas(ids: ReadonlySet<string>): void {
+    if (ids.size === 0) {
+      this.campusLayer.remove();
+      return;
+    }
+    // Adding the group puts every area back, so add it first, then take away
+    // the ones not wanted.
+    if (!this.map.hasLayer(this.campusLayer)) this.campusLayer.addTo(this.map);
+    this.campusLayer.eachLayer((layer) => {
+      const id = ((layer as L.Path & { feature?: GeoJSON.Feature }).feature?.properties as CampusAreaProps).area_id;
+      const want = ids.has(id);
+      if (want && !this.map.hasLayer(layer)) {
+        this.map.addLayer(layer);
+        // Back under the tree dots, which share its drawing surface.
+        (layer as L.Path).bringToBack();
+      } else if (!want && this.map.hasLayer(layer)) {
+        this.map.removeLayer(layer);
+      }
+    });
+  }
+
 }
 
 /**
