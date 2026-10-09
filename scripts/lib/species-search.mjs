@@ -53,7 +53,7 @@ export const SEARCH_FORM = `<button type="button" class="search-open" aria-label
   </button>
   <form class="search" role="search" hidden>
     <label class="visually-hidden" for="species-q">Search species</label>
-    <input id="species-q" type="search" placeholder="Search species" autocomplete="off"
+    <input id="species-q" type="search" placeholder="Search" autocomplete="off"
       spellcheck="false" role="combobox" aria-expanded="false" aria-controls="species-hits" aria-autocomplete="list">
     <button type="button" class="search-close" aria-label="Close search">&times;</button>
     <ul id="species-hits" class="hits" role="listbox" hidden></ul>
