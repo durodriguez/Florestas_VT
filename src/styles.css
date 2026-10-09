@@ -239,11 +239,13 @@ button, input, select { font: inherit; color: inherit; }
    different allegiance: blue where the UVM cluster is green, white where it
    is gold. See BTV_BLUE in map.ts. */
 /* The toggle's own note, so nobody has to guess what the blue pins are. */
-.facet--city { border-top: 1px solid var(--border); margin-top: .2rem; padding-top: .6rem; }
+/* The double line: the last filter's bottom border, a gap, then this. */
+.panel-layers { border-top: 1px solid var(--border); margin-top: .2rem; }
 .facet-note {
   margin: .35rem 0 0; font-size: .76rem; line-height: 1.4; color: var(--text-dim);
   display: flex; align-items: baseline; gap: .4rem;
 }
+.facet-note[hidden] { display: none; }
 .city-swatch {
   flex: none; width: .72rem; height: .72rem; border-radius: 50%;
   background: #1d4395; border: 1.5px solid #fff;

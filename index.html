@@ -84,20 +84,33 @@
             </label>
           </div>
         </details>
-        <!-- Its own block, below the filters rather than among them: the
-             filters narrow the UVM collection, and this adds something that
-             is not part of it. -->
-        <div class="facet facet--plain facet--city">
-          <label>
-            <input type="checkbox" id="filter-city">
-            <span class="facet-label">Show Burlington street trees</span>
-          </label>
-          <p id="filter-city-note" class="facet-note">
-            <span class="city-swatch" aria-hidden="true"></span>
-            The city's trees inside campus, not part of the UVM collection.
-            <span id="filter-city-count" class="facet-count-inline"></span>
-          </p>
-        </div>
+        <!-- Below the filters rather than among them, after the double line:
+             the filters narrow the UVM collection, and these add to the map
+             things that are not part of it. -->
+        <details id="layer-city" class="panel-layers">
+          <summary>City trees</summary>
+          <div class="facet">
+            <label>
+              <input type="checkbox" id="filter-city">
+              <span class="facet-label">Show Burlington street trees</span>
+            </label>
+            <p id="filter-city-note" class="facet-note">
+              <span class="city-swatch" aria-hidden="true"></span>
+              The city's trees inside campus, not part of the UVM collection.
+              <span id="filter-city-count" class="facet-count-inline"></span>
+            </p>
+          </div>
+        </details>
+        <details id="layer-campus">
+          <summary>Campus boundaries</summary>
+          <div class="facet">
+            <label>
+              <input type="checkbox" id="show-campus" checked>
+              <span class="facet-label">Show campus boundaries</span>
+            </label>
+            <p id="show-campus-note" class="facet-note" hidden>Some boundaries are approximate.</p>
+          </div>
+        </details>
       </form>
 
       <div id="panel-split" class="panel-split" role="separator" tabindex="0"
