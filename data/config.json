@@ -12,6 +12,7 @@
       -73.1956
     ],
     "zoom": 16,
+    "phoneZoom": 15,
     "minZoom": 12,
     "maxZoom": 22,
     "bounds": [

@@ -43,6 +43,15 @@ function basemaps(maxZoom: number): Record<string, L.TileLayer> {
 const CAMPUS_LABEL_MIN_ZOOM = 15;
 
 /**
+ * Where the map starts. A phone shows a sliver of what a desktop does at the
+ * same zoom, so it starts a step further out (config `phoneZoom`): the scale
+ * bar reads 1000 ft rather than 500. The width is the panel's own breakpoint.
+ */
+function startZoom(cfg: { zoom: number; phoneZoom?: number }): number {
+  return window.matchMedia('(max-width: 48rem)').matches ? cfg.phoneZoom ?? cfg.zoom : cfg.zoom;
+}
+
+/**
  * Burlington's flag: blue and white, against UVM's green and gold.
  *
  * The colours are the point, not decoration. These trees belong to the city,
@@ -110,7 +119,7 @@ export class PlantMap {
 
     this.map = L.map(container, {
       center: cfg.center,
-      zoom: cfg.zoom,
+      zoom: startZoom(cfg),
       minZoom: cfg.minZoom,
       maxZoom: cfg.maxZoom,
       maxBounds: L.latLngBounds(cfg.bounds).pad(0.5),
@@ -394,7 +403,7 @@ export class PlantMap {
 
   resetView(): void {
     const cfg = this.dataset.config.map;
-    this.map.setView(cfg.center, cfg.zoom);
+    this.map.setView(cfg.center, startZoom(cfg));
   }
 
   showUserLocation(lat: number, lng: number, accuracy: number): void {
