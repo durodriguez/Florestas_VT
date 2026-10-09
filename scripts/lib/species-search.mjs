@@ -42,13 +42,22 @@ export function rankSpecies(query, entries, normalize, limit) {
   return hits.slice(0, limit).map((h) => h.e);
 }
 
-/** The search form, the same on every species page and the index. */
-export const SEARCH_FORM = `<form class="search" role="search" hidden>
-  <label class="visually-hidden" for="species-q">Search species</label>
-  <input id="species-q" type="search" placeholder="Search species, e.g. sugar maple" autocomplete="off"
-    spellcheck="false" role="combobox" aria-expanded="false" aria-controls="species-hits" aria-autocomplete="list">
-  <ul id="species-hits" class="hits" role="listbox" hidden></ul>
-</form>`;
+/**
+ * The search, in the green bar of every species page and the index. On a wide
+ * screen the box sits in the bar after "All species"; on a narrow one the bar
+ * shows a magnifier instead, which swaps the bar's contents for the box and a
+ * close button. Both start hidden: without the script they would do nothing.
+ */
+export const SEARCH_FORM = `<button type="button" class="search-open" aria-label="Search species" aria-expanded="false" hidden>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+  </button>
+  <form class="search" role="search" hidden>
+    <label class="visually-hidden" for="species-q">Search species</label>
+    <input id="species-q" type="search" placeholder="Search species" autocomplete="off"
+      spellcheck="false" role="combobox" aria-expanded="false" aria-controls="species-hits" aria-autocomplete="list">
+    <button type="button" class="search-close" aria-label="Close search">&times;</button>
+    <ul id="species-hits" class="hits" role="listbox" hidden></ul>
+  </form>`;
 
 /** species/search.js. */
 export const SPECIES_SEARCH_JS = `// Written by npm run data from scripts/lib/species-search.mjs. Do not edit.
@@ -103,6 +112,22 @@ export const SPECIES_SEARCH_JS = `// Written by npm run data from scripts/lib/sp
     if (pick) location.href = pageOf(pick);
   });
   document.addEventListener('click', (e) => { if (!form.contains(e.target)) { list.hidden = true; input.setAttribute('aria-expanded', 'false'); } });
+
+  // The narrow-screen magnifier: the bar becomes the search, and the close
+  // button gives it back. On a wide screen neither button shows (species.css).
+  const bar = form.closest('.bar');
+  const open = bar && bar.querySelector('.search-open');
+  const setOpen = (on) => {
+    bar.classList.toggle('searching', on);
+    open.setAttribute('aria-expanded', String(on));
+    if (on) { load(); input.focus(); } else { input.value = ''; hits = []; active = -1; show(); open.focus(); }
+  };
+  if (open) {
+    open.addEventListener('click', () => setOpen(true));
+    form.querySelector('.search-close').addEventListener('click', () => setOpen(false));
+    input.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !input.value && bar.classList.contains('searching')) setOpen(false); });
+    open.hidden = false;
+  }
   form.hidden = false;
 })();
 `;

@@ -87,8 +87,9 @@ ${search ? `<script src="${up}search.js" defer></script>\n` : ''}</head>
 <header class="bar">
   <a class="bar-home" href="${esc(base)}"><img class="bar-mark" src="${mark}" alt="" width="30" height="30">UVM Trees</a>
   <a class="bar-link" href="${esc(base)}species/">All species</a>
+  ${search ? SEARCH_FORM : ''}
 </header>
-${search ? `<div class="search-wrap">${SEARCH_FORM}</div>\n` : ''}${body}
+${body}
 </body>
 </html>
 `;
@@ -265,25 +266,44 @@ h2 {
 .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
 .actions .btn { margin: 0; }
 
-/* Species search, under the bar on every species page. Hidden until its
-   script runs, since without it the box would do nothing. */
-.search-wrap { max-width: 44rem; margin: 0 auto; padding: 1rem 1rem 0; }
-.search { position: relative; }
+/* Species search, in the bar. Wide screens: a box after "All species", 28rem
+   wide, which fits about nine in ten species' names on one line. Narrow
+   screens: a magnifier that turns the bar into the box (search.js). */
+.search { position: relative; flex: 0 1 28rem; display: flex; align-items: center; gap: .5rem; }
+.search[hidden] { display: none; }
 .search input {
-  width: 100%; box-sizing: border-box; padding: .55rem .75rem; font: inherit; font-size: .95rem;
-  color: var(--ink); background: var(--sunk); border: 1px solid var(--border); border-radius: 8px;
+  flex: 1; min-width: 0; box-sizing: border-box; padding: .4rem .7rem; font: inherit; font-size: .9rem;
+  color: #fff; background: rgb(255 255 255 / 12%); border: 1px solid rgb(255 255 255 / 30%); border-radius: 8px;
 }
-.search input:focus { outline: 2px solid var(--green-light); outline-offset: 1px; }
+.search input::placeholder { color: rgb(255 255 255 / 70%); }
+.search input:focus { outline: 2px solid #fff; outline-offset: 1px; }
+/* The browser's own clear button is blue on green; hidden, with the close
+   button standing in for it on a narrow screen. */
+.search input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.search-open, .search-close {
+  display: none; place-items: center; flex: 0 0 auto; width: 2.3rem; height: 2.3rem; padding: 0;
+  border: 0; border-radius: 8px; color: #fff; cursor: pointer; font: inherit;
+}
+.search-open { background: rgb(255 255 255 / 12%); }
+.search-close { background: none; font-size: 1.6rem; line-height: 1; }
 .hits {
-  position: absolute; z-index: 10; left: 0; right: 0; top: calc(100% + .25rem);
+  position: absolute; z-index: 10; left: 0; right: 0; top: calc(100% + .35rem);
   list-style: none; margin: 0; padding: .25rem 0; background: var(--bg);
   border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 6px 18px rgb(0 0 0 / 14%);
 }
-.hits a { display: block; padding: .45rem .75rem; color: inherit; text-decoration: none; }
-.hits a:hover, .hits [aria-selected="true"] a { background: var(--sunk); }
+.bar .hits a { display: block; padding: .45rem .75rem; color: var(--ink); text-decoration: none; }
+.bar .hits a:hover, .hits [aria-selected="true"] a { background: var(--sunk); text-decoration: none; }
 .hit-common { font-weight: 600; }
 .hit-sci { font-style: italic; color: var(--dim); font-size: .88rem; margin-left: .3rem; }
 .hit-none { padding: .45rem .75rem; color: var(--dim); font-size: .9rem; }
+@media (max-width: 48rem) {
+  .bar .search { display: none; flex: 1; }
+  .search-open:not([hidden]) { display: grid; }
+  .bar.searching .bar-home, .bar.searching .bar-link, .bar.searching .search-open { display: none; }
+  .bar.searching .search:not([hidden]) { display: flex; }
+  .bar.searching .search-close { display: grid; }
+  .bar.searching .hits { right: 2.8rem; }
+}
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 .index { list-style: none; padding: 0; margin: 1.2rem 0 0; }
