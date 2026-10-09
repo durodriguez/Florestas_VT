@@ -94,6 +94,17 @@ describe('renderSpeciesPage', () => {
     expect(html).toContain('href="/?plant=UVM-0493"');
   });
 
+  it('puts the photos in On campus, under its text and above its button', () => {
+    const html = page(taxon(), {
+      photos: [{ id: 'UVM-0493', url: 'https://uvm.edu/photos/493.webp' }],
+    });
+    const at = (s: string) => html.indexOf(s);
+    expect(at('<h2>On campus</h2>')).toBeGreaterThan(at('<h2>Characteristics</h2>'));
+    expect(at('1 mapped on campus')).toBeGreaterThan(at('<h2>On campus</h2>'));
+    expect(at('class="shots"')).toBeGreaterThan(at('1 mapped on campus'));
+    expect(at('Show them on the map')).toBeGreaterThan(at('class="shots"'));
+  });
+
   it('keeps the base path so the pages work under a project URL', () => {
     const html = page(taxon(), { base: '/Florestas_VT/' });
     expect(html).toContain('href="/Florestas_VT/"');
