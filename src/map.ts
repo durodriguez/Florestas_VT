@@ -63,7 +63,8 @@ export interface PlantMapOptions {
   /** Called when the active basemap stops serving tiles. */
   onBasemapTrouble?: (layerName: string) => void;
   /** The campus areas were switched on or off from the map's own layers control. */
-  onCampusAreasChange?: (visible: boolean) => void;
+  /** The whole-campus outline was switched on or off from the map's own layers control. */
+  onOutlineChange?: (visible: boolean) => void;
 }
 
 export class PlantMap {
@@ -78,6 +79,12 @@ export class PlantMap {
   private readonly cityCluster: L.MarkerClusterGroup;
   private cityShown = false;
   private readonly trailLayer: L.GeoJSON;
+  /** The whole-campus outline: the one boundary the layers control switches. */
+  private readonly outlineLayer: L.GeoJSON;
+  /**
+   * The six campus areas. Never on the map as a group: each area is added or
+   * removed on its own, from the panel, so the group is only their container.
+   */
   private readonly campusLayer: L.GeoJSON;
   /** True while campus areas are changed from code, not the layers control. */
   private quietCampus = false;
@@ -177,27 +184,33 @@ export class PlantMap {
       interactive: false,
     });
 
-    this.campusLayer = campusAreas(dataset.campusAreas);
+    const outline = dataset.campusAreas.features.filter((f) => f.properties.kind === 'boundary');
+    this.outlineLayer = campusAreas({ ...dataset.campusAreas, features: outline });
+    this.campusLayer = campusAreas({
+      ...dataset.campusAreas,
+      features: dataset.campusAreas.features.filter((f) => f.properties.kind !== 'boundary'),
+    });
 
     // Overlays are checkboxes in the same control as the basemap radio buttons,
-    // so campus areas toggle on and off without disturbing the chosen basemap.
-    const provisional = dataset.campusAreas.features.some((f) => f.properties.provisional);
+    // so the outline toggles on and off without disturbing the chosen basemap.
+    // Only the outline: the campus areas are chosen one by one in the panel.
+    const provisional = outline.some((f) => f.properties.provisional);
     L.control
       .layers(
         layers,
         {
-          [`Campus areas${provisional ? ' (approximate)' : ''}`]: this.campusLayer,
+          [`Campus outline${provisional ? ' (approximate)' : ''}`]: this.outlineLayer,
           'Walking trails': this.trailLayer,
         },
         { position: 'bottomright', collapsed: true },
       )
       .addTo(this.map);
-    // The panel has its own switch for the campus areas; tell it when this
-    // control is used instead, so the two never disagree. Leaflet fires these
-    // for any add or remove, not only a click in the control, so changes the
-    // panel itself makes (and the first add, below) are kept quiet.
+    // The panel has its own switch for the outline; tell it when this control
+    // is used instead, so the two never disagree. Leaflet fires these for any
+    // add or remove, not only a click in the control, so changes the panel
+    // itself makes (and the first add, below) are kept quiet.
     const campusChanged = (visible: boolean) => (e: L.LayersControlEvent) => {
-      if (e.layer === this.campusLayer && !this.quietCampus) this.options.onCampusAreasChange?.(visible);
+      if (e.layer === this.outlineLayer && !this.quietCampus) this.options.onOutlineChange?.(visible);
     };
     this.map.on('overlayadd', campusChanged(true));
     this.map.on('overlayremove', campusChanged(false));
@@ -208,8 +221,9 @@ export class PlantMap {
 
     this.buildMarkers(plants);
     // Added before the clusters so the polygons sit under the tree markers.
+    // The outline alone, by default; the panel adds any campus areas.
     this.quietCampus = true;
-    this.campusLayer.addTo(this.map);
+    this.outlineLayer.addTo(this.map);
     this.quietCampus = false;
     this.cluster.addTo(this.map);
     this.trailLayer.addTo(this.map);
@@ -400,9 +414,8 @@ export class PlantMap {
   }
 
   /**
-   * Show exactly these campus areas, by area_id; the rest are hidden. With
-   * none left the whole layer comes off the map, so the layers control's
-   * "Campus areas" box reads unticked, as it should.
+   * Show exactly these campus areas, by area_id (the outline's included);
+   * the rest are hidden.
    */
   showCampusAreas(ids: ReadonlySet<string>): void {
     this.quietCampus = true;
@@ -414,16 +427,7 @@ export class PlantMap {
   }
 
   private applyCampusAreas(ids: ReadonlySet<string>): void {
-    if (ids.size === 0) {
-      this.campusLayer.remove();
-      return;
-    }
-    // Adding the group puts every area back, so add it first, then take away
-    // the ones not wanted.
-    if (!this.map.hasLayer(this.campusLayer)) this.campusLayer.addTo(this.map);
-    this.campusLayer.eachLayer((layer) => {
-      const id = ((layer as L.Path & { feature?: GeoJSON.Feature }).feature?.properties as CampusAreaProps).area_id;
-      const want = ids.has(id);
+    const place = (layer: L.Layer, want: boolean) => {
       if (want && !this.map.hasLayer(layer)) {
         this.map.addLayer(layer);
         // Back under the tree dots, which share its drawing surface.
@@ -431,8 +435,17 @@ export class PlantMap {
       } else if (!want && this.map.hasLayer(layer)) {
         this.map.removeLayer(layer);
       }
-    });
+    };
+    const idOf = (layer: L.Layer) =>
+      ((layer as L.Path & { feature?: GeoJSON.Feature }).feature?.properties as CampusAreaProps).area_id;
+    // The outline goes on and off as a group, since that is what the layers
+    // control watches; the areas one by one.
+    let outlineWanted = false;
+    this.outlineLayer.eachLayer((layer) => { outlineWanted ||= ids.has(idOf(layer)); });
+    place(this.outlineLayer, outlineWanted);
+    this.campusLayer.eachLayer((layer) => place(layer, ids.has(idOf(layer))));
   }
+
 
 }
 
