@@ -74,8 +74,9 @@ They are on the map behind **Show Burlington street trees**, off by default,
 folded under *City trees* in the panel's *Layers*, in Burlington's flag blue and
 white against UVM's green and gold. Above it, *Campus boundaries* shows or hides
 the whole-campus outline and each campus area one by one, or all together. The
-map opens with the outline alone; the map's own layers control switches only
-the outline (*Campus outline*). They are kept
+map opens with the outline alone, which carries every campus's name; an area
+switched on shows its own name, and never a second copy of it. The map's own
+layers control switches only the outline (*Campus outline*). They are kept
 structurally separate from the collection — their own file, their own `BTV-` ids,
 their own array in the payload — because they are the city's trees, not the
 university's. See [docs/CITY-TREES.md](docs/CITY-TREES.md).
