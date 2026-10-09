@@ -242,8 +242,8 @@ h2 {
 .shots span { display: block; font-size: .76rem; color: var(--dim); margin-top: .25rem; }
 .shots a { color: inherit; }
 
-.facts { margin: 0; display: grid; gap: .45rem; }
-.fact { display: grid; grid-template-columns: 10rem 1fr; gap: .6rem; font-size: .88rem; }
+.facts { margin: 0; display: grid; gap: .3rem; }
+.fact { display: grid; grid-template-columns: 10rem 1fr; gap: .6rem; font-size: .88rem; line-height: 1.45; }
 .fact dt { color: var(--dim); }
 .fact dd { margin: 0; }
 
@@ -268,7 +268,9 @@ h2 {
 .foot { margin-top: 2rem; font-size: .8rem; color: var(--dim); }
 
 @media (max-width: 30rem) {
-  .fact { grid-template-columns: 1fr; gap: 0; }
+  /* Stacked label over value, so each row is two lines: kept tight. */
+  .facts { gap: .3rem; }
+  .fact { grid-template-columns: 1fr; gap: 0; line-height: 1.3; }
   .fact dt { font-size: .78rem; }
   /* Two photos a row on a phone, where the 13rem minimum above would leave
      one, full width, and push "Show them on the map" screens down. */
