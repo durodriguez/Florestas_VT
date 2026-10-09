@@ -254,6 +254,13 @@ button, input, select { font: inherit; color: inherit; }
   display: flex; align-items: baseline; gap: .4rem;
 }
 .facet-note[hidden] { display: none; }
+/* The campus areas, one under another beneath "All campus boundaries". */
+.facet-sub { padding-left: 1.4rem; }
+.area-swatch {
+  flex: none; width: .72rem; height: .72rem; border-radius: 3px;
+  background: color-mix(in srgb, var(--swatch) 25%, transparent); border: 2px solid var(--swatch);
+}
+.area-swatch--outline { background: none; }
 .city-swatch {
   flex: none; width: .72rem; height: .72rem; border-radius: 50%;
   background: #1d4395; border: 1.5px solid #fff;
