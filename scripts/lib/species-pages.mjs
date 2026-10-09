@@ -270,5 +270,8 @@ h2 {
 @media (max-width: 30rem) {
   .fact { grid-template-columns: 1fr; gap: 0; }
   .fact dt { font-size: .78rem; }
+  /* Two photos a row on a phone, where the 13rem minimum above would leave
+     one, full width, and push "Show them on the map" screens down. */
+  .shots { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
 }
 `;
