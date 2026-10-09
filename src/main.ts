@@ -54,8 +54,15 @@ class App {
       onSelectCityTree: (tree) => this.selectCityTree(tree),
       onBasemapTrouble: (name) =>
         this.toast(`The ${name} basemap is not loading. Pick another from the layers control, bottom right.`),
-      // The map's own "Campus areas" box is all or nothing.
-      onCampusAreasChange: (visible) => this.setCampusAreas(visible ? this.allCampusAreas() : new Set()),
+      // The map's own "Campus outline" box is the outline's box here too.
+      onOutlineChange: (visible) => {
+        const ids = this.shownCampusAreas();
+        for (const id of this.outlineIds()) {
+          if (visible) ids.add(id);
+          else ids.delete(id);
+        }
+        this.setCampusAreas(ids);
+      },
     });
 
     document.title = dataset.config.siteName;
@@ -202,6 +209,19 @@ class App {
     return new Set(this.dataset.campusAreas.features.map((f) => f.properties.area_id));
   }
 
+  /** The whole-campus outline's id: what shows when the map opens. */
+  private outlineIds(): Set<string> {
+    return new Set(this.dataset.campusAreas.features
+      .filter((f) => f.properties.kind === 'boundary').map((f) => f.properties.area_id));
+  }
+
+  /** The areas whose boxes are ticked in the panel. */
+  private shownCampusAreas(): Set<string> {
+    return new Set(
+      [...document.querySelectorAll<HTMLInputElement>('#campus-area-toggles input:checked')].map((i) => i.dataset.area!),
+    );
+  }
+
   /**
    * The Campus boundaries section: one box per area, and an "All" box over
    * them that is ticked when every area shows, empty when none does, and
@@ -214,22 +234,19 @@ class App {
       const p = f.properties;
       const name = p.kind === 'boundary' ? 'Whole-campus outline' : p.name;
       return `<label>
-        <input type="checkbox" data-area="${escapeHtml(p.area_id)}" checked>
+        <input type="checkbox" data-area="${escapeHtml(p.area_id)}">
         <span class="area-swatch${p.kind === 'boundary' ? ' area-swatch--outline' : ''}" style="--swatch:${escapeHtml(p.color ?? '#154734')}" aria-hidden="true"></span>
         <span class="facet-label">${escapeHtml(name)}</span>
       </label>`;
     }).join('');
     $('#show-campus-note').hidden = !features.some((f) => f.properties.provisional);
 
-    $('#campus-area-toggles').addEventListener('change', () => {
-      const ids = new Set(
-        [...document.querySelectorAll<HTMLInputElement>('#campus-area-toggles input:checked')].map((i) => i.dataset.area!),
-      );
-      this.setCampusAreas(ids);
-    });
+    $('#campus-area-toggles').addEventListener('change', () => this.setCampusAreas(this.shownCampusAreas()));
     $<HTMLInputElement>('#show-campus').addEventListener('change', (e) => {
       this.setCampusAreas((e.target as HTMLInputElement).checked ? this.allCampusAreas() : new Set());
     });
+    // The outline alone to start: the areas are there to be asked for.
+    this.setCampusAreas(this.outlineIds());
   }
 
   /** Show these campus areas, and make every box in the section agree. */
