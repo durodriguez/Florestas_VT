@@ -344,9 +344,14 @@ time. So the map, the filters, the clustering and the colour-by modes see
 exactly one row per plant and know nothing about the history; only the detail
 panel reads the series, and only when there is more than one visit to show.
 
-Condition and status both come from the latest observation. Nothing caches them
-on `plants.csv`, so they cannot drift out of step with the survey that
-established them.
+Status comes from the latest observation. So does condition, with one
+exception: a visit that leaves condition blank (a photo-only visit, say) does
+not erase it. A standing tree keeps the last condition anyone recorded, and its
+row carries `condition_on`, the date of that visit, which the panel shows as
+"Good (Dec 2023)" and the CSV export as `condition_recorded_on`. A tree whose
+latest visit found it removed or not found carries nothing forward. Nothing
+caches either on `plants.csv`, so they cannot drift out of step with the
+surveys that established them.
 
 ### Multi-stemmed trees
 
