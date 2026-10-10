@@ -17,6 +17,7 @@ stale, which is how this file got untidy in the first place.
 | 19 | [The Redstone pine grove, mapped in the wrong places](#19-the-redstone-white-pine-grove-is-mapped-in-the-wrong-places-open-fieldwork) | **open** |
 | 20 | [LiDAR from the Spatial Analysis Laboratory](#20-lidar-from-the-spatial-analysis-laboratory-in-progress-crown-peaks-in-positions-7-october-2026) | **in progress** |
 | 21 | [A "Did you know…?" bubble on the map](#21-a-did-you-know-bubble-on-the-map-idea-8-october-2026) | *idea* |
+| 22 | [Updating the map without a programmer: upload and review](#22-updating-the-map-without-a-programmer-upload-and-review-open-10-october-2026) | **open** |
 | 1 | [Rename `memorial`, add `dedication_label`](#1-rename-memorial-add-dedication_label-done-11-september-2026) | done |
 | 2 | [Dedication in the survey app](#2-dedication-in-the-survey-app-done-12-september-2026) | done |
 | 3 | [`geolocation_notes`, right of `lng`](#3-geolocation_notes-right-of-lng-done-11-september-2026) | done |
@@ -855,6 +856,92 @@ illustrations, not claims to verify.)
   motion.
 - **Random, but not repetitive:** shuffle the facts and avoid showing the
   same one twice in a row.
+
+## 22. Updating the map without a programmer: upload and review [open, 10 October 2026]
+
+**Why.** The aim is for UVM to run the map, with Grounds or the Office of
+Sustainability keeping the inventory up to date. Today every update needs
+someone technical: a survey export is run through `npm run import`, its
+report read, the change committed and merged. Whoever takes it over will not
+have that, and should not need it.
+
+**What the people updating it would do,** after a day of surveying:
+
+1. Export from the survey app as now: the survey CSV and the photos zip.
+2. On the repository's website (GitHub or GitLab, below), open an `inbox/`
+   folder and upload both files.
+3. Within a few minutes a review appears with a summary in plain words, for
+   example: "2 new trees, 11 visits, 11 photos. UVM-2777's position moved
+   22 m: check this before publishing." If anything is wrong (an unknown
+   species, two different reports of the same visit) it says so in the same
+   plain terms and publishes nothing.
+4. They read it and click **Merge**. The map updates a few minutes later.
+
+The position tool's export ([POSITIONS.md](POSITIONS.md)) would take the same
+route.
+
+**What to build:**
+
+- The work itself as one script (say `npm run inbox`) that runs the importer
+  (`npm run import`, `npm run photos`, `npm run data`) on whatever is in
+  `inbox/`, writes the summary and clears the inbox. Kept apart from any one
+  host, so it does not matter yet which one UVM chooses.
+- A thin job on the host that runs it when files land in `inbox/` and opens a
+  review with the result: a GitHub Actions workflow and pull request, or a
+  GitLab CI pipeline and merge request.
+- The summary, written for a reader who is not a programmer: what is new,
+  what changed, and anything a person should look at (a position moved more
+  than a set distance, a condition getting worse, a tree marked removed or
+  not found). It is the importer's existing report, reworded.
+- On failure, a comment or issue that says what to fix, in the same plain
+  terms, and nothing merged.
+- A one-page guide in `docs/` with screenshots of the four steps.
+- Tested end to end on a real survey before anyone else relies on it.
+
+**What it keeps.** Every check the importer and the data build make today,
+the full history of every change, and a person approving each one before it
+is public. It costs nothing to run.
+
+**Still needs a person to judge.** The workflow can flag a tree that moved
+41 m; it cannot say whether that is right. Whoever reviews needs to know the
+campus, not the code.
+
+**Questions to settle first:**
+
+- **Who reviews and merges?** One or two named people in Grounds or
+  Sustainability, with an account on the host and about 15 minutes of
+  training.
+- **Where does the repository live?** It should move from a personal account
+  to one UVM owns, so that nothing depends on one person. UVM appears to use
+  its own **UVM GitLab** rather than GitHub (unconfirmed). GitLab has the same
+  pieces: upload in the browser, merge requests for review, and CI pipelines
+  to build. Ask ETS:
+  - Can a project live on UVM GitLab, under which group, and can Grounds or
+    Sustainability staff sign in with their UVM accounts?
+  - Does UVM GitLab have CI runners for projects to use?
+  - Does it offer GitLab Pages, or should the built site be copied to a UVM
+    web server instead?
+
+  Moving means rewriting the three jobs in `.github/workflows/` (checks,
+  link check, publish) as a `.gitlab-ci.yml`. The map, survey app and
+  position tool are plain web pages and do not depend on GitHub; `BASE_PATH`
+  already sets where the site is served from. The alternative is a GitHub
+  organization UVM owns, if ETS would rather.
+- **The web address.** ETS would point an address such as
+  `arboretum.uvm.edu` at the site, wherever it is hosted.
+- **A technical steward.** Some things stay outside the routine: a species not
+  yet in `taxa.csv`, a broken basemap, an i-Tree or LiDAR rerun. Plan for a
+  named person (GIS staff, the Spatial Analysis Lab, or a student position)
+  for a few hours a semester.
+- **Does Grounds work in ArcGIS?** If its staff already keep records in UVM's
+  ArcGIS, a nightly sync from there (`npm run import:arcgis` exists) might suit
+  them better. It would lose the survey app and the review step, though, and
+  an error in ArcGIS would reach the public map overnight. Ask before
+  deciding.
+
+**Later, not first:** the survey app sending results straight to the inbox,
+with no download and upload. That needs a small server holding a GitHub key,
+and so a security review by ETS.
 
 ## Finished
 
