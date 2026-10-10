@@ -54,6 +54,12 @@ class App {
       onSelectCityTree: (tree) => this.selectCityTree(tree),
       onBasemapTrouble: (name) =>
         this.toast(`The ${name} basemap is not loading. Pick another from the layers control, bottom right.`),
+      // On a phone the record is a sheet over the map; a tap on the map
+      // beside it puts it away, as the × does. On a desktop the record is a
+      // column of its own and stays until it is closed.
+      onMapClick: () => {
+        if (window.matchMedia('(max-width: 48rem)').matches && !$('#detail').hidden) this.select(null);
+      },
       // The map's own "Campus outline" box is the outline's box here too.
       onOutlineChange: (visible) => {
         const ids = this.shownCampusAreas();
