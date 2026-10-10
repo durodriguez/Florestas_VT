@@ -868,8 +868,8 @@ have that, and should not need it.
 **What the people updating it would do,** after a day of surveying:
 
 1. Export from the survey app as now: the survey CSV and the photos zip.
-2. On GitHub's website, open an `inbox/` folder and use **Add file → Upload
-   files** to drop both in.
+2. On the repository's website (GitHub or GitLab, below), open an `inbox/`
+   folder and upload both files.
 3. Within a few minutes a review appears with a summary in plain words, for
    example: "2 new trees, 11 visits, 11 photos. UVM-2777's position moved
    22 m: check this before publishing." If anything is wrong (an unknown
@@ -882,9 +882,13 @@ route.
 
 **What to build:**
 
-- A GitHub Actions workflow that runs when files land in `inbox/`. It runs the
-  importer (`npm run import`, `npm run photos`, `npm run data`), and opens a
-  pull request with the result and the summary. It clears the inbox afterwards.
+- The work itself as one script (say `npm run inbox`) that runs the importer
+  (`npm run import`, `npm run photos`, `npm run data`) on whatever is in
+  `inbox/`, writes the summary and clears the inbox. Kept apart from any one
+  host, so it does not matter yet which one UVM chooses.
+- A thin job on the host that runs it when files land in `inbox/` and opens a
+  review with the result: a GitHub Actions workflow and pull request, or a
+  GitLab CI pipeline and merge request.
 - The summary, written for a reader who is not a programmer: what is new,
   what changed, and anything a person should look at (a position moved more
   than a set distance, a condition getting worse, a tree marked removed or
@@ -905,14 +909,26 @@ campus, not the code.
 **Questions to settle first:**
 
 - **Who reviews and merges?** One or two named people in Grounds or
-  Sustainability, each with a free GitHub account and about 15 minutes of
+  Sustainability, with an account on the host and about 15 minutes of
   training.
 - **Where does the repository live?** It should move from a personal account
-  to a UVM-owned GitHub organization, so that nothing depends on one person.
-  Does UVM have one?
+  to one UVM owns, so that nothing depends on one person. UVM appears to use
+  its own **UVM GitLab** rather than GitHub (unconfirmed). GitLab has the same
+  pieces: upload in the browser, merge requests for review, and CI pipelines
+  to build. Ask ETS:
+  - Can a project live on UVM GitLab, under which group, and can Grounds or
+    Sustainability staff sign in with their UVM accounts?
+  - Does UVM GitLab have CI runners for projects to use?
+  - Does it offer GitLab Pages, or should the built site be copied to a UVM
+    web server instead?
+
+  Moving means rewriting the three jobs in `.github/workflows/` (checks,
+  link check, publish) as a `.gitlab-ci.yml`. The map, survey app and
+  position tool are plain web pages and do not depend on GitHub; `BASE_PATH`
+  already sets where the site is served from. The alternative is a GitHub
+  organization UVM owns, if ETS would rather.
 - **The web address.** ETS would point an address such as
-  `arboretum.uvm.edu` at the site. Do they allow that for a site hosted on
-  GitHub?
+  `arboretum.uvm.edu` at the site, wherever it is hosted.
 - **A technical steward.** Some things stay outside the routine: a species not
   yet in `taxa.csv`, a broken basemap, an i-Tree or LiDAR rerun. Plan for a
   named person (GIS staff, the Spatial Analysis Lab, or a student position)
