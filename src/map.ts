@@ -72,6 +72,8 @@ export interface PlantMapOptions {
   /** Called when the active basemap stops serving tiles. */
   onBasemapTrouble?: (layerName: string) => void;
   /** The campus areas were switched on or off from the map's own layers control. */
+  /** A tap on the map itself: not on a tree, a cluster or a control, and not a drag. */
+  onMapClick?: () => void;
   /** The whole-campus outline was switched on or off from the map's own layers control. */
   onOutlineChange?: (visible: boolean) => void;
 }
@@ -226,6 +228,15 @@ export class PlantMap {
     };
     this.map.on('overlayadd', campusChanged(true));
     this.map.on('overlayremove', campusChanged(false));
+
+    // Leaflet passes a tree's click on to the map as well, without saying it
+    // started on a tree, so look at what was actually under the finger: a
+    // dot, a cluster or a control is not the map.
+    this.map.on('click', (e) => {
+      const under = e.originalEvent.target as Element | null;
+      if (under?.closest('.leaflet-interactive, .leaflet-marker-icon, .leaflet-control')) return;
+      this.options.onMapClick?.();
+    });
 
     this.watchTiles(layers);
     this.map.on('zoomend', () => this.updateCampusLabels());
