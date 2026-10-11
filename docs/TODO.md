@@ -18,6 +18,8 @@ stale, which is how this file got untidy in the first place.
 | 20 | [LiDAR from the Spatial Analysis Laboratory](#20-lidar-from-the-spatial-analysis-laboratory-in-progress-crown-peaks-in-positions-7-october-2026) | **in progress** |
 | 21 | [A "Did you know…?" bubble on the map](#21-a-did-you-know-bubble-on-the-map-idea-8-october-2026) | *idea* |
 | 22 | [Updating the map without a programmer: upload and review](#22-updating-the-map-without-a-programmer-upload-and-review-open-10-october-2026) | **open** |
+| 23 | [Tree Campus Higher Education recognition](#23-tree-campus-higher-education-recognition-open-11-october-2026) | **open** |
+| 24 | [ArbNet arboretum accreditation](#24-arbnet-arboretum-accreditation-open-11-october-2026) | **open** |
 | 1 | [Rename `memorial`, add `dedication_label`](#1-rename-memorial-add-dedication_label-done-11-september-2026) | done |
 | 2 | [Dedication in the survey app](#2-dedication-in-the-survey-app-done-12-september-2026) | done |
 | 3 | [`geolocation_notes`, right of `lng`](#3-geolocation_notes-right-of-lng-done-11-september-2026) | done |
@@ -943,6 +945,83 @@ campus, not the code.
 with no download and upload. That needs a small server holding a GitHub key,
 and so a security review by ETS.
 
+## 23. Tree Campus Higher Education recognition [open, 11 October 2026]
+
+**Task.** Review what the Arbor Day Foundation asks for, and begin preparing
+the documents: <https://www.arborday.org/our-work/tree-campus-higher-education>.
+
+**First, find out where UVM stands.** UVM was recognized as a Tree Campus USA,
+the program's earlier name, in 2013 (UVM news, "Arbor Day Foundation honors
+UVM", and its 2014 AASHE STARS report, which says Middlebury was the first in
+Vermont). Recognition is renewed every year, so either someone at UVM still
+applies (most likely in Grounds or the Office of Sustainability) or it has
+lapsed. Ask before drafting anything: if it is current, this item becomes
+helping whoever applies, not starting over. The Foundation's network directory
+lists the campuses recognized now.
+
+**The five standards,** as the Foundation's page puts them on 11 October 2026:
+
+1. **A campus tree advisory committee,** with students, faculty, facilities
+   staff and the community.
+2. **A campus tree care plan:** policies for planting, maintaining and
+   removing trees. The Foundation offers a free template and a sample plan
+   from Virginia Tech.
+3. **Annual expenditures** on tree care: planting, maintenance, staff time,
+   volunteer time or education.
+4. **An Arbor Day observance,** or other tree celebration, each year.
+5. **A student service-learning project** about trees.
+
+Applications are yearly: meet the standards over the calendar year, apply in
+the fall or winter through the Foundation's online portal, recognition is
+announced in spring. Deadlines vary by state. No fee is mentioned.
+
+**What this project already has towards them:**
+
+- **The inventory and map** for the tree care plan: what is planted, where,
+  in what condition, and how that is kept up to date ([11](#11-updating-the-data-over-time-done-11-september-2026), [22](#22-updating-the-map-without-a-programmer-upload-and-review-open-10-october-2026)).
+- **Student surveying with the field app** as a service-learning project, and
+  the map as material for an Arbor Day event (a guided walk, the "Did you
+  know" facts of [21](#21-a-did-you-know-bubble-on-the-map-idea-8-october-2026)).
+- **i-Tree estimates** ([7](#7-ecosystem-services--the-i-tree-question-in-progress-city-trees-done-8-october-2026)) for describing the trees' benefits.
+
+The committee and the expenditure figures are for UVM to supply; this project
+cannot.
+
+## 24. ArbNet arboretum accreditation [open, 11 October 2026]
+
+**Task.** Review what ArbNet asks for, and begin preparing the documents:
+<https://arbnet.org/accreditation/>. ArbNet publishes a tool kit for
+university and college arboreta (`Tool-Kit-University-College-Arboretum`,
+November 2025, on arbnet.org).
+
+**First, check UVM's status.** Nothing found so far says UVM holds ArbNet
+accreditation; ArbNet's directory of accredited arboreta would say.
+
+**How it works,** from ArbNet's pages on 11 October 2026: four levels, each
+building on the last; a self-assessment, with no site visit; free; valid for
+five years, then renewed. Public access can be limited to scheduled events or
+appointments, and the collection must be documented, "preferably in a
+database".
+
+| Level | Labeled woody plants | Also needs |
+|---|---|---|
+| I | at least 25 species | an arboretum plan, a governing group, one or more employees or volunteers, some public access |
+| II | at least 100 kinds | paid staff, enhanced public education, a documented collections policy |
+| III | at least 500 taxa | a collections curator, substantial education, collaboration with other arboreta, tree science and conservation work |
+| IV | not specified | scientists publishing research, collections managed for conservation |
+
+**Where UVM might fit.** The map holds 112 kinds of woody plant, so Level II
+is within reach on numbers, but ArbNet counts **labeled** plants: kinds with a
+physical label on a tree. `npm run labels` prints QR labels; how many are on
+trees today is the number to find out. Level I would need an arboretum plan,
+a governing group and someone responsible, which overlap with Tree Campus
+standards 1 and 2 ([23](#23-tree-campus-higher-education-recognition-open-11-october-2026)).
+
+**What this project already has towards it:** the documented collection (the
+inventory itself, in a database of a kind), public access through the map and
+species pages, and printable labels. The plan, the governing group and the
+collections policy are for UVM to write; the inventory can supply their facts.
+
 ## Finished
 
 ## 1. Rename `memorial`, add `dedication_label` [done, 11 September 2026]
@@ -1326,7 +1405,7 @@ reduced this file did it faithfully.
 **Three columns are genuinely new**, and the case for each is weak to fair:
 
 - `Height` — **Small / Medium / Large**, not a measurement. DBH already says
-  size, and says it better. i-Tree ([#7](#7-ecosystem-services--the-i-tree-question-blocked-no-diameters))
+  size, and says it better. i-Tree ([#7](#7-ecosystem-services--the-i-tree-question-in-progress-city-trees-done-8-october-2026))
   needs a number, so this does not unblock it.
 - `Notes` — free text on **48 of 2,502 trees**. Real arborist observations:
   *recent construction*, *soil erosion*, *stump sprout*, *dead stem*,
