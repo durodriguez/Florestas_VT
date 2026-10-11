@@ -314,6 +314,7 @@ written new, from the sources named in each commit, and want the same check.
 
 - [ ] **Blue Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodthree'*, `hibiscus-syriacus-notwoodthree`): description + fun fact
 - [ ] **Bluecrop highbush blueberry** (*Vaccinium corymbosum 'Bluecrop'*, `vaccinium-corymbosum-bluecrop`): description + fun fact
+- [ ] **Chandler highbush blueberry** (*Vaccinium corymbosum 'Chandler'*, `vaccinium-corymbosum-chandler`): description + fun fact
 - [ ] **Duke highbush blueberry** (*Vaccinium corymbosum 'Duke'*, `vaccinium-corymbosum-duke`): description + fun fact
 - [ ] **Patriot highbush blueberry** (*Vaccinium corymbosum 'Patriot'*, `vaccinium-corymbosum-patriot`): description + fun fact
 - [ ] **Pink Flair Sargent cherry** (*Prunus sargentii 'JFS-KW58'*, `prunus-sargentii-jfs-kw58`): description + fun fact
