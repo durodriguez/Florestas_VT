@@ -12,6 +12,7 @@ import {
 } from './filters';
 import { distanceMeters } from './geo';
 import { initPanelSplit } from './panel-split';
+import { SHARE_BUTTON, renderShareMenu } from './share';
 import type { CityTree, ColorBy, Dataset, FilterState, Plant } from './types';
 
 const BASE = import.meta.env.BASE_URL;
@@ -198,6 +199,7 @@ class App {
     panel.hidden = false;
     panel.innerHTML =
       `<button type="button" class="detail-close" data-action="close-detail" aria-label="Close">&times;</button>` +
+      SHARE_BUTTON +
       renderDetail(plant, this.dataset, BASE);
     panel.scrollTop = 0;
     this.map.focus(plant);
@@ -535,13 +537,25 @@ class App {
         this.setTaxon(this.selected.taxon.id);
         this.map.fitTo(this.results);
       }
+      if (el.dataset.action === 'share') this.share(el);
       if (el.dataset.action === 'copy-link') {
+        this.closeShareMenu(false);
         navigator.clipboard
           ?.writeText(el.dataset.url!)
           .then(() => this.toast('Link copied to clipboard.'))
           .catch(() => this.toast('Could not copy — select the address bar instead.'));
       }
     });
+    // A share page opens in its own tab; the menu has done its job.
+    $('#detail').addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a[data-share]')) this.closeShareMenu(false);
+    });
+    // The menu closes on a click anywhere else (Escape: the keydown handler below).
+    document.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement;
+      if (!t.closest('.share-menu, .detail-share')) this.closeShareMenu(false);
+    });
+
 
     $('#zoom-results').addEventListener('click', () => this.revealResults(null));
 
@@ -568,7 +582,9 @@ class App {
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.selected) this.select(null);
+      // Escape closes the share menu first, and the record on a second press.
+      if (e.key === 'Escape' && document.querySelector('.share-menu')) this.closeShareMenu(true);
+      else if (e.key === 'Escape' && this.selected) this.select(null);
       if (e.key === '/' && document.activeElement?.tagName !== 'INPUT') {
         e.preventDefault();
         $<HTMLInputElement>('#search').focus();
@@ -590,6 +606,43 @@ class App {
       () => this.toast('Location unavailable. Check your browser permissions.'),
       { enableHighAccuracy: true, timeout: 10000 },
     );
+  }
+
+  /** The address that opens this record, and a line to go with it. */
+  private shareOf(plant: Plant): { url: string; title: string; text: string } {
+    const url = `${location.origin}${location.pathname}?plant=${encodeURIComponent(plant.id)}`;
+    const title = `${plant.taxon.common} (${plant.id})`;
+    return { url, title, text: `${plant.taxon.common}, ${plant.taxon.sci}, on the ${this.dataset.config.siteName} map` };
+  }
+
+  /**
+   * On a phone, the phone's own share screen, which lists the apps its owner
+   * actually uses. Elsewhere, or where there is none, our menu.
+   */
+  private share(button: HTMLElement): void {
+    if (!this.selected) return;
+    const { url, title, text } = this.shareOf(this.selected);
+    if (navigator.share && window.matchMedia('(max-width: 48rem)').matches) {
+      // Cancelling the share screen rejects; that is not an error.
+      navigator.share({ title, text, url }).catch(() => {});
+      return;
+    }
+    if (document.querySelector('.share-menu')) {
+      this.closeShareMenu(true);
+      return;
+    }
+    button.insertAdjacentHTML('afterend', renderShareMenu(url, text));
+    button.setAttribute('aria-expanded', 'true');
+    document.querySelector<HTMLElement>('.share-menu [role="menuitem"]')?.focus();
+  }
+
+  private closeShareMenu(refocus: boolean): void {
+    const menu = document.querySelector('.share-menu');
+    if (!menu) return;
+    menu.remove();
+    const button = document.querySelector<HTMLElement>('.detail-share');
+    button?.setAttribute('aria-expanded', 'false');
+    if (refocus) button?.focus();
   }
 
   private toast(message: string): void {

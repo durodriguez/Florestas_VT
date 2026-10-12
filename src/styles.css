@@ -345,6 +345,33 @@ button, input, select { font: inherit; color: inherit; }
   box-shadow: var(--shadow);
 }
 
+/* Share, just left of the close button and drawn to match it. */
+.detail-share {
+  position: absolute; top: .5rem; right: 2.9rem;
+  width: 2rem; height: 2rem; padding: 0; border: 0; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--bg-sunk); color: var(--uvm-green-light); cursor: pointer;
+}
+@media (prefers-color-scheme: dark) { .detail-share { color: #7fc9a3; } }
+/* The two buttons sit beside the accession line; keep it clear of them. */
+.detail-eyebrow { padding-right: 4.6rem; }
+.share-menu {
+  position: absolute; top: 2.9rem; right: .5rem; z-index: 5;
+  min-width: 12.5rem; margin: 0; padding: .35rem 0; list-style: none;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 16%);
+}
+.share-menu li + li { border-top: 1px solid var(--border); }
+.share-menu [role="menuitem"] {
+  display: flex; align-items: center; gap: .7rem; width: 100%; box-sizing: border-box;
+  padding: .55rem .9rem; border: 0; background: none; cursor: pointer;
+  font: inherit; font-size: .9rem; color: var(--text); text-align: left; text-decoration: none;
+}
+.share-menu [role="menuitem"]:hover, .share-menu [role="menuitem"]:focus-visible { background: var(--bg-sunk); }
+.share-ico {
+  flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+  display: grid; place-items: center;
+}
 .detail-close {
   position: absolute; top: .5rem; right: .5rem;
   width: 2rem; height: 2rem; border: 0; border-radius: 50%;
