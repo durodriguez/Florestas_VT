@@ -125,7 +125,6 @@ function aboutTaxon(t: Taxon, countOnCampus = true): string {
 
 export function renderDetail(plant: Plant, dataset: Dataset, base: string): string {
   const t = plant.taxon;
-  const shareUrl = `${location.origin}${location.pathname}?plant=${encodeURIComponent(plant.id)}`;
   const age = plant.plantedYear ? `${new Date().getFullYear() - plant.plantedYear} years` : null;
 
   const taken = photoTaken(plant.surveyedOn);
@@ -202,7 +201,6 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
       <a class="btn" href="${base}species/${encodeURIComponent(t.id)}/">More about this species</a>
       <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=${plant.lat},${plant.lng}"
          target="_blank" rel="noopener">Directions</a>
-      <button type="button" class="btn" data-action="copy-link" data-url="${escapeHtml(shareUrl)}">Copy link</button>
       ${t.wikipedia ? `<a class="btn" href="${escapeHtml(t.wikipedia)}" target="_blank" rel="noopener">Wikipedia</a>` : ''}
     </div>
     <p class="detail-foot">Something look wrong? Email
