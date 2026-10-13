@@ -167,6 +167,11 @@ describe('renderSpeciesIndex', () => {
     expect(html).toContain('data-sci="Tilia cordata"');
   });
 
+  it('leaves out the "All species" link, which would lead back to itself', () => {
+    expect(renderSpeciesIndex([taxon()], { base: '/', config })).not.toContain('All species');
+    expect(page()).toContain('>All species</a>');
+  });
+
   it('lists only species mapped on campus, and counts them', () => {
     const html = renderSpeciesIndex(
       [taxon(), taxon({ id: 'acer-nigrum', common: 'Black maple', sci: 'Acer nigrum', count: 0 })],

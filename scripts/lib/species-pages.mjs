@@ -69,7 +69,7 @@ export const row = (label, value) =>
  * The page around a body. `depth` counts folders below /species/; a page
  * outside it (the i-Tree page) passes `root`, its relative path to the site.
  */
-export function shell({ title, description, base, body, depth = 0, root = null, search = false }) {
+export function shell({ title, description, base, body, depth = 0, root = null, search = false, allSpecies = true }) {
   // Relative, so the pages work under a project path (/Florestas_VT/) and at a
   // domain root alike, without the generator having to know which.
   const up = '../'.repeat(depth);
@@ -89,7 +89,7 @@ ${search ? `<script src="${up}search.js?v=${assetVersion()}" defer></script>\n` 
 <body>
 <header class="bar">
   <a class="bar-home" href="${esc(base)}"><img class="bar-mark" src="${mark}" alt="" width="30" height="30">UVM Trees</a>
-  <a class="bar-link" href="${esc(base)}species/">All species</a>
+  ${allSpecies ? `<a class="bar-link" href="${esc(base)}species/">All species</a>` : ''}
   ${search ? SEARCH_FORM : ''}
 </header>
 ${body}
@@ -250,7 +250,8 @@ export function renderSpeciesIndex(taxa, { base, config }) {
   return shell({
     title: `Species — ${config.siteName}`,
     description: `Every species of tree, shrub and vine mapped so far on the ${config.siteName} map.`,
-    base, body, depth: 0, search: true,
+    // The index is the page "All species" leads to, so it leaves the link out.
+    base, body, depth: 0, search: true, allSpecies: false,
   });
 }
 
@@ -271,9 +272,11 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
   padding: .7rem 1rem; background: var(--green); border-bottom: 3px solid var(--gold);
 }
 .bar a { color: #fff; text-decoration: none; }
-.bar-home { font-weight: 700; display: flex; align-items: center; gap: .55rem; }
+/* The margin sits on the home link, so the rest of the bar keeps right
+   whether or not "All species" is there. */
+.bar-home { font-weight: 700; display: flex; align-items: center; gap: .55rem; margin-right: auto; }
 .bar-mark { flex: 0 0 auto; display: block; }
-.bar-link { margin-left: auto; font-size: .9rem; opacity: .9; }
+.bar-link { font-size: .9rem; opacity: .9; }
 .bar a:hover { text-decoration: underline; }
 
 .page { max-width: 44rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
