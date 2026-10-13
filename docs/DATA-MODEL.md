@@ -52,7 +52,7 @@ reading, and the earlier ones are still there to be asked about.
 | `origin` | | `vermont-native`, `vermont-invasive`, `introduced` |
 | `flower_color` | | free text, one word: `pink`, `yellow-green` — a hyphenated pair here is one blended colour, not a sequence |
 | `flower_months` | | month numbers, e.g. `4,5` for April–May |
-| `fruit_color`, `fruit_months` | | same shape as the flower columns |
+| `fruit_color`, `fruit_months` | | same shape as the flower columns; blank for ferns, which bear spores, not fruit |
 | `fall_color` | | `orange`, `yellow`, `none` — a hyphenated pair is a **progression**, earliest first: `orange-red` turns orange, then red |
 | `mature_height_ft` | | number |
 | `mature_spread_ft` | | number — typical crown width at maturity |
