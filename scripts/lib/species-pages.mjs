@@ -223,21 +223,25 @@ const SORT_JS = `(() => {
   group.hidden = false;
 })();`;
 
-/** Every species, for someone browsing rather than searching. */
+/**
+ * The species mapped on campus, for someone browsing rather than searching.
+ * Every taxon in the list still gets its own page; a species joins this index
+ * the first time a plant of it is mapped, with no other step.
+ */
 export function renderSpeciesIndex(taxa, { base, config }) {
-  const sorted = [...taxa].sort((a, b) => a.common.localeCompare(b.common));
+  const mapped = taxa.filter((t) => t.count > 0);
+  const sorted = [...mapped].sort((a, b) => a.common.localeCompare(b.common));
   const items = sorted.map((t) => `<li data-sci="${esc(t.sci)}">
     <a href="${encodeURIComponent(t.id)}/">
       <span class="idx-common">${esc(t.common)}</span>
       <span class="idx-sci">${esc(t.sci)}</span>
     </a>
-    <span class="idx-count">${t.count ? `${t.count} mapped` : ''}</span>
+    <span class="idx-count">${t.count} mapped</span>
   </li>`).join('');
 
-  const mapped = taxa.filter((t) => t.count > 0).length;
   const body = `<main class="page">
   <h1>Species</h1>
-  <p class="label">${taxa.length} in the list &middot; ${mapped} mapped on campus so far</p>
+  <p class="label">${mapped.length} species mapped on campus so far</p>
   ${SORT_CONTROL}
   <ul class="index">${items}</ul>
 </main>
@@ -245,7 +249,7 @@ export function renderSpeciesIndex(taxa, { base, config }) {
 
   return shell({
     title: `Species — ${config.siteName}`,
-    description: `Every tree, shrub and vine in the ${config.siteName} species list.`,
+    description: `Every species of tree, shrub and vine mapped so far on the ${config.siteName} map.`,
     base, body, depth: 0, search: true,
   });
 }
