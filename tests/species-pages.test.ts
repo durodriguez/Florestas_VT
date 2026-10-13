@@ -159,6 +159,14 @@ describe('renderSpeciesIndex', () => {
     expect(html).toContain('href="tilia-cordata/"');
   });
 
+  it('offers sorting by scientific name, hidden until its script runs', () => {
+    const html = renderSpeciesIndex([taxon()], { base: '/', config });
+    expect(html).toMatch(/<div class="sort"[^>]*hidden>/);
+    expect(html).toContain('data-sort="scientific"');
+    // Each row carries the name the script sorts it by.
+    expect(html).toContain('data-sci="Tilia cordata"');
+  });
+
   it('counts the list and how much of it is mapped', () => {
     const html = renderSpeciesIndex([taxon(), taxon({ id: 'x', count: 0 })], { base: '/', config });
     expect(html).toContain('2 in the list');
