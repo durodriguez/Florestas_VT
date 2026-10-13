@@ -313,6 +313,7 @@ Species added after the review above. Their description and fun fact were
 written new, from the sources named in each commit, and want the same check.
 
 - [ ] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
+- [ ] **Ann magnolia** (*Magnolia 'Ann'*, `magnolia-ann`): description + fun fact
 - [ ] **Blue Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodthree'*, `hibiscus-syriacus-notwoodthree`): description + fun fact
 - [ ] **Bluecrop highbush blueberry** (*Vaccinium corymbosum 'Bluecrop'*, `vaccinium-corymbosum-bluecrop`): description + fun fact
 - [ ] **Brilliance autumn fern** (*Dryopteris erythrosora 'Brilliance'*, `dryopteris-erythrosora-brilliance`): description + fun fact
