@@ -36,7 +36,7 @@ describe('renderSpeciesPage', () => {
   it('reaches the stylesheet from one directory down', () => {
     // The page is written to species/<id>/index.html and the stylesheet to
     // species/species.css, so exactly one ../ stands between them. Two 404s.
-    expect(page()).toContain('href="../species.css"');
+    expect(page()).toMatch(/href="\.\.\/species\.css\?v=[0-9a-f]{10}"/);
   });
 
   it('carries the species through to the title and the headings', () => {
@@ -96,13 +96,13 @@ describe('renderSpeciesPage', () => {
 
   it('has the species search in the bar, with a magnifier for narrow screens', () => {
     const html = page();
-    expect(html).toContain('<script src="../search.js" defer></script>');
+    expect(html).toMatch(/<script src="\.\.\/search\.js\?v=[0-9a-f]{10}" defer><\/script>/);
     const bar = html.slice(html.indexOf('<header class="bar">'), html.indexOf('</header>'));
     expect(bar).toContain('id="species-q"');
     expect(bar.indexOf('id="species-q"')).toBeGreaterThan(bar.indexOf('All species'));
     expect(bar).toContain('class="search-open" aria-label="Search species"');
     expect(bar).toContain('class="search-close" aria-label="Close search"');
-    expect(renderSpeciesIndex([taxon()], { base: '/', config })).toContain('<script src="search.js" defer></script>');
+    expect(renderSpeciesIndex([taxon()], { base: '/', config })).toMatch(/<script src="search\.js\?v=[0-9a-f]{10}" defer><\/script>/);
   });
 
   it('puts Wikipedia in one row beside Show them on the map', () => {
@@ -128,7 +128,7 @@ describe('renderSpeciesPage', () => {
     expect(html).toContain('href="/Florestas_VT/"');
     expect(html).toContain('href="/Florestas_VT/species/"');
     // Still relative: the stylesheet sits beside the page either way.
-    expect(html).toContain('href="../species.css"');
+    expect(html).toMatch(/href="\.\.\/species\.css\?v=[0-9a-f]{10}"/);
   });
 
   it('escapes text that came from the CSV', () => {
@@ -146,7 +146,7 @@ describe('renderSpeciesPage', () => {
 describe('renderSpeciesIndex', () => {
   it('reaches the stylesheet in its own directory', () => {
     // The index IS species/index.html, so no ../ at all.
-    expect(renderSpeciesIndex([taxon()], { base: '/', config })).toContain('href="species.css"');
+    expect(renderSpeciesIndex([taxon()], { base: '/', config })).toMatch(/href="species\.css\?v=[0-9a-f]{10}"/);
   });
 
   it('sorts by common name and links to each page', () => {

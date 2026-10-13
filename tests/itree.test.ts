@@ -147,7 +147,7 @@ describe('renderItreePage', () => {
   });
 
   it('sits one folder below the site, beside the species pages', () => {
-    expect(html).toContain('href="../species/species.css"');
+    expect(html).toMatch(/href="\.\.\/species\/species\.css\?v=[0-9a-f]{10}"/);
     expect(html).toContain('src="../uvm-mark.png"');
     expect(html).toContain('Powered by <a href="https://www.itreetools.org/">i-Tree</a>');
   });

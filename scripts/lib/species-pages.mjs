@@ -15,7 +15,8 @@
  * authored here; this is a second view of data the map already carries.
  */
 
-import { SEARCH_FORM } from './species-search.mjs';
+import { createHash } from 'node:crypto';
+import { SEARCH_FORM, SPECIES_SEARCH_JS } from './species-search.mjs';
 
 export const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) =>
@@ -72,7 +73,9 @@ export function shell({ title, description, base, body, depth = 0, root = null, 
   // Relative, so the pages work under a project path (/Florestas_VT/) and at a
   // domain root alike, without the generator having to know which.
   const up = '../'.repeat(depth);
-  const css = root === null ? `${up}species.css` : `${root}species/species.css`;
+  // ?v= changes whenever the file does, so a browser holding an older copy
+  // fetches the new one rather than styling a new page with old rules.
+  const css = `${root === null ? `${up}species.css` : `${root}species/species.css`}?v=${assetVersion()}`;
   const mark = root === null ? `${up}../uvm-mark.png` : `${root}uvm-mark.png`;
   return `<!doctype html>
 <html lang="en">
@@ -82,7 +85,7 @@ export function shell({ title, description, base, body, depth = 0, root = null, 
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="stylesheet" href="${css}">
-${search ? `<script src="${up}search.js" defer></script>\n` : ''}</head>
+${search ? `<script src="${up}search.js?v=${assetVersion()}" defer></script>\n` : ''}</head>
 <body>
 <header class="bar">
   <a class="bar-home" href="${esc(base)}"><img class="bar-mark" src="${mark}" alt="" width="30" height="30">UVM Trees</a>
@@ -390,3 +393,9 @@ h2 {
   .shots { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
 }
 `;
+
+/** A short fingerprint of the stylesheet and search script, for their URLs. */
+let version;
+function assetVersion() {
+  return version ??= createHash('sha256').update(SPECIES_CSS).update(SPECIES_SEARCH_JS).digest('hex').slice(0, 10);
+}
