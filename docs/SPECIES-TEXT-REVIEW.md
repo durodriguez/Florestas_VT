@@ -346,7 +346,9 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Karl Foerster feather reed grass** (*Calamagrostis x acutiflora 'Karl Foerster'*, `calamagrostis-x-acutiflora-karl-foerster`): description + fun fact
 - [ ] **Lacebark pine** (*Pinus bungeana*, `pinus-bungeana`): description + fun fact
 - [ ] **Lady fern** (*Athyrium filix-femina*, `athyrium-filix-femina`): description + fun fact
+- [ ] **Lilac** (*Syringa sp.*, `syringa-sp`): description + fun fact
 - [ ] **Limber pine** (*Pinus flexilis*, `pinus-flexilis`): description + fun fact
+- [ ] **Miss Kim Korean lilac** (*Syringa pubescens subsp. patula 'Miss Kim'*, `syringa-pubescens-patula-miss-kim`): description + fun fact
 - [ ] **New York fern** (*Amauropelta noveboracensis*, `amauropelta-noveboracensis`): description + fun fact
 - [ ] **Northern maidenhair fern** (*Adiantum pedatum*, `adiantum-pedatum`): description + fun fact
 - [ ] **Ohio buckeye** (*Aesculus glabra*, `aesculus-glabra`): description + fun fact
