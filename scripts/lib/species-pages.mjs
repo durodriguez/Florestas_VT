@@ -176,10 +176,54 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config }) {
   });
 }
 
+/**
+ * The index is written sorted by common name. The buttons re-sort it in the
+ * page by scientific name and back, and lead each row with the name it is
+ * sorted by. Hidden until the script shows them, as they do nothing without
+ * it; the choice rides in the address (?sort=scientific) so it can be shared
+ * and survives the back button.
+ */
+const SORT_CONTROL = `<div class="sort" role="group" aria-label="Sort species" hidden>
+    <span class="sort-label">Sort by</span>
+    <button type="button" data-sort="common" aria-pressed="true">Common name</button>
+    <button type="button" data-sort="scientific" aria-pressed="false">Scientific name</button>
+  </div>`;
+
+const SORT_JS = `(() => {
+  const group = document.querySelector('.sort');
+  const list = document.querySelector('.index');
+  if (!group || !list) return;
+  const rows = [...list.children];
+  const byCommon = rows.slice();
+  const bySci = rows.slice().sort((a, b) => a.dataset.sci.localeCompare(b.dataset.sci));
+  const apply = (mode, push) => {
+    const sci = mode === 'scientific';
+    list.replaceChildren(...(sci ? bySci : byCommon));
+    list.classList.toggle('by-sci', sci);
+    // Lead each row with the name it is sorted by.
+    for (const a of list.querySelectorAll('a')) {
+      const first = a.querySelector(sci ? '.idx-sci' : '.idx-common');
+      if (a.firstElementChild !== first) a.prepend(first, ' ');
+    }
+    for (const b of group.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.sort === mode));
+    if (push) {
+      const url = new URL(location.href);
+      if (sci) url.searchParams.set('sort', 'scientific'); else url.searchParams.delete('sort');
+      history.replaceState(null, '', url);
+    }
+  };
+  group.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-sort]');
+    if (b) apply(b.dataset.sort, true);
+  });
+  if (new URLSearchParams(location.search).get('sort') === 'scientific') apply('scientific', false);
+  group.hidden = false;
+})();`;
+
 /** Every species, for someone browsing rather than searching. */
 export function renderSpeciesIndex(taxa, { base, config }) {
   const sorted = [...taxa].sort((a, b) => a.common.localeCompare(b.common));
-  const items = sorted.map((t) => `<li>
+  const items = sorted.map((t) => `<li data-sci="${esc(t.sci)}">
     <a href="${encodeURIComponent(t.id)}/">
       <span class="idx-common">${esc(t.common)}</span>
       <span class="idx-sci">${esc(t.sci)}</span>
@@ -191,8 +235,10 @@ export function renderSpeciesIndex(taxa, { base, config }) {
   const body = `<main class="page">
   <h1>Species</h1>
   <p class="label">${taxa.length} in the list &middot; ${mapped} mapped on campus so far</p>
+  ${SORT_CONTROL}
   <ul class="index">${items}</ul>
-</main>`;
+</main>
+<script>${SORT_JS}</script>`;
 
   return shell({
     title: `Species — ${config.siteName}`,
@@ -316,6 +362,21 @@ h2 {
 .idx-common { font-weight: 600; }
 .idx-sci { font-style: italic; color: var(--dim); font-size: .88rem; margin-left: .4rem; }
 .idx-count { margin-left: auto; font-size: .78rem; color: var(--dim); white-space: nowrap; }
+/* Sorted by scientific name, the row leads with it: the eye runs down the
+   names in the order they are sorted. */
+.index.by-sci .idx-sci { font-size: 1rem; font-weight: 600; color: var(--ink); margin-left: 0; }
+.index.by-sci .idx-common { font-weight: 400; color: var(--dim); font-size: .88rem; margin-left: .4rem; }
+.index.by-sci a:hover .idx-common { text-decoration: none; }
+.index.by-sci a:hover .idx-sci { text-decoration: underline; }
+
+.sort:not([hidden]) { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; margin: 1rem 0 0; }
+.sort-label { font-size: .82rem; color: var(--dim); margin-right: .2rem; }
+.sort button {
+  font: inherit; font-size: .82rem; padding: .25rem .75rem; cursor: pointer;
+  border: 1px solid var(--border); border-radius: 999px; background: var(--bg); color: var(--ink);
+}
+.sort button:hover { border-color: var(--green-light); }
+.sort button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: #fff; }
 
 .foot { margin-top: 2rem; font-size: .8rem; color: var(--dim); }
 
