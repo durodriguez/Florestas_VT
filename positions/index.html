@@ -13,7 +13,7 @@
     <img class="bar-mark" src="/uvm-mark.png" alt="" width="28" height="28">
     <h1>Tree positions</h1>
     <span id="save-state" class="save-state"></span>
-    <button type="button" id="export" class="bar-btn" disabled>Export moves</button>
+    <button type="button" id="export" class="bar-btn" disabled>Export changes</button>
   </header>
 
   <main class="layout">
@@ -25,6 +25,12 @@
       </label>
       <p id="find-msg" class="hint find-msg"></p>
 
+      <div class="tools" role="group" aria-label="Select the trees in an area">
+        <span class="label">Select an area</span>
+        <button type="button" id="area-rect" class="ghost-btn tool-btn" aria-pressed="false" title="Drag a rectangle on the map; Shift adds to the selection">▭ Rectangle</button>
+        <button type="button" id="area-circle" class="ghost-btn tool-btn" aria-pressed="false" title="Drag out a circle from its centre; Shift adds to the selection">◯ Circle</button>
+      </div>
+
       <section id="selected" class="card" hidden></section>
 
       <details class="help">
@@ -32,11 +38,15 @@
         <ul>
           <li><strong>Drag any dot</strong> onto the crown it belongs to. No need to select it first.</li>
           <li>With a tree selected, the <strong>arrow keys</strong> nudge it 0.2 m (1 m with Shift).</li>
-          <li><strong>Ctrl+Z</strong> (⌘Z) undoes the last move. <strong>Esc</strong> deselects.</li>
+          <li><strong>Shift+click</strong> adds a tree to the selection, or takes it out.
+            <strong>Rectangle</strong> or <strong>Circle</strong>, then drag on the map, selects every tree inside (hold Shift to add to the selection).</li>
+          <li><strong>Mark as not there</strong>, or the <strong>Delete</strong> key, for trees with nothing on the imagery where the record puts them. They turn dark with a dashed red ring and can be restored until you export.</li>
+          <li><strong>Ctrl+Z</strong> (⌘Z) undoes the last change. <strong>Esc</strong> deselects.</li>
           <li>Moved trees turn gold, with a line back to where the record had them.</li>
-          <li>Every move is kept in this browser as you go. When you are done,
-            <strong>Export moves</strong> and send the file — <code>npm run positions</code>
-            applies it. A move is not a survey visit, and the public map will not show it as one.</li>
+          <li>Every change is kept in this browser as you go. When you are done,
+            <strong>Export changes</strong> and send the file — <code>npm run positions</code>
+            applies it. A move is not a survey visit, and the public map will not show it as one;
+            a tree marked not there gets a <em>not found</em> record and leaves the map, its history kept.</li>
         </ul>
       </details>
 
@@ -112,7 +122,13 @@
       <p id="moves-note" class="hint" hidden></p>
       <ol id="moves" class="moves"></ol>
       <p id="moves-empty" class="hint">No moves yet.</p>
-      <button type="button" id="clear" class="danger-btn" disabled>Clear all moves</button>
+
+      <div class="moves-head">
+        <span class="label">Not there <span id="del-count" class="count">0</span></span>
+      </div>
+      <ol id="deletions" class="moves"></ol>
+      <p id="deletions-empty" class="hint">No trees marked as not there.</p>
+      <button type="button" id="clear" class="danger-btn" disabled>Clear all changes</button>
     </aside>
 
     <div id="map" class="map" aria-label="Map of campus trees on satellite imagery"></div>

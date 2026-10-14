@@ -22,6 +22,31 @@ with its tag number, or `#` and its accession if it has none.
 - Moved trees turn **gold**, with a dashed line back to where the record had
   them. **Reset** on any move puts that tree back.
 
+## Marking trees as not there
+
+Some records have no tree: nothing on the imagery, the LiDAR or the ground
+where the record puts one. The tool can mark those, one at a time or by the
+dozen.
+
+- **Pick trees.** A click picks one; **Shift+click** adds a tree to the
+  selection or takes it out.
+- **Pick by area.** **Rectangle** or **Circle** under the search box, then drag
+  on the map: every standing tree inside is picked. A circle is dragged out
+  from its centre. Hold **Shift** while dragging to add to what is already
+  picked. One area per press of the button; **Esc** cancels.
+- **Mark as not there** in the panel, or the **Delete** key, marks what is
+  picked. More than one asks first, since an area can catch more than was
+  meant. A tree with a pending move loses it: there is nothing to move.
+- Marked trees turn **dark, with a dashed red ring**, and are listed under
+  **Not there**, each with **Restore**. They cannot be dragged until restored.
+  **Ctrl+Z** undoes a marking, a whole area's at once.
+
+Marking is not erasing. Applied, each marked tree gets a `not-found`
+observation in `observations.csv`, dated the day it was marked: the tree leaves
+the public map and the counts, and keeps its record and history, the same as a
+field survey that went looking and found nothing. A tree already off the map
+when the file is applied is left as it is, with a warning.
+
 The **campus boundary** is drawn over the imagery — the outer edge in gold, the
 lines between campuses in white, with their names — and switched off from the
 layers button at the top right. It is outline only and never takes a click, so
@@ -148,7 +173,9 @@ it for many trees.
 
 ## Getting the moves onto the map
 
-1. **Export moves** downloads `positions-<date>.csv`.
+1. **Export changes** downloads `positions-<date>.csv`: the moves, and the
+   trees marked as not there (its `action` column says which). A file from
+   before that column existed is read as all moves.
 2. Apply it:
 
    ```bash
@@ -163,12 +190,13 @@ it for many trees.
 
 ## What a correction is, and is not
 
-**It is not a survey visit.** Nobody stood at the tree, so nothing is written
-to `observations.csv`: the public map's *Last surveyed* date and survey history
+**A move is not a survey visit.** Nobody stood at the tree, so a move writes
+nothing to `observations.csv`: the public map's *Last surveyed* date and survey history
 are exactly what they were. What changes in `plants.csv` is `lat`, `lng`,
 `geolocation_notes` — set to *Position corrected on imagery, &lt;date&gt;*, a
 column that is never sent to the public map — and `collection_id` if the tree
-has crossed into another campus.
+has crossed into another campus. (A tree [marked as not
+there](#marking-trees-as-not-there) is the one case that adds an observation.)
 
 **An old export cannot undo newer work.** Each move carries where the tree was
 when it was picked up. If the record has moved more than 0.5 m since — another

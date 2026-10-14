@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import Papa from 'papaparse';
 import {
-  applyMove, movedMeters, movesToCsv, reconcile, today, MOVE_COLUMNS,
+  applyMove, idsInBox, idsInCircle, movedMeters, movesToCsv, reconcile, today, MOVE_COLUMNS,
   type Moves,
 } from '../src/positions/moves';
 // @ts-expect-error — plain .mjs, no type declarations
-import { applyPositions, STALE_M } from '../scripts/lib/positions.mjs';
+import { applyPositions, currentStatus, STALE_M } from '../scripts/lib/positions.mjs';
 
 /** About a metre of latitude. */
 const M = 1 / 111_320;
@@ -67,7 +67,25 @@ describe('movesToCsv', () => {
     );
     const { data, meta } = Papa.parse<Record<string, string>>(csv, { header: true, skipEmptyLines: true });
     expect(meta.fields).toEqual(MOVE_COLUMNS);
-    expect(data[0]).toMatchObject({ plant_id: 'UVM-3326', tag: '3326', from_lat: '44.472600', moved_m: '10.0', moved_on: '2026-10-06' });
+    expect(data[0]).toMatchObject({ plant_id: 'UVM-3326', tag: '3326', from_lat: '44.472600', moved_m: '10.0', moved_on: '2026-10-06', action: 'move' });
+  });
+
+  it('writes a tree marked not there as a delete at the position on record', () => {
+    const csv = movesToCsv([], () => ({ tag: '', species: 'Betula nigra' }), [{ id: 'UVM-4010', at: A, on: '2026-10-14' }]);
+    const { data } = Papa.parse<Record<string, string>>(csv, { header: true, skipEmptyLines: true });
+    expect(data[0]).toMatchObject({ plant_id: 'UVM-4010', from_lat: '44.472600', lat: '44.472600', moved_m: '0.0', moved_on: '2026-10-14', action: 'delete' });
+  });
+});
+
+describe('selecting by area', () => {
+  const pts: Array<[string, [number, number]]> = [['in', north(5)], ['edge', north(10)], ['out', north(20)]];
+  it('picks the points inside a box, whichever corner the drag began at', () => {
+    expect(idsInBox(pts, north(12), A)).toEqual(['in', 'edge']);
+    expect(idsInBox(pts, A, north(12))).toEqual(['in', 'edge']);
+  });
+  it('picks the points within a circle', () => {
+    expect(idsInCircle(pts, A, 11)).toEqual(['in', 'edge']);
+    expect(idsInCircle(pts, A, 4)).toEqual([]);
   });
 });
 
@@ -111,6 +129,34 @@ describe('applyPositions', () => {
     const r = applyPositions([plant], [move({ lat: north(233)[0].toFixed(6) })], { bounds });
     expect(r.updates).toHaveLength(1);
     expect(r.issues).toEqual([{ level: 'warning', message: expect.stringMatching(/moves 233 m/) }]);
+  });
+
+  it('turns a delete into a removal, and moves nothing', () => {
+    const r = applyPositions([plant], [move({ action: 'delete', lat: A[0].toFixed(6), moved_on: '2026-10-14' })], { bounds });
+    expect(r.issues).toEqual([]);
+    expect(r.updates).toEqual([]);
+    expect(r.removals).toEqual([{ plant_id: 'UVM-3326', on: '2026-10-14' }]);
+  });
+
+  it('leaves a tree already off the map alone', () => {
+    const statusOf = currentStatus([
+      { plant_id: 'UVM-3326', surveyed_on: '2023-10-22', status: 'active' },
+      { plant_id: 'UVM-3326', surveyed_on: '2026-10-01', status: 'not-found' },
+    ]);
+    const r = applyPositions([plant], [move({ action: 'delete' })], { bounds, statusOf });
+    expect(r.removals).toEqual([]);
+    expect(r.issues[0]).toMatchObject({ level: 'warning', message: expect.stringMatching(/already off the map \(not-found\)/) });
+  });
+
+  it('refuses an action it does not know', () => {
+    const r = applyPositions([plant], [move({ action: 'teleport' })], { bounds });
+    expect(r.issues[0]!.message).toMatch(/unknown action "teleport"/);
+  });
+
+  it('reads an older file without the action column as all moves', () => {
+    const r = applyPositions([plant], [move()], { bounds });
+    expect(r.updates).toHaveLength(1);
+    expect(r.removals).toEqual([]);
   });
 
   it('skips a move too small to be one', () => {

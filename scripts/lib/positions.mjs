@@ -6,6 +6,10 @@
 // to observations.csv, so "Last surveyed" and the survey history on the public
 // map are exactly what they were.
 //
+// A deletion (action `delete`) is different: it says there is no tree where
+// the record puts one, so it becomes a `not-found` observation. That takes the
+// tree off the map and keeps its history; nothing is erased from plants.csv.
+//
 // Pure: takes rows and moves, returns what would change and what is wrong.
 // The script around it does the reading, the reporting and the writing.
 
@@ -27,17 +31,35 @@ export function metres(lat1, lng1, lat2, lng2) {
 
 const num = (v) => (v === undefined || String(v).trim() === '' ? NaN : Number(v));
 
+/** Each plant's status from its latest observation; `active` when it has none. */
+export function currentStatus(observationRows) {
+  const latest = new Map();
+  for (const o of observationRows) {
+    const id = String(o.plant_id ?? '').trim();
+    const on = String(o.surveyed_on ?? '').trim();
+    const prev = latest.get(id);
+    if (!prev || on >= prev.on) latest.set(id, { on, status: String(o.status ?? '').trim() || 'active' });
+  }
+  return (id) => latest.get(id)?.status ?? 'active';
+}
+
 /**
  * @param {object[]} plantRows   data/plants.csv as objects
  * @param {object[]} moveRows    the file /positions/ exports
  * @param {object}   opts
  * @param {[[number,number],[number,number]]} opts.bounds  config.map.bounds
  * @param {object}   [opts.areas] campus-areas.geojson, to re-file a tree that crosses a boundary
- * @returns {{ updates: {plant_id: string, changes: object, metres: number}[], issues: {level: string, message: string}[] }}
+ * @param {(id: string) => string} [opts.statusOf] a plant's current status (currentStatus)
+ * @returns {{
+ *   updates: {plant_id: string, changes: object, metres: number}[],
+ *   removals: {plant_id: string, on: string}[],
+ *   issues: {level: string, message: string}[]
+ * }}
  */
-export function applyPositions(plantRows, moveRows, { bounds, areas } = {}) {
+export function applyPositions(plantRows, moveRows, { bounds, areas, statusOf = () => 'active' } = {}) {
   const byId = new Map(plantRows.map((p) => [String(p.plant_id ?? '').trim(), p]));
   const updates = [];
+  const removals = [];
   const issues = [];
   const seen = new Set();
   const err = (message) => issues.push({ level: 'error', message });
@@ -51,6 +73,15 @@ export function applyPositions(plantRows, moveRows, { bounds, areas } = {}) {
 
     const plant = byId.get(id);
     if (!plant) { err(`${id} is not in plants.csv`); continue; }
+
+    const action = String(m.action ?? '').trim() || 'move';
+    if (action === 'delete') {
+      const status = statusOf(id);
+      if (status !== 'active') { warn(`${id} is already off the map (${status}) — left as it is`); continue; }
+      removals.push({ plant_id: id, on: String(m.moved_on ?? '').trim() });
+      continue;
+    }
+    if (action !== 'move') { err(`${id}: unknown action "${action}"`); continue; }
 
     const [fromLat, fromLng, lat, lng] = [m.from_lat, m.from_lng, m.lat, m.lng].map(num);
     if ([fromLat, fromLng, lat, lng].some(Number.isNaN)) { err(`${id}: a coordinate is missing or not a number`); continue; }
@@ -88,5 +119,5 @@ export function applyPositions(plantRows, moveRows, { bounds, areas } = {}) {
     }
     updates.push({ plant_id: id, changes, metres: moved });
   }
-  return { updates, issues };
+  return { updates, removals, issues };
 }

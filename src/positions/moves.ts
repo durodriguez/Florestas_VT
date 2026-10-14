@@ -22,6 +22,21 @@ export interface Move {
 
 export type Moves = Record<string, Move>;
 
+/**
+ * A tree marked as not there: nothing on the imagery where the record puts
+ * it. Applied as a `not-found` observation, which takes it off the map and
+ * keeps its history; the record itself is never erased.
+ */
+export interface Deletion {
+  id: string;
+  /** Where the record had the tree when it was marked. */
+  at: [number, number];
+  /** Local date it was marked, YYYY-MM-DD. */
+  on: string;
+}
+
+export type Deletions = Record<string, Deletion>;
+
 /** Under this, a drag is a slip of the mouse rather than a correction. */
 export const MIN_MOVE_M = 0.1;
 
@@ -80,23 +95,57 @@ export function reconcile(
   return { moves: out, applied, stale, missing };
 }
 
-export const MOVE_COLUMNS = ['plant_id', 'tag', 'species', 'from_lat', 'from_lng', 'lat', 'lng', 'moved_m', 'moved_on'];
+/** `action` is `move` or `delete`; a file without the column is all moves. */
+export const MOVE_COLUMNS = ['plant_id', 'tag', 'species', 'from_lat', 'from_lng', 'lat', 'lng', 'moved_m', 'moved_on', 'action'];
 
 const cell = (v: string): string => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
 
-/** The file `npm run positions` reads. Stale moves are left out. */
+/**
+ * The file `npm run positions` reads. Stale moves are left out by the caller.
+ * A deletion is a row whose position is where the record has the tree and
+ * whose action is `delete`.
+ */
 export function movesToCsv(
   moves: Move[],
   describe: (id: string) => { tag: string; species: string },
+  deletions: Deletion[] = [],
 ): string {
-  const rows = moves.map((m) => {
-    const { tag, species } = describe(m.id);
+  const row = (id: string, from: [number, number], to: [number, number], metres: number, on: string, action: string) => {
+    const { tag, species } = describe(id);
     return [
-      m.id, tag, species,
-      m.from[0].toFixed(6), m.from[1].toFixed(6),
-      m.to[0].toFixed(6), m.to[1].toFixed(6),
-      movedMeters(m).toFixed(1), m.on,
+      id, tag, species,
+      from[0].toFixed(6), from[1].toFixed(6),
+      to[0].toFixed(6), to[1].toFixed(6),
+      metres.toFixed(1), on, action,
     ].map(cell).join(',');
-  });
+  };
+  const rows = [
+    ...moves.map((m) => row(m.id, m.from, m.to, movedMeters(m), m.on, 'move')),
+    ...deletions.map((d) => row(d.id, d.at, d.at, 0, d.on, 'delete')),
+  ];
   return [MOVE_COLUMNS.join(','), ...rows].join('\n') + '\n';
+}
+
+/** Ids of the points inside a lat/lng box. */
+export function idsInBox(
+  points: Iterable<[string, [number, number]]>,
+  a: [number, number],
+  b: [number, number],
+): string[] {
+  const [s, n] = [Math.min(a[0], b[0]), Math.max(a[0], b[0])];
+  const [w, e] = [Math.min(a[1], b[1]), Math.max(a[1], b[1])];
+  const out: string[] = [];
+  for (const [id, [lat, lng]] of points) if (lat >= s && lat <= n && lng >= w && lng <= e) out.push(id);
+  return out;
+}
+
+/** Ids of the points within `radius` metres of `center`. */
+export function idsInCircle(
+  points: Iterable<[string, [number, number]]>,
+  center: [number, number],
+  radius: number,
+): string[] {
+  const out: string[] = [];
+  for (const [id, [lat, lng]] of points) if (distanceMeters(center[0], center[1], lat, lng) <= radius) out.push(id);
+  return out;
 }
