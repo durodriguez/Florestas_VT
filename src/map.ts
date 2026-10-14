@@ -249,7 +249,7 @@ export class PlantMap {
     this.outlineLayer.addTo(this.map);
     this.quietCampus = false;
     this.cluster.addTo(this.map);
-    this.trailLayer.addTo(this.map);
+    // Walking trails start hidden; the layers control (bottom right) shows them.
     this.highlight.addTo(this.map);
     this.hoverRing.addTo(this.map);
   }
