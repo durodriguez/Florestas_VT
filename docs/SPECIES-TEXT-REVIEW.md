@@ -317,6 +317,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Ann magnolia** (*Magnolia 'Ann'*, `magnolia-ann`): description + fun fact
 - [ ] **Atlantic white cedar** (*Chamaecyparis thyoides*, `chamaecyparis-thyoides`): description + fun fact
 - [ ] **Black maple** (*Acer nigrum*, `acer-nigrum`): description + fun fact
+- [ ] **Bloodgood Japanese maple** (*Acer palmatum 'Bloodgood'*, `acer-palmatum-bloodgood`): description + fun fact
 - [ ] **Blue Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodthree'*, `hibiscus-syriacus-notwoodthree`): description + fun fact
 - [ ] **Bluecrop highbush blueberry** (*Vaccinium corymbosum 'Bluecrop'*, `vaccinium-corymbosum-bluecrop`): description + fun fact
 - [ ] **Bosnian pine** (*Pinus heldreichii*, `pinus-heldreichii`): description + fun fact
