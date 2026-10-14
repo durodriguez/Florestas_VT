@@ -121,6 +121,8 @@ button, input, select { font: inherit; color: inherit; }
   body.panel-collapsed .layout { grid-template-columns: 1.6rem 1fr; }
   body.panel-collapsed .panel > :not(.panel-expand) { display: none; }
   body.panel-collapsed .panel-expand { display: grid; margin: .75rem 0 0 .25rem; }
+  /* With a record open, the zoom, layers and credits move out from under it. */
+  body.has-detail .leaflet-right { right: min(24rem, 100%); }
 }
 
 /* The species chosen by "Show all": said out loud, because the search box no
@@ -230,7 +232,10 @@ button, input, select { font: inherit; color: inherit; }
 
 .map-wrap { position: relative; min-width: 0; }
 .panel-scrim { display: none; }
-#map { position: absolute; inset: 0; background: var(--bg-sunk); }
+/* isolation keeps Leaflet's own layers (its controls sit at z-index 1000)
+   inside the map, so the drawer, the record and the scrim all cover them
+   rather than the scale and credits showing through. */
+#map { position: absolute; inset: 0; background: var(--bg-sunk); isolation: isolate; }
 
 .map-controls {
   position: absolute; top: .75rem; left: .75rem; z-index: 500;
