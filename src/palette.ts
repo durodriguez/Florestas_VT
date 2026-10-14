@@ -1,17 +1,16 @@
 import type { ColorBy, Dataset, Plant } from './types';
 
-// Seven hues that stay apart from each other in both themes. The two tree
-// greens are deliberately close: they are the same kind of thing, and a reader
-// scanning the map should see "trees, two sorts" rather than two unrelated
-// categories.
+// Seven colors chosen by the project lead (October 2026). The two tree greens
+// used to be close on purpose, "trees, two sorts", but were too hard to tell
+// apart on the map: now a light green and a dark one.
 const TYPE_COLORS: Record<string, string> = {
-  'deciduous-tree': '#2f7a4d',
-  'evergreen-tree': '#1c5b52',
-  shrub: '#8a9a2b',
-  perennial: '#b5651d',
-  annual: '#c2185b',
-  vine: '#6b5b95',
-  grass: '#7a8b3a',
+  'deciduous-tree': '#4ea72e',
+  'evergreen-tree': '#12501a',
+  shrub: '#666633',
+  perennial: '#cc5316',
+  annual: '#860000',
+  vine: '#653cfa',
+  grass: '#b8b400',
 };
 
 const ORIGIN_COLORS: Record<string, string> = {
