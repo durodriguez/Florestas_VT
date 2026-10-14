@@ -155,8 +155,9 @@ function startDrag(id: string, e: L.LeafletMouseEvent): void {
   // in the search box would keep the arrow keys and Ctrl+Z for itself.
   (document.activeElement as HTMLElement | null)?.blur();
   dragEndedAt = Date.now();
-  // Shift+click adds a tree to the picked set, or takes it out.
-  if (e.originalEvent.shiftKey) return togglePick(id);
+  // Shift+click or Ctrl+click (⌘ on a Mac) adds a tree to the picked set,
+  // or takes it out.
+  if (adding(e.originalEvent)) return togglePick(id);
   select(id, false);
   // A tree marked not there stays put (restore it first to move it), but the
   // press is still the dot's: the map must not pan under it either.
@@ -188,13 +189,29 @@ document.addEventListener('mouseup', () => {
 // ---------------------------------------------------------------- area select
 
 // Rectangle or circle: drag on the map and every standing tree inside is
-// picked; with Shift held, added to what is already picked. One area per
-// press of the button, then the map pans again as usual. Handled on the map's
-// container before Leaflet sees the press, so a press on a dot draws the
-// area rather than picking the tree up.
+// picked; with Shift or Ctrl held, added to what is already picked. The
+// drawing is handled on the map's container before Leaflet sees the press, so
+// a press on a dot draws the area rather than picking the tree up.
+//
+// The finished shape stays, with handles: a rectangle's four corners resize
+// it, a circle's edge handle sets its radius, and the center handle of either
+// moves it. The selection follows the shape as it changes. A plain click on a
+// tree, Clear selection, Esc or a new shape puts it away.
 type AreaMode = 'rect' | 'circle';
 let areaMode: AreaMode | null = null;
-let area: { start: L.LatLng; shape: L.Rectangle | L.Circle; add: boolean } | null = null;
+/** The shape being drawn, between press and release. */
+let drawing: { start: L.LatLng; shape: L.Rectangle | L.Circle; add: boolean } | null = null;
+/**
+ * The shape left on the map. The selection is what was picked before it
+ * (`base`, if it was drawn adding) plus the trees inside it, less any taken
+ * out by hand since (`excluded`).
+ */
+let areaSel: {
+  shape: L.Rectangle | L.Circle;
+  handles: L.Marker[];
+  base: Set<string>;
+  excluded: Set<string>;
+} | null = null;
 
 function setAreaMode(mode: AreaMode | null): void {
   areaMode = mode;
@@ -202,9 +219,9 @@ function setAreaMode(mode: AreaMode | null): void {
     $(id).setAttribute('aria-pressed', String(mode === m));
   }
   map.getContainer().classList.toggle('is-area-mode', !!mode);
-  if (!mode && area) {
-    area.shape.remove();
-    area = null;
+  if (!mode && drawing) {
+    drawing.shape.remove();
+    drawing = null;
     map.dragging.enable();
   }
 }
@@ -213,6 +230,114 @@ function setAreaMode(mode: AreaMode | null): void {
 // a canvas of its own, laid over the whole map, and that would swallow every
 // click meant for a tree from then on.
 const AREA_STYLE: L.PathOptions = { renderer, color: '#ff2d55', weight: 2, dashArray: '6 4', fillColor: '#ff2d55', fillOpacity: 0.08, interactive: false };
+
+const adding = (e: MouseEvent): boolean => e.shiftKey || e.ctrlKey || e.metaKey;
+
+function treePoints(): Array<[string, [number, number]]> {
+  return [...dots].map(([id, d]) => [id, [d.getLatLng().lat, d.getLatLng().lng]]);
+}
+
+function insideShape(shape: L.Rectangle | L.Circle): string[] {
+  if (shape instanceof L.Circle) {
+    const c = shape.getLatLng();
+    return idsInCircle(treePoints(), [c.lat, c.lng], shape.getRadius());
+  }
+  const b = shape.getBounds();
+  return idsInBox(treePoints(), [b.getSouth(), b.getWest()], [b.getNorth(), b.getEast()]);
+}
+
+/** Recompute the selection from the shape left on the map. */
+function applyArea(): void {
+  if (!areaSel) return;
+  const ids = new Set([...areaSel.base, ...insideShape(areaSel.shape)]);
+  for (const id of areaSel.excluded) ids.delete(id);
+  setPicked(ids);
+  $('find-msg').classList.remove('is-err');
+  $('find-msg').textContent = ids.size ? '' : 'No trees inside that area.';
+}
+
+function removeArea(): void {
+  if (!areaSel) return;
+  areaSel.shape.remove();
+  for (const h of areaSel.handles) h.remove();
+  areaSel = null;
+}
+
+const handleIcon = (cls: string, title: string) => {
+  const move = cls === 'is-move';
+  const size = move ? 22 : 14;
+  return L.divIcon({
+    className: `area-handle ${cls}`, iconSize: [size, size], iconAnchor: [size / 2, size / 2],
+    html: `<span title="${title}">${move ? '✥' : ''}</span>`,
+  });
+};
+
+/** A point `metres` east of `at`. */
+function east(at: L.LatLng, metres: number): L.LatLng {
+  return L.latLng(at.lat, at.lng + metres / (111_320 * Math.cos((at.lat * Math.PI) / 180)));
+}
+
+/** Put handles on a finished shape, and keep it and the selection in step with them. */
+function keepArea(shape: L.Rectangle | L.Circle, base: Set<string>): void {
+  removeArea();
+  const handle = (at: L.LatLng, cls: string, title: string) =>
+    L.marker(at, { icon: handleIcon(cls, title), draggable: true, autoPan: true, keyboard: false, zIndexOffset: 1000 }).addTo(map);
+  const handles: L.Marker[] = [];
+  if (shape instanceof L.Circle) {
+    const center = handle(shape.getLatLng(), 'is-move', 'Drag to move the circle');
+    const edge = handle(east(shape.getLatLng(), shape.getRadius()), 'is-size', 'Drag to resize the circle');
+    center.on('drag', () => {
+      const r = shape.getRadius();
+      shape.setLatLng(center.getLatLng());
+      edge.setLatLng(east(center.getLatLng(), r));
+      applyArea();
+    });
+    edge.on('drag', () => {
+      shape.setRadius(map.distance(shape.getLatLng(), edge.getLatLng()));
+      applyArea();
+    });
+    handles.push(center, edge);
+  } else {
+    const corners = () => {
+      const b = shape.getBounds();
+      return [b.getNorthWest(), b.getNorthEast(), b.getSouthEast(), b.getSouthWest()];
+    };
+    const place = () => {
+      corners().forEach((c, i) => handles[i]!.setLatLng(c));
+      handles[4]!.setLatLng(shape.getBounds().getCenter());
+    };
+    corners().forEach((c, i) => {
+      const h = handle(c, 'is-size', 'Drag to resize the rectangle');
+      h.on('drag', () => {
+        // The opposite corner stays put; this one follows the pointer.
+        const opposite = corners()[(i + 2) % 4]!;
+        shape.setBounds(L.latLngBounds(opposite, h.getLatLng()));
+        place();
+        applyArea();
+      });
+      handles.push(h);
+    });
+    const move = handle(shape.getBounds().getCenter(), 'is-move', 'Drag to move the rectangle');
+    move.on('drag', () => {
+      const b = shape.getBounds();
+      const c = b.getCenter();
+      const to = move.getLatLng();
+      const dLat = to.lat - c.lat;
+      const dLng = to.lng - c.lng;
+      shape.setBounds(L.latLngBounds(
+        [b.getSouth() + dLat, b.getWest() + dLng],
+        [b.getNorth() + dLat, b.getEast() + dLng],
+      ));
+      place();
+      applyArea();
+    });
+    handles.push(move);
+  }
+  // A handle's press is its own: no map click (and so no deselect) after it.
+  for (const h of handles) h.on('dragend', () => { dragEndedAt = Date.now(); });
+  areaSel = { shape, handles, base, excluded: new Set() };
+  applyArea();
+}
 
 map.getContainer().addEventListener('mousedown', (e) => {
   if (!areaMode || e.button !== 0) return;
@@ -224,29 +349,24 @@ map.getContainer().addEventListener('mousedown', (e) => {
   const shape = areaMode === 'rect'
     ? L.rectangle(L.latLngBounds(start, start), AREA_STYLE)
     : L.circle(start, { ...AREA_STYLE, radius: 0 });
-  area = { start, shape: shape.addTo(map), add: e.shiftKey };
+  drawing = { start, shape: shape.addTo(map), add: adding(e) };
 }, true);
 
 document.addEventListener('mousemove', (e) => {
-  if (!area) return;
+  if (!drawing) return;
   const at = map.mouseEventToLatLng(e);
-  if (area.shape instanceof L.Circle) area.shape.setRadius(map.distance(area.start, at));
-  else area.shape.setBounds(L.latLngBounds(area.start, at));
+  if (drawing.shape instanceof L.Circle) drawing.shape.setRadius(map.distance(drawing.start, at));
+  else drawing.shape.setBounds(L.latLngBounds(drawing.start, at));
 });
 
-document.addEventListener('mouseup', (e) => {
-  if (!area) return;
-  const at = map.mouseEventToLatLng(e);
-  const points = [...dots].map(([id, d]) => [id, [d.getLatLng().lat, d.getLatLng().lng]] as [string, [number, number]]);
-  const inside = area.shape instanceof L.Circle
-    ? idsInCircle(points, [area.start.lat, area.start.lng], map.distance(area.start, at))
-    : idsInBox(points, [area.start.lat, area.start.lng], [at.lat, at.lng]);
-  const add = area.add;
+document.addEventListener('mouseup', () => {
+  if (!drawing) return;
+  const { shape, add } = drawing;
+  drawing = null;
   dragEndedAt = Date.now();
+  map.dragging.enable();
   setAreaMode(null);
-  setPicked(add ? new Set([...picked, ...inside]) : inside);
-  $('find-msg').classList.remove('is-err');
-  $('find-msg').textContent = inside.length ? '' : 'No trees inside that area.';
+  keepArea(shape, add ? new Set(picked) : new Set());
 });
 
 $('area-rect').addEventListener('click', () => setAreaMode(areaMode === 'rect' ? null : 'rect'));
@@ -429,7 +549,7 @@ function renderSelected(): void {
       <ul class="picked-list">${shown}${ids.length > 12 ? `<li>and ${ids.length - 12} more</li>` : ''}</ul>
       ${live.length ? `<button type="button" class="danger-btn" data-delete-picked>Mark ${live.length} as not there</button>` : ''}
       <button type="button" class="ghost-btn" data-clear-picked>Clear selection</button>
-      <span class="hint">Shift+click a tree to add it or take it out.</span>`;
+      <span class="hint">Shift+click or Ctrl+click a tree to add it or take it out.</span>`;
     return;
   }
   const p = selected ? byId.get(selected) : undefined;
@@ -468,16 +588,25 @@ function setPicked(ids: Iterable<string>): void {
 }
 
 function clearPicked(): void {
+  removeArea();
   setPicked([]);
 }
 
 function togglePick(id: string): void {
+  if (areaSel) {
+    // Kept through later changes to the shape: a tree taken out stays out,
+    // one added stays in.
+    if (picked.has(id)) { areaSel.base.delete(id); areaSel.excluded.add(id); }
+    else { areaSel.base.add(id); areaSel.excluded.delete(id); }
+    return applyArea();
+  }
   const next = new Set(picked);
   if (next.has(id)) next.delete(id); else next.add(id);
   setPicked(next);
 }
 
 function select(id: string | null, pan: boolean): void {
+  removeArea();
   setPicked(id ? [id] : []);
   if (id && pan) map.setView(dots.get(id)!.getLatLng(), Math.max(map.getZoom(), 20));
 }
@@ -583,6 +712,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     if (myImagery.isAligning()) return myImagery.cancel();
     if (areaMode) return setAreaMode(null);
+    if (areaSel) return clearPicked();
     return select(null, false);
   }
   if ((e.key === 'Delete' || e.key === 'Backspace') && picked.size) {
