@@ -69,6 +69,14 @@ button, input, select { font: inherit; color: inherit; }
 .brand-mark { flex: 0 0 auto; display: block; }
 .brand { flex: 1; min-width: 0; }
 .brand h1 { font-size: 1.05rem; letter-spacing: .01em; }
+/* The site name puts the map back to its starting view (main.ts). Styled as
+   the heading it sits in, not as a button. */
+.brand-reset {
+  font: inherit; letter-spacing: inherit; color: inherit;
+  background: none; border: 0; padding: 0; cursor: pointer;
+}
+.brand-reset:hover { text-decoration: underline; }
+.brand-reset:focus-visible { outline: 2px solid #fff; outline-offset: 2px; border-radius: 2px; }
 .brand p { margin: 0; font-size: .78rem; opacity: .82; }
 
 .icon-btn {

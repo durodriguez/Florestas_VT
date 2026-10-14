@@ -571,6 +571,11 @@ class App {
 
     $('#locate').addEventListener('click', () => this.locate());
 
+    // The site name in the banner: back to the map's starting view, the
+    // center and zoom it opens at. Only the view; filters and an open record
+    // stay as they are.
+    $('#site-name').addEventListener('click', () => this.map.resetView());
+
     $('#panel-collapse').addEventListener('click', () => this.setPanelCollapsed(true));
     $('#panel-expand').addEventListener('click', () => this.setPanelCollapsed(false));
     if (sessionGet(PANEL_KEY) === 'collapsed') this.setPanelCollapsed(true, false);
