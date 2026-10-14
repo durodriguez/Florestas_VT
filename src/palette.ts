@@ -9,7 +9,7 @@ const TYPE_COLORS: Record<string, string> = {
   shrub: '#666633',
   perennial: '#cc5316',
   annual: '#860000',
-  vine: '#653cfa',
+  vine: '#7030a0',
   grass: '#b8b400',
 };
 
