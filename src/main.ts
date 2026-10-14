@@ -538,6 +538,7 @@ class App {
         this.map.fitTo(this.results);
       }
       if (el.dataset.action === 'share') this.share(el);
+      if (el.dataset.action === 'photo') this.openPhoto(el);
       if (el.dataset.action === 'copy-link') {
         this.closeShareMenu(false);
         navigator.clipboard
@@ -582,14 +583,47 @@ class App {
     });
 
     document.addEventListener('keydown', (e) => {
-      // Escape closes the share menu first, and the record on a second press.
-      if (e.key === 'Escape' && document.querySelector('.share-menu')) this.closeShareMenu(true);
+      // Escape closes the full-size photo or the share menu first, and the
+      // record on a further press.
+      if (e.key === 'Escape' && document.querySelector('.lightbox')) this.closePhoto();
+      else if (e.key === 'Escape' && document.querySelector('.share-menu')) this.closeShareMenu(true);
       else if (e.key === 'Escape' && this.selected) this.select(null);
       if (e.key === '/' && document.activeElement?.tagName !== 'INPUT') {
         e.preventDefault();
         $<HTMLInputElement>('#search').focus();
       }
     });
+  }
+
+  /**
+   * The record's photo at full size, over everything. A tap anywhere or
+   * Escape closes it, and focus goes back to the photo that opened it.
+   */
+  private openPhoto(opener: HTMLElement): void {
+    const img = opener.querySelector('img');
+    if (!img) return;
+    const box = document.createElement('div');
+    box.className = 'lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', 'Photo, full size');
+    box.innerHTML = `<button type="button" class="lightbox-close" aria-label="Close the photo">&times;</button>`;
+    const big = document.createElement('img');
+    big.src = img.src;
+    big.alt = img.alt;
+    box.append(big);
+    box.addEventListener('click', () => this.closePhoto());
+    this.photoOpener = opener;
+    document.body.append(box);
+    box.querySelector<HTMLButtonElement>('.lightbox-close')!.focus();
+  }
+
+  private photoOpener: HTMLElement | null = null;
+
+  private closePhoto(): void {
+    document.querySelector('.lightbox')?.remove();
+    this.photoOpener?.focus();
+    this.photoOpener = null;
   }
 
   private locate(): void {

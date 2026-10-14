@@ -130,8 +130,10 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
   const taken = photoTaken(plant.surveyedOn);
   const photo = plant.photo
     ? `<figure class="detail-figure">
-         <img class="detail-photo" src="${escapeHtml(photoUrl(plant.photo, base, dataset.config.photoBaseUrl))}"
-           alt="${escapeHtml(t.common)}, accession ${escapeHtml(plant.id)}" loading="lazy">
+         <button type="button" class="detail-photo-open" data-action="photo" aria-label="Show the photo full size">
+           <img class="detail-photo" src="${escapeHtml(photoUrl(plant.photo, base, dataset.config.photoBaseUrl))}"
+             alt="${escapeHtml(t.common)}, accession ${escapeHtml(plant.id)}" loading="lazy">
+         </button>
          ${taken ? `<figcaption class="detail-photo-date">Photographed ${escapeHtml(taken)}</figcaption>` : ''}
        </figure>`
     : '';
