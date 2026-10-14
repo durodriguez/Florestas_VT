@@ -158,7 +158,7 @@ describe('importCityTrees', () => {
 
   it('leaves out the sites excluded by hand, and says why', () => {
     const r = run([row({ site_id: '7387' }), row({ site_id: '6762' }), row()]);
-    expect(r.inserts.map((i) => i.city_id)).toEqual(['BTV-886']);
+    expect(r.inserts.map((i: { city_id: string }) => i.city_id)).toEqual(['BTV-886']);
     expect(r.skipped['excluded by hand: remote Centennial Woods']).toBe(2);
   });
 
