@@ -67,16 +67,24 @@ button, input, select { font: inherit; color: inherit; }
 /* The mark is decorative here — the adjacent h1 already names the site — so
    its alt is empty and it is hidden from assistive tech. */
 .brand-mark { flex: 0 0 auto; display: block; }
-.brand { flex: 1; min-width: 0; }
+/* The name and tagline together are one click target that puts the map back
+   to its starting view (main.ts): the button's ::after stretches over the
+   whole block, which shades lightly on hover. The negative margin keeps the
+   text where it was; #locate keeps to the right on its own. */
+.brand {
+  flex: 0 1 auto; min-width: 0; position: relative;
+  padding: .1rem .45rem; margin-left: -.45rem; border-radius: var(--radius);
+}
+@media (hover: hover) { .brand:hover { background: rgb(255 255 255 / 10%); } }
+.brand:has(.brand-reset:focus-visible) { outline: 2px solid #fff; outline-offset: 1px; }
+#locate { margin-left: auto; }
 .brand h1 { font-size: 1.05rem; letter-spacing: .01em; }
-/* The site name puts the map back to its starting view (main.ts). Styled as
-   the heading it sits in, not as a button. */
 .brand-reset {
   font: inherit; letter-spacing: inherit; color: inherit;
   background: none; border: 0; padding: 0; cursor: pointer;
 }
-.brand-reset:hover { text-decoration: underline; }
-.brand-reset:focus-visible { outline: 2px solid #fff; outline-offset: 2px; border-radius: 2px; }
+.brand-reset::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.brand-reset:focus-visible { outline: none; }
 .brand p { margin: 0; font-size: .78rem; opacity: .82; }
 
 .icon-btn {
