@@ -102,6 +102,27 @@ button, input, select { font: inherit; color: inherit; }
 }
 #search:focus-visible { outline: 2px solid var(--uvm-green-light); outline-offset: 1px; }
 
+/* Folding the panel away on a wide screen, for more map: a slim ◀ beside the
+   search, and a ▶ on the sliver left behind (main.ts, setPanelCollapsed).
+   Phones have the ☰ drawer instead, so the buttons show only above 48rem. */
+.panel-fold {
+  display: none; place-items: center; width: 1.1rem; height: 2.4rem; padding: 0;
+  position: relative; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-sunk); color: var(--ink); cursor: pointer;
+}
+/* Slim to look at, wider to hit with a finger. */
+.panel-fold::after { content: ''; position: absolute; inset: -.3rem -.4rem; }
+.panel-fold:hover { border-color: var(--uvm-green-light); }
+.panel-fold:focus-visible { outline: 2px solid var(--uvm-green-light); outline-offset: 1px; }
+@media (min-width: 48.0625rem) {
+  .panel-search { display: grid; grid-template-columns: auto 1fr; gap: .4rem; align-items: center; padding-left: .25rem; }
+  .panel-search .taxon-filter { grid-column: 1 / -1; }
+  .panel-collapse { display: grid; }
+  body.panel-collapsed .layout { grid-template-columns: 1.6rem 1fr; }
+  body.panel-collapsed .panel > :not(.panel-expand) { display: none; }
+  body.panel-collapsed .panel-expand { display: grid; margin: .75rem 0 0 .25rem; }
+}
+
 /* The species chosen by "Show all": said out loud, because the search box no
    longer shows what is filtering, and one tap from gone. */
 .taxon-filter {
