@@ -121,9 +121,11 @@ See [docs/CAMPUS-AREAS.md](docs/CAMPUS-AREAS.md).
 
 **Position editor** — an internal tool at `/positions/` for correcting where
 trees sit, at a desk: every mapped tree on satellite imagery, drag a dot onto its
-crown, dozens or hundreds in a session, saved in the browser as you go.
-**Export moves** hands you a file that `npm run positions` applies. A correction
-is not a survey visit and the public map does not show it as one. See
+crown, dozens or hundreds in a session, saved in the browser as you go. Trees
+with nothing there can be marked one by one or by dragging a rectangle or
+circle; they become `not-found` records, history kept. **Export changes** hands
+you a file that `npm run positions` applies. A correction is not a survey visit
+and the public map does not show it as one. See
 [docs/POSITIONS.md](docs/POSITIONS.md).
 
 **Survey intake** — `npm run import` merges a field export into the dataset:
@@ -179,7 +181,7 @@ species never reaches the live site.
 | `npm run data` | Validate `data/*.csv` and regenerate `public/data/`, `public/field/` and `public/species/` |
 | `npm run build` | Validate, typecheck and build to `dist/` |
 | `npm run import -- <file.csv>` | Merge a field-survey export into `data/plants.csv` and `data/observations.csv` (dry run by default) |
-| `npm run positions -- <positions.csv>` | Apply position corrections exported from `/positions/` to `data/plants.csv` (dry run by default) |
+| `npm run positions -- <positions.csv>` | Apply position corrections exported from `/positions/` to `data/plants.csv`, and trees marked not there to `data/observations.csv` (dry run by default) |
 | `npm run import:arcgis -- <layer.geojson>` | Load UVM's ArcGIS tree layer (dry run by default) |
 | `npm run import:city -- <file.csv>` | Clip Burlington's street-tree inventory to campus (dry run by default) |
 | `npm run areas` | File each plant under the campus area its coordinates fall in (dry run by default) |

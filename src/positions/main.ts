@@ -10,12 +10,13 @@ import { initImagery } from './imagery';
 import { parsePeaks, type Peak, type PeaksFile } from './peaks';
 import { loadCrowns, nearRings, readCrownFiles, saveCrowns, type SavedCrowns } from './crowns';
 import {
-  applyMove, movedMeters, movesToCsv, reconcile, today,
-  type Move, type Moves,
+  applyMove, idsInBox, idsInCircle, movedMeters, movesToCsv, reconcile, today,
+  type Deletion, type Deletions, type Move, type Moves,
 } from './moves';
 
 const BASE = import.meta.env.BASE_URL;
 const STORE = 'uvm-tree-positions/moves';
+const DEL_STORE = 'uvm-tree-positions/deletions';
 const DRAG_PX = 3;
 
 const $ = <T extends HTMLElement>(id: string): T => {
@@ -43,9 +44,16 @@ const byId = new Map<string, Plant>();
 const home = new Map<string, [number, number]>();
 const dots = new Map<string, L.CircleMarker>();
 let moves: Moves = {};
+/** Trees marked as not there, to become not-found observations. */
+let deletions: Deletions = {};
 let stale = new Set<string>();
+/** The trees picked: one by a click, more by Shift+click or an area. */
+const picked = new Set<string>();
+/** The one picked tree, when exactly one is: the card shows it, the arrow keys move it. */
 let selected: string | null = null;
-const undoStack: Array<{ id: string; prev: Move | undefined }> = [];
+/** Each change remembers what it replaced, for every tree it touched. */
+interface Undo { ids: string[]; moves: Array<Move | undefined>; deletions: Array<Deletion | undefined> }
+const undoStack: Undo[] = [];
 /** LiDAR crown peaks, if the build has them. */
 let peaks: Peak[] = [];
 
@@ -84,17 +92,23 @@ let crownArea: ((lat: number, lng: number) => boolean) | null = null;
 const fillFor = (p: Plant): string =>
   moves[p.id] ? MOVED_FILL : (FILL[p.taxon.type] ?? OTHER_FILL);
 
+// Marked not there: a dark, dashed red ring, still on the map so it can be
+// found again and restored before the export.
+const DELETED = '#ff2d55';
+
 function styleDot(id: string): void {
   const dot = dots.get(id);
   const p = byId.get(id);
   if (!dot || !p) return;
-  const isSel = id === selected;
+  const isSel = picked.has(id);
+  const gone = !!deletions[id];
   dot.setStyle({
-    radius: isSel ? 9 : 6,
-    color: isSel ? '#ff2d55' : moves[id] ? '#154734' : '#ffffff',
-    weight: isSel ? 3 : 1.5,
-    fillColor: fillFor(p),
-    fillOpacity: 0.95,
+    radius: isSel ? 9 : gone ? 5 : 6,
+    color: isSel || gone ? DELETED : moves[id] ? '#154734' : '#ffffff',
+    weight: isSel ? 3 : gone ? 2 : 1.5,
+    fillColor: gone ? '#1b1b1b' : fillFor(p),
+    fillOpacity: gone ? 0.6 : 0.95,
+    dashArray: gone && !isSel ? '3 3' : undefined,
   });
   if (isSel) dot.bringToFront();
 }
@@ -131,7 +145,7 @@ map.on('moveend zoomend', drawLabels);
 // two thousand trees would be slow. So the drag is done by hand: press on a
 // dot, the map stops panning, the dot follows the pointer, and letting go is
 // the move. Press-and-release without travelling is a click, which selects.
-let drag: { id: string; x: number; y: number; travelled: boolean } | null = null;
+let drag: { id: string; x: number; y: number; travelled: boolean; locked: boolean } | null = null;
 /** When the last drag ended: the release can arrive as a click on the map. */
 let dragEndedAt = 0;
 
@@ -140,13 +154,18 @@ function startDrag(id: string, e: L.LeafletMouseEvent): void {
   // Stopping the press also stops the browser moving focus, so a cursor left
   // in the search box would keep the arrow keys and Ctrl+Z for itself.
   (document.activeElement as HTMLElement | null)?.blur();
-  drag = { id, x: e.originalEvent.clientX, y: e.originalEvent.clientY, travelled: false };
-  map.dragging.disable();
+  dragEndedAt = Date.now();
+  // Shift+click adds a tree to the picked set, or takes it out.
+  if (e.originalEvent.shiftKey) return togglePick(id);
   select(id, false);
+  // A tree marked not there stays put (restore it first to move it), but the
+  // press is still the dot's: the map must not pan under it either.
+  drag = { id, x: e.originalEvent.clientX, y: e.originalEvent.clientY, travelled: false, locked: !!deletions[id] };
+  map.dragging.disable();
 }
 
 document.addEventListener('mousemove', (e) => {
-  if (!drag) return;
+  if (!drag || drag.locked) return;
   if (!drag.travelled && Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < DRAG_PX) return;
   drag.travelled = true;
   map.getContainer().classList.add('is-dragging');
@@ -166,27 +185,124 @@ document.addEventListener('mouseup', () => {
   }
 });
 
+// ---------------------------------------------------------------- area select
+
+// Rectangle or circle: drag on the map and every standing tree inside is
+// picked; with Shift held, added to what is already picked. One area per
+// press of the button, then the map pans again as usual. Handled on the map's
+// container before Leaflet sees the press, so a press on a dot draws the
+// area rather than picking the tree up.
+type AreaMode = 'rect' | 'circle';
+let areaMode: AreaMode | null = null;
+let area: { start: L.LatLng; shape: L.Rectangle | L.Circle; add: boolean } | null = null;
+
+function setAreaMode(mode: AreaMode | null): void {
+  areaMode = mode;
+  for (const [id, m] of [['area-rect', 'rect'], ['area-circle', 'circle']] as const) {
+    $(id).setAttribute('aria-pressed', String(mode === m));
+  }
+  map.getContainer().classList.toggle('is-area-mode', !!mode);
+  if (!mode && area) {
+    area.shape.remove();
+    area = null;
+    map.dragging.enable();
+  }
+}
+
+// Drawn on the trees' own canvas: a shape on the map's default renderer gets
+// a canvas of its own, laid over the whole map, and that would swallow every
+// click meant for a tree from then on.
+const AREA_STYLE: L.PathOptions = { renderer, color: '#ff2d55', weight: 2, dashArray: '6 4', fillColor: '#ff2d55', fillOpacity: 0.08, interactive: false };
+
+map.getContainer().addEventListener('mousedown', (e) => {
+  if (!areaMode || e.button !== 0) return;
+  if ((e.target as HTMLElement).closest('.leaflet-control')) return;
+  e.stopPropagation();
+  e.preventDefault();
+  map.dragging.disable();
+  const start = map.mouseEventToLatLng(e);
+  const shape = areaMode === 'rect'
+    ? L.rectangle(L.latLngBounds(start, start), AREA_STYLE)
+    : L.circle(start, { ...AREA_STYLE, radius: 0 });
+  area = { start, shape: shape.addTo(map), add: e.shiftKey };
+}, true);
+
+document.addEventListener('mousemove', (e) => {
+  if (!area) return;
+  const at = map.mouseEventToLatLng(e);
+  if (area.shape instanceof L.Circle) area.shape.setRadius(map.distance(area.start, at));
+  else area.shape.setBounds(L.latLngBounds(area.start, at));
+});
+
+document.addEventListener('mouseup', (e) => {
+  if (!area) return;
+  const at = map.mouseEventToLatLng(e);
+  const points = [...dots].map(([id, d]) => [id, [d.getLatLng().lat, d.getLatLng().lng]] as [string, [number, number]]);
+  const inside = area.shape instanceof L.Circle
+    ? idsInCircle(points, [area.start.lat, area.start.lng], map.distance(area.start, at))
+    : idsInBox(points, [area.start.lat, area.start.lng], [at.lat, at.lng]);
+  const add = area.add;
+  dragEndedAt = Date.now();
+  setAreaMode(null);
+  setPicked(add ? new Set([...picked, ...inside]) : inside);
+  $('find-msg').classList.remove('is-err');
+  $('find-msg').textContent = inside.length ? '' : 'No trees inside that area.';
+});
+
+$('area-rect').addEventListener('click', () => setAreaMode(areaMode === 'rect' ? null : 'rect'));
+$('area-circle').addEventListener('click', () => setAreaMode(areaMode === 'circle' ? null : 'circle'));
+
 // ---------------------------------------------------------------- moves
 
+function remember(ids: string[]): void {
+  undoStack.push({ ids, moves: ids.map((id) => moves[id]), deletions: ids.map((id) => deletions[id]) });
+}
+
 function commit(id: string, to: [number, number]): void {
-  undoStack.push({ id, prev: moves[id] });
+  remember([id]);
   moves = applyMove(moves, id, home.get(id)!, to, today());
   stale.delete(id);
-  afterChange(id);
+  afterChange([id]);
 }
 
-function revert(id: string, prev: Move | undefined): void {
-  const next = { ...moves };
-  if (prev) next[id] = prev;
-  else delete next[id];
-  moves = next;
-  afterChange(id);
+/**
+ * Mark trees as not there. A tree with a move loses it: there is nothing to
+ * move. Asks first when it is more than one, since an area can catch more
+ * than was meant.
+ */
+function deleteTrees(ids: string[]): void {
+  const todo = ids.filter((id) => byId.has(id) && !deletions[id]);
+  if (!todo.length) return;
+  if (todo.length > 1 && !confirm(`Mark ${todo.length} trees as not there? They stay listed, and can be restored, until you export.`)) return;
+  remember(todo);
+  const nextMoves = { ...moves };
+  const nextDel = { ...deletions };
+  for (const id of todo) {
+    delete nextMoves[id];
+    stale.delete(id);
+    nextDel[id] = { id, at: home.get(id)!, on: today() };
+  }
+  moves = nextMoves;
+  deletions = nextDel;
+  clearPicked();
+  afterChange(todo);
 }
 
-function afterChange(id: string): void {
-  const m = moves[id];
-  dots.get(id)?.setLatLng(m ? m.to : home.get(id)!);
-  styleDot(id);
+function restoreTree(id: string): void {
+  if (!deletions[id]) return;
+  remember([id]);
+  const next = { ...deletions };
+  delete next[id];
+  deletions = next;
+  afterChange([id]);
+}
+
+function afterChange(ids: string[]): void {
+  for (const id of ids) {
+    const m = moves[id];
+    dots.get(id)?.setLatLng(m ? m.to : home.get(id)!);
+    styleDot(id);
+  }
   drawGhosts();
   drawLabels();
   save();
@@ -197,8 +313,18 @@ function afterChange(id: string): void {
 function undo(): void {
   const last = undoStack.pop();
   if (!last) return;
-  revert(last.id, last.prev);
-  select(last.id, false);
+  const nextMoves = { ...moves };
+  const nextDel = { ...deletions };
+  last.ids.forEach((id, i) => {
+    const m = last.moves[i];
+    const d = last.deletions[i];
+    if (m) nextMoves[id] = m; else delete nextMoves[id];
+    if (d) nextDel[id] = d; else delete nextDel[id];
+  });
+  moves = nextMoves;
+  deletions = nextDel;
+  afterChange(last.ids);
+  if (last.ids.length === 1) select(last.ids[0]!, false);
 }
 
 // ---------------------------------------------------------------- storage
@@ -212,7 +338,8 @@ function save(): void {
   const state = $('save-state');
   try {
     localStorage.setItem(STORE, JSON.stringify(moves));
-    const n = Object.keys(moves).length;
+    localStorage.setItem(DEL_STORE, JSON.stringify(deletions));
+    const n = Object.keys(moves).length + Object.keys(deletions).length;
     state.textContent = n ? 'Saved in this browser' : '';
     state.classList.remove('is-warn');
   } catch {
@@ -230,6 +357,15 @@ function load(): Moves {
   }
 }
 
+function loadDeletions(): Deletions {
+  try {
+    const raw = localStorage.getItem(DEL_STORE);
+    return raw ? (JSON.parse(raw) as Deletions) : {};
+  } catch {
+    return {};
+  }
+}
+
 // ---------------------------------------------------------------- panel
 
 function describe(id: string): { tag: string; species: string } {
@@ -240,15 +376,30 @@ function describe(id: string): { tag: string; species: string } {
 function renderMoves(): void {
   const list = Object.values(moves).sort((a, b) => b.on.localeCompare(a.on) || a.id.localeCompare(b.id));
   // Newest first by the order they were made this session, where known.
-  const order = new Map(undoStack.map((u, i) => [u.id, i]));
+  const order = new Map(undoStack.flatMap((u, i) => u.ids.map((id) => [id, i] as const)));
   list.sort((a, b) => (order.get(b.id) ?? -1) - (order.get(a.id) ?? -1));
+  const gone = Object.values(deletions).sort((a, b) => (order.get(b.id) ?? -1) - (order.get(a.id) ?? -1) || a.id.localeCompare(b.id));
 
+  const changes = list.length - stale.size + gone.length;
   $('move-count').textContent = String(list.length);
   $('moves-empty').hidden = list.length > 0;
-  $<HTMLButtonElement>('export').disabled = list.length - stale.size <= 0;
-  $<HTMLButtonElement>('clear').disabled = list.length === 0;
+  $<HTMLButtonElement>('export').disabled = changes <= 0;
+  $<HTMLButtonElement>('clear').disabled = list.length + gone.length === 0;
   $<HTMLButtonElement>('undo').disabled = undoStack.length === 0;
-  $('export').textContent = list.length ? `Export ${list.length - stale.size} move(s)` : 'Export moves';
+  $('export').textContent = changes > 0 ? `Export ${changes} change(s)` : 'Export changes';
+
+  $('del-count').textContent = String(gone.length);
+  $('deletions-empty').hidden = gone.length > 0;
+  $('deletions').innerHTML = gone.map((d) => {
+    const p = byId.get(d.id);
+    return `<li>
+      <button type="button" class="go" data-go="${esc(d.id)}">
+        <span class="mv-id">${esc(d.id)}</span>
+        <span class="mv-meta">${p?.tag ? `tag ${esc(p.tag)} · ` : ''}${esc(p?.taxon.common ?? '')} · not there</span>
+      </button>
+      <button type="button" class="ghost-btn" data-restore="${esc(d.id)}">Restore</button>
+    </li>`;
+  }).join('');
 
   $('moves').innerHTML = list.map((m) => {
     const p = byId.get(m.id);
@@ -265,6 +416,22 @@ function renderMoves(): void {
 
 function renderSelected(): void {
   const card = $('selected');
+  if (picked.size > 1) {
+    const ids = [...picked];
+    const live = ids.filter((id) => !deletions[id]);
+    const shown = ids.slice(0, 12).map((id) => {
+      const q = byId.get(id);
+      return `<li>${esc(id)}${q?.tag ? ` · tag ${esc(q.tag)}` : ''} · ${esc(q?.taxon.common ?? '')}${deletions[id] ? ' · not there' : ''}</li>`;
+    }).join('');
+    card.hidden = false;
+    card.innerHTML = `
+      <span class="name">${ids.length} trees selected</span>
+      <ul class="picked-list">${shown}${ids.length > 12 ? `<li>and ${ids.length - 12} more</li>` : ''}</ul>
+      ${live.length ? `<button type="button" class="danger-btn" data-delete-picked>Mark ${live.length} as not there</button>` : ''}
+      <button type="button" class="ghost-btn" data-clear-picked>Clear selection</button>
+      <span class="hint">Shift+click a tree to add it or take it out.</span>`;
+    return;
+  }
   const p = selected ? byId.get(selected) : undefined;
   if (!p) {
     card.hidden = true;
@@ -272,28 +439,47 @@ function renderSelected(): void {
     return;
   }
   const m = moves[p.id];
+  const gone = deletions[p.id];
   card.hidden = false;
   card.innerHTML = `
     <span class="id">${esc(p.id)} ${p.tag ? `<span class="tag-chip">Tag ${esc(p.tag)}</span>` : '<span class="tag-chip">No tag</span>'}</span>
     <span class="name">${esc(p.taxon.common)}</span>
     <span class="sci">${esc(p.taxon.sci)}</span>
     <span>${esc(TYPE_LABELS[p.taxon.type] ?? p.taxon.type)}${p.collection ? ` · ${esc(p.collection.name)}` : ''}</span>
-    ${m
-      ? `<span class="moved">Moved ${movedMeters(m).toFixed(1)} m</span>
-         <button type="button" class="ghost-btn" data-reset="${esc(p.id)}">Put it back where the record has it</button>`
-      : '<span class="hint">Not moved. Drag the dot, or use the arrow keys.</span>'}
+    ${gone
+      ? `<span class="gone">Marked not there</span>
+         <button type="button" class="ghost-btn" data-restore="${esc(p.id)}">Restore it</button>`
+      : m
+        ? `<span class="moved">Moved ${movedMeters(m).toFixed(1)} m</span>
+           <button type="button" class="ghost-btn" data-reset="${esc(p.id)}">Put it back where the record has it</button>`
+        : '<span class="hint">Not moved. Drag the dot, or use the arrow keys.</span>'}
+    ${gone ? '' : `<button type="button" class="danger-btn" data-delete="${esc(p.id)}">Mark as not there</button>`}
 `;
 }
 
-function select(id: string | null, pan: boolean): void {
-  const prev = selected;
-  selected = id;
-  if (prev) styleDot(prev);
-  if (id) {
-    styleDot(id);
-    if (pan) map.setView(dots.get(id)!.getLatLng(), Math.max(map.getZoom(), 20));
-  }
+/** Make `ids` the whole selection. */
+function setPicked(ids: Iterable<string>): void {
+  const before = [...picked];
+  picked.clear();
+  for (const id of ids) picked.add(id);
+  selected = picked.size === 1 ? [...picked][0]! : null;
+  for (const id of new Set([...before, ...picked])) styleDot(id);
   renderSelected();
+}
+
+function clearPicked(): void {
+  setPicked([]);
+}
+
+function togglePick(id: string): void {
+  const next = new Set(picked);
+  if (next.has(id)) next.delete(id); else next.add(id);
+  setPicked(next);
+}
+
+function select(id: string | null, pan: boolean): void {
+  setPicked(id ? [id] : []);
+  if (id && pan) map.setView(dots.get(id)!.getLatLng(), Math.max(map.getZoom(), 20));
 }
 
 function find(query: string): void {
@@ -310,40 +496,47 @@ function find(query: string): void {
 
 // ---------------------------------------------------------------- wiring
 
-$('moves').addEventListener('click', (e) => {
-  const el = e.target as HTMLElement;
-  const reset = el.closest<HTMLElement>('[data-reset]');
-  if (reset) return resetTree(reset.dataset.reset!);
-  const go = el.closest<HTMLElement>('[data-go]');
-  if (go) select(go.dataset.go!, true);
-});
-$('selected').addEventListener('click', (e) => {
-  const el = e.target as HTMLElement;
-  const reset = el.closest<HTMLElement>('[data-reset]');
-  if (reset) resetTree(reset.dataset.reset!);
-});
+for (const list of ['moves', 'deletions', 'selected']) {
+  $(list).addEventListener('click', (e) => {
+    const el = e.target as HTMLElement;
+    const reset = el.closest<HTMLElement>('[data-reset]');
+    if (reset) return resetTree(reset.dataset.reset!);
+    const restore = el.closest<HTMLElement>('[data-restore]');
+    if (restore) return restoreTree(restore.dataset.restore!);
+    const del = el.closest<HTMLElement>('[data-delete]');
+    if (del) return deleteTrees([del.dataset.delete!]);
+    if (el.closest('[data-delete-picked]')) return deleteTrees([...picked]);
+    if (el.closest('[data-clear-picked]')) return clearPicked();
+    const go = el.closest<HTMLElement>('[data-go]');
+    if (go) select(go.dataset.go!, true);
+  });
+}
 
 function resetTree(id: string): void {
-  undoStack.push({ id, prev: moves[id] });
-  revert(id, undefined);
+  if (!moves[id]) return;
+  remember([id]);
+  const next = { ...moves };
+  delete next[id];
+  moves = next;
   stale.delete(id);
-  renderMoves();
+  afterChange([id]);
 }
 
 $('undo').addEventListener('click', undo);
 $('clear').addEventListener('click', () => {
-  const n = Object.keys(moves).length;
-  if (!confirm(`Clear all ${n} move(s)? Export first if you want to keep them — this cannot be undone.`)) return;
-  const ids = Object.keys(moves);
+  const n = Object.keys(moves).length + Object.keys(deletions).length;
+  if (!confirm(`Clear all ${n} change(s), moves and trees marked not there? Export first if you want to keep them — this cannot be undone.`)) return;
+  const ids = [...Object.keys(moves), ...Object.keys(deletions)];
   moves = {};
+  deletions = {};
   stale = new Set();
   undoStack.length = 0;
-  for (const id of ids) afterChange(id);
+  afterChange(ids);
 });
 
 $('export').addEventListener('click', () => {
   const list = Object.values(moves).filter((m) => !stale.has(m.id));
-  const csv = movesToCsv(list, describe);
+  const csv = movesToCsv(list, describe, Object.values(deletions));
   const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
   const a = document.createElement('a');
   a.href = url;
@@ -389,10 +582,15 @@ document.addEventListener('keydown', (e) => {
   if (typing) return;
   if (e.key === 'Escape') {
     if (myImagery.isAligning()) return myImagery.cancel();
+    if (areaMode) return setAreaMode(null);
     return select(null, false);
   }
+  if ((e.key === 'Delete' || e.key === 'Backspace') && picked.size) {
+    e.preventDefault();
+    return deleteTrees([...picked]);
+  }
   const step = { ArrowUp: [1, 0], ArrowDown: [-1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1] }[e.key];
-  if (!step || !selected) return;
+  if (!step || !selected || deletions[selected]) return;
   e.preventDefault();
   // Metres to degrees at this latitude; 0.2 m is about two imagery pixels.
   const metres = e.shiftKey ? 1 : 0.2;
@@ -404,7 +602,7 @@ document.addEventListener('keydown', (e) => {
 
 window.addEventListener('beforeunload', (e) => {
   // Saved already; this only catches a browser that refused to save.
-  if (Object.keys(moves).length && $('save-state').classList.contains('is-warn')) {
+  if (Object.keys(moves).length + Object.keys(deletions).length && $('save-state').classList.contains('is-warn')) {
     e.preventDefault();
     e.returnValue = '';
   }
@@ -452,7 +650,14 @@ loadData(BASE).then(({ dataset, plants: all }) => {
   const saved = reconcile(load(), home);
   moves = saved.moves;
   stale = new Set(saved.stale);
+  // A marked tree no longer standing on the map has had its not-found applied.
+  const savedDel = loadDeletions();
+  const doneDel = Object.keys(savedDel).filter((id) => !byId.has(id));
+  for (const id of doneDel) delete savedDel[id];
+  deletions = savedDel;
+  for (const id of Object.keys(deletions)) delete moves[id];
   const notes: string[] = [];
+  if (doneDel.length) notes.push(`${doneDel.length} tree(s) marked not there are already off the map and were cleared.`);
   if (saved.applied.length) notes.push(`${saved.applied.length} saved move(s) are already on the map and were cleared.`);
   if (saved.stale.length) notes.push(`${saved.stale.length} tree(s) moved by something else since — shown in red, left out of the export.`);
   if (saved.missing.length) notes.push(`${saved.missing.length} saved move(s) were for trees no longer on the map.`);
@@ -609,6 +814,8 @@ Object.assign(window as unknown as Record<string, unknown>, {
       return [box.left + pt.x, box.top + pt.y];
     },
     selected: () => selected,
+    picked: () => [...picked],
+    deletions: () => deletions,
     peaks: () => peaks.length,
     layersOn: () => ({ peaks: map.hasLayer(peakLayer), crowns: map.hasLayer(crownLayer) }),
     crowns: () => crownLayer.getLayers().length / 2,
