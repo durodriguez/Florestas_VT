@@ -556,6 +556,14 @@ body.is-loading .layout { opacity: .35; }
   body.has-detail .leaflet-bottom { display: none; }
 }
 
+/* An upright small tablet (an iPad mini or iPad, up to 768px wide) also gets
+   the bottom sheet, but there it spans the full width and the phone's photo
+   looks lost in it: a second fixed size, which still leaves the whole
+   description in view on a 768 x 1024 screen. No phone is this wide. */
+@media (min-width: 36rem) and (max-width: 48rem) {
+  .detail-photo { max-height: 26rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
