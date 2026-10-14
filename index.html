@@ -26,8 +26,16 @@
   </header>
 
   <main class="layout">
-    <aside class="panel" aria-label="Search and filters">
+    <aside id="side-panel" class="panel" aria-label="Search and filters">
+      <button type="button" id="panel-expand" class="panel-fold panel-expand"
+              aria-label="Show search and filters" title="Show search and filters" aria-expanded="false" aria-controls="side-panel">
+        <svg width="9" height="9" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5 9 6l-6 4.5z" fill="currentColor"/></svg>
+      </button>
       <div class="panel-search">
+        <button type="button" id="panel-collapse" class="panel-fold panel-collapse"
+                aria-label="Hide search and filters" title="Hide search and filters" aria-expanded="true" aria-controls="side-panel">
+          <svg width="9" height="9" viewBox="0 0 12 12" aria-hidden="true"><path d="M9 1.5 3 6l6 4.5z" fill="currentColor"/></svg>
+        </button>
         <label class="visually-hidden" for="search">Search plants</label>
         <input id="search" type="search" autocomplete="off" spellcheck="false"
                placeholder="Plant name or tag number">

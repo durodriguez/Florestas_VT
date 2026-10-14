@@ -571,6 +571,10 @@ class App {
 
     $('#locate').addEventListener('click', () => this.locate());
 
+    $('#panel-collapse').addEventListener('click', () => this.setPanelCollapsed(true));
+    $('#panel-expand').addEventListener('click', () => this.setPanelCollapsed(false));
+    if (sessionGet(PANEL_KEY) === 'collapsed') this.setPanelCollapsed(true, false);
+
     $('#toggle-panel').addEventListener('click', () => {
       document.body.classList.toggle('panel-open');
     });
@@ -593,6 +597,20 @@ class App {
         $<HTMLInputElement>('#search').focus();
       }
     });
+  }
+
+  /**
+   * Folds the left panel down to a sliver, or opens it again, on a wide
+   * screen. Remembered for this tab only (sessionStorage): a refresh keeps
+   * it, a new tab or visit starts with the panel open.
+   */
+  private setPanelCollapsed(collapsed: boolean, moveFocus = true): void {
+    document.body.classList.toggle('panel-collapsed', collapsed);
+    sessionSet(PANEL_KEY, collapsed ? 'collapsed' : null);
+    // The map's box changed size without the window doing so; Leaflet only
+    // notices the latter.
+    requestAnimationFrame(() => this.map.map.invalidateSize());
+    if (moveFocus) $<HTMLButtonElement>(collapsed ? '#panel-expand' : '#panel-collapse').focus();
   }
 
   /**
@@ -707,3 +725,16 @@ loadData(BASE)
     if (detail) detail.textContent = err.message;
     console.error(err);
   });
+
+const PANEL_KEY = 'uvm-trees.panel';
+
+/** sessionStorage can be missing or refuse (private modes, blocked storage). */
+function sessionGet(key: string): string | null {
+  try { return sessionStorage.getItem(key); } catch { return null; }
+}
+function sessionSet(key: string, value: string | null): void {
+  try {
+    if (value === null) sessionStorage.removeItem(key);
+    else sessionStorage.setItem(key, value);
+  } catch { /* nothing to remember it in; it still works for this page */ }
+}
