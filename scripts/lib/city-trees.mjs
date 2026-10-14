@@ -47,6 +47,17 @@ export const CITY_TREE_COLUMNS = [
 export const STANDING_TREE = 'T';
 
 /**
+ * Burlington site_ids inside the boundary that are left out by hand, with the
+ * reason. Kept here rather than deleted from data/city-trees.csv, which every
+ * import rewrites from the source: a deletion alone would come back.
+ */
+export const EXCLUDED_SITES = new Map([
+  // Remote parts of Centennial Woods, far from any path a visitor would take:
+  // edge cases the city happens to have recorded, not street trees of campus.
+  ...['7387', '14449', '6786', '6785', '6783', '6762'].map((id) => [id, 'remote Centennial Woods']),
+]);
+
+/**
  * Burlington scores condition 0-100; this project names five grades. The four
  * values that actually occur inside the boundary are 50, 70, 80 and 90.
  *
@@ -151,6 +162,7 @@ export function importCityTrees({ rows, speciesLookup, campusAreas }) {
     // row rather than add it again.
     const siteId = String(row.site_id ?? '').trim();
     if (!siteId) { skip('no site_id'); continue; }
+    if (EXCLUDED_SITES.has(siteId)) { skip(`excluded by hand: ${EXCLUDED_SITES.get(siteId)}`); continue; }
     const cityId = `BTV-${siteId}`;
     if (seen.has(cityId)) { skip('duplicate site_id'); continue; }
     seen.add(cityId);

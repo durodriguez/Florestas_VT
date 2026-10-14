@@ -3,7 +3,7 @@
   "model": "i-Tree Eco v6.0.41",
   "project": "BTVtrees, series BTVtrees_UVM, year 2026",
   "location": "Burlington, Chittenden County, Vermont",
-  "trees": "Burlington's 364 street trees inside the campus boundary, as the city measured them 2013–2023",
+  "trees": "Burlington's 364 street trees inside the campus boundary, as the city measured them 2013–2023. Six in remote Centennial Woods were later left off the map, with their results (EXCLUDED_SITES in scripts/lib/city-trees.mjs)",
   "resultsDate": "2026-10-08",
   "report": "Individual Level Results → Tree Benefits and Costs → Summary, English units, scientific names, CSV",
   "weatherYear": 2024,

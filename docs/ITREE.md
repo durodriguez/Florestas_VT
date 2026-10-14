@@ -305,3 +305,8 @@ a few pounds or ounces less.
   DBH. The CSV and the PDF of the same report agree to the last digit.
 - **8 October 2026** — step 6 done: each city tree's panel shows its
   ecosystem services and yearly benefits, labeled Powered by i-Tree.
+- **14 October 2026** — six trees in remote parts of Centennial Woods
+  (BTV-6762, 6783, 6785, 6786, 7387, 14449) left off the map as edge cases,
+  and their rows dropped from `data/itree-city-trees.csv`, so the map and the
+  i-Tree page now cover 358. The exclusion lives in `EXCLUDED_SITES`
+  (`scripts/lib/city-trees.mjs`) so a re-import keeps them out.

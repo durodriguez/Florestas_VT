@@ -156,6 +156,12 @@ describe('importCityTrees', () => {
     expect(r.summary.skipped).toBe(0);
   });
 
+  it('leaves out the sites excluded by hand, and says why', () => {
+    const r = run([row({ site_id: '7387' }), row({ site_id: '6762' }), row()]);
+    expect(r.inserts.map((i) => i.city_id)).toEqual(['BTV-886']);
+    expect(r.skipped['excluded by hand: remote Centennial Woods']).toBe(2);
+  });
+
   it('leaves out stumps, removals and vacant planting sites', () => {
     const r = run([row({ site_typ: 'S' }), row({ site_typ: 'R' }), row({ site_typ: 'P' })]);
     expect(r.inserts).toHaveLength(0);
