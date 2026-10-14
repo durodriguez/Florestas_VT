@@ -28,12 +28,17 @@ Some records have no tree: nothing on the imagery, the LiDAR or the ground
 where the record puts one. The tool can mark those, one at a time or by the
 dozen.
 
-- **Pick trees.** A click picks one; **Shift+click** adds a tree to the
-  selection or takes it out.
+- **Pick trees.** A click picks one; **Shift+click** or **Ctrl+click** (⌘ on
+  a Mac) adds a tree to the selection or takes it out.
 - **Pick by area.** **Rectangle** or **Circle** under the search box, then drag
   on the map: every standing tree inside is picked. A circle is dragged out
-  from its centre. Hold **Shift** while dragging to add to what is already
-  picked. One area per press of the button; **Esc** cancels.
+  from its center. Hold **Shift** or **Ctrl** while dragging to add to what is
+  already picked.
+- **Adjust the area.** The shape stays on the map with handles: the square
+  ones resize it (a rectangle's corners, a circle's edge), the round one with
+  arrows moves it, and the selection follows as it changes. Trees added or
+  taken out by Ctrl+click stay that way while the shape moves. A plain click on
+  a tree, **Clear selection**, **Esc** or a new shape puts it away.
 - **Mark as not there** in the panel, or the **Delete** key, marks what is
   picked. More than one asks first, since an area can catch more than was
   meant. A tree with a pending move loses it: there is nothing to move.

@@ -27,8 +27,8 @@
 
       <div class="tools" role="group" aria-label="Select the trees in an area">
         <span class="label">Select an area</span>
-        <button type="button" id="area-rect" class="ghost-btn tool-btn" aria-pressed="false" title="Drag a rectangle on the map; Shift adds to the selection">▭ Rectangle</button>
-        <button type="button" id="area-circle" class="ghost-btn tool-btn" aria-pressed="false" title="Drag out a circle from its centre; Shift adds to the selection">◯ Circle</button>
+        <button type="button" id="area-rect" class="ghost-btn tool-btn" aria-pressed="false" title="Drag a rectangle on the map; Shift or Ctrl adds to the selection">▭ Rectangle</button>
+        <button type="button" id="area-circle" class="ghost-btn tool-btn" aria-pressed="false" title="Drag out a circle from its center; Shift or Ctrl adds to the selection">◯ Circle</button>
       </div>
 
       <section id="selected" class="card" hidden></section>
@@ -38,8 +38,9 @@
         <ul>
           <li><strong>Drag any dot</strong> onto the crown it belongs to. No need to select it first.</li>
           <li>With a tree selected, the <strong>arrow keys</strong> nudge it 0.2 m (1 m with Shift).</li>
-          <li><strong>Shift+click</strong> adds a tree to the selection, or takes it out.
-            <strong>Rectangle</strong> or <strong>Circle</strong>, then drag on the map, selects every tree inside (hold Shift to add to the selection).</li>
+          <li><strong>Shift+click</strong> or <strong>Ctrl+click</strong> (⌘) adds a tree to the selection, or takes it out.
+            <strong>Rectangle</strong> or <strong>Circle</strong>, then drag on the map, selects every tree inside (hold Shift or Ctrl to add to the selection).
+            The shape stays: drag its square handles to resize it, the round one to move it, and the selection follows.</li>
           <li><strong>Mark as not there</strong>, or the <strong>Delete</strong> key, for trees with nothing on the imagery where the record puts them. They turn dark with a dashed red ring and can be restored until you export.</li>
           <li><strong>Ctrl+Z</strong> (⌘Z) undoes the last change. <strong>Esc</strong> deselects.</li>
           <li>Moved trees turn gold, with a line back to where the record had them.</li>

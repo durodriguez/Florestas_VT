@@ -162,3 +162,14 @@ button, input { font: inherit; color: inherit; }
 .card .gone { color: #b0122d; font-weight: 600; }
 .card .danger-btn { align-self: flex-start; }
 .picked-list { margin: 0; padding-left: 1.1rem; font-size: .8rem; color: var(--text-dim); max-height: 11rem; overflow-y: auto; }
+
+/* Handles on a kept rectangle or circle: squares resize, the round one moves. */
+.area-handle span {
+  display: block; width: 14px; height: 14px; box-sizing: border-box;
+  background: #fff; border: 2px solid #ff2d55; border-radius: 2px; cursor: nwse-resize;
+}
+.area-handle.is-move span {
+  width: 22px; height: 22px; border-radius: 50%; cursor: move;
+  display: grid; place-items: center; color: #ff2d55; font-size: 15px; line-height: 1;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 40%);
+}
