@@ -43,9 +43,9 @@ function basemaps(maxZoom: number): Record<string, L.TileLayer> {
 const CAMPUS_LABEL_MIN_ZOOM = 15;
 
 /**
- * Where the map starts. A phone shows a sliver of what a desktop does at the
- * same zoom, so it starts a step further out (config `phoneZoom`): the scale
- * bar reads 1000 ft rather than 500. The width is the panel's own breakpoint.
+ * Where the map starts. Phones and desktops now share one zoom (15, a 1000 ft
+ * scale bar); config `phoneZoom`, if set, still gives phones their own. The
+ * width is the panel's own breakpoint.
  */
 function startZoom(cfg: { zoom: number; phoneZoom?: number }): number {
   return window.matchMedia('(max-width: 48rem)').matches ? cfg.phoneZoom ?? cfg.zoom : cfg.zoom;
