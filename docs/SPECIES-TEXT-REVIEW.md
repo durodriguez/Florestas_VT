@@ -79,7 +79,7 @@ Less doubtful, but each rests on one remembered detail:
 - [ ] **Bur oak** — a seedling's taproot "can reach four feet down" in its first season
 - [ ] **American sycamore** — the Pringle brothers, "in the 1760s… for three years"
 - [ ] **Common pear** / **Korean sun pear** — the Endicott pear, planted around 1630, "still bears fruit"
-- [ ] **Eastern poplar** — state tree of Kansas, Nebraska and Wyoming (Wyoming's is the plains cottonwood)
+- [ ] **Eastern cottonwood** — state tree of Kansas, Nebraska and Wyoming (Wyoming's is the plains cottonwood)
 - [ ] **Shantung maple** — seed oil rich in nervonic acid, grown as a crop in China
 - [ ] **Serviceberry** — the burial-service story is labelled folklore; is that fair?
 - [ ] **Larch (genus)** — tamarack root-and-trunk joints used as ship's knees
@@ -187,6 +187,7 @@ other was already there and has not been reviewed either.
 - [ ] **Columnar Sargent cherry** (*Prunus sargentii 'Columnaris'*, `prunus-sargentii-columnaris`): fun fact
 - [ ] **Common baldcypress** (*Taxodium distichum*, `taxodium-distichum`): fun fact
 - [ ] **Common buckthorn** (*Rhamnus cathartica*, `rhamnus-cathartica`): description
+- [ ] **Common honeylocust** (*Gleditsia triacanthos*, `gleditsia-triacanthos`): fun fact
 - [ ] **Common Larch** (*Larix decidua*, `larix-decidua`): fun fact
 - [ ] **Common lilac** (*Syringa vulgaris*, `syringa-vulgaris`): description
 - [ ] **Common smoketree** (*Cotinus coggygria*, `cotinus-coggygria`): fun fact
@@ -201,9 +202,9 @@ other was already there and has not been reviewed either.
 - [ ] **Dogwood** (*Cornus sp.*, `cornus-sp`): description
 - [ ] **Donald Wyman crabapple** (*Malus 'Donald Wyman'*, `malus-donald-wyman`): fun fact
 - [ ] **Dragon's claw willow** (*Salix matsudana 'Tortuosa'*, `salix-matsudana-tortuosa`): description + fun fact
+- [ ] **Eastern cottonwood** (*Populus deltoides*, `populus-deltoides`): fun fact
 - [ ] **Eastern hemlock** (*Tsuga canadensis*, `tsuga-canadensis`): description
 - [ ] **Eastern hophornbeam** (*Ostrya virginiana*, `ostrya-virginiana`): fun fact
-- [ ] **Eastern poplar** (*Populus deltoides*, `populus-deltoides`): fun fact
 - [ ] **Eastern redcedar** (*Juniperus virginiana*, `juniperus-virginiana`): fun fact
 - [ ] **Eastern white pine** (*Pinus strobus*, `pinus-strobus`): description
 - [ ] **Elm** (*Ulmus sp.*, `ulmus-sp`): description + fun fact
@@ -298,7 +299,6 @@ other was already there and has not been reviewed either.
 - [ ] **Sweetgum** (*Liquidambar styraciflua*, `liquidambar-styraciflua`): fun fact
 - [ ] **Tamarack** (*Larix laricina*, `larix-laricina`): description + fun fact
 - [ ] **Tatarian maple** (*Acer tataricum*, `acer-tataricum`): fun fact
-- [ ] **Common honeylocust** (*Gleditsia triacanthos*, `gleditsia-triacanthos`): fun fact
 - [ ] **Thornless honeylocust** (*Gleditsia triacanthos f. inermis*, `gleditsia-triacanthos-inermis`): description
 - [ ] **Three-flower maple** (*Acer triflorum*, `acer-triflorum`): fun fact
 - [ ] **Turkish filbert** (*Corylus colurna*, `corylus-colurna`): description + fun fact
