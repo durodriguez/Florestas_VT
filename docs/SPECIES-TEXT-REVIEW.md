@@ -71,18 +71,27 @@ treat as a separate species.
 
 Less doubtful, but each rests on one remembered detail:
 
-- [ ] **Autumn Blaze maple** — registered as 'Jeffersred', after Ohio nurseryman Glenn Jeffers
-- [ ] **Red Sunset red maple** — 'Franksred', J. Frank Schmidt's Oregon nursery, 1966
-- [ ] **Austrian pine** — resin tapping south of Vienna "now listed as Austrian cultural heritage"
-- [ ] **Spaeth alder** — raised at the Späth nursery in Berlin around 1908
-- [ ] **Tamarack** — "survives cold below minus 60 degrees Fahrenheit"
-- [ ] **Bur oak** — a seedling's taproot "can reach four feet down" in its first season
-- [ ] **American sycamore** — the Pringle brothers, "in the 1760s… for three years"
-- [ ] **Common pear** / **Korean sun pear** — the Endicott pear, planted around 1630, "still bears fruit"
-- [ ] **Eastern cottonwood** — state tree of Kansas, Nebraska and Wyoming (Wyoming's is the plains cottonwood)
-- [ ] **Shantung maple** — seed oil rich in nervonic acid, grown as a crop in China
-- [ ] **Serviceberry** — the burial-service story is labelled folklore; is that fair?
-- [ ] **Larch (genus)** — tamarack root-and-trunk joints used as ship's knees
+- [x] **Autumn Blaze maple** — registered as 'Jeffersred', after Ohio nurseryman Glenn Jeffers
+- [x] **Red Sunset red maple** — 'Franksred', J. Frank Schmidt's Oregon nursery, 1966
+- [x] **Austrian pine** — resin tapping south of Vienna "now listed as Austrian cultural heritage"
+- [x] **Spaeth alder** — raised at the Späth nursery in Berlin around 1908
+- [x] **Tamarack** — "survives cold below minus 60 degrees Fahrenheit"
+- [x] **Bur oak** — a seedling's taproot "can reach four feet down" in its first season
+- [x] **American sycamore** — the Pringle brothers, "in the 1760s… for three years"
+- [x] **Korean sun pear** — the Endicott pear, planted around 1630, "still bears fruit"
+- [x] **Eastern cottonwood** — state tree of Kansas, Nebraska and Wyoming (Wyoming's is the plains cottonwood)
+- [x] **Shantung maple** — seed oil rich in nervonic acid, grown as a crop in China
+- [x] **Serviceberry** — the burial-service story is labeled folklore; is that fair?
+- [x] **Larch (genus)** — tamarack root-and-trunk joints used as ship's knees
+
+Checked on 3 November 2026. Seven held up as written. Changed: Austrian pine
+(resin tapping continues; listed in Austria's intangible heritage inventory
+in 2011), Spaeth alder (raised in the 1890s, sold from 1908), bur oak (more
+than three feet, per the USDA plant guide), American sycamore (marked as a
+story), Korean sun pear (planted in the 1630s). Serviceberry now gives the
+likely origin of the name, from the European service tree, as well as the
+folklore.
+
 
 ## Characteristics: where the sources disagree
 
