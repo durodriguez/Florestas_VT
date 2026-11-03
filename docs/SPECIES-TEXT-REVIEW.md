@@ -30,30 +30,42 @@ site.
 
 | | Species | The claim | What to check |
 | --- | --- | --- | --- |
-| [ ] | Red maple | "Uncommon in many of the forests the first European settlers saw… Ecologists call this the red maple paradox" | Abrams, M.D. (1998), *The Red Maple Paradox*, BioScience 48(5). Does "uncommon" fit? |
-| [ ] | Pin oak | "wildlife managers flood pin oak stands in autumn to feed ducks on their way south" | Green-tree reservoirs; pin oak as a primary species |
-| [ ] | Willow (genus) | "Each bud is wrapped in a single cap-like scale, which no other northern tree has" | The "no other" |
-| [ ] | Cherry (genus) | "Many carry a pair of small glands on the leafstalk" | How general across *Prunus* |
-| [ ] | Dogwood (genus) | "a leaf torn gently apart stays joined by fine white threads" | True of all *Cornus*? |
-| [ ] | Washington hawthorn | "takes its name from Washington, DC, where nurseries were already growing it in the early 1800s" | The name's origin |
-| [ ] | River birch | "The only birch whose seed ripens in late spring rather than autumn" | The "only" |
-| [ ] | Sargent cherry | "brought its seed back from Japan in 1892" | The year |
-| [ ] | Common smoketree | "yields a yellow dye, called young fustic" | The dye name |
-| [ ] | Silver linden | "Research suggests they are starving as the nectar runs out, rather than being poisoned" | The bee research |
-| [ ] | Green Giant arborvitae | "a seedling raised in Denmark in 1937… reached the US National Arboretum in 1967" | Both dates |
-| [ ] | Katsuratree | "a traditional choice for the boards of the game go" | Katsura, not kaya? |
-| [ ] | Hackberry | "seeds of an Asian relative turn up in the Zhoukoudian caves… hundreds of thousands of years ago" | The site and its age |
-| [ ] | Amur maackia | "gets nitrogen from bacteria living in its roots" | Whether *Maackia* nodulates |
-| [ ] | Four-winged silverbell | "silverbells over 80 feet tall stand in the Great Smoky Mountains" | The height |
-| [ ] | Black tupelo | "more than 600 years old have been found in swamps in New Hampshire and Massachusetts" | The age and places |
-| [ ] | Heritage river birch | "found in the St. Louis area in the late 1960s" | Place and decade |
-| [ ] | October Glory red maple | "came from Princeton Nurseries in New Jersey" | The nursery |
-| [ ] | Nordman fir | "a Finnish naturalist who came across it… in the 1830s" | Nationality and decade |
-| [ ] | Common larch | "much of Venice stands on piles of larch and oak" | Larch's share, against alder |
-| [ ] | Peking lilac | "Emil Bretschneider sent its seed west in the 1880s" | The introducer and decade |
-| [ ] | White poplar | "the tree of Heracles, who wore a crown of its leaves on his way back from the underworld" | The myth |
-| [ ] | Bigleaf linden | "bigleaf lindens over a thousand years old stand in village squares in Germany and Austria" | The ages |
-| [ ] | Prairifire crabapple | "Bred at the University of Illinois" | The breeder |
+| [x] | Red maple | "Uncommon in many of the forests the first European settlers saw… Ecologists call this the red maple paradox" | Abrams, M.D. (1998), *The Red Maple Paradox*, BioScience 48(5). Does "uncommon" fit? |
+| [x] | Pin oak | "wildlife managers flood pin oak stands in autumn to feed ducks on their way south" | Green-tree reservoirs; pin oak as a primary species |
+| [x] | Willow (genus) | "Each bud is wrapped in a single cap-like scale, which no other northern tree has" | The "no other" |
+| [x] | Cherry (genus) | "Many carry a pair of small glands on the leafstalk" | How general across *Prunus* |
+| [x] | Dogwood (genus) | "a leaf torn gently apart stays joined by fine white threads" | True of all *Cornus*? |
+| [x] | Washington hawthorn | "takes its name from Washington, DC, where nurseries were already growing it in the early 1800s" | The name's origin |
+| [x] | River birch | "The only birch whose seed ripens in late spring rather than autumn" | The "only" |
+| [x] | Sargent cherry | "brought its seed back from Japan in 1892" | The year |
+| [x] | Common smoketree | "yields a yellow dye, called young fustic" | The dye name |
+| [x] | Silver linden | "Research suggests they are starving as the nectar runs out, rather than being poisoned" | The bee research |
+| [x] | Green Giant arborvitae | "a seedling raised in Denmark in 1937… reached the US National Arboretum in 1967" | Both dates |
+| [x] | Katsuratree | "a traditional choice for the boards of the game go" | Katsura, not kaya? |
+| [x] | Hackberry | "seeds of an Asian relative turn up in the Zhoukoudian caves… hundreds of thousands of years ago" | The site and its age |
+| [x] | Amur maackia | "gets nitrogen from bacteria living in its roots" | Whether *Maackia* nodulates |
+| [x] | Four-winged silverbell | "silverbells over 80 feet tall stand in the Great Smoky Mountains" | The height |
+| [x] | Black tupelo | "more than 600 years old have been found in swamps in New Hampshire and Massachusetts" | The age and places |
+| [x] | Heritage river birch | "found in the St. Louis area in the late 1960s" | Place and decade |
+| [x] | October Glory red maple | "came from Princeton Nurseries in New Jersey" | The nursery |
+| [x] | Nordmann fir | "a Finnish naturalist who came across it… in the 1830s" | Nationality and decade |
+| [x] | Common larch | "much of Venice stands on piles of larch and oak" | Larch's share, against alder |
+| [x] | Peking lilac | "Emil Bretschneider sent its seed west in the 1880s" | The introducer and decade |
+| [x] | White poplar | "the tree of Heracles, who wore a crown of its leaves on his way back from the underworld" | The myth |
+| [x] | Bigleaf linden | "bigleaf lindens over a thousand years old stand in village squares in Germany and Austria" | The ages |
+| [x] | Prairifire crabapple | "Bred at the University of Illinois" | The breeder |
+
+Checked on 3 November 2026 against extension, arboretum and published
+sources. Thirteen held up as written. Reworded: willow (the single bud scale
+is not unique; sycamore has one too), Washington hawthorn (late 1700s, not
+early 1800s), river birch ("unusually", not "the only"), Green Giant (late
+1930s; a single plant in 1967), black tupelo (nearly 700 years, New
+Hampshire), Heritage river birch (around 1970), common larch (alder, larch
+and oak), bigleaf linden (thousand-year ages are traditional; most are
+probably 600 to 800). Softened: hackberry ("may have been eating"), Sargent
+cherry (seed first reached the Arboretum in 1890). Four-winged silverbell
+kept: the tallest Smokies trees are the mountain form, which some botanists
+treat as a separate species.
 
 ### Worth a second look
 
@@ -67,7 +79,7 @@ Less doubtful, but each rests on one remembered detail:
 - [ ] **Bur oak** — a seedling's taproot "can reach four feet down" in its first season
 - [ ] **American sycamore** — the Pringle brothers, "in the 1760s… for three years"
 - [ ] **Common pear** / **Korean sun pear** — the Endicott pear, planted around 1630, "still bears fruit"
-- [ ] **Eastern poplar** — state tree of Kansas, Nebraska and Wyoming (Wyoming's is the plains cottonwood)
+- [ ] **Eastern cottonwood** — state tree of Kansas, Nebraska and Wyoming (Wyoming's is the plains cottonwood)
 - [ ] **Shantung maple** — seed oil rich in nervonic acid, grown as a crop in China
 - [ ] **Serviceberry** — the burial-service story is labelled folklore; is that fair?
 - [ ] **Larch (genus)** — tamarack root-and-trunk joints used as ship's knees
@@ -175,6 +187,7 @@ other was already there and has not been reviewed either.
 - [ ] **Columnar Sargent cherry** (*Prunus sargentii 'Columnaris'*, `prunus-sargentii-columnaris`): fun fact
 - [ ] **Common baldcypress** (*Taxodium distichum*, `taxodium-distichum`): fun fact
 - [ ] **Common buckthorn** (*Rhamnus cathartica*, `rhamnus-cathartica`): description
+- [ ] **Common honeylocust** (*Gleditsia triacanthos*, `gleditsia-triacanthos`): fun fact
 - [ ] **Common Larch** (*Larix decidua*, `larix-decidua`): fun fact
 - [ ] **Common lilac** (*Syringa vulgaris*, `syringa-vulgaris`): description
 - [ ] **Common smoketree** (*Cotinus coggygria*, `cotinus-coggygria`): fun fact
@@ -189,9 +202,9 @@ other was already there and has not been reviewed either.
 - [ ] **Dogwood** (*Cornus sp.*, `cornus-sp`): description
 - [ ] **Donald Wyman crabapple** (*Malus 'Donald Wyman'*, `malus-donald-wyman`): fun fact
 - [ ] **Dragon's claw willow** (*Salix matsudana 'Tortuosa'*, `salix-matsudana-tortuosa`): description + fun fact
+- [ ] **Eastern cottonwood** (*Populus deltoides*, `populus-deltoides`): fun fact
 - [ ] **Eastern hemlock** (*Tsuga canadensis*, `tsuga-canadensis`): description
 - [ ] **Eastern hophornbeam** (*Ostrya virginiana*, `ostrya-virginiana`): fun fact
-- [ ] **Eastern poplar** (*Populus deltoides*, `populus-deltoides`): fun fact
 - [ ] **Eastern redcedar** (*Juniperus virginiana*, `juniperus-virginiana`): fun fact
 - [ ] **Eastern white pine** (*Pinus strobus*, `pinus-strobus`): description
 - [ ] **Elm** (*Ulmus sp.*, `ulmus-sp`): description + fun fact
@@ -200,7 +213,7 @@ other was already there and has not been reviewed either.
 - [ ] **European linden** (*Tilia x europaea*, `tilia-x-europaea`): fun fact
 - [ ] **Fastigiate English oak** (*Quercus robur 'Fastigiata'*, `quercus-robur-fastigiata`): description + fun fact
 - [ ] **Flowering dogwood** (*Cornus florida*, `cornus-florida`): fun fact
-- [ ] **Four Winged silverbell** (*Halesia tetraptera*, `halesia-tetraptera`): fun fact
+- [ ] **Four-winged silverbell** (*Halesia tetraptera*, `halesia-tetraptera`): fun fact
 - [ ] **Freeman's maple** (*Acer x freemanii*, `acer-x-freemanii`): description
 - [ ] **Ginkgo** (*Ginkgo biloba*, `ginkgo-biloba`): description
 - [ ] **Golden Raindrops crabapple** (*Malus 'Schmidtcutleaf'*, `malus-schmidtcutleaf`): fun fact
@@ -237,7 +250,7 @@ other was already there and has not been reviewed either.
 - [ ] **Montmorency cherry** (*Prunus cerasus 'Montmorency'*, `prunus-cerasus-montmorency`): fun fact
 - [ ] **Mugo pine** (*Pinus mugo*, `pinus-mugo`): description + fun fact
 - [ ] **Mulberry** (*Morus sp.*, `morus-sp`): description
-- [ ] **Nordman fir** (*Abies nordmanniana*, `abies-nordmanniana`): fun fact
+- [ ] **Nordmann fir** (*Abies nordmanniana*, `abies-nordmanniana`): fun fact
 - [ ] **Northern red oak** (*Quercus rubra*, `quercus-rubra`): description
 - [ ] **Norway maple** (*Acer platanoides*, `acer-platanoides`): description
 - [ ] **Norway spruce** (*Picea abies*, `picea-abies`): description
@@ -286,7 +299,6 @@ other was already there and has not been reviewed either.
 - [ ] **Sweetgum** (*Liquidambar styraciflua*, `liquidambar-styraciflua`): fun fact
 - [ ] **Tamarack** (*Larix laricina*, `larix-laricina`): description + fun fact
 - [ ] **Tatarian maple** (*Acer tataricum*, `acer-tataricum`): fun fact
-- [ ] **Common honeylocust** (*Gleditsia triacanthos*, `gleditsia-triacanthos`): fun fact
 - [ ] **Thornless honeylocust** (*Gleditsia triacanthos f. inermis*, `gleditsia-triacanthos-inermis`): description
 - [ ] **Three-flower maple** (*Acer triflorum*, `acer-triflorum`): fun fact
 - [ ] **Turkish filbert** (*Corylus colurna*, `corylus-colurna`): description + fun fact

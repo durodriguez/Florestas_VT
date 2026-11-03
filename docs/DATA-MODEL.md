@@ -455,8 +455,8 @@ agree are where a hand-edited CSV drifts.
 Most aliases are a faithful reading of a messy name. A few are not. "Cedar" in
 Vermont covers northern white cedar (*Thuja occidentalis*) and eastern redcedar
 (*Juniperus virginiana*), which are different genera — mapping it to `thuja-sp`
-was somebody's choice, not the source's statement. Three aliases are marked
-this way today: `Cedar`, `Hemlock` and `Lilac`.
+was somebody's choice, not the source's statement. Four aliases are marked
+this way today: `Cedar`, `Cottonwood`, `Hemlock` and `Honey locust`.
 
 This exists because of a specific failure. The bare word "Cedar" resolved
 cleanly for 23 trees, so it counted toward a reported **"99.5% of names
