@@ -334,6 +334,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Duke highbush blueberry** (*Vaccinium corymbosum 'Duke'*, `vaccinium-corymbosum-duke`): description + fun fact
 - [ ] **Dwarf Everbearing black mulberry** (*Morus nigra 'Dwarf Everbearing'*, `morus-nigra-dwarf-everbearing`): description + fun fact
 - [ ] **Elizabeth magnolia** (*Magnolia 'Elizabeth'*, `magnolia-elizabeth`): description + fun fact
+- [ ] **Emerald Green arborvitae** (*Thuja occidentalis 'Smaragd'*, `thuja-occidentalis-smaragd`): description + fun fact
 - [ ] **English ivy** (*Hedera helix*, `hedera-helix`): description + fun fact
 - [ ] **English walnut** (*Juglans regia*, `juglans-regia`): description + fun fact
 - [ ] **Fall Gold raspberry** (*Rubus idaeus 'Fall Gold'*, `rubus-idaeus-fall-gold`): description + fun fact
