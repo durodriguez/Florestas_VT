@@ -127,34 +127,41 @@ On 27 September 2026 each species' `origin` (Vermont native, introduced,
 Vermont invasive) was compared with its native status in the
 [USDA PLANTS Database](https://plants.usda.gov/). 157 of the 191 species
 matched a USDA record; the rest are hybrids and garden trees USDA does not
-list, all but one labelled introduced.
+list, all but one labeled introduced.
 
-- Every species labelled **Vermont native** is native to the lower 48 states
+- Every species labeled **Vermont native** is native to the lower 48 states
   in USDA. None was wrongly called native.
-- Every species labelled **Vermont invasive** is introduced in USDA, except
+- Every species labeled **Vermont invasive** is introduced in USDA, except
   black locust, which is native to the Appalachians and invasive here — as
   its entry already says.
-- Thirty species labelled **introduced** are native elsewhere in the United
+- Thirty species labeled **introduced** are native elsewhere in the United
   States (tuliptree, black locust's relatives, baldcypress, Douglas fir and
   others). None is native to Vermont as far as is known, but USDA's
   state-by-state data could not be reached, so that last step rests on
   general knowledge. Worth a glance: **river birch**, which grows wild in
-  neighbouring states.
+  neighboring states.
 - The check could not test the **Vermont invasive** labels against Vermont's
   own noxious weed list: USDA's service returns those fields empty.
 
 Found along the way, for a person to settle:
 
-- [ ] **Apple serviceberry** (and **Autumn Brilliance**) — labelled Vermont
+- [x] **Apple serviceberry** (and **Autumn Brilliance**) — labeled Vermont
   native. It is a hybrid of two native serviceberries that occurs wild where
   they meet, but the trees sold are nursery selections. Native, or introduced?
-- [ ] **Chestnut oak** — listed as *Quercus prinus*. USDA files that name under
+- [x] **Chestnut oak** — listed as *Quercus prinus*. USDA files that name under
   swamp chestnut oak (*Q. michauxii*); most current sources call chestnut oak
   *Q. montana*, as its description says. Which name should the record use?
-- [ ] **Laurel oak** (*Quercus hemisphaerica*) — USDA folds it into
+- [x] **Laurel oak** (*Quercus hemisphaerica*) — USDA folds it into
   *Q. laurifolia*. A taxonomic difference, not an error.
-- [ ] **Common apple** (*Malus domestica*) — USDA calls it *Malus pumila*. The
+- [x] **Common apple** (*Malus domestica*) — USDA calls it *Malus pumila*. The
   same.
+
+Settled on 4 November 2026. Apple serviceberry and Autumn Brilliance stay
+Vermont native: a natural hybrid of two Vermont natives, labeled the way
+the file already labels cultivars of native species. Chestnut oak is now
+*Quercus montana* (`quercus-montana`), the name Kew accepts; *Q. prinus*
+stays as an alias. Laurel oak and common apple keep their names; *Malus
+pumila* is an alias.
 
 Corrected: pin cherry's scientific name was misspelled *Prunus pennsylvanica*;
 it is *P. pensylvanica*, with one n.
