@@ -96,18 +96,26 @@ folklore.
 ## Characteristics: where the sources disagree
 
 On 27 September 2026 the characteristics columns (heights, spreads, zones,
-colours, months) were compared with the Morton Arboretum's tree and shrub
+colors, months) were compared with the Morton Arboretum's tree and shrub
 pages. 175 of the 257 taxa matched a page. The rule was to change a value
 only where Morton and a second source agreed it was clearly wrong; nothing
 met it, which says the table holds up where Morton covers it. These are the
 disagreements a person who knows the trees should settle:
 
-- [ ] **Seven-son flower** — we say yellow fall colour; Morton says "little to no fall color"
-- [ ] **Russian olive** — we say zones 2–7; Morton says 3–10
-- [ ] **Chinese juniper** — we say 18 ft; Morton says 50–60 ft (Wikipedia: 3–65 ft, "very variable")
-- [ ] **Bigleaf linden** — we say hardy to zone 3; Morton says zone 5
-- [ ] **Sugar maple**, **katsura**, **black oak** — our fall colours (orange, orange, red) against Morton's yellow; Chicago against Vermont, probably, but worth a look
-- [ ] **American sycamore** — we say yellow fall colour; Morton says brown
+- [x] **Seven-son flower** — we say yellow fall color; Morton says "little to no fall color"
+- [x] **Russian olive** — we say zones 2–7; Morton says 3–10
+- [x] **Chinese juniper** — we say 18 ft; Morton says 50–60 ft (Wikipedia: 3–65 ft, "very variable")
+- [x] **Bigleaf linden** — we say hardy to zone 3; Morton says zone 5
+- [x] **Sugar maple**, **katsura**, **black oak** — our fall colors (orange, orange, red) against Morton's yellow; Chicago against Vermont, probably, but worth a look
+- [x] **American sycamore** — we say yellow fall color; Morton says brown
+
+Settled on 4 November 2026 against extension and arboretum sources. Changed:
+seven-son flower to no fall color (the leaves drop late without coloring;
+the red is in the sepals), Russian olive to zones 3–7 (the range most often
+cited), Chinese juniper to 50 × 15 ft (the species, not a garden cultivar),
+American sycamore to yellow-brown. Kept: bigleaf linden at 3–7 (NC State
+Extension gives the same), and sugar maple, katsura and black oak, whose
+colors sit inside the ranges the sources give.
 
 The Amber Glow dawn redwood's description and pest note were corrected the
 same day from its introducer's and two other nurseries' descriptions (golden
