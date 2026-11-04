@@ -408,6 +408,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Shirazz magnolia** (*Magnolia 'Shirazz'*, `magnolia-shirazz`): description + fun fact
 - [ ] **Siberian iris** (*Iris sibirica*, `iris-sibirica`): description + fun fact
 - [ ] **Snow Fountains weeping cherry** (*Prunus 'Snofozam'*, `prunus-snofozam`): description + fun fact
+- [ ] **Spicebush** (*Lindera benzoin*, `lindera-benzoin`): description + fun fact
 - [ ] **Sweetbay magnolia** (*Magnolia virginiana*, `magnolia-virginiana`): description + fun fact
 - [ ] **Swiss stone pine** (*Pinus cembra*, `pinus-cembra`): description + fun fact
 - [ ] **Sycamore maple** (*Acer pseudoplatanus*, `acer-pseudoplatanus`): description + fun fact
