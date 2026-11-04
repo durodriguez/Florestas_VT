@@ -389,6 +389,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Osage orange** (*Maclura pomifera*, `maclura-pomifera`): description + fun fact
 - [ ] **Ostrich fern** (*Matteuccia struthiopteris*, `matteuccia-struthiopteris`): description + fun fact
 - [ ] **Patriot highbush blueberry** (*Vaccinium corymbosum 'Patriot'*, `vaccinium-corymbosum-patriot`): description + fun fact
+- [ ] **Pawpaw** (*Asimina triloba*, `asimina-triloba`): description + fun fact
 - [ ] **Pecan** (*Carya illinoinensis*, `carya-illinoinensis`): description + fun fact
 - [ ] **Pink Flair Sargent cherry** (*Prunus sargentii 'JFS-KW58'*, `prunus-sargentii-jfs-kw58`): description + fun fact
 - [ ] **PJM rhododendron** (*Rhododendron 'P.J.M.'*, `rhododendron-pjm`): description + fun fact
