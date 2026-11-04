@@ -405,6 +405,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Pink Flair Sargent cherry** (*Prunus sargentii 'JFS-KW58'*, `prunus-sargentii-jfs-kw58`): description + fun fact
 - [ ] **PJM rhododendron** (*Rhododendron 'P.J.M.'*, `rhododendron-pjm`): description + fun fact
 - [ ] **Rhododendron** (*Rhododendron sp.*, `rhododendron-sp`): description + fun fact
+- [ ] **Rosy Lights azalea** (*Rhododendron 'Rosy Lights'*, `rhododendron-rosy-lights`): description + fun fact
 - [ ] **Royal Frost birch** (*Betula 'Penci 2'*, `betula-penci-2`): description + fun fact
 - [ ] **Sawtooth oak** (*Quercus acutissima*, `quercus-acutissima`): description + fun fact
 - [ ] **Serbian spruce** (*Picea omorika*, `picea-omorika`): description + fun fact
