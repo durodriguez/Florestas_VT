@@ -379,6 +379,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Hybrid paperbark maple** (*Acer griseum x maximowiczianum*, `acer-griseum-x-maximowiczianum`): description + fun fact
 - [ ] **Iris** (*Iris sp.*, `iris-sp`): description + fun fact
 - [ ] **Japanese angelica tree** (*Aralia elata*, `aralia-elata`): description + fun fact
+- [ ] **Japanese clethra** (*Clethra barbinervis*, `clethra-barbinervis`): description + fun fact
 - [ ] **Japanese fiber banana** (*Musa basjoo*, `musa-basjoo`): description + fun fact
 - [ ] **Japanese pagoda tree** (*Styphnolobium japonicum*, `styphnolobium-japonicum`): description + fun fact
 - [ ] **Japanese pieris** (*Pieris japonica*, `pieris-japonica`): description + fun fact
