@@ -394,6 +394,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **PJM rhododendron** (*Rhododendron 'P.J.M.'*, `rhododendron-pjm`): description + fun fact
 - [ ] **Rhododendron** (*Rhododendron sp.*, `rhododendron-sp`): description + fun fact
 - [ ] **Royal Frost birch** (*Betula 'Penci 2'*, `betula-penci-2`): description + fun fact
+- [ ] **Sawtooth oak** (*Quercus acutissima*, `quercus-acutissima`): description + fun fact
 - [ ] **Serbian spruce** (*Picea omorika*, `picea-omorika`): description + fun fact
 - [ ] **Shellbark hickory** (*Carya laciniosa*, `carya-laciniosa`): description + fun fact
 - [ ] **Shirazz magnolia** (*Magnolia 'Shirazz'*, `magnolia-shirazz`): description + fun fact
