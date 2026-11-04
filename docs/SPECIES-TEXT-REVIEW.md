@@ -384,6 +384,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Lilac** (*Syringa sp.*, `syringa-sp`): description + fun fact
 - [ ] **Limber pine** (*Pinus flexilis*, `pinus-flexilis`): description + fun fact
 - [ ] **Mariesii doublefile viburnum** (*Viburnum plicatum f. tomentosum 'Mariesii'*, `viburnum-plicatum-tomentosum-mariesii`): description + fun fact
+- [ ] **Meader persimmon** (*Diospyros virginiana 'Meader'*, `diospyros-virginiana-meader`): description + fun fact
 - [ ] **Miss Kim lilac** (*Syringa pubescens subsp. patula 'Miss Kim'*, `syringa-pubescens-patula-miss-kim`): description + fun fact
 - [ ] **New York fern** (*Amauropelta noveboracensis*, `amauropelta-noveboracensis`): description + fun fact
 - [ ] **Northern maidenhair fern** (*Adiantum pedatum*, `adiantum-pedatum`): description + fun fact
