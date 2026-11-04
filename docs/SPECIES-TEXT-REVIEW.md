@@ -345,12 +345,15 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
 - [ ] **Ann magnolia** (*Magnolia 'Ann'*, `magnolia-ann`): description + fun fact
 - [ ] **Atlantic white cedar** (*Chamaecyparis thyoides*, `chamaecyparis-thyoides`): description + fun fact
+- [ ] **Beautybush** (*Kolkwitzia amabilis*, `kolkwitzia-amabilis`): description + fun fact
 - [ ] **Black maple** (*Acer nigrum*, `acer-nigrum`): description + fun fact
 - [ ] **Bloodgood Japanese maple** (*Acer palmatum 'Bloodgood'*, `acer-palmatum-bloodgood`): description + fun fact
 - [ ] **Blue Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodthree'*, `hibiscus-syriacus-notwoodthree`): description + fun fact
+- [ ] **Blue Mist dwarf fothergilla** (*Fothergilla gardenii 'Blue Mist'*, `fothergilla-gardenii-blue-mist`): description + fun fact
 - [ ] **Bluecrop highbush blueberry** (*Vaccinium corymbosum 'Bluecrop'*, `vaccinium-corymbosum-bluecrop`): description + fun fact
 - [ ] **Bosnian pine** (*Pinus heldreichii*, `pinus-heldreichii`): description + fun fact
 - [ ] **Boston ivy** (*Parthenocissus tricuspidata*, `parthenocissus-tricuspidata`): description + fun fact
+- [ ] **Bottlebrush buckeye** (*Aesculus parviflora*, `aesculus-parviflora`): description + fun fact
 - [ ] **Brilliance autumn fern** (*Dryopteris erythrosora 'Brilliance'*, `dryopteris-erythrosora-brilliance`): description + fun fact
 - [ ] **Brouwer's Beauty andromeda** (*Pieris 'Brouwer's Beauty'*, `pieris-brouwers-beauty`): description + fun fact
 - [ ] **Butternut** (*Juglans cinerea*, `juglans-cinerea`): description + fun fact
@@ -359,23 +362,30 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Chandler highbush blueberry** (*Vaccinium corymbosum 'Chandler'*, `vaccinium-corymbosum-chandler`): description + fun fact
 - [ ] **Christmas fern** (*Polystichum acrostichoides*, `polystichum-acrostichoides`): description + fun fact
 - [ ] **Common juniper** (*Juniperus communis*, `juniperus-communis`): description + fun fact
+- [ ] **Creeping cotoneaster** (*Cotoneaster adpressus*, `cotoneaster-adpressus`): description + fun fact
 - [ ] **Cucumbertree magnolia** (*Magnolia acuminata*, `magnolia-acuminata`): description + fun fact
 - [ ] **Duke highbush blueberry** (*Vaccinium corymbosum 'Duke'*, `vaccinium-corymbosum-duke`): description + fun fact
 - [ ] **Dwarf Everbearing black mulberry** (*Morus nigra 'Dwarf Everbearing'*, `morus-nigra-dwarf-everbearing`): description + fun fact
+- [ ] **Dwarf fothergilla** (*Fothergilla gardenii*, `fothergilla-gardenii`): description + fun fact
 - [ ] **Elizabeth magnolia** (*Magnolia 'Elizabeth'*, `magnolia-elizabeth`): description + fun fact
 - [ ] **Emerald Green arborvitae** (*Thuja occidentalis 'Smaragd'*, `thuja-occidentalis-smaragd`): description + fun fact
 - [ ] **English ivy** (*Hedera helix*, `hedera-helix`): description + fun fact
 - [ ] **English walnut** (*Juglans regia*, `juglans-regia`): description + fun fact
 - [ ] **Fall Gold raspberry** (*Rubus idaeus 'Fall Gold'*, `rubus-idaeus-fall-gold`): description + fun fact
 - [ ] **Forsythia** (*Forsythia sp.*, `forsythia-sp`): description + fun fact
+- [ ] **Ghost bramble** (*Rubus thibetanus*, `rubus-thibetanus`): description + fun fact
 - [ ] **Gold Star magnolia** (*Magnolia 'Gold Star'*, `magnolia-gold-star`): description + fun fact
+- [ ] **Golden Spirit smokebush** (*Cotinus coggygria 'Ancot'*, `cotinus-coggygria-ancot`): description + fun fact
 - [ ] **Gracillimus maiden grass** (*Miscanthus sinensis 'Gracillimus'*, `miscanthus-sinensis-gracillimus`): description + fun fact
 - [ ] **Heritage oak** (*Quercus x macdanielii 'Clemons'*, `quercus-x-macdanielii-clemons`): description + fun fact
 - [ ] **Hybrid paperbark maple** (*Acer griseum x maximowiczianum*, `acer-griseum-x-maximowiczianum`): description + fun fact
 - [ ] **Iris** (*Iris sp.*, `iris-sp`): description + fun fact
+- [ ] **Japanese angelica tree** (*Aralia elata*, `aralia-elata`): description + fun fact
+- [ ] **Japanese clethra** (*Clethra barbinervis*, `clethra-barbinervis`): description + fun fact
 - [ ] **Japanese fiber banana** (*Musa basjoo*, `musa-basjoo`): description + fun fact
 - [ ] **Japanese pagoda tree** (*Styphnolobium japonicum*, `styphnolobium-japonicum`): description + fun fact
 - [ ] **Japanese pieris** (*Pieris japonica*, `pieris-japonica`): description + fun fact
+- [ ] **Japanese snowbell** (*Styrax japonicus*, `styrax-japonicus`): description + fun fact
 - [ ] **Japanese white pine** (*Pinus parviflora*, `pinus-parviflora`): description + fun fact
 - [ ] **Judy Zuk magnolia** (*Magnolia 'Judy Zuk'*, `magnolia-judy-zuk`): description + fun fact
 - [ ] **Karl Foerster feather reed grass** (*Calamagrostis x acutiflora 'Karl Foerster'*, `calamagrostis-x-acutiflora-karl-foerster`): description + fun fact
@@ -383,6 +393,8 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Lady fern** (*Athyrium filix-femina*, `athyrium-filix-femina`): description + fun fact
 - [ ] **Lilac** (*Syringa sp.*, `syringa-sp`): description + fun fact
 - [ ] **Limber pine** (*Pinus flexilis*, `pinus-flexilis`): description + fun fact
+- [ ] **Mariesii doublefile viburnum** (*Viburnum plicatum f. tomentosum 'Mariesii'*, `viburnum-plicatum-tomentosum-mariesii`): description + fun fact
+- [ ] **Meader persimmon** (*Diospyros virginiana 'Meader'*, `diospyros-virginiana-meader`): description + fun fact
 - [ ] **Miss Kim lilac** (*Syringa pubescens subsp. patula 'Miss Kim'*, `syringa-pubescens-patula-miss-kim`): description + fun fact
 - [ ] **New York fern** (*Amauropelta noveboracensis*, `amauropelta-noveboracensis`): description + fun fact
 - [ ] **Northern maidenhair fern** (*Adiantum pedatum*, `adiantum-pedatum`): description + fun fact
@@ -396,6 +408,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Pink Flair Sargent cherry** (*Prunus sargentii 'JFS-KW58'*, `prunus-sargentii-jfs-kw58`): description + fun fact
 - [ ] **PJM rhododendron** (*Rhododendron 'P.J.M.'*, `rhododendron-pjm`): description + fun fact
 - [ ] **Rhododendron** (*Rhododendron sp.*, `rhododendron-sp`): description + fun fact
+- [ ] **Rosy Lights azalea** (*Rhododendron 'Rosy Lights'*, `rhododendron-rosy-lights`): description + fun fact
 - [ ] **Royal Frost birch** (*Betula 'Penci 2'*, `betula-penci-2`): description + fun fact
 - [ ] **Sawtooth oak** (*Quercus acutissima*, `quercus-acutissima`): description + fun fact
 - [ ] **Serbian spruce** (*Picea omorika*, `picea-omorika`): description + fun fact
@@ -403,6 +416,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Shirazz magnolia** (*Magnolia 'Shirazz'*, `magnolia-shirazz`): description + fun fact
 - [ ] **Siberian iris** (*Iris sibirica*, `iris-sibirica`): description + fun fact
 - [ ] **Snow Fountains weeping cherry** (*Prunus 'Snofozam'*, `prunus-snofozam`): description + fun fact
+- [ ] **Spicebush** (*Lindera benzoin*, `lindera-benzoin`): description + fun fact
 - [ ] **Sweetbay magnolia** (*Magnolia virginiana*, `magnolia-virginiana`): description + fun fact
 - [ ] **Swiss stone pine** (*Pinus cembra*, `pinus-cembra`): description + fun fact
 - [ ] **Sycamore maple** (*Acer pseudoplatanus*, `acer-pseudoplatanus`): description + fun fact
