@@ -384,6 +384,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Japanese fiber banana** (*Musa basjoo*, `musa-basjoo`): description + fun fact
 - [ ] **Japanese pagoda tree** (*Styphnolobium japonicum*, `styphnolobium-japonicum`): description + fun fact
 - [ ] **Japanese pieris** (*Pieris japonica*, `pieris-japonica`): description + fun fact
+- [ ] **Japanese snowbell** (*Styrax japonicus*, `styrax-japonicus`): description + fun fact
 - [ ] **Japanese white pine** (*Pinus parviflora*, `pinus-parviflora`): description + fun fact
 - [ ] **Judy Zuk magnolia** (*Magnolia 'Judy Zuk'*, `magnolia-judy-zuk`): description + fun fact
 - [ ] **Karl Foerster feather reed grass** (*Calamagrostis x acutiflora 'Karl Foerster'*, `calamagrostis-x-acutiflora-karl-foerster`): description + fun fact
