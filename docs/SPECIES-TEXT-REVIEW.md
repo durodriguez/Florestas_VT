@@ -374,6 +374,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Forsythia** (*Forsythia sp.*, `forsythia-sp`): description + fun fact
 - [ ] **Ghost bramble** (*Rubus thibetanus*, `rubus-thibetanus`): description + fun fact
 - [ ] **Gold Star magnolia** (*Magnolia 'Gold Star'*, `magnolia-gold-star`): description + fun fact
+- [ ] **Golden Spirit smokebush** (*Cotinus coggygria 'Ancot'*, `cotinus-coggygria-ancot`): description + fun fact
 - [ ] **Gracillimus maiden grass** (*Miscanthus sinensis 'Gracillimus'*, `miscanthus-sinensis-gracillimus`): description + fun fact
 - [ ] **Heritage oak** (*Quercus x macdanielii 'Clemons'*, `quercus-x-macdanielii-clemons`): description + fun fact
 - [ ] **Hybrid paperbark maple** (*Acer griseum x maximowiczianum*, `acer-griseum-x-maximowiczianum`): description + fun fact
