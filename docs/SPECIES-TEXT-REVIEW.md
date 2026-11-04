@@ -374,6 +374,7 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Hybrid paperbark maple** (*Acer griseum x maximowiczianum*, `acer-griseum-x-maximowiczianum`): description + fun fact
 - [ ] **Iris** (*Iris sp.*, `iris-sp`): description + fun fact
 - [ ] **Japanese fiber banana** (*Musa basjoo*, `musa-basjoo`): description + fun fact
+- [ ] **Japanese pagoda tree** (*Styphnolobium japonicum*, `styphnolobium-japonicum`): description + fun fact
 - [ ] **Japanese pieris** (*Pieris japonica*, `pieris-japonica`): description + fun fact
 - [ ] **Japanese white pine** (*Pinus parviflora*, `pinus-parviflora`): description + fun fact
 - [ ] **Judy Zuk magnolia** (*Magnolia 'Judy Zuk'*, `magnolia-judy-zuk`): description + fun fact
@@ -388,7 +389,9 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Ohio buckeye** (*Aesculus glabra*, `aesculus-glabra`): description + fun fact
 - [ ] **Osage orange** (*Maclura pomifera*, `maclura-pomifera`): description + fun fact
 - [ ] **Ostrich fern** (*Matteuccia struthiopteris*, `matteuccia-struthiopteris`): description + fun fact
+- [ ] **Panicle hydrangea** (*Hydrangea paniculata*, `hydrangea-paniculata`): description + fun fact
 - [ ] **Patriot highbush blueberry** (*Vaccinium corymbosum 'Patriot'*, `vaccinium-corymbosum-patriot`): description + fun fact
+- [ ] **Pawpaw** (*Asimina triloba*, `asimina-triloba`): description + fun fact
 - [ ] **Pecan** (*Carya illinoinensis*, `carya-illinoinensis`): description + fun fact
 - [ ] **Pink Flair Sargent cherry** (*Prunus sargentii 'JFS-KW58'*, `prunus-sargentii-jfs-kw58`): description + fun fact
 - [ ] **PJM rhododendron** (*Rhododendron 'P.J.M.'*, `rhododendron-pjm`): description + fun fact
@@ -408,4 +411,5 @@ written new, from the sources named in each commit, and want the same check.
 - [ ] **Ultimate Yellow magnolia** (*Magnolia 'Ultimate Yellow'*, `magnolia-ultimate-yellow`): description + fun fact
 - [ ] **Umbrella magnolia** (*Magnolia tripetala*, `magnolia-tripetala`): description + fun fact
 - [ ] **Virginia creeper** (*Parthenocissus quinquefolia*, `parthenocissus-quinquefolia`): description + fun fact
+- [ ] **Weeping Alaska cedar** (*Callitropsis nootkatensis 'Pendula'*, `callitropsis-nootkatensis-pendula`): description + fun fact
 - [ ] **White Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodtwo'*, `hibiscus-syriacus-notwoodtwo`): description + fun fact
