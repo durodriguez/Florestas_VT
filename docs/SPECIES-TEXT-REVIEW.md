@@ -178,12 +178,13 @@ published sources found by web search: Allegheny serviceberry (fun fact
 eased: one of the taller serviceberries, not the tallest; downy
 serviceberry grows taller), Amber Glow dawn redwood (fun fact made exact:
 five genera of conifers are deciduous) and American basswood (description
-as written). These are marked "sources checked" rather than ticked, since a
-tick here means someone who knows the tree has read the page.
+as written). By the project lead's decision of 6 November 2026, a source check
+is enough to tick a box for now; a reading by someone who knows the trees
+is still welcome before the map moves to a university domain.
 
-- [ ] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact — sources checked 6 Nov 2026
-- [ ] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact — sources checked 6 Nov 2026
-- [ ] **American basswood** (*Tilia americana*, `tilia-americana`): description — sources checked 6 Nov 2026
+- [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
+- [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
+- [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
 - [ ] **American beech** (*Fagus grandifolia*, `fagus-grandifolia`): description
 - [ ] **American chestnut** (*Castanea dentata*, `castanea-dentata`): description
 - [ ] **American elm** (*Ulmus americana*, `ulmus-americana`): description + fun fact
@@ -427,7 +428,7 @@ A ninth ten on 6 November 2026 finishes this list: northern maidenhair
 fern, Ohio buckeye, Patriot blueberry, Pink Flair Sargent cherry, Royal
 Frost birch, sycamore maple and White Chiffon rose of Sharon. (Allegheny
 serviceberry, Amber Glow dawn redwood and American basswood, checked the
-same day, are marked in section 2 above.) One fixed here: the Sycamore Gap
+same day, are ticked in section 2 above.) One fixed here: the Sycamore Gap
 tree was about 150 years old, not over 200.
 
 - [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
