@@ -173,3 +173,23 @@ button, input { font: inherit; color: inherit; }
   display: grid; place-items: center; color: #ff2d55; font-size: 15px; line-height: 1;
   box-shadow: 0 1px 3px rgb(0 0 0 / 40%);
 }
+
+/* "You are here" (locate.ts): the button sits under the zoom buttons, and the
+   accuracy reads beside it. */
+.locate-control { display: flex; align-items: center; background: #fff; }
+.locate-btn { font-size: 1.15rem; line-height: 30px; text-align: center; text-decoration: none; color: var(--text); }
+.locate-btn[aria-pressed="true"] { color: #1d6fe0; font-weight: 700; }
+.locate-msg { padding: 0 .55rem; font-size: .8rem; white-space: nowrap; color: var(--text); }
+.locate-msg:empty { display: none; }
+.locate-msg.is-warn { color: var(--poor); font-weight: 600; }
+
+/* A phone in the field: the panel stacks above the map instead of taking
+   330 px of a 400 px screen. */
+@media (max-width: 48rem) {
+  .layout { flex-direction: column; }
+  .side { width: auto; max-height: 38vh; border-right: 0; border-bottom: 1px solid var(--border); }
+  .map { min-height: 0; }
+  .bar { gap: .5rem; padding: 0 .6rem; }
+  .bar h1 { font-size: .95rem; }
+  .save-state { display: none; }
+}

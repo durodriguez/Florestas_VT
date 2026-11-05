@@ -22,6 +22,24 @@ with its tag number, or `#` and its accession if it has none.
 - Moved trees turn **gold**, with a dashed line back to where the record had
   them. **Reset** on any move puts that tree back.
 
+## Checking positions on site
+
+**◎**, under the zoom buttons, shows where you are: a blue dot that follows the
+device as you walk, inside a shaded circle as wide as the device's own estimate
+of its accuracy, which is shown beside the button. The map centers on you once,
+at the first fix, and then stays where you put it; if the dot is off screen,
+◎ brings it back, and pressed again it stops.
+
+Judge a tree against the circle, not the dot. A phone outdoors is typically
+good to 3–10 m, the same size as most corrections here, and worse beside tall
+buildings and under dense canopy. Past ±15 m the label turns red and says so.
+The most reliable use is relative: stand at a trunk, and see which dot the blue
+one sits beside.
+
+The page works on a phone, with the panel stacked above the map, but dragging
+trees and the arrow-key nudges need a mouse and keyboard. Use the phone to look
+and a laptop to move.
+
 ## Marking trees as not there
 
 Some records have no tree: nothing on the imagery, the LiDAR or the ground
