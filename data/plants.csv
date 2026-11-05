@@ -201,18 +201,18 @@ UVM-0360,360,quercus-imbricaria,44.476820,-73.195925,"Position corrected on imag
 UVM-0361,361,quercus-rubra,44.476828,-73.196024,"Position corrected on imagery, 2026-11-04",central,,,,4d5a8b56-bc87-4ae1-97c5-760a00c8399c
 UVM-0362,362,tilia-cordata,44.476935,-73.195968,"Position corrected on imagery, 2026-11-04",central,,,,55ffe5fc-4b78-42b8-8529-2759542ebd87
 UVM-4053,,tilia-cordata,44.476910,-73.196180,"Position corrected on imagery, 2026-11-04",central,,,,0cfd744a-87c4-49c9-b3e8-fdf19fed1714
-UVM-0365,365,quercus-alba,44.476903,-73.196331,"Position corrected on imagery, 2026-11-04",central,,,,e19fa916-a3a8-4552-82e2-e3f2330aa716
+UVM-0365,365,quercus-alba,44.476903,-73.196343,"Position corrected on imagery, 2026-11-04",central,,,,e19fa916-a3a8-4552-82e2-e3f2330aa716
 UVM-0366,366,quercus-alba,44.476904,-73.196502,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,5d34ada5-a90d-4087-8f99-3a5b429cceab
 UVM-4054,,syringa-reticulata,44.476974,-73.196795,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b98de96d-8bbd-4581-8dc1-13ee4867fae1
 UVM-4055,,syringa-reticulata,44.476968,-73.196871,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,98f51104-0681-415c-ae6d-a5fb2b0ef67d
 UVM-4056,,populus-nigra,44.477029,-73.196911,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,54d3c901-7e55-4655-b603-d2670bd9a043
 UVM-4057,,populus-nigra,44.477045,-73.196873,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c1ead582-aa78-4f00-a97d-0d2778a01578
 UVM-4058,,populus-nigra,44.477047,-73.196831,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,5a6fcb53-7327-4615-aec8-0db4d97b0984
-UVM-0370,370,celtis-occidentalis,44.476990,-73.196693,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,85e7276f-f6f6-41d4-bf06-850ce1ce64a5
+UVM-0370,370,celtis-occidentalis,44.476980,-73.196671,"Position corrected on imagery, 2026-11-04",central,,,,85e7276f-f6f6-41d4-bf06-850ce1ce64a5
 UVM-4059,,tilia-cordata,44.477029,-73.196306,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,21f488bd-cf3d-4b17-b859-885101e89b1b
 UVM-4060,,tilia-cordata,44.477033,-73.196226,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,f4ae3d1e-e89d-4dfb-8ba5-bc2715b7a148
 UVM-3002,3002,phellodendron-amurense,44.477043,-73.196151,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,998aaf57-1491-4a6b-82e0-236623296a20
-UVM-4061,,tilia-cordata,44.477098,-73.196043,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c8b505e6-c113-4744-a085-8959f0b79b58
+UVM-4061,,tilia-cordata,44.477088,-73.196074,"Position corrected on imagery, 2026-11-04",central,,,,c8b505e6-c113-4744-a085-8959f0b79b58
 UVM-0376,376,syringa-reticulata,44.477449,-73.196866,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,54e7eb28-b930-4c3a-a67d-2669b70104e8
 UVM-0377,377,syringa-reticulata,44.477447,-73.196917,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0f55d72c-49df-4125-85b8-a9148f15fcfe
 UVM-0379,379,acer-palmatum,44.477440,-73.196993,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,a4f7df18-3180-49eb-b48b-bb10aecfe71b
@@ -240,32 +240,32 @@ UVM-4068,,quercus-bicolor,44.476737,-73.197511,"Mapped in UVM's ArcGIS tree laye
 UVM-4069,,quercus-bicolor,44.476699,-73.197589,"Position corrected on imagery, 2026-11-04",central,,,,295eb16d-dd31-4e2b-80a9-bc0eaef683c6
 UVM-4070,,quercus-bicolor,44.476665,-73.197666,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ffc1c981-63c8-44d9-887e-4d119cfc1d00
 UVM-1322,1322,gleditsia-triacanthos-inermis,44.476546,-73.197925,"Position corrected on imagery, 2026-11-04",central,,,,3f943f41-d188-4d36-ad64-efe485b4cd9e
-UVM-4071,,gleditsia-triacanthos-inermis,44.476587,-73.197925,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b7bfa10a-93c6-4489-a94f-cb04f658b07a
-UVM-1324,1324,gleditsia-triacanthos-inermis,44.476623,-73.197930,"Position corrected on imagery, 2026-11-04",central,,,,bebf232a-daf2-4882-8cc8-e625061d2d6d
-UVM-4072,,gleditsia-triacanthos-inermis,44.476684,-73.197933,"Position corrected on imagery, 2026-11-04",central,,,,d382dd07-2aa1-46ab-b36c-1d006f0133ac
-UVM-4073,,gleditsia-triacanthos-inermis,44.476782,-73.197967,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,80de2676-ef78-4dbb-b06b-b37c1eb5cbf7
-UVM-4074,,gleditsia-triacanthos-inermis,44.476843,-73.197985,"Position corrected on imagery, 2026-11-04",central,,,,7fe720f7-e86d-4f33-863e-bff47c657968
-UVM-0323,323,ginkgo-biloba,44.476837,-73.198259,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,3e855c40-40a9-4718-aaef-8774dfdb88f3
-UVM-0322,322,ginkgo-biloba,44.476766,-73.198233,"Position corrected on imagery, 2026-11-04",central,,,,869a1e86-9d3b-444f-bb75-14a487cafc7b
+UVM-4071,,gleditsia-triacanthos-inermis,44.476624,-73.197935,"Position corrected on imagery, 2026-11-04",central,,,,b7bfa10a-93c6-4489-a94f-cb04f658b07a
+UVM-1324,1324,gleditsia-triacanthos-inermis,44.476684,-73.197934,"Position corrected on imagery, 2026-11-04",central,,,,bebf232a-daf2-4882-8cc8-e625061d2d6d
+UVM-4072,,gleditsia-triacanthos-inermis,44.476786,-73.197963,"Position corrected on imagery, 2026-11-04",central,,,,d382dd07-2aa1-46ab-b36c-1d006f0133ac
+UVM-4073,,gleditsia-triacanthos-inermis,44.476847,-73.197989,"Position corrected on imagery, 2026-11-04",central,,,,80de2676-ef78-4dbb-b06b-b37c1eb5cbf7
+UVM-4074,,gleditsia-triacanthos-inermis,44.476948,-73.198061,"Position corrected on imagery, 2026-11-04",central,,,,7fe720f7-e86d-4f33-863e-bff47c657968
+UVM-0323,323,ginkgo-biloba,44.476818,-73.198271,"Position corrected on imagery, 2026-11-04",central,,,,3e855c40-40a9-4718-aaef-8774dfdb88f3
+UVM-0322,322,ginkgo-biloba,44.476767,-73.198246,"Position corrected on imagery, 2026-11-04",central,,,,869a1e86-9d3b-444f-bb75-14a487cafc7b
 UVM-0321,321,ginkgo-biloba,44.476702,-73.198200,"Position corrected on imagery, 2026-11-04",central,,,,644f0601-af5f-49ef-8d6e-278716d9c271
 UVM-0320,320,ginkgo-biloba,44.476643,-73.198187,"Position corrected on imagery, 2026-11-04",central,,,,6035eff5-30b9-41b2-bfbd-9173fef93669
 UVM-0319,319,ginkgo-biloba,44.476585,-73.198198,"Position corrected on imagery, 2026-11-04",central,,,,6657f1a7-2f9e-48d6-ac11-f69c2974fe7f
 UVM-0318,318,ginkgo-biloba,44.476510,-73.198210,"Position corrected on imagery, 2026-11-04",central,,,,16fbbc5f-5173-452f-b9e5-4782a25ebcef
-UVM-3208,3208,acer-x-freemanii,44.476390,-73.198214,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ad7c754d-7dee-440f-8ec7-85ab66534cab
-UVM-4075,,taxodium-distichum,44.476350,-73.198280,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,2f49ac29-76fd-4480-b20b-e038b908f4a5
-UVM-3209,3209,ulmus-sp,44.476377,-73.198441,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,4104a5da-3cee-464f-8814-8920b20e49bd
+UVM-3208,3208,acer-x-freemanii,44.476399,-73.198248,"Position corrected on imagery, 2026-11-04",central,,,,ad7c754d-7dee-440f-8ec7-85ab66534cab
+UVM-4075,,taxodium-distichum,44.476353,-73.198305,"Position corrected on imagery, 2026-11-04",central,,,,2f49ac29-76fd-4480-b20b-e038b908f4a5
+UVM-3209,3209,ulmus-sp,44.476381,-73.198444,"Position corrected on imagery, 2026-11-04",central,,,,4104a5da-3cee-464f-8814-8920b20e49bd
 UVM-0316,316,malus-sp,44.476467,-73.198666,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,81176241-a516-4adc-9fba-bb505d76f3b9
 UVM-3210,3210,ulmus-sp,44.476522,-73.198818,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e45ee2d3-a84e-4cba-bcfe-f7e13796d101
 UVM-3211,3211,ulmus-sp,44.476606,-73.198892,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,f3d032e7-e20b-44d6-a82b-9cbe6bf2027e
-UVM-0310,310,malus-sp,44.476687,-73.198788,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,02ee8eb4-0b7b-4707-b4e7-e861b4270618
-UVM-0309,309,malus-sp,44.476630,-73.198698,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,4b8b35de-6177-494b-a35c-62e707fe14c8
-UVM-0308,308,picea-abies,44.476677,-73.198633,Position set by pin on imagery,central,,,,c30dbae4-702d-4e63-bef1-e06a265cef54
-UVM-0314,314,acer-saccharum,44.476721,-73.198914,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,7949ef51-c30b-4430-bbee-5503a1905723
-UVM-0313,313,acer-saccharum,44.476824,-73.198927,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,3ace58ee-c734-4c6e-b5bf-ba8497f61fff
-UVM-0311,311,quercus-palustris,44.476815,-73.198863,Position set by pin on imagery,central,,,,8a404d68-4090-4ef1-8e57-565080eb9be8
-UVM-0312,312,malus-sp,44.476845,-73.198700,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c73bf00c-7b4f-4098-bc23-f366966f933e
-UVM-0307,307,picea-abies,44.476807,-73.198648,Position set by pin on imagery,central,,,,91fbd758-ab9c-4b9b-864b-40968f9539d8
-UVM-0306,306,ginkgo-biloba,44.476818,-73.198537,Position set by pin on imagery,central,,,,a3cb10d8-b06b-4cfb-b91d-5adb9cb8f37b
+UVM-0310,310,malus-sp,44.476667,-73.198802,"Position corrected on imagery, 2026-11-04",central,,,,02ee8eb4-0b7b-4707-b4e7-e861b4270618
+UVM-0309,309,malus-sp,44.476617,-73.198735,"Position corrected on imagery, 2026-11-04",central,,,,4b8b35de-6177-494b-a35c-62e707fe14c8
+UVM-0308,308,picea-abies,44.476685,-73.198641,"Position corrected on imagery, 2026-11-04",central,,,,c30dbae4-702d-4e63-bef1-e06a265cef54
+UVM-0314,314,acer-saccharum,44.476730,-73.198936,"Position corrected on imagery, 2026-11-04",central,,,,7949ef51-c30b-4430-bbee-5503a1905723
+UVM-0313,313,acer-saccharum,44.476851,-73.198957,"Position corrected on imagery, 2026-11-04",central,,,,3ace58ee-c734-4c6e-b5bf-ba8497f61fff
+UVM-0311,311,quercus-palustris,44.476806,-73.198815,"Position corrected on imagery, 2026-11-04",central,,,,8a404d68-4090-4ef1-8e57-565080eb9be8
+UVM-0312,312,malus-sp,44.476933,-73.198786,"Position corrected on imagery, 2026-11-04",central,,,,c73bf00c-7b4f-4098-bc23-f366966f933e
+UVM-0307,307,picea-abies,44.476801,-73.198648,"Position corrected on imagery, 2026-11-04",central,,,,91fbd758-ab9c-4b9b-864b-40968f9539d8
+UVM-0306,306,ginkgo-biloba,44.476809,-73.198536,"Position corrected on imagery, 2026-11-04",central,,,,a3cb10d8-b06b-4cfb-b91d-5adb9cb8f37b
 UVM-0304,304,ginkgo-biloba,44.476891,-73.198336,Position set by pin on imagery,central,,,,eaa32a0d-4c93-4665-8e94-7ec36a96e6d2
 UVM-0305,305,ginkgo-biloba,44.476796,-73.198322,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,788bc493-b26c-44c9-80a4-ce49b1e368be
 UVM-0298,298,acer-platanoides,44.477191,-73.198754,"Position corrected on imagery, 2026-11-04",central,,,,0e35aa5a-2e17-4ad9-945c-cb5e5ca82ab4
@@ -292,7 +292,7 @@ UVM-4081,,betula-nigra,44.477779,-73.198028,"Mapped in UVM's ArcGIS tree layer, 
 UVM-4082,,betula-nigra,44.477898,-73.198099,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c71c53e0-92c7-4521-ba23-5ca95389700f
 UVM-4083,,betula-nigra,44.477951,-73.198166,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,1a942892-6a85-4ea1-b51b-34dfeef62855
 UVM-4084,,acer-x-freemanii,44.478051,-73.198338,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,93ab6f30-7947-4f3f-b6f2-c881bfdd136c
-UVM-4085,,acer-x-freemanii,44.478163,-73.198344,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,1cd89be4-3b9a-484a-8b57-ec30898847df
+UVM-4085,,acer-x-freemanii,44.478174,-73.198362,"Position corrected on imagery, 2026-11-04",central,,,,1cd89be4-3b9a-484a-8b57-ec30898847df
 UVM-0271,271,quercus-palustris,44.478214,-73.198539,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,46864ea0-a285-4e26-8fba-e154d532c2a6
 UVM-0270,270,quercus-palustris,44.478170,-73.198611,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,8513773b-838e-4a79-aa51-9216779bbbd7
 UVM-0269,269,quercus-palustris,44.478119,-73.198603,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e266de20-92c2-4964-b5c0-f52b9d6122fe
@@ -302,8 +302,8 @@ UVM-0263,263,quercus-palustris,44.477999,-73.198744,"Mapped in UVM's ArcGIS tree
 UVM-0264,264,quercus-palustris,44.478048,-73.198757,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,472ce21c-082f-4739-a186-5aee47317acd
 UVM-0265,265,quercus-palustris,44.478102,-73.198765,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,9ab053c5-9e95-41e3-81d7-1fed88abfdb9
 UVM-3270,3270,quercus-palustris,44.478154,-73.198774,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,6d2a2949-b5c3-4d85-a3b4-3e1fcab9af00
-UVM-3268,3268,fraxinus-pennsylvanica,44.477181,-73.198935,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,18d64a44-0605-471f-8304-1e78941a0367
-UVM-1302,1302,acer-x-freemanii,44.477095,-73.198931,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,fa4900c4-ed49-4fa3-b383-224cd0efebe1
+UVM-3268,3268,fraxinus-pennsylvanica,44.477203,-73.199006,"Position corrected on imagery, 2026-11-04",central,,,,18d64a44-0605-471f-8304-1e78941a0367
+UVM-1302,1302,acer-x-freemanii,44.477104,-73.198961,"Position corrected on imagery, 2026-11-04",central,,,,fa4900c4-ed49-4fa3-b383-224cd0efebe1
 UVM-0282,282,fraxinus-pennsylvanica,44.477583,-73.199025,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e867682e-ad5d-4e98-ac5d-0d611e759f1f
 UVM-3267,3267,acer-saccharinum,44.477738,-73.199095,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,eee75ff7-9544-4a1d-b574-5d2ff76efc39
 UVM-3266,3266,acer-saccharinum,44.477913,-73.199131,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,7373b800-a7ff-4ed2-9d32-dd6e4e9ab588
@@ -316,7 +316,7 @@ UVM-3262,3262,ulmus-sp,44.478615,-73.199224,"Mapped in UVM's ArcGIS tree layer, 
 UVM-3261,3261,acer-platanoides,44.478710,-73.199282,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,3c384b16-5d7a-4d9d-8b9a-aae0fb3c14e8
 UVM-0491,491,zelkova-serrata,44.478804,-73.199252,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,4f668e52-5bd0-45e8-aa19-652ea176b785
 UVM-0250,250,acer-saccharum,44.479120,-73.199371,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ee451f9d-8e55-48fe-8ba7-e4d6bbc6c886
-UVM-3260,3260,acer-saccharum,44.479236,-73.199394,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,24eb8796-aa4b-4747-8915-5e322554335b
+UVM-3260,3260,acer-saccharum,44.479311,-73.199403,"Position corrected on imagery, 2026-11-04",central,,,,24eb8796-aa4b-4747-8915-5e322554335b
 UVM-4086,,magnolia-sp,44.479293,-73.199229,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,cba45af2-3c83-41ef-a13c-f26a4fbf2d43
 UVM-0246,246,pyrus-calleryana,44.479504,-73.199395,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,3649e601-bd35-4bd2-8e6d-0eb6e5d4bcc4
 UVM-3259,3259,acer-platanoides,44.479590,-73.199316,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b1326eaa-f4ac-4093-afe2-995cba4ec243
@@ -324,7 +324,7 @@ UVM-0242,242,malus-sp,44.479626,-73.199103,"Mapped in UVM's ArcGIS tree layer, 2
 UVM-0241,241,malus-sp,44.479663,-73.199195,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b8fd4b8e-35b5-4d3f-82df-759a832e7064
 UVM-0239,239,acer-platanoides,44.479607,-73.199446,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,84729133-7c3e-4aad-a236-59a0ba5330f6
 UVM-4087,,gleditsia-triacanthos-inermis,44.479678,-73.199330,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,641891d0-76fb-4eb0-9a37-66a7e304478f
-UVM-0236,236,acer-saccharum,44.479941,-73.199516,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,1242a966-99b6-4122-b81a-7a61537a7cb2
+UVM-0236,236,acer-saccharum,44.480034,-73.199520,"Position corrected on imagery, 2026-11-04",central,,,,1242a966-99b6-4122-b81a-7a61537a7cb2
 UVM-1096,1096,quercus-bicolor,44.477529,-73.195003,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ee0f56f4-c9f5-408f-a3fc-6da7fa7f72ac
 UVM-3016,3016,cercidiphyllum-japonicum,44.477604,-73.194861,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e39c2613-ed9a-44ef-bce1-21b6fcb30ccb
 UVM-3017,3017,malus-sp,44.477680,-73.194970,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,86a0a363-6943-4272-98aa-7c2905bffb78
@@ -405,19 +405,19 @@ UVM-4110,,acer-x-freemanii,44.478417,-73.196278,"Position corrected on imagery, 
 UVM-4111,,quercus-rubra,44.478438,-73.196062,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,acbf3dd7-6c76-4bd2-8c50-8e35cdcefa43
 UVM-4112,,acer-x-freemanii,44.478610,-73.196322,"Position corrected on imagery, 2026-10-14",central,,,,64284e79-cb61-4044-b776-54e97328823b
 UVM-4113,,acer-x-freemanii,44.478704,-73.196336,"Position corrected on imagery, 2026-10-14",central,,,,e7ecd7d9-0346-429d-812f-541ca2f516ae
-UVM-0472,472,gleditsia-triacanthos-inermis,44.478816,-73.196305,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,6f0b7c6f-53d8-4102-a4e4-f11cdc3629bb
-UVM-0459,459,gleditsia-triacanthos-inermis,44.479026,-73.196333,"Position corrected on imagery, 2026-10-14",central,,,,07e45b92-593b-4120-afdc-f15778b550c3
-UVM-4114,,gleditsia-triacanthos-inermis,44.479098,-73.196325,"Position corrected on imagery, 2026-10-14",central,,,,f5cae316-0394-424b-a789-ea5984faace4
-UVM-4115,,gleditsia-triacanthos-inermis,44.479177,-73.196320,"Position corrected on imagery, 2026-10-14",central,,,,e3e00231-8820-4189-8ebf-f1ecf186667f
-UVM-4116,,gleditsia-triacanthos-inermis,44.479264,-73.196315,"Position corrected on imagery, 2026-10-14",central,,,,d8136d62-022a-415d-8d59-2eb0dc2d6ab9
-UVM-4117,,acer-x-freemanii,44.479326,-73.196302,"Position corrected on imagery, 2026-10-14",central,,,,83ea0c71-034d-4faf-88a1-96f1cc062c12
-UVM-4118,,acer-x-freemanii,44.479373,-73.196273,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,305c1094-a2d5-41ea-af9a-57eb2452d502
+UVM-0472,472,gleditsia-triacanthos-inermis,44.478820,-73.196348,"Position corrected on imagery, 2026-11-04",central,,,,6f0b7c6f-53d8-4102-a4e4-f11cdc3629bb
+UVM-0459,459,gleditsia-triacanthos-inermis,44.478898,-73.196351,"Position corrected on imagery, 2026-11-04",central,,,,07e45b92-593b-4120-afdc-f15778b550c3
+UVM-4114,,gleditsia-triacanthos-inermis,44.479019,-73.196336,"Position corrected on imagery, 2026-11-04",central,,,,f5cae316-0394-424b-a789-ea5984faace4
+UVM-4115,,gleditsia-triacanthos-inermis,44.479095,-73.196348,"Position corrected on imagery, 2026-11-04",central,,,,e3e00231-8820-4189-8ebf-f1ecf186667f
+UVM-4116,,gleditsia-triacanthos-inermis,44.479172,-73.196327,"Position corrected on imagery, 2026-11-04",central,,,,d8136d62-022a-415d-8d59-2eb0dc2d6ab9
+UVM-4117,,acer-x-freemanii,44.479262,-73.196316,"Position corrected on imagery, 2026-11-04",central,,,,83ea0c71-034d-4faf-88a1-96f1cc062c12
+UVM-4118,,acer-x-freemanii,44.479328,-73.196303,"Position corrected on imagery, 2026-11-04",central,,,,305c1094-a2d5-41ea-af9a-57eb2452d502
 UVM-4119,,acer-x-freemanii,44.479383,-73.196284,"Position corrected on imagery, 2026-10-14",central,,,,7eb33ba5-8567-4e29-a02e-a7b7f3370ec2
 UVM-4120,,acer-x-freemanii,44.479445,-73.196397,"Position corrected on imagery, 2026-10-14",central,,,,04e84ea2-959c-4280-baa6-5d2867bd1bab
 UVM-4121,,acer-x-freemanii,44.479513,-73.196380,"Position corrected on imagery, 2026-10-14",central,,,,e78a25bc-a320-47d9-836d-fa6e5075cf31
 UVM-4122,,acer-x-freemanii,44.479571,-73.196362,"Position corrected on imagery, 2026-10-14",central,,,,a70e68e2-fa21-4ad9-abb6-a3bdff273291
 UVM-0417,417,acer-saccharum,44.479657,-73.196382,"Position corrected on imagery, 2026-10-14",central,,,,26aac41c-37b0-4521-affb-08857a620cb3
-UVM-4123,,acer-platanoides,44.479364,-73.196425,"Position corrected on imagery, 2026-10-14",central,,,,c645b8e3-811b-44c1-b880-ae6fd4e8538c
+UVM-4123,,acer-platanoides,44.479378,-73.196423,"Position corrected on imagery, 2026-11-04",central,,,,c645b8e3-811b-44c1-b880-ae6fd4e8538c
 UVM-4124,,acer-platanoides,44.479353,-73.196481,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,eb274918-13d9-42e6-9c51-c9bfd5319cae
 UVM-0422,422,acer-platanoides,44.479379,-73.196608,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,49df40d7-7fdf-4795-8817-5cc72535b1cf
 UVM-0423,423,gleditsia-triacanthos-inermis,44.479275,-73.196493,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ad853e2e-19bf-4aaa-ba69-29de219f19fb
@@ -466,11 +466,11 @@ UVM-0474,474,gleditsia-triacanthos-inermis,44.478729,-73.196516,"Mapped in UVM's
 UVM-0475,475,gleditsia-triacanthos-inermis,44.478722,-73.196583,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,010099a6-dcd8-4de6-ac3c-33d6c320e5f0
 UVM-3207,3207,gleditsia-triacanthos-inermis,44.478713,-73.196641,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,1d52fc95-281a-408b-85e1-4d27942f2e61
 UVM-0477,477,gleditsia-triacanthos-inermis,44.478680,-73.196842,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0d9b6ee6-29bc-40e2-845f-eb955f8d7c98
-UVM-0480,480,acer-rubrum,44.478479,-73.197092,"Position corrected on imagery, 2026-10-14",central,,,,5f69fcbd-ed01-4151-88ba-7cf2f8e143f0
-UVM-0478,478,quercus-palustris,44.478533,-73.196577,"Position corrected on imagery, 2026-10-14",central,,,,ab79f2f7-957e-4174-ab26-75b40d17d4d8
+UVM-0480,480,acer-rubrum,44.478486,-73.197103,"Position corrected on imagery, 2026-11-04",central,,,,5f69fcbd-ed01-4151-88ba-7cf2f8e143f0
+UVM-0478,478,quercus-palustris,44.478539,-73.196591,"Position corrected on imagery, 2026-11-04",central,,,,ab79f2f7-957e-4174-ab26-75b40d17d4d8
 UVM-4127,,acer-saccharum,44.478333,-73.196529,"Position corrected on imagery, 2026-10-14",central,,,,e239564a-61f2-48a2-b641-3bffa5f430cc
 UVM-4128,,ulmus-sp,44.478212,-73.197058,"Position corrected on imagery, 2026-10-14",central,,,,cd357e7c-dfdc-4680-a35c-9693f6ae2cd5
-UVM-3295,3295,acer-x-freemanii,44.478046,-73.197335,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,609e6d14-8fe3-41c2-b096-df4ac5317e6c
+UVM-3295,3295,acer-x-freemanii,44.478044,-73.197284,"Position corrected on imagery, 2026-11-04",central,,,,609e6d14-8fe3-41c2-b096-df4ac5317e6c
 UVM-3296,3296,acer-x-freemanii,44.478215,-73.197310,"Position corrected on imagery, 2026-10-14",central,,,,33413f86-0d52-46ce-8576-b7e8a34758a0
 UVM-3297,3297,acer-x-freemanii,44.478263,-73.197323,"Position corrected on imagery, 2026-10-14",central,,,,99cbe5a4-effc-4311-b565-9fe1ba0417d1
 UVM-4129,,betula-nigra,44.478304,-73.197313,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,67ab26c8-feec-45f0-b0ee-91cddc725b71
@@ -479,17 +479,17 @@ UVM-4131,,betula-nigra,44.478343,-73.197317,"Mapped in UVM's ArcGIS tree layer, 
 UVM-4132,,betula-nigra,44.478470,-73.197351,"Position corrected on imagery, 2026-10-14",central,,,,263f4b6d-a081-438a-bda7-01efae016a90
 UVM-4133,,betula-nigra,44.478534,-73.197365,"Position corrected on imagery, 2026-10-14",central,,,,993e7dac-4781-4a73-bbfc-f1bb61efc225
 UVM-4134,,betula-nigra,44.478573,-73.197373,"Position corrected on imagery, 2026-10-14",central,,,,784344c6-1a0c-4853-b8ac-443c7ee19da8
-UVM-4135,,gleditsia-triacanthos-inermis,44.478659,-73.197332,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,13d458c0-923b-4dfc-9e6f-f68cbd2b3b14
-UVM-4136,,gleditsia-triacanthos-inermis,44.478704,-73.197366,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,bd910ba7-c6b0-4d14-8e28-b2cf624322f0
-UVM-4137,,gleditsia-triacanthos-inermis,44.478742,-73.197400,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0c47038e-deac-44c6-9179-69c8ac047efe
-UVM-4138,,gleditsia-triacanthos-inermis,44.478776,-73.197445,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e8f438a1-36ab-477f-9e18-875debaed544
-UVM-4139,,betula-nigra,44.478915,-73.197364,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,18e3049f-491e-4b24-98fd-dbf5f311934c
-UVM-4140,,betula-nigra,44.478947,-73.197411,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,a1d318c1-1fe3-414b-8bf9-13944e28ee17
-UVM-4141,,betula-nigra,44.478940,-73.197450,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c05e3ee0-0a88-41bf-ba43-5ee4e7fef6c7
-UVM-4142,,betula-nigra,44.478972,-73.197469,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,6efd4f13-c77a-43a6-ad19-c8f1ee24228d
-UVM-4143,,betula-nigra,44.478962,-73.197508,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,92731495-357c-4185-8981-342bb15a2773
-UVM-4144,,betula-nigra,44.478996,-73.197543,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0d4411e0-404b-497c-a7c8-bf8c9b0a634d
-UVM-4145,,acer-x-freemanii,44.478705,-73.197490,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b92cab1e-afc7-4022-ba8e-87e816b9da0e
+UVM-4135,,gleditsia-triacanthos-inermis,44.478691,-73.197369,"Position corrected on imagery, 2026-11-04",central,,,,13d458c0-923b-4dfc-9e6f-f68cbd2b3b14
+UVM-4136,,gleditsia-triacanthos-inermis,44.478746,-73.197424,"Position corrected on imagery, 2026-11-04",central,,,,bd910ba7-c6b0-4d14-8e28-b2cf624322f0
+UVM-4137,,gleditsia-triacanthos-inermis,44.478790,-73.197465,"Position corrected on imagery, 2026-11-04",central,,,,0c47038e-deac-44c6-9179-69c8ac047efe
+UVM-4138,,gleditsia-triacanthos-inermis,44.478829,-73.197552,"Position corrected on imagery, 2026-11-04",central,,,,e8f438a1-36ab-477f-9e18-875debaed544
+UVM-4139,,betula-nigra,44.478906,-73.197402,"Position corrected on imagery, 2026-11-04",central,,,,18e3049f-491e-4b24-98fd-dbf5f311934c
+UVM-4140,,betula-nigra,44.478939,-73.197428,"Position corrected on imagery, 2026-11-04",central,,,,a1d318c1-1fe3-414b-8bf9-13944e28ee17
+UVM-4141,,betula-nigra,44.478935,-73.197465,"Position corrected on imagery, 2026-11-04",central,,,,c05e3ee0-0a88-41bf-ba43-5ee4e7fef6c7
+UVM-4142,,betula-nigra,44.478962,-73.197496,"Position corrected on imagery, 2026-11-04",central,,,,6efd4f13-c77a-43a6-ad19-c8f1ee24228d
+UVM-4143,,betula-nigra,44.478956,-73.197542,"Position corrected on imagery, 2026-11-04",central,,,,92731495-357c-4185-8981-342bb15a2773
+UVM-4144,,betula-nigra,44.478986,-73.197574,"Position corrected on imagery, 2026-11-04",central,,,,0d4411e0-404b-497c-a7c8-bf8c9b0a634d
+UVM-4145,,acer-x-freemanii,44.478736,-73.197540,"Position corrected on imagery, 2026-11-04",central,,,,b92cab1e-afc7-4022-ba8e-87e816b9da0e
 UVM-2887,2887,acer-saccharinum,44.479415,-73.197137,"Position corrected on imagery, 2026-11-04",central,,,,9f954ba3-6122-4bd6-af2e-2921a527f7cc
 UVM-4146,,betula-nigra,44.477748,-73.197519,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b3d20bc9-94f4-4fe9-a661-cbbefe87d141
 UVM-4147,,betula-nigra,44.477891,-73.197478,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,708b21db-7bc3-4901-b149-60fb3e37a433
@@ -498,63 +498,63 @@ UVM-4149,,betula-nigra,44.477944,-73.197503,"Mapped in UVM's ArcGIS tree layer, 
 UVM-4150,,betula-nigra,44.477974,-73.197516,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,9aeb8a27-ee8d-460c-a63d-ee07bc3fd798
 UVM-4151,,betula-nigra,44.477891,-73.197574,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,3f821392-306d-498f-bf5e-255107bddf94
 UVM-4152,,betula-nigra,44.477925,-73.197614,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,7d82c8e1-eba8-4377-be1e-2533afe71f6d
-UVM-3274,3274,zelkova-serrata,44.478057,-73.197815,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ce893d92-36c2-4feb-af6e-94cd75edc9f7
-UVM-3275,3275,zelkova-serrata,44.478118,-73.197825,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,1e4661c2-fed1-455a-b388-e7bfb07df98c
-UVM-3276,3276,zelkova-serrata,44.478176,-73.197834,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,9d917612-9c3f-4cfa-861a-57fd0b152a48
-UVM-3277,3277,zelkova-serrata,44.478234,-73.197842,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,14f3fa53-ed97-448a-81c0-0934b7625e5d
+UVM-3274,3274,zelkova-serrata,44.478073,-73.197778,"Position corrected on imagery, 2026-11-04",central,,,,ce893d92-36c2-4feb-af6e-94cd75edc9f7
+UVM-3275,3275,zelkova-serrata,44.478128,-73.197778,"Position corrected on imagery, 2026-11-04",central,,,,1e4661c2-fed1-455a-b388-e7bfb07df98c
+UVM-3276,3276,zelkova-serrata,44.478178,-73.197789,"Position corrected on imagery, 2026-11-04",central,,,,9d917612-9c3f-4cfa-861a-57fd0b152a48
+UVM-3277,3277,zelkova-serrata,44.478227,-73.197795,"Position corrected on imagery, 2026-11-04",central,,,,14f3fa53-ed97-448a-81c0-0934b7625e5d
 UVM-4153,,ulmus-sp,44.477990,-73.197874,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c910dc4b-8832-4eb0-aee3-2cac53a843c4
-UVM-4154,,ulmus-sp,44.477999,-73.197954,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c306f84f-c819-41ac-8847-e5ec979cc656
-UVM-4155,,ulmus-sp,44.478017,-73.198061,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0e1e7a33-8f2c-4d19-a64d-7f8c4bf17b38
-UVM-4156,,ulmus-sp,44.478055,-73.198134,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,cd617398-1b93-417b-bb79-a7606caf409c
-UVM-4157,,ulmus-sp,44.478102,-73.198198,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0e1d60ec-11f9-40d5-b902-2edd126e91e6
+UVM-4154,,ulmus-sp,44.477994,-73.197985,"Position corrected on imagery, 2026-11-04",central,,,,c306f84f-c819-41ac-8847-e5ec979cc656
+UVM-4155,,ulmus-sp,44.478012,-73.198096,"Position corrected on imagery, 2026-11-04",central,,,,0e1e7a33-8f2c-4d19-a64d-7f8c4bf17b38
+UVM-4156,,ulmus-sp,44.478068,-73.198182,"Position corrected on imagery, 2026-11-04",central,,,,cd617398-1b93-417b-bb79-a7606caf409c
+UVM-4157,,ulmus-sp,44.478141,-73.198239,"Position corrected on imagery, 2026-11-04",central,,,,0e1d60ec-11f9-40d5-b902-2edd126e91e6
 UVM-4158,,betula-nigra,44.478332,-73.198619,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,93d59de6-ae7f-447a-9443-16c0ab88e97f
 UVM-4159,,betula-nigra,44.478373,-73.198600,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,1c6e0de7-2ee6-4ff2-8f25-ff1a0364eeff
-UVM-0402,402,fagus-sylvatica,44.478455,-73.198723,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c0e5161a-25a3-44c6-9e0c-696806ef4544
+UVM-0402,402,fagus-sylvatica,44.478451,-73.198722,"Position corrected on imagery, 2026-11-04",central,,,,c0e5161a-25a3-44c6-9e0c-696806ef4544
 UVM-4160,,quercus-palustris,44.478405,-73.198658,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,daeab737-bc79-4679-bbdf-8b26519d4c50
-UVM-4161,,malus-sp,44.478483,-73.198637,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,99a2b461-ebc9-4c29-a2b7-8a3f64aeadbe
-UVM-3278,3278,ulmus-sp,44.478525,-73.198437,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c62602ac-a94e-41f5-97fc-e9b76e2f424d
-UVM-4162,,ulmus-sp,44.478610,-73.198445,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,edef367d-f085-49be-8048-bbf770a81998
-UVM-4163,,ulmus-sp,44.478672,-73.198469,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,42ac200e-ac96-430e-9300-c10440b14257
-UVM-3280,3280,ulmus-sp,44.478733,-73.198512,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b15682cf-7052-496d-b5fc-17d66ddbed31
-UVM-3282,3282,ulmus-sp,44.478776,-73.198544,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,02a1e485-a151-4b90-9e14-d6080011a0df
-UVM-3284,3284,ulmus-sp,44.478830,-73.198582,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,38d8ea89-b921-4593-b326-14ab574cf1f6
-UVM-3283,3283,ulmus-sp,44.478894,-73.198497,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,aae0688f-c48b-4477-9505-3c50a68f6fda
-UVM-3281,3281,ulmus-sp,44.478838,-73.198448,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,292a0070-bbfd-4c4f-a234-7030d19acce4
-UVM-4164,,ulmus-sp,44.478778,-73.198406,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,14f0b96a-d637-4d34-953b-cfbe34777bb0
-UVM-4165,,ulmus-sp,44.478715,-73.198360,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c5ee6103-0f4f-4fae-a810-5da760201cfc
-UVM-4166,,ulmus-sp,44.478643,-73.198316,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,98441af1-c811-4073-b373-9d48097378d1
-UVM-3279,3279,ulmus-sp,44.478560,-73.198298,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ad8ddd66-664b-4796-b9eb-44114494fd6a
+UVM-4161,,malus-sp,44.478483,-73.198641,"Position corrected on imagery, 2026-11-04",central,,,,99a2b461-ebc9-4c29-a2b7-8a3f64aeadbe
+UVM-3278,3278,ulmus-sp,44.478508,-73.198408,"Position corrected on imagery, 2026-11-04",central,,,,c62602ac-a94e-41f5-97fc-e9b76e2f424d
+UVM-4162,,ulmus-sp,44.478582,-73.198434,"Position corrected on imagery, 2026-11-04",central,,,,edef367d-f085-49be-8048-bbf770a81998
+UVM-4163,,ulmus-sp,44.478650,-73.198450,"Position corrected on imagery, 2026-11-04",central,,,,42ac200e-ac96-430e-9300-c10440b14257
+UVM-3280,3280,ulmus-sp,44.478717,-73.198493,"Position corrected on imagery, 2026-11-04",central,,,,b15682cf-7052-496d-b5fc-17d66ddbed31
+UVM-3282,3282,ulmus-sp,44.478792,-73.198545,"Position corrected on imagery, 2026-11-04",central,,,,02a1e485-a151-4b90-9e14-d6080011a0df
+UVM-3284,3284,ulmus-sp,44.478854,-73.198602,"Position corrected on imagery, 2026-11-04",central,,,,38d8ea89-b921-4593-b326-14ab574cf1f6
+UVM-3283,3283,ulmus-sp,44.478904,-73.198517,"Position corrected on imagery, 2026-11-04",central,,,,aae0688f-c48b-4477-9505-3c50a68f6fda
+UVM-3281,3281,ulmus-sp,44.478831,-73.198459,"Position corrected on imagery, 2026-11-04",central,,,,292a0070-bbfd-4c4f-a234-7030d19acce4
+UVM-4164,,ulmus-sp,44.478752,-73.198408,"Position corrected on imagery, 2026-11-04",central,,,,14f0b96a-d637-4d34-953b-cfbe34777bb0
+UVM-4165,,ulmus-sp,44.478674,-73.198366,"Position corrected on imagery, 2026-11-04",central,,,,c5ee6103-0f4f-4fae-a810-5da760201cfc
+UVM-4166,,ulmus-sp,44.478596,-73.198326,"Position corrected on imagery, 2026-11-04",central,,,,98441af1-c811-4073-b373-9d48097378d1
+UVM-3279,3279,ulmus-sp,44.478520,-73.198310,"Position corrected on imagery, 2026-11-04",central,,,,ad8ddd66-664b-4796-b9eb-44114494fd6a
 UVM-4167,,gleditsia-triacanthos-inermis,44.478936,-73.197892,"Position corrected on imagery, 2026-10-14",central,,,,679cf276-dce4-4c8b-bb0f-eb52a52f8feb
 UVM-4168,,gleditsia-triacanthos-inermis,44.478901,-73.197837,"Position corrected on imagery, 2026-10-14",central,,,,581b68fd-3f31-45e7-80b0-b70d5af02edb
 UVM-4169,,gleditsia-triacanthos-inermis,44.478887,-73.197761,"Position corrected on imagery, 2026-10-14",central,,,,146c7042-993f-4744-9375-febccd7db8e1
 UVM-4170,,gleditsia-triacanthos-inermis,44.478864,-73.197660,"Position corrected on imagery, 2026-10-14",central,,,,b3684d35-efd0-4aa0-a74b-a38570b67670
 UVM-4171,,gleditsia-triacanthos-inermis,44.478963,-73.197746,"Position corrected on imagery, 2026-10-14",central,,,,52688fb1-db23-425c-ab64-49417c988941
-UVM-4172,,acer-x-freemanii,44.478709,-73.197604,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,6d331364-cfe9-4242-a143-e3cb137f89e8
+UVM-4172,,acer-x-freemanii,44.478725,-73.197682,"Position corrected on imagery, 2026-11-04",central,,,,6d331364-cfe9-4242-a143-e3cb137f89e8
 UVM-4173,,amelanchier-sp,44.479163,-73.197733,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ab585e13-eb5d-4918-927d-4a8d2e865605
 UVM-4174,,amelanchier-sp,44.479221,-73.197737,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,25d4cbdf-7ae0-4508-b5ad-f492df92ffd5
 UVM-4175,,crataegus-phaenopyrum,44.479197,-73.198414,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c6817d5e-6730-4206-a118-62808cb7903e
 UVM-4176,,betula-alleghaniensis,44.479090,-73.198349,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,25a043cb-6c77-4796-bbba-f38df1378be5
-UVM-0255,255,crataegus-phaenopyrum,44.479003,-73.198736,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,6d2e1eb9-584d-4ecb-9e0c-bed53de9d980
-UVM-0254,254,crataegus-phaenopyrum,44.479035,-73.198742,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,6e349d65-6233-4bf0-9f1b-13bb7a8c5be6
+UVM-0255,255,crataegus-phaenopyrum,44.479004,-73.198747,"Position corrected on imagery, 2026-11-04",central,,,,6d2e1eb9-584d-4ecb-9e0c-bed53de9d980
+UVM-0254,254,crataegus-phaenopyrum,44.479033,-73.198752,"Position corrected on imagery, 2026-11-04",central,,,,6e349d65-6233-4bf0-9f1b-13bb7a8c5be6
 UVM-4177,,heptacodium-miconioides,44.479113,-73.198637,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e4cff9e7-7647-4212-afd4-a812a96cf608
 UVM-3285,3285,amelanchier-sp,44.479083,-73.198644,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,375400a9-bf53-423f-8035-b97a1b50c8b7
 UVM-4178,,cornus-kousa,44.479039,-73.198664,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c1a38aa7-4c36-4476-9684-48dc39c90057
-UVM-3258,3258,quercus-palustris,44.479904,-73.199438,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,f7fdcd6f-7d85-4e12-a0c7-dc4bfacfeda9
-UVM-0234,234,picea-abies,44.479948,-73.199453,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,41e2e68b-b894-4cbc-a2a5-a22fbfda430b
-UVM-0233,233,picea-glauca,44.479956,-73.199410,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e7f8bf43-c849-4df4-88df-117feed9d172
-UVM-1301,1301,amelanchier-sp,44.479904,-73.199181,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,50bee1bb-7ef3-4bde-bdbb-dd730f11972c
-UVM-0231,231,callitropsis-nootkatensis,44.479919,-73.199134,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,33148995-87c7-4897-9680-b9a9b6a94547
+UVM-3258,3258,quercus-palustris,44.479942,-73.199415,"Position corrected on imagery, 2026-11-04",central,,,,f7fdcd6f-7d85-4e12-a0c7-dc4bfacfeda9
+UVM-0234,234,picea-abies,44.479997,-73.199430,"Position corrected on imagery, 2026-11-04",central,,,,41e2e68b-b894-4cbc-a2a5-a22fbfda430b
+UVM-0233,233,picea-glauca,44.480004,-73.199362,"Position corrected on imagery, 2026-11-04",central,,,,e7f8bf43-c849-4df4-88df-117feed9d172
+UVM-1301,1301,amelanchier-sp,44.479971,-73.199162,"Position corrected on imagery, 2026-11-04",central,,,,50bee1bb-7ef3-4bde-bdbb-dd730f11972c
+UVM-0231,231,callitropsis-nootkatensis,44.480019,-73.199139,"Position corrected on imagery, 2026-11-04",central,,,,33148995-87c7-4897-9680-b9a9b6a94547
 UVM-1032,1032,quercus-rubra,44.480061,-73.199216,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c0468e11-a1e5-453d-a44e-21060bd051bc
 UVM-4179,,quercus-rubra,44.480120,-73.199152,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,11972d73-b1b8-4e2f-b218-9795f2614ee7
 UVM-0229,229,ginkgo-biloba,44.480145,-73.199355,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,acff8c0a-b643-4c96-8ac0-41b692d9aa4a
 UVM-3257,3257,quercus-rubra,44.480146,-73.199469,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,d9bfb225-2217-4d5b-acdf-287f47748ff6
-UVM-0227,227,sorbus-aucuparia,44.480248,-73.199418,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,8a941ae7-aff8-4ac2-80c1-08a7ed78d0ff
+UVM-0227,227,sorbus-aucuparia,44.480277,-73.199364,"Position corrected on imagery, 2026-11-04",central,,,,8a941ae7-aff8-4ac2-80c1-08a7ed78d0ff
 UVM-0224,224,quercus-robur-fastigiata,44.480307,-73.199264,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,55faeca8-9c22-4ffd-9757-b30cd30b5909
-UVM-4180,,acer-saccharinum,44.480308,-73.199483,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,fad0e2e4-d3b3-4c1f-8a90-0daf6798d030
+UVM-4180,,acer-saccharinum,44.480237,-73.199455,"Position corrected on imagery, 2026-11-04",central,,,,fad0e2e4-d3b3-4c1f-8a90-0daf6798d030
 UVM-3256,3256,quercus-rubra,44.480340,-73.199394,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,dea55e9f-3a83-4e50-b3c6-5debdcf7fb64
-UVM-0221,221,acer-platanoides,44.480373,-73.199493,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,749da39b-5ebf-4a3f-a681-969323fe2036
-UVM-0220,220,quercus-rubra,44.480433,-73.199438,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,59639728-ecd2-4fb7-a1b3-da11cbc1b5f4
-UVM-4181,,acer-saccharum,44.480446,-73.199283,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0a624535-6cd8-45e2-9910-af6ac0c047e3
+UVM-0221,221,acer-platanoides,44.480344,-73.199478,"Position corrected on imagery, 2026-11-04",central,,,,749da39b-5ebf-4a3f-a681-969323fe2036
+UVM-0220,220,quercus-rubra,44.480411,-73.199429,"Position corrected on imagery, 2026-11-04",central,,,,59639728-ecd2-4fb7-a1b3-da11cbc1b5f4
+UVM-4181,,acer-saccharum,44.480414,-73.199264,"Position corrected on imagery, 2026-11-04",central,,,,0a624535-6cd8-45e2-9910-af6ac0c047e3
 UVM-3232,3232,acer-platanoides,44.480387,-73.199229,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,754035db-883d-443d-b100-381f063ad31e
 UVM-0212,212,pinus-nigra,44.480368,-73.199112,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e771dcdc-b6b0-42dc-8f05-54eff23653c0
 UVM-0213,213,pinus-nigra,44.480390,-73.199070,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b8a0b914-9d28-445e-b7a7-33df7ea0aab6
@@ -563,7 +563,7 @@ UVM-0215,215,pinus-nigra,44.480426,-73.199090,"Mapped in UVM's ArcGIS tree layer
 UVM-0216,216,pinus-nigra,44.480436,-73.199138,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,27bc3ec5-a805-4397-a485-a522f3a933b4
 UVM-0217,217,pinus-nigra,44.480454,-73.199095,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,7736c647-ee1d-4ea8-8332-e1835b8ba48d
 UVM-0218,218,pinus-nigra,44.480464,-73.199148,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0c837b6e-c83f-4236-a847-ae1e5f294f96
-UVM-3233,3233,malus-sp,44.480446,-73.199011,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,86dbee94-890b-4822-944d-a7c08d59e29c
+UVM-3233,3233,malus-sp,44.480466,-73.198998,"Position corrected on imagery, 2026-11-04",central,,,,86dbee94-890b-4822-944d-a7c08d59e29c
 UVM-0210,210,malus-sp,44.480470,-73.198859,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c88162cc-3e29-46a9-bca0-d1ce5c0bf5b7
 UVM-1022,1022,tilia-cordata,44.480506,-73.198414,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b9b8473e-bd22-4498-991d-406339aabf75
 UVM-1024,1024,tilia-cordata,44.480406,-73.198461,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c2f0ffed-382b-40d3-9781-4edad135f5f7
@@ -582,32 +582,32 @@ UVM-1007,1007,tilia-cordata,44.480149,-73.197808,"Mapped in UVM's ArcGIS tree la
 UVM-0598,598,tilia-cordata,44.480149,-73.197735,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,eb09b0d6-0f78-4177-b94b-a5664b6deee6
 UVM-0599,599,tilia-cordata,44.480183,-73.197704,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,32a81c54-802d-4cf2-83fb-ba45075db77f
 UVM-0597,597,tilia-cordata,44.480016,-73.197663,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,1d6c9c1c-acc6-4682-a8fa-ed3ec7ddd817
-UVM-0595,595,picea-pungens,44.480087,-73.197482,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,33216e12-e92f-45fb-b2a8-b8e272b870a0
+UVM-0595,595,picea-pungens,44.480057,-73.197504,"Position corrected on imagery, 2026-11-04",central,,,,33216e12-e92f-45fb-b2a8-b8e272b870a0
 UVM-0593,593,picea-pungens,44.480117,-73.197463,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,423df38a-afc9-436c-982d-c5ae8bbb6694
 UVM-0594,594,pinus-sylvestris,44.480119,-73.197498,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,07e64290-9980-4bb5-9191-3ecd47781fd3
 UVM-2889,2889,malus-sp,44.480135,-73.197305,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,cde55c57-626e-4ed0-b3ff-12645e3cdde7
 UVM-0590,590,malus-sp,44.480141,-73.197254,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,9fa0ef1d-d917-4798-afab-fdfc6992b71d
 UVM-0591,591,malus-sp,44.480175,-73.197290,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,37d44625-6d1a-4246-a23e-530d06fc2959
-UVM-0588,588,pinus-strobus,44.480359,-73.197496,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,36a98bb6-c538-411b-8885-d50215663b38
-UVM-2890,2890,pinus-strobus,44.480357,-73.197572,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ffdedac8-97d0-46bd-97bc-43361292871f
-UVM-0587,587,pinus-strobus,44.480405,-73.197545,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,baaf7731-276a-4b96-ac6f-ed8fc5bd5296
+UVM-0588,588,pinus-strobus,44.480336,-73.197461,"Position corrected on imagery, 2026-11-04",central,,,,36a98bb6-c538-411b-8885-d50215663b38
+UVM-2890,2890,pinus-strobus,44.480371,-73.197531,"Position corrected on imagery, 2026-11-04",central,,,,ffdedac8-97d0-46bd-97bc-43361292871f
+UVM-0587,587,pinus-strobus,44.480419,-73.197505,"Position corrected on imagery, 2026-11-04",central,,,,baaf7731-276a-4b96-ac6f-ed8fc5bd5296
 UVM-2891,2891,quercus-rubra,44.480493,-73.197546,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,8a7e25c2-f8c4-4ca2-b49b-26a38eebb990
-UVM-2892,2892,quercus-imbricaria,44.480509,-73.197261,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,cd1eccfb-bc3c-4384-a33c-b52f8498f802
-UVM-0584,584,ginkgo-biloba,44.480504,-73.197034,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0fb51a5c-864b-4717-b11f-c4610876a824
+UVM-2892,2892,quercus-imbricaria,44.480524,-73.197323,"Position corrected on imagery, 2026-11-04",central,,,,cd1eccfb-bc3c-4384-a33c-b52f8498f802
+UVM-0584,584,ginkgo-biloba,44.480517,-73.197127,"Position corrected on imagery, 2026-11-04",central,,,,0fb51a5c-864b-4717-b11f-c4610876a824
 UVM-0583,583,malus-sp,44.480153,-73.197031,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,fc21dc71-ec0c-400d-82d0-8d6437576859
 UVM-0582,582,malus-sp,44.480184,-73.197013,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,60e93eba-d9b3-4fce-a277-c282816db4af
 UVM-0581,581,malus-sp,44.480163,-73.196995,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,47bc02d1-f65f-4b19-9d7f-f7945336f464
 UVM-0580,580,tilia-cordata,44.480246,-73.196883,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e28688c6-2c78-4c76-a4c9-205b0a49fb30
-UVM-4182,,ginkgo-biloba,44.480420,-73.196816,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,353df154-8a5d-4989-a2a9-e77c2c152579
-UVM-0571,571,acer-saccharum,44.480530,-73.196766,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,9a1aec66-e134-431c-b9f3-d1a71811dd26
+UVM-4182,,ginkgo-biloba,44.480414,-73.196881,"Position corrected on imagery, 2026-11-04",central,,,,353df154-8a5d-4989-a2a9-e77c2c152579
+UVM-0571,571,acer-saccharum,44.480466,-73.196785,"Position corrected on imagery, 2026-11-04",central,,,,9a1aec66-e134-431c-b9f3-d1a71811dd26
 UVM-2894,2894,quercus-rubra,44.480552,-73.196644,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,fec6e469-9504-4a7d-808d-cd2bf88163a0
-UVM-0904,904,pseudotsuga-menziesii,44.480421,-73.196699,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0c87f1f6-c8f0-40f6-a56c-3f035426604a
+UVM-0904,904,pseudotsuga-menziesii,44.480362,-73.196733,"Position corrected on imagery, 2026-11-04",central,,,,0c87f1f6-c8f0-40f6-a56c-3f035426604a
 UVM-2896,2896,quercus-palustris,44.480376,-73.196615,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b4552715-9b67-4c7e-9923-e9fbcc355da0
 UVM-0573,573,quercus-palustris,44.480300,-73.196666,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,6fd16a63-df73-4050-b1f0-e46edf29232b
 UVM-0568,568,quercus-rubra,44.480282,-73.196530,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,a5188b28-3551-4694-9041-5da9a6697be4
-UVM-0911,911,picea-abies,44.480154,-73.196272,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,f6dfff51-cb9e-4658-923e-4c33c1e75a78
+UVM-0911,911,picea-abies,44.480149,-73.196293,"Position corrected on imagery, 2026-11-04",central,,,,f6dfff51-cb9e-4658-923e-4c33c1e75a78
 UVM-0549,549,acer-platanoides,44.480114,-73.196366,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,decbd65e-ea5e-43b9-ab59-84c0ce9be05f
-UVM-4183,,acer-x-freemanii,44.480072,-73.196235,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,2c2999c4-42d8-4603-b1ef-25c5b44f72c5
+UVM-4183,,acer-x-freemanii,44.480038,-73.196234,"Position corrected on imagery, 2026-11-04",central,,,,2c2999c4-42d8-4603-b1ef-25c5b44f72c5
 UVM-4184,,acer-x-freemanii,44.479983,-73.196253,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,1eb058a2-685f-4cbe-88aa-01e731a9d0d3
 UVM-2900,2900,acer-platanoides,44.480149,-73.196458,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,a3363b53-58c9-4e5c-9de3-2bda53a9d0d4
 UVM-2899,2899,pinus-nigra,44.480186,-73.196566,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,9837d25a-130a-4c4e-9b37-225a695f70a8
@@ -676,70 +676,70 @@ UVM-3805,3805,picea-pungens,44.474209,-73.193384,"Mapped in UVM's ArcGIS tree la
 UVM-3808,3808,picea-pungens,44.474200,-73.193332,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,7174921c-eb2c-4860-8021-3d319a391818
 UVM-3807,3807,betula-nigra,44.474219,-73.193275,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,afbc4687-7aa0-4b92-a428-da446942ca9f
 UVM-0833,833,betula-nigra,44.474169,-73.193281,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c9b6920c-2e9a-4fbb-aa9b-789db9a1f05c
-UVM-3230,3230,liriodendron-tulipifera,44.480464,-73.199903,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,4ff52ba8-c58b-4a31-b40b-bf8f3e1b3291
-UVM-0009,9,liriodendron-tulipifera,44.480397,-73.199983,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,309838ec-662c-428d-bb63-4bb8e0c76c8a
-UVM-3231,3231,acer-saccharinum,44.480366,-73.199887,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,87d25309-26b6-471f-8c82-b0593f5f77b5
-UVM-0002,2,acer-saccharum,44.480527,-73.200332,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,82c776bf-5ead-42c8-ab97-04d4d56c8e27
+UVM-3230,3230,liriodendron-tulipifera,44.480497,-73.199901,"Position corrected on imagery, 2026-11-04",central,,,,4ff52ba8-c58b-4a31-b40b-bf8f3e1b3291
+UVM-0009,9,liriodendron-tulipifera,44.480371,-73.199930,"Position corrected on imagery, 2026-11-04",central,,,,309838ec-662c-428d-bb63-4bb8e0c76c8a
+UVM-3231,3231,acer-saccharinum,44.480354,-73.199854,"Position corrected on imagery, 2026-11-04",central,,,,87d25309-26b6-471f-8c82-b0593f5f77b5
+UVM-0002,2,acer-saccharum,44.480526,-73.200298,"Position corrected on imagery, 2026-11-04",central,,,,82c776bf-5ead-42c8-ab97-04d4d56c8e27
 UVM-0001,1,acer-saccharinum,44.480589,-73.200353,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,a0b8c44d-fa9e-49b5-8ed7-f45d6a5dda49
-UVM-0012,12,acer-platanoides,44.480141,-73.200035,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,19f30a60-ca44-476b-a5ae-b25c0a326b62
+UVM-0012,12,acer-platanoides,44.480123,-73.200042,"Position corrected on imagery, 2026-11-04",central,,,,19f30a60-ca44-476b-a5ae-b25c0a326b62
 UVM-0026,26,pseudotsuga-menziesii,44.480055,-73.199910,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,76c154ee-3316-4eb2-b855-1cc63aa96a02
 UVM-3228,3228,quercus-rubra,44.479971,-73.199938,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,a8fd672a-fe22-4d8d-bfc8-e254dc96b290
 UVM-0028,28,quercus-palustris,44.479949,-73.199857,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,18d01746-f759-4170-b133-a927661e0caf
 UVM-0030,30,aesculus-hippocastanum,44.479907,-73.199963,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e4f42f9a-e00e-4dbf-8d94-17818a3e23f0
 UVM-0029,29,aesculus-hippocastanum,44.479990,-73.200001,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0614d791-3dd3-4f8d-9b38-f425574ae0d2
 UVM-0036,36,pinus-nigra,44.479717,-73.199843,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c8f8abe9-f61f-4c38-9518-3e5b1a2ceec9
-UVM-0016,16,aesculus-hippocastanum,44.480006,-73.200200,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,7fc7492b-ff3e-448c-8f50-565d9c43c488
+UVM-0016,16,aesculus-hippocastanum,44.480035,-73.200176,"Position corrected on imagery, 2026-11-04",central,,,,7fc7492b-ff3e-448c-8f50-565d9c43c488
 UVM-3229,3229,aesculus-hippocastanum,44.480089,-73.200233,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,6966877e-7a68-43ea-9ced-4b0b93a2398f
-UVM-0018,18,acer-saccharinum,44.479990,-73.200340,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,76556b4b-e75a-40dd-a6e1-fe9a936d6cc3
-UVM-0019,19,acer-platanoides,44.479911,-73.200251,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,6bd4e784-ff83-4faa-a012-6ea0efb2a27d
-UVM-3227,3227,acer-saccharinum,44.479756,-73.200365,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,3d4bb9d7-93f5-4edf-9155-f9e5871c396f
-UVM-0021,21,acer-saccharinum,44.479676,-73.200379,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,f20cf18c-1792-4ff2-9908-a08a51a3a886
-UVM-0023,23,acer-rubrum,44.479627,-73.200086,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,28bab4a9-7afd-49a9-87af-687932f8fc83
-UVM-0038,38,acer-saccharum,44.479442,-73.200047,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c43ff557-edd3-415c-a6e1-4eb24dfea06b
-UVM-4197,,quercus-robur-fastigiata,44.479484,-73.199908,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,bb794409-2e4a-4471-bebf-de0779af7b17
-UVM-0039,39,tsuga-canadensis,44.479380,-73.199915,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,5b383f1f-cc3c-4e04-a946-db00e1c59ee2
-UVM-0041,41,tsuga-canadensis,44.479297,-73.199852,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0cbbab4b-739c-4f48-9b4d-8b22efe712aa
-UVM-0040,40,tsuga-canadensis,44.479300,-73.199959,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,44ed6b2a-e664-4c60-8a65-0d52ca784266
-UVM-3226,3226,acer-saccharum,44.479227,-73.200036,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,2e194897-a4eb-4f56-8756-fb74666d4e10
-UVM-0046,46,acer-saccharum,44.479118,-73.200029,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,03719fcd-86e0-4402-8575-726b9180712a
-UVM-0045,45,acer-saccharum,44.479193,-73.199888,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,55ce24df-566e-4957-bcde-ce88beee9ecd
+UVM-0018,18,acer-saccharinum,44.479975,-73.200350,"Position corrected on imagery, 2026-11-04",central,,,,76556b4b-e75a-40dd-a6e1-fe9a936d6cc3
+UVM-0019,19,acer-platanoides,44.479916,-73.200256,"Position corrected on imagery, 2026-11-04",central,,,,6bd4e784-ff83-4faa-a012-6ea0efb2a27d
+UVM-3227,3227,acer-saccharinum,44.479763,-73.200388,"Position corrected on imagery, 2026-11-04",central,,,,3d4bb9d7-93f5-4edf-9155-f9e5871c396f
+UVM-0021,21,acer-saccharinum,44.479691,-73.200398,"Position corrected on imagery, 2026-11-04",central,,,,f20cf18c-1792-4ff2-9908-a08a51a3a886
+UVM-0023,23,acer-rubrum,44.479585,-73.200127,"Position corrected on imagery, 2026-11-04",central,,,,28bab4a9-7afd-49a9-87af-687932f8fc83
+UVM-0038,38,acer-saccharum,44.479449,-73.200052,"Position corrected on imagery, 2026-11-04",central,,,,c43ff557-edd3-415c-a6e1-4eb24dfea06b
+UVM-4197,,quercus-robur-fastigiata,44.479511,-73.199902,"Position corrected on imagery, 2026-11-04",central,,,,bb794409-2e4a-4471-bebf-de0779af7b17
+UVM-0039,39,tsuga-canadensis,44.479384,-73.199923,"Position corrected on imagery, 2026-11-04",central,,,,5b383f1f-cc3c-4e04-a946-db00e1c59ee2
+UVM-0041,41,tsuga-canadensis,44.479300,-73.199895,"Position corrected on imagery, 2026-11-04",central,,,,0cbbab4b-739c-4f48-9b4d-8b22efe712aa
+UVM-0040,40,tsuga-canadensis,44.479330,-73.199992,"Position corrected on imagery, 2026-11-04",central,,,,44ed6b2a-e664-4c60-8a65-0d52ca784266
+UVM-3226,3226,acer-saccharum,44.479272,-73.200105,"Position corrected on imagery, 2026-11-04",central,,,,2e194897-a4eb-4f56-8756-fb74666d4e10
+UVM-0046,46,acer-saccharum,44.479152,-73.200052,"Position corrected on imagery, 2026-11-04",central,,,,03719fcd-86e0-4402-8575-726b9180712a
+UVM-0045,45,acer-saccharum,44.479198,-73.199936,"Position corrected on imagery, 2026-11-04",central,,,,55ce24df-566e-4957-bcde-ce88beee9ecd
 UVM-0047,47,quercus-rubra,44.479051,-73.199635,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,a095a1f1-189b-43d8-8800-936d64be5590
 UVM-3224,3224,pinus-strobus,44.479017,-73.199905,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,93acea98-3b26-4da5-85cf-b5001d3f0175
 UVM-0050,50,pinus-strobus,44.479015,-73.200032,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,83ad2247-50e1-42aa-a590-40d893cb9c3b
-UVM-0051,51,pinus-strobus,44.478944,-73.200057,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,bfcd4cb7-91a1-433c-bc0e-a0e610bcf512
-UVM-3225,3225,pinus-strobus,44.478989,-73.200167,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,3530e24f-dcf5-433d-9a8e-4f813b4e406b
-UVM-0053,53,pinus-strobus,44.478981,-73.200288,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b46005b4-9922-4ec1-85a3-4371427b46d5
-UVM-0054,54,pinus-strobus,44.478926,-73.200346,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,81614116-194d-466a-a94b-79ef4844b7b3
-UVM-4198,,abies-concolor,44.478787,-73.200240,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,5e96dbe9-e02d-4729-a673-25fca49f9167
-UVM-0058,58,quercus-rubra,44.478797,-73.200044,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ebf3432b-fee3-4f99-881d-fd4603f88d74
-UVM-0062,62,acer-saccharum,44.478622,-73.199979,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,d70c52d4-9926-4831-a63b-646938df0fa8
+UVM-0051,51,pinus-strobus,44.479005,-73.200060,"Position corrected on imagery, 2026-11-04",central,,,,bfcd4cb7-91a1-433c-bc0e-a0e610bcf512
+UVM-3225,3225,pinus-strobus,44.479026,-73.200121,"Position corrected on imagery, 2026-11-04",central,,,,3530e24f-dcf5-433d-9a8e-4f813b4e406b
+UVM-0053,53,pinus-strobus,44.478990,-73.200274,"Position corrected on imagery, 2026-11-04",central,,,,b46005b4-9922-4ec1-85a3-4371427b46d5
+UVM-0054,54,pinus-strobus,44.478926,-73.200303,"Position corrected on imagery, 2026-11-04",central,,,,81614116-194d-466a-a94b-79ef4844b7b3
+UVM-4198,,abies-concolor,44.478787,-73.200192,"Position corrected on imagery, 2026-11-04",central,,,,5e96dbe9-e02d-4729-a673-25fca49f9167
+UVM-0058,58,quercus-rubra,44.478825,-73.199962,"Position corrected on imagery, 2026-11-04",central,,,,ebf3432b-fee3-4f99-881d-fd4603f88d74
+UVM-0062,62,acer-saccharum,44.478672,-73.199801,"Position corrected on imagery, 2026-11-04",central,,,,d70c52d4-9926-4831-a63b-646938df0fa8
 UVM-0059,59,quercus-palustris,44.478707,-73.199560,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,a7315d88-c141-489e-b837-25ec6900395a
 UVM-0060,60,quercus-palustris,44.478630,-73.199551,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,4514d778-4dad-4f4c-9760-0f6798543268
 UVM-0061,61,quercus-palustris,44.478551,-73.199533,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,69fc6142-c932-4331-802e-d44b4f9d8891
-UVM-0064,64,acer-saccharinum,44.478556,-73.200313,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,4277b011-a969-4349-9bc3-99e46d61f09b
+UVM-0064,64,acer-saccharinum,44.478589,-73.200237,"Position corrected on imagery, 2026-11-04",central,,,,4277b011-a969-4349-9bc3-99e46d61f09b
 UVM-3223,3223,acer-saccharinum,44.478326,-73.200403,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e5d74182-cc0d-4b9d-a8d2-39fd2c54908e
 UVM-0067,67,acer-saccharinum,44.478201,-73.200403,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ecfe3c29-407c-4379-89e3-1509b4e3ddc6
 UVM-0068,68,acer-saccharinum,44.478083,-73.200415,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,72c6f1d7-cb6e-4587-9905-5e22c3771c2f
-UVM-0081,81,magnolia-sp,44.477900,-73.199977,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,a178929a-50d4-4f5e-b46d-c1d2903990a3
+UVM-0081,81,magnolia-sp,44.477895,-73.200056,"Position corrected on imagery, 2026-11-04",central,,,,a178929a-50d4-4f5e-b46d-c1d2903990a3
 UVM-0080,80,malus-sp,44.478106,-73.199916,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,9c045f34-d512-40f3-b78b-ff5c9787f3ab
-UVM-0077,77,malus-sp,44.478046,-73.199664,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,86cd4735-ea93-4383-9806-9aad8aaa1eb8
-UVM-4199,,quercus-robur-fastigiata,44.477973,-73.199703,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,acb45da9-57d0-4af9-8099-a116449fc5ce
-UVM-0075,75,malus-sp,44.478203,-73.199706,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,30169a61-3bac-42c3-8cef-b5008af7a9d0
-UVM-0074,74,aesculus-hippocastanum,44.478175,-73.199610,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,1f1d01ed-436d-43e9-aff2-bd829834d9d8
-UVM-0073,73,quercus-bicolor,44.478129,-73.199489,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,4d17280a-ab2e-41a0-96f7-02eaa035b41b
-UVM-3222,3222,malus-sp,44.478292,-73.199759,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c005d9aa-4836-471e-afe0-e5f5496432a3
-UVM-0069,69,acer-saccharinum,44.478414,-73.199511,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0e366b3b-fd83-4bab-a44e-6c5970088279
-UVM-0088,88,picea-pungens,44.477940,-73.199434,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,292d8fe9-f728-4ca6-9fe5-f8bd40087ad0
-UVM-3220,3220,acer-rubrum,44.477772,-73.199571,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,14161859-7420-4a62-9cc5-e760ecb6f43c
-UVM-0084,84,picea-pungens,44.477823,-73.199668,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,27374d13-dab2-4b19-9f55-2768f90879a3
-UVM-3221,3221,picea-pungens,44.477837,-73.199521,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,023dcaa0-a266-4398-b269-188232bd6d0d
-UVM-0085,85,picea-pungens,44.477858,-73.199601,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b9f44b95-4d86-477d-954e-42b1b465a337
-UVM-0104,104,acer-saccharinum,44.477601,-73.199921,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,43429fb4-1f77-4808-85ee-299cf421e2e9
-UVM-3218,3218,acer-saccharinum,44.477604,-73.199797,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0fdd5c43-ba0d-4170-b98f-9ffded5df2a1
-UVM-3219,3219,acer-saccharinum,44.477624,-73.199673,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,96862dab-2f8a-4326-845a-a91529acc10e
+UVM-0077,77,malus-sp,44.478039,-73.199717,"Position corrected on imagery, 2026-11-04",central,,,,86cd4735-ea93-4383-9806-9aad8aaa1eb8
+UVM-4199,,quercus-robur-fastigiata,44.477957,-73.199759,"Position corrected on imagery, 2026-11-04",central,,,,acb45da9-57d0-4af9-8099-a116449fc5ce
+UVM-0075,75,malus-sp,44.478193,-73.199641,"Position corrected on imagery, 2026-11-04",central,,,,30169a61-3bac-42c3-8cef-b5008af7a9d0
+UVM-0074,74,aesculus-hippocastanum,44.478159,-73.199543,"Position corrected on imagery, 2026-11-04",central,,,,1f1d01ed-436d-43e9-aff2-bd829834d9d8
+UVM-0073,73,quercus-bicolor,44.478117,-73.199465,"Position corrected on imagery, 2026-11-04",central,,,,4d17280a-ab2e-41a0-96f7-02eaa035b41b
+UVM-3222,3222,malus-sp,44.478315,-73.199694,"Position corrected on imagery, 2026-11-04",central,,,,c005d9aa-4836-471e-afe0-e5f5496432a3
+UVM-0069,69,acer-saccharinum,44.478428,-73.199496,"Position corrected on imagery, 2026-11-04",central,,,,0e366b3b-fd83-4bab-a44e-6c5970088279
+UVM-0088,88,picea-pungens,44.477949,-73.199466,"Position corrected on imagery, 2026-11-04",central,,,,292d8fe9-f728-4ca6-9fe5-f8bd40087ad0
+UVM-3220,3220,acer-rubrum,44.477710,-73.199547,"Position corrected on imagery, 2026-11-04",central,,,,14161859-7420-4a62-9cc5-e760ecb6f43c
+UVM-0084,84,picea-pungens,44.477798,-73.199666,"Position corrected on imagery, 2026-11-04",central,,,,27374d13-dab2-4b19-9f55-2768f90879a3
+UVM-3221,3221,picea-pungens,44.477813,-73.199573,"Position corrected on imagery, 2026-11-04",central,,,,023dcaa0-a266-4398-b269-188232bd6d0d
+UVM-0085,85,picea-pungens,44.477867,-73.199655,"Position corrected on imagery, 2026-11-04",central,,,,b9f44b95-4d86-477d-954e-42b1b465a337
+UVM-0104,104,acer-saccharinum,44.477620,-73.199911,"Position corrected on imagery, 2026-11-04",central,,,,43429fb4-1f77-4808-85ee-299cf421e2e9
+UVM-3218,3218,acer-saccharinum,44.477623,-73.199804,"Position corrected on imagery, 2026-11-04",central,,,,0fdd5c43-ba0d-4170-b98f-9ffded5df2a1
+UVM-3219,3219,acer-saccharinum,44.477638,-73.199661,"Position corrected on imagery, 2026-11-04",central,,,,96862dab-2f8a-4326-845a-a91529acc10e
 UVM-0101,101,picea-pungens,44.477498,-73.199779,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,73cdc4d2-c9a7-48af-bac4-9866276f1e74
-UVM-0100,100,metasequoia-glyptostroboides,44.477417,-73.199821,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,20d50285-8fee-4abd-bfd4-503cf0cc3fc9
-UVM-0105,3497,ulmus-sp,44.477421,-73.199932,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b1d2f359-a626-4ef1-b0ba-4698575f6ce8
+UVM-0100,100,metasequoia-glyptostroboides,44.477440,-73.199913,"Position corrected on imagery, 2026-11-04",central,,,,20d50285-8fee-4abd-bfd4-503cf0cc3fc9
+UVM-0105,3497,ulmus-sp,44.477487,-73.200040,"Position corrected on imagery, 2026-11-04",central,,,,b1d2f359-a626-4ef1-b0ba-4698575f6ce8
 UVM-3217,3217,ulmus-sp,44.477536,-73.200405,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0c9f0b6e-ea41-46b8-a947-d6d6aca9bd94
 UVM-0109,109,fraxinus-sp,44.477367,-73.200392,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,de238998-1fd5-4d4b-b0bd-772bd65b5bb0
 UVM-3216,3216,quercus-rubra,44.477365,-73.200172,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,d7768f8f-3e83-44d6-9f73-6f0d3f990e58
@@ -767,17 +767,17 @@ UVM-0154,154,picea-glauca,44.476552,-73.200281,"Mapped in UVM's ArcGIS tree laye
 UVM-0162,162,fraxinus-sp,44.476507,-73.200015,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,fae2e111-5b15-4399-97dc-0768d712a300
 UVM-0161,161,fraxinus-sp,44.476516,-73.199843,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,01534bb0-995b-4322-8cb8-4b05fd651ca8
 UVM-0160,160,fraxinus-sp,44.476525,-73.199692,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,bf8054a8-be46-4e49-bc92-db2477313da2
-UVM-0090,90,picea-pungens,44.477536,-73.199392,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,8603ed87-787b-407b-93bc-f00d87f58782
-UVM-0091,91,picea-pungens,44.477457,-73.199451,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,2e213347-6d75-4ecc-bab1-036bca98edf4
-UVM-0092,92,fraxinus-sp,44.477401,-73.199365,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,042c9725-f4a3-47b7-bca5-7085041cb79c
-UVM-3213,3213,quercus-rubra,44.477338,-73.199327,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,ff661042-06ed-448b-963e-e17c09ffedbf
+UVM-0090,90,picea-pungens,44.477550,-73.199418,"Position corrected on imagery, 2026-11-04",central,,,,8603ed87-787b-407b-93bc-f00d87f58782
+UVM-0091,91,picea-pungens,44.477439,-73.199497,"Position corrected on imagery, 2026-11-04",central,,,,2e213347-6d75-4ecc-bab1-036bca98edf4
+UVM-0092,92,fraxinus-sp,44.477358,-73.199399,"Position corrected on imagery, 2026-11-04",central,,,,042c9725-f4a3-47b7-bca5-7085041cb79c
+UVM-3213,3213,quercus-rubra,44.477284,-73.199319,"Position corrected on imagery, 2026-11-04",central,,,,ff661042-06ed-448b-963e-e17c09ffedbf
 UVM-0094,94,fagus-grandifolia,44.477336,-73.199493,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c6c938d3-3943-43ce-a1f4-ab44d1c32490
-UVM-0095,95,picea-pungens,44.477338,-73.199584,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,edbc4ca3-0475-46e6-ad6a-cbc1c7767102
-UVM-0098,98,picea-abies,44.477255,-73.199651,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,97790e4a-f8fc-496c-a447-1a76a5e47795
-UVM-0146,146,picea-glauca,44.477282,-73.199549,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,5718dcde-19c9-4d90-896a-ad2096b0e74f
-UVM-0096,96,picea-pungens,44.477282,-73.199475,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,2aadf6bc-a1c3-4753-bfeb-b69bb44140ce
-UVM-3212,3212,quercus-palustris,44.477272,-73.199316,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,791a72be-51c2-4955-a6bd-68e33c35c3bc
-UVM-0138,138,acer-saccharum,44.477209,-73.199384,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,9d69605c-3981-44f6-97fc-299b3d2052c9
+UVM-0095,95,picea-pungens,44.477298,-73.199615,"Position corrected on imagery, 2026-11-04",central,,,,edbc4ca3-0475-46e6-ad6a-cbc1c7767102
+UVM-0098,98,picea-abies,44.477238,-73.199619,"Position corrected on imagery, 2026-11-04",central,,,,97790e4a-f8fc-496c-a447-1a76a5e47795
+UVM-0146,146,picea-glauca,44.477233,-73.199509,"Position corrected on imagery, 2026-11-04",central,,,,5718dcde-19c9-4d90-896a-ad2096b0e74f
+UVM-0096,96,picea-pungens,44.477183,-73.199469,"Position corrected on imagery, 2026-11-04",central,,,,2aadf6bc-a1c3-4753-bfeb-b69bb44140ce
+UVM-3212,3212,quercus-palustris,44.477130,-73.199293,"Position corrected on imagery, 2026-11-04",central,,,,791a72be-51c2-4955-a6bd-68e33c35c3bc
+UVM-0138,138,acer-saccharum,44.477084,-73.199411,"Position corrected on imagery, 2026-11-04",central,,,,9d69605c-3981-44f6-97fc-299b3d2052c9
 UVM-0140,140,aesculus-hippocastanum,44.476919,-73.199257,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,d2bebe1d-4bbb-46ee-84e9-ef9b16a1a6db
 UVM-0141,141,picea-pungens,44.476883,-73.199319,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,83d835f3-0dee-4fbe-a863-325b16a74682
 UVM-0142,142,picea-abies,44.476825,-73.199269,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,658443e3-bf58-4aab-9cbd-80c914541a6f
@@ -2066,7 +2066,7 @@ UVM-4711,,prunus-sargentii,44.477203,-73.195115,Position set by pin on imagery,c
 UVM-4712,,prunus-sargentii,44.477276,-73.195118,Position set by pin on imagery,central,,,,
 UVM-4713,,prunus-sargentii,44.477363,-73.195147,Position set by pin on imagery,central,,,,
 UVM-4714,,prunus-sargentii,44.477370,-73.194965,Position set by pin on imagery,central,,,,
-UVM-4715,,ginkgo-biloba,44.476984,-73.198434,Position set by pin on imagery,central,,,,
+UVM-4715,,ginkgo-biloba,44.476986,-73.198426,"Position corrected on imagery, 2026-11-04",central,,,,
 UVM-4716,,acer-x-freemanii,44.472035,-73.197379,Position set by pin on imagery,redstone,,,,
 UVM-4717,,acer-x-freemanii,44.472226,-73.197085,Position set by pin on imagery,redstone,,,,
 UVM-4718,,stewartia-pseudocamellia,44.475719,-73.193727,Position set by pin on imagery,central,,,,
