@@ -173,9 +173,17 @@ description and its fun fact on the species page and is content with them.
 "description", "fun fact" or both says which of the two was rewritten; the
 other was already there and has not been reviewed either.
 
-- [ ] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
-- [ ] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
-- [ ] **American basswood** (*Tilia americana*, `tilia-americana`): description
+Checked from the top on 6 November 2026, against extension, arboretum and
+published sources found by web search: Allegheny serviceberry (fun fact
+eased: one of the taller serviceberries, not the tallest; downy
+serviceberry grows taller), Amber Glow dawn redwood (fun fact made exact:
+five genera of conifers are deciduous) and American basswood (description
+as written). These are marked "sources checked" rather than ticked, since a
+tick here means someone who knows the tree has read the page.
+
+- [ ] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact — sources checked 6 Nov 2026
+- [ ] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact — sources checked 6 Nov 2026
+- [ ] **American basswood** (*Tilia americana*, `tilia-americana`): description — sources checked 6 Nov 2026
 - [ ] **American beech** (*Fagus grandifolia*, `fagus-grandifolia`): description
 - [ ] **American chestnut** (*Castanea dentata*, `castanea-dentata`): description
 - [ ] **American elm** (*Ulmus americana*, `ulmus-americana`): description + fun fact
@@ -415,6 +423,13 @@ quarter"), Duke (an unconfirmed 1949 date replaced by its 1987 release) and
 the hybrid paperbark maple ("hardier" unconfirmed; Cornell says faster and
 more sun-tolerant).
 
+A ninth ten on 6 November 2026 finishes this list: northern maidenhair
+fern, Ohio buckeye, Patriot blueberry, Pink Flair Sargent cherry, Royal
+Frost birch, sycamore maple and White Chiffon rose of Sharon. (Allegheny
+serviceberry, Amber Glow dawn redwood and American basswood, checked the
+same day, are marked in section 2 above.) One fixed here: the Sycamore Gap
+tree was about 150 years old, not over 200.
+
 - [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [x] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
 - [x] **Ann magnolia** (*Magnolia 'Ann'*, `magnolia-ann`): description + fun fact
@@ -472,19 +487,19 @@ more sun-tolerant).
 - [x] **Meader persimmon** (*Diospyros virginiana 'Meader'*, `diospyros-virginiana-meader`): description + fun fact
 - [x] **Miss Kim lilac** (*Syringa pubescens subsp. patula 'Miss Kim'*, `syringa-pubescens-patula-miss-kim`): description + fun fact
 - [x] **New York fern** (*Amauropelta noveboracensis*, `amauropelta-noveboracensis`): description + fun fact
-- [ ] **Northern maidenhair fern** (*Adiantum pedatum*, `adiantum-pedatum`): description + fun fact
-- [ ] **Ohio buckeye** (*Aesculus glabra*, `aesculus-glabra`): description + fun fact
+- [x] **Northern maidenhair fern** (*Adiantum pedatum*, `adiantum-pedatum`): description + fun fact
+- [x] **Ohio buckeye** (*Aesculus glabra*, `aesculus-glabra`): description + fun fact
 - [x] **Osage orange** (*Maclura pomifera*, `maclura-pomifera`): description + fun fact
 - [x] **Ostrich fern** (*Matteuccia struthiopteris*, `matteuccia-struthiopteris`): description + fun fact
 - [x] **Panicle hydrangea** (*Hydrangea paniculata*, `hydrangea-paniculata`): description + fun fact
-- [ ] **Patriot highbush blueberry** (*Vaccinium corymbosum 'Patriot'*, `vaccinium-corymbosum-patriot`): description + fun fact
+- [x] **Patriot highbush blueberry** (*Vaccinium corymbosum 'Patriot'*, `vaccinium-corymbosum-patriot`): description + fun fact
 - [x] **Pawpaw** (*Asimina triloba*, `asimina-triloba`): description + fun fact
 - [x] **Pecan** (*Carya illinoinensis*, `carya-illinoinensis`): description + fun fact
-- [ ] **Pink Flair Sargent cherry** (*Prunus sargentii 'JFS-KW58'*, `prunus-sargentii-jfs-kw58`): description + fun fact
+- [x] **Pink Flair Sargent cherry** (*Prunus sargentii 'JFS-KW58'*, `prunus-sargentii-jfs-kw58`): description + fun fact
 - [x] **PJM rhododendron** (*Rhododendron 'P.J.M.'*, `rhododendron-pjm`): description + fun fact
 - [x] **Rhododendron** (*Rhododendron sp.*, `rhododendron-sp`): description + fun fact
 - [x] **Rosy Lights azalea** (*Rhododendron 'Rosy Lights'*, `rhododendron-rosy-lights`): description + fun fact
-- [ ] **Royal Frost birch** (*Betula 'Penci 2'*, `betula-penci-2`): description + fun fact
+- [x] **Royal Frost birch** (*Betula 'Penci 2'*, `betula-penci-2`): description + fun fact
 - [x] **Sawtooth oak** (*Quercus acutissima*, `quercus-acutissima`): description + fun fact
 - [x] **Serbian spruce** (*Picea omorika*, `picea-omorika`): description + fun fact
 - [x] **Shellbark hickory** (*Carya laciniosa*, `carya-laciniosa`): description + fun fact
@@ -494,11 +509,11 @@ more sun-tolerant).
 - [x] **Spicebush** (*Lindera benzoin*, `lindera-benzoin`): description + fun fact
 - [x] **Sweetbay magnolia** (*Magnolia virginiana*, `magnolia-virginiana`): description + fun fact
 - [x] **Swiss stone pine** (*Pinus cembra*, `pinus-cembra`): description + fun fact
-- [ ] **Sycamore maple** (*Acer pseudoplatanus*, `acer-pseudoplatanus`): description + fun fact
+- [x] **Sycamore maple** (*Acer pseudoplatanus*, `acer-pseudoplatanus`): description + fun fact
 - [x] **Triple Crown thornless blackberry** (*Rubus 'Triple Crown'*, `rubus-triple-crown`): description + fun fact
 - [x] **Triumph elm** (*Ulmus 'Morton Glossy'*, `ulmus-morton-glossy`): description + fun fact
 - [x] **Ultimate Yellow magnolia** (*Magnolia 'Ultimate Yellow'*, `magnolia-ultimate-yellow`): description + fun fact
 - [x] **Umbrella magnolia** (*Magnolia tripetala*, `magnolia-tripetala`): description + fun fact
 - [x] **Virginia creeper** (*Parthenocissus quinquefolia*, `parthenocissus-quinquefolia`): description + fun fact
 - [x] **Weeping Alaska cedar** (*Callitropsis nootkatensis 'Pendula'*, `callitropsis-nootkatensis-pendula`): description + fun fact
-- [ ] **White Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodtwo'*, `hibiscus-syriacus-notwoodtwo`): description + fun fact
+- [x] **White Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodtwo'*, `hibiscus-syriacus-notwoodtwo`): description + fun fact
