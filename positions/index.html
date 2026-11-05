@@ -48,6 +48,7 @@
           <li><strong>◎</strong> (top right) shows where you are, for checking positions on site: a blue
             dot that follows you, in a shaded circle as wide as the device's own accuracy estimate. Phone GPS is often
             off by 3–10 m, so judge a tree against the circle, not the dot. Tap ◎ again to stop.</li>
+          <li>On a phone, <strong>drag the bar</strong> between this panel and the map up or down to give either more room. Double-tap it to put it back.</li>
           <li><strong>Ctrl+Z</strong> (⌘Z) undoes the last change. <strong>Esc</strong> deselects.</li>
           <li>Moved trees turn gold, with a line back to where the record had them.</li>
           <li>Every change is kept in this browser as you go. When you are done,
@@ -137,6 +138,14 @@
       <p id="deletions-empty" class="hint">No trees marked as not there.</p>
       <button type="button" id="clear" class="danger-btn" disabled>Clear all changes</button>
     </aside>
+
+    <div id="side-split" class="side-split" role="separator" tabindex="0"
+         aria-orientation="horizontal" aria-controls="map" aria-valuemin="0"
+         aria-valuemax="100" aria-valuenow="38"
+         aria-label="Resize the panel and the map. Drag, or use the arrow keys."
+         title="Drag up or down to give the map or the panel more room. Double-tap to reset.">
+      <span class="side-split-grip" aria-hidden="true"></span>
+    </div>
 
     <div id="map" class="map" aria-label="Map of campus trees on satellite imagery"></div>
   </main>

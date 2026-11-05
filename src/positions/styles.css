@@ -43,6 +43,22 @@ button, input { font: inherit; color: inherit; }
 }
 .map { flex: 1; min-width: 0; background: #2a2f2b; }
 
+/* The bar between the panel and the map on a phone. Tall enough to grab
+   with a finger; the visible grip is small so it reads as a handle. */
+.side-split {
+  display: none; flex: none; height: 18px;
+  align-items: center; justify-content: center;
+  cursor: row-resize; touch-action: none; user-select: none; -webkit-user-select: none;
+  border-bottom: 1px solid var(--border); background: var(--bg);
+}
+.side-split-grip {
+  width: 2.75rem; height: 5px; border-radius: 99px; background: #b5bcb6;
+  transition: background .12s ease;
+}
+.side-split:hover .side-split-grip,
+.side-split.is-dragging .side-split-grip { background: var(--uvm-green); }
+.side-split:focus-visible { outline: 2px solid var(--uvm-green); outline-offset: -2px; }
+
 .find input {
   width: 100%; padding: .55rem .7rem; border: 1px solid var(--border); border-radius: 8px;
   background: var(--bg-sunk);
@@ -195,6 +211,7 @@ button, input { font: inherit; color: inherit; }
 @media (max-width: 48rem) {
   .layout { flex-direction: column; }
   .side { width: auto; max-height: 38vh; border-right: 0; border-bottom: 1px solid var(--border); }
+  .side-split { display: flex; }
   .map { min-height: 0; }
   .bar { gap: .5rem; padding: 0 .6rem; }
   .bar h1 { font-size: .95rem; }

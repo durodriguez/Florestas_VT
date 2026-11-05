@@ -38,7 +38,8 @@ The most reliable use is relative: stand at a trunk, and see which dot the blue
 one sits beside.
 
 The page works on a phone or tablet, with the panel stacked above the map on a
-phone. **Touch a dot and slide** to drag it; a finger anywhere else pans the
+phone. Drag the bar between them up or down to give the map or the panel more
+room; double-tap it to put it back. The phone remembers the height. **Touch a dot and slide** to drag it; a finger anywhere else pans the
 map, and two fingers pinch-zoom. A fingertip is blunt, so a touch takes the
 nearest tree within about 18 pixels. With trees close together, zoom in first.
 The arrow-key nudges still need a keyboard, and Rectangle and Circle need a

@@ -8,6 +8,7 @@ import { TYPE_LABELS } from '../palette';
 import type { Plant } from '../types';
 import { initImagery } from './imagery';
 import { initLocate } from './locate';
+import { initSideSplit } from './split';
 import { parsePeaks, type Peak, type PeaksFile } from './peaks';
 import { loadCrowns, nearRings, readCrownFiles, saveCrowns, type SavedCrowns } from './crowns';
 import {
@@ -79,6 +80,7 @@ map.getPane('campus')!.style.zIndex = '300';
 map.getPane('campus')!.style.pointerEvents = 'none';
 L.control.scale({ imperial: false }).addTo(map);
 initLocate(map, $<HTMLButtonElement>('locate'));
+initSideSplit($('map').parentElement!, document.querySelector<HTMLElement>('.side')!, $('side-split'), () => map.invalidateSize());
 
 // Generous tolerance: a 6 px dot is a small target, and the job is grabbing
 // hundreds of them.
