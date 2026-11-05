@@ -360,6 +360,13 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     const assessed = latest.condition >= 0 || !active
       ? latest
       : series.findLast((o) => o.condition >= 0) ?? latest;
+    // The same for a photo: a standing tree whose latest visit took none keeps
+    // its last one, dated by the visit it came from, so the caption never puts
+    // an old picture under a newer date. A removed tree shows only what its
+    // latest visit recorded, which is the evidence of the removal.
+    const shot = latest.photo || !active
+      ? latest
+      : series.findLast((o) => o.photo) ?? latest;
 
     const record = {
       plant_id: plant.id,
@@ -377,7 +384,8 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       status: latest.status,
       surveyed_on: latest.surveyed_on,
       surveyor: latest.surveyor,
-      photo: latest.photo,
+      photo: shot.photo,
+      photo_on: shot === latest ? null : shot.surveyed_on,
       dedication_label: plant.dedication_label,
       story: plant.story,
       surveys: series.length,

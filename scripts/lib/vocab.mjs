@@ -197,6 +197,7 @@ export const PLANT_FIELDS = [
   'surveyed_on',
   'surveyor',
   'photo',
+  'photo_on',    // the visit that photo is from, when not the latest
   'dedication_label',
   'story',
   'surveys',     // how many observations this plant has

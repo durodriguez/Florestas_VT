@@ -194,6 +194,8 @@ export interface Plant {
   surveyedOn: string | null;
   surveyor: string | null;
   photo: string | null;
+  /** When `photo` is from an earlier visit than the latest, that visit's date. */
+  photoOn: string | null;
   /**
    * What the plaque says. Non-blank *is* what makes a tree a gift, memorial or
    * dedicated one — there is no separate flag to disagree with it.

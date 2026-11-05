@@ -127,7 +127,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
   const t = plant.taxon;
   const age = plant.plantedYear ? `${new Date().getFullYear() - plant.plantedYear} years` : null;
 
-  const taken = photoTaken(plant.surveyedOn);
+  const taken = photoTaken(plant.photoOn ?? plant.surveyedOn);
   const photo = plant.photo
     ? `<figure class="detail-figure">
          <button type="button" class="detail-photo-open" data-action="photo" aria-label="Show the photo full size">
