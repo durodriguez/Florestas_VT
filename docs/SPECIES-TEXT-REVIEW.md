@@ -396,10 +396,19 @@ figure (one source gives far more by 1948); Elizabeth was released in 1977,
 per Brooklyn Botanic Garden and its patent, not named in 1978; Ultimate
 Yellow loses an unconfirmed Massachusetts origin.
 
+A seventh ten on 5 November 2026: pecan, shellbark hickory, Atlantic white
+cedar, Brilliance autumn fern, forsythia (genus), Siberian iris, iris
+(genus), butternut, English walnut and common juniper. Four fixed: pecan
+('Centennial' was shown at the 1876 exposition; no prize could be
+confirmed), Atlantic white cedar (when the Dennisville mining ended is
+disputed, so no end date), forsythia ('Vermont Sun' was registered in 1978
+by Evert and Pellett of UVM) and English walnut (the merchant-ship origin of
+the name is a guess, so "possibly").
+
 - [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [x] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
 - [x] **Ann magnolia** (*Magnolia 'Ann'*, `magnolia-ann`): description + fun fact
-- [ ] **Atlantic white cedar** (*Chamaecyparis thyoides*, `chamaecyparis-thyoides`): description + fun fact
+- [x] **Atlantic white cedar** (*Chamaecyparis thyoides*, `chamaecyparis-thyoides`): description + fun fact
 - [x] **Beautybush** (*Kolkwitzia amabilis*, `kolkwitzia-amabilis`): description + fun fact
 - [ ] **Black maple** (*Acer nigrum*, `acer-nigrum`): description + fun fact
 - [ ] **Bloodgood Japanese maple** (*Acer palmatum 'Bloodgood'*, `acer-palmatum-bloodgood`): description + fun fact
@@ -409,14 +418,14 @@ Yellow loses an unconfirmed Massachusetts origin.
 - [x] **Bosnian pine** (*Pinus heldreichii*, `pinus-heldreichii`): description + fun fact
 - [x] **Boston ivy** (*Parthenocissus tricuspidata*, `parthenocissus-tricuspidata`): description + fun fact
 - [x] **Bottlebrush buckeye** (*Aesculus parviflora*, `aesculus-parviflora`): description + fun fact
-- [ ] **Brilliance autumn fern** (*Dryopteris erythrosora 'Brilliance'*, `dryopteris-erythrosora-brilliance`): description + fun fact
+- [x] **Brilliance autumn fern** (*Dryopteris erythrosora 'Brilliance'*, `dryopteris-erythrosora-brilliance`): description + fun fact
 - [x] **Brouwer's Beauty andromeda** (*Pieris 'Brouwer's Beauty'*, `pieris-brouwers-beauty`): description + fun fact
-- [ ] **Butternut** (*Juglans cinerea*, `juglans-cinerea`): description + fun fact
+- [x] **Butternut** (*Juglans cinerea*, `juglans-cinerea`): description + fun fact
 - [x] **Cameo magnolia** (*Magnolia 'Cameo'*, `magnolia-cameo`): description + fun fact
 - [x] **Catawba rhododendron** (*Rhododendron catawbiense*, `rhododendron-catawbiense`): description + fun fact
 - [ ] **Chandler highbush blueberry** (*Vaccinium corymbosum 'Chandler'*, `vaccinium-corymbosum-chandler`): description + fun fact
 - [x] **Christmas fern** (*Polystichum acrostichoides*, `polystichum-acrostichoides`): description + fun fact
-- [ ] **Common juniper** (*Juniperus communis*, `juniperus-communis`): description + fun fact
+- [x] **Common juniper** (*Juniperus communis*, `juniperus-communis`): description + fun fact
 - [x] **Creeping cotoneaster** (*Cotoneaster adpressus*, `cotoneaster-adpressus`): description + fun fact
 - [x] **Cucumbertree magnolia** (*Magnolia acuminata*, `magnolia-acuminata`): description + fun fact
 - [ ] **Duke highbush blueberry** (*Vaccinium corymbosum 'Duke'*, `vaccinium-corymbosum-duke`): description + fun fact
@@ -425,9 +434,9 @@ Yellow loses an unconfirmed Massachusetts origin.
 - [x] **Elizabeth magnolia** (*Magnolia 'Elizabeth'*, `magnolia-elizabeth`): description + fun fact
 - [x] **Emerald Green arborvitae** (*Thuja occidentalis 'Smaragd'*, `thuja-occidentalis-smaragd`): description + fun fact
 - [x] **English ivy** (*Hedera helix*, `hedera-helix`): description + fun fact
-- [ ] **English walnut** (*Juglans regia*, `juglans-regia`): description + fun fact
+- [x] **English walnut** (*Juglans regia*, `juglans-regia`): description + fun fact
 - [x] **Fall Gold raspberry** (*Rubus idaeus 'Fall Gold'*, `rubus-idaeus-fall-gold`): description + fun fact
-- [ ] **Forsythia** (*Forsythia sp.*, `forsythia-sp`): description + fun fact
+- [x] **Forsythia** (*Forsythia sp.*, `forsythia-sp`): description + fun fact
 - [x] **Ghost bramble** (*Rubus thibetanus*, `rubus-thibetanus`): description + fun fact
 - [x] **Gold Star magnolia** (*Magnolia 'Gold Star'*, `magnolia-gold-star`): description + fun fact
 - [x] **Golden Spirit smokebush** (*Cotinus coggygria 'Ancot'*, `cotinus-coggygria-ancot`): description + fun fact
@@ -435,7 +444,7 @@ Yellow loses an unconfirmed Massachusetts origin.
 - [x] **Heritage oak** (*Quercus x macdanielii 'Clemons'*, `quercus-x-macdanielii-clemons`): description + fun fact
 - [x] **Highbush blueberry** (*Vaccinium corymbosum*, `vaccinium-corymbosum`): description + fun fact
 - [ ] **Hybrid paperbark maple** (*Acer griseum x maximowiczianum*, `acer-griseum-x-maximowiczianum`): description + fun fact
-- [ ] **Iris** (*Iris sp.*, `iris-sp`): description + fun fact
+- [x] **Iris** (*Iris sp.*, `iris-sp`): description + fun fact
 - [x] **Japanese angelica tree** (*Aralia elata*, `aralia-elata`): description + fun fact
 - [x] **Japanese clethra** (*Clethra barbinervis*, `clethra-barbinervis`): description + fun fact
 - [x] **Japanese fiber banana** (*Musa basjoo*, `musa-basjoo`): description + fun fact
@@ -460,7 +469,7 @@ Yellow loses an unconfirmed Massachusetts origin.
 - [x] **Panicle hydrangea** (*Hydrangea paniculata*, `hydrangea-paniculata`): description + fun fact
 - [ ] **Patriot highbush blueberry** (*Vaccinium corymbosum 'Patriot'*, `vaccinium-corymbosum-patriot`): description + fun fact
 - [x] **Pawpaw** (*Asimina triloba*, `asimina-triloba`): description + fun fact
-- [ ] **Pecan** (*Carya illinoinensis*, `carya-illinoinensis`): description + fun fact
+- [x] **Pecan** (*Carya illinoinensis*, `carya-illinoinensis`): description + fun fact
 - [ ] **Pink Flair Sargent cherry** (*Prunus sargentii 'JFS-KW58'*, `prunus-sargentii-jfs-kw58`): description + fun fact
 - [x] **PJM rhododendron** (*Rhododendron 'P.J.M.'*, `rhododendron-pjm`): description + fun fact
 - [x] **Rhododendron** (*Rhododendron sp.*, `rhododendron-sp`): description + fun fact
@@ -468,9 +477,9 @@ Yellow loses an unconfirmed Massachusetts origin.
 - [ ] **Royal Frost birch** (*Betula 'Penci 2'*, `betula-penci-2`): description + fun fact
 - [x] **Sawtooth oak** (*Quercus acutissima*, `quercus-acutissima`): description + fun fact
 - [x] **Serbian spruce** (*Picea omorika*, `picea-omorika`): description + fun fact
-- [ ] **Shellbark hickory** (*Carya laciniosa*, `carya-laciniosa`): description + fun fact
+- [x] **Shellbark hickory** (*Carya laciniosa*, `carya-laciniosa`): description + fun fact
 - [x] **Shirazz magnolia** (*Magnolia 'Shirazz'*, `magnolia-shirazz`): description + fun fact
-- [ ] **Siberian iris** (*Iris sibirica*, `iris-sibirica`): description + fun fact
+- [x] **Siberian iris** (*Iris sibirica*, `iris-sibirica`): description + fun fact
 - [x] **Snow Fountains weeping cherry** (*Prunus 'Snofozam'*, `prunus-snofozam`): description + fun fact
 - [x] **Spicebush** (*Lindera benzoin*, `lindera-benzoin`): description + fun fact
 - [x] **Sweetbay magnolia** (*Magnolia virginiana*, `magnolia-virginiana`): description + fun fact
