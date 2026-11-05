@@ -357,11 +357,19 @@ cultivated blueberry), Golden Spirit ("said to" resist scorch), bottlebrush
 buckeye (red-tipped stamens, not pink) and Blue Mist (bluer than the
 species, not a color the species lacks).
 
+A second ten on 5 November 2026: Mariesii doublefile viburnum, Meader
+persimmon, ghost bramble, creeping cotoneaster, beautybush, weeping Alaska
+cedar, panicle hydrangea, Japanese pagoda tree, pawpaw and sawtooth oak.
+Three fixed: cotoneaster's pronunciation (the stress falls on AS, per Oregon
+State and Dictionary.com), sawtooth oak (planted for wildlife across the
+eastern United States, not only the South) and Meader persimmon (its
+description no longer suggests frost is needed to ripen the fruit).
+
 - [ ] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [ ] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
 - [ ] **Ann magnolia** (*Magnolia 'Ann'*, `magnolia-ann`): description + fun fact
 - [ ] **Atlantic white cedar** (*Chamaecyparis thyoides*, `chamaecyparis-thyoides`): description + fun fact
-- [ ] **Beautybush** (*Kolkwitzia amabilis*, `kolkwitzia-amabilis`): description + fun fact
+- [x] **Beautybush** (*Kolkwitzia amabilis*, `kolkwitzia-amabilis`): description + fun fact
 - [ ] **Black maple** (*Acer nigrum*, `acer-nigrum`): description + fun fact
 - [ ] **Bloodgood Japanese maple** (*Acer palmatum 'Bloodgood'*, `acer-palmatum-bloodgood`): description + fun fact
 - [ ] **Blue Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodthree'*, `hibiscus-syriacus-notwoodthree`): description + fun fact
@@ -378,7 +386,7 @@ species, not a color the species lacks).
 - [ ] **Chandler highbush blueberry** (*Vaccinium corymbosum 'Chandler'*, `vaccinium-corymbosum-chandler`): description + fun fact
 - [ ] **Christmas fern** (*Polystichum acrostichoides*, `polystichum-acrostichoides`): description + fun fact
 - [ ] **Common juniper** (*Juniperus communis*, `juniperus-communis`): description + fun fact
-- [ ] **Creeping cotoneaster** (*Cotoneaster adpressus*, `cotoneaster-adpressus`): description + fun fact
+- [x] **Creeping cotoneaster** (*Cotoneaster adpressus*, `cotoneaster-adpressus`): description + fun fact
 - [ ] **Cucumbertree magnolia** (*Magnolia acuminata*, `magnolia-acuminata`): description + fun fact
 - [ ] **Duke highbush blueberry** (*Vaccinium corymbosum 'Duke'*, `vaccinium-corymbosum-duke`): description + fun fact
 - [ ] **Dwarf Everbearing black mulberry** (*Morus nigra 'Dwarf Everbearing'*, `morus-nigra-dwarf-everbearing`): description + fun fact
@@ -389,7 +397,7 @@ species, not a color the species lacks).
 - [ ] **English walnut** (*Juglans regia*, `juglans-regia`): description + fun fact
 - [ ] **Fall Gold raspberry** (*Rubus idaeus 'Fall Gold'*, `rubus-idaeus-fall-gold`): description + fun fact
 - [ ] **Forsythia** (*Forsythia sp.*, `forsythia-sp`): description + fun fact
-- [ ] **Ghost bramble** (*Rubus thibetanus*, `rubus-thibetanus`): description + fun fact
+- [x] **Ghost bramble** (*Rubus thibetanus*, `rubus-thibetanus`): description + fun fact
 - [ ] **Gold Star magnolia** (*Magnolia 'Gold Star'*, `magnolia-gold-star`): description + fun fact
 - [x] **Golden Spirit smokebush** (*Cotinus coggygria 'Ancot'*, `cotinus-coggygria-ancot`): description + fun fact
 - [ ] **Gracillimus maiden grass** (*Miscanthus sinensis 'Gracillimus'*, `miscanthus-sinensis-gracillimus`): description + fun fact
@@ -400,7 +408,7 @@ species, not a color the species lacks).
 - [x] **Japanese angelica tree** (*Aralia elata*, `aralia-elata`): description + fun fact
 - [x] **Japanese clethra** (*Clethra barbinervis*, `clethra-barbinervis`): description + fun fact
 - [ ] **Japanese fiber banana** (*Musa basjoo*, `musa-basjoo`): description + fun fact
-- [ ] **Japanese pagoda tree** (*Styphnolobium japonicum*, `styphnolobium-japonicum`): description + fun fact
+- [x] **Japanese pagoda tree** (*Styphnolobium japonicum*, `styphnolobium-japonicum`): description + fun fact
 - [ ] **Japanese pieris** (*Pieris japonica*, `pieris-japonica`): description + fun fact
 - [x] **Japanese snowbell** (*Styrax japonicus*, `styrax-japonicus`): description + fun fact
 - [ ] **Japanese white pine** (*Pinus parviflora*, `pinus-parviflora`): description + fun fact
@@ -410,24 +418,24 @@ species, not a color the species lacks).
 - [ ] **Lady fern** (*Athyrium filix-femina*, `athyrium-filix-femina`): description + fun fact
 - [ ] **Lilac** (*Syringa sp.*, `syringa-sp`): description + fun fact
 - [ ] **Limber pine** (*Pinus flexilis*, `pinus-flexilis`): description + fun fact
-- [ ] **Mariesii doublefile viburnum** (*Viburnum plicatum f. tomentosum 'Mariesii'*, `viburnum-plicatum-tomentosum-mariesii`): description + fun fact
-- [ ] **Meader persimmon** (*Diospyros virginiana 'Meader'*, `diospyros-virginiana-meader`): description + fun fact
+- [x] **Mariesii doublefile viburnum** (*Viburnum plicatum f. tomentosum 'Mariesii'*, `viburnum-plicatum-tomentosum-mariesii`): description + fun fact
+- [x] **Meader persimmon** (*Diospyros virginiana 'Meader'*, `diospyros-virginiana-meader`): description + fun fact
 - [ ] **Miss Kim lilac** (*Syringa pubescens subsp. patula 'Miss Kim'*, `syringa-pubescens-patula-miss-kim`): description + fun fact
 - [ ] **New York fern** (*Amauropelta noveboracensis*, `amauropelta-noveboracensis`): description + fun fact
 - [ ] **Northern maidenhair fern** (*Adiantum pedatum*, `adiantum-pedatum`): description + fun fact
 - [ ] **Ohio buckeye** (*Aesculus glabra*, `aesculus-glabra`): description + fun fact
 - [ ] **Osage orange** (*Maclura pomifera*, `maclura-pomifera`): description + fun fact
 - [ ] **Ostrich fern** (*Matteuccia struthiopteris*, `matteuccia-struthiopteris`): description + fun fact
-- [ ] **Panicle hydrangea** (*Hydrangea paniculata*, `hydrangea-paniculata`): description + fun fact
+- [x] **Panicle hydrangea** (*Hydrangea paniculata*, `hydrangea-paniculata`): description + fun fact
 - [ ] **Patriot highbush blueberry** (*Vaccinium corymbosum 'Patriot'*, `vaccinium-corymbosum-patriot`): description + fun fact
-- [ ] **Pawpaw** (*Asimina triloba*, `asimina-triloba`): description + fun fact
+- [x] **Pawpaw** (*Asimina triloba*, `asimina-triloba`): description + fun fact
 - [ ] **Pecan** (*Carya illinoinensis*, `carya-illinoinensis`): description + fun fact
 - [ ] **Pink Flair Sargent cherry** (*Prunus sargentii 'JFS-KW58'*, `prunus-sargentii-jfs-kw58`): description + fun fact
 - [ ] **PJM rhododendron** (*Rhododendron 'P.J.M.'*, `rhododendron-pjm`): description + fun fact
 - [ ] **Rhododendron** (*Rhododendron sp.*, `rhododendron-sp`): description + fun fact
 - [x] **Rosy Lights azalea** (*Rhododendron 'Rosy Lights'*, `rhododendron-rosy-lights`): description + fun fact
 - [ ] **Royal Frost birch** (*Betula 'Penci 2'*, `betula-penci-2`): description + fun fact
-- [ ] **Sawtooth oak** (*Quercus acutissima*, `quercus-acutissima`): description + fun fact
+- [x] **Sawtooth oak** (*Quercus acutissima*, `quercus-acutissima`): description + fun fact
 - [ ] **Serbian spruce** (*Picea omorika*, `picea-omorika`): description + fun fact
 - [ ] **Shellbark hickory** (*Carya laciniosa*, `carya-laciniosa`): description + fun fact
 - [ ] **Shirazz magnolia** (*Magnolia 'Shirazz'*, `magnolia-shirazz`): description + fun fact
@@ -442,5 +450,5 @@ species, not a color the species lacks).
 - [ ] **Ultimate Yellow magnolia** (*Magnolia 'Ultimate Yellow'*, `magnolia-ultimate-yellow`): description + fun fact
 - [ ] **Umbrella magnolia** (*Magnolia tripetala*, `magnolia-tripetala`): description + fun fact
 - [ ] **Virginia creeper** (*Parthenocissus quinquefolia*, `parthenocissus-quinquefolia`): description + fun fact
-- [ ] **Weeping Alaska cedar** (*Callitropsis nootkatensis 'Pendula'*, `callitropsis-nootkatensis-pendula`): description + fun fact
+- [x] **Weeping Alaska cedar** (*Callitropsis nootkatensis 'Pendula'*, `callitropsis-nootkatensis-pendula`): description + fun fact
 - [ ] **White Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodtwo'*, `hibiscus-syriacus-notwoodtwo`): description + fun fact
