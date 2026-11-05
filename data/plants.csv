@@ -922,12 +922,12 @@ UVM-2525,2525,quercus-palustris,44.482672,-73.192404,"Position corrected on imag
 UVM-2539,2539,malus-sp,44.482755,-73.192734,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,c48bdf0a-fe24-4a07-a65b-bca216a2a410
 UVM-2538,2538,acer-platanoides,44.482914,-73.192539,"Position corrected on imagery, 2026-11-04",trinity,,,,b39de1d0-5840-4cd6-96a8-2668dc7165aa
 UVM-2537,2537,acer-platanoides,44.483012,-73.192618,"Position corrected on imagery, 2026-11-04",trinity,,,,e914d359-6730-4845-b747-cd60513cdcce
-UVM-2615,2615,malus-sp,44.483525,-73.192246,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,f284b6bb-fa58-4176-80e0-f41c9f34e560
+UVM-2615,2615,malus-sp,44.483477,-73.192197,"Position corrected on imagery, 2026-11-04",trinity,,,,f284b6bb-fa58-4176-80e0-f41c9f34e560
 UVM-4254,,tsuga-canadensis,44.484198,-73.193095,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,f3e65ba2-266c-4394-9a8e-00849648ccff
 UVM-4255,,tsuga-canadensis,44.484182,-73.193124,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,be5422ab-7871-4ba7-9254-26f44b4e4b26
 UVM-4256,,tsuga-canadensis,44.484176,-73.193172,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,36d4c30c-6024-4cad-af18-1a3876de91be
 UVM-2613,2613,prunus-sp,44.483365,-73.192576,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,62e01861-af94-49b1-930a-ba245e75c8cc
-UVM-2614,2614,acer-saccharinum,44.483303,-73.192400,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,9b4dd242-12ed-41b3-a1e9-f6fb58d6aee1
+UVM-2614,2614,acer-saccharinum,44.483277,-73.192441,"Position corrected on imagery, 2026-11-04",trinity,,,,9b4dd242-12ed-41b3-a1e9-f6fb58d6aee1
 UVM-2611,2611,picea-abies,44.483236,-73.192680,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,d128dfd5-cc02-4c00-8c06-ca3cd8fb3ec7
 UVM-2610,2610,fraxinus-sp,44.483148,-73.192786,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,59bfaa83-5252-415b-a0ee-71d8d22f80ea
 UVM-2609,2609,malus-sp,44.483237,-73.192856,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,bcdd8e6c-fd6a-4d82-a6c7-d112a0940c43
@@ -935,9 +935,9 @@ UVM-2608,2608,robinia-pseudoacacia,44.483204,-73.192928,"Mapped in UVM's ArcGIS 
 UVM-2607,2607,robinia-pseudoacacia,44.483210,-73.192958,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,ec6361ab-306b-483f-94d9-423bbee05fae
 UVM-2606,2606,acer-saccharum,44.483274,-73.192991,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,b9a367b4-8a26-4b87-96e4-b1cfdd2a0256
 UVM-2604,2604,malus-sp,44.483264,-73.193170,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,a85d9093-9bc3-488f-b6e7-cdc3de2c60ea
-UVM-4257,,quercus-rubra,44.483332,-73.193273,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,14cc43ef-7cad-4394-884f-2e6692bca6de
-UVM-4258,,quercus-rubra,44.483386,-73.193313,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,2929e78c-2f3a-4a88-977e-f25f0d20ce42
-UVM-4259,,quercus-rubra,44.483438,-73.193362,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,abfcfc04-8f38-4925-8278-20f1c14bae03
+UVM-4257,,quercus-rubra,44.483352,-73.193272,"Position corrected on imagery, 2026-11-04",trinity,,,,14cc43ef-7cad-4394-884f-2e6692bca6de
+UVM-4258,,quercus-rubra,44.483405,-73.193319,"Position corrected on imagery, 2026-11-04",trinity,,,,2929e78c-2f3a-4a88-977e-f25f0d20ce42
+UVM-4259,,quercus-rubra,44.483452,-73.193365,"Position corrected on imagery, 2026-11-04",trinity,,,,abfcfc04-8f38-4925-8278-20f1c14bae03
 UVM-4260,,malus-sp,44.483045,-73.193415,"Position corrected on imagery, 2026-11-04",trinity,,,,0ac2606e-4102-4c3c-aa20-724603d4a933
 UVM-2602,2602,pinus-sylvestris,44.483106,-73.193274,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,e7e17d96-c2aa-4d44-9d3b-93d4f964ae25
 UVM-2603,2603,malus-sp,44.483195,-73.193259,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,b69db7ed-1cbe-42c2-8c15-b59e5d5e72e9
@@ -947,15 +947,15 @@ UVM-2600,2600,malus-sp,44.482947,-73.193079,"Mapped in UVM's ArcGIS tree layer, 
 UVM-2543,2543,acer-rubrum,44.482753,-73.193245,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,50c976a2-3c38-4136-b9f8-e8398741a3cb
 UVM-2542,2542,acer-platanoides,44.482680,-73.193180,"Position corrected on imagery, 2026-11-04",trinity,,,,65989a0a-f701-44c0-aa5b-dced07a7d3b9
 UVM-2521,2521,robinia-pseudoacacia,44.482314,-73.192800,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,655a203b-0743-4805-a0bd-df578a8b48fc
-UVM-2499,2499,pseudotsuga-menziesii,44.482188,-73.193516,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,1957998c-c062-4204-b853-febfb5135966
-UVM-2500,2500,picea-pungens,44.482305,-73.193125,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,8336011e-0b23-44c6-85bc-4a64123888c7
-UVM-2498,2498,prunus-sargentii,44.482287,-73.193362,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,7256cda0-222e-42a7-bf5b-51de53f99ae4
-UVM-2497,2497,acer-platanoides,44.482337,-73.193475,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,66fe3c2a-8cc3-410a-a0b4-5b71a3eebdab
+UVM-2499,2499,pseudotsuga-menziesii,44.482134,-73.193500,"Position corrected on imagery, 2026-11-04",trinity,,,,1957998c-c062-4204-b853-febfb5135966
+UVM-2500,2500,picea-pungens,44.482281,-73.193146,"Position corrected on imagery, 2026-11-04",trinity,,,,8336011e-0b23-44c6-85bc-4a64123888c7
+UVM-2498,2498,prunus-sargentii,44.482306,-73.193342,"Position corrected on imagery, 2026-11-04",trinity,,,,7256cda0-222e-42a7-bf5b-51de53f99ae4
+UVM-2497,2497,acer-platanoides,44.482341,-73.193460,"Position corrected on imagery, 2026-11-04",trinity,,,,66fe3c2a-8cc3-410a-a0b4-5b71a3eebdab
 UVM-2496,2496,tilia-americana,44.482369,-73.193692,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,cb76d67f-b5cd-4487-8c44-302053ef20b7
 UVM-2495,2495,malus-sp,44.482545,-73.193843,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,eb9da216-6ab1-44d8-b320-f07fd4df0303
-UVM-2544,2544,malus-sp,44.482961,-73.193548,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,ae5227a2-4fc4-4237-beaa-2f0bfdc77de4
-UVM-2545,2545,catalpa-speciosa,44.482880,-73.193706,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,fea6ac1b-c0e0-428f-a2aa-9de112af1c0c
-UVM-2546,2546,catalpa-speciosa,44.482819,-73.193841,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,996e7504-2629-4c76-9bb2-02a3c2f3c878
+UVM-2544,2544,malus-sp,44.482957,-73.193543,"Position corrected on imagery, 2026-11-04",trinity,,,,ae5227a2-4fc4-4237-beaa-2f0bfdc77de4
+UVM-2545,2545,catalpa-speciosa,44.482861,-73.193724,"Position corrected on imagery, 2026-11-04",trinity,,,,fea6ac1b-c0e0-428f-a2aa-9de112af1c0c
+UVM-2546,2546,catalpa-speciosa,44.482829,-73.193831,"Position corrected on imagery, 2026-11-04",trinity,,,,996e7504-2629-4c76-9bb2-02a3c2f3c878
 UVM-3254,3254,malus-sp,44.482888,-73.194010,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,b85310e1-a3e1-44f9-9de2-8409358efe7a
 UVM-2547,2547,robinia-pseudoacacia,44.482929,-73.193925,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,a6eca622-4e02-4914-be7a-99e77aac5c47
 UVM-2550,2550,robinia-pseudoacacia,44.482934,-73.193805,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,dbacd7eb-90de-4399-b74f-2df57722e4ca
@@ -980,9 +980,9 @@ UVM-3243,3243,quercus-rubra,44.483180,-73.194110,"Mapped in UVM's ArcGIS tree la
 UVM-3241,3241,liriodendron-tulipifera,44.483065,-73.194382,"Position corrected on imagery, 2026-11-04",trinity,,,,303a9c0e-56ed-4bb3-a600-475d3687d3bd
 UVM-3240,3240,robinia-pseudoacacia,44.482982,-73.194382,"Position corrected on imagery, 2026-11-04",trinity,,,,d06adcc3-4307-407f-ab1a-bb2df9f97599
 UVM-3239,3239,pinus-sylvestris,44.482958,-73.194641,"Position corrected on imagery, 2026-11-04",trinity,,,,d023c84c-2b4b-460e-89be-f94bd5002462
-UVM-2494,2494,acer-saccharum,44.482120,-73.193756,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,8bd0e370-e840-4deb-9464-24c5b9193599
-UVM-2493,2493,acer-rubrum,44.482023,-73.193862,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,11ab7645-7100-4223-9419-12a4610a491a
-UVM-2491,2491,acer-platanoides,44.481940,-73.193798,"Mapped in UVM's ArcGIS tree layer, 2023–24",trinity,,,,0cc34bf6-945c-4eaf-af71-376f2243fd70
+UVM-2494,2494,acer-saccharum,44.482074,-73.193882,"Position corrected on imagery, 2026-11-04",trinity,,,,8bd0e370-e840-4deb-9464-24c5b9193599
+UVM-2493,2493,acer-rubrum,44.482052,-73.194011,"Position corrected on imagery, 2026-11-04",trinity,,,,11ab7645-7100-4223-9419-12a4610a491a
+UVM-2491,2491,acer-platanoides,44.481896,-73.193831,"Position corrected on imagery, 2026-11-04",trinity,,,,0cc34bf6-945c-4eaf-af71-376f2243fd70
 UVM-3234,3234,acer-saccharum,44.482211,-73.195467,"Position corrected on imagery, 2026-11-04",trinity,,,,9d2f8850-dc00-4022-a6b8-d9a63ff65604
 UVM-3237,3237,thuja-occidentalis,44.482255,-73.195788,"Position corrected on imagery, 2026-11-04",trinity,,,,48965b8b-ba59-4bb6-9fe5-31ff0ac71953
 UVM-3236,3236,thuja-occidentalis,44.482281,-73.195802,"Position corrected on imagery, 2026-11-04",trinity,,,,bb699801-2b5b-49ac-a1d4-1ab00c14a697
