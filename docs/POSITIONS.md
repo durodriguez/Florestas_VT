@@ -24,9 +24,10 @@ with its tag number, or `#` and its accession if it has none.
 
 ## Checking positions on site
 
-**◎**, under the zoom buttons, shows where you are: a blue dot that follows the
+**◎**, at the right of the header (the same button as the public map's "Find
+plants near me"), shows where you are: a blue dot that follows the
 device as you walk, inside a shaded circle as wide as the device's own estimate
-of its accuracy, which is shown beside the button. The map centers on you once,
+of its accuracy, which is shown on the map under the zoom buttons. The map centers on you once,
 at the first fix, and then stays where you put it; if the dot is off screen,
 ◎ brings it back, and pressed again it stops.
 
@@ -36,9 +37,12 @@ buildings and under dense canopy. Past ±15 m the label turns red and says so.
 The most reliable use is relative: stand at a trunk, and see which dot the blue
 one sits beside.
 
-The page works on a phone, with the panel stacked above the map, but dragging
-trees and the arrow-key nudges need a mouse and keyboard. Use the phone to look
-and a laptop to move.
+The page works on a phone or tablet, with the panel stacked above the map on a
+phone. **Touch a dot and slide** to drag it; a finger anywhere else pans the
+map, and two fingers pinch-zoom. A fingertip is blunt, so a touch takes the
+nearest tree within about 18 pixels. With trees close together, zoom in first.
+The arrow-key nudges still need a keyboard, and Rectangle and Circle need a
+mouse.
 
 ## Marking trees as not there
 

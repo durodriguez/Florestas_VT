@@ -174,12 +174,19 @@ button, input { font: inherit; color: inherit; }
   box-shadow: 0 1px 3px rgb(0 0 0 / 40%);
 }
 
-/* "You are here" (locate.ts): the button sits under the zoom buttons, and the
-   accuracy reads beside it. */
-.locate-control { display: flex; align-items: center; background: #fff; }
-.locate-btn { font-size: 1.15rem; line-height: 30px; text-align: center; text-decoration: none; color: var(--text); }
-.locate-btn[aria-pressed="true"] { color: #1d6fe0; font-weight: 700; }
-.locate-msg { padding: 0 .55rem; font-size: .8rem; white-space: nowrap; color: var(--text); }
+/* "You are here" (locate.ts): ◎ in the header, the public map's button; what it
+   reports shows on the map under the zoom buttons. */
+.icon-btn {
+  background: rgb(255 255 255 / 12%); border: 0; color: #fff; flex: none;
+  width: 2.25rem; height: 2.25rem; border-radius: 7px;
+  cursor: pointer; font-size: 1.1rem; line-height: 1;
+}
+.icon-btn:hover { background: rgb(255 255 255 / 22%); }
+.icon-btn[aria-pressed="true"] { background: #fff; color: #1d6fe0; }
+.locate-msg {
+  padding: .3rem .55rem; border-radius: 6px; background: #fff;
+  font-size: .8rem; color: var(--text); box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+}
 .locate-msg:empty { display: none; }
 .locate-msg.is-warn { color: var(--poor); font-weight: 600; }
 
