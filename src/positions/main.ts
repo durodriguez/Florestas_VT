@@ -7,6 +7,7 @@ import { normalizeTag } from '../accession';
 import { TYPE_LABELS } from '../palette';
 import type { Plant } from '../types';
 import { initImagery } from './imagery';
+import { initLocate } from './locate';
 import { parsePeaks, type Peak, type PeaksFile } from './peaks';
 import { loadCrowns, nearRings, readCrownFiles, saveCrowns, type SavedCrowns } from './crowns';
 import {
@@ -77,6 +78,7 @@ map.createPane('campus');
 map.getPane('campus')!.style.zIndex = '300';
 map.getPane('campus')!.style.pointerEvents = 'none';
 L.control.scale({ imperial: false }).addTo(map);
+initLocate(map, $<HTMLButtonElement>('locate'));
 
 // Generous tolerance: a 6 px dot is a small target, and the job is grabbing
 // hundreds of them.
@@ -185,6 +187,70 @@ document.addEventListener('mouseup', () => {
     commit(id, [at.lat, at.lng]);
   }
 });
+
+// Touch: a finger on a dot picks it up, as the mouse does. Leaflet would take
+// the press first and pan the map, so it is caught on the way down, before
+// Leaflet sees it, and only when it lands on a tree; anywhere else the map
+// pans and pinches as usual. A fingertip is blunt, so its reach is wider
+// than the canvas's 5 px, and it takes the nearest tree within it.
+const FINGER_PX = 18;
+let touch: {
+  pointer: number; id: string; x: number; y: number;
+  from: L.LatLng; travelled: boolean; locked: boolean;
+} | null = null;
+
+function dotUnder(x: number, y: number, reach: number): string | null {
+  let best: string | null = null;
+  let bestPx = reach;
+  for (const [id, dot] of dots) {
+    const pt = map.latLngToContainerPoint(dot.getLatLng());
+    const px = Math.hypot(pt.x - x, pt.y - y);
+    if (px <= bestPx) { bestPx = px; best = id; }
+  }
+  return best;
+}
+
+map.getContainer().addEventListener('pointerdown', (e) => {
+  if (e.pointerType !== 'touch') return;
+  // A second finger while one is carrying a tree: ignored, not a pinch.
+  if (touch) { e.stopPropagation(); return; }
+  if (areaMode || !map.hasLayer(dotLayer)) return;
+  const box = map.getContainer().getBoundingClientRect();
+  const id = dotUnder(e.clientX - box.left, e.clientY - box.top, FINGER_PX);
+  if (!id) return;
+  e.stopPropagation();
+  e.preventDefault();
+  (document.activeElement as HTMLElement | null)?.blur();
+  select(id, false);
+  touch = {
+    pointer: e.pointerId, id, x: e.clientX, y: e.clientY,
+    from: dots.get(id)!.getLatLng(), travelled: false, locked: !!deletions[id],
+  };
+}, true);
+
+document.addEventListener('pointermove', (e) => {
+  if (!touch || e.pointerId !== touch.pointer || touch.locked) return;
+  // A finger wobbles more than a mouse, so a tap is allowed a little travel.
+  if (!touch.travelled && Math.hypot(e.clientX - touch.x, e.clientY - touch.y) < DRAG_PX * 2) return;
+  touch.travelled = true;
+  map.getContainer().classList.add('is-dragging');
+  dots.get(touch.id)!.setLatLng(map.mouseEventToLatLng(e));
+});
+
+function endTouch(e: PointerEvent): void {
+  if (!touch || e.pointerId !== touch.pointer) return;
+  const { id, travelled, from } = touch;
+  touch = null;
+  dragEndedAt = Date.now();
+  map.getContainer().classList.remove('is-dragging');
+  if (!travelled) return;
+  // A cancelled touch (the browser took it back) is no move: the tree goes home.
+  if (e.type === 'pointercancel') { dots.get(id)!.setLatLng(from); return; }
+  const at = dots.get(id)!.getLatLng();
+  commit(id, [at.lat, at.lng]);
+}
+document.addEventListener('pointerup', endTouch);
+document.addEventListener('pointercancel', endTouch);
 
 // ---------------------------------------------------------------- area select
 
