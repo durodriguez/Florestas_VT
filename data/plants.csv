@@ -217,17 +217,17 @@ UVM-0376,376,syringa-reticulata,44.477449,-73.196866,"Mapped in UVM's ArcGIS tre
 UVM-0377,377,syringa-reticulata,44.477447,-73.196917,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0f55d72c-49df-4125-85b8-a9148f15fcfe
 UVM-0379,379,acer-palmatum,44.477440,-73.196993,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,a4f7df18-3180-49eb-b48b-bb10aecfe71b
 UVM-4062,,betula-nigra,44.477231,-73.197523,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b36a8033-5c57-4dc0-8515-80ed992d7d14
-UVM-1314,1314,picea-pungens,44.477175,-73.197923,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,509e378e-ec43-41f6-b5c4-fd15a8b974a7
-UVM-1313,1313,picea-pungens,44.477192,-73.197922,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e6228b94-5697-42d0-bf2e-eba1f310a2ef
-UVM-4063,,thuja-sp,44.477199,-73.197948,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,be9fe9b1-e66c-4ddd-99ff-c618978eea9a
-UVM-1311,1311,tsuga-canadensis,44.477211,-73.197925,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,8b9458cb-9eb6-4032-bc27-e78ffc88bb44
-UVM-3014,3014,thuja-sp,44.477223,-73.197958,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c74cd269-188b-4b72-947d-aee1a88b2e0f
-UVM-4064,,gleditsia-triacanthos-inermis,44.477148,-73.197720,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,da5d3e94-a72d-4697-8ab6-0e7102a53473
-UVM-4065,,gleditsia-triacanthos-inermis,44.477154,-73.197644,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,92b7a987-3d8b-4fc2-ba4a-cab564f47064
-UVM-4066,,gleditsia-triacanthos-inermis,44.477159,-73.197547,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,1e1e3572-7e0a-4732-8f7d-dd2b49a95247
+UVM-1314,1314,picea-pungens,44.477148,-73.197965,"Position corrected on imagery, 2026-11-04",central,,,,509e378e-ec43-41f6-b5c4-fd15a8b974a7
+UVM-1313,1313,picea-pungens,44.477184,-73.197950,"Position corrected on imagery, 2026-11-04",central,,,,e6228b94-5697-42d0-bf2e-eba1f310a2ef
+UVM-4063,,thuja-sp,44.477208,-73.197975,"Position corrected on imagery, 2026-11-04",central,,,,be9fe9b1-e66c-4ddd-99ff-c618978eea9a
+UVM-1311,1311,tsuga-canadensis,44.477230,-73.197956,"Position corrected on imagery, 2026-11-04",central,,,,8b9458cb-9eb6-4032-bc27-e78ffc88bb44
+UVM-3014,3014,thuja-sp,44.477243,-73.197983,"Position corrected on imagery, 2026-11-04",central,,,,c74cd269-188b-4b72-947d-aee1a88b2e0f
+UVM-4064,,gleditsia-triacanthos-inermis,44.477125,-73.197707,"Position corrected on imagery, 2026-11-04",central,,,,da5d3e94-a72d-4697-8ab6-0e7102a53473
+UVM-4065,,gleditsia-triacanthos-inermis,44.477129,-73.197634,"Position corrected on imagery, 2026-11-04",central,,,,92b7a987-3d8b-4fc2-ba4a-cab564f47064
+UVM-4066,,gleditsia-triacanthos-inermis,44.477134,-73.197571,"Position corrected on imagery, 2026-11-04",central,,,,1e1e3572-7e0a-4732-8f7d-dd2b49a95247
 UVM-3015,3015,pinus-nigra,44.477236,-73.198095,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,3cc81dc3-b87b-4060-9b81-aa9a448571c2
 UVM-0326,326,pinus-nigra,44.477220,-73.198173,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,b23ec2a1-a4b1-4b94-a5ba-d10f68c9c3ba
-UVM-3013,3013,gleditsia-triacanthos-inermis,44.477048,-73.197370,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,a53b6648-0e04-4ef8-86e7-90e887189654
+UVM-3013,3013,gleditsia-triacanthos-inermis,44.477066,-73.197403,"Position corrected on imagery, 2026-11-04",central,,,,a53b6648-0e04-4ef8-86e7-90e887189654
 UVM-1321,1321,ulmus-sp,44.476886,-73.197314,"Position corrected on imagery, 2026-11-04",central,,,,8f946fee-d7e5-47c1-8f12-e6cfc64a508c
 UVM-1320,1320,ulmus-sp,44.476913,-73.197396,"Position corrected on imagery, 2026-11-04",central,,,,818ee150-abb3-4d2f-88e5-75e4d03a033a
 UVM-1319,1319,ulmus-sp,44.476953,-73.197503,"Position corrected on imagery, 2026-11-04",central,,,,c140c07c-0a7d-416c-9240-e6f6f35c0621
@@ -268,14 +268,14 @@ UVM-0307,307,picea-abies,44.476807,-73.198648,Position set by pin on imagery,cen
 UVM-0306,306,ginkgo-biloba,44.476818,-73.198537,Position set by pin on imagery,central,,,,a3cb10d8-b06b-4cfb-b91d-5adb9cb8f37b
 UVM-0304,304,ginkgo-biloba,44.476891,-73.198336,Position set by pin on imagery,central,,,,eaa32a0d-4c93-4665-8e94-7ec36a96e6d2
 UVM-0305,305,ginkgo-biloba,44.476796,-73.198322,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,788bc493-b26c-44c9-80a4-ce49b1e368be
-UVM-0298,298,acer-platanoides,44.477205,-73.198742,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,0e35aa5a-2e17-4ad9-945c-cb5e5ca82ab4
-UVM-0299,299,acer-platanoides,44.477208,-73.198706,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,5a8dd19d-7930-405f-86af-527455810adb
-UVM-3269,3269,acer-platanoides,44.477211,-73.198658,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,514bac24-da21-4a4c-bfaa-82c8626814fa
-UVM-0301,301,acer-platanoides,44.477212,-73.198603,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,bdceb489-6ae7-4240-807b-37e028ad5fc3
-UVM-0294,294,acer-platanoides,44.477269,-73.198592,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,1bfdf5bd-8ec0-42d0-bf9f-a422616b070e
-UVM-0295,295,acer-platanoides,44.477266,-73.198640,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,89af72f0-eb6e-4d26-82a9-0b404810b412
-UVM-0296,296,acer-platanoides,44.477260,-73.198692,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,8686817a-6cfa-45d3-9c1b-c7f6b069cd90
-UVM-0297,297,acer-platanoides,44.477258,-73.198743,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,16538431-3d9f-47cd-b4a8-3bea2771d39d
+UVM-0298,298,acer-platanoides,44.477191,-73.198754,"Position corrected on imagery, 2026-11-04",central,,,,0e35aa5a-2e17-4ad9-945c-cb5e5ca82ab4
+UVM-0299,299,acer-platanoides,44.477195,-73.198697,"Position corrected on imagery, 2026-11-04",central,,,,5a8dd19d-7930-405f-86af-527455810adb
+UVM-3269,3269,acer-platanoides,44.477198,-73.198642,"Position corrected on imagery, 2026-11-04",central,,,,514bac24-da21-4a4c-bfaa-82c8626814fa
+UVM-0301,301,acer-platanoides,44.477206,-73.198593,"Position corrected on imagery, 2026-11-04",central,,,,bdceb489-6ae7-4240-807b-37e028ad5fc3
+UVM-0294,294,acer-platanoides,44.477261,-73.198605,"Position corrected on imagery, 2026-11-04",central,,,,1bfdf5bd-8ec0-42d0-bf9f-a422616b070e
+UVM-0295,295,acer-platanoides,44.477255,-73.198654,"Position corrected on imagery, 2026-11-04",central,,,,89af72f0-eb6e-4d26-82a9-0b404810b412
+UVM-0296,296,acer-platanoides,44.477257,-73.198708,"Position corrected on imagery, 2026-11-04",central,,,,8686817a-6cfa-45d3-9c1b-c7f6b069cd90
+UVM-0297,297,acer-platanoides,44.477252,-73.198764,"Position corrected on imagery, 2026-11-04",central,,,,16538431-3d9f-47cd-b4a8-3bea2771d39d
 UVM-4076,,gleditsia-triacanthos-inermis,44.477311,-73.198802,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,e553bf91-1e5f-4540-af07-8ef75e3b9196
 UVM-4077,,gleditsia-triacanthos-inermis,44.477400,-73.198810,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,74180646-0c8c-4ec9-8ef4-80828f199b71
 UVM-3273,3273,quercus-palustris,44.477551,-73.198674,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,4d6a4e62-05ac-4832-b9cb-3e91f7a8b360
