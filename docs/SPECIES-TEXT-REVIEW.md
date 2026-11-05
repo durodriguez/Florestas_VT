@@ -189,6 +189,14 @@ cousin"), Amur corktree (an unconfirmed detail about the bark dropped) and
 Amur maple (its fun fact, that it colors first of any tree, could not be
 confirmed and is replaced).
 
+A third ten on 6 November 2026, arborvitae to bitternut hickory (Austrian
+pine, Autumn Blaze and bigleaf linden fun facts were checked in section 1).
+Four fixed: arborvitae (the crushed foliage smells sharp; "fruity" was
+unsourced), ash (five to thirteen leaflets across the genus), Autumn
+Brilliance serviceberry (its core is small and indistinct, not a
+miniature apple's five-part star) and bitternut hickory (wagon wheels
+unsourced; tool handles and farm implements confirmed).
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -202,16 +210,16 @@ confirmed and is replaced).
 - [x] **Amur corktree** (*Phellodendron amurense*, `phellodendron-amurense`): description
 - [x] **Amur maackia** (*Maackia amurensis*, `maackia-amurensis`): description + fun fact
 - [x] **Amur maple** (*Acer ginnala*, `acer-ginnala`): description + fun fact
-- [ ] **Arborvitae** (*Thuja sp.*, `thuja-sp`): description + fun fact
-- [ ] **Armstrong red maple** (*Acer rubrum 'Armstrong'*, `acer-rubrum-armstrong`): fun fact
-- [ ] **Ash** (*Fraxinus sp.*, `fraxinus-sp`): description + fun fact
-- [ ] **Austrian pine** (*Pinus nigra*, `pinus-nigra`): fun fact
-- [ ] **Autumn Blaze maple** (*Acer x freemanii 'Autumn Blaze'*, `acer-x-freemanii-autumn-blaze`): description + fun fact
-- [ ] **Autumn Brilliance serviceberry** (*Amelanchier x grandiflora 'Autumn Brilliance'*, `amelanchier-x-grandiflora-autumn-brilliance`): fun fact
-- [ ] **Balsam poplar** (*Populus balsamifera*, `populus-balsamifera`): fun fact
-- [ ] **Bigleaf linden** (*Tilia platyphyllos*, `tilia-platyphyllos`): fun fact
-- [ ] **Bigleaf magnolia** (*Magnolia macrophylla*, `magnolia-macrophylla`): fun fact
-- [ ] **Bitternut hickory** (*Carya cordiformis*, `carya-cordiformis`): description + fun fact
+- [x] **Arborvitae** (*Thuja sp.*, `thuja-sp`): description + fun fact
+- [x] **Armstrong red maple** (*Acer rubrum 'Armstrong'*, `acer-rubrum-armstrong`): fun fact
+- [x] **Ash** (*Fraxinus sp.*, `fraxinus-sp`): description + fun fact
+- [x] **Austrian pine** (*Pinus nigra*, `pinus-nigra`): fun fact
+- [x] **Autumn Blaze maple** (*Acer x freemanii 'Autumn Blaze'*, `acer-x-freemanii-autumn-blaze`): description + fun fact
+- [x] **Autumn Brilliance serviceberry** (*Amelanchier x grandiflora 'Autumn Brilliance'*, `amelanchier-x-grandiflora-autumn-brilliance`): fun fact
+- [x] **Balsam poplar** (*Populus balsamifera*, `populus-balsamifera`): fun fact
+- [x] **Bigleaf linden** (*Tilia platyphyllos*, `tilia-platyphyllos`): fun fact
+- [x] **Bigleaf magnolia** (*Magnolia macrophylla*, `magnolia-macrophylla`): fun fact
+- [x] **Bitternut hickory** (*Carya cordiformis*, `carya-cordiformis`): description + fun fact
 - [ ] **Black tupelo** (*Nyssa sylvatica*, `nyssa-sylvatica`): fun fact
 - [ ] **Black walnut** (*Juglans nigra*, `juglans-nigra`): fun fact
 - [ ] **Boxelder** (*Acer negundo*, `acer-negundo`): fun fact
