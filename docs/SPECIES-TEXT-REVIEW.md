@@ -182,19 +182,26 @@ as written). By the project lead's decision of 6 November 2026, a source check
 is enough to tick a box for now; a reading by someone who knows the trees
 is still welcome before the map moves to a university domain.
 
+A second ten on 6 November 2026, American beech to Amur maple. Four fixed:
+American elm (Loyalists as well as British soldiers felled the Liberty
+Tree), American smoketree (a rare native, not "rarer than its European
+cousin"), Amur corktree (an unconfirmed detail about the bark dropped) and
+Amur maple (its fun fact, that it colors first of any tree, could not be
+confirmed and is replaced).
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
-- [ ] **American beech** (*Fagus grandifolia*, `fagus-grandifolia`): description
-- [ ] **American chestnut** (*Castanea dentata*, `castanea-dentata`): description
-- [ ] **American elm** (*Ulmus americana*, `ulmus-americana`): description + fun fact
-- [ ] **American hornbeam** (*Carpinus caroliniana*, `carpinus-caroliniana`): fun fact
-- [ ] **American smoketree** (*Cotinus obovatus*, `cotinus-obovatus`): description
-- [ ] **American sycamore** (*Platanus occidentalis*, `platanus-occidentalis`): description + fun fact
-- [ ] **Amur chokecherry** (*Prunus maackii*, `prunus-maackii`): fun fact
-- [ ] **Amur corktree** (*Phellodendron amurense*, `phellodendron-amurense`): description
-- [ ] **Amur maackia** (*Maackia amurensis*, `maackia-amurensis`): description + fun fact
-- [ ] **Amur maple** (*Acer ginnala*, `acer-ginnala`): description + fun fact
+- [x] **American beech** (*Fagus grandifolia*, `fagus-grandifolia`): description
+- [x] **American chestnut** (*Castanea dentata*, `castanea-dentata`): description
+- [x] **American elm** (*Ulmus americana*, `ulmus-americana`): description + fun fact
+- [x] **American hornbeam** (*Carpinus caroliniana*, `carpinus-caroliniana`): fun fact
+- [x] **American smoketree** (*Cotinus obovatus*, `cotinus-obovatus`): description
+- [x] **American sycamore** (*Platanus occidentalis*, `platanus-occidentalis`): description + fun fact
+- [x] **Amur chokecherry** (*Prunus maackii*, `prunus-maackii`): fun fact
+- [x] **Amur corktree** (*Phellodendron amurense*, `phellodendron-amurense`): description
+- [x] **Amur maackia** (*Maackia amurensis*, `maackia-amurensis`): description + fun fact
+- [x] **Amur maple** (*Acer ginnala*, `acer-ginnala`): description + fun fact
 - [ ] **Arborvitae** (*Thuja sp.*, `thuja-sp`): description + fun fact
 - [ ] **Armstrong red maple** (*Acer rubrum 'Armstrong'*, `acer-rubrum-armstrong`): fun fact
 - [ ] **Ash** (*Fraxinus sp.*, `fraxinus-sp`): description + fun fact
