@@ -39,9 +39,22 @@ one sits beside.
 
 The page works on a phone or tablet, with the panel stacked above the map on a
 phone. Drag the bar between them up or down to give the map or the panel more
-room; double-tap it to put it back. The phone remembers the height. **Touch a dot and slide** to drag it; a finger anywhere else pans the
-map, and two fingers pinch-zoom. A fingertip is blunt, so a touch takes the
-nearest tree within about 18 pixels. With trees close together, zoom in first.
+room; double-tap it to put it back. The phone remembers the height.
+
+On a touch screen:
+
+- **Tap** a dot to select it: the panel shows the tree, with **Mark as not
+  there**.
+- **Touch and hold** a dot still for half a second to pick it up: a white ring
+  appears around it (and an Android phone gives a short buzz; iPhones do not
+  let web pages do that). Then slide to drag it, and lift to drop it.
+- **A finger that moves straight away pans the map,** even if it landed on a
+  dot. A finger that wanders more than a few pixels during the half second
+  counts as a pan too; lift it and hold again.
+- Two fingers pinch-zoom, except while a tree is being carried.
+
+A fingertip is blunt, so a touch takes the nearest tree within about 18
+pixels. With trees close together, zoom in first.
 The arrow-key nudges still need a keyboard, and Rectangle and Circle need a
 mouse.
 

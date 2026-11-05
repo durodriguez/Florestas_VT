@@ -190,16 +190,35 @@ document.addEventListener('mouseup', () => {
   }
 });
 
-// Touch: a finger on a dot picks it up, as the mouse does. Leaflet would take
-// the press first and pan the map, so it is caught on the way down, before
-// Leaflet sees it, and only when it lands on a tree; anywhere else the map
-// pans and pinches as usual. A fingertip is blunt, so its reach is wider
-// than the canvas's 5 px, and it takes the nearest tree within it.
+// Touch works by holding, because a finger has to pan the map as well:
+//   - a tap on a tree selects it;
+//   - a finger that lands on a tree and moves straight away pans the map;
+//   - a finger held still on a tree for half a second picks it up, and from
+//     then on moving it drags the tree.
+// On a phone Leaflet listens to touch events, not pointer events, so it
+// cannot be stopped from seeing the touch. It is not fought: every touch
+// starts as an ordinary pan, and only a hold switches panning off. A finger
+// that wanders more than HOLD_SLOP_PX during the hold has started a pan, and
+// the hold is called off for that touch. A fingertip is blunt, so its reach
+// is wider than the canvas's 5 px, and it takes the nearest tree within it.
 const FINGER_PX = 18;
+const HOLD_MS = 500;
+/** How far a held finger may wobble and still count as held. */
+const HOLD_SLOP_PX = 10;
 let touch: {
-  pointer: number; id: string; x: number; y: number;
-  from: L.LatLng; travelled: boolean; locked: boolean;
+  pointer: number; id: string; x: number; y: number; from: L.LatLng;
+  /** 'held' once the half second is up and the tree is picked up. */
+  state: 'waiting' | 'held' | 'panning'; travelled: boolean; timer: number;
 } | null = null;
+/** A ring around a picked-up tree, so the hold has something to show for it. */
+// Its own pane, above the trees and every canvas, so nothing covers it.
+map.createPane('lift');
+map.getPane('lift')!.style.zIndex = '650';
+map.getPane('lift')!.style.pointerEvents = 'none';
+const liftRing = L.circleMarker([0, 0], {
+  pane: 'lift', renderer: L.svg({ pane: 'lift' }),
+  radius: 16, interactive: false, color: '#ffffff', weight: 3, fill: false,
+});
 
 function dotUnder(x: number, y: number, reach: number): string | null {
   let best: string | null = null;
@@ -212,40 +231,82 @@ function dotUnder(x: number, y: number, reach: number): string | null {
   return best;
 }
 
+function pickUp(): void {
+  if (!touch) return;
+  touch.state = 'held';
+  // Leaflet may already be counting this touch as a pan; switching panning
+  // off ends that, and a second finger cannot pinch while a tree is carried.
+  map.dragging.disable();
+  map.touchZoom.disable();
+  (document.activeElement as HTMLElement | null)?.blur();
+  select(touch.id, false);
+  touch.from = dots.get(touch.id)!.getLatLng();
+  liftRing.setLatLng(touch.from).addTo(map);
+  map.getContainer().classList.add('is-dragging');
+  // A short buzz where the phone allows it (Android; not iPhone Safari).
+  try { navigator.vibrate?.(30); } catch { /* not allowed: the ring is enough */ }
+}
+
+function endHold(): void {
+  if (!touch) return;
+  clearTimeout(touch.timer);
+  if (touch.state === 'held') {
+    map.dragging.enable();
+    map.touchZoom.enable();
+    liftRing.remove();
+    map.getContainer().classList.remove('is-dragging');
+  }
+  touch = null;
+}
+
 map.getContainer().addEventListener('pointerdown', (e) => {
   if (e.pointerType !== 'touch') return;
-  // A second finger while one is carrying a tree: ignored, not a pinch.
-  if (touch) { e.stopPropagation(); return; }
+  // A second finger during the hold is the start of a pinch: let it be one.
+  // While a tree is carried, it is ignored (pinching is off).
+  if (touch) {
+    if (touch.state === 'waiting') endHold();
+    return;
+  }
   if (areaMode || !map.hasLayer(dotLayer)) return;
   const box = map.getContainer().getBoundingClientRect();
   const id = dotUnder(e.clientX - box.left, e.clientY - box.top, FINGER_PX);
   if (!id) return;
-  e.stopPropagation();
-  e.preventDefault();
-  (document.activeElement as HTMLElement | null)?.blur();
-  select(id, false);
   touch = {
-    pointer: e.pointerId, id, x: e.clientX, y: e.clientY,
-    from: dots.get(id)!.getLatLng(), travelled: false, locked: !!deletions[id],
+    pointer: e.pointerId, id, x: e.clientX, y: e.clientY, from: dots.get(id)!.getLatLng(),
+    state: 'waiting', travelled: false,
+    // A tree marked not there stays put: a hold only selects it.
+    timer: deletions[id] ? 0 : window.setTimeout(pickUp, HOLD_MS),
   };
 }, true);
 
 document.addEventListener('pointermove', (e) => {
-  if (!touch || e.pointerId !== touch.pointer || touch.locked) return;
-  // A finger wobbles more than a mouse, so a tap is allowed a little travel.
-  if (!touch.travelled && Math.hypot(e.clientX - touch.x, e.clientY - touch.y) < DRAG_PX * 2) return;
+  if (!touch || e.pointerId !== touch.pointer) return;
+  if (touch.state === 'waiting') {
+    // Moved off during the hold: this touch is a pan, and stays one.
+    if (Math.hypot(e.clientX - touch.x, e.clientY - touch.y) > HOLD_SLOP_PX) {
+      clearTimeout(touch.timer);
+      touch.state = 'panning';
+    }
+    return;
+  }
+  if (touch.state !== 'held') return;
   touch.travelled = true;
-  map.getContainer().classList.add('is-dragging');
-  dots.get(touch.id)!.setLatLng(map.mouseEventToLatLng(e));
+  const at = map.mouseEventToLatLng(e);
+  dots.get(touch.id)!.setLatLng(at);
+  liftRing.setLatLng(at);
 });
 
 function endTouch(e: PointerEvent): void {
   if (!touch || e.pointerId !== touch.pointer) return;
-  const { id, travelled, from } = touch;
-  touch = null;
+  const { id, state, travelled, from } = touch;
+  endHold();
   dragEndedAt = Date.now();
-  map.getContainer().classList.remove('is-dragging');
-  if (!travelled) return;
+  if (state === 'waiting') {
+    // Down and up without wandering, before the half second: a tap.
+    if (e.type === 'pointerup') select(id, false);
+    return;
+  }
+  if (state !== 'held' || !travelled) return;
   // A cancelled touch (the browser took it back) is no move: the tree goes home.
   if (e.type === 'pointercancel') { dots.get(id)!.setLatLng(from); return; }
   const at = dots.get(id)!.getLatLng();
@@ -253,6 +314,9 @@ function endTouch(e: PointerEvent): void {
 }
 document.addEventListener('pointerup', endTouch);
 document.addEventListener('pointercancel', endTouch);
+// A long press can bring up the browser's own menu; on the map it means
+// "pick up this tree", nothing else.
+map.getContainer().addEventListener('contextmenu', (e) => { if (touch) e.preventDefault(); });
 
 // ---------------------------------------------------------------- area select
 
