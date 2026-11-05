@@ -38,9 +38,9 @@ const MONTHS = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep
  * date gets no line rather than a guess, because a caption is the one place a
  * guess would be invisible.
  *
- * The date is the survey's, which is the photo's: the photo on a plant is
- * always the one from its latest observation, so a later survey recording no
- * photo shows none at all rather than an older one under a newer date.
+ * The date is the survey's, which is the photo's. A later survey that took no
+ * photo does not hide an earlier one, but the caption keeps the earlier
+ * survey's date (`photoOn`), never the newer one's.
  *
  * Mirrored by photoTaken() in scripts/lib/species-pages.mjs, which cannot
  * import this — src/ is TypeScript compiled by Vite, scripts/ is plain .mjs.

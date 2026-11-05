@@ -506,6 +506,43 @@ describe('buildDataset', () => {
     }
   });
 
+  it('keeps the last photo, with its date, through a visit that took none', () => {
+    const r = build({
+      observationRows: [
+        observation({ surveyed_on: '2025-04-24', photo: 'UVM-0001-1.webp' }),
+        observation({ surveyed_on: '2026-11-04', photo: '' }),
+      ],
+    });
+    expect(r.errors).toEqual([]);
+    expect(field(r, 0, 'photo')).toBe('UVM-0001-1.webp');
+    expect(field(r, 0, 'photo_on')).toBe('2025-04-24');
+    expect(field(r, 0, 'surveyed_on')).toBe('2026-11-04');
+  });
+
+  it('gives no photo date when the latest visit took the photo itself', () => {
+    const r = build({
+      observationRows: [
+        observation({ surveyed_on: '2025-04-24', photo: 'UVM-0001-1.webp' }),
+        observation({ surveyed_on: '2026-11-04', photo: 'UVM-0001-2.webp' }),
+      ],
+    });
+    expect(field(r, 0, 'photo')).toBe('UVM-0001-2.webp');
+    expect(field(r, 0, 'photo_on')).toBeNull();
+  });
+
+  it('does not carry a photo onto a tree last found removed or not found', () => {
+    for (const status of ['removed', 'not-found']) {
+      const r = build({
+        observationRows: [
+          observation({ surveyed_on: '2025-04-24', photo: 'UVM-0001-1.webp' }),
+          observation({ surveyed_on: '2026-11-04', photo: '', status }),
+        ],
+      });
+      expect(field(r, 0, 'photo')).toBeNull();
+      expect(field(r, 0, 'photo_on')).toBeNull();
+    }
+  });
+
   it('joins i-Tree estimates onto the city trees they belong to', () => {
     const city = (id: string) => ({ city_id: id, taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955',
       collection_id: 'green', dbh_in: '12', height_ft: '25', spread_ft: '20', condition: 'good' });

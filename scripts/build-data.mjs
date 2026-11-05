@@ -196,9 +196,9 @@ for (const row of result.plants.rows) {
     photosByTaxon.get(taxon.id).push({
       id: at(row, 'plant_id'),
       url: photoUrl(file, siteBase, config.photoBaseUrl),
-      // The survey the photo came off. The photo on a plant row is always the
-      // one from its latest observation, so this is that photo's own date.
-      taken: at(row, 'surveyed_on'),
+      // The survey the photo came off: photo_on when it is from an earlier
+      // visit than the latest, otherwise the latest visit's own date.
+      taken: at(row, 'photo_on') ?? at(row, 'surveyed_on'),
     });
   }
   const c = result.dataset.collections[at(row, 'collection')];

@@ -66,6 +66,7 @@ export function expandPlants(file: PlantsFile, dataset: Dataset): Plant[] {
       surveyedOn: at(row, 'surveyed_on') as string | null,
       surveyor: at(row, 'surveyor') as string | null,
       photo: at(row, 'photo') as string | null,
+      photoOn: (at(row, 'photo_on') as string | null | undefined) ?? null,
       dedicationLabel: at(row, 'dedication_label') as string | null,
       story: at(row, 'story') as string | null,
       history: [],
