@@ -365,7 +365,17 @@ State and Dictionary.com), sawtooth oak (planted for wildlife across the
 eastern United States, not only the South) and Meader persimmon (its
 description no longer suggests frost is needed to ripen the fruit).
 
-- [ ] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
+A third ten on 5 November 2026: Emerald Green arborvitae, Boston ivy,
+Virginia creeper, Japanese fiber banana, English ivy, Triumph and Accolade
+elms, lilac (genus), Miss Kim lilac and Triple Crown blackberry. Four fixed:
+Boston ivy no longer claims to be *the* ivy of the Ivy League name, and drops
+an unsourced line about English ivy failing in New England; Virginia creeper
+no longer says it came from the Virginia colony (only that it reached
+England from eastern North America by 1629); Accolade's date is when its
+seedling was planted, not when the seed was collected; Triumph loses an
+unconfirmed year.
+
+- [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [ ] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
 - [ ] **Ann magnolia** (*Magnolia 'Ann'*, `magnolia-ann`): description + fun fact
 - [ ] **Atlantic white cedar** (*Chamaecyparis thyoides*, `chamaecyparis-thyoides`): description + fun fact
@@ -376,7 +386,7 @@ description no longer suggests frost is needed to ripen the fruit).
 - [x] **Blue Mist dwarf fothergilla** (*Fothergilla gardenii 'Blue Mist'*, `fothergilla-gardenii-blue-mist`): description + fun fact
 - [ ] **Bluecrop highbush blueberry** (*Vaccinium corymbosum 'Bluecrop'*, `vaccinium-corymbosum-bluecrop`): description + fun fact
 - [ ] **Bosnian pine** (*Pinus heldreichii*, `pinus-heldreichii`): description + fun fact
-- [ ] **Boston ivy** (*Parthenocissus tricuspidata*, `parthenocissus-tricuspidata`): description + fun fact
+- [x] **Boston ivy** (*Parthenocissus tricuspidata*, `parthenocissus-tricuspidata`): description + fun fact
 - [x] **Bottlebrush buckeye** (*Aesculus parviflora*, `aesculus-parviflora`): description + fun fact
 - [ ] **Brilliance autumn fern** (*Dryopteris erythrosora 'Brilliance'*, `dryopteris-erythrosora-brilliance`): description + fun fact
 - [ ] **Brouwer's Beauty andromeda** (*Pieris 'Brouwer's Beauty'*, `pieris-brouwers-beauty`): description + fun fact
@@ -392,8 +402,8 @@ description no longer suggests frost is needed to ripen the fruit).
 - [ ] **Dwarf Everbearing black mulberry** (*Morus nigra 'Dwarf Everbearing'*, `morus-nigra-dwarf-everbearing`): description + fun fact
 - [x] **Dwarf fothergilla** (*Fothergilla gardenii*, `fothergilla-gardenii`): description + fun fact
 - [ ] **Elizabeth magnolia** (*Magnolia 'Elizabeth'*, `magnolia-elizabeth`): description + fun fact
-- [ ] **Emerald Green arborvitae** (*Thuja occidentalis 'Smaragd'*, `thuja-occidentalis-smaragd`): description + fun fact
-- [ ] **English ivy** (*Hedera helix*, `hedera-helix`): description + fun fact
+- [x] **Emerald Green arborvitae** (*Thuja occidentalis 'Smaragd'*, `thuja-occidentalis-smaragd`): description + fun fact
+- [x] **English ivy** (*Hedera helix*, `hedera-helix`): description + fun fact
 - [ ] **English walnut** (*Juglans regia*, `juglans-regia`): description + fun fact
 - [ ] **Fall Gold raspberry** (*Rubus idaeus 'Fall Gold'*, `rubus-idaeus-fall-gold`): description + fun fact
 - [ ] **Forsythia** (*Forsythia sp.*, `forsythia-sp`): description + fun fact
@@ -407,7 +417,7 @@ description no longer suggests frost is needed to ripen the fruit).
 - [ ] **Iris** (*Iris sp.*, `iris-sp`): description + fun fact
 - [x] **Japanese angelica tree** (*Aralia elata*, `aralia-elata`): description + fun fact
 - [x] **Japanese clethra** (*Clethra barbinervis*, `clethra-barbinervis`): description + fun fact
-- [ ] **Japanese fiber banana** (*Musa basjoo*, `musa-basjoo`): description + fun fact
+- [x] **Japanese fiber banana** (*Musa basjoo*, `musa-basjoo`): description + fun fact
 - [x] **Japanese pagoda tree** (*Styphnolobium japonicum*, `styphnolobium-japonicum`): description + fun fact
 - [ ] **Japanese pieris** (*Pieris japonica*, `pieris-japonica`): description + fun fact
 - [x] **Japanese snowbell** (*Styrax japonicus*, `styrax-japonicus`): description + fun fact
@@ -416,11 +426,11 @@ description no longer suggests frost is needed to ripen the fruit).
 - [ ] **Karl Foerster feather reed grass** (*Calamagrostis x acutiflora 'Karl Foerster'*, `calamagrostis-x-acutiflora-karl-foerster`): description + fun fact
 - [ ] **Lacebark pine** (*Pinus bungeana*, `pinus-bungeana`): description + fun fact
 - [ ] **Lady fern** (*Athyrium filix-femina*, `athyrium-filix-femina`): description + fun fact
-- [ ] **Lilac** (*Syringa sp.*, `syringa-sp`): description + fun fact
+- [x] **Lilac** (*Syringa sp.*, `syringa-sp`): description + fun fact
 - [ ] **Limber pine** (*Pinus flexilis*, `pinus-flexilis`): description + fun fact
 - [x] **Mariesii doublefile viburnum** (*Viburnum plicatum f. tomentosum 'Mariesii'*, `viburnum-plicatum-tomentosum-mariesii`): description + fun fact
 - [x] **Meader persimmon** (*Diospyros virginiana 'Meader'*, `diospyros-virginiana-meader`): description + fun fact
-- [ ] **Miss Kim lilac** (*Syringa pubescens subsp. patula 'Miss Kim'*, `syringa-pubescens-patula-miss-kim`): description + fun fact
+- [x] **Miss Kim lilac** (*Syringa pubescens subsp. patula 'Miss Kim'*, `syringa-pubescens-patula-miss-kim`): description + fun fact
 - [ ] **New York fern** (*Amauropelta noveboracensis*, `amauropelta-noveboracensis`): description + fun fact
 - [ ] **Northern maidenhair fern** (*Adiantum pedatum*, `adiantum-pedatum`): description + fun fact
 - [ ] **Ohio buckeye** (*Aesculus glabra*, `aesculus-glabra`): description + fun fact
@@ -445,10 +455,10 @@ description no longer suggests frost is needed to ripen the fruit).
 - [ ] **Sweetbay magnolia** (*Magnolia virginiana*, `magnolia-virginiana`): description + fun fact
 - [ ] **Swiss stone pine** (*Pinus cembra*, `pinus-cembra`): description + fun fact
 - [ ] **Sycamore maple** (*Acer pseudoplatanus*, `acer-pseudoplatanus`): description + fun fact
-- [ ] **Triple Crown thornless blackberry** (*Rubus 'Triple Crown'*, `rubus-triple-crown`): description + fun fact
-- [ ] **Triumph elm** (*Ulmus 'Morton Glossy'*, `ulmus-morton-glossy`): description + fun fact
+- [x] **Triple Crown thornless blackberry** (*Rubus 'Triple Crown'*, `rubus-triple-crown`): description + fun fact
+- [x] **Triumph elm** (*Ulmus 'Morton Glossy'*, `ulmus-morton-glossy`): description + fun fact
 - [ ] **Ultimate Yellow magnolia** (*Magnolia 'Ultimate Yellow'*, `magnolia-ultimate-yellow`): description + fun fact
 - [ ] **Umbrella magnolia** (*Magnolia tripetala*, `magnolia-tripetala`): description + fun fact
-- [ ] **Virginia creeper** (*Parthenocissus quinquefolia*, `parthenocissus-quinquefolia`): description + fun fact
+- [x] **Virginia creeper** (*Parthenocissus quinquefolia*, `parthenocissus-quinquefolia`): description + fun fact
 - [x] **Weeping Alaska cedar** (*Callitropsis nootkatensis 'Pendula'*, `callitropsis-nootkatensis-pendula`): description + fun fact
 - [ ] **White Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodtwo'*, `hibiscus-syriacus-notwoodtwo`): description + fun fact
