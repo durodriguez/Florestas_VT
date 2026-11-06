@@ -361,6 +361,29 @@ latest visit found it removed or not found carries nothing forward. Nothing
 caches either on `plants.csv`, so they cannot drift out of step with the
 surveys that established them.
 
+The trunk diameter works the same way. Most visits do not measure it, so a
+standing tree whose latest visit left `dbh_in` blank shows the last diameter
+anyone recorded, with `dbh_on`: "40 in (2014)" in the panel, `dbh_measured_on`
+in the CSV export.
+
+### The 2014 inventory's rows
+
+896 rows, all dated `2014-12-31` with `surveyor` **`UVM 2014 inventory`**, are
+the 2014 UVM campus tree inventory's measurements of trees still on the map:
+its diameter, its condition, and (in `notes`) its tree number and age class.
+Added on 6 November 2026, matched by tag, and only where the 2014 species and
+the map's agree at least on genus. The 54 that disagree are held back until
+someone checks which tree the tag is on now.
+
+The inventory was collected over the whole of 2014 with no date per tree, so
+`2014-12-31` stands for "sometime in 2014": the last day of the year, so that
+any real 2014 visit sorts before it. The build shows these rows as plain
+**2014**, never as "Dec 2014" (`YEAR_ONLY_SURVEYORS` in
+`scripts/lib/vocab.mjs`).
+
+They are twelve-year-old readings, and the map always shows them dated. Nothing
+should treat a 2014 diameter as a tree's current size (see to-do #7).
+
 ### Multi-stemmed trees
 
 Record the largest stem in `dbh_in` and note the others in the observation's

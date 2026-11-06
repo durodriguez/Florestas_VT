@@ -175,4 +175,6 @@ untagged tree is recognised the second time — see
   [to-do #7](TODO.md) (i-Tree ecosystem services) is still blocked. The 2014
   inventory holds a DBH for 950 of these trees, joinable by tag, but those
   measurements are twelve years old and feeding them to i-Tree would produce
-  confident-looking wrong answers. That join is its own decision.
+  confident-looking wrong answers. That join is its own decision. (Made on
+  6 November 2026: 896 of them are now 2014 visits in `observations.csv`,
+  always shown dated. See [DATA-MODEL.md](DATA-MODEL.md#the-2014-inventorys-rows).)

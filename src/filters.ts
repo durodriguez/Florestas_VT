@@ -136,6 +136,8 @@ const CSV_COLUMNS: Array<[string, (p: Plant) => unknown]> = [
   ['lat', (p) => p.lat],
   ['lng', (p) => p.lng],
   ['dbh_in', (p) => p.dbhIn ?? ''],
+  // Blank when the diameter is from the latest visit.
+  ['dbh_measured_on', (p) => p.dbhOn ?? ''],
   ['height_ft', (p) => p.heightFt ?? ''],
   ['spread_ft', (p) => p.spreadFt ?? ''],
   ['condition', (p) => p.condition ?? ''],

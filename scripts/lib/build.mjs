@@ -6,7 +6,7 @@ import {
   TAXON_REQUIRED, PLANT_REQUIRED, OBSERVATION_REQUIRED,
   TAXON_NUMERIC, PLANT_NUMERIC, OBSERVATION_NUMERIC,
   OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS,
-  CITY_TREE_FIELDS,
+  CITY_TREE_FIELDS, YEAR_ONLY_SURVEYORS,
 } from './vocab.mjs';
 import { buildSpeciesLookup } from './species.mjs';
 
@@ -335,6 +335,9 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
 
   for (const series of history.values()) {
     series.sort((a, b) => a.surveyed_on.localeCompare(b.surveyed_on));
+    // Sorted on the full date; shown as the year where that is all that is
+    // known. The front end prints a bare year as it is.
+    for (const o of series) if (YEAR_ONLY_SURVEYORS.has(o.surveyor)) o.surveyed_on = o.surveyed_on.slice(0, 4);
   }
 
   // ---- plants + their latest observation ---------------------------------
@@ -364,6 +367,11 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     // its last one, dated by the visit it came from, so the caption never puts
     // an old picture under a newer date. A removed tree shows only what its
     // latest visit recorded, which is the evidence of the removal.
+    // And for the trunk diameter: most visits do not measure it, and a tree
+    // last measured in 2014 shows that measurement, dated, rather than none.
+    const measured = latest.dbh_in !== null || !active
+      ? latest
+      : series.findLast((o) => o.dbh_in !== null) ?? latest;
     const shot = latest.photo || !active
       ? latest
       : series.findLast((o) => o.photo) ?? latest;
@@ -375,7 +383,8 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       lat: plant.lat,
       lng: plant.lng,
       collection: plant.collection,
-      dbh_in: latest.dbh_in,
+      dbh_in: measured.dbh_in,
+      dbh_on: measured === latest ? null : measured.surveyed_on,
       height_ft: latest.height_ft,
       spread_ft: latest.spread_ft,
       condition: assessed.condition,

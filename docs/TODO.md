@@ -94,8 +94,14 @@ measurements are twelve years old, and DBH is the input i-Tree is most
 sensitive to, so stale numbers would produce confident-looking wrong answers.
 Deliberately left out of the import; worth revisiting only as its own decision.
 
-**The blocker.** Of the 2,062 plants in `data/plants.csv`, **none** has a DBH —
-not even the few surveyed in the field since the import. Without DBH there is
+**6 November 2026:** revisited. 896 of those diameters are now in
+`observations.csv` as 2014 visits, so the map shows them, dated. That does not
+unblock this item: a calculation must use a diameter measured recently, and
+must skip, or explicitly age, any whose `dbh_on` is 2014.
+
+**The blocker.** Of the 2,062 plants in `data/plants.csv`, **none** has a DBH
+measured since 2014 — not even the few surveyed in the field since the import.
+(896 have their 2014 diameter, as history; see above.) Without DBH there is
 no calculation — not a rough one, not a defaulted one. Any number
 shown would be invented, which is worse than showing nothing on a page with
 UVM's name on it.

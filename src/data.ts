@@ -56,6 +56,7 @@ export function expandPlants(file: PlantsFile, dataset: Dataset): Plant[] {
       lng: at(row, 'lng') as number,
       collection,
       dbhIn: at(row, 'dbh_in') as number | null,
+      dbhOn: (at(row, 'dbh_on') as string | null | undefined) ?? null,
       heightFt: at(row, 'height_ft') as number | null,
       spreadFt: at(row, 'spread_ft') as number | null,
       condition: condIdx >= 0 ? conditions[condIdx] ?? null : null,
