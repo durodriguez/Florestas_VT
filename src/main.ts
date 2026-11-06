@@ -6,7 +6,7 @@ import { expandCityTrees, loadData } from './data';
 import { indexByTag, normalizeTag } from './accession';
 import { PlantMap, escapeHtml } from './map';
 import { renderCityDetail, renderDetail, renderResultItem } from './detail';
-import { legendFor, ORIGIN_LABELS, TYPE_LABELS } from './palette';
+import { legendFor, ORIGIN_LABELS, TYPE_LABELS, typesInUse } from './palette';
 import {
   applyFilters, emptyFilters, facetCounts, isFilterActive, toCsv,
 } from './filters';
@@ -85,11 +85,16 @@ class App {
 
   // ---- filter panel ------------------------------------------------------
 
+  /** Plant types on the map, UVM's and the city's: what the filter and legend offer. */
+  private typesShown(): string[] {
+    return typesInUse(this.dataset.vocab.plantTypes, [...this.plants, ...this.cityTrees]);
+  }
+
   private buildFilterUi(): void {
     const { vocab, collections } = this.dataset;
     const families = [...new Set(this.plants.map((p) => p.taxon.family))].sort();
 
-    $('#facet-type').innerHTML = vocab.plantTypes
+    $('#facet-type').innerHTML = this.typesShown()
       .map((t) => checkbox('types', t, TYPE_LABELS[t] ?? titleCase(t)))
       .join('');
     $('#facet-origin').innerHTML = vocab.origins
@@ -136,7 +141,7 @@ class App {
   }
 
   private renderLegend(): void {
-    $('#legend-items').innerHTML = legendFor(this.colorBy, this.dataset)
+    $('#legend-items').innerHTML = legendFor(this.colorBy, this.dataset, this.typesShown())
       .map(
         (e) =>
           `<li><span class="swatch" style="background:${escapeHtml(e.color)}"></span>${escapeHtml(titleCase(e.label))}</li>`,
