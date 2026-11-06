@@ -79,7 +79,7 @@ map.createPane('campus');
 map.getPane('campus')!.style.zIndex = '300';
 map.getPane('campus')!.style.pointerEvents = 'none';
 L.control.scale({ imperial: false }).addTo(map);
-initLocate(map, $<HTMLButtonElement>('locate'));
+initLocate(map, $<HTMLButtonElement>('locate'), $<HTMLButtonElement>('receiver'));
 initSideSplit($('map').parentElement!, document.querySelector<HTMLElement>('.side')!, $('side-split'), () => map.invalidateSize());
 
 // Generous tolerance: a 6 px dot is a small target, and the job is grabbing

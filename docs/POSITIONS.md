@@ -37,6 +37,11 @@ buildings and under dense canopy. Past ±15 m the label turns red and says so.
 The most reliable use is relative: stand at a trunk, and see which dot the blue
 one sits beside.
 
+**Receiver**, beside ◎ on a laptop in Chrome or Edge, connects a Bluetooth GNSS
+receiver such as the Trimble R1, and the dot follows it instead of the laptop:
+see [GNSS-RECEIVER.md](GNSS-RECEIVER.md). On an Android phone, Trimble Mobile
+Manager does this without the button.
+
 The page works on a phone or tablet, with the panel stacked above the map on a
 phone. Drag the bar between them up or down to give the map or the panel more
 room; double-tap it to put it back. The phone remembers the height.

@@ -252,6 +252,8 @@ textarea { min-height: 78px; resize: vertical; }
   .accuracy--poor { background: #3a1d12; color: #f6b599; }
 }
 .gps-status { font-size: 14px; color: var(--ink-2); }
+.receiver-msg { font-weight: 600; }
+.receiver-msg.is-warn { color: var(--poor); }
 .pin-map {
   height: 230px; border-radius: 10px; overflow: hidden;
   border: 1px solid var(--rule); background: var(--ground);

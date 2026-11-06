@@ -21,6 +21,7 @@ import {
   type MappedTree, type NearbyTree,
 } from './nearby';
 import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
+import { describeFix, describeWaiting, Receiver, receiverSupported, type ReceiverState } from '../gnss/receiver';
 import { download, stamp, toCsv, toPhotoZip } from './exporter';
 import { extensionFor, kb, shrinkPhoto } from './photo';
 import { ALL_CARDS, CARDS, visibleCards, type Mode } from './modes';
@@ -1535,9 +1536,71 @@ $('gps-recapture').addEventListener('click', () => {
   manualLatLng = null;
   gps.reset();
   gps.stop();
-  gps.start();
-  toast('Re-reading GPS…');
+  // With a receiver connected its next sentence refills the fix; the
+  // browser's own location stays off.
+  if (!receiver?.connected) gps.start();
+  toast(receiver?.connected ? 'Re-reading the receiver…' : 'Re-reading GPS…');
 });
+
+// ---------------------------------------------------------------- receiver
+
+// A Bluetooth GNSS receiver read directly, on a laptop with Chrome or Edge
+// (src/gnss/receiver.ts). While it is connected its fixes replace the
+// browser's; if it drops, the browser's location comes back, and the line
+// under the accuracy says so.
+let receiver: Receiver | null = null;
+
+function onReceiver(state: ReceiverState): void {
+  const btn = $<HTMLButtonElement>('receiver-btn');
+  const msg = $('receiver-msg');
+  const on = state.status === 'connecting' || state.status === 'waiting' || state.status === 'fix';
+  btn.textContent = on ? 'Disconnect receiver' : 'Connect receiver';
+  btn.setAttribute('aria-pressed', String(on));
+  btn.classList.toggle('is-on', on);
+  msg.hidden = false;
+  msg.classList.toggle('is-warn', state.status === 'lost' || (state.status === 'waiting' && state.slow));
+  switch (state.status) {
+    case 'connecting':
+      msg.textContent = 'Connecting to the receiver…';
+      return;
+    case 'waiting':
+      msg.textContent = describeWaiting(state).text;
+      return;
+    case 'fix':
+      msg.textContent = `Receiver · ${describeFix(state.fix)}`;
+      gps.feed({ lat: state.fix.lat, lng: state.fix.lng, accuracy: state.fix.accuracy, at: state.fix.at });
+      return;
+    case 'lost':
+    case 'off':
+      // Back to the browser's location, from a clean slate: the best fix held
+      // came from the receiver, and must not outlive it unannounced.
+      gps.reset();
+      gps.start();
+      msg.textContent = state.status === 'lost'
+        ? `${state.message} Back to this device's own location.`
+        : "Receiver disconnected. Back to this device's own location.";
+      if (state.status === 'off') msg.classList.remove('is-warn');
+      return;
+  }
+}
+
+if (receiverSupported()) {
+  receiver = new Receiver(onReceiver);
+  const btn = $<HTMLButtonElement>('receiver-btn');
+  btn.hidden = false;
+  btn.addEventListener('click', () => {
+    if (receiver!.connected) {
+      void receiver!.disconnect();
+      return;
+    }
+    void receiver!.connect().then(() => {
+      if (!receiver!.connected) return;
+      // The receiver's fixes from now on; the laptop's own are set aside.
+      gps.stop();
+      gps.reset();
+    });
+  });
+}
 
 $('save').addEventListener('click', () => void save());
 $('nav-list').addEventListener('click', () => showScreen('list'));

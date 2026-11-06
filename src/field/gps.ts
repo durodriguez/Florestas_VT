@@ -9,7 +9,9 @@
  * receiver outright.
  *
  * An external Bluetooth GNSS receiver set as Android's mock location provider
- * replaces the system fix, and this code picks it up with no changes.
+ * replaces the system fix, and this code picks it up with no changes. On a
+ * laptop, where there is no such provider, main.ts reads the receiver itself
+ * and passes its fixes to feed().
  */
 
 export interface Fix {
@@ -50,18 +52,12 @@ export class Gps {
     this.onChange({ status: 'locating' });
 
     this.watchId = navigator.geolocation.watchPosition(
-      (pos) => {
-        const fix: Fix = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-          accuracy: pos.coords.accuracy,
-          at: pos.timestamp,
-        };
-        // Keep the tightest fix seen, so walking under a tree does not throw
-        // away a good reading taken a moment earlier in the open.
-        if (!this.best || fix.accuracy <= this.best.accuracy) this.best = fix;
-        this.onChange({ status: 'fixed', fix: this.best });
-      },
+      (pos) => this.feed({
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude,
+        accuracy: pos.coords.accuracy,
+        at: pos.timestamp,
+      }),
       (err) => {
         if (err.code === err.PERMISSION_DENIED) {
           this.onChange({ status: 'denied' });
@@ -71,6 +67,17 @@ export class Gps {
       },
       { enableHighAccuracy: true, maximumAge: 0, timeout: 30000 },
     );
+  }
+
+  /**
+   * A fix from anywhere: the browser's location, or a receiver read directly
+   * (src/gnss/receiver.ts) while the browser's watch is stopped.
+   */
+  feed(fix: Fix): void {
+    // Keep the tightest fix seen, so walking under a tree does not throw
+    // away a good reading taken a moment earlier in the open.
+    if (!this.best || fix.accuracy <= this.best.accuracy) this.best = fix;
+    this.onChange({ status: 'fixed', fix: this.best });
   }
 
   stop(): void {

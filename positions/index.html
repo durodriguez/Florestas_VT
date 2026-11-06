@@ -13,6 +13,7 @@
     <img class="bar-mark" src="/uvm-mark.png" alt="" width="28" height="28">
     <h1>Tree positions</h1>
     <span id="save-state" class="save-state"></span>
+    <button type="button" id="receiver" class="icon-btn receiver-btn" aria-pressed="false" hidden>Receiver</button>
     <button type="button" id="locate" class="icon-btn" aria-pressed="false" aria-label="Show where I am" title="Show where I am">
       <span aria-hidden="true">◎</span>
     </button>
@@ -48,6 +49,7 @@
           <li><strong>◎</strong> (top right) shows where you are, for checking positions on site: a blue
             dot that follows you, in a shaded circle as wide as the device's own accuracy estimate. Phone GPS is often
             off by 3–10 m, so judge a tree against the circle, not the dot. Tap ◎ again to stop.</li>
+          <li>On a laptop in Chrome or Edge, <strong>Receiver</strong> (beside ◎) connects a Bluetooth GNSS receiver such as a Trimble R1, and the dot follows it. See <code>docs/GNSS-RECEIVER.md</code>.</li>
           <li>On a phone, <strong>drag the bar</strong> between this panel and the map up or down to give either more room. Double-tap it to put it back.</li>
           <li><strong>Ctrl+Z</strong> (⌘Z) undoes the last change. <strong>Esc</strong> deselects.</li>
           <li>Moved trees turn gold, with a line back to where the record had them.</li>
