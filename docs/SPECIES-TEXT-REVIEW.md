@@ -446,8 +446,14 @@ serviceberry, Amber Glow dawn redwood and American basswood, checked the
 same day, are ticked in section 2 above.) One fixed here: the Sycamore Gap
 tree was about 150 years old, not over 200.
 
+American elderberry, added 6 November 2026, was written from sources checked
+the same day (UF/IFAS, University of Minnesota, UMass, Oregon State
+extension). Its fall color, bark and pests are left blank: no source checked
+described them.
+
 - [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [x] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
+- [x] **American elderberry** (*Sambucus canadensis*, `sambucus-canadensis`): description + fun fact
 - [x] **Ann magnolia** (*Magnolia 'Ann'*, `magnolia-ann`): description + fun fact
 - [x] **Atlantic white cedar** (*Chamaecyparis thyoides*, `chamaecyparis-thyoides`): description + fun fact
 - [x] **Beautybush** (*Kolkwitzia amabilis*, `kolkwitzia-amabilis`): description + fun fact
