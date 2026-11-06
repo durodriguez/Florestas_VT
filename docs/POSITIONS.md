@@ -101,9 +101,10 @@ save. The moves live in that one browser on that one computer until exported.
 
 The tool also shows **crown peaks** as small orange circles: the tops of tree
 crowns in Vermont's statewide LiDAR, flown on 21 April 2023
-([LIDAR.md](LIDAR.md)). There are 8,284 across the whole campus boundary. The
-**Show** box in the section's heading turns them off and on, as does the
-layers button at the top right; the two stay in step.
+([LIDAR.md](LIDAR.md)). There are 8,284 across the whole campus boundary. They start
+hidden each time the page opens: the **Show** box in the section's heading
+turns them on and off, as does the layers button at the top right; the two
+stay in step.
 
 A peak shows that a tree stood there in April 2023, not which tree. A clump
 of crowns can give a single peak, and nothing pairs peaks with mapped trees.
@@ -113,10 +114,11 @@ They are there to look at alongside the imagery and the dots.
 
 **Tree crowns (SAL)** in the side panel loads the Spatial Analysis Lab's
 *Tree Centroids Derived from LiDAR for Burlington, VT, 2023*: the file Ernie
-Buford sent. It holds each crown's centre, height and radius. Choose the `.zip`
+Buford sent. It holds each crown's center, height and radius. Choose the `.zip`
 as it came, or its `.shp`, `.dbf` and `.prj` together. Each crown is drawn as a
-violet circle of its radius, with a dot at its centre, under the trees.
-Its own **Show** box turns them off and on.
+violet circle of its radius, with a dot at its center, under the trees.
+They too start hidden each time the page opens; their own **Show** box turns
+them on and off.
 
 - **Only crowns inside the campus boundary, or within 30 m of it, are kept.**
   That is about 8,000 of the city's 112,000.
@@ -134,7 +136,7 @@ Its own **Show** box turns them off and on.
 SAL's crowns are not this project's [peaks](#lidar-crown-peaks). They come from
 the same April 2023 flight, but by a different and more careful method, which
 uses a hand-checked canopy outline and splits it into crowns. Against
-Burlington's surveyed street trees, half have a SAL centre within 2 m, against
+Burlington's surveyed street trees, half have a SAL center within 2 m, against
 a third for the peaks.
 
 ## Your own imagery, privately
