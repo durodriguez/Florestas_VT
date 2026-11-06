@@ -466,6 +466,13 @@ species' fun fact: Kerr's 1804 plant was the double form, and the single
 species reached England about 1834 (Bean's Trees and Shrubs). Sources give
 1804 or 1805 for the first and 1834 or 1835 for the second.
 
+Verdant Hills boxwood, added the same day, has little written about it: the
+Dawes Arboretum's record (parentage, zone 4, size, winter color, deer and
+rabbits) and the American Boxwood Society's cultivar checklist (the 1999
+Boxwood Bulletin article). The warm end of its range, 8, is borrowed from
+similar hybrids, not from a source on this one. Whether the Norman Pellett
+of that article is UVM's could not be confirmed, so the entry does not say.
+
 - [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [x] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
 - [x] **American elderberry** (*Sambucus canadensis*, `sambucus-canadensis`): description + fun fact
@@ -555,6 +562,7 @@ species reached England about 1834 (Bean's Trees and Shrubs). Sources give
 - [x] **Triumph elm** (*Ulmus 'Morton Glossy'*, `ulmus-morton-glossy`): description + fun fact
 - [x] **Ultimate Yellow magnolia** (*Magnolia 'Ultimate Yellow'*, `magnolia-ultimate-yellow`): description + fun fact
 - [x] **Umbrella magnolia** (*Magnolia tripetala*, `magnolia-tripetala`): description + fun fact
+- [x] **Verdant Hills boxwood** (*Buxus 'Verdant Hills'*, `buxus-verdant-hills`): description + fun fact
 - [x] **Virginia creeper** (*Parthenocissus quinquefolia*, `parthenocissus-quinquefolia`): description + fun fact
 - [x] **Weeping Alaska cedar** (*Callitropsis nootkatensis 'Pendula'*, `callitropsis-nootkatensis-pendula`): description + fun fact
 - [x] **White Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodtwo'*, `hibiscus-syriacus-notwoodtwo`): description + fun fact
