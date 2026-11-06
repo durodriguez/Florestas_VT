@@ -68,11 +68,12 @@ export const PLANT_REQUIRED = ['plant_id', 'taxon_id', 'lat', 'lng'];
 export const OBSERVATION_REQUIRED = ['plant_id', 'surveyed_on'];
 
 /**
- * Surveys known only to the year. The 2014 UVM campus inventory was collected
- * over all of 2014 with no date per tree, so its rows in observations.csv are
- * dated 2014-12-31 (to sort after any real 2014 visit) and shown as "2014".
+ * Surveys known only to the year, dated the last day of it (to sort after
+ * any real visit that year) and shown as the bare year: the 2014 UVM campus
+ * inventory, collected over all of 2014 with no date per tree, and the
+ * trunk diameters FOR 1210 Dendrology recorded in OpenStreetMap in 2022.
  */
-export const YEAR_ONLY_SURVEYORS = new Set(['UVM 2014 inventory']);
+export const YEAR_ONLY_SURVEYORS = new Set(['UVM 2014 inventory', 'FOR 1210 Dendrology, 2022']);
 
 export const TAXON_NUMERIC = ['mature_height_ft', 'mature_spread_ft'];
 export const PLANT_NUMERIC = ['planted_year'];

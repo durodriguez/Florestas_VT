@@ -120,6 +120,28 @@ predate Eco v6, and the Cooperative's membership may have changed. The license
 screen in the i-Tree Eco v6 installer is the version that applies; check it
 against the above, or ask info@itreetools.org.
 
+## 5. FOR 1210 Dendrology, 2022, via OpenStreetMap
+
+**In `data/observations.csv`, since 6 November 2026:** 119 trunk diameters,
+as 2022 visits by surveyor `FOR 1210 Dendrology, 2022`.
+
+Students in RSENR's FOR 1210: Dendrology mapped about 215 campus trees in
+OpenStreetMap in 2022, each with its species and trunk diameter. There is no
+master list outside OpenStreetMap; permission to include the class's data
+here was given to this project directly (November 2026).
+
+**What was taken, and what was not.** Only the diameter, and only where one
+OSM tree sits within 6 m of exactly one mapped tree of the same genus (145
+such pairs). 26 of those were then held back: 17 where two or three OSM
+trees matched one of ours (a tree mapped twice, or a clump of stems), 7
+whose 2022 diameter is implausible against the 2014 inventory's (most
+smaller), and 2 recorded without a unit. Species and positions from OSM are
+not used. Each row's `notes` names its OSM node and the diameter exactly as
+recorded (in cm or in, converted to inches here).
+
+The collection date is known only to the year; the rows are dated
+2022-12-31 and shown as "2022" (see DATA-MODEL.md).
+
 ## On ShareAlike
 
 CC BY-SA requires that derivative works carry the same licence. How far that

@@ -490,6 +490,12 @@ labeled invasive, without a claim about Vermont's sale rules (see
 DATA-MODEL.md, origin). Spread and the warm end of its range (8) are not from
 a checked source; spread is left blank.
 
+Dwarf burning bush ('Compactus'), added the same day, was written from Purdue
+Arboretum (which flags it as invasive, seeding into woodlots), NC State and
+nursery listings. Sources give 6–10 ft for its size and disagree on its
+zones; 10 by 10 ft and 4–8 are used. The less-pronounced wings are a common
+description, not from a checked source.
+
 - [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [x] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
 - [x] **American elderberry** (*Sambucus canadensis*, `sambucus-canadensis`): description + fun fact
@@ -516,6 +522,7 @@ a checked source; spread is left blank.
 - [x] **Creeping cotoneaster** (*Cotoneaster adpressus*, `cotoneaster-adpressus`): description + fun fact
 - [x] **Cucumbertree magnolia** (*Magnolia acuminata*, `magnolia-acuminata`): description + fun fact
 - [x] **Duke highbush blueberry** (*Vaccinium corymbosum 'Duke'*, `vaccinium-corymbosum-duke`): description + fun fact
+- [x] **Dwarf burning bush** (*Euonymus alatus 'Compactus'*, `euonymus-alatus-compactus`): description + fun fact
 - [x] **Dwarf Everbearing black mulberry** (*Morus nigra 'Dwarf Everbearing'*, `morus-nigra-dwarf-everbearing`): description + fun fact
 - [x] **Dwarf fothergilla** (*Fothergilla gardenii*, `fothergilla-gardenii`): description + fun fact
 - [x] **Elizabeth magnolia** (*Magnolia 'Elizabeth'*, `magnolia-elizabeth`): description + fun fact
