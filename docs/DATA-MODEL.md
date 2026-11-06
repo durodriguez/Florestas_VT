@@ -384,6 +384,16 @@ any real 2014 visit sorts before it. The build shows these rows as plain
 They are twelve-year-old readings, and the map always shows them dated. Nothing
 should treat a 2014 diameter as a tree's current size (see to-do #7).
 
+### The 2022 dendrology class's rows
+
+119 rows dated `2022-12-31` with `surveyor` **`FOR 1210 Dendrology, 2022`**
+carry trunk diameters that students in RSENR's dendrology course recorded in
+OpenStreetMap in 2022, matched to mapped trees by position and genus. Only
+`dbh_in` is filled; `notes` gives the OSM node and the diameter as recorded.
+Shown as **2022**, like the 2014 rows. Where a tree has both, the panel's
+growth line compares them. See [SOURCES.md](../data/SOURCES.md) for what was
+held back and why.
+
 ### Multi-stemmed trees
 
 Record the largest stem in `dbh_in` and note the others in the observation's
