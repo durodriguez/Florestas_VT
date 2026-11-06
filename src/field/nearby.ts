@@ -167,3 +167,28 @@ export const DUPLICATE_M = 5;
 export function likelyDuplicate(lat: number, lng: number, trees: MappedTree[]): NearbyTree | null {
   return nearbyTrees(lat, lng, trees, { radiusM: DUPLICATE_M, limit: 1 })[0] ?? null;
 }
+
+/** A tree's genus: the first word of its scientific name. */
+export const genusOf = (sci: string): string => sci.trim().split(/\s+/)[0] || '?';
+
+/**
+ * Short labels for genera: the first `min` letters, or more where two genera
+ * would otherwise read the same — just enough to tell them apart. With both
+ * Cercis and Cercidiphyllum about, they become "Cercis" and "Cercid", while
+ * Ginkgo stays "Gink".
+ */
+export function genusAbbreviations(genera: Iterable<string>, min = 4): Map<string, string> {
+  const all = [...new Set(genera)];
+  const shared = (a: string, b: string): number => {
+    let i = 0;
+    while (i < a.length && i < b.length && a[i]!.toLowerCase() === b[i]!.toLowerCase()) i++;
+    return i;
+  };
+  const out = new Map<string, string>();
+  for (const g of all) {
+    let n = min;
+    for (const h of all) if (h !== g) n = Math.max(n, shared(g, h) + 1);
+    out.set(g, g.slice(0, n));
+  }
+  return out;
+}

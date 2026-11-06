@@ -155,6 +155,9 @@ let dragEndedAt = 0;
 
 function startDrag(id: string, e: L.LeafletMouseEvent): void {
   L.DomEvent.stop(e.originalEvent);
+  // A phone follows a tap with pretend mouse events. The touch code above has
+  // already dealt with the tap; a pretend press must not start a drag.
+  if (Date.now() - lastTouchAt < 800) return;
   // Stopping the press also stops the browser moving focus, so a cursor left
   // in the search box would keep the arrow keys and Ctrl+Z for itself.
   (document.activeElement as HTMLElement | null)?.blur();
@@ -190,28 +193,35 @@ document.addEventListener('mouseup', () => {
   }
 });
 
-// Touch works by holding, because a finger has to pan the map as well:
-//   - a tap on a tree selects it;
-//   - a finger that lands on a tree and moves straight away pans the map;
-//   - a finger held still on a tree for half a second picks it up, and from
-//     then on moving it drags the tree.
-// On a phone Leaflet listens to touch events, not pointer events, so it
-// cannot be stopped from seeing the touch. It is not fought: every touch
-// starts as an ordinary pan, and only a hold switches panning off. A finger
-// that wanders more than HOLD_SLOP_PX during the hold has started a pan, and
-// the hold is called off for that touch. A fingertip is blunt, so its reach
-// is wider than the canvas's 5 px, and it takes the nearest tree within it.
+// Touch: no dragging trees at all, because on a phone one finger has to pan
+// the map, and a drag that sometimes pans and sometimes moves a tree is how
+// trees got nudged by accident. Instead:
+//   - a tap on a tree selects it, to read about it or mark it not there;
+//   - a long press (half a second, held still) picks it up, ringed in white;
+//   - while it is picked up, a tap anywhere puts it there. It stays picked
+//     up, so a second tap refines the first; Done puts it down;
+//   - a drag always pans the map, and two fingers always pinch.
+// Every tap is its own move, so Undo steps back through them one at a time.
+// The mouse is unchanged: press on a dot and drag.
 const FINGER_PX = 18;
 const HOLD_MS = 500;
-/** How far a held finger may wobble and still count as held. */
-const HOLD_SLOP_PX = 10;
+/** How far a finger may wander and still count as a tap or a hold. */
+const TAP_SLOP_PX = 10;
+/** A touch that ended this recently: the mouse events phones fake after it are ignored. */
+let lastTouchAt = 0;
+/** The finger on the glass, while there is one. */
 let touch: {
-  pointer: number; id: string; x: number; y: number; from: L.LatLng;
-  /** 'held' once the half second is up and the tree is picked up. */
-  state: 'waiting' | 'held' | 'panning'; travelled: boolean; timer: number;
+  pointer: number; x: number; y: number;
+  /** The tree it landed on, if any (when nothing is picked up). */
+  id: string | null;
+  /** 'held' once a long press has picked up the tree under it. */
+  state: 'pending' | 'held' | 'panning'; timer: number;
 } | null = null;
-/** A ring around a picked-up tree, so the hold has something to show for it. */
-// Its own pane, above the trees and every canvas, so nothing covers it.
+/** The tree picked up for placing, if any. */
+let carry: string | null = null;
+
+// The ring around a picked-up tree: its own pane, above the trees and every
+// canvas, so nothing covers it.
 map.createPane('lift');
 map.getPane('lift')!.style.zIndex = '650';
 map.getPane('lift')!.style.pointerEvents = 'none';
@@ -219,6 +229,14 @@ const liftRing = L.circleMarker([0, 0], {
   pane: 'lift', renderer: L.svg({ pane: 'lift' }),
   radius: 16, interactive: false, color: '#ffffff', weight: 3, fill: false,
 });
+
+// What to do next, and the way out, on the map itself while a tree is picked up.
+const carryBar = L.DomUtil.create('div', 'carry-bar', map.getContainer());
+carryBar.hidden = true;
+carryBar.innerHTML = '<span class="carry-msg"></span><button type="button" class="carry-done">Done</button>';
+L.DomEvent.disableClickPropagation(carryBar);
+L.DomEvent.disableScrollPropagation(carryBar);
+carryBar.querySelector('button')!.addEventListener('click', () => endCarry());
 
 function dotUnder(x: number, y: number, reach: number): string | null {
   let best: string | null = null;
@@ -231,92 +249,91 @@ function dotUnder(x: number, y: number, reach: number): string | null {
   return best;
 }
 
-function pickUp(): void {
-  if (!touch) return;
-  touch.state = 'held';
-  // Leaflet may already be counting this touch as a pan; switching panning
-  // off ends that, and a second finger cannot pinch while a tree is carried.
-  map.dragging.disable();
-  map.touchZoom.disable();
+function startCarry(id: string): void {
   (document.activeElement as HTMLElement | null)?.blur();
-  select(touch.id, false);
-  touch.from = dots.get(touch.id)!.getLatLng();
-  liftRing.setLatLng(touch.from).addTo(map);
-  map.getContainer().classList.add('is-dragging');
+  select(id, false);
+  carry = id;
+  liftRing.setLatLng(dots.get(id)!.getLatLng()).addTo(map);
+  const p = byId.get(id)!;
+  carryBar.querySelector('.carry-msg')!.textContent = `Tap where ${p.tag ? `tag ${p.tag}` : p.id} belongs`;
+  carryBar.hidden = false;
   // A short buzz where the phone allows it (Android; not iPhone Safari).
   try { navigator.vibrate?.(30); } catch { /* not allowed: the ring is enough */ }
 }
 
-function endHold(): void {
-  if (!touch) return;
-  clearTimeout(touch.timer);
-  if (touch.state === 'held') {
-    map.dragging.enable();
-    map.touchZoom.enable();
-    liftRing.remove();
-    map.getContainer().classList.remove('is-dragging');
-  }
-  touch = null;
+function endCarry(): void {
+  if (carry === null) return;
+  carry = null;
+  liftRing.remove();
+  carryBar.hidden = true;
+}
+
+/** After any change: the ring follows its tree, and goes if the tree cannot move. */
+function syncCarry(): void {
+  if (carry === null) return;
+  if (!picked.has(carry) || deletions[carry]) return endCarry();
+  liftRing.setLatLng(dots.get(carry)!.getLatLng());
 }
 
 map.getContainer().addEventListener('pointerdown', (e) => {
   if (e.pointerType !== 'touch') return;
-  // A second finger during the hold is the start of a pinch: let it be one.
-  // While a tree is carried, it is ignored (pinching is off).
+  // A second finger: a pinch, not a tap or a hold.
   if (touch) {
-    if (touch.state === 'waiting') endHold();
+    clearTimeout(touch.timer);
+    touch.state = 'panning';
     return;
   }
   if (areaMode || !map.hasLayer(dotLayer)) return;
+  if ((e.target as HTMLElement).closest('.carry-bar, .leaflet-control')) return;
   const box = map.getContainer().getBoundingClientRect();
-  const id = dotUnder(e.clientX - box.left, e.clientY - box.top, FINGER_PX);
-  if (!id) return;
+  const id = carry === null ? dotUnder(e.clientX - box.left, e.clientY - box.top, FINGER_PX) : null;
   touch = {
-    pointer: e.pointerId, id, x: e.clientX, y: e.clientY, from: dots.get(id)!.getLatLng(),
-    state: 'waiting', travelled: false,
-    // A tree marked not there stays put: a hold only selects it.
-    timer: deletions[id] ? 0 : window.setTimeout(pickUp, HOLD_MS),
+    pointer: e.pointerId, x: e.clientX, y: e.clientY, id, state: 'pending',
+    // A tree marked not there stays put: a long press only selects it.
+    timer: id && !deletions[id]
+      ? window.setTimeout(() => {
+        if (touch?.state !== 'pending') return;
+        touch.state = 'held';
+        startCarry(id);
+      }, HOLD_MS)
+      : 0,
   };
 }, true);
 
 document.addEventListener('pointermove', (e) => {
-  if (!touch || e.pointerId !== touch.pointer) return;
-  if (touch.state === 'waiting') {
-    // Moved off during the hold: this touch is a pan, and stays one.
-    if (Math.hypot(e.clientX - touch.x, e.clientY - touch.y) > HOLD_SLOP_PX) {
-      clearTimeout(touch.timer);
-      touch.state = 'panning';
-    }
-    return;
+  if (!touch || e.pointerId !== touch.pointer || touch.state !== 'pending') return;
+  // Moved off: this touch is a pan, and stays one.
+  if (Math.hypot(e.clientX - touch.x, e.clientY - touch.y) > TAP_SLOP_PX) {
+    clearTimeout(touch.timer);
+    touch.state = 'panning';
   }
-  if (touch.state !== 'held') return;
-  touch.travelled = true;
-  const at = map.mouseEventToLatLng(e);
-  dots.get(touch.id)!.setLatLng(at);
-  liftRing.setLatLng(at);
 });
 
 function endTouch(e: PointerEvent): void {
   if (!touch || e.pointerId !== touch.pointer) return;
-  const { id, state, travelled, from } = touch;
-  endHold();
+  const { id, state, timer } = touch;
+  clearTimeout(timer);
+  touch = null;
+  lastTouchAt = Date.now();
+  // The map's own click, which follows a tap, must not undo what the tap did.
   dragEndedAt = Date.now();
-  if (state === 'waiting') {
-    // Down and up without wandering, before the half second: a tap.
-    if (e.type === 'pointerup') select(id, false);
+  if (state !== 'pending' || e.type !== 'pointerup') return;
+  // A tap. With a tree picked up, it goes where the finger touched; even onto
+  // another tree's dot, which is how two trees end up close together.
+  if (carry !== null) {
+    const at = map.mouseEventToLatLng(e);
+    dots.get(carry)!.setLatLng(at);
+    commit(carry, [at.lat, at.lng]);
     return;
   }
-  if (state !== 'held' || !travelled) return;
-  // A cancelled touch (the browser took it back) is no move: the tree goes home.
-  if (e.type === 'pointercancel') { dots.get(id)!.setLatLng(from); return; }
-  const at = dots.get(id)!.getLatLng();
-  commit(id, [at.lat, at.lng]);
+  // Otherwise a tap on a tree selects it; a tap on nothing deselects.
+  select(id, false);
 }
 document.addEventListener('pointerup', endTouch);
 document.addEventListener('pointercancel', endTouch);
 // A long press can bring up the browser's own menu; on the map it means
 // "pick up this tree", nothing else.
-map.getContainer().addEventListener('contextmenu', (e) => { if (touch) e.preventDefault(); });
+map.getContainer().addEventListener('contextmenu', (e) => { if (touch || carry !== null) e.preventDefault(); });
 
 // ---------------------------------------------------------------- area select
 
@@ -560,6 +577,7 @@ function afterChange(ids: string[]): void {
   save();
   renderMoves();
   renderSelected();
+  syncCarry();
 }
 
 function undo(): void {
@@ -717,6 +735,7 @@ function setPicked(ids: Iterable<string>): void {
   selected = picked.size === 1 ? [...picked][0]! : null;
   for (const id of new Set([...before, ...picked])) styleDot(id);
   renderSelected();
+  syncCarry();
 }
 
 function clearPicked(): void {
@@ -845,6 +864,7 @@ document.addEventListener('keydown', (e) => {
     if (myImagery.isAligning()) return myImagery.cancel();
     if (areaMode) return setAreaMode(null);
     if (areaSel) return clearPicked();
+    if (carry !== null) return endCarry();
     return select(null, false);
   }
   if ((e.key === 'Delete' || e.key === 'Backspace') && picked.size) {

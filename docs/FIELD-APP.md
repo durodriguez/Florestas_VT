@@ -79,8 +79,11 @@ the same reason an update needs no GPS fix unless the tree is being moved.
 4. **Position.** The accuracy chip shows how good the GPS fix is. Tap the map
    to drop the pin on the tree's crown — on satellite imagery this usually
    beats the receiver, especially under canopy. The mapped trees around it
-   show as white dots, labeled with their tag (or `#` and the accession) once
-   zoomed in, so the new tree can be placed against its neighbors. They are
+   show as white dots, labeled with the first four letters of their genus and their tag,
+   or `#` and the accession — *Gink* (778), *Pinu* (#4263) — once
+   zoomed in, so the new tree can be placed against its neighbors. Two genera
+   that start alike get as many letters as it takes to tell them apart:
+   *Cercis* (redbud) and *Cercid* (katsura). They are
    for reference only: a tap on one drops the pin there, as anywhere else on
    the map, and they hide when zoomed out too far to help. If the pin lands within 5 m of
    a mapped tree the app says so and offers **Update it instead**; it is a

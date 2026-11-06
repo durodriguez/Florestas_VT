@@ -41,17 +41,23 @@ The page works on a phone or tablet, with the panel stacked above the map on a
 phone. Drag the bar between them up or down to give the map or the panel more
 room; double-tap it to put it back. The phone remembers the height.
 
-On a touch screen:
+On a touch screen trees are not dragged, because one finger has to pan the
+map too, and a drag that sometimes panned and sometimes moved a tree nudged
+trees by accident. Instead:
 
 - **Tap** a dot to select it: the panel shows the tree, with **Mark as not
-  there**.
+  there**. A tap on an empty spot deselects it.
 - **Touch and hold** a dot still for half a second to pick it up: a white ring
   appears around it (and an Android phone gives a short buzz; iPhones do not
-  let web pages do that). Then slide to drag it, and lift to drop it.
-- **A finger that moves straight away pans the map,** even if it landed on a
-  dot. A finger that wanders more than a few pixels during the half second
-  counts as a pan too; lift it and hold again.
-- Two fingers pinch-zoom, except while a tree is being carried.
+  let web pages do that), with a bar at the foot of the map saying what to do.
+- **Tap where it belongs,** and the tree goes there. It stays picked up, so a
+  second tap adjusts the first, zooming in between if need be. A tap next to
+  another dot still moves the picked-up tree, so trees can be placed close
+  together. **Done** on the bar puts it down; holding another dot picks that
+  one up instead.
+- **A drag always pans the map,** and two fingers always pinch-zoom, whether
+  or not a tree is picked up.
+- Every tap is its own move: **Undo last** steps back one tap at a time.
 
 A fingertip is blunt, so a touch takes the nearest tree within about 18
 pixels. With trees close together, zoom in first.
@@ -101,9 +107,10 @@ save. The moves live in that one browser on that one computer until exported.
 
 The tool also shows **crown peaks** as small orange circles: the tops of tree
 crowns in Vermont's statewide LiDAR, flown on 21 April 2023
-([LIDAR.md](LIDAR.md)). There are 8,284 across the whole campus boundary. The
-**Show** box in the section's heading turns them off and on, as does the
-layers button at the top right; the two stay in step.
+([LIDAR.md](LIDAR.md)). There are 8,284 across the whole campus boundary. They start
+hidden each time the page opens: the **Show** box in the section's heading
+turns them on and off, as does the layers button at the top right; the two
+stay in step.
 
 A peak shows that a tree stood there in April 2023, not which tree. A clump
 of crowns can give a single peak, and nothing pairs peaks with mapped trees.
@@ -113,10 +120,11 @@ They are there to look at alongside the imagery and the dots.
 
 **Tree crowns (SAL)** in the side panel loads the Spatial Analysis Lab's
 *Tree Centroids Derived from LiDAR for Burlington, VT, 2023*: the file Ernie
-Buford sent. It holds each crown's centre, height and radius. Choose the `.zip`
+Buford sent. It holds each crown's center, height and radius. Choose the `.zip`
 as it came, or its `.shp`, `.dbf` and `.prj` together. Each crown is drawn as a
-violet circle of its radius, with a dot at its centre, under the trees.
-Its own **Show** box turns them off and on.
+violet circle of its radius, with a dot at its center, under the trees.
+They too start hidden each time the page opens; their own **Show** box turns
+them on and off.
 
 - **Only crowns inside the campus boundary, or within 30 m of it, are kept.**
   That is about 8,000 of the city's 112,000.
@@ -134,7 +142,7 @@ Its own **Show** box turns them off and on.
 SAL's crowns are not this project's [peaks](#lidar-crown-peaks). They come from
 the same April 2023 flight, but by a different and more careful method, which
 uses a hand-checked canopy outline and splits it into crowns. Against
-Burlington's surveyed street trees, half have a SAL centre within 2 m, against
+Burlington's surveyed street trees, half have a SAL center within 2 m, against
 a third for the peaks.
 
 ## Your own imagery, privately
