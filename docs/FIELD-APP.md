@@ -173,9 +173,18 @@ refused as a typo.
 **Take photo** opens a bare in-app camera; **Choose from library** takes a
 photo already on the phone — one taken with the phone's own camera app, with
 its focus, exposure and HDR settings. Either is resized the same way below, so
-the library route buys a better-exposed picture, not a bigger one. A library
-photo older than the survey date gets a note saying so, because the map dates
-every photo by the survey it arrived with.
+the library route buys a better-exposed picture, not a bigger one.
+
+**A photo from an earlier day dates the survey.** The map dates every photo by
+the survey it arrived with, so when a photo is chosen the app reads the date
+the camera wrote into it (EXIF `DateTimeOriginal`, `src/field/exif.ts`) and
+puts it in **Date**, saying *Date set from the photo*. That is how plants are
+added afterwards from photos taken weeks before. A date the surveyor has
+typed is never replaced: the app only notes that the photo is from another
+day. Removing the photo puts the date back to today. Where the phone has
+stripped the date on the way to the browser, the app falls back to the file's
+modified time, which it only mentions, because on some phones that is when
+the file was copied rather than taken.
 
 Every shot is resized before it is stored — 1200 px on the long edge, with the
 EXIF rotation baked in, so a portrait photo is not filed sideways. A phone

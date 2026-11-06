@@ -59,11 +59,25 @@ export function colorFor(plant: Plant, mode: ColorBy): string {
   }
 }
 
+/**
+ * The plant types something on the map actually has, in the vocabulary's
+ * order. The filter and the legend list only these, so an allowed type nothing
+ * uses (annual, today) stays out of sight and comes back by itself once a
+ * plant of that type is added.
+ */
+export function typesInUse(all: string[], items: Iterable<{ taxon: { type: string } }>): string[] {
+  const used = new Set<string>();
+  for (const item of items) used.add(item.taxon.type);
+  return all.filter((t) => used.has(t));
+}
+
 /** Legend entries for the active colour scheme, in a stable display order. */
-export function legendFor(mode: ColorBy, dataset: Dataset): Array<{ label: string; color: string }> {
+export function legendFor(
+  mode: ColorBy, dataset: Dataset, types: string[] = dataset.vocab.plantTypes,
+): Array<{ label: string; color: string }> {
   switch (mode) {
     case 'type':
-      return dataset.vocab.plantTypes.map((t) => ({ label: TYPE_LABELS[t] ?? t, color: TYPE_COLORS[t] ?? FALLBACK }));
+      return types.map((t) => ({ label: TYPE_LABELS[t] ?? t, color: TYPE_COLORS[t] ?? FALLBACK }));
     case 'origin':
       return dataset.vocab.origins.map((o) => ({ label: ORIGIN_LABELS[o] ?? o, color: ORIGIN_COLORS[o] ?? FALLBACK }));
     case 'condition':

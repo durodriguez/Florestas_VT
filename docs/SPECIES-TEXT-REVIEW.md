@@ -197,6 +197,15 @@ Brilliance serviceberry (its core is small and indistinct, not a
 miniature apple's five-part star) and bitternut hickory (wagon wheels
 unsourced; tool handles and farm implements confirmed).
 
+A fourth ten on 6 November 2026, black tupelo to columnar European beech
+(black locust was checked in section 1). Three fixed: Colorado blue spruce
+(no longer Utah's state tree, which became quaking aspen in 2014), black
+tupelo (sources put the oldest New Hampshire trees at 650 to 700 years, so
+"more than 600", not "nearly 700") and the Dawyck beech (found in the
+mid-1800s; sources give 1850 to 1864, not the 1860s). Black walnut thefts,
+chokecherry as North Dakota's state fruit (2007) and the bur oak's first-year
+taproot (about 4.5 ft, per Silvics) were confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -220,16 +229,16 @@ unsourced; tool handles and farm implements confirmed).
 - [x] **Bigleaf linden** (*Tilia platyphyllos*, `tilia-platyphyllos`): fun fact
 - [x] **Bigleaf magnolia** (*Magnolia macrophylla*, `magnolia-macrophylla`): fun fact
 - [x] **Bitternut hickory** (*Carya cordiformis*, `carya-cordiformis`): description + fun fact
-- [ ] **Black tupelo** (*Nyssa sylvatica*, `nyssa-sylvatica`): fun fact
-- [ ] **Black walnut** (*Juglans nigra*, `juglans-nigra`): fun fact
-- [ ] **Boxelder** (*Acer negundo*, `acer-negundo`): fun fact
-- [ ] **Buckthorn** (*Rhamnus sp.*, `rhamnus-sp`): description
-- [ ] **Bur oak** (*Quercus macrocarpa*, `quercus-macrocarpa`): fun fact
-- [ ] **Cherry** (*Prunus sp.*, `prunus-sp`): description
-- [ ] **Chokecherry** (*Prunus virginiana*, `prunus-virginiana`): fun fact
-- [ ] **Colorado blue spruce** (*Picea pungens*, `picea-pungens`): fun fact
-- [ ] **Columnar American basswood** (*Tilia americana 'Fastigiata'*, `tilia-americana-fastigiata`): fun fact
-- [ ] **Columnar European beech** (*Fagus sylvatica 'Fastigiata'*, `fagus-sylvatica-fastigiata`): fun fact
+- [x] **Black tupelo** (*Nyssa sylvatica*, `nyssa-sylvatica`): fun fact
+- [x] **Black walnut** (*Juglans nigra*, `juglans-nigra`): fun fact
+- [x] **Boxelder** (*Acer negundo*, `acer-negundo`): fun fact
+- [x] **Buckthorn** (*Rhamnus sp.*, `rhamnus-sp`): description
+- [x] **Bur oak** (*Quercus macrocarpa*, `quercus-macrocarpa`): fun fact
+- [x] **Cherry** (*Prunus sp.*, `prunus-sp`): description
+- [x] **Chokecherry** (*Prunus virginiana*, `prunus-virginiana`): fun fact
+- [x] **Colorado blue spruce** (*Picea pungens*, `picea-pungens`): fun fact
+- [x] **Columnar American basswood** (*Tilia americana 'Fastigiata'*, `tilia-americana-fastigiata`): fun fact
+- [x] **Columnar European beech** (*Fagus sylvatica 'Fastigiata'*, `fagus-sylvatica-fastigiata`): fun fact
 - [ ] **Columnar Norway maple** (*Acer platanoides 'Columnare'*, `acer-platanoides-columnare`): fun fact
 - [ ] **Columnar red maple** (*Acer rubrum 'Columnare'*, `acer-rubrum-columnare`): fun fact
 - [ ] **Columnar Sargent cherry** (*Prunus sargentii 'Columnaris'*, `prunus-sargentii-columnaris`): fun fact
