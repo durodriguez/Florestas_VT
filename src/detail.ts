@@ -31,10 +31,15 @@ function formatScientific(plant: Plant): string {
   return parts.join(' ') || escapeHtml(t.sci);
 }
 
-function row(label: string, value: string | null | undefined): string {
+function row(label: string, value: string | null | undefined, hint?: string): string {
   if (value === null || value === undefined || value === '' || value === '—') return '';
-  return `<div class="fact"><dt>${escapeHtml(label)}</dt><dd>${value}</dd></div>`;
+  const title = hint ? ` title="${escapeHtml(hint)}"` : '';
+  return `<div class="fact"><dt${title}>${escapeHtml(label)}</dt><dd>${value}</dd></div>`;
 }
+
+/** Short enough for the panel; the hover says exactly what was measured. */
+const DBH_LABEL = 'Trunk diameter';
+const DBH_HINT = 'Diameter at breast height: measured 4.5 ft above the ground';
 
 const numOr = (v: number | null, unit: string): string | null =>
   v === null ? null : `${v}${unit}`;
@@ -186,9 +191,9 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
           plant.conditionOn ? ` <span class="fact-when">(${escapeHtml(surveyDate(plant.conditionOn))})</span>` : ''}`
         : null)}
       ${row('Planted', plant.plantedYear ? `${plant.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
-      ${row('Diameter at breast height', plant.dbhIn === null ? null : `${numOr(plant.dbhIn, ' in')}${
+      ${row(DBH_LABEL, plant.dbhIn === null ? null : `${numOr(plant.dbhIn, ' in')}${
         // From an earlier visit than the latest, as every 2014 measurement is.
-        plant.dbhOn ? ` <span class="fact-when">(${escapeHtml(surveyDate(plant.dbhOn))})</span>` : ''}`)}
+        plant.dbhOn ? ` <span class="fact-when">(${escapeHtml(surveyDate(plant.dbhOn))})</span>` : ''}`, DBH_HINT)}
       ${row('Height', numOr(plant.heightFt, ' ft'))}
       ${row('Canopy spread', numOr(plant.spreadFt, ' ft'))}
       ${row('Last surveyed', plant.surveyedOn
@@ -307,7 +312,7 @@ export function renderCityDetail(tree: CityTree, base: string): string {
       ${row('Condition', tree.condition
         ? `<span class="pill pill--${tree.condition}">${escapeHtml(titleCase(tree.condition))}</span>`
         : null)}
-      ${row('Diameter at breast height', tree.dbhIn === null ? null : `${tree.dbhIn} in`)}
+      ${row(DBH_LABEL, tree.dbhIn === null ? null : `${tree.dbhIn} in`, DBH_HINT)}
       ${row('Height', tree.heightFt === null ? null : `${tree.heightFt} ft`)}
       ${row('Canopy spread', tree.spreadFt === null ? null : `${tree.spreadFt} ft`)}
       ${row('Planted', tree.plantedYear ? `${tree.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
