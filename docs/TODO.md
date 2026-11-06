@@ -101,7 +101,7 @@ must skip, or explicitly age, any whose `dbh_on` is 2014.
 
 **The blocker.** Of the 2,062 plants in `data/plants.csv`, **none** has a DBH
 measured since 2014 — not even the few surveyed in the field since the import.
-(896 have their 2014 diameter and 127 a 2022 one from the dendrology class,
+(896 have their 2014 diameter and 126 a 2022 one from the dendrology class,
 as history; see above.) Without DBH there is
 no calculation — not a rough one, not a defaulted one. Any number
 shown would be invented, which is worse than showing nothing on a page with
