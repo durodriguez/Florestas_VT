@@ -41,17 +41,23 @@ The page works on a phone or tablet, with the panel stacked above the map on a
 phone. Drag the bar between them up or down to give the map or the panel more
 room; double-tap it to put it back. The phone remembers the height.
 
-On a touch screen:
+On a touch screen trees are not dragged, because one finger has to pan the
+map too, and a drag that sometimes panned and sometimes moved a tree nudged
+trees by accident. Instead:
 
 - **Tap** a dot to select it: the panel shows the tree, with **Mark as not
-  there**.
+  there**. A tap on an empty spot deselects it.
 - **Touch and hold** a dot still for half a second to pick it up: a white ring
   appears around it (and an Android phone gives a short buzz; iPhones do not
-  let web pages do that). Then slide to drag it, and lift to drop it.
-- **A finger that moves straight away pans the map,** even if it landed on a
-  dot. A finger that wanders more than a few pixels during the half second
-  counts as a pan too; lift it and hold again.
-- Two fingers pinch-zoom, except while a tree is being carried.
+  let web pages do that), with a bar at the foot of the map saying what to do.
+- **Tap where it belongs,** and the tree goes there. It stays picked up, so a
+  second tap adjusts the first, zooming in between if need be. A tap next to
+  another dot still moves the picked-up tree, so trees can be placed close
+  together. **Done** on the bar puts it down; holding another dot picks that
+  one up instead.
+- **A drag always pans the map,** and two fingers always pinch-zoom, whether
+  or not a tree is picked up.
+- Every tap is its own move: **Undo last** steps back one tap at a time.
 
 A fingertip is blunt, so a touch takes the nearest tree within about 18
 pixels. With trees close together, zoom in first.

@@ -220,3 +220,17 @@ button, input { font: inherit; color: inherit; }
   .bar h1 { font-size: .95rem; }
   .save-state { display: none; }
 }
+
+/* While a tree is picked up on a touch screen: what to do next, and Done. */
+.carry-bar {
+  position: absolute; z-index: 1000; left: 50%; bottom: 1.6rem; transform: translateX(-50%);
+  display: flex; align-items: center; gap: .6rem; max-width: calc(100% - 2rem);
+  padding: .4rem .4rem .4rem .8rem; border-radius: 99px;
+  background: rgba(16, 24, 32, .85); color: #fff; font-size: .9rem; font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .35);
+}
+.carry-msg { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.carry-done {
+  flex: none; padding: .45rem 1.1rem; border: 0; border-radius: 99px; cursor: pointer;
+  background: var(--uvm-gold); color: var(--uvm-green); font-weight: 700;
+}
