@@ -71,6 +71,7 @@ function renderHistory(plant: Plant): string {
           ${o.condition ? `<span class="pill pill--${o.condition}">${escapeHtml(titleCase(o.condition))}</span>` : ''}
           ${measures ? `<span class="survey-measures">${measures}</span>` : ''}
           ${o.status !== 'active' ? `<span class="survey-measures">${escapeHtml(titleCase(o.status))}</span>` : ''}
+          ${o.photo ? '<span class="survey-measures">Photo added</span>' : ''}
         </span>
       </li>`;
   });
