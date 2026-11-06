@@ -455,7 +455,12 @@ button, input, select { font: inherit; color: inherit; }
   display: grid; place-items: center; padding: 1rem;
   background: rgb(0 0 0 / 90%); cursor: zoom-out;
 }
-.lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: var(--radius); }
+.lightbox img {
+  /* Sized against the window, not the grid cell: a percentage there does not
+     hold, and a tall photo ran off the bottom of the screen. */
+  max-width: calc(100vw - 2rem); max-height: calc(100vh - 2rem); max-height: calc(100dvh - 2rem);
+  width: auto; height: auto; object-fit: contain; border-radius: var(--radius);
+}
 .lightbox-close {
   position: absolute; top: .75rem; right: .75rem;
   width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 0;

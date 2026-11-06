@@ -111,7 +111,9 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config }) {
     ? `<ul class="shots">${photos.map((p) => {
       const taken = photoTaken(p.taken);
       return `<li>
-        <img src="${esc(p.url)}" alt="${esc(t.common)} on campus, accession ${esc(p.id)}" loading="lazy">
+        <button type="button" class="shot-open" aria-label="Show the photo full size">
+          <img src="${esc(p.url)}" alt="${esc(t.common)} on campus, accession ${esc(p.id)}" loading="lazy">
+        </button>
         <span><a href="${esc(base)}?plant=${encodeURIComponent(p.id)}">${esc(p.id)}</a>${taken ? ` &middot; ${esc(taken)}` : ''}</span>
       </li>`;
     }).join('')}</ul>`
@@ -170,7 +172,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config }) {
   ${actions}
   <p class="foot">Something look wrong? Email
     <a href="mailto:${esc(config.contactEmail)}?subject=${encodeURIComponent(`${config.siteName} species ${t.id}`)}">${esc(config.contactEmail)}</a>.</p>
-</main>`;
+</main>${photos.length ? `\n<script>${LIGHTBOX_JS}</script>` : ''}`;
 
   return shell({
     title: `${t.common} (${t.sci}) — ${config.siteName}`,
@@ -191,6 +193,42 @@ const SORT_CONTROL = `<div class="sort" role="group" aria-label="Sort species" h
     <button type="button" data-sort="common" aria-pressed="true">Common name</button>
     <button type="button" data-sort="scientific" aria-pressed="false">Scientific name</button>
   </div>`;
+
+/**
+ * A tap on a photo shows it full size, as the map's panel does (openPhoto in
+ * src/main.ts): the same dark backdrop, closed by a tap anywhere, the ×, or
+ * Escape, with focus handed back to the photo it came from.
+ */
+const LIGHTBOX_JS = `(() => {
+  let opener = null;
+  const close = () => {
+    document.querySelector('.lightbox')?.remove();
+    opener?.focus();
+    opener = null;
+  };
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.shot-open');
+    if (!btn) return;
+    const img = btn.querySelector('img');
+    const box = document.createElement('div');
+    box.className = 'lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', 'Photo, full size');
+    box.innerHTML = '<button type="button" class="lightbox-close" aria-label="Close the photo">&times;</button>';
+    const big = document.createElement('img');
+    big.src = img.currentSrc || img.src;
+    big.alt = img.alt;
+    box.append(big);
+    box.addEventListener('click', close);
+    opener = btn;
+    document.body.append(box);
+    box.querySelector('.lightbox-close').focus();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.querySelector('.lightbox')) close();
+  });
+})();`;
 
 const SORT_JS = `(() => {
   const group = document.querySelector('.sort');
@@ -305,6 +343,18 @@ h2 {
 .shots { list-style: none; display: grid; gap: .8rem; padding: 0; margin: 1.2rem 0 0;
   grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
 .shots img { width: 100%; height: auto; border-radius: 8px; display: block; }
+/* The photo is a button: a tap shows it full size (LIGHTBOX_JS). */
+.shot-open { display: block; width: 100%; padding: 0; border: 0; background: none;
+  cursor: zoom-in; border-radius: 8px; }
+.shot-open:focus-visible { outline: 2px solid var(--green, #154734); outline-offset: 2px; }
+/* Full size, as on the map. */
+.lightbox { position: fixed; inset: 0; z-index: 2500; display: grid; place-items: center;
+  padding: 1rem; background: rgb(0 0 0 / 90%); cursor: zoom-out; }
+.lightbox img { max-width: calc(100vw - 2rem); max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem); width: auto; height: auto; object-fit: contain; border-radius: 8px; }
+.lightbox-close { position: absolute; top: .75rem; right: .75rem; width: 2.75rem; height: 2.75rem;
+  border-radius: 50%; border: 0; background: rgb(255 255 255 / 15%); color: #fff;
+  font-size: 1.8rem; line-height: 1; cursor: pointer; }
 .shots span { display: block; font-size: .76rem; color: var(--dim); margin-top: .25rem; }
 .shots a { color: inherit; }
 
