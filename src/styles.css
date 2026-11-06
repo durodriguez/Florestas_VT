@@ -519,10 +519,6 @@ button, input, select { font: inherit; color: inherit; }
 .pill--poor { background: #d1642c; }
 .pill--dead { background: #7c7c7c; }
 
-.detail-growth {
-  margin: 0 0 .6rem; font-size: .84rem; line-height: 1.45;
-  color: var(--text-dim);
-}
 .surveys { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
 .survey {
   display: grid; grid-template-columns: 5.5rem 1fr; gap: .5rem;

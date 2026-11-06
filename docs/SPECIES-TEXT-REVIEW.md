@@ -227,7 +227,7 @@ unsourced; tool handles and farm implements confirmed).
 - [ ] **Bur oak** (*Quercus macrocarpa*, `quercus-macrocarpa`): fun fact
 - [ ] **Cherry** (*Prunus sp.*, `prunus-sp`): description
 - [ ] **Chokecherry** (*Prunus virginiana*, `prunus-virginiana`): fun fact
-- [ ] **Colorado Blue spruce** (*Picea pungens*, `picea-pungens`): fun fact
+- [ ] **Colorado blue spruce** (*Picea pungens*, `picea-pungens`): fun fact
 - [ ] **Columnar American basswood** (*Tilia americana 'Fastigiata'*, `tilia-americana-fastigiata`): fun fact
 - [ ] **Columnar European beech** (*Fagus sylvatica 'Fastigiata'*, `fagus-sylvatica-fastigiata`): fun fact
 - [ ] **Columnar Norway maple** (*Acer platanoides 'Columnare'*, `acer-platanoides-columnare`): fun fact
@@ -236,7 +236,7 @@ unsourced; tool handles and farm implements confirmed).
 - [ ] **Common baldcypress** (*Taxodium distichum*, `taxodium-distichum`): fun fact
 - [ ] **Common buckthorn** (*Rhamnus cathartica*, `rhamnus-cathartica`): description
 - [ ] **Common honeylocust** (*Gleditsia triacanthos*, `gleditsia-triacanthos`): fun fact
-- [ ] **Common Larch** (*Larix decidua*, `larix-decidua`): fun fact
+- [ ] **Common larch** (*Larix decidua*, `larix-decidua`): fun fact
 - [ ] **Common lilac** (*Syringa vulgaris*, `syringa-vulgaris`): description
 - [ ] **Common smoketree** (*Cotinus coggygria*, `cotinus-coggygria`): fun fact
 - [ ] **Common witchhazel** (*Hamamelis virginiana*, `hamamelis-virginiana`): fun fact
@@ -246,7 +246,7 @@ unsourced; tool handles and farm implements confirmed).
 - [ ] **Crimson Cloud hawthorn** (*Crataegus laevigata 'Crimson Cloud'*, `crataegus-laevigata-crimson-cloud`): fun fact
 - [ ] **Cutleaf silver maple** (*Acer saccharinum 'Skinneri'*, `acer-saccharinum-skinneri`): fun fact
 - [ ] **Dawn redwood** (*Metasequoia glyptostroboides*, `metasequoia-glyptostroboides`): fun fact
-- [ ] **Devils Walkingstick** (*Aralia spinosa*, `aralia-spinosa`): fun fact
+- [ ] **Devil's walkingstick** (*Aralia spinosa*, `aralia-spinosa`): fun fact
 - [ ] **Dogwood** (*Cornus sp.*, `cornus-sp`): description
 - [ ] **Donald Wyman crabapple** (*Malus 'Donald Wyman'*, `malus-donald-wyman`): fun fact
 - [ ] **Dragon's claw willow** (*Salix matsudana 'Tortuosa'*, `salix-matsudana-tortuosa`): description + fun fact
@@ -280,7 +280,7 @@ unsourced; tool handles and farm implements confirmed).
 - [ ] **Hinoki falsecypress** (*Chamaecyparis obtusa*, `chamaecyparis-obtusa`): fun fact
 - [ ] **Honeycrisp apple** (*Malus domestica 'Honeycrisp'*, `malus-domestica-honeycrisp`): fun fact
 - [ ] **Japanese stewartia** (*Stewartia pseudocamellia*, `stewartia-pseudocamellia`): description
-- [ ] **Japanese Tree lilac** (*Syringa reticulata*, `syringa-reticulata`): fun fact
+- [ ] **Japanese tree lilac** (*Syringa reticulata*, `syringa-reticulata`): fun fact
 - [ ] **Juniper** (*Juniperus sp.*, `juniperus-sp`): description
 - [ ] **Katsuratree** (*Cercidiphyllum japonicum*, `cercidiphyllum-japonicum`): fun fact
 - [ ] **Kentucky coffeetree** (*Gymnocladus dioicus*, `gymnocladus-dioicus`): description
@@ -313,7 +313,7 @@ unsourced; tool handles and farm implements confirmed).
 - [ ] **Pin oak** (*Quercus palustris*, `quercus-palustris`): fun fact
 - [ ] **Prairifire crabapple** (*Malus 'Prairifire'*, `malus-prairifire`): fun fact
 - [ ] **Princeton Sentry ginkgo** (*Ginkgo biloba 'Princeton Sentry'*, `ginkgo-biloba-princeton-sentry`): fun fact
-- [ ] **Purple Leaf Plum** (*Prunus cerasifera*, `prunus-cerasifera`): fun fact
+- [ ] **Purple leaf plum** (*Prunus cerasifera*, `prunus-cerasifera`): fun fact
 - [ ] **Quaking aspen** (*Populus tremuloides*, `populus-tremuloides`): fun fact
 - [ ] **Ragin Red redosier dogwood** (*Cornus sericea 'Ragin Red'*, `cornus-sericea-ragin-red`): description + fun fact
 - [ ] **Red maple** (*Acer rubrum*, `acer-rubrum`): description + fun fact
@@ -342,7 +342,7 @@ unsourced; tool handles and farm implements confirmed).
 - [ ] **Spruce** (*Picea sp.*, `picea-sp`): description + fun fact
 - [ ] **Sugar maple** (*Acer saccharum*, `acer-saccharum`): description
 - [ ] **Summersweet** (*Clethra alnifolia*, `clethra-alnifolia`): fun fact
-- [ ] **Swamp White oak** (*Quercus bicolor*, `quercus-bicolor`): fun fact
+- [ ] **Swamp white oak** (*Quercus bicolor*, `quercus-bicolor`): fun fact
 - [ ] **Sweet birch** (*Betula lenta*, `betula-lenta`): fun fact
 - [ ] **Sweetgum** (*Liquidambar styraciflua*, `liquidambar-styraciflua`): fun fact
 - [ ] **Tamarack** (*Larix laricina*, `larix-laricina`): description + fun fact
@@ -353,7 +353,7 @@ unsourced; tool handles and farm implements confirmed).
 - [ ] **Variegated tuliptree** (*Liriodendron tulipifera 'Aureomarginatum'*, `liriodendron-tulipifera-aureomarginatum`): fun fact
 - [ ] **Ware oak** (*Quercus x warei*, `quercus-x-warei`): fun fact
 - [ ] **Washington hawthorn** (*Crataegus phaenopyrum*, `crataegus-phaenopyrum`): description + fun fact
-- [ ] **Weeping Cherry** (*Prunus subhirtella*, `prunus-subhirtella`): fun fact
+- [ ] **Weeping cherry** (*Prunus subhirtella*, `prunus-subhirtella`): fun fact
 - [ ] **White ash** (*Fraxinus americana*, `fraxinus-americana`): description
 - [ ] **White fir** (*Abies concolor*, `abies-concolor`): fun fact
 - [ ] **White oak** (*Quercus alba*, `quercus-alba`): description + fun fact

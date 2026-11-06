@@ -77,25 +77,7 @@ function renderHistory(plant: Plant): string {
 
   return `
     <h3 class="detail-section">Survey history</h3>
-    ${growth(plant)}
     <ul class="surveys">${rows.join('')}</ul>`;
-}
-
-/**
- * Growth between the first and last survey that measured a trunk — skipped
- * unless both ends have a diameter, since a change from nothing is not growth.
- */
-function growth(plant: Plant): string {
-  const measured = plant.history.filter((o) => o.dbhIn !== null);
-  if (measured.length < 2) return '';
-  const first = measured[0]!;
-  const last = measured.at(-1)!;
-  const gained = (last.dbhIn as number) - (first.dbhIn as number);
-  if (gained <= 0) return '';
-  const years = Number(last.surveyedOn.slice(0, 4)) - Number(first.surveyedOn.slice(0, 4));
-  const span = years > 0 ? ` over ${years} year${years === 1 ? '' : 's'}` : '';
-  return `<p class="detail-growth">Grew ${gained.toFixed(1)}&Prime; in trunk diameter${span},
-    from ${first.dbhIn}&Prime; to ${last.dbhIn}&Prime;.</p>`;
 }
 
 /**
