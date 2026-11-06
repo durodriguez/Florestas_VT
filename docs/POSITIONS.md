@@ -171,7 +171,8 @@ layer, and this repository and its site are public ([to-do #17](TODO.md)).
    so the next ones start closer.
 
 **Where images overlap, the one with the lowest error is on top.** The list is
-in that order, numbered from 1. Error only counts once it has been measured:
+by name, so an image is easy to find; the number beside each is its place in
+the stacking, from 1 on top. Error only counts once it has been measured:
 an image needs five or more points to rank by it — four always fit exactly and
 report zero, which proves nothing — so those rank below, then stretched images,
 then unaligned ones. Nothing is merged into one picture: at campus size and
