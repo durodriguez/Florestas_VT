@@ -399,3 +399,12 @@ body[data-mode] [data-only="none"] { display: none !important; }
   background: var(--ground); border: 1px solid var(--rule); border-radius: 6px;
   font-size: 11px; line-height: 1.4; white-space: pre;
 }
+
+/* What the condition grades mean: the chosen one under the buttons, the
+   whole scale behind "What the grades mean". */
+.condition-meaning { margin: 6px 0 0; }
+.condition-key { margin-top: 6px; font-size: 13px; }
+.condition-key summary { cursor: pointer; color: var(--ink-2); }
+.condition-key dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; margin: 8px 0 4px; }
+.condition-key dt { font-weight: 650; }
+.condition-key dd { margin: 0; }

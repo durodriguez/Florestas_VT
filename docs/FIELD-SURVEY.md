@@ -75,15 +75,30 @@ largest stem and note the rest.
 **Height and spread** can be estimated to the nearest 5 ft; a clinometer app is
 plenty accurate for an arboretum inventory.
 
-**Condition** — use the five-point scale consistently:
+**Condition** — use the five-point scale consistently. The survey app shows
+the chosen grade's meaning under the buttons, and the whole scale behind
+*What the grades mean*; both come from `src/field/conditions.ts`.
 
-| Value | Meaning |
-|---|---|
-| `excellent` | Full canopy, no significant defects |
-| `good` | Minor deadwood or small wounds, structurally sound |
-| `fair` | 25–50% canopy loss, decay, or a structural defect worth monitoring |
-| `poor` | Over 50% decline, major structural defect, likely removal candidate |
-| `dead` | Standing dead |
+| Value | Canopy loss | Or a defect like |
+|---|---|---|
+| `excellent` | under 10% | none |
+| `good` | 10–25% | minor deadwood or small wounds; structurally sound |
+| `fair` | 25–50% | decay, or a structural defect worth monitoring |
+| `poor` | over 50% | a major structural defect; likely to need removal |
+| `dead` | no live canopy | still standing. A tree taken down is *Gone*, not dead |
+
+Canopy loss is judged first, defects second, and **where they point to
+different grades, the lower one applies**: a full canopy on a split trunk is
+not a good tree. The bands meet without a gap, so every tree fits one. (They
+were set on 6 November 2026; the earlier wording left 10–25% loss with no
+defects between *good* and *fair*.)
+
+**Conditions from other sources were not graded on this scale.** The 2023–24
+UVM layer used the same five words with no recorded definitions, the 2014
+inventory used its own *Good / Fair / Poor / Dead* for a storm-risk survey,
+and the city's street trees are converted from a 0–100 score. Read them as
+roughly comparable, not identical; this project's own surveys replace them,
+tree by tree.
 
 ## 4. Work area by area
 
