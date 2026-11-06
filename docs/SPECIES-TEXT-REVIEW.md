@@ -455,6 +455,11 @@ Show Off forsythia, added the same day, was written from its US plant patent
 (PP19,321) and nursery listings. They disagree on hardiness (zones 3 to 9);
 5–8 is the range most give.
 
+Japanese kerria, added the same day, was written from extension and
+arboretum pages (Clemson, NC State, Illinois, UConn) and Trees and Shrubs
+Online. Hardiness is given as zone 4 or 5 at the cold end; UConn's 5 is used.
+Fruit and fall color are left blank.
+
 - [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [x] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
 - [x] **American elderberry** (*Sambucus canadensis*, `sambucus-canadensis`): description + fun fact
@@ -499,6 +504,7 @@ Show Off forsythia, added the same day, was written from its US plant patent
 - [x] **Japanese angelica tree** (*Aralia elata*, `aralia-elata`): description + fun fact
 - [x] **Japanese clethra** (*Clethra barbinervis*, `clethra-barbinervis`): description + fun fact
 - [x] **Japanese fiber banana** (*Musa basjoo*, `musa-basjoo`): description + fun fact
+- [x] **Japanese kerria** (*Kerria japonica*, `kerria-japonica`): description + fun fact
 - [x] **Japanese pagoda tree** (*Styphnolobium japonicum*, `styphnolobium-japonicum`): description + fun fact
 - [x] **Japanese pieris** (*Pieris japonica*, `pieris-japonica`): description + fun fact
 - [x] **Japanese snowbell** (*Styrax japonicus*, `styrax-japonicus`): description + fun fact
