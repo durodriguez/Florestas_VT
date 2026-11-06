@@ -466,12 +466,15 @@ species' fun fact: Kerr's 1804 plant was the double form, and the single
 species reached England about 1834 (Bean's Trees and Shrubs). Sources give
 1804 or 1805 for the first and 1834 or 1835 for the second.
 
-Verdant Hills boxwood, added the same day, has little written about it: the
-Dawes Arboretum's record (parentage, zone 4, size, winter color, deer and
-rabbits) and the American Boxwood Society's cultivar checklist (the 1999
-Boxwood Bulletin article). The warm end of its range, 8, is borrowed from
-similar hybrids, not from a source on this one. Whether the Norman Pellett
-of that article is UVM's could not be confirmed, so the entry does not say.
+Verdant Hills boxwood, added the same day, was first written from the
+Dawes Arboretum's record and the American Boxwood Society's checklist, and
+rewritten the same day from the registration itself, which the user found:
+"Four Recently Registered Boxwood Cultivars", The Boxwood Bulletin
+38(3):47, 1999. It names the registrant as Dr. Norman E. Pellet [sic],
+Professor Emeritus, University of Vermont, and gives the Sheridan Nurseries
+origin, the sister seedlings, and a 25-year-old plant at UVM's Horticultural
+Research Center of 46 by 70 inches. Zone 4 is the Dawes figure; 8 at the warm
+end is still not from a source on this plant.
 
 Tom Thumb cotoneaster, added 6 November 2026, is filed under the genus alone:
 Oregon State, Chicago Botanic Garden, the RHS, Illinois and Fine Gardening
