@@ -469,6 +469,21 @@ button, input, select { font: inherit; color: inherit; }
 /* When the picture was taken, so nobody reads a ten-year-old photo as how the
    tree looks today. */
 .detail-photo-date { margin-top: .3rem; font-size: .76rem; color: var(--dim); text-align: right; }
+/* Every photo of the tree, newest first, once there is more than one. Scrolls
+   sideways when it outgrows the panel; a thumbnail cut at the edge says so. */
+.photo-strip {
+  display: flex; gap: .4rem; margin-top: .5rem; padding-bottom: .25rem;
+  overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin;
+  overscroll-behavior-x: contain;
+}
+.photo-strip-shot {
+  flex: none; width: 3.4rem; padding: 0; border: 2px solid transparent; border-radius: 6px;
+  background: none; cursor: pointer; scroll-snap-align: start;
+}
+.photo-strip-shot[aria-pressed="true"] { border-color: var(--uvm-green); }
+.photo-strip-shot:focus-visible { outline: 2px solid var(--uvm-green-light); outline-offset: 1px; }
+.photo-strip-shot img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; }
+.photo-strip-shot span { display: block; font-size: .66rem; color: var(--dim); text-align: center; margin-top: .1rem; white-space: nowrap; }
 .detail-desc { font-size: .88rem; line-height: 1.5; }
 
 /* This tree's own history, and a line about the species. Both are optional

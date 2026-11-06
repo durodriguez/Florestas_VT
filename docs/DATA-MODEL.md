@@ -361,6 +361,11 @@ latest visit found it removed or not found carries nothing forward. Nothing
 caches either on `plants.csv`, so they cannot drift out of step with the
 surveys that established them.
 
+Every photo is kept with the visit that took it. The panel shows the newest;
+once a tree has two or more, a strip of thumbnails under it, newest first,
+shows any of them with its date (`photoSeries` in `src/photos.ts`). It
+scrolls sideways when it outgrows the panel.
+
 The trunk diameter works the same way. Most visits do not measure it, so a
 standing tree whose latest visit left `dbh_in` blank shows the last diameter
 anyone recorded, with `dbh_on`: "40 in (2014)" in the panel, `dbh_measured_on`

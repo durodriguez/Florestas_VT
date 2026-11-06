@@ -1,7 +1,7 @@
 import type { CityTree, CityTreeItree, Dataset, Observation, Plant, Taxon } from './types';
 import { escapeHtml } from './map';
 import { ORIGIN_LABELS, TYPE_LABELS } from './palette';
-import { photoTaken, photoUrl } from './photos';
+import { photoSeries, photoTaken, photoUrl } from './photos';
 
 const MONTHS = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -111,6 +111,25 @@ function aboutTaxon(t: Taxon, countOnCampus = true): string {
   `;
 }
 
+/**
+ * Every photo of the tree as a row of thumbnails, newest first, once there
+ * is more than one. A tap shows that photo in the main frame with its date;
+ * the row scrolls sideways when it outgrows the panel.
+ */
+function photoStrip(plant: Plant, base: string, photoBaseUrl?: string): string {
+  const shots = photoSeries(plant);
+  if (shots.length < 2) return '';
+  return `<div class="photo-strip" role="group" aria-label="Photos of this tree">${shots.map((s) => {
+    const when = photoTaken(s.on);
+    const url = photoUrl(s.file, base, photoBaseUrl);
+    return `<button type="button" class="photo-strip-shot" data-action="photo-pick"
+        data-src="${escapeHtml(url)}" data-when="${escapeHtml(when)}" aria-pressed="${s.file === plant.photo}"
+        aria-label="Show the photo${when ? ` from ${escapeHtml(when)}` : ''}">
+        <img src="${escapeHtml(url)}" alt="" loading="lazy"><span>${escapeHtml(when)}</span>
+      </button>`;
+  }).join('')}</div>`;
+}
+
 export function renderDetail(plant: Plant, dataset: Dataset, base: string): string {
   const t = plant.taxon;
   const age = plant.plantedYear ? `${new Date().getFullYear() - plant.plantedYear} years` : null;
@@ -123,6 +142,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
              alt="${escapeHtml(t.common)}, accession ${escapeHtml(plant.id)}" loading="lazy">
          </button>
          ${taken ? `<figcaption class="detail-photo-date">Photographed ${escapeHtml(taken)}</figcaption>` : ''}
+         ${photoStrip(plant, base, dataset.config.photoBaseUrl)}
        </figure>`
     : '';
 

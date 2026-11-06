@@ -534,6 +534,17 @@ class App {
     $('#results').addEventListener('focusin', (e) => this.map.hover(hovered(e)));
     $('#results').addEventListener('focusout', () => this.map.hover(null));
 
+    // A mouse wheel over the photo strip scrolls it sideways, when it has
+    // more photos than fit; otherwise the panel scrolls as usual.
+    $('#detail').addEventListener('wheel', (e) => {
+      const strip = (e.target as HTMLElement).closest<HTMLElement>('.photo-strip');
+      if (!strip || strip.scrollWidth <= strip.clientWidth || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      const end = strip.scrollWidth - strip.clientWidth;
+      if ((e.deltaY < 0 && strip.scrollLeft <= 0) || (e.deltaY > 0 && strip.scrollLeft >= end - 1)) return;
+      strip.scrollLeft += e.deltaY;
+      e.preventDefault();
+    }, { passive: false });
+
     $('#detail').addEventListener('click', (e) => {
       const el = (e.target as HTMLElement).closest<HTMLElement>('[data-action]');
       if (!el) return;
@@ -544,6 +555,7 @@ class App {
       }
       if (el.dataset.action === 'share') this.share(el);
       if (el.dataset.action === 'photo') this.openPhoto(el);
+      if (el.dataset.action === 'photo-pick') this.pickPhoto(el);
       if (el.dataset.action === 'copy-link') {
         this.closeShareMenu(false);
         navigator.clipboard
@@ -644,6 +656,28 @@ class App {
     this.photoOpener = opener;
     document.body.append(box);
     box.querySelector<HTMLButtonElement>('.lightbox-close')!.focus();
+  }
+
+  /** A thumbnail in the photo strip: show that photo, with its date, in the main frame. */
+  private pickPhoto(thumb: HTMLElement): void {
+    const fig = thumb.closest('.detail-figure');
+    const img = fig?.querySelector<HTMLImageElement>('.detail-photo');
+    if (!fig || !img) return;
+    img.src = thumb.dataset.src!;
+    const when = thumb.dataset.when;
+    let cap = fig.querySelector('.detail-photo-date');
+    if (when) {
+      if (!cap) {
+        cap = document.createElement('figcaption');
+        cap.className = 'detail-photo-date';
+        fig.querySelector('.detail-photo-open')!.after(cap);
+      }
+      cap.textContent = `Photographed ${when}`;
+    } else {
+      cap?.remove();
+    }
+    for (const b of fig.querySelectorAll('.photo-strip-shot')) b.setAttribute('aria-pressed', String(b === thumb));
+    thumb.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
   }
 
   private photoOpener: HTMLElement | null = null;

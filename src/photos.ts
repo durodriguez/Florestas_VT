@@ -51,3 +51,24 @@ export function photoTaken(date: string | null): string {
   const month = MONTHS[Number(m[2])];
   return month ? `${month} ${m[1]}` : '';
 }
+
+/**
+ * Every photo of a plant, newest first, each with the visit that took it.
+ * The panel shows a strip of them under the main photo once there are two or
+ * more; the newest is the one already shown.
+ */
+export function photoSeries(
+  plant: { photo: string | null; photoOn: string | null; surveyedOn: string | null; history: Array<{ photo: string | null; surveyedOn: string }> },
+): Array<{ file: string; on: string | null }> {
+  const seen = new Set<string>();
+  const out: Array<{ file: string; on: string | null }> = [];
+  for (const o of [...plant.history].reverse()) {
+    if (o.photo && !seen.has(o.photo)) {
+      seen.add(o.photo);
+      out.push({ file: o.photo, on: o.surveyedOn });
+    }
+  }
+  // A plant with a single visit carries no history; its photo is still one.
+  if (plant.photo && !seen.has(plant.photo)) out.unshift({ file: plant.photo, on: plant.photoOn ?? plant.surveyedOn });
+  return out;
+}
