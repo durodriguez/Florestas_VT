@@ -446,8 +446,44 @@ serviceberry, Amber Glow dawn redwood and American basswood, checked the
 same day, are ticked in section 2 above.) One fixed here: the Sycamore Gap
 tree was about 150 years old, not over 200.
 
+American elderberry, added 6 November 2026, was written from sources checked
+the same day (UF/IFAS, University of Minnesota, UMass, Oregon State
+extension). Its fall color, bark and pests are left blank: no source checked
+described them.
+
+Show Off forsythia, added the same day, was written from its US plant patent
+(PP19,321) and nursery listings. They disagree on hardiness (zones 3 to 9);
+5–8 is the range most give.
+
+Japanese kerria, added the same day, was written from extension and
+arboretum pages (Clemson, NC State, Illinois, UConn) and Trees and Shrubs
+Online. Hardiness is given as zone 4 or 5 at the cold end; UConn's 5 is used.
+Fruit and fall color are left blank.
+
+Its Pleniflora and Picta cultivars followed the same day (Clemson, Purdue,
+Oregon State, RHS, Cornell, nursery listings). Checking them corrected the
+species' fun fact: Kerr's 1804 plant was the double form, and the single
+species reached England about 1834 (Bean's Trees and Shrubs). Sources give
+1804 or 1805 for the first and 1834 or 1835 for the second.
+
+Verdant Hills boxwood, added the same day, has little written about it: the
+Dawes Arboretum's record (parentage, zone 4, size, winter color, deer and
+rabbits) and the American Boxwood Society's cultivar checklist (the 1999
+Boxwood Bulletin article). The warm end of its range, 8, is borrowed from
+similar hybrids, not from a source on this one. Whether the Norman Pellett
+of that article is UVM's could not be confirmed, so the entry does not say.
+
+Tom Thumb cotoneaster, added 6 November 2026, is filed under the genus alone:
+Oregon State, Chicago Botanic Garden, the RHS, Illinois and Fine Gardening
+place it under three different species. Written from those, Cornell and
+nursery listings, which disagree on fruit: the grower sheet and Fine
+Gardening (little or none) are followed over retail claims of heavy berries.
+Nurseries give zone 5 at the cold end; 8 at the warm end is not from a
+source on this plant.
+
 - [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [x] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
+- [x] **American elderberry** (*Sambucus canadensis*, `sambucus-canadensis`): description + fun fact
 - [x] **Ann magnolia** (*Magnolia 'Ann'*, `magnolia-ann`): description + fun fact
 - [x] **Atlantic white cedar** (*Chamaecyparis thyoides*, `chamaecyparis-thyoides`): description + fun fact
 - [x] **Beautybush** (*Kolkwitzia amabilis*, `kolkwitzia-amabilis`): description + fun fact
@@ -489,6 +525,7 @@ tree was about 150 years old, not over 200.
 - [x] **Japanese angelica tree** (*Aralia elata*, `aralia-elata`): description + fun fact
 - [x] **Japanese clethra** (*Clethra barbinervis*, `clethra-barbinervis`): description + fun fact
 - [x] **Japanese fiber banana** (*Musa basjoo*, `musa-basjoo`): description + fun fact
+- [x] **Japanese kerria** (*Kerria japonica*, `kerria-japonica`): description + fun fact
 - [x] **Japanese pagoda tree** (*Styphnolobium japonicum*, `styphnolobium-japonicum`): description + fun fact
 - [x] **Japanese pieris** (*Pieris japonica*, `pieris-japonica`): description + fun fact
 - [x] **Japanese snowbell** (*Styrax japonicus*, `styrax-japonicus`): description + fun fact
@@ -511,8 +548,10 @@ tree was about 150 years old, not over 200.
 - [x] **Patriot highbush blueberry** (*Vaccinium corymbosum 'Patriot'*, `vaccinium-corymbosum-patriot`): description + fun fact
 - [x] **Pawpaw** (*Asimina triloba*, `asimina-triloba`): description + fun fact
 - [x] **Pecan** (*Carya illinoinensis*, `carya-illinoinensis`): description + fun fact
+- [x] **Picta Japanese kerria** (*Kerria japonica 'Picta'*, `kerria-japonica-picta`): description + fun fact
 - [x] **Pink Flair Sargent cherry** (*Prunus sargentii 'JFS-KW58'*, `prunus-sargentii-jfs-kw58`): description + fun fact
 - [x] **PJM rhododendron** (*Rhododendron 'P.J.M.'*, `rhododendron-pjm`): description + fun fact
+- [x] **Pleniflora Japanese kerria** (*Kerria japonica 'Pleniflora'*, `kerria-japonica-pleniflora`): description + fun fact
 - [x] **Rhododendron** (*Rhododendron sp.*, `rhododendron-sp`): description + fun fact
 - [x] **Rosy Lights azalea** (*Rhododendron 'Rosy Lights'*, `rhododendron-rosy-lights`): description + fun fact
 - [x] **Royal Frost birch** (*Betula 'Penci 2'*, `betula-penci-2`): description + fun fact
@@ -520,16 +559,19 @@ tree was about 150 years old, not over 200.
 - [x] **Serbian spruce** (*Picea omorika*, `picea-omorika`): description + fun fact
 - [x] **Shellbark hickory** (*Carya laciniosa*, `carya-laciniosa`): description + fun fact
 - [x] **Shirazz magnolia** (*Magnolia 'Shirazz'*, `magnolia-shirazz`): description + fun fact
+- [x] **Show Off forsythia** (*Forsythia x intermedia 'Mindor'*, `forsythia-x-intermedia-mindor`): description + fun fact
 - [x] **Siberian iris** (*Iris sibirica*, `iris-sibirica`): description + fun fact
 - [x] **Snow Fountains weeping cherry** (*Prunus 'Snofozam'*, `prunus-snofozam`): description + fun fact
 - [x] **Spicebush** (*Lindera benzoin*, `lindera-benzoin`): description + fun fact
 - [x] **Sweetbay magnolia** (*Magnolia virginiana*, `magnolia-virginiana`): description + fun fact
 - [x] **Swiss stone pine** (*Pinus cembra*, `pinus-cembra`): description + fun fact
 - [x] **Sycamore maple** (*Acer pseudoplatanus*, `acer-pseudoplatanus`): description + fun fact
+- [x] **Tom Thumb cotoneaster** (*Cotoneaster 'Tom Thumb'*, `cotoneaster-tom-thumb`): description + fun fact
 - [x] **Triple Crown thornless blackberry** (*Rubus 'Triple Crown'*, `rubus-triple-crown`): description + fun fact
 - [x] **Triumph elm** (*Ulmus 'Morton Glossy'*, `ulmus-morton-glossy`): description + fun fact
 - [x] **Ultimate Yellow magnolia** (*Magnolia 'Ultimate Yellow'*, `magnolia-ultimate-yellow`): description + fun fact
 - [x] **Umbrella magnolia** (*Magnolia tripetala*, `magnolia-tripetala`): description + fun fact
+- [x] **Verdant Hills boxwood** (*Buxus 'Verdant Hills'*, `buxus-verdant-hills`): description + fun fact
 - [x] **Virginia creeper** (*Parthenocissus quinquefolia*, `parthenocissus-quinquefolia`): description + fun fact
 - [x] **Weeping Alaska cedar** (*Callitropsis nootkatensis 'Pendula'*, `callitropsis-nootkatensis-pendula`): description + fun fact
 - [x] **White Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodtwo'*, `hibiscus-syriacus-notwoodtwo`): description + fun fact
