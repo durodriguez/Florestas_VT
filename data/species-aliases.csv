@@ -272,5 +272,8 @@ Double-flowered kerria,kerria-japonica-pleniflora,,
 Double kerria,kerria-japonica-pleniflora,,
 Variegated kerria,kerria-japonica-picta,,
 Kerria japonica 'Variegata',kerria-japonica-picta,Another name for 'Picta',
-Tom Thumb cotoneaster,cotoneaster-adpressus,"Dwarf cultivar, also sold as 'Little Gem'; cultivar not distinguished","Taken as C. adpressus; sources also place 'Tom Thumb' under C. apiculatus or C. horizontalis"
-Cotoneaster 'Tom Thumb',cotoneaster-adpressus,See Tom Thumb cotoneaster,"Taken as C. adpressus; sources also place 'Tom Thumb' under C. apiculatus or C. horizontalis"
+Cotoneaster apiculatus 'Tom Thumb',cotoneaster-tom-thumb,"Its species is disputed; filed under the genus",
+Cotoneaster adpressus 'Little Gem',cotoneaster-tom-thumb,'Little Gem' is the same plant; species disputed,
+Cotoneaster horizontalis 'Tom Thumb',cotoneaster-tom-thumb,Species disputed,
+Cotoneaster 'Little Gem',cotoneaster-tom-thumb,Same plant as 'Tom Thumb',
+Little Gem cotoneaster,cotoneaster-tom-thumb,Same plant as 'Tom Thumb',

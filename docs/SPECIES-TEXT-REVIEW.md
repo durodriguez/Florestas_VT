@@ -473,6 +473,14 @@ Boxwood Bulletin article). The warm end of its range, 8, is borrowed from
 similar hybrids, not from a source on this one. Whether the Norman Pellett
 of that article is UVM's could not be confirmed, so the entry does not say.
 
+Tom Thumb cotoneaster, added 6 November 2026, is filed under the genus alone:
+Oregon State, Chicago Botanic Garden, the RHS, Illinois and Fine Gardening
+place it under three different species. Written from those, Cornell and
+nursery listings, which disagree on fruit: the grower sheet and Fine
+Gardening (little or none) are followed over retail claims of heavy berries.
+Nurseries give zone 5 at the cold end; 8 at the warm end is not from a
+source on this plant.
+
 - [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [x] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
 - [x] **American elderberry** (*Sambucus canadensis*, `sambucus-canadensis`): description + fun fact
@@ -558,6 +566,7 @@ of that article is UVM's could not be confirmed, so the entry does not say.
 - [x] **Sweetbay magnolia** (*Magnolia virginiana*, `magnolia-virginiana`): description + fun fact
 - [x] **Swiss stone pine** (*Pinus cembra*, `pinus-cembra`): description + fun fact
 - [x] **Sycamore maple** (*Acer pseudoplatanus*, `acer-pseudoplatanus`): description + fun fact
+- [x] **Tom Thumb cotoneaster** (*Cotoneaster 'Tom Thumb'*, `cotoneaster-tom-thumb`): description + fun fact
 - [x] **Triple Crown thornless blackberry** (*Rubus 'Triple Crown'*, `rubus-triple-crown`): description + fun fact
 - [x] **Triumph elm** (*Ulmus 'Morton Glossy'*, `ulmus-morton-glossy`): description + fun fact
 - [x] **Ultimate Yellow magnolia** (*Magnolia 'Ultimate Yellow'*, `magnolia-ultimate-yellow`): description + fun fact
