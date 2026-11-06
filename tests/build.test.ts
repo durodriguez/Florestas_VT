@@ -543,6 +543,42 @@ describe('buildDataset', () => {
     }
   });
 
+  it('keeps the last diameter, with its date, through a visit that measured none', () => {
+    const r = build({
+      observationRows: [
+        observation({ surveyed_on: '2014-12-31', surveyor: 'UVM 2014 inventory', dbh_in: '17' }),
+        observation({ surveyed_on: '2023-10-22', dbh_in: '' }),
+      ],
+    });
+    expect(r.errors).toEqual([]);
+    expect(field(r, 0, 'dbh_in')).toBe(17);
+    // The 2014 inventory is known only to the year, and shown that way.
+    expect(field(r, 0, 'dbh_on')).toBe('2014');
+    expect(field(r, 0, 'surveyed_on')).toBe('2023-10-22');
+  });
+
+  it('gives no diameter date when the latest visit measured it', () => {
+    const r = build({
+      observationRows: [
+        observation({ surveyed_on: '2014-12-31', surveyor: 'UVM 2014 inventory', dbh_in: '17' }),
+        observation({ surveyed_on: '2026-11-04', dbh_in: '19.5' }),
+      ],
+    });
+    expect(field(r, 0, 'dbh_in')).toBe(19.5);
+    expect(field(r, 0, 'dbh_on')).toBeNull();
+  });
+
+  it('shows only the year for a survey known only to the year, and full dates otherwise', () => {
+    const r = build({
+      observationRows: [
+        observation({ surveyed_on: '2014-12-31', surveyor: 'UVM 2014 inventory', dbh_in: '17' }),
+        observation({ surveyed_on: '2023-10-22', surveyor: 'EC' }),
+      ],
+    });
+    const history = r.plants.history[r.plants.rows[0]![0] as string] as unknown[][];
+    expect(history.map((h) => h[0])).toEqual(['2014', '2023-10-22']);
+  });
+
   it('joins i-Tree estimates onto the city trees they belong to', () => {
     const city = (id: string) => ({ city_id: id, taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955',
       collection_id: 'green', dbh_in: '12', height_ft: '25', spread_ft: '20', condition: 'good' });

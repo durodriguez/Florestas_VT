@@ -399,9 +399,9 @@ The fallback is the 2014 inventory, published at
 so surveyors never have to do anything — open the app and tag lookup works.
 
 **It is FEMC's data, CC BY-SA 4.0**, and this app redistributes a copy of it.
-Neither the map nor the survey app shows a credit for it: the public map uses
-nothing from it, and the survey app is an internal data-entry tool, not a
-public page. The full citation and licence are in
+Since 6 November 2026 the public map also shows its diameters and conditions,
+as dated 2014 visits in `observations.csv`; neither the map nor the survey app
+shows a credit for it. The full citation and licence are in
 [data/SOURCES.md](../data/SOURCES.md), and that is where to put a credit back if
 the app is ever opened to the public.
 

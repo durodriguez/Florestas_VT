@@ -186,7 +186,9 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
           plant.conditionOn ? ` <span class="fact-when">(${escapeHtml(surveyDate(plant.conditionOn))})</span>` : ''}`
         : null)}
       ${row('Planted', plant.plantedYear ? `${plant.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
-      ${row('Diameter at breast height', numOr(plant.dbhIn, ' in'))}
+      ${row('Diameter at breast height', plant.dbhIn === null ? null : `${numOr(plant.dbhIn, ' in')}${
+        // From an earlier visit than the latest, as every 2014 measurement is.
+        plant.dbhOn ? ` <span class="fact-when">(${escapeHtml(surveyDate(plant.dbhOn))})</span>` : ''}`)}
       ${row('Height', numOr(plant.heightFt, ' ft'))}
       ${row('Canopy spread', numOr(plant.spreadFt, ' ft'))}
       ${row('Last surveyed', plant.surveyedOn

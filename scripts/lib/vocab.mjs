@@ -67,6 +67,13 @@ export const TAXON_REQUIRED = ['taxon_id', 'scientific_name', 'common_name', 'fa
 export const PLANT_REQUIRED = ['plant_id', 'taxon_id', 'lat', 'lng'];
 export const OBSERVATION_REQUIRED = ['plant_id', 'surveyed_on'];
 
+/**
+ * Surveys known only to the year. The 2014 UVM campus inventory was collected
+ * over all of 2014 with no date per tree, so its rows in observations.csv are
+ * dated 2014-12-31 (to sort after any real 2014 visit) and shown as "2014".
+ */
+export const YEAR_ONLY_SURVEYORS = new Set(['UVM 2014 inventory']);
+
 export const TAXON_NUMERIC = ['mature_height_ft', 'mature_spread_ft'];
 export const PLANT_NUMERIC = ['planted_year'];
 export const OBSERVATION_NUMERIC = ['dbh_in', 'height_ft', 'spread_ft'];
@@ -188,6 +195,7 @@ export const PLANT_FIELDS = [
   'lng',
   'collection',  // integer index into collections[], or -1
   'dbh_in',
+  'dbh_on',      // the visit that diameter is from, when not the latest
   'height_ft',
   'spread_ft',
   'condition',   // integer index into CONDITIONS, or -1

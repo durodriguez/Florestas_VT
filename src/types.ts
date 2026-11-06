@@ -189,6 +189,8 @@ export interface Plant {
   condition: string | null;
   /** When `condition` is from an earlier visit than the latest, that visit's date. */
   conditionOn: string | null;
+  /** The survey the diameter is from, when not the latest ("2014" for the 2014 inventory). */
+  dbhOn: string | null;
   plantedYear: number | null;
   status: string;
   surveyedOn: string | null;

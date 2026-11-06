@@ -37,6 +37,13 @@ class and condition. `Genus` and `Species` are `Botanical` split in two.
 needs enough to autofill a form, and an arborist's internal notes do not
 belong on a public URL.
 
+**Also in `data/observations.csv`, since 6 November 2026:** for the 896
+trees whose tag is on the map and whose 2014 species agrees with the map's at
+least on genus, its DBH and condition as a 2014 visit, with the tree number and
+age class in the notes. See [DATA-MODEL.md](../docs/DATA-MODEL.md#the-2014-inventorys-rows).
+The public map shows these in each tree's history and, where no later visit
+measured the trunk, as its diameter, dated 2014.
+
 **The published copy was verified against the source on 22 September 2026**:
 all 2,502 rows present, zero cell differences across the six shared columns.
 The reduction is faithful.
