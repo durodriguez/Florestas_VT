@@ -16,7 +16,7 @@ import {
 import { getMeta, setMeta } from './db';
 import { STATUSES, STATUS_LABELS, absent } from './status';
 import {
-  describeDistance, likelyDuplicate, mappedByTagOrId, mappedNeighbours, nearbyTrees, NEARBY_COLOURS,
+  describeDistance, genusAbbreviations, genusOf, likelyDuplicate, mappedByTagOrId, mappedNeighbours, nearbyTrees, NEARBY_COLOURS,
   normalizeTag, TAG_FAR_M,
   type MappedTree, type NearbyTree,
 } from './nearby';
@@ -52,6 +52,8 @@ let hasPlaque = false;
 let reference = { species: '', taxonId: '', source: '' };
 /** Every plant already on the map, for matching an untagged tree by position. */
 let mapped: MappedTree[] = [];
+/** Short genus labels for the reference dots, worked out over every mapped genus. */
+let genusShort = new Map<string, string>();
 /** The mapped tree the surveyor says this is, if they picked one. */
 let claimed: NearbyTree | null = null;
 /** How the claim was made: a tag typed, or a tree picked by position. */
@@ -131,6 +133,11 @@ const CONTEXT_MIN_ZOOM = 17;
 /** From this zoom each reference dot carries its genus and number. */
 const CONTEXT_LABEL_ZOOM = 19;
 
+function setMapped(trees: MappedTree[]): void {
+  mapped = trees;
+  genusShort = genusAbbreviations(trees.map((t) => genusOf(t.sci)));
+}
+
 function renderContext(): void {
   contextLayer.clearLayers();
   if (mode !== 'new' || mapped.length === 0 || map.getZoom() < CONTEXT_MIN_ZOOM) return;
@@ -145,8 +152,9 @@ function renderContext(): void {
     if (labelled) {
       // Both, kept short: the genus says what stands around the new tree
       // ("past the maple"), and the number tells apart a row of the same tree.
-      // Four letters of the genus, then the tag, or # and the accession.
-      const genus = (t.sci.trim().split(/\s+/)[0] || '?').slice(0, 4);
+      // Four letters of the genus (more only where two genera would read the
+      // same), then the tag, or # and the accession.
+      const genus = genusShort.get(genusOf(t.sci)) ?? genusOf(t.sci);
       const num = t.tag || t.id.replace(/^UVM-/, '#');
       dot.bindTooltip(`<i>${escapeHtml(genus)}</i> (${escapeHtml(num)})`, {
         permanent: true, direction: 'right', offset: [6, 0], className: 'context-label', pane: 'context',
@@ -426,7 +434,7 @@ const TREES_KEY = 'mapped-trees';
  */
 async function initTrees(): Promise<void> {
   const cached = await getMeta<MappedTree[]>(TREES_KEY);
-  if (cached?.length) mapped = cached;
+  if (cached?.length) setMapped(cached);
   try {
     // Versioned, because the service worker serves same-origin GETs cache-first
     // and a fixed URL would freeze the map at whatever it held on day one.
@@ -434,7 +442,7 @@ async function initTrees(): Promise<void> {
     if (!res.ok) return;
     const fresh = (await res.json()) as MappedTree[];
     if (Array.isArray(fresh)) {
-      mapped = fresh;
+      setMapped(fresh);
       await setMeta(TREES_KEY, fresh);
       renderNearby();
     }

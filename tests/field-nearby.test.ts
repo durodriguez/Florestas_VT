@@ -250,3 +250,36 @@ describe('likelyDuplicate', () => {
     expect(likelyDuplicate(HERE.lat, HERE.lng, [tree('UVM-1', DUPLICATE_M + 2, 0)])).toBeNull();
   });
 });
+
+describe('genusAbbreviations', () => {
+  it('uses four letters where no other genus shares them', async () => {
+    const { genusAbbreviations } = await import('../src/field/nearby');
+    const m = genusAbbreviations(['Ginkgo', 'Acer', 'Pinus', 'Picea']);
+    expect(m.get('Ginkgo')).toBe('Gink');
+    expect(m.get('Pinus')).toBe('Pinu');
+    expect(m.get('Picea')).toBe('Pice');
+    expect(m.get('Acer')).toBe('Acer');
+  });
+  it('lengthens only the genera that would read the same', async () => {
+    const { genusAbbreviations } = await import('../src/field/nearby');
+    const m = genusAbbreviations(['Cercis', 'Cercidiphyllum', 'Cornus']);
+    expect(m.get('Cercis')).toBe('Cercis');
+    expect(m.get('Cercidiphyllum')).toBe('Cercid');
+    expect(m.get('Cornus')).toBe('Corn');
+  });
+  it('keeps a short genus whole when a longer one begins with it', async () => {
+    const { genusAbbreviations } = await import('../src/field/nearby');
+    const m = genusAbbreviations(['Rhus', 'Rhusella']);
+    expect(m.get('Rhus')).toBe('Rhus');
+    expect(m.get('Rhusella')).toBe('Rhuse');
+  });
+});
+
+describe('genusOf', () => {
+  it('takes the first word of the scientific name', async () => {
+    const { genusOf } = await import('../src/field/nearby');
+    expect(genusOf("Cotoneaster 'Tom Thumb'")).toBe('Cotoneaster');
+    expect(genusOf('Acer x freemanii')).toBe('Acer');
+    expect(genusOf('  ')).toBe('?');
+  });
+});
