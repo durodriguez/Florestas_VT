@@ -21,13 +21,13 @@ import {
   type MappedTree, type NearbyTree,
 } from './nearby';
 import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
+import { CONDITION_MEANINGS, CONDITION_RULE, CONDITIONS, conditionLabel, type Condition } from './conditions';
 import { describeFix, describeWaiting, mountLog, Receiver, receiverSupported, type ReceiverState } from '../gnss/receiver';
 import { download, stamp, toCsv, toPhotoZip } from './exporter';
 import { extensionFor, kb, shrinkPhoto } from './photo';
 import { ALL_CARDS, CARDS, visibleCards, type Mode } from './modes';
 
 const BASE = import.meta.env.BASE_URL;
-const CONDITIONS = ['excellent', 'good', 'fair', 'poor', 'dead'];
 
 const $ = <T extends HTMLElement>(id: string): T => {
   const el = document.getElementById(id);
@@ -987,8 +987,22 @@ function accept(index: number): void {
 function renderConditions(): void {
   $('condition-seg').innerHTML = CONDITIONS.map(
     (c) =>
-      `<button type="button" class="seg-btn" role="radio" aria-checked="false" data-condition="${c}">${c[0]!.toUpperCase()}${c.slice(1)}</button>`,
+      `<button type="button" class="seg-btn" role="radio" aria-checked="false" data-condition="${c}">${conditionLabel(c)}</button>`,
   ).join('');
+  // The whole scale, one tap away, so every surveyor grades the same way.
+  $('condition-key').innerHTML =
+    `<summary>What the grades mean</summary><dl>${CONDITIONS.map(
+      (c) => `<dt>${conditionLabel(c)}</dt><dd>${escapeHtml(CONDITION_MEANINGS[c])}</dd>`,
+    ).join('')}</dl><p class="hint">${escapeHtml(CONDITION_RULE)}</p>`;
+  renderConditionMeaning();
+}
+
+/** The chosen grade's meaning, under the buttons, as a check on the choice. */
+function renderConditionMeaning(): void {
+  const c = selectedCondition() as Condition | '';
+  const el = $('condition-meaning');
+  el.textContent = c ? CONDITION_MEANINGS[c] : '';
+  el.hidden = !c;
 }
 
 function selectedCondition(): string {
@@ -1026,6 +1040,7 @@ function applyStatus(): void {
     b.disabled = gone;
     if (gone) b.setAttribute('aria-checked', 'false');
   }
+  renderConditionMeaning();
 }
 
 function resetForm(): void {
@@ -1046,6 +1061,7 @@ function resetForm(): void {
   for (const b of $('condition-seg').querySelectorAll('[aria-checked]')) {
     b.setAttribute('aria-checked', 'false');
   }
+  renderConditionMeaning();
   for (const b of $('status-seg').querySelectorAll('[aria-checked]')) {
     b.setAttribute('aria-checked', String(b.getAttribute('data-status') === 'active'));
   }
@@ -1433,6 +1449,7 @@ $('condition-seg').addEventListener('click', (e) => {
   for (const b of $('condition-seg').querySelectorAll('[aria-checked]')) {
     b.setAttribute('aria-checked', String(b === btn));
   }
+  renderConditionMeaning();
 });
 
 $('status-seg').addEventListener('click', (e) => {
