@@ -88,6 +88,9 @@ the same reason an update needs no GPS fix unless the tree is being moved.
    the map, and they hide when zoomed out too far to help. If the pin lands within 5 m of
    a mapped tree the app says so and offers **Update it instead**; it is a
    warning, not a refusal, because hedges and clumps really are that close.
+   On a laptop in Chrome or Edge, **Connect receiver** under the map takes the
+   position from a Bluetooth GNSS receiver such as the Trimble R1: see
+   [GNSS-RECEIVER.md](GNSS-RECEIVER.md).
 5. Photo, measurements and condition, notes. Save.
 
 There is no "is the tree there?" question for a new tree. The importer issues a

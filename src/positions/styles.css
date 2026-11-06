@@ -202,6 +202,8 @@ button, input { font: inherit; color: inherit; }
 }
 .icon-btn:hover { background: rgb(255 255 255 / 22%); }
 .icon-btn[aria-pressed="true"] { background: #fff; color: #1d6fe0; }
+/* Receiver: a word, not a symbol; pressed while a receiver is connected. */
+.receiver-btn { width: auto; padding: 0 .7rem; font-size: .85rem; font-weight: 600; }
 .locate-msg {
   padding: .3rem .55rem; border-radius: 6px; background: #fff;
   font-size: .8rem; color: var(--text); box-shadow: 0 1px 4px rgb(0 0 0 / 30%);

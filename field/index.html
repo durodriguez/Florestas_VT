@@ -94,6 +94,7 @@
         <span id="gps-accuracy" class="accuracy">—</span>
       </div>
       <div id="gps-status" class="gps-status">Waiting for location…</div>
+      <div id="receiver-msg" class="gps-status receiver-msg" hidden></div>
       <div id="pin-map" class="pin-map" aria-label="Map of the trees around you"></div>
       <p class="hint" id="start-note" data-only="none"></p>
       <p class="hint" data-only="new">Tap the map to place the pin on the tree's crown, or drag it. Imagery beats GPS under canopy.</p>
@@ -102,6 +103,8 @@
       <button type="button" id="move-tree" class="ghost-btn" data-only="update" hidden>Its mapped position is wrong</button>
       <div class="btn-row">
         <button type="button" id="gps-recapture" class="ghost-btn">Re-read GPS</button>
+        <button type="button" id="receiver-btn" class="ghost-btn" aria-pressed="false" hidden
+                title="Connect a Bluetooth GNSS receiver, such as a Trimble R1">Connect receiver</button>
         <span id="coords" class="coords">—</span>
       </div>
     </section>
