@@ -128,7 +128,7 @@ map.getPane('context')!.style.pointerEvents = 'none';
 const contextLayer = L.layerGroup().addTo(map);
 /** Past this, a view holds too many trees for reference dots to help. */
 const CONTEXT_MIN_ZOOM = 17;
-/** From this zoom each reference dot carries its tag, or its accession. */
+/** From this zoom each reference dot carries its genus. */
 const CONTEXT_LABEL_ZOOM = 19;
 
 function renderContext(): void {
@@ -143,7 +143,10 @@ function renderContext(): void {
       color: '#101820', weight: 2, fillColor: '#ffffff', fillOpacity: 0.9,
     });
     if (labelled) {
-      dot.bindTooltip(t.tag ? t.tag : t.id.replace(/^UVM-/, '#'), {
+      // The genus, not the tag: placing a new tree goes by what stands around
+      // it ("past the maple, before the spruce"), which a number cannot say.
+      const genus = t.sci.trim().split(/\s+/)[0] || '?';
+      dot.bindTooltip(escapeHtml(genus), {
         permanent: true, direction: 'right', offset: [6, 0], className: 'context-label', pane: 'context',
       });
     }
