@@ -8,6 +8,7 @@
 // and is reported, rather than being imported wrong.
 
 import { BOOLEANISH, CONDITIONS, OBSERVATION_COLUMNS, STATUSES, TAXON_COLUMNS } from './vocab.mjs';
+import { campusAt } from './geo.mjs';
 
 const trim = (v) => (typeof v === 'string' ? v.trim() : v ?? '');
 
@@ -252,6 +253,9 @@ export function importSurvey({
   plantRows,
   observationRows = [],
   collectionRows,
+  // campus-areas.geojson. When given, a plant with no area in the file gets
+  // the campus its coordinates fall in (see "collection" below).
+  campusAreas = null,
   config,
   year = new Date().getFullYear(),
   duplicateMeters = 2,
@@ -460,6 +464,13 @@ export function importSurvey({
       }
       collection = match;
     }
+    // No area in the file, which is every row from the survey app: it has no
+    // campus box, because the coordinates already say. Worked out here for a
+    // new plant; for a known one only if it moves (below), so a re-survey's
+    // GPS reading near a boundary cannot flip a tree's campus on its own.
+    const derivedCollection = !collection && campusAreas && lat !== null && lng !== null
+      ? campusAt(lng, lat, campusAreas) ?? ''
+      : '';
 
     // --- measurements ------------------------------------------------------
     const measures = {};
@@ -496,6 +507,8 @@ export function importSurvey({
       lat: lat.toFixed(6),
       lng: lng.toFixed(6),
       geolocation_notes: get(row, 'geolocation_notes'),
+      // Blank on a known tree unless the file names one; see the corrections
+      // loop. A new plant takes the derived campus at insert.
       collection_id: collection,
       planted_year: measures.planted_year,
       dedication_label: dedicationLabel,
@@ -576,7 +589,7 @@ export function importSurvey({
         // tree that appears to have moved.
         issuedThisRun.add(String(Number(tag)));
         byTag.set(String(Number(tag)), id);
-        inserts.push({ plant_id: id, ...record, tag: String(Number(tag)) });
+        inserts.push({ plant_id: id, ...record, collection_id: record.collection_id || derivedCollection, tag: String(Number(tag)) });
         if (surveyedOn) recordObservation(id, observation, error);
         return;
       }
@@ -594,6 +607,11 @@ export function importSurvey({
         if (!isChanged(k, before[k], v, movedMeters, before, record)) continue;
         changes[k] = v;
       }
+      // A tree moved across a campus line takes the campus it now stands in.
+      if ((changes.lat || changes.lng) && !collection && derivedCollection &&
+          derivedCollection !== trim(before.collection_id)) {
+        changes.collection_id = derivedCollection;
+      }
       if (Object.keys(changes).length > 0) updates.push({ plant_id: known, changes });
       else if (!recorded && !surveyedOn) warn(`tag "${tag}" carries nothing new to record`);
       return;
@@ -609,7 +627,7 @@ export function importSurvey({
     let id = formatAccession(prefix, null, seq++);
     while (takenIds.has(id)) id = formatAccession(prefix, null, seq++);
     takenIds.add(id);
-    inserts.push({ plant_id: id, ...record });
+    inserts.push({ plant_id: id, ...record, collection_id: record.collection_id || derivedCollection });
     if (surveyedOn) recordObservation(id, observation, error);
   });
 

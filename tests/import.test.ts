@@ -673,3 +673,47 @@ describe('importSurvey — housekeeping', () => {
     expect(r.issues.some((i: { message: string }) => /no species recorded/.test(i.message))).toBe(true);
   });
 });
+
+describe('importSurvey — campus from coordinates', () => {
+  // Two square campuses: the Green around the default row's point, Redstone
+  // around the plant already on file.
+  const square = (area_id: string, lat: number, lng: number) => ({
+    type: 'Feature',
+    properties: { kind: 'campus', area_id },
+    geometry: { type: 'Polygon', coordinates: [[
+      [lng - 0.002, lat - 0.002], [lng + 0.002, lat - 0.002], [lng + 0.002, lat + 0.002],
+      [lng - 0.002, lat + 0.002], [lng - 0.002, lat - 0.002],
+    ]] },
+  });
+  const campusAreas = { type: 'FeatureCollection', features: [
+    square('university-green', 44.4779, -73.1955), square('redstone-campus', 44.4700, -73.2000),
+  ] };
+
+  it('gives a new plant with no area the campus its coordinates fall in', () => {
+    const r = run([row({ area: '' })], { campusAreas });
+    expect(r.inserts[0].collection_id).toBe('university-green');
+  });
+
+  it('keeps an area the file names', () => {
+    const r = run([row({ area: 'Redstone Campus' })], { campusAreas });
+    expect(r.inserts[0].collection_id).toBe('redstone-campus');
+  });
+
+  it('leaves it blank outside every campus', () => {
+    const r = run([row({ area: '', lat: '44.4900', lng: '-73.1700' })], { campusAreas });
+    expect(r.inserts[0].collection_id).toBe('');
+  });
+
+  it('moves a known tree to the campus it was moved into', () => {
+    const onRedstone = [{ ...plantRows[0]!, collection_id: 'redstone-campus' }];
+    const r = run([row({ tag: 'UVM-2025-0007', area: '', species: 'Sugar maple' })], { campusAreas, plantRows: onRedstone });
+    expect(r.updates[0].changes).toMatchObject({ collection_id: 'university-green' });
+  });
+
+  it('does not change a known tree’s campus when it has not moved', () => {
+    const misfiled = [{ ...plantRows[0]!, collection_id: 'university-green' }];
+    const r = run([row({ tag: 'UVM-2025-0007', area: '', lat: '44.4700', lng: '-73.2000' })],
+      { campusAreas, plantRows: misfiled });
+    expect(r.updates.flatMap((u: { changes: object }) => Object.keys(u.changes))).not.toContain('collection_id');
+  });
+});

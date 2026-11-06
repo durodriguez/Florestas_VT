@@ -175,6 +175,13 @@ The importer does the tedious, error-prone work:
   rather than guessing at it.
 - **Normalises vocabulary** — `EXC`, `Very Good`, `g` all become the right
   `condition` value. Campus areas resolve by display name.
+- **Works out the campus from the coordinates.** The survey app has no
+  campus box, because the position already says: a new plant with no area in
+  the file takes the campus its coordinates fall in (`data/campus-areas.geojson`).
+  A known tree takes a new campus only when it has been moved across a
+  campus line, never from a re-survey's GPS reading alone. An area the file
+  does name wins. A plant outside every campus is left blank, and the build
+  says so.
 - **Reads whatever coordinate format your app emitted** — decimal degrees,
   degrees-minutes-seconds, `POINT(lng lat)` from QGIS, or a `lat, lng` cell.
 - **Records every visit as a new observation.** Each row becomes a line in
