@@ -121,6 +121,14 @@ New accessions are issued from the untagged block (`UVM-4001` and up) whether
 or not the tree wears a tag. There is one shape for a number this project
 issued, and the metal never becomes the identifier again.
 
+One accession has been changed after issue, as a deliberate exception: the
+dawn redwood wearing tag 676, issued `UVM-4729` when it was added on
+4 November 2026, became `UVM-0676` on 6 November, before any label or link
+could depend on the old number. It was renumbered so that the one new tree
+in the original tag range would not read differently from its neighbors. The
+rule above still stands for trees added from now on; the map's panel shows
+each tree's tag beside its accession, so a mismatch explains itself.
+
 **Tag history is deliberately not kept.** A re-tagging overwrites the column.
 Finding out that a tree was renumbered takes somebody noticing in the field,
 and that is not something this project systematically does — so the schema

@@ -178,6 +178,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
 
     <h3 class="detail-section">This specimen</h3>
     <dl class="facts">
+      ${row('Tag', plant.tag ? escapeHtml(plant.tag) : 'No tag')}
       ${row('Location', plant.collection ? escapeHtml(plant.collection.name) : null)}
       ${row('Condition', plant.condition
         ? `<span class="pill pill--${plant.condition}">${escapeHtml(titleCase(plant.condition))}</span>${
