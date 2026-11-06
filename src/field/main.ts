@@ -128,7 +128,7 @@ map.getPane('context')!.style.pointerEvents = 'none';
 const contextLayer = L.layerGroup().addTo(map);
 /** Past this, a view holds too many trees for reference dots to help. */
 const CONTEXT_MIN_ZOOM = 17;
-/** From this zoom each reference dot carries its genus. */
+/** From this zoom each reference dot carries its genus and number. */
 const CONTEXT_LABEL_ZOOM = 19;
 
 function renderContext(): void {
@@ -143,10 +143,12 @@ function renderContext(): void {
       color: '#101820', weight: 2, fillColor: '#ffffff', fillOpacity: 0.9,
     });
     if (labelled) {
-      // The genus, not the tag: placing a new tree goes by what stands around
-      // it ("past the maple, before the spruce"), which a number cannot say.
-      const genus = t.sci.trim().split(/\s+/)[0] || '?';
-      dot.bindTooltip(escapeHtml(genus), {
+      // Both, kept short: the genus says what stands around the new tree
+      // ("past the maple"), and the number tells apart a row of the same tree.
+      // Four letters of the genus, then the tag, or # and the accession.
+      const genus = (t.sci.trim().split(/\s+/)[0] || '?').slice(0, 4);
+      const num = t.tag || t.id.replace(/^UVM-/, '#');
+      dot.bindTooltip(`<i>${escapeHtml(genus)}</i> (${escapeHtml(num)})`, {
         permanent: true, direction: 'right', offset: [6, 0], className: 'context-label', pane: 'context',
       });
     }
