@@ -21,7 +21,7 @@ import {
   type MappedTree, type NearbyTree,
 } from './nearby';
 import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
-import { describeFix, describeWaiting, Receiver, receiverSupported, type ReceiverState } from '../gnss/receiver';
+import { describeFix, describeWaiting, mountLog, Receiver, receiverSupported, type ReceiverState } from '../gnss/receiver';
 import { download, stamp, toCsv, toPhotoZip } from './exporter';
 import { extensionFor, kb, shrinkPhoto } from './photo';
 import { ALL_CARDS, CARDS, visibleCards, type Mode } from './modes';
@@ -1558,6 +1558,8 @@ function onReceiver(state: ReceiverState): void {
   btn.setAttribute('aria-pressed', String(on));
   btn.classList.toggle('is-on', on);
   msg.hidden = false;
+  // From the first connection on, the raw lines can be looked at.
+  $('receiver-log').hidden = false;
   msg.classList.toggle('is-warn', state.status === 'lost' || (state.status === 'waiting' && state.slow));
   switch (state.status) {
     case 'connecting':
@@ -1586,6 +1588,7 @@ function onReceiver(state: ReceiverState): void {
 
 if (receiverSupported()) {
   receiver = new Receiver(onReceiver);
+  mountLog($<HTMLDetailsElement>('receiver-log'), receiver);
   const btn = $<HTMLButtonElement>('receiver-btn');
   btn.hidden = false;
   btn.addEventListener('click', () => {

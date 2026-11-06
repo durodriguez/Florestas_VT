@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { checksumOk, LineSplitter, parseGga, parseGst, qualityLabel } from '../src/gnss/nmea';
-import { describeFix, Receiver, type ReceiverState } from '../src/gnss/receiver';
+import { checksumOk, LineSplitter, parseDtm, parseGga, parseGst, qualityLabel } from '../src/gnss/nmea';
+import { describeFix, LOG_LINES, Receiver, type ReceiverState } from '../src/gnss/receiver';
 
 /** A sentence with its checksum, as a receiver would send it. */
 function nmea(body: string): string {
@@ -41,6 +41,13 @@ describe('NMEA', () => {
     expect(parseGst(nmea('GNGST,145530.00,,,,,,,'))).toBeNull();
   });
 
+  it('reads the datum from DTM', () => {
+    expect(parseDtm(nmea('GPDTM,W84,,0.0,N,0.0,E,0.0,W84'))).toBe('WGS84');
+    expect(parseDtm(nmea('GPDTM,999,CH,0.08,N,0.07,E,-47.7,W84'))).toBe('user-defined datum (CH)');
+    expect(parseDtm(nmea('GPDTM,N83,,0.0,N,0.0,E,0.0,W84'))).toBe('datum N83');
+    expect(parseDtm(GGA)).toBeNull();
+  });
+
   it('names fix types', () => {
     expect(qualityLabel(2)).toBe('SBAS');
     expect(qualityLabel(4)).toBe('RTK fixed');
@@ -68,7 +75,7 @@ describe('Receiver', () => {
     expect(s.fix.accuracy).toBeCloseTo(Math.hypot(0.95, 0.8), 6);
     expect(s.fix.estimated).toBe(false);
     expect(s.fix.label).toBe('SBAS');
-    expect(describeFix(s.fix)).toBe('SBAS · 19 satellites · ±1.2 m');
+    expect(describeFix(s.fix)).toBe('SBAS · 19 satellites · ±1.2 m · datum not reported');
   });
 
   it('estimates from HDOP, and says so, without a GST for that moment', () => {
@@ -79,6 +86,22 @@ describe('Receiver', () => {
     expect(s.fix.estimated).toBe(true);
     expect(s.fix.accuracy).toBeCloseTo(2.8, 6);
     expect(describeFix(s.fix)).toContain('(estimated)');
+  });
+
+  it('names the datum once a DTM has arrived', () => {
+    states.length = 0;
+    r.line(nmea('GNDTM,W84,,0.0,N,0.0,E,0.0,W84'));
+    r.line(GGA);
+    const s = states.at(-1)!;
+    if (s.status !== 'fix') throw new Error('no fix');
+    expect(s.fix.datum).toBe('WGS84');
+    expect(describeFix(s.fix)).toMatch(/· WGS84$/);
+  });
+
+  it('keeps the last lines for "Show what it sends"', () => {
+    for (let i = 0; i < LOG_LINES + 5; i++) r.line(`line ${i}`);
+    expect(r.recent.length).toBe(LOG_LINES);
+    expect(r.recent.at(-1)).toBe(`line ${LOG_LINES + 4}`);
   });
 
   it('ignores garbled lines', () => {

@@ -12,7 +12,7 @@
  * and the apps show no button.
  */
 
-import { HDOP_TO_M, LineSplitter, parseGga, parseGst, qualityLabel, type Gst } from './nmea';
+import { HDOP_TO_M, LineSplitter, parseDtm, parseGga, parseGst, qualityLabel, type Gst } from './nmea';
 
 export interface ReceiverFix {
   lat: number;
@@ -24,6 +24,8 @@ export interface ReceiverFix {
   quality: number;
   label: string;
   satellites: number;
+  /** The datum named by the receiver's DTM sentence, or null if it sends none. */
+  datum: string | null;
   at: number;
 }
 
@@ -57,11 +59,16 @@ export const receiverSupported = (): boolean => !!serial();
 const SPP = '00001101-0000-1000-8000-00805f9b34fb';
 /** No position for this long and the fix is called lost: the apps go back to the device's own. */
 export const STALE_MS = 5000;
+/** How many received lines "Show what it sends" keeps. */
+export const LOG_LINES = 40;
 
 export class Receiver {
   private port: SerialPortLike | null = null;
   private reader: ReadableStreamDefaultReader<string> | null = null;
   private lastGst: Gst | null = null;
+  private datum: string | null = null;
+  /** The last lines received, newest last: what "Show what it sends" lists. */
+  private log: string[] = [];
   private lastFixAt = 0;
   private heard = false;
   private watchdog = 0;
@@ -71,6 +78,11 @@ export class Receiver {
 
   get connected(): boolean {
     return this.port !== null;
+  }
+
+  /** The last LOG_LINES lines received, oldest first. Kept after a disconnect. */
+  get recent(): readonly string[] {
+    return this.log;
   }
 
   /** Must be called from a click: Chrome only shows its port picker then. */
@@ -96,6 +108,8 @@ export class Receiver {
     this.heard = false;
     this.lastFixAt = 0;
     this.lastGst = null;
+    this.datum = null;
+    this.log = [];
     s.addEventListener('disconnect', (e) => {
       if ((e.target as unknown) === port) void this.drop('The receiver disconnected.');
     });
@@ -134,6 +148,13 @@ export class Receiver {
   /** One sentence. Public so the browser test can feed it lines without a port. */
   line(line: string): void {
     if (line.startsWith('$')) this.heard = true;
+    this.log.push(line);
+    if (this.log.length > LOG_LINES) this.log.shift();
+    const dtm = parseDtm(line);
+    if (dtm) {
+      this.datum = dtm;
+      return;
+    }
     const gst = parseGst(line);
     if (gst) {
       this.lastGst = gst;
@@ -152,6 +173,7 @@ export class Receiver {
       quality: gga.quality,
       label: qualityLabel(gga.quality),
       satellites: gga.satellites,
+      datum: this.datum,
       at: Date.now(),
     };
     this.lastFixAt = fix.at;
@@ -174,7 +196,7 @@ export class Receiver {
 /** One line for the status display: "SBAS · 19 satellites · ±1.3 m". */
 export function describeFix(fix: ReceiverFix): string {
   const acc = `±${fix.accuracy < 10 ? fix.accuracy.toFixed(1) : Math.round(fix.accuracy)} m${fix.estimated ? ' (estimated)' : ''}`;
-  return `${fix.label} · ${fix.satellites} satellite${fix.satellites === 1 ? '' : 's'} · ${acc}`;
+  return `${fix.label} · ${fix.satellites} satellite${fix.satellites === 1 ? '' : 's'} · ${acc} · ${fix.datum ?? 'datum not reported'}`;
 }
 
 /** What to say while connected without a position. */
@@ -185,4 +207,26 @@ export function describeWaiting(state: { heard: boolean; slow: boolean }): { tex
   return state.heard
     ? { text: 'Receiver connected · no position from it yet. Is it out in the open?', warn: true }
     : { text: 'Receiver connected, but nothing is arriving from it. Is it on, and sending NMEA?', warn: true };
+}
+
+/**
+ * "Show what it sends": the receiver's raw lines in a <details>, refreshed
+ * every second while it is open. For checking, in the field, whether the
+ * receiver sends positions at all and whether it names its datum.
+ */
+export function mountLog(details: HTMLDetailsElement, receiver: Receiver): void {
+  const pre = details.querySelector('pre')!;
+  const draw = (): void => {
+    const lines = receiver.recent;
+    pre.textContent = lines.length ? lines.join('\n') : 'Nothing received yet.';
+    pre.scrollTop = pre.scrollHeight;
+  };
+  let timer = 0;
+  details.addEventListener('toggle', () => {
+    clearInterval(timer);
+    if (details.open) {
+      draw();
+      timer = window.setInterval(draw, 1000);
+    }
+  });
 }
