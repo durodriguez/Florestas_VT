@@ -224,7 +224,7 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
    * Only what is in view is on the map. Fourteen 8,000-pixel photographs held
    * decoded at once is gigabytes; one or two at a time is fine.
    */
-  /** Best first — see rankImages. The list and the stacking both follow it. */
+  /** Best first — see rankImages. The stacking follows it; the list is by name. */
   const ranked = (): Live[] =>
     rankImages(images.map((i) => ({ id: i.id, aligned: i.aligned !== null, points: i.pairs.length, rms: i.rms, img: i })))
       .map((r) => r.img);
@@ -259,13 +259,18 @@ export function initImagery(map: L.Map, hooks: ImageryHooks) {
   function render(): void {
     $('img-count').textContent = String(images.length);
     $('img-empty').hidden = images.length > 0;
-    $('img-list').innerHTML = ranked().map((img, rank) => {
+    // Listed by name, so an image is easy to find; the number beside each is
+    // still its place in the stacking, which follows the error.
+    const stackPlace = new Map(ranked().map((img, i) => [img, i + 1]));
+    const byName = [...images].sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
+    $('img-list').innerHTML = byName.map((img) => {
+      const rank = stackPlace.get(img)!;
       const kind = img.aligned ? placementOf(img).kind : null;
       const status = img.aligned
         ? `<span class="img-ok">Aligned · ${kind === 'tilt' ? 'tilt-corrected' : 'stretched'} · ±${(img.rms ?? 0).toFixed(1)} m over ${img.pairs.length} points</span>`
         : `<span class="img-todo">Not aligned${img.cam ? ' · placed from its .geprint' : ' · no .geprint'}</span>`;
       return `<li>
-        <span class="img-head"><span class="img-rank" title="Stacking order: 1 is on top where images overlap">${rank + 1}</span>
+        <span class="img-head"><span class="img-rank" title="Stacking order: 1 is on top where images overlap">${rank}</span>
           <button type="button" class="go img-name" data-img-go="${esc(img.id)}">${esc(img.id)}</button></span>
         ${status}
         <span class="img-actions">
