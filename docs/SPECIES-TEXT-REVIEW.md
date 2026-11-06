@@ -451,6 +451,10 @@ the same day (UF/IFAS, University of Minnesota, UMass, Oregon State
 extension). Its fall color, bark and pests are left blank: no source checked
 described them.
 
+Show Off forsythia, added the same day, was written from its US plant patent
+(PP19,321) and nursery listings. They disagree on hardiness (zones 3 to 9);
+5–8 is the range most give.
+
 - [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [x] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
 - [x] **American elderberry** (*Sambucus canadensis*, `sambucus-canadensis`): description + fun fact
@@ -526,6 +530,7 @@ described them.
 - [x] **Serbian spruce** (*Picea omorika*, `picea-omorika`): description + fun fact
 - [x] **Shellbark hickory** (*Carya laciniosa*, `carya-laciniosa`): description + fun fact
 - [x] **Shirazz magnolia** (*Magnolia 'Shirazz'*, `magnolia-shirazz`): description + fun fact
+- [x] **Show Off forsythia** (*Forsythia x intermedia 'Mindor'*, `forsythia-x-intermedia-mindor`): description + fun fact
 - [x] **Siberian iris** (*Iris sibirica*, `iris-sibirica`): description + fun fact
 - [x] **Snow Fountains weeping cherry** (*Prunus 'Snofozam'*, `prunus-snofozam`): description + fun fact
 - [x] **Spicebush** (*Lindera benzoin*, `lindera-benzoin`): description + fun fact
