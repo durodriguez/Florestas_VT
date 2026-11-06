@@ -390,3 +390,12 @@ body[data-mode] [data-only="none"] { display: none !important; }
   background: rgba(16, 24, 32, 0.75); color: #fff; font-size: 11px; font-weight: 600;
 }
 .leaflet-tooltip.context-label::before { display: none; }
+
+/* "Show what it sends": raw receiver lines, small and scrollable. */
+.receiver-log { margin-top: 4px; font-size: 13px; }
+.receiver-log summary { cursor: pointer; color: var(--ink-2); }
+.receiver-log pre {
+  max-height: 180px; overflow: auto; margin: 6px 0 0; padding: 6px 8px;
+  background: var(--ground); border: 1px solid var(--rule); border-radius: 6px;
+  font-size: 11px; line-height: 1.4; white-space: pre;
+}

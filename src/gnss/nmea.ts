@@ -8,6 +8,9 @@
  * "Horizontal precision (RMS)". Without GST the accuracy is estimated from
  * GGA's HDOP, and is marked as an estimate.
  *
+ * A third, DTM, names the datum the positions are in, when the receiver is
+ * set to send it. GGA itself does not say.
+ *
  * No browser here: this file is the testable half of src/gnss/receiver.ts.
  */
 
@@ -72,6 +75,25 @@ export function parseGst(line: string): Gst | null {
   if (!f[6] || !f[7] || !Number.isFinite(latErr) || !Number.isFinite(lngErr)) return null;
   return { horizontal: Math.hypot(latErr, lngErr), time: f[1] ?? '' };
 }
+
+/**
+ * DTM: the datum the receiver's positions are in (its "local" datum), as a
+ * name where the code is a standard one. Null if it is not a DTM sentence.
+ */
+export function parseDtm(line: string): string | null {
+  if (!checksumOk(line)) return null;
+  const f = fields(line);
+  if (!/^..DTM$/.test(f[0] ?? '')) return null;
+  const code = (f[1] ?? '').trim();
+  const sub = (f[2] ?? '').trim();
+  const name = DATUMS[code];
+  if (name) return name;
+  if (code === '999') return sub ? `user-defined datum (${sub})` : 'user-defined datum';
+  return code ? `datum ${code}${sub ? ` (${sub})` : ''}` : null;
+}
+
+/** The datum codes NMEA 0183 fixes for DTM. */
+const DATUMS: Record<string, string> = { W84: 'WGS84', W72: 'WGS72', S85: 'SGS85', P90: 'PE90' };
 
 /** What a fix quality means, in the words Trimble Mobile Manager uses where it can. */
 export function qualityLabel(q: number): string {

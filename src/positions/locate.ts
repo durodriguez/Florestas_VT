@@ -1,6 +1,6 @@
 import L from 'leaflet';
 import { accuracyLabel } from './accuracy';
-import { describeFix, describeWaiting, Receiver, receiverSupported, type ReceiverState } from '../gnss/receiver';
+import { describeFix, describeWaiting, mountLog, Receiver, receiverSupported, type ReceiverState } from '../gnss/receiver';
 
 /**
  * "You are here" for checking positions in the field: a blue dot that follows
@@ -161,6 +161,8 @@ export function initLocate(map: L.Map, btn: HTMLButtonElement, receiverBtn?: HTM
   const onReceiver = (state: ReceiverState): void => {
     switch (state.status) {
       case 'connecting':
+        // From the first connection on, the raw lines can be looked at.
+        if (log) log.hidden = false;
         say('Connecting to the receiver…');
         return;
       case 'waiting':
@@ -194,6 +196,8 @@ export function initLocate(map: L.Map, btn: HTMLButtonElement, receiverBtn?: HTM
     }
   };
   receiver = new Receiver(onReceiver);
+  const log = document.getElementById('receiver-log') as HTMLDetailsElement | null;
+  if (log) mountLog(log, receiver);
   receiverBtn.addEventListener('click', () => {
     if (receiver!.connected) {
       void receiver!.disconnect();

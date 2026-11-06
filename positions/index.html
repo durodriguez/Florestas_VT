@@ -60,6 +60,13 @@
         </ul>
       </details>
 
+      <details class="lidar receiver-log" id="receiver-log" hidden>
+        <summary>Receiver: show what it sends</summary>
+        <p class="hint">The last lines from the connected GNSS receiver, as sent. Positions are in
+          <code>GGA</code> lines, accuracy in <code>GST</code>, and the datum in <code>DTM</code> if it sends one.</p>
+        <pre></pre>
+      </details>
+
       <details class="lidar" id="lidar" hidden>
         <summary>LiDAR crown peaks <span id="lidar-count" class="count">0</span> <span class="key-peak" aria-hidden="true"></span>
           <label class="layer-toggle" title="Show or hide the peaks on the map"><input type="checkbox" id="lidar-show" autocomplete="off"> Show</label></summary>

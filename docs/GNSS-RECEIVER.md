@@ -22,7 +22,7 @@ other browsers the button does not appear.
    receiver**, under the map. Chrome lists the ports it can see; choose the
    receiver's.
 4. A line says what the position is based on, for example
-   *Receiver · SBAS · 19 satellites · ±1.3 m*. In the positions tool the blue
+   *Receiver · SBAS · 19 satellites · ±1.3 m · WGS84*. In the positions tool the blue
    dot and its circle follow the receiver; in the survey app the pin, the
    accuracy and the "GPS ±… m" note saved with a new tree do.
 5. Press the same button again to disconnect. Chrome asks for the port again
@@ -31,6 +31,12 @@ other browsers the button does not appear.
 If the receiver drops (switched off, out of range, battery), the apps go back
 to the laptop's own location and say so: the positions tool marks every
 position after that *Receiver lost* until the receiver is back.
+
+**Show what it sends** (in the survey app, under that line; in the positions
+tool, *Receiver: show what it sends* in the side panel) lists the last 40
+lines the receiver sent, exactly as sent, refreshed every second while open.
+It appears once a receiver has been connected, and keeps the lines after a
+disconnect.
 
 ## What the numbers mean
 
@@ -44,6 +50,11 @@ position after that *Receiver lost* until the receiver is back.
   Manager's home screen shows a larger, more cautious *Horizontal accuracy*
   for the same fix. If the receiver does not send GST, the apps estimate the
   accuracy from its HDOP instead and mark it *(estimated)*.
+- **Datum.** The position sentence (GGA) does not say which datum its
+  coordinates are in; a separate DTM sentence does, when the receiver is set
+  to send it. The apps show the datum it names (*WGS84*, or a code they do not
+  know, or *user-defined datum* for a custom one) and otherwise say *datum not
+  reported*.
 
 ## If it does not work
 
@@ -64,8 +75,11 @@ on 6 November 2026. Two things are open until it is tried in the field:
 - whether the R1 sends GGA and GST to a laptop without being told to;
 - **which datum** it sends them in. Mobile Manager reported NAD83(2011) on the
   phone; the imagery and the map are WGS84, and in Vermont the two differ by
-  roughly a meter. Checking a laptop position against a known point would
-  settle it.
+  roughly a meter. The status line answers this if the R1 sends DTM, and
+  *Show what it sends* shows whether it does. Comparing positions instead is
+  weak evidence: at ±1.3 m, a 1 m shift is within the noise of one reading.
+  (The likely answer, unconfirmed: the R1 works in WGS84 with SBAS, and the
+  NAD83 is Mobile Manager converting on the phone.)
 
 The code is `src/gnss/` (`nmea.ts` reads the sentences, `receiver.ts` holds
 the connection), with tests in `tests/gnss.test.ts`.

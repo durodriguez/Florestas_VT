@@ -236,3 +236,10 @@ button, input { font: inherit; color: inherit; }
   flex: none; padding: .45rem 1.1rem; border: 0; border-radius: 99px; cursor: pointer;
   background: var(--uvm-gold); color: var(--uvm-green); font-weight: 700;
 }
+
+/* "Receiver: show what it sends": raw receiver lines, small and scrollable. */
+.receiver-log pre {
+  max-height: 14rem; overflow: auto; margin: .4rem 0 0; padding: .4rem .5rem;
+  background: var(--bg-sunk); border: 1px solid var(--border); border-radius: 6px;
+  font-size: .7rem; line-height: 1.4; white-space: pre;
+}
