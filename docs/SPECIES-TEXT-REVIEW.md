@@ -484,6 +484,12 @@ Gardening (little or none) are followed over retail claims of heavy berries.
 Nurseries give zone 5 at the cold end; 8 at the warm end is not from a
 source on this plant.
 
+Burning bush, added 6 November 2026, was written from UConn Extension,
+Illinois Extension, Wisconsin DNR and the Greenwich, CT, data sheet. It is
+labeled invasive, without a claim about Vermont's sale rules (see
+DATA-MODEL.md, origin). Spread and the warm end of its range (8) are not from
+a checked source; spread is left blank.
+
 - [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [x] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
 - [x] **American elderberry** (*Sambucus canadensis*, `sambucus-canadensis`): description + fun fact
@@ -500,6 +506,7 @@ source on this plant.
 - [x] **Bottlebrush buckeye** (*Aesculus parviflora*, `aesculus-parviflora`): description + fun fact
 - [x] **Brilliance autumn fern** (*Dryopteris erythrosora 'Brilliance'*, `dryopteris-erythrosora-brilliance`): description + fun fact
 - [x] **Brouwer's Beauty andromeda** (*Pieris 'Brouwer's Beauty'*, `pieris-brouwers-beauty`): description + fun fact
+- [x] **Burning bush** (*Euonymus alatus*, `euonymus-alatus`): description + fun fact
 - [x] **Butternut** (*Juglans cinerea*, `juglans-cinerea`): description + fun fact
 - [x] **Cameo magnolia** (*Magnolia 'Cameo'*, `magnolia-cameo`): description + fun fact
 - [x] **Catawba rhododendron** (*Rhododendron catawbiense*, `rhododendron-catawbiense`): description + fun fact
