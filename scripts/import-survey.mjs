@@ -74,6 +74,7 @@ const result = importSurvey({
   plantRows: plants.rows,
   observationRows: existingObservations.rows,
   collectionRows: parse(join(root, 'data', 'collections.csv')).rows,
+  campusAreas: JSON.parse(readFileSync(join(root, 'data', 'campus-areas.geojson'), 'utf8')),
   config: JSON.parse(readFileSync(join(root, 'data', 'config.json'), 'utf8')),
   year: Number(opt('year', new Date().getFullYear())),
   duplicateMeters: flag('allow-duplicates') ? 0 : Number(opt('duplicate-meters', 2)),
