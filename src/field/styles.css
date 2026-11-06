@@ -379,3 +379,12 @@ body[data-mode] [data-only="none"] { display: none !important; }
   justify-self: start; margin-top: 4px; padding: 6px 12px; border-radius: 8px;
   border: 1.5px solid var(--green-2); background: #fff; color: var(--green); font-weight: 600;
 }
+
+/* ---- reference dots for a new tree ---- */
+/* Mapped trees around the pin when adding one: labels small and plain, so
+   they read as context, not as something to pick. */
+.leaflet-tooltip.context-label {
+  padding: 0 4px; border: 0; border-radius: 3px; box-shadow: none;
+  background: rgba(16, 24, 32, 0.75); color: #fff; font-size: 11px; font-weight: 600;
+}
+.leaflet-tooltip.context-label::before { display: none; }

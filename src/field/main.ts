@@ -116,6 +116,41 @@ const pinIcon = L.divIcon({
 // beside them. Added before the pin so the pin always sits on top of them —
 // the pin is what the surveyor is placing, and it must never be hidden.
 const nearbyLayer = L.layerGroup().addTo(map);
+// For a new tree: the mapped trees around the pin, as reference points only.
+// Placing a new tree is judged against its neighbours ("two metres past the
+// tagged oak"), so they are shown, but they take no tap: a tap on the map
+// drops the pin, and a reference dot that swallowed it would get in the way.
+// In a pane of their own below the overlay pane, so the pin and any offered
+// dot always sit on top of them.
+map.createPane('context');
+map.getPane('context')!.style.zIndex = '350';
+map.getPane('context')!.style.pointerEvents = 'none';
+const contextLayer = L.layerGroup().addTo(map);
+/** Past this, a view holds too many trees for reference dots to help. */
+const CONTEXT_MIN_ZOOM = 17;
+/** From this zoom each reference dot carries its tag, or its accession. */
+const CONTEXT_LABEL_ZOOM = 19;
+
+function renderContext(): void {
+  contextLayer.clearLayers();
+  if (mode !== 'new' || mapped.length === 0 || map.getZoom() < CONTEXT_MIN_ZOOM) return;
+  const view = map.getBounds().pad(0.25);
+  const labelled = map.getZoom() >= CONTEXT_LABEL_ZOOM;
+  for (const t of mapped) {
+    if (!view.contains([t.lat, t.lng])) continue;
+    const dot = L.circleMarker([t.lat, t.lng], {
+      pane: 'context', radius: 6, interactive: false,
+      color: '#101820', weight: 2, fillColor: '#ffffff', fillOpacity: 0.9,
+    });
+    if (labelled) {
+      dot.bindTooltip(t.tag ? t.tag : t.id.replace(/^UVM-/, '#'), {
+        permanent: true, direction: 'right', offset: [6, 0], className: 'context-label', pane: 'context',
+      });
+    }
+    dot.addTo(contextLayer);
+  }
+}
+map.on('moveend', renderContext);
 
 const pin = L.marker([44.4777, -73.1956], { draggable: true, icon: pinIcon, autoPan: true }).addTo(map);
 const accuracyRing = L.circle([44.4777, -73.1956], { radius: 0, color: '#1d6fe0', weight: 1, fillOpacity: 0.1 }).addTo(map);
@@ -411,6 +446,7 @@ async function initTrees(): Promise<void> {
  * about one.
  */
 function renderNearby(): void {
+  renderContext();
   const box = $('nearby');
   const list = $('nearby-list');
   const point = currentLatLng();
