@@ -460,6 +460,12 @@ arboretum pages (Clemson, NC State, Illinois, UConn) and Trees and Shrubs
 Online. Hardiness is given as zone 4 or 5 at the cold end; UConn's 5 is used.
 Fruit and fall color are left blank.
 
+Its Pleniflora and Picta cultivars followed the same day (Clemson, Purdue,
+Oregon State, RHS, Cornell, nursery listings). Checking them corrected the
+species' fun fact: Kerr's 1804 plant was the double form, and the single
+species reached England about 1834 (Bean's Trees and Shrubs). Sources give
+1804 or 1805 for the first and 1834 or 1835 for the second.
+
 - [x] **Accolade elm** (*Ulmus 'Morton'*, `ulmus-morton`): description + fun fact
 - [x] **Adagio maiden grass** (*Miscanthus sinensis 'Adagio'*, `miscanthus-sinensis-adagio`): description + fun fact
 - [x] **American elderberry** (*Sambucus canadensis*, `sambucus-canadensis`): description + fun fact
@@ -527,8 +533,10 @@ Fruit and fall color are left blank.
 - [x] **Patriot highbush blueberry** (*Vaccinium corymbosum 'Patriot'*, `vaccinium-corymbosum-patriot`): description + fun fact
 - [x] **Pawpaw** (*Asimina triloba*, `asimina-triloba`): description + fun fact
 - [x] **Pecan** (*Carya illinoinensis*, `carya-illinoinensis`): description + fun fact
+- [x] **Picta Japanese kerria** (*Kerria japonica 'Picta'*, `kerria-japonica-picta`): description + fun fact
 - [x] **Pink Flair Sargent cherry** (*Prunus sargentii 'JFS-KW58'*, `prunus-sargentii-jfs-kw58`): description + fun fact
 - [x] **PJM rhododendron** (*Rhododendron 'P.J.M.'*, `rhododendron-pjm`): description + fun fact
+- [x] **Pleniflora Japanese kerria** (*Kerria japonica 'Pleniflora'*, `kerria-japonica-pleniflora`): description + fun fact
 - [x] **Rhododendron** (*Rhododendron sp.*, `rhododendron-sp`): description + fun fact
 - [x] **Rosy Lights azalea** (*Rhododendron 'Rosy Lights'*, `rhododendron-rosy-lights`): description + fun fact
 - [x] **Royal Frost birch** (*Betula 'Penci 2'*, `betula-penci-2`): description + fun fact
