@@ -122,7 +122,7 @@ against the above, or ask info@itreetools.org.
 
 ## 5. FOR 1210 Dendrology, 2022, via OpenStreetMap
 
-**In `data/observations.csv`, since 6 November 2026:** 126 trunk diameters,
+**In `data/observations.csv`, since 6 November 2026:** 120 trunk diameters,
 as 2022 visits by surveyor `FOR 1210 Dendrology, 2022`.
 
 Students in RSENR's FOR 1210: Dendrology mapped about 215 campus trees in
@@ -137,7 +137,9 @@ mapped twice, or a clump of stems), the diameter is the average of their
 readings. The eighth, UVM-3822, is left out: one of its two readings was
 entered as a circumference, and which it is could not be told. Left out entirely: 7 whose 2022 diameter is
 implausible against the 2014 inventory's (most smaller), and 2 recorded
-without a unit. Species and positions from OSM are
+without a unit. Six more, smaller in 2022 than in 2014 by up to 2.6 in, are
+held back until they are measured in the field: UVM-0095, 0115, 0116, 0354,
+1313 and 1838. Species and positions from OSM are
 not used. Each row's `notes` names its OSM node and the diameter exactly as
 recorded (in cm or in, converted to inches here).
 
