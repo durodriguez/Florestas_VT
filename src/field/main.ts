@@ -24,6 +24,7 @@ import { Gps, accuracyLabel, ACCURACY_WARN_M, type GpsState } from './gps';
 import { CONDITION_MEANINGS, CONDITION_RULE, CONDITIONS, conditionLabel, type Condition } from './conditions';
 import { describeFix, describeWaiting, mountLog, Receiver, receiverSupported, type ReceiverState } from '../gnss/receiver';
 import { download, stamp, toCsv, toPhotoZip } from './exporter';
+import { photoTakenOn } from './exif';
 import { extensionFor, kb, shrinkPhoto } from './photo';
 import { ALL_CARDS, CARDS, visibleCards, type Mode } from './modes';
 
@@ -1085,6 +1086,11 @@ function clearPhoto(): void {
   $<HTMLInputElement>('photo').value = '';
   $<HTMLInputElement>('photo-library').value = '';
   $('photo-older').hidden = true;
+  // A date that came with the photo leaves with it.
+  if (dateFromPhoto) {
+    dateFromPhoto = false;
+    refreshDate();
+  }
   const img = $<HTMLImageElement>('photo-img');
   if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
   img.removeAttribute('src');
@@ -1285,8 +1291,10 @@ renderMode();
 // 23rd. It is refreshed whenever the app comes back to the screen and after
 // every save — unless the surveyor has typed a date, which is then theirs.
 let dateTouched = false;
+/** The date was set from the photo's own: it holds for this record, until the photo goes. */
+let dateFromPhoto = false;
 function refreshDate(): void {
-  if (!dateTouched) $<HTMLInputElement>('date').value = stamp();
+  if (!dateTouched && !dateFromPhoto) $<HTMLInputElement>('date').value = stamp();
 }
 refreshDate();
 $('date').addEventListener('input', () => { dateTouched = true; });
@@ -1519,16 +1527,33 @@ $('planted').addEventListener('input', () => {
 async function takePhoto(e: Event): Promise<void> {
   const file = (e.target as HTMLInputElement).files?.[0];
   if (!file) return;
-  // The map dates a photo by the survey it came with. A library photo from an
-  // earlier day would be shown under today's date, so say so while it can be
-  // swapped. lastModified is the capture time on most phones, but not all —
-  // hence a note, not a refusal.
+  // The map dates a photo by the survey it came with, so a photo from an
+  // earlier day should carry its own date. The camera writes it into the file
+  // (EXIF); where it survived the trip to the browser, it becomes the survey
+  // date, unless the surveyor has typed one, which stays theirs.
   const older = $('photo-older');
-  const takenOn = stamp(new Date(file.lastModified));
-  const surveyedOn = $<HTMLInputElement>('date').value || stamp();
-  older.hidden = !file.lastModified || takenOn >= surveyedOn;
-  older.textContent = `This photo looks like it was taken on ${takenOn}. It will be shown as photographed ` +
-    `on the survey date, ${surveyedOn} — set the date in Notes if that is wrong.`;
+  const dateBox = $<HTMLInputElement>('date');
+  let shot: string | null = null;
+  try {
+    shot = photoTakenOn(await file.slice(0, 256 * 1024).arrayBuffer());
+  } catch { /* unreadable: treated as no date */ }
+  if (shot && !dateTouched) {
+    dateBox.value = shot;
+    dateFromPhoto = shot !== stamp();
+    older.hidden = !dateFromPhoto;
+    older.textContent = `Date set from the photo: ${shot}. Change it in Notes if that is wrong.`;
+  } else if (shot) {
+    older.hidden = shot === dateBox.value;
+    older.textContent = `This photo was taken on ${shot}; the survey date in Notes is ${dateBox.value}.`;
+  } else {
+    // No date in the file. lastModified is the capture time on most phones,
+    // but not all, hence a note and not a change.
+    const takenOn = stamp(new Date(file.lastModified));
+    const surveyedOn = dateBox.value || stamp();
+    older.hidden = !file.lastModified || takenOn >= surveyedOn;
+    older.textContent = `This photo looks like it was taken on ${takenOn}. It will be shown as photographed ` +
+      `on the survey date, ${surveyedOn} — set the date in Notes if that is wrong.`;
+  }
   $('photo-size').textContent = 'Processing…';
   $('photo-preview').hidden = false;
 
