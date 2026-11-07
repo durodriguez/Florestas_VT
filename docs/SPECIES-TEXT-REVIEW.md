@@ -239,6 +239,14 @@ true from seed, which is why rows vary in width) and eastern cottonwood
 in Poland in 1992, from Asia), redcedar pencils (supplies ran short by the
 1910s), London's elm water pipes and the Broad Arrow pines were confirmed.
 
+An eighth ten on 7 November 2026, flowering dogwood to Green Giant
+arborvitae. One fun fact eased: flowering dogwood (shuttles of dogwood are
+well documented; "by the million" was not). Frost's own birches were gray
+birch, as he said; Green Giant's Danish origin (1937 or 1938 by source) and
+its single plant at the US National Arboretum in 1967, Freeman's 1933 cross,
+J. Frank Schmidt's Red Sunset maple and emerald ash borer in Vermont (2018)
+were confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -302,16 +310,16 @@ in Poland in 1992, from Asia), redcedar pencils (supplies ran short by the
 - [x] **European bird cherry** (*Prunus padus*, `prunus-padus`): fun fact
 - [x] **European linden** (*Tilia x europaea*, `tilia-x-europaea`): fun fact
 - [x] **Fastigiate English oak** (*Quercus robur 'Fastigiata'*, `quercus-robur-fastigiata`): description + fun fact
-- [ ] **Flowering dogwood** (*Cornus florida*, `cornus-florida`): fun fact
-- [ ] **Four-winged silverbell** (*Halesia tetraptera*, `halesia-tetraptera`): fun fact
-- [ ] **Freeman's maple** (*Acer x freemanii*, `acer-x-freemanii`): description
-- [ ] **Ginkgo** (*Ginkgo biloba*, `ginkgo-biloba`): description
-- [ ] **Golden Raindrops crabapple** (*Malus 'Schmidtcutleaf'*, `malus-schmidtcutleaf`): fun fact
-- [ ] **Golden weeping willow** (*Salix alba 'Tristis'*, `salix-alba-tristis`): fun fact
-- [ ] **Grand fir** (*Abies grandis*, `abies-grandis`): fun fact
-- [ ] **Gray birch** (*Betula populifolia*, `betula-populifolia`): fun fact
-- [ ] **Green ash** (*Fraxinus pennsylvanica*, `fraxinus-pennsylvanica`): description
-- [ ] **Green Giant arborvitae** (*Thuja 'Green Giant'*, `thuja-green-giant`): fun fact
+- [x] **Flowering dogwood** (*Cornus florida*, `cornus-florida`): fun fact
+- [x] **Four-winged silverbell** (*Halesia tetraptera*, `halesia-tetraptera`): fun fact
+- [x] **Freeman's maple** (*Acer x freemanii*, `acer-x-freemanii`): description
+- [x] **Ginkgo** (*Ginkgo biloba*, `ginkgo-biloba`): description
+- [x] **Golden Raindrops crabapple** (*Malus 'Schmidtcutleaf'*, `malus-schmidtcutleaf`): fun fact
+- [x] **Golden weeping willow** (*Salix alba 'Tristis'*, `salix-alba-tristis`): fun fact
+- [x] **Grand fir** (*Abies grandis*, `abies-grandis`): fun fact
+- [x] **Gray birch** (*Betula populifolia*, `betula-populifolia`): fun fact
+- [x] **Green ash** (*Fraxinus pennsylvanica*, `fraxinus-pennsylvanica`): description
+- [x] **Green Giant arborvitae** (*Thuja 'Green Giant'*, `thuja-green-giant`): fun fact
 - [ ] **Green hawthorn** (*Crataegus viridis*, `crataegus-viridis`): fun fact
 - [ ] **Greenspire linden** (*Tilia cordata 'Greenspire'*, `tilia-cordata-greenspire`): fun fact
 - [ ] **Hackberry** (*Celtis occidentalis*, `celtis-occidentalis`): fun fact
