@@ -293,6 +293,13 @@ is smooth between a few large points rather than wholly smooth).
 Prairifire's 1982 University of Illinois release for scab resistance,
 Red Sunset's 'Franksred' (1966), Pando and kinnikinnick were confirmed.
 
+A fourteenth ten on 7 November 2026, river birch to Shantung maple. One fun
+fact eased: Scotch pine was for decades the most widely grown Christmas
+tree in America; that it was the most popular could not be sourced.
+Sargent cherry (Bigelow's seed in 1890, Sargent's in 1892), Soulange-Bodin
+as a retired cavalry officer of Napoleon's, scarlet oak as Washington,
+DC's tree and Shantung maple's nervonic-acid oil were confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -416,16 +423,16 @@ Red Sunset's 'Franksred' (1966), Pando and kinnikinnick were confirmed.
 - [x] **Red mulberry** (*Morus rubra*, `morus-rubra`): fun fact
 - [x] **Red Sunset red maple** (*Acer rubrum 'Red Sunset'*, `acer-rubrum-red-sunset`): fun fact
 - [x] **Redosier dogwood** (*Cornus sericea*, `cornus-sericea`): fun fact
-- [ ] **River birch** (*Betula nigra*, `betula-nigra`): fun fact
-- [ ] **Ruby Lace honeylocust** (*Gleditsia triacanthos f. inermis 'Ruby Lace'*, `gleditsia-triacanthos-inermis-ruby-lace`): fun fact
-- [ ] **Russian olive** (*Elaeagnus angustifolia*, `elaeagnus-angustifolia`): description
-- [ ] **Sargent cherry** (*Prunus sargentii*, `prunus-sargentii`): fun fact
-- [ ] **Saucer magnolia** (*Magnolia x soulangiana*, `magnolia-x-soulangiana`): fun fact
-- [ ] **Scarlet oak** (*Quercus coccinea*, `quercus-coccinea`): fun fact
-- [ ] **Scotch pine** (*Pinus sylvestris*, `pinus-sylvestris`): fun fact
-- [ ] **Serviceberry** (*Amelanchier sp.*, `amelanchier-sp`): fun fact
-- [ ] **Shadblow serviceberry** (*Amelanchier canadensis*, `amelanchier-canadensis`): fun fact
-- [ ] **Shantung maple** (*Acer truncatum*, `acer-truncatum`): fun fact
+- [x] **River birch** (*Betula nigra*, `betula-nigra`): fun fact
+- [x] **Ruby Lace honeylocust** (*Gleditsia triacanthos f. inermis 'Ruby Lace'*, `gleditsia-triacanthos-inermis-ruby-lace`): fun fact
+- [x] **Russian olive** (*Elaeagnus angustifolia*, `elaeagnus-angustifolia`): description
+- [x] **Sargent cherry** (*Prunus sargentii*, `prunus-sargentii`): fun fact
+- [x] **Saucer magnolia** (*Magnolia x soulangiana*, `magnolia-x-soulangiana`): fun fact
+- [x] **Scarlet oak** (*Quercus coccinea*, `quercus-coccinea`): fun fact
+- [x] **Scotch pine** (*Pinus sylvestris*, `pinus-sylvestris`): fun fact
+- [x] **Serviceberry** (*Amelanchier sp.*, `amelanchier-sp`): fun fact
+- [x] **Shadblow serviceberry** (*Amelanchier canadensis*, `amelanchier-canadensis`): fun fact
+- [x] **Shantung maple** (*Acer truncatum*, `acer-truncatum`): fun fact
 - [ ] **Shingle oak** (*Quercus imbricaria*, `quercus-imbricaria`): fun fact
 - [ ] **Siberian elm** (*Ulmus pumila*, `ulmus-pumila`): fun fact
 - [ ] **Siberian peashrub** (*Caragana arborescens*, `caragana-arborescens`): fun fact
