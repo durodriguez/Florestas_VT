@@ -230,6 +230,15 @@ willow (the claim that all trees come from one original was unsourced).
 Donald Wyman's 35 years at the Arnold Arboretum (1935 to 1970) were
 confirmed.
 
+A seventh ten on 7 November 2026, eastern cottonwood to fastigiate English
+oak. Two fun facts fixed: fastigiate English oak (it was said that every
+narrow one is a graft; arboretum and extension sources say it comes largely
+true from seed, which is why rows vary in width) and eastern cottonwood
+(Wyoming's state tree is the plains form, *Populus deltoides* subsp.
+*monilifera*). European ash's "matt" became "matte". Ash dieback (first seen
+in Poland in 1992, from Asia), redcedar pencils (supplies ran short by the
+1910s), London's elm water pipes and the Broad Arrow pines were confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -283,16 +292,16 @@ confirmed.
 - [x] **Dogwood** (*Cornus sp.*, `cornus-sp`): description
 - [x] **Donald Wyman crabapple** (*Malus 'Donald Wyman'*, `malus-donald-wyman`): fun fact
 - [x] **Dragon's claw willow** (*Salix matsudana 'Tortuosa'*, `salix-matsudana-tortuosa`): description + fun fact
-- [ ] **Eastern cottonwood** (*Populus deltoides*, `populus-deltoides`): fun fact
-- [ ] **Eastern hemlock** (*Tsuga canadensis*, `tsuga-canadensis`): description
-- [ ] **Eastern hophornbeam** (*Ostrya virginiana*, `ostrya-virginiana`): fun fact
-- [ ] **Eastern redcedar** (*Juniperus virginiana*, `juniperus-virginiana`): fun fact
-- [ ] **Eastern white pine** (*Pinus strobus*, `pinus-strobus`): description
-- [ ] **Elm** (*Ulmus sp.*, `ulmus-sp`): description + fun fact
-- [ ] **European ash** (*Fraxinus excelsior*, `fraxinus-excelsior`): fun fact
-- [ ] **European bird cherry** (*Prunus padus*, `prunus-padus`): fun fact
-- [ ] **European linden** (*Tilia x europaea*, `tilia-x-europaea`): fun fact
-- [ ] **Fastigiate English oak** (*Quercus robur 'Fastigiata'*, `quercus-robur-fastigiata`): description + fun fact
+- [x] **Eastern cottonwood** (*Populus deltoides*, `populus-deltoides`): fun fact
+- [x] **Eastern hemlock** (*Tsuga canadensis*, `tsuga-canadensis`): description
+- [x] **Eastern hophornbeam** (*Ostrya virginiana*, `ostrya-virginiana`): fun fact
+- [x] **Eastern redcedar** (*Juniperus virginiana*, `juniperus-virginiana`): fun fact
+- [x] **Eastern white pine** (*Pinus strobus*, `pinus-strobus`): description
+- [x] **Elm** (*Ulmus sp.*, `ulmus-sp`): description + fun fact
+- [x] **European ash** (*Fraxinus excelsior*, `fraxinus-excelsior`): fun fact
+- [x] **European bird cherry** (*Prunus padus*, `prunus-padus`): fun fact
+- [x] **European linden** (*Tilia x europaea*, `tilia-x-europaea`): fun fact
+- [x] **Fastigiate English oak** (*Quercus robur 'Fastigiata'*, `quercus-robur-fastigiata`): description + fun fact
 - [ ] **Flowering dogwood** (*Cornus florida*, `cornus-florida`): fun fact
 - [ ] **Four-winged silverbell** (*Halesia tetraptera*, `halesia-tetraptera`): fun fact
 - [ ] **Freeman's maple** (*Acer x freemanii*, `acer-x-freemanii`): description
