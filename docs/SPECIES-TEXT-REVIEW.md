@@ -308,6 +308,14 @@ as Mississippi's tree and Louisiana's flower, the Späth alder (selected
 1894, sold from 1908), salicylic acid from meadowsweet and the "spir" in
 aspirin, and Maine spruce gum (1848).
 
+A sixteenth ten on 7 November 2026, sugar maple to Turkish filbert. One fun
+fact fixed: sweet birch (birch beer was traditionally brewed from it in the
+Northeast, but an English birch-sap ale is recorded in 1676, so it was not
+"first brewed from this tree"). Tatarian maple's name (Linnaeus's "Habitat
+in Tataria"), box elder as the one native maple with divided leaves, swamp
+white oak's long-stalked acorns and sweet pepperbush's peppercorn capsules
+were confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -451,16 +459,16 @@ aspirin, and Maine spruce gum (1848).
 - [x] **Spaeth alder** (*Alnus x spaethii*, `alnus-x-spaethii`): fun fact
 - [x] **Spirea** (*Spiraea sp.*, `spiraea-sp`): description + fun fact
 - [x] **Spruce** (*Picea sp.*, `picea-sp`): description + fun fact
-- [ ] **Sugar maple** (*Acer saccharum*, `acer-saccharum`): description
-- [ ] **Summersweet** (*Clethra alnifolia*, `clethra-alnifolia`): fun fact
-- [ ] **Swamp white oak** (*Quercus bicolor*, `quercus-bicolor`): fun fact
-- [ ] **Sweet birch** (*Betula lenta*, `betula-lenta`): fun fact
-- [ ] **Sweetgum** (*Liquidambar styraciflua*, `liquidambar-styraciflua`): fun fact
-- [ ] **Tamarack** (*Larix laricina*, `larix-laricina`): description + fun fact
-- [ ] **Tatarian maple** (*Acer tataricum*, `acer-tataricum`): fun fact
-- [ ] **Thornless honeylocust** (*Gleditsia triacanthos f. inermis*, `gleditsia-triacanthos-inermis`): description
-- [ ] **Three-flower maple** (*Acer triflorum*, `acer-triflorum`): fun fact
-- [ ] **Turkish filbert** (*Corylus colurna*, `corylus-colurna`): description + fun fact
+- [x] **Sugar maple** (*Acer saccharum*, `acer-saccharum`): description
+- [x] **Summersweet** (*Clethra alnifolia*, `clethra-alnifolia`): fun fact
+- [x] **Swamp white oak** (*Quercus bicolor*, `quercus-bicolor`): fun fact
+- [x] **Sweet birch** (*Betula lenta*, `betula-lenta`): fun fact
+- [x] **Sweetgum** (*Liquidambar styraciflua*, `liquidambar-styraciflua`): fun fact
+- [x] **Tamarack** (*Larix laricina*, `larix-laricina`): description + fun fact
+- [x] **Tatarian maple** (*Acer tataricum*, `acer-tataricum`): fun fact
+- [x] **Thornless honeylocust** (*Gleditsia triacanthos f. inermis*, `gleditsia-triacanthos-inermis`): description
+- [x] **Three-flower maple** (*Acer triflorum*, `acer-triflorum`): fun fact
+- [x] **Turkish filbert** (*Corylus colurna*, `corylus-colurna`): description + fun fact
 - [ ] **Variegated tuliptree** (*Liriodendron tulipifera 'Aureomarginatum'*, `liriodendron-tulipifera-aureomarginatum`): fun fact
 - [ ] **Ware oak** (*Quercus x warei*, `quercus-x-warei`): fun fact
 - [ ] **Washington hawthorn** (*Crataegus phaenopyrum*, `crataegus-phaenopyrum`): description + fun fact
