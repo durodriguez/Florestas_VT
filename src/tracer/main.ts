@@ -350,7 +350,7 @@ function renderPanel(rest: MultiPoly): void {
   els.cancel.disabled = draft.length === 0 && !picked;
   // Deliberately NOT disabled while a shape is part-drawn. The remainder is
   // typically a hairline seam that cannot be clicked accurately, so the moment
-  // someone starts trying, this is the button they need — greying it out then
+  // someone starts trying, this is the button they need — graying it out then
   // hides the answer behind the failing attempt.
   els.rest.disabled = mode !== 'split' || !active || !restLeft;
   els.undoStep.disabled = history.length === 0;

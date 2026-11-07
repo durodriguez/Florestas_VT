@@ -206,6 +206,66 @@ mid-1800s; sources give 1850 to 1864, not the 1860s). Black walnut thefts,
 chokecherry as North Dakota's state fruit (2007) and the bur oak's first-year
 taproot (about 4.5 ft, per Silvics) were confirmed.
 
+A fifth ten on 7 November 2026, columnar Norway maple to common witchhazel.
+Six fixed: Norway maple (John Bartram received its seed from London in 1756;
+he did not bring it over himself), common lilac (arrived with colonists in
+the 1700s, not with the first ones), common smoketree (young fustic dyed
+wool and silk; leather is unsourced), common witchhazel (seeds thrown up to
+about twenty feet, sources ranging 17 to 40, and "among the last flowers of
+the year", not the last), common buckthorn (planted as a hedge through the
+1800s; "a century before anyone noticed" overstated it) and, for the same
+entry, "Class B noxious weed" dropped from the description, since the map
+makes no claims about Vermont's noxious-weed rule (see DATA-MODEL, origin).
+Baldcypress sinker logs, honeylocust's lost megafauna, larch in Venice's
+piles (with alder and oak) and Sargent cherry's range were confirmed.
+
+A sixth ten on 7 November 2026, contorted hazelnut to dragon's claw willow.
+Five fun facts fixed: contorted hazel (found in 1863 at Frocester, and
+propagated by grafting rather than cuttings), crabapple (the domestic apple
+descends mainly from central Asia's wild apple, with a large share from
+Europe's crab, not wholly from the former), dawn redwood (the Axel Heiberg
+forest is about 45 million years old, not 50), dogwood (the form "dagwood"
+is not attested; the skewer explanation is kept, hedged) and dragon's claw
+willow (the claim that all trees come from one original was unsourced).
+Donald Wyman's 35 years at the Arnold Arboretum (1935 to 1970) were
+confirmed.
+
+A seventh ten on 7 November 2026, eastern cottonwood to fastigiate English
+oak. Two fun facts fixed: fastigiate English oak (it was said that every
+narrow one is a graft; arboretum and extension sources say it comes largely
+true from seed, which is why rows vary in width) and eastern cottonwood
+(Wyoming's state tree is the plains form, *Populus deltoides* subsp.
+*monilifera*). European ash's "matt" became "matte". Ash dieback (first seen
+in Poland in 1992, from Asia), redcedar pencils (supplies ran short by the
+1910s), London's elm water pipes and the Broad Arrow pines were confirmed.
+
+An eighth ten on 7 November 2026, flowering dogwood to Green Giant
+arborvitae. One fun fact eased: flowering dogwood (shuttles of dogwood are
+well documented; "by the million" was not). Frost's own birches were gray
+birch, as he said; Green Giant's Danish origin (1937 or 1938 by source) and
+its single plant at the US National Arboretum in 1967, Freeman's 1933 cross,
+J. Frank Schmidt's Red Sunset maple and emerald ash borer in Vermont (2018)
+were confirmed.
+
+A ninth ten on 7 November 2026, green hawthorn to Japanese stewartia. Three
+fun facts and one description adjusted: Heritage river birch (found by Earl
+Cully in a St. Louis yard, around 1968 to 1970 by source; first propagated
+by grafted cuttings, so "grown from cuttings ever since" was dropped),
+hackberry (Celtis seeds at Zhoukoudian may have been left by animals, so
+the claim is hedged), hinoki (Noh stages are almost entirely hinoki, not
+wholly) and hardy rubber tree (the threads are latex; dogwood leaves also
+hold together when torn, by a different means, so "the only hardy tree
+that does this" became "the only hardy tree with rubber in its leaves").
+Japanese stewartia's "grey" became "gray".
+
+A tenth ten on 7 November 2026, Japanese tree lilac to Lombardy poplar. Two
+fun facts eased: Japanese tree lilac (sharing a family with privet does not
+explain the scent, so "which is why" was dropped) and katsura (its wood is
+a recognized but cheaper go-board wood; kaya is the traditional prize).
+Katsura's maltol, the Endicott pear (planted about 1630, still fruiting),
+Unter den Linden's first lindens (1647) and kousa dogwood's resistance to
+anthracnose were confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -239,66 +299,66 @@ taproot (about 4.5 ft, per Silvics) were confirmed.
 - [x] **Colorado blue spruce** (*Picea pungens*, `picea-pungens`): fun fact
 - [x] **Columnar American basswood** (*Tilia americana 'Fastigiata'*, `tilia-americana-fastigiata`): fun fact
 - [x] **Columnar European beech** (*Fagus sylvatica 'Fastigiata'*, `fagus-sylvatica-fastigiata`): fun fact
-- [ ] **Columnar Norway maple** (*Acer platanoides 'Columnare'*, `acer-platanoides-columnare`): fun fact
-- [ ] **Columnar red maple** (*Acer rubrum 'Columnare'*, `acer-rubrum-columnare`): fun fact
-- [ ] **Columnar Sargent cherry** (*Prunus sargentii 'Columnaris'*, `prunus-sargentii-columnaris`): fun fact
-- [ ] **Common baldcypress** (*Taxodium distichum*, `taxodium-distichum`): fun fact
-- [ ] **Common buckthorn** (*Rhamnus cathartica*, `rhamnus-cathartica`): description
-- [ ] **Common honeylocust** (*Gleditsia triacanthos*, `gleditsia-triacanthos`): fun fact
-- [ ] **Common larch** (*Larix decidua*, `larix-decidua`): fun fact
-- [ ] **Common lilac** (*Syringa vulgaris*, `syringa-vulgaris`): description
-- [ ] **Common smoketree** (*Cotinus coggygria*, `cotinus-coggygria`): fun fact
-- [ ] **Common witchhazel** (*Hamamelis virginiana*, `hamamelis-virginiana`): fun fact
-- [ ] **Contorted hazelnut** (*Corylus avellana*, `corylus-avellana`): description
-- [ ] **Copper Curls Peking lilac** (*Syringa pekinensis 'Copper Curls'*, `syringa-pekinensis-copper-curls`): fun fact
-- [ ] **Crabapple** (*Malus sp.*, `malus-sp`): description
-- [ ] **Crimson Cloud hawthorn** (*Crataegus laevigata 'Crimson Cloud'*, `crataegus-laevigata-crimson-cloud`): fun fact
-- [ ] **Cutleaf silver maple** (*Acer saccharinum 'Skinneri'*, `acer-saccharinum-skinneri`): fun fact
-- [ ] **Dawn redwood** (*Metasequoia glyptostroboides*, `metasequoia-glyptostroboides`): fun fact
-- [ ] **Devil's walkingstick** (*Aralia spinosa*, `aralia-spinosa`): fun fact
-- [ ] **Dogwood** (*Cornus sp.*, `cornus-sp`): description
-- [ ] **Donald Wyman crabapple** (*Malus 'Donald Wyman'*, `malus-donald-wyman`): fun fact
-- [ ] **Dragon's claw willow** (*Salix matsudana 'Tortuosa'*, `salix-matsudana-tortuosa`): description + fun fact
-- [ ] **Eastern cottonwood** (*Populus deltoides*, `populus-deltoides`): fun fact
-- [ ] **Eastern hemlock** (*Tsuga canadensis*, `tsuga-canadensis`): description
-- [ ] **Eastern hophornbeam** (*Ostrya virginiana*, `ostrya-virginiana`): fun fact
-- [ ] **Eastern redcedar** (*Juniperus virginiana*, `juniperus-virginiana`): fun fact
-- [ ] **Eastern white pine** (*Pinus strobus*, `pinus-strobus`): description
-- [ ] **Elm** (*Ulmus sp.*, `ulmus-sp`): description + fun fact
-- [ ] **European ash** (*Fraxinus excelsior*, `fraxinus-excelsior`): fun fact
-- [ ] **European bird cherry** (*Prunus padus*, `prunus-padus`): fun fact
-- [ ] **European linden** (*Tilia x europaea*, `tilia-x-europaea`): fun fact
-- [ ] **Fastigiate English oak** (*Quercus robur 'Fastigiata'*, `quercus-robur-fastigiata`): description + fun fact
-- [ ] **Flowering dogwood** (*Cornus florida*, `cornus-florida`): fun fact
-- [ ] **Four-winged silverbell** (*Halesia tetraptera*, `halesia-tetraptera`): fun fact
-- [ ] **Freeman's maple** (*Acer x freemanii*, `acer-x-freemanii`): description
-- [ ] **Ginkgo** (*Ginkgo biloba*, `ginkgo-biloba`): description
-- [ ] **Golden Raindrops crabapple** (*Malus 'Schmidtcutleaf'*, `malus-schmidtcutleaf`): fun fact
-- [ ] **Golden weeping willow** (*Salix alba 'Tristis'*, `salix-alba-tristis`): fun fact
-- [ ] **Grand fir** (*Abies grandis*, `abies-grandis`): fun fact
-- [ ] **Gray birch** (*Betula populifolia*, `betula-populifolia`): fun fact
-- [ ] **Green ash** (*Fraxinus pennsylvanica*, `fraxinus-pennsylvanica`): description
-- [ ] **Green Giant arborvitae** (*Thuja 'Green Giant'*, `thuja-green-giant`): fun fact
-- [ ] **Green hawthorn** (*Crataegus viridis*, `crataegus-viridis`): fun fact
-- [ ] **Greenspire linden** (*Tilia cordata 'Greenspire'*, `tilia-cordata-greenspire`): fun fact
-- [ ] **Hackberry** (*Celtis occidentalis*, `celtis-occidentalis`): fun fact
-- [ ] **Hardy rubber tree** (*Eucommia ulmoides*, `eucommia-ulmoides`): description
-- [ ] **Hawthorn** (*Crataegus sp.*, `crataegus-sp`): description + fun fact
-- [ ] **Hedge maple** (*Acer campestre*, `acer-campestre`): fun fact
-- [ ] **Heritage river birch** (*Betula nigra 'Heritage'*, `betula-nigra-heritage`): fun fact
-- [ ] **Hinoki falsecypress** (*Chamaecyparis obtusa*, `chamaecyparis-obtusa`): fun fact
-- [ ] **Honeycrisp apple** (*Malus domestica 'Honeycrisp'*, `malus-domestica-honeycrisp`): fun fact
-- [ ] **Japanese stewartia** (*Stewartia pseudocamellia*, `stewartia-pseudocamellia`): description
-- [ ] **Japanese tree lilac** (*Syringa reticulata*, `syringa-reticulata`): fun fact
-- [ ] **Juniper** (*Juniperus sp.*, `juniperus-sp`): description
-- [ ] **Katsuratree** (*Cercidiphyllum japonicum*, `cercidiphyllum-japonicum`): fun fact
-- [ ] **Kentucky coffeetree** (*Gymnocladus dioicus*, `gymnocladus-dioicus`): description
-- [ ] **Korean maple** (*Acer pseudosieboldianum*, `acer-pseudosieboldianum`): fun fact
-- [ ] **Korean sun pear** (*Pyrus fauriei*, `pyrus-fauriei`): description + fun fact
-- [ ] **Kousa dogwood** (*Cornus kousa*, `cornus-kousa`): fun fact
-- [ ] **Larch** (*Larix sp.*, `larix-sp`): description + fun fact
-- [ ] **Littleleaf linden** (*Tilia cordata*, `tilia-cordata`): fun fact
-- [ ] **Lombardy poplar** (*Populus nigra*, `populus-nigra`): description
+- [x] **Columnar Norway maple** (*Acer platanoides 'Columnare'*, `acer-platanoides-columnare`): fun fact
+- [x] **Columnar red maple** (*Acer rubrum 'Columnare'*, `acer-rubrum-columnare`): fun fact
+- [x] **Columnar Sargent cherry** (*Prunus sargentii 'Columnaris'*, `prunus-sargentii-columnaris`): fun fact
+- [x] **Common baldcypress** (*Taxodium distichum*, `taxodium-distichum`): fun fact
+- [x] **Common buckthorn** (*Rhamnus cathartica*, `rhamnus-cathartica`): description
+- [x] **Common honeylocust** (*Gleditsia triacanthos*, `gleditsia-triacanthos`): fun fact
+- [x] **Common larch** (*Larix decidua*, `larix-decidua`): fun fact
+- [x] **Common lilac** (*Syringa vulgaris*, `syringa-vulgaris`): description
+- [x] **Common smoketree** (*Cotinus coggygria*, `cotinus-coggygria`): fun fact
+- [x] **Common witchhazel** (*Hamamelis virginiana*, `hamamelis-virginiana`): fun fact
+- [x] **Contorted hazelnut** (*Corylus avellana*, `corylus-avellana`): description
+- [x] **Copper Curls Peking lilac** (*Syringa pekinensis 'Copper Curls'*, `syringa-pekinensis-copper-curls`): fun fact
+- [x] **Crabapple** (*Malus sp.*, `malus-sp`): description
+- [x] **Crimson Cloud hawthorn** (*Crataegus laevigata 'Crimson Cloud'*, `crataegus-laevigata-crimson-cloud`): fun fact
+- [x] **Cutleaf silver maple** (*Acer saccharinum 'Skinneri'*, `acer-saccharinum-skinneri`): fun fact
+- [x] **Dawn redwood** (*Metasequoia glyptostroboides*, `metasequoia-glyptostroboides`): fun fact
+- [x] **Devil's walkingstick** (*Aralia spinosa*, `aralia-spinosa`): fun fact
+- [x] **Dogwood** (*Cornus sp.*, `cornus-sp`): description
+- [x] **Donald Wyman crabapple** (*Malus 'Donald Wyman'*, `malus-donald-wyman`): fun fact
+- [x] **Dragon's claw willow** (*Salix matsudana 'Tortuosa'*, `salix-matsudana-tortuosa`): description + fun fact
+- [x] **Eastern cottonwood** (*Populus deltoides*, `populus-deltoides`): fun fact
+- [x] **Eastern hemlock** (*Tsuga canadensis*, `tsuga-canadensis`): description
+- [x] **Eastern hophornbeam** (*Ostrya virginiana*, `ostrya-virginiana`): fun fact
+- [x] **Eastern redcedar** (*Juniperus virginiana*, `juniperus-virginiana`): fun fact
+- [x] **Eastern white pine** (*Pinus strobus*, `pinus-strobus`): description
+- [x] **Elm** (*Ulmus sp.*, `ulmus-sp`): description + fun fact
+- [x] **European ash** (*Fraxinus excelsior*, `fraxinus-excelsior`): fun fact
+- [x] **European bird cherry** (*Prunus padus*, `prunus-padus`): fun fact
+- [x] **European linden** (*Tilia x europaea*, `tilia-x-europaea`): fun fact
+- [x] **Fastigiate English oak** (*Quercus robur 'Fastigiata'*, `quercus-robur-fastigiata`): description + fun fact
+- [x] **Flowering dogwood** (*Cornus florida*, `cornus-florida`): fun fact
+- [x] **Four-winged silverbell** (*Halesia tetraptera*, `halesia-tetraptera`): fun fact
+- [x] **Freeman's maple** (*Acer x freemanii*, `acer-x-freemanii`): description
+- [x] **Ginkgo** (*Ginkgo biloba*, `ginkgo-biloba`): description
+- [x] **Golden Raindrops crabapple** (*Malus 'Schmidtcutleaf'*, `malus-schmidtcutleaf`): fun fact
+- [x] **Golden weeping willow** (*Salix alba 'Tristis'*, `salix-alba-tristis`): fun fact
+- [x] **Grand fir** (*Abies grandis*, `abies-grandis`): fun fact
+- [x] **Gray birch** (*Betula populifolia*, `betula-populifolia`): fun fact
+- [x] **Green ash** (*Fraxinus pennsylvanica*, `fraxinus-pennsylvanica`): description
+- [x] **Green Giant arborvitae** (*Thuja 'Green Giant'*, `thuja-green-giant`): fun fact
+- [x] **Green hawthorn** (*Crataegus viridis*, `crataegus-viridis`): fun fact
+- [x] **Greenspire linden** (*Tilia cordata 'Greenspire'*, `tilia-cordata-greenspire`): fun fact
+- [x] **Hackberry** (*Celtis occidentalis*, `celtis-occidentalis`): fun fact
+- [x] **Hardy rubber tree** (*Eucommia ulmoides*, `eucommia-ulmoides`): description
+- [x] **Hawthorn** (*Crataegus sp.*, `crataegus-sp`): description + fun fact
+- [x] **Hedge maple** (*Acer campestre*, `acer-campestre`): fun fact
+- [x] **Heritage river birch** (*Betula nigra 'Heritage'*, `betula-nigra-heritage`): fun fact
+- [x] **Hinoki falsecypress** (*Chamaecyparis obtusa*, `chamaecyparis-obtusa`): fun fact
+- [x] **Honeycrisp apple** (*Malus domestica 'Honeycrisp'*, `malus-domestica-honeycrisp`): fun fact
+- [x] **Japanese stewartia** (*Stewartia pseudocamellia*, `stewartia-pseudocamellia`): description
+- [x] **Japanese tree lilac** (*Syringa reticulata*, `syringa-reticulata`): fun fact
+- [x] **Juniper** (*Juniperus sp.*, `juniperus-sp`): description
+- [x] **Katsuratree** (*Cercidiphyllum japonicum*, `cercidiphyllum-japonicum`): fun fact
+- [x] **Kentucky coffeetree** (*Gymnocladus dioicus*, `gymnocladus-dioicus`): description
+- [x] **Korean maple** (*Acer pseudosieboldianum*, `acer-pseudosieboldianum`): fun fact
+- [x] **Korean sun pear** (*Pyrus fauriei*, `pyrus-fauriei`): description + fun fact
+- [x] **Kousa dogwood** (*Cornus kousa*, `cornus-kousa`): fun fact
+- [x] **Larch** (*Larix sp.*, `larix-sp`): description + fun fact
+- [x] **Littleleaf linden** (*Tilia cordata*, `tilia-cordata`): fun fact
+- [x] **Lombardy poplar** (*Populus nigra*, `populus-nigra`): description
 - [ ] **London planetree** (*Platanus x acerifolia*, `platanus-x-acerifolia`): fun fact
 - [ ] **Magnolia** (*Magnolia sp.*, `magnolia-sp`): description
 - [ ] **Manchurian alder** (*Alnus hirsuta*, `alnus-hirsuta`): fun fact
