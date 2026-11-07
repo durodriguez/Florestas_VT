@@ -277,6 +277,14 @@ usual view, but English origins are argued too). Montmorency and Traverse
 City, Nordmann's 1836 expedition and red mulberry's hybridizing with white
 were confirmed.
 
+A twelfth ten on 7 November 2026, Norway maple to Persian ironwood. One
+fun fact fixed: pagoda dogwood is one of two alternate-leaved dogwoods,
+not the only one; the Asian giant dogwood, *Cornus controversa*, is the
+other. Sorbic acid (isolated from rowan berries by Hofmann in 1859), the
+Princeton Nurseries origin of October Glory, Wilson's 1901 paperbark maple,
+Bretschneider's Peking lilac seed (about 1881) and Parrot's ascent of
+Ararat (1829) were confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -380,16 +388,16 @@ were confirmed.
 - [x] **Mulberry** (*Morus sp.*, `morus-sp`): description
 - [x] **Nordmann fir** (*Abies nordmanniana*, `abies-nordmanniana`): fun fact
 - [x] **Northern red oak** (*Quercus rubra*, `quercus-rubra`): description
-- [ ] **Norway maple** (*Acer platanoides*, `acer-platanoides`): description
-- [ ] **Norway spruce** (*Picea abies*, `picea-abies`): description
-- [ ] **Oakleaf mountain ash** (*Sorbus x thuringiaca*, `sorbus-x-thuringiaca`): fun fact
-- [ ] **October Glory red maple** (*Acer rubrum 'October Glory'*, `acer-rubrum-october-glory`): fun fact
-- [ ] **Pagoda dogwood** (*Cornus alternifolia*, `cornus-alternifolia`): description + fun fact
-- [ ] **Paper birch** (*Betula papyrifera*, `betula-papyrifera`): description
-- [ ] **Paperbark maple** (*Acer griseum*, `acer-griseum`): fun fact
-- [ ] **Pear** (*Pyrus sp.*, `pyrus-sp`): description + fun fact
-- [ ] **Peking lilac** (*Syringa pekinensis*, `syringa-pekinensis`): fun fact
-- [ ] **Persian ironwood** (*Parrotia persica*, `parrotia-persica`): fun fact
+- [x] **Norway maple** (*Acer platanoides*, `acer-platanoides`): description
+- [x] **Norway spruce** (*Picea abies*, `picea-abies`): description
+- [x] **Oakleaf mountain ash** (*Sorbus x thuringiaca*, `sorbus-x-thuringiaca`): fun fact
+- [x] **October Glory red maple** (*Acer rubrum 'October Glory'*, `acer-rubrum-october-glory`): fun fact
+- [x] **Pagoda dogwood** (*Cornus alternifolia*, `cornus-alternifolia`): description + fun fact
+- [x] **Paper birch** (*Betula papyrifera*, `betula-papyrifera`): description
+- [x] **Paperbark maple** (*Acer griseum*, `acer-griseum`): fun fact
+- [x] **Pear** (*Pyrus sp.*, `pyrus-sp`): description + fun fact
+- [x] **Peking lilac** (*Syringa pekinensis*, `syringa-pekinensis`): fun fact
+- [x] **Persian ironwood** (*Parrotia persica*, `parrotia-persica`): fun fact
 - [ ] **Pin oak** (*Quercus palustris*, `quercus-palustris`): fun fact
 - [ ] **Prairifire crabapple** (*Malus 'Prairifire'*, `malus-prairifire`): fun fact
 - [ ] **Princeton Sentry ginkgo** (*Ginkgo biloba 'Princeton Sentry'*, `ginkgo-biloba-princeton-sentry`): fun fact
