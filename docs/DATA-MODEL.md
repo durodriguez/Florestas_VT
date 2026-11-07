@@ -632,6 +632,9 @@ A GeoJSON `FeatureCollection` of `LineString` features. Each needs
 `stops` — an array of `plant_id` values in walking order. Draw the lines in
 [geojson.io](https://geojson.io) or QGIS and paste them in.
 
+While the file holds no trails, the map leaves *Walking trails* out of its
+layers control; the option appears once a trail is added.
+
 ### Filling in a new taxon
 
 All 257 taxa now carry a description and, where the question is meaningful, the
