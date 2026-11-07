@@ -247,6 +247,17 @@ its single plant at the US National Arboretum in 1967, Freeman's 1933 cross,
 J. Frank Schmidt's Red Sunset maple and emerald ash borer in Vermont (2018)
 were confirmed.
 
+A ninth ten on 7 November 2026, green hawthorn to Japanese stewartia. Three
+fun facts and one description adjusted: Heritage river birch (found by Earl
+Cully in a St. Louis yard, around 1968 to 1970 by source; first propagated
+by grafted cuttings, so "grown from cuttings ever since" was dropped),
+hackberry (Celtis seeds at Zhoukoudian may have been left by animals, so
+the claim is hedged), hinoki (Noh stages are almost entirely hinoki, not
+wholly) and hardy rubber tree (the threads are latex; dogwood leaves also
+hold together when torn, by a different means, so "the only hardy tree
+that does this" became "the only hardy tree with rubber in its leaves").
+Japanese stewartia's "grey" became "gray".
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -320,16 +331,16 @@ were confirmed.
 - [x] **Gray birch** (*Betula populifolia*, `betula-populifolia`): fun fact
 - [x] **Green ash** (*Fraxinus pennsylvanica*, `fraxinus-pennsylvanica`): description
 - [x] **Green Giant arborvitae** (*Thuja 'Green Giant'*, `thuja-green-giant`): fun fact
-- [ ] **Green hawthorn** (*Crataegus viridis*, `crataegus-viridis`): fun fact
-- [ ] **Greenspire linden** (*Tilia cordata 'Greenspire'*, `tilia-cordata-greenspire`): fun fact
-- [ ] **Hackberry** (*Celtis occidentalis*, `celtis-occidentalis`): fun fact
-- [ ] **Hardy rubber tree** (*Eucommia ulmoides*, `eucommia-ulmoides`): description
-- [ ] **Hawthorn** (*Crataegus sp.*, `crataegus-sp`): description + fun fact
-- [ ] **Hedge maple** (*Acer campestre*, `acer-campestre`): fun fact
-- [ ] **Heritage river birch** (*Betula nigra 'Heritage'*, `betula-nigra-heritage`): fun fact
-- [ ] **Hinoki falsecypress** (*Chamaecyparis obtusa*, `chamaecyparis-obtusa`): fun fact
-- [ ] **Honeycrisp apple** (*Malus domestica 'Honeycrisp'*, `malus-domestica-honeycrisp`): fun fact
-- [ ] **Japanese stewartia** (*Stewartia pseudocamellia*, `stewartia-pseudocamellia`): description
+- [x] **Green hawthorn** (*Crataegus viridis*, `crataegus-viridis`): fun fact
+- [x] **Greenspire linden** (*Tilia cordata 'Greenspire'*, `tilia-cordata-greenspire`): fun fact
+- [x] **Hackberry** (*Celtis occidentalis*, `celtis-occidentalis`): fun fact
+- [x] **Hardy rubber tree** (*Eucommia ulmoides*, `eucommia-ulmoides`): description
+- [x] **Hawthorn** (*Crataegus sp.*, `crataegus-sp`): description + fun fact
+- [x] **Hedge maple** (*Acer campestre*, `acer-campestre`): fun fact
+- [x] **Heritage river birch** (*Betula nigra 'Heritage'*, `betula-nigra-heritage`): fun fact
+- [x] **Hinoki falsecypress** (*Chamaecyparis obtusa*, `chamaecyparis-obtusa`): fun fact
+- [x] **Honeycrisp apple** (*Malus domestica 'Honeycrisp'*, `malus-domestica-honeycrisp`): fun fact
+- [x] **Japanese stewartia** (*Stewartia pseudocamellia*, `stewartia-pseudocamellia`): description
 - [ ] **Japanese tree lilac** (*Syringa reticulata*, `syringa-reticulata`): fun fact
 - [ ] **Juniper** (*Juniperus sp.*, `juniperus-sp`): description
 - [ ] **Katsuratree** (*Cercidiphyllum japonicum*, `cercidiphyllum-japonicum`): fun fact
