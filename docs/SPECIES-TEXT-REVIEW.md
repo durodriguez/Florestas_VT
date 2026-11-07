@@ -285,6 +285,14 @@ Princeton Nurseries origin of October Glory, Wilson's 1901 paperbark maple,
 Bretschneider's Peking lilac seed (about 1881) and Parrot's ascent of
 Ararat (1829) were confirmed.
 
+A thirteenth ten on 7 November 2026, pin oak to redosier dogwood. Two
+adjusted: red mulberry (fence posts, cooperage and boat building are
+documented; boat ribs in particular were not) and red maple's description
+(three main lobes, not "three shallow lobes", and sugar maple's leaf edge
+is smooth between a few large points rather than wholly smooth).
+Prairifire's 1982 University of Illinois release for scab resistance,
+Red Sunset's 'Franksred' (1966), Pando and kinnikinnick were confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -398,16 +406,16 @@ Ararat (1829) were confirmed.
 - [x] **Pear** (*Pyrus sp.*, `pyrus-sp`): description + fun fact
 - [x] **Peking lilac** (*Syringa pekinensis*, `syringa-pekinensis`): fun fact
 - [x] **Persian ironwood** (*Parrotia persica*, `parrotia-persica`): fun fact
-- [ ] **Pin oak** (*Quercus palustris*, `quercus-palustris`): fun fact
-- [ ] **Prairifire crabapple** (*Malus 'Prairifire'*, `malus-prairifire`): fun fact
-- [ ] **Princeton Sentry ginkgo** (*Ginkgo biloba 'Princeton Sentry'*, `ginkgo-biloba-princeton-sentry`): fun fact
-- [ ] **Purple leaf plum** (*Prunus cerasifera*, `prunus-cerasifera`): fun fact
-- [ ] **Quaking aspen** (*Populus tremuloides*, `populus-tremuloides`): fun fact
-- [ ] **Ragin Red redosier dogwood** (*Cornus sericea 'Ragin Red'*, `cornus-sericea-ragin-red`): description + fun fact
-- [ ] **Red maple** (*Acer rubrum*, `acer-rubrum`): description + fun fact
-- [ ] **Red mulberry** (*Morus rubra*, `morus-rubra`): fun fact
-- [ ] **Red Sunset red maple** (*Acer rubrum 'Red Sunset'*, `acer-rubrum-red-sunset`): fun fact
-- [ ] **Redosier dogwood** (*Cornus sericea*, `cornus-sericea`): fun fact
+- [x] **Pin oak** (*Quercus palustris*, `quercus-palustris`): fun fact
+- [x] **Prairifire crabapple** (*Malus 'Prairifire'*, `malus-prairifire`): fun fact
+- [x] **Princeton Sentry ginkgo** (*Ginkgo biloba 'Princeton Sentry'*, `ginkgo-biloba-princeton-sentry`): fun fact
+- [x] **Purple leaf plum** (*Prunus cerasifera*, `prunus-cerasifera`): fun fact
+- [x] **Quaking aspen** (*Populus tremuloides*, `populus-tremuloides`): fun fact
+- [x] **Ragin Red redosier dogwood** (*Cornus sericea 'Ragin Red'*, `cornus-sericea-ragin-red`): description + fun fact
+- [x] **Red maple** (*Acer rubrum*, `acer-rubrum`): description + fun fact
+- [x] **Red mulberry** (*Morus rubra*, `morus-rubra`): fun fact
+- [x] **Red Sunset red maple** (*Acer rubrum 'Red Sunset'*, `acer-rubrum-red-sunset`): fun fact
+- [x] **Redosier dogwood** (*Cornus sericea*, `cornus-sericea`): fun fact
 - [ ] **River birch** (*Betula nigra*, `betula-nigra`): fun fact
 - [ ] **Ruby Lace honeylocust** (*Gleditsia triacanthos f. inermis 'Ruby Lace'*, `gleditsia-triacanthos-inermis-ruby-lace`): fun fact
 - [ ] **Russian olive** (*Elaeagnus angustifolia*, `elaeagnus-angustifolia`): description
