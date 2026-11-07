@@ -266,6 +266,72 @@ Katsura's maltol, the Endicott pear (planted about 1630, still fruiting),
 Unter den Linden's first lindens (1647) and kousa dogwood's resistance to
 anthracnose were confirmed.
 
+An eleventh ten on 7 November 2026, London planetree to northern red oak.
+Three adjusted: maple (its description called it "Vermont's most-planted
+genus", which could not be sourced; it now says one of the most-planted
+on this map, where it leads oak only 270 to 264, and opposite buds narrow a winter tree
+to a short list, since katsura and Amur corktree are opposite too),
+Mongolian linden (native to northern China including Inner Mongolia, not
+to Mongolia itself) and London planetree (Spain or southern France is the
+usual view, but English origins are argued too). Montmorency and Traverse
+City, Nordmann's 1836 expedition and red mulberry's hybridizing with white
+were confirmed.
+
+A twelfth ten on 7 November 2026, Norway maple to Persian ironwood. One
+fun fact fixed: pagoda dogwood is one of two alternate-leaved dogwoods,
+not the only one; the Asian giant dogwood, *Cornus controversa*, is the
+other. Sorbic acid (isolated from rowan berries by Hofmann in 1859), the
+Princeton Nurseries origin of October Glory, Wilson's 1901 paperbark maple,
+Bretschneider's Peking lilac seed (about 1881) and Parrot's ascent of
+Ararat (1829) were confirmed.
+
+A thirteenth ten on 7 November 2026, pin oak to redosier dogwood. Two
+adjusted: red mulberry (fence posts, cooperage and boat building are
+documented; boat ribs in particular were not) and red maple's description
+(three main lobes, not "three shallow lobes", and sugar maple's leaf edge
+is smooth between a few large points rather than wholly smooth).
+Prairifire's 1982 University of Illinois release for scab resistance,
+Red Sunset's 'Franksred' (1966), Pando and kinnikinnick were confirmed.
+
+A fourteenth ten on 7 November 2026, river birch to Shantung maple. One fun
+fact eased: Scotch pine was for decades the most widely grown Christmas
+tree in America; that it was the most popular could not be sourced.
+Sargent cherry (Bigelow's seed in 1890, Sargent's in 1892), Soulange-Bodin
+as a retired cavalry officer of Napoleon's, scarlet oak as Washington,
+DC's tree and Shantung maple's nervonic-acid oil were confirmed.
+
+A fifteenth ten on 7 November 2026, shingle oak to spruce, all as written
+(shingle oak's fun fact had been rewritten that day). Confirmed: Siberian
+elm seeds eaten in northern China, starving bumblebees under silver
+linden, silver maple's seed sprouting without a winter, southern magnolia
+as Mississippi's tree and Louisiana's flower, the Späth alder (selected
+1894, sold from 1908), salicylic acid from meadowsweet and the "spir" in
+aspirin, and Maine spruce gum (1848).
+
+A sixteenth ten on 7 November 2026, sugar maple to Turkish filbert. One fun
+fact fixed: sweet birch (birch beer was traditionally brewed from it in the
+Northeast, but an English birch-sap ale is recorded in 1676, so it was not
+"first brewed from this tree"). Tatarian maple's name (Linnaeus's "Habitat
+in Tataria"), box elder as the one native maple with divided leaves, swamp
+white oak's long-stalked acorns and sweet pepperbush's peppercorn capsules
+were confirmed.
+
+A seventeenth ten on 7 November 2026, variegated tuliptree to white
+willow. Two fun facts adjusted: Ware oak (named for George Ware, the
+Morton Arboretum's research director, but he is not documented as its
+breeder; a nursery catalogue credits the Regal Prince cross to Earl
+Cully; the parent is the columnar English oak) and Washington hawthorn
+(the late-1700s Washington nurseries are reported, not documented, and
+its later spread north was unsourced). Higan-zakura, concolor, white oak's
+plugged pores, the Heracles myth, watap and the cricket-bat willow were
+confirmed.
+
+The last six on 7 November 2026, Whitespire birch to Yoshino cherry, all as
+written: betulin's white bark, bee gums cut from hollow black gum, salicin
+and aspirin, yellow birch on stilt roots past 300 years, and the 1912 gift
+of 3,020 cherries answered by dogwoods in 1915. With these, every box in
+this section is ticked.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -359,82 +425,82 @@ anthracnose were confirmed.
 - [x] **Larch** (*Larix sp.*, `larix-sp`): description + fun fact
 - [x] **Littleleaf linden** (*Tilia cordata*, `tilia-cordata`): fun fact
 - [x] **Lombardy poplar** (*Populus nigra*, `populus-nigra`): description
-- [ ] **London planetree** (*Platanus x acerifolia*, `platanus-x-acerifolia`): fun fact
-- [ ] **Magnolia** (*Magnolia sp.*, `magnolia-sp`): description
-- [ ] **Manchurian alder** (*Alnus hirsuta*, `alnus-hirsuta`): fun fact
-- [ ] **Maple** (*Acer sp.*, `acer-sp`): description
-- [ ] **Mongolian linden** (*Tilia x mongolica*, `tilia-x-mongolica`): fun fact
-- [ ] **Montmorency cherry** (*Prunus cerasus 'Montmorency'*, `prunus-cerasus-montmorency`): fun fact
-- [ ] **Mugo pine** (*Pinus mugo*, `pinus-mugo`): description + fun fact
-- [ ] **Mulberry** (*Morus sp.*, `morus-sp`): description
-- [ ] **Nordmann fir** (*Abies nordmanniana*, `abies-nordmanniana`): fun fact
-- [ ] **Northern red oak** (*Quercus rubra*, `quercus-rubra`): description
-- [ ] **Norway maple** (*Acer platanoides*, `acer-platanoides`): description
-- [ ] **Norway spruce** (*Picea abies*, `picea-abies`): description
-- [ ] **Oakleaf mountain ash** (*Sorbus x thuringiaca*, `sorbus-x-thuringiaca`): fun fact
-- [ ] **October Glory red maple** (*Acer rubrum 'October Glory'*, `acer-rubrum-october-glory`): fun fact
-- [ ] **Pagoda dogwood** (*Cornus alternifolia*, `cornus-alternifolia`): description + fun fact
-- [ ] **Paper birch** (*Betula papyrifera*, `betula-papyrifera`): description
-- [ ] **Paperbark maple** (*Acer griseum*, `acer-griseum`): fun fact
-- [ ] **Pear** (*Pyrus sp.*, `pyrus-sp`): description + fun fact
-- [ ] **Peking lilac** (*Syringa pekinensis*, `syringa-pekinensis`): fun fact
-- [ ] **Persian ironwood** (*Parrotia persica*, `parrotia-persica`): fun fact
-- [ ] **Pin oak** (*Quercus palustris*, `quercus-palustris`): fun fact
-- [ ] **Prairifire crabapple** (*Malus 'Prairifire'*, `malus-prairifire`): fun fact
-- [ ] **Princeton Sentry ginkgo** (*Ginkgo biloba 'Princeton Sentry'*, `ginkgo-biloba-princeton-sentry`): fun fact
-- [ ] **Purple leaf plum** (*Prunus cerasifera*, `prunus-cerasifera`): fun fact
-- [ ] **Quaking aspen** (*Populus tremuloides*, `populus-tremuloides`): fun fact
-- [ ] **Ragin Red redosier dogwood** (*Cornus sericea 'Ragin Red'*, `cornus-sericea-ragin-red`): description + fun fact
-- [ ] **Red maple** (*Acer rubrum*, `acer-rubrum`): description + fun fact
-- [ ] **Red mulberry** (*Morus rubra*, `morus-rubra`): fun fact
-- [ ] **Red Sunset red maple** (*Acer rubrum 'Red Sunset'*, `acer-rubrum-red-sunset`): fun fact
-- [ ] **Redosier dogwood** (*Cornus sericea*, `cornus-sericea`): fun fact
-- [ ] **River birch** (*Betula nigra*, `betula-nigra`): fun fact
-- [ ] **Ruby Lace honeylocust** (*Gleditsia triacanthos f. inermis 'Ruby Lace'*, `gleditsia-triacanthos-inermis-ruby-lace`): fun fact
-- [ ] **Russian olive** (*Elaeagnus angustifolia*, `elaeagnus-angustifolia`): description
-- [ ] **Sargent cherry** (*Prunus sargentii*, `prunus-sargentii`): fun fact
-- [ ] **Saucer magnolia** (*Magnolia x soulangiana*, `magnolia-x-soulangiana`): fun fact
-- [ ] **Scarlet oak** (*Quercus coccinea*, `quercus-coccinea`): fun fact
-- [ ] **Scotch pine** (*Pinus sylvestris*, `pinus-sylvestris`): fun fact
-- [ ] **Serviceberry** (*Amelanchier sp.*, `amelanchier-sp`): fun fact
-- [ ] **Shadblow serviceberry** (*Amelanchier canadensis*, `amelanchier-canadensis`): fun fact
-- [ ] **Shantung maple** (*Acer truncatum*, `acer-truncatum`): fun fact
-- [ ] **Shingle oak** (*Quercus imbricaria*, `quercus-imbricaria`): fun fact
-- [ ] **Siberian elm** (*Ulmus pumila*, `ulmus-pumila`): fun fact
-- [ ] **Siberian peashrub** (*Caragana arborescens*, `caragana-arborescens`): fun fact
-- [ ] **Sienna Glen maple** (*Acer x freemanii 'Sienna Glen'*, `acer-x-freemanii-sienna-glen`): fun fact
-- [ ] **Silver linden** (*Tilia tomentosa*, `tilia-tomentosa`): fun fact
-- [ ] **Silver maple** (*Acer saccharinum*, `acer-saccharinum`): fun fact
-- [ ] **Southern magnolia** (*Magnolia grandiflora*, `magnolia-grandiflora`): fun fact
-- [ ] **Spaeth alder** (*Alnus x spaethii*, `alnus-x-spaethii`): fun fact
-- [ ] **Spirea** (*Spiraea sp.*, `spiraea-sp`): description + fun fact
-- [ ] **Spruce** (*Picea sp.*, `picea-sp`): description + fun fact
-- [ ] **Sugar maple** (*Acer saccharum*, `acer-saccharum`): description
-- [ ] **Summersweet** (*Clethra alnifolia*, `clethra-alnifolia`): fun fact
-- [ ] **Swamp white oak** (*Quercus bicolor*, `quercus-bicolor`): fun fact
-- [ ] **Sweet birch** (*Betula lenta*, `betula-lenta`): fun fact
-- [ ] **Sweetgum** (*Liquidambar styraciflua*, `liquidambar-styraciflua`): fun fact
-- [ ] **Tamarack** (*Larix laricina*, `larix-laricina`): description + fun fact
-- [ ] **Tatarian maple** (*Acer tataricum*, `acer-tataricum`): fun fact
-- [ ] **Thornless honeylocust** (*Gleditsia triacanthos f. inermis*, `gleditsia-triacanthos-inermis`): description
-- [ ] **Three-flower maple** (*Acer triflorum*, `acer-triflorum`): fun fact
-- [ ] **Turkish filbert** (*Corylus colurna*, `corylus-colurna`): description + fun fact
-- [ ] **Variegated tuliptree** (*Liriodendron tulipifera 'Aureomarginatum'*, `liriodendron-tulipifera-aureomarginatum`): fun fact
-- [ ] **Ware oak** (*Quercus x warei*, `quercus-x-warei`): fun fact
-- [ ] **Washington hawthorn** (*Crataegus phaenopyrum*, `crataegus-phaenopyrum`): description + fun fact
-- [ ] **Weeping cherry** (*Prunus subhirtella*, `prunus-subhirtella`): fun fact
-- [ ] **White ash** (*Fraxinus americana*, `fraxinus-americana`): description
-- [ ] **White fir** (*Abies concolor*, `abies-concolor`): fun fact
-- [ ] **White oak** (*Quercus alba*, `quercus-alba`): description + fun fact
-- [ ] **White poplar** (*Populus alba*, `populus-alba`): fun fact
-- [ ] **White spruce** (*Picea glauca*, `picea-glauca`): fun fact
-- [ ] **White willow** (*Salix alba*, `salix-alba`): fun fact
-- [ ] **Whitespire birch** (*Betula populifolia 'Whitespire'*, `betula-populifolia-whitespire`): fun fact
-- [ ] **Wildfire black tupelo** (*Nyssa sylvatica 'Wildfire'*, `nyssa-sylvatica-wildfire`): fun fact
-- [ ] **Willow** (*Salix sp.*, `salix-sp`): description + fun fact
-- [ ] **Yellow birch** (*Betula alleghaniensis*, `betula-alleghaniensis`): fun fact
-- [ ] **Yew** (*Taxus sp.*, `taxus-sp`): description
-- [ ] **Yoshino cherry** (*Prunus x yedoensis*, `prunus-x-yedoensis`): fun fact
+- [x] **London planetree** (*Platanus x acerifolia*, `platanus-x-acerifolia`): fun fact
+- [x] **Magnolia** (*Magnolia sp.*, `magnolia-sp`): description
+- [x] **Manchurian alder** (*Alnus hirsuta*, `alnus-hirsuta`): fun fact
+- [x] **Maple** (*Acer sp.*, `acer-sp`): description
+- [x] **Mongolian linden** (*Tilia x mongolica*, `tilia-x-mongolica`): fun fact
+- [x] **Montmorency cherry** (*Prunus cerasus 'Montmorency'*, `prunus-cerasus-montmorency`): fun fact
+- [x] **Mugo pine** (*Pinus mugo*, `pinus-mugo`): description + fun fact
+- [x] **Mulberry** (*Morus sp.*, `morus-sp`): description
+- [x] **Nordmann fir** (*Abies nordmanniana*, `abies-nordmanniana`): fun fact
+- [x] **Northern red oak** (*Quercus rubra*, `quercus-rubra`): description
+- [x] **Norway maple** (*Acer platanoides*, `acer-platanoides`): description
+- [x] **Norway spruce** (*Picea abies*, `picea-abies`): description
+- [x] **Oakleaf mountain ash** (*Sorbus x thuringiaca*, `sorbus-x-thuringiaca`): fun fact
+- [x] **October Glory red maple** (*Acer rubrum 'October Glory'*, `acer-rubrum-october-glory`): fun fact
+- [x] **Pagoda dogwood** (*Cornus alternifolia*, `cornus-alternifolia`): description + fun fact
+- [x] **Paper birch** (*Betula papyrifera*, `betula-papyrifera`): description
+- [x] **Paperbark maple** (*Acer griseum*, `acer-griseum`): fun fact
+- [x] **Pear** (*Pyrus sp.*, `pyrus-sp`): description + fun fact
+- [x] **Peking lilac** (*Syringa pekinensis*, `syringa-pekinensis`): fun fact
+- [x] **Persian ironwood** (*Parrotia persica*, `parrotia-persica`): fun fact
+- [x] **Pin oak** (*Quercus palustris*, `quercus-palustris`): fun fact
+- [x] **Prairifire crabapple** (*Malus 'Prairifire'*, `malus-prairifire`): fun fact
+- [x] **Princeton Sentry ginkgo** (*Ginkgo biloba 'Princeton Sentry'*, `ginkgo-biloba-princeton-sentry`): fun fact
+- [x] **Purple leaf plum** (*Prunus cerasifera*, `prunus-cerasifera`): fun fact
+- [x] **Quaking aspen** (*Populus tremuloides*, `populus-tremuloides`): fun fact
+- [x] **Ragin Red redosier dogwood** (*Cornus sericea 'Ragin Red'*, `cornus-sericea-ragin-red`): description + fun fact
+- [x] **Red maple** (*Acer rubrum*, `acer-rubrum`): description + fun fact
+- [x] **Red mulberry** (*Morus rubra*, `morus-rubra`): fun fact
+- [x] **Red Sunset red maple** (*Acer rubrum 'Red Sunset'*, `acer-rubrum-red-sunset`): fun fact
+- [x] **Redosier dogwood** (*Cornus sericea*, `cornus-sericea`): fun fact
+- [x] **River birch** (*Betula nigra*, `betula-nigra`): fun fact
+- [x] **Ruby Lace honeylocust** (*Gleditsia triacanthos f. inermis 'Ruby Lace'*, `gleditsia-triacanthos-inermis-ruby-lace`): fun fact
+- [x] **Russian olive** (*Elaeagnus angustifolia*, `elaeagnus-angustifolia`): description
+- [x] **Sargent cherry** (*Prunus sargentii*, `prunus-sargentii`): fun fact
+- [x] **Saucer magnolia** (*Magnolia x soulangiana*, `magnolia-x-soulangiana`): fun fact
+- [x] **Scarlet oak** (*Quercus coccinea*, `quercus-coccinea`): fun fact
+- [x] **Scotch pine** (*Pinus sylvestris*, `pinus-sylvestris`): fun fact
+- [x] **Serviceberry** (*Amelanchier sp.*, `amelanchier-sp`): fun fact
+- [x] **Shadblow serviceberry** (*Amelanchier canadensis*, `amelanchier-canadensis`): fun fact
+- [x] **Shantung maple** (*Acer truncatum*, `acer-truncatum`): fun fact
+- [x] **Shingle oak** (*Quercus imbricaria*, `quercus-imbricaria`): fun fact
+- [x] **Siberian elm** (*Ulmus pumila*, `ulmus-pumila`): fun fact
+- [x] **Siberian peashrub** (*Caragana arborescens*, `caragana-arborescens`): fun fact
+- [x] **Sienna Glen maple** (*Acer x freemanii 'Sienna Glen'*, `acer-x-freemanii-sienna-glen`): fun fact
+- [x] **Silver linden** (*Tilia tomentosa*, `tilia-tomentosa`): fun fact
+- [x] **Silver maple** (*Acer saccharinum*, `acer-saccharinum`): fun fact
+- [x] **Southern magnolia** (*Magnolia grandiflora*, `magnolia-grandiflora`): fun fact
+- [x] **Spaeth alder** (*Alnus x spaethii*, `alnus-x-spaethii`): fun fact
+- [x] **Spirea** (*Spiraea sp.*, `spiraea-sp`): description + fun fact
+- [x] **Spruce** (*Picea sp.*, `picea-sp`): description + fun fact
+- [x] **Sugar maple** (*Acer saccharum*, `acer-saccharum`): description
+- [x] **Summersweet** (*Clethra alnifolia*, `clethra-alnifolia`): fun fact
+- [x] **Swamp white oak** (*Quercus bicolor*, `quercus-bicolor`): fun fact
+- [x] **Sweet birch** (*Betula lenta*, `betula-lenta`): fun fact
+- [x] **Sweetgum** (*Liquidambar styraciflua*, `liquidambar-styraciflua`): fun fact
+- [x] **Tamarack** (*Larix laricina*, `larix-laricina`): description + fun fact
+- [x] **Tatarian maple** (*Acer tataricum*, `acer-tataricum`): fun fact
+- [x] **Thornless honeylocust** (*Gleditsia triacanthos f. inermis*, `gleditsia-triacanthos-inermis`): description
+- [x] **Three-flower maple** (*Acer triflorum*, `acer-triflorum`): fun fact
+- [x] **Turkish filbert** (*Corylus colurna*, `corylus-colurna`): description + fun fact
+- [x] **Variegated tuliptree** (*Liriodendron tulipifera 'Aureomarginatum'*, `liriodendron-tulipifera-aureomarginatum`): fun fact
+- [x] **Ware oak** (*Quercus x warei*, `quercus-x-warei`): fun fact
+- [x] **Washington hawthorn** (*Crataegus phaenopyrum*, `crataegus-phaenopyrum`): description + fun fact
+- [x] **Weeping cherry** (*Prunus subhirtella*, `prunus-subhirtella`): fun fact
+- [x] **White ash** (*Fraxinus americana*, `fraxinus-americana`): description
+- [x] **White fir** (*Abies concolor*, `abies-concolor`): fun fact
+- [x] **White oak** (*Quercus alba*, `quercus-alba`): description + fun fact
+- [x] **White poplar** (*Populus alba*, `populus-alba`): fun fact
+- [x] **White spruce** (*Picea glauca*, `picea-glauca`): fun fact
+- [x] **White willow** (*Salix alba*, `salix-alba`): fun fact
+- [x] **Whitespire birch** (*Betula populifolia 'Whitespire'*, `betula-populifolia-whitespire`): fun fact
+- [x] **Wildfire black tupelo** (*Nyssa sylvatica 'Wildfire'*, `nyssa-sylvatica-wildfire`): fun fact
+- [x] **Willow** (*Salix sp.*, `salix-sp`): description + fun fact
+- [x] **Yellow birch** (*Betula alleghaniensis*, `betula-alleghaniensis`): fun fact
+- [x] **Yew** (*Taxus sp.*, `taxus-sp`): description
+- [x] **Yoshino cherry** (*Prunus x yedoensis*, `prunus-x-yedoensis`): fun fact
 
 ## 3. Added since
 
