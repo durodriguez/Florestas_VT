@@ -206,6 +206,19 @@ mid-1800s; sources give 1850 to 1864, not the 1860s). Black walnut thefts,
 chokecherry as North Dakota's state fruit (2007) and the bur oak's first-year
 taproot (about 4.5 ft, per Silvics) were confirmed.
 
+A fifth ten on 7 November 2026, columnar Norway maple to common witchhazel.
+Six fixed: Norway maple (John Bartram received its seed from London in 1756;
+he did not bring it over himself), common lilac (arrived with colonists in
+the 1700s, not with the first ones), common smoketree (young fustic dyed
+wool and silk; leather is unsourced), common witchhazel (seeds thrown up to
+about twenty feet, sources ranging 17 to 40, and "among the last flowers of
+the year", not the last), common buckthorn (planted as a hedge through the
+1800s; "a century before anyone noticed" overstated it) and, for the same
+entry, "Class B noxious weed" dropped from the description, since the map
+makes no claims about Vermont's noxious-weed rule (see DATA-MODEL, origin).
+Baldcypress sinker logs, honeylocust's lost megafauna, larch in Venice's
+piles (with alder and oak) and Sargent cherry's range were confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -239,16 +252,16 @@ taproot (about 4.5 ft, per Silvics) were confirmed.
 - [x] **Colorado blue spruce** (*Picea pungens*, `picea-pungens`): fun fact
 - [x] **Columnar American basswood** (*Tilia americana 'Fastigiata'*, `tilia-americana-fastigiata`): fun fact
 - [x] **Columnar European beech** (*Fagus sylvatica 'Fastigiata'*, `fagus-sylvatica-fastigiata`): fun fact
-- [ ] **Columnar Norway maple** (*Acer platanoides 'Columnare'*, `acer-platanoides-columnare`): fun fact
-- [ ] **Columnar red maple** (*Acer rubrum 'Columnare'*, `acer-rubrum-columnare`): fun fact
-- [ ] **Columnar Sargent cherry** (*Prunus sargentii 'Columnaris'*, `prunus-sargentii-columnaris`): fun fact
-- [ ] **Common baldcypress** (*Taxodium distichum*, `taxodium-distichum`): fun fact
-- [ ] **Common buckthorn** (*Rhamnus cathartica*, `rhamnus-cathartica`): description
-- [ ] **Common honeylocust** (*Gleditsia triacanthos*, `gleditsia-triacanthos`): fun fact
-- [ ] **Common larch** (*Larix decidua*, `larix-decidua`): fun fact
-- [ ] **Common lilac** (*Syringa vulgaris*, `syringa-vulgaris`): description
-- [ ] **Common smoketree** (*Cotinus coggygria*, `cotinus-coggygria`): fun fact
-- [ ] **Common witchhazel** (*Hamamelis virginiana*, `hamamelis-virginiana`): fun fact
+- [x] **Columnar Norway maple** (*Acer platanoides 'Columnare'*, `acer-platanoides-columnare`): fun fact
+- [x] **Columnar red maple** (*Acer rubrum 'Columnare'*, `acer-rubrum-columnare`): fun fact
+- [x] **Columnar Sargent cherry** (*Prunus sargentii 'Columnaris'*, `prunus-sargentii-columnaris`): fun fact
+- [x] **Common baldcypress** (*Taxodium distichum*, `taxodium-distichum`): fun fact
+- [x] **Common buckthorn** (*Rhamnus cathartica*, `rhamnus-cathartica`): description
+- [x] **Common honeylocust** (*Gleditsia triacanthos*, `gleditsia-triacanthos`): fun fact
+- [x] **Common larch** (*Larix decidua*, `larix-decidua`): fun fact
+- [x] **Common lilac** (*Syringa vulgaris*, `syringa-vulgaris`): description
+- [x] **Common smoketree** (*Cotinus coggygria*, `cotinus-coggygria`): fun fact
+- [x] **Common witchhazel** (*Hamamelis virginiana*, `hamamelis-virginiana`): fun fact
 - [ ] **Contorted hazelnut** (*Corylus avellana*, `corylus-avellana`): description
 - [ ] **Copper Curls Peking lilac** (*Syringa pekinensis 'Copper Curls'*, `syringa-pekinensis-copper-curls`): fun fact
 - [ ] **Crabapple** (*Malus sp.*, `malus-sp`): description
