@@ -219,6 +219,17 @@ makes no claims about Vermont's noxious-weed rule (see DATA-MODEL, origin).
 Baldcypress sinker logs, honeylocust's lost megafauna, larch in Venice's
 piles (with alder and oak) and Sargent cherry's range were confirmed.
 
+A sixth ten on 7 November 2026, contorted hazelnut to dragon's claw willow.
+Five fun facts fixed: contorted hazel (found in 1863 at Frocester, and
+propagated by grafting rather than cuttings), crabapple (the domestic apple
+descends mainly from central Asia's wild apple, with a large share from
+Europe's crab, not wholly from the former), dawn redwood (the Axel Heiberg
+forest is about 45 million years old, not 50), dogwood (the form "dagwood"
+is not attested; the skewer explanation is kept, hedged) and dragon's claw
+willow (the claim that all trees come from one original was unsourced).
+Donald Wyman's 35 years at the Arnold Arboretum (1935 to 1970) were
+confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -262,16 +273,16 @@ piles (with alder and oak) and Sargent cherry's range were confirmed.
 - [x] **Common lilac** (*Syringa vulgaris*, `syringa-vulgaris`): description
 - [x] **Common smoketree** (*Cotinus coggygria*, `cotinus-coggygria`): fun fact
 - [x] **Common witchhazel** (*Hamamelis virginiana*, `hamamelis-virginiana`): fun fact
-- [ ] **Contorted hazelnut** (*Corylus avellana*, `corylus-avellana`): description
-- [ ] **Copper Curls Peking lilac** (*Syringa pekinensis 'Copper Curls'*, `syringa-pekinensis-copper-curls`): fun fact
-- [ ] **Crabapple** (*Malus sp.*, `malus-sp`): description
-- [ ] **Crimson Cloud hawthorn** (*Crataegus laevigata 'Crimson Cloud'*, `crataegus-laevigata-crimson-cloud`): fun fact
-- [ ] **Cutleaf silver maple** (*Acer saccharinum 'Skinneri'*, `acer-saccharinum-skinneri`): fun fact
-- [ ] **Dawn redwood** (*Metasequoia glyptostroboides*, `metasequoia-glyptostroboides`): fun fact
-- [ ] **Devil's walkingstick** (*Aralia spinosa*, `aralia-spinosa`): fun fact
-- [ ] **Dogwood** (*Cornus sp.*, `cornus-sp`): description
-- [ ] **Donald Wyman crabapple** (*Malus 'Donald Wyman'*, `malus-donald-wyman`): fun fact
-- [ ] **Dragon's claw willow** (*Salix matsudana 'Tortuosa'*, `salix-matsudana-tortuosa`): description + fun fact
+- [x] **Contorted hazelnut** (*Corylus avellana*, `corylus-avellana`): description
+- [x] **Copper Curls Peking lilac** (*Syringa pekinensis 'Copper Curls'*, `syringa-pekinensis-copper-curls`): fun fact
+- [x] **Crabapple** (*Malus sp.*, `malus-sp`): description
+- [x] **Crimson Cloud hawthorn** (*Crataegus laevigata 'Crimson Cloud'*, `crataegus-laevigata-crimson-cloud`): fun fact
+- [x] **Cutleaf silver maple** (*Acer saccharinum 'Skinneri'*, `acer-saccharinum-skinneri`): fun fact
+- [x] **Dawn redwood** (*Metasequoia glyptostroboides*, `metasequoia-glyptostroboides`): fun fact
+- [x] **Devil's walkingstick** (*Aralia spinosa*, `aralia-spinosa`): fun fact
+- [x] **Dogwood** (*Cornus sp.*, `cornus-sp`): description
+- [x] **Donald Wyman crabapple** (*Malus 'Donald Wyman'*, `malus-donald-wyman`): fun fact
+- [x] **Dragon's claw willow** (*Salix matsudana 'Tortuosa'*, `salix-matsudana-tortuosa`): description + fun fact
 - [ ] **Eastern cottonwood** (*Populus deltoides*, `populus-deltoides`): fun fact
 - [ ] **Eastern hemlock** (*Tsuga canadensis*, `tsuga-canadensis`): description
 - [ ] **Eastern hophornbeam** (*Ostrya virginiana*, `ostrya-virginiana`): fun fact
