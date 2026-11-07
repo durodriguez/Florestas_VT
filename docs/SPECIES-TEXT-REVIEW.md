@@ -266,6 +266,17 @@ Katsura's maltol, the Endicott pear (planted about 1630, still fruiting),
 Unter den Linden's first lindens (1647) and kousa dogwood's resistance to
 anthracnose were confirmed.
 
+An eleventh ten on 7 November 2026, London planetree to northern red oak.
+Three adjusted: maple (its description called it "Vermont's most-planted
+genus", which could not be sourced; it now says one of the most-planted
+on this map, where it leads oak only 270 to 264, and opposite buds narrow a winter tree
+to a short list, since katsura and Amur corktree are opposite too),
+Mongolian linden (native to northern China including Inner Mongolia, not
+to Mongolia itself) and London planetree (Spain or southern France is the
+usual view, but English origins are argued too). Montmorency and Traverse
+City, Nordmann's 1836 expedition and red mulberry's hybridizing with white
+were confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -359,16 +370,16 @@ anthracnose were confirmed.
 - [x] **Larch** (*Larix sp.*, `larix-sp`): description + fun fact
 - [x] **Littleleaf linden** (*Tilia cordata*, `tilia-cordata`): fun fact
 - [x] **Lombardy poplar** (*Populus nigra*, `populus-nigra`): description
-- [ ] **London planetree** (*Platanus x acerifolia*, `platanus-x-acerifolia`): fun fact
-- [ ] **Magnolia** (*Magnolia sp.*, `magnolia-sp`): description
-- [ ] **Manchurian alder** (*Alnus hirsuta*, `alnus-hirsuta`): fun fact
-- [ ] **Maple** (*Acer sp.*, `acer-sp`): description
-- [ ] **Mongolian linden** (*Tilia x mongolica*, `tilia-x-mongolica`): fun fact
-- [ ] **Montmorency cherry** (*Prunus cerasus 'Montmorency'*, `prunus-cerasus-montmorency`): fun fact
-- [ ] **Mugo pine** (*Pinus mugo*, `pinus-mugo`): description + fun fact
-- [ ] **Mulberry** (*Morus sp.*, `morus-sp`): description
-- [ ] **Nordmann fir** (*Abies nordmanniana*, `abies-nordmanniana`): fun fact
-- [ ] **Northern red oak** (*Quercus rubra*, `quercus-rubra`): description
+- [x] **London planetree** (*Platanus x acerifolia*, `platanus-x-acerifolia`): fun fact
+- [x] **Magnolia** (*Magnolia sp.*, `magnolia-sp`): description
+- [x] **Manchurian alder** (*Alnus hirsuta*, `alnus-hirsuta`): fun fact
+- [x] **Maple** (*Acer sp.*, `acer-sp`): description
+- [x] **Mongolian linden** (*Tilia x mongolica*, `tilia-x-mongolica`): fun fact
+- [x] **Montmorency cherry** (*Prunus cerasus 'Montmorency'*, `prunus-cerasus-montmorency`): fun fact
+- [x] **Mugo pine** (*Pinus mugo*, `pinus-mugo`): description + fun fact
+- [x] **Mulberry** (*Morus sp.*, `morus-sp`): description
+- [x] **Nordmann fir** (*Abies nordmanniana*, `abies-nordmanniana`): fun fact
+- [x] **Northern red oak** (*Quercus rubra*, `quercus-rubra`): description
 - [ ] **Norway maple** (*Acer platanoides*, `acer-platanoides`): description
 - [ ] **Norway spruce** (*Picea abies*, `picea-abies`): description
 - [ ] **Oakleaf mountain ash** (*Sorbus x thuringiaca*, `sorbus-x-thuringiaca`): fun fact
