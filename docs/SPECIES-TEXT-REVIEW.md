@@ -258,6 +258,14 @@ hold together when torn, by a different means, so "the only hardy tree
 that does this" became "the only hardy tree with rubber in its leaves").
 Japanese stewartia's "grey" became "gray".
 
+A tenth ten on 7 November 2026, Japanese tree lilac to Lombardy poplar. Two
+fun facts eased: Japanese tree lilac (sharing a family with privet does not
+explain the scent, so "which is why" was dropped) and katsura (its wood is
+a recognized but cheaper go-board wood; kaya is the traditional prize).
+Katsura's maltol, the Endicott pear (planted about 1630, still fruiting),
+Unter den Linden's first lindens (1647) and kousa dogwood's resistance to
+anthracnose were confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -341,16 +349,16 @@ Japanese stewartia's "grey" became "gray".
 - [x] **Hinoki falsecypress** (*Chamaecyparis obtusa*, `chamaecyparis-obtusa`): fun fact
 - [x] **Honeycrisp apple** (*Malus domestica 'Honeycrisp'*, `malus-domestica-honeycrisp`): fun fact
 - [x] **Japanese stewartia** (*Stewartia pseudocamellia*, `stewartia-pseudocamellia`): description
-- [ ] **Japanese tree lilac** (*Syringa reticulata*, `syringa-reticulata`): fun fact
-- [ ] **Juniper** (*Juniperus sp.*, `juniperus-sp`): description
-- [ ] **Katsuratree** (*Cercidiphyllum japonicum*, `cercidiphyllum-japonicum`): fun fact
-- [ ] **Kentucky coffeetree** (*Gymnocladus dioicus*, `gymnocladus-dioicus`): description
-- [ ] **Korean maple** (*Acer pseudosieboldianum*, `acer-pseudosieboldianum`): fun fact
-- [ ] **Korean sun pear** (*Pyrus fauriei*, `pyrus-fauriei`): description + fun fact
-- [ ] **Kousa dogwood** (*Cornus kousa*, `cornus-kousa`): fun fact
-- [ ] **Larch** (*Larix sp.*, `larix-sp`): description + fun fact
-- [ ] **Littleleaf linden** (*Tilia cordata*, `tilia-cordata`): fun fact
-- [ ] **Lombardy poplar** (*Populus nigra*, `populus-nigra`): description
+- [x] **Japanese tree lilac** (*Syringa reticulata*, `syringa-reticulata`): fun fact
+- [x] **Juniper** (*Juniperus sp.*, `juniperus-sp`): description
+- [x] **Katsuratree** (*Cercidiphyllum japonicum*, `cercidiphyllum-japonicum`): fun fact
+- [x] **Kentucky coffeetree** (*Gymnocladus dioicus*, `gymnocladus-dioicus`): description
+- [x] **Korean maple** (*Acer pseudosieboldianum*, `acer-pseudosieboldianum`): fun fact
+- [x] **Korean sun pear** (*Pyrus fauriei*, `pyrus-fauriei`): description + fun fact
+- [x] **Kousa dogwood** (*Cornus kousa*, `cornus-kousa`): fun fact
+- [x] **Larch** (*Larix sp.*, `larix-sp`): description + fun fact
+- [x] **Littleleaf linden** (*Tilia cordata*, `tilia-cordata`): fun fact
+- [x] **Lombardy poplar** (*Populus nigra*, `populus-nigra`): description
 - [ ] **London planetree** (*Platanus x acerifolia*, `platanus-x-acerifolia`): fun fact
 - [ ] **Magnolia** (*Magnolia sp.*, `magnolia-sp`): description
 - [ ] **Manchurian alder** (*Alnus hirsuta*, `alnus-hirsuta`): fun fact
