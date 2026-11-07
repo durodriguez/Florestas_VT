@@ -316,6 +316,16 @@ in Tataria"), box elder as the one native maple with divided leaves, swamp
 white oak's long-stalked acorns and sweet pepperbush's peppercorn capsules
 were confirmed.
 
+A seventeenth ten on 7 November 2026, variegated tuliptree to white
+willow. Two fun facts adjusted: Ware oak (named for George Ware, the
+Morton Arboretum's research director, but he is not documented as its
+breeder; a nursery catalogue credits the Regal Prince cross to Earl
+Cully; the parent is the columnar English oak) and Washington hawthorn
+(the late-1700s Washington nurseries are reported, not documented, and
+its later spread north was unsourced). Higan-zakura, concolor, white oak's
+plugged pores, the Heracles myth, watap and the cricket-bat willow were
+confirmed.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -469,16 +479,16 @@ were confirmed.
 - [x] **Thornless honeylocust** (*Gleditsia triacanthos f. inermis*, `gleditsia-triacanthos-inermis`): description
 - [x] **Three-flower maple** (*Acer triflorum*, `acer-triflorum`): fun fact
 - [x] **Turkish filbert** (*Corylus colurna*, `corylus-colurna`): description + fun fact
-- [ ] **Variegated tuliptree** (*Liriodendron tulipifera 'Aureomarginatum'*, `liriodendron-tulipifera-aureomarginatum`): fun fact
-- [ ] **Ware oak** (*Quercus x warei*, `quercus-x-warei`): fun fact
-- [ ] **Washington hawthorn** (*Crataegus phaenopyrum*, `crataegus-phaenopyrum`): description + fun fact
-- [ ] **Weeping cherry** (*Prunus subhirtella*, `prunus-subhirtella`): fun fact
-- [ ] **White ash** (*Fraxinus americana*, `fraxinus-americana`): description
-- [ ] **White fir** (*Abies concolor*, `abies-concolor`): fun fact
-- [ ] **White oak** (*Quercus alba*, `quercus-alba`): description + fun fact
-- [ ] **White poplar** (*Populus alba*, `populus-alba`): fun fact
-- [ ] **White spruce** (*Picea glauca*, `picea-glauca`): fun fact
-- [ ] **White willow** (*Salix alba*, `salix-alba`): fun fact
+- [x] **Variegated tuliptree** (*Liriodendron tulipifera 'Aureomarginatum'*, `liriodendron-tulipifera-aureomarginatum`): fun fact
+- [x] **Ware oak** (*Quercus x warei*, `quercus-x-warei`): fun fact
+- [x] **Washington hawthorn** (*Crataegus phaenopyrum*, `crataegus-phaenopyrum`): description + fun fact
+- [x] **Weeping cherry** (*Prunus subhirtella*, `prunus-subhirtella`): fun fact
+- [x] **White ash** (*Fraxinus americana*, `fraxinus-americana`): description
+- [x] **White fir** (*Abies concolor*, `abies-concolor`): fun fact
+- [x] **White oak** (*Quercus alba*, `quercus-alba`): description + fun fact
+- [x] **White poplar** (*Populus alba*, `populus-alba`): fun fact
+- [x] **White spruce** (*Picea glauca*, `picea-glauca`): fun fact
+- [x] **White willow** (*Salix alba*, `salix-alba`): fun fact
 - [ ] **Whitespire birch** (*Betula populifolia 'Whitespire'*, `betula-populifolia-whitespire`): fun fact
 - [ ] **Wildfire black tupelo** (*Nyssa sylvatica 'Wildfire'*, `nyssa-sylvatica-wildfire`): fun fact
 - [ ] **Willow** (*Salix sp.*, `salix-sp`): description + fun fact
