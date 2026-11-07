@@ -300,6 +300,14 @@ Sargent cherry (Bigelow's seed in 1890, Sargent's in 1892), Soulange-Bodin
 as a retired cavalry officer of Napoleon's, scarlet oak as Washington,
 DC's tree and Shantung maple's nervonic-acid oil were confirmed.
 
+A fifteenth ten on 7 November 2026, shingle oak to spruce, all as written
+(shingle oak's fun fact had been rewritten that day). Confirmed: Siberian
+elm seeds eaten in northern China, starving bumblebees under silver
+linden, silver maple's seed sprouting without a winter, southern magnolia
+as Mississippi's tree and Louisiana's flower, the Späth alder (selected
+1894, sold from 1908), salicylic acid from meadowsweet and the "spir" in
+aspirin, and Maine spruce gum (1848).
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -433,16 +441,16 @@ DC's tree and Shantung maple's nervonic-acid oil were confirmed.
 - [x] **Serviceberry** (*Amelanchier sp.*, `amelanchier-sp`): fun fact
 - [x] **Shadblow serviceberry** (*Amelanchier canadensis*, `amelanchier-canadensis`): fun fact
 - [x] **Shantung maple** (*Acer truncatum*, `acer-truncatum`): fun fact
-- [ ] **Shingle oak** (*Quercus imbricaria*, `quercus-imbricaria`): fun fact
-- [ ] **Siberian elm** (*Ulmus pumila*, `ulmus-pumila`): fun fact
-- [ ] **Siberian peashrub** (*Caragana arborescens*, `caragana-arborescens`): fun fact
-- [ ] **Sienna Glen maple** (*Acer x freemanii 'Sienna Glen'*, `acer-x-freemanii-sienna-glen`): fun fact
-- [ ] **Silver linden** (*Tilia tomentosa*, `tilia-tomentosa`): fun fact
-- [ ] **Silver maple** (*Acer saccharinum*, `acer-saccharinum`): fun fact
-- [ ] **Southern magnolia** (*Magnolia grandiflora*, `magnolia-grandiflora`): fun fact
-- [ ] **Spaeth alder** (*Alnus x spaethii*, `alnus-x-spaethii`): fun fact
-- [ ] **Spirea** (*Spiraea sp.*, `spiraea-sp`): description + fun fact
-- [ ] **Spruce** (*Picea sp.*, `picea-sp`): description + fun fact
+- [x] **Shingle oak** (*Quercus imbricaria*, `quercus-imbricaria`): fun fact
+- [x] **Siberian elm** (*Ulmus pumila*, `ulmus-pumila`): fun fact
+- [x] **Siberian peashrub** (*Caragana arborescens*, `caragana-arborescens`): fun fact
+- [x] **Sienna Glen maple** (*Acer x freemanii 'Sienna Glen'*, `acer-x-freemanii-sienna-glen`): fun fact
+- [x] **Silver linden** (*Tilia tomentosa*, `tilia-tomentosa`): fun fact
+- [x] **Silver maple** (*Acer saccharinum*, `acer-saccharinum`): fun fact
+- [x] **Southern magnolia** (*Magnolia grandiflora*, `magnolia-grandiflora`): fun fact
+- [x] **Spaeth alder** (*Alnus x spaethii*, `alnus-x-spaethii`): fun fact
+- [x] **Spirea** (*Spiraea sp.*, `spiraea-sp`): description + fun fact
+- [x] **Spruce** (*Picea sp.*, `picea-sp`): description + fun fact
 - [ ] **Sugar maple** (*Acer saccharum*, `acer-saccharum`): description
 - [ ] **Summersweet** (*Clethra alnifolia*, `clethra-alnifolia`): fun fact
 - [ ] **Swamp white oak** (*Quercus bicolor*, `quercus-bicolor`): fun fact
