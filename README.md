@@ -97,7 +97,8 @@ hand-drawn estimates, marked as such on the map; `/tracer/` replaces them with
 traced ones. See [docs/CAMPUS-AREAS.md](docs/CAMPUS-AREAS.md).
 
 **Walking trails** — self-guided tours drawn from `data/trails.geojson`, each
-with a stop list.
+with a stop list. None are drawn yet, so the map does not offer the option; it
+appears in the layers control once the file holds a trail.
 
 **Near me** — sorts results by distance from the visitor's location, for
 "what am I standing under?"

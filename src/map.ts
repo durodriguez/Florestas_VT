@@ -209,13 +209,16 @@ export class PlantMap {
     // so the outline toggles on and off without disturbing the chosen basemap.
     // Only the outline: the campus areas are chosen one by one in the panel.
     const provisional = outline.some((f) => f.properties.provisional);
+    const overlays: Record<string, L.Layer> = {
+      [`Campus outline${provisional ? ' (approximate)' : ''}`]: this.outlineLayer,
+    };
+    // The trails option is offered only once data/trails.geojson holds a
+    // trail: an empty checkbox would show nothing. Adding a trail brings it back.
+    if (dataset.trails.features.length > 0) overlays['Walking trails'] = this.trailLayer;
     L.control
       .layers(
         layers,
-        {
-          [`Campus outline${provisional ? ' (approximate)' : ''}`]: this.outlineLayer,
-          'Walking trails': this.trailLayer,
-        },
+        overlays,
         { position: 'bottomright', collapsed: true },
       )
       .addTo(this.map);
@@ -249,7 +252,8 @@ export class PlantMap {
     this.outlineLayer.addTo(this.map);
     this.quietCampus = false;
     this.cluster.addTo(this.map);
-    // Walking trails start hidden; the layers control (bottom right) shows them.
+    // Walking trails start hidden; the layers control (bottom right) shows them,
+    // once there are any.
     this.highlight.addTo(this.map);
     this.hoverRing.addTo(this.map);
   }
