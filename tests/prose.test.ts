@@ -40,7 +40,7 @@ describe('vocabularyOverlap', () => {
 describe('checkProse', () => {
   const row = (over: Record<string, string> = {}) => ({
     taxon_id: 'quercus-test', common_name: 'Test oak',
-    description: 'Bark is deeply furrowed and grey.',
+    description: 'Bark is deeply furrowed and gray.',
     fun_fact: 'Squirrels strip the acorns before they fall.',
     ...over,
   });
