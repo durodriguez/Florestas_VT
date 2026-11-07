@@ -326,6 +326,12 @@ its later spread north was unsourced). Higan-zakura, concolor, white oak's
 plugged pores, the Heracles myth, watap and the cricket-bat willow were
 confirmed.
 
+The last six on 7 November 2026, Whitespire birch to Yoshino cherry, all as
+written: betulin's white bark, bee gums cut from hollow black gum, salicin
+and aspirin, yellow birch on stilt roots past 300 years, and the 1912 gift
+of 3,020 cherries answered by dogwoods in 1915. With these, every box in
+this section is ticked.
+
 - [x] **Allegheny serviceberry** (*Amelanchier laevis*, `amelanchier-laevis`): fun fact
 - [x] **Amber Glow dawn redwood** (*Metasequoia glyptostroboides 'Amber Glow'*, `metasequoia-glyptostroboides-amber-glow`): fun fact
 - [x] **American basswood** (*Tilia americana*, `tilia-americana`): description
@@ -489,12 +495,12 @@ confirmed.
 - [x] **White poplar** (*Populus alba*, `populus-alba`): fun fact
 - [x] **White spruce** (*Picea glauca*, `picea-glauca`): fun fact
 - [x] **White willow** (*Salix alba*, `salix-alba`): fun fact
-- [ ] **Whitespire birch** (*Betula populifolia 'Whitespire'*, `betula-populifolia-whitespire`): fun fact
-- [ ] **Wildfire black tupelo** (*Nyssa sylvatica 'Wildfire'*, `nyssa-sylvatica-wildfire`): fun fact
-- [ ] **Willow** (*Salix sp.*, `salix-sp`): description + fun fact
-- [ ] **Yellow birch** (*Betula alleghaniensis*, `betula-alleghaniensis`): fun fact
-- [ ] **Yew** (*Taxus sp.*, `taxus-sp`): description
-- [ ] **Yoshino cherry** (*Prunus x yedoensis*, `prunus-x-yedoensis`): fun fact
+- [x] **Whitespire birch** (*Betula populifolia 'Whitespire'*, `betula-populifolia-whitespire`): fun fact
+- [x] **Wildfire black tupelo** (*Nyssa sylvatica 'Wildfire'*, `nyssa-sylvatica-wildfire`): fun fact
+- [x] **Willow** (*Salix sp.*, `salix-sp`): description + fun fact
+- [x] **Yellow birch** (*Betula alleghaniensis*, `betula-alleghaniensis`): fun fact
+- [x] **Yew** (*Taxus sp.*, `taxus-sp`): description
+- [x] **Yoshino cherry** (*Prunus x yedoensis*, `prunus-x-yedoensis`): fun fact
 
 ## 3. Added since
 
