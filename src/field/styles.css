@@ -176,7 +176,8 @@ textarea { min-height: 78px; resize: vertical; }
 /* Styled like the stamped metal itself, so it reads as the thing to match. */
 .nearby-tag {
   display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 6px;
-  background: #e4e7e5; border: 1px solid #c3c9c5; color: var(--ink);
+  /* Fixed dark ink: the chip stays light in dark mode, and --ink turns light. */
+  background: #e4e7e5; border: 1px solid #c3c9c5; color: #101820;
   font-size: 14px; font-weight: 700; letter-spacing: .03em; vertical-align: 1px;
 }
 .nearby-tag--none { background: none; border-style: dashed; color: var(--ink-2); font-weight: 500; }
@@ -390,6 +391,15 @@ body[data-mode] [data-only="none"] { display: none !important; }
   background: rgba(16, 24, 32, 0.75); color: #fff; font-size: 11px; font-weight: 600;
 }
 .leaflet-tooltip.context-label::before { display: none; }
+
+/* Tag or accession beside each tree that can be picked, as in the positions
+   tool: plain white text with a dark halo, readable on any imagery. */
+.leaflet-tooltip.tree-num {
+  padding: 0; border: 0; box-shadow: none; background: none;
+  color: #fff; font-size: 12px; font-weight: 700; white-space: nowrap;
+  text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 3px #000;
+}
+.leaflet-tooltip.tree-num::before { display: none; }
 
 /* "Show what it sends": raw receiver lines, small and scrollable. */
 .receiver-log { margin-top: 4px; font-size: 13px; }
