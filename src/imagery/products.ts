@@ -17,6 +17,7 @@ import {
 } from './raster';
 import { download, esc, imageSize, today, type SourceImage } from './images';
 import type { Bounds } from '../positions/imagery-math';
+import { PRODUCTS, request } from './db';
 
 export type Format = 'image/webp' | 'image/jpeg' | 'image/png';
 type Geometry = { type: 'Polygon'; coordinates: number[][][] } | { type: 'MultiPolygon'; coordinates: number[][][][] };
@@ -55,26 +56,8 @@ export interface Product {
 export const MAX_PIXELS = 60_000_000;
 const EXT: Record<Format, string> = { 'image/webp': 'webp', 'image/jpeg': 'jpg', 'image/png': 'png' };
 const PANE = 'made-imagery';
-const DB = 'uvm-imagery';
-const STORE = 'products';
 
-function openDb(): Promise<IDBDatabase> {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB, 1);
-    req.onupgradeneeded = () => req.result.createObjectStore(STORE, { keyPath: 'id' });
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
-}
-
-async function tx<T>(mode: IDBTransactionMode, run: (s: IDBObjectStore) => IDBRequest<T>): Promise<T> {
-  const db = await openDb();
-  return new Promise((resolve, reject) => {
-    const req = run(db.transaction(STORE, mode).objectStore(STORE));
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
-}
+const tx = <T>(mode: IDBTransactionMode, run: (s: IDBObjectStore) => IDBRequest<T>): Promise<T> => request(PRODUCTS, mode, run);
 
 const nextFrame = () => new Promise<void>((r) => setTimeout(r, 0));
 const slug = (s: string) => s.trim().replace(/[^\w.-]+/g, '-').replace(/^-+|-+$/g, '') || 'image';

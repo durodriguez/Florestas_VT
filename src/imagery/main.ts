@@ -13,6 +13,7 @@ import type { Dataset } from '../types';
 import { initSideSplit } from '../positions/split';
 import { initImages, esc } from './images';
 import { initProducts, make, MAX_PIXELS, plan, type Clip, type Format } from './products';
+import { buildTiles, initTiles, tilePlan } from './tiles';
 
 const BASE = import.meta.env.BASE_URL;
 const $ = <T extends HTMLElement>(id: string): T => {
@@ -46,9 +47,10 @@ initSideSplit($('map').parentElement!, document.querySelector<HTMLElement>('.sid
 
 const images = initImages(map, {
   onAligning: (on) => document.body.classList.toggle('is-aligning', on),
-  onSelection: () => updatePlan(),
+  onSelection: () => { updatePlan(); updateTilePlan(); },
 });
 const products = initProducts(map);
+const tiles = initTiles(map, layers);
 
 map.on('click', (e: L.LeafletMouseEvent) => { images.click(e.latlng); });
 document.addEventListener('keydown', (e) => {
@@ -93,6 +95,7 @@ async function loadCampus(): Promise<void> {
     layers.addOverlay(layer, `${label}${f.properties.provisional ? ' (approximate)' : ''}`);
     clips.set(f.properties.area_id, { name: label, geometry: f.geometry as Clip['geometry'] });
     select.add(new Option(label, f.properties.area_id));
+    $<HTMLSelectElement>('tiles-clip').add(new Option(label, f.properties.area_id, outline, outline));
   }
   map.fitBounds(L.geoJSON(ordered[0]).getBounds());
 }
@@ -164,6 +167,61 @@ $('make-go').addEventListener('click', () => {
     .finally(() => updatePlan());
 });
 
+// ---------------------------------------------------------------- tiles
+
+let stopTiles = false;
+
+function tileOptions() {
+  const clipId = $<HTMLSelectElement>('tiles-clip').value;
+  return {
+    name: $<HTMLInputElement>('tiles-name').value,
+    sources: images.chosen(),
+    clip: clipId ? clips.get(clipId) ?? null : null,
+    maxZ: Number($<HTMLSelectElement>('tiles-zoom').value),
+  };
+}
+
+function updateTilePlan(): void {
+  const o = tileOptions();
+  const p = tilePlan(o);
+  const go = $<HTMLButtonElement>('tiles-go');
+  if (typeof p === 'string') {
+    $('tiles-plan').textContent = p;
+    go.disabled = true;
+    return;
+  }
+  const skipped = o.sources.filter((s) => !s.aligned).length;
+  // A third more for the zooms out; 15–40 kB a tile is typical of aerial WebP.
+  const all = Math.round(p.tiles * 4 / 3);
+  $('tiles-plan').textContent =
+    `At most ${p.tiles.toLocaleString()} tiles at the finest zoom, ${all.toLocaleString()} in all, ` +
+    `roughly ${Math.round((all * 15) / 1000)}–${Math.round((all * 40) / 1000)} MB. Tiles with nothing in them are skipped, so usually fewer.` +
+    (skipped ? ` ${skipped} ticked image(s) not aligned yet are left out.` : '');
+  go.disabled = false;
+}
+
+for (const id of ['tiles-clip', 'tiles-zoom']) $(id).addEventListener('change', updateTilePlan);
+$('tiles-stop').addEventListener('click', () => { stopTiles = true; });
+$('tiles-go').addEventListener('click', () => {
+  const go = $<HTMLButtonElement>('tiles-go');
+  const stop = $('tiles-stop');
+  const msg = $('tiles-msg');
+  go.disabled = true;
+  stop.hidden = false;
+  stopTiles = false;
+  const started = performance.now();
+  void navigator.storage?.persist?.().catch(() => undefined);
+  buildTiles(tileOptions(), (t) => { msg.textContent = t; }, () => stopTiles)
+    .then((t) => {
+      tiles.added(t);
+      const mins = (performance.now() - started) / 60000;
+      msg.textContent = `Built ${t.name}: ${t.tiles.toLocaleString()} tiles in ${mins >= 1 ? `${mins.toFixed(1)} min` : `${Math.round(mins * 60)} s`}. It is on the map, and in the layers list (top right).`;
+      void renderUsage();
+    })
+    .catch((err: Error) => { msg.textContent = err.message === 'Stopped.' ? 'Stopped; nothing kept.' : `Could not build the tiles: ${err.message}`; })
+    .finally(() => { stop.hidden = true; updateTilePlan(); });
+});
+
 async function renderUsage(): Promise<void> {
   try {
     const est = await navigator.storage?.estimate?.();
@@ -173,7 +231,7 @@ async function renderUsage(): Promise<void> {
 
 loadCampus()
   .catch((err: Error) => { $('make-msg').textContent = `The campus areas did not load: ${err.message}`; })
-  .finally(() => { updatePlan(); void renderUsage(); });
+  .finally(() => { updatePlan(); updateTilePlan(); void renderUsage(); });
 
 // For the browser test.
-Object.assign(window as unknown as Record<string, unknown>, { __imagery: { images, products, map } });
+Object.assign(window as unknown as Record<string, unknown>, { __imagery: { images, products, tiles, map } });

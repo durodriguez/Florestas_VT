@@ -70,6 +70,42 @@ Every made image is drawn on the Web Mercator grid at a whole zoom level, the
 same grid the web maps use. That keeps the way open to showing made images on
 the public map, the survey app or the positions tool later.
 
+## Campus tile layer
+
+A made image is one big picture, and a browser has to unpack all of it to
+show any of it. The satellite layer is fast for a different reason: it comes
+as small tiles, 256 pixels square, with a separate set for every zoom, and the
+browser only ever loads the twenty or thirty tiles on screen. **Campus tile
+layer** makes the same thing from your images, so a whole campus at full
+detail pans and zooms as smoothly as the satellite layer.
+
+1. **Tick** the aligned images to use. Images not aligned yet are left out.
+2. **Clip to** is the campus boundary unless changed; tiles outside it are not
+   made at all.
+3. **Finest** is zoom 20 (0.11 m per pixel, about the detail of a Google Earth
+   print) or zoom 19 (0.21 m, a quarter of the tiles).
+4. **Build tiles.** The page works through the area in blocks of 16 × 16
+   tiles, drawing each from the images, best-ranked on top where they
+   overlap, then makes every zoom out from the one below, down to zoom 14. It
+   says how far it has got and about how long is left; **Stop** abandons the
+   build and keeps nothing.
+
+The page estimates the tile count and size first. For the whole campus
+boundary at zoom 20 the upper bound is about 14,000 tiles; tiles with nothing
+in them are skipped, so it is fewer. On a test with two print-sized images,
+about 1,200 tiles at zoom 20 took 20 seconds, so a whole campus should take
+minutes rather than hours, on a laptop. Storage per tile depends on the
+images; expect a few hundred megabytes for the campus at zoom 20.
+
+The tile set is then a layer like any other. It is listed under **Campus tile
+layer** (Show, Hide, Remove), and appears in the layers list at the top right
+of this page, of the [positions tool](POSITIONS.md), and of the survey app, on
+the same computer and browser, as *Campus tiles: (name)*, off until ticked. A
+phone that never built one sees nothing new. Tiles stay in the browser that
+built them; to move a set to another computer, build it there.
+
+To rebuild after aligning better, build a new set and remove the old one.
+
 ## What may be published
 
 Nothing on this page is uploaded: sources and made images stay in the browser

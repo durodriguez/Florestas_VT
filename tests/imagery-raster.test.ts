@@ -130,3 +130,40 @@ describe('clip shapes', () => {
     expect(y).toBeLessThanOrEqual(g.height + 1);
   });
 });
+
+describe('tiles', () => {
+  it('covers a box with whole tiles, the way the satellite layer numbers them', async () => {
+    const { tilesCovering } = await import('../src/imagery/raster');
+    const t = tilesCovering(campus, 20);
+    // The campus box at zoom 20 is tens of thousands of pixels: about a hundred-plus tiles a side.
+    expect(t.x1 - t.x0).toBeGreaterThan(80);
+    const [x, y] = project(campus.north, campus.west, 20);
+    expect(t.x0).toBe(Math.floor(x / 256));
+    expect(t.y0).toBe(Math.floor(y / 256));
+  });
+
+  it('cuts the tiles into blocks that cover each exactly once', async () => {
+    const { blocksOf } = await import('../src/imagery/raster');
+    const t = { x0: 10, x1: 45, y0: 3, y1: 20 };
+    const blocks = blocksOf(t, 20, 16);
+    const area = blocks.reduce((s, b) => s + (b.width / 256) * (b.height / 256), 0);
+    expect(area).toBe(35 * 17);
+    expect(blocks[0]).toEqual({ z: 20, x0: 2560, y0: 768, width: 4096, height: 4096 });
+    expect(blocks.at(-1)).toEqual({ z: 20, x0: 42 * 256, y0: 19 * 256, width: 3 * 256, height: 256 });
+  });
+
+  it('tells an empty tile from one with a single pixel in it', async () => {
+    const { tileHasPixels } = await import('../src/imagery/raster');
+    const w = 512;
+    const rgba = new Uint8ClampedArray(w * 256 * 4);
+    expect(tileHasPixels(rgba, w, 0, 0)).toBe(false);
+    rgba[(200 * w + 300) * 4 + 3] = 1; // one pixel in the second tile
+    expect(tileHasPixels(rgba, w, 0, 0)).toBe(false);
+    expect(tileHasPixels(rgba, w, 1, 0)).toBe(true);
+  });
+
+  it('finds each parent tile once', async () => {
+    const { parentsOf } = await import('../src/imagery/raster');
+    expect(parentsOf([[4, 6], [5, 6], [4, 7], [5, 7], [6, 6]])).toEqual([[2, 3], [3, 3]]);
+  });
+});

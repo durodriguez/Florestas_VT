@@ -24,6 +24,7 @@
           <li><strong>Tick</strong> the images to work with, then <strong>Make image</strong>. One image ticked recompresses it onto the map's grid; several are merged into one. Where they overlap, the image with the lowest alignment error (1 in the list) wins.</li>
           <li><strong>Clip to</strong> keeps only what lies inside the campus boundary or one campus area. <strong>Detail</strong> sets the pixel size; finer is sharper and larger.</li>
           <li>Made images are kept in this browser and listed under <strong>Made images</strong>. <strong>Export .zip</strong> saves the picture, a placement file this page can import again, and a world file (<code>.wld</code>, Web Mercator, EPSG:3857) for QGIS and other GIS programs.</li>
+          <li><strong>Campus tile layer</strong> turns the ticked images into map tiles, the way the satellite layer is made, so the whole campus pans and zooms smoothly at full detail. Building one takes a while; the page says how far it has got.</li>
           <li>Nothing is uploaded. Google Earth prints may not be published as a map layer, and neither may anything made from them; see <code>docs/IMAGERY.md</code>.</li>
         </ul>
       </details>
@@ -91,6 +92,31 @@
         <p id="make-plan" class="hint"></p>
         <button type="button" id="make-go" class="bar-btn" disabled>Make image</button>
         <p id="make-msg" class="hint" aria-live="polite"></p>
+      </section>
+
+      <section class="card make" id="tiles">
+        <span class="label">Campus tile layer <span id="tiles-count" class="count">0</span></span>
+        <p class="hint">Cuts the ticked, aligned images into map tiles, like the satellite layer's, so the
+          result pans and zooms as smoothly. Kept in this browser; the positions tool, and the survey app on
+          this computer, can show it too.</p>
+        <label class="field">Name <input type="text" id="tiles-name" autocomplete="off" spellcheck="false" placeholder="e.g. campus-2026"></label>
+        <label class="field">Clip to
+          <select id="tiles-clip"><option value="">Nothing (the images' full extent)</option></select>
+        </label>
+        <label class="field">Finest
+          <select id="tiles-zoom">
+            <option value="20">Zoom 20 (0.11 m per pixel)</option>
+            <option value="19">Zoom 19 (0.21 m per pixel, a quarter the size)</option>
+          </select>
+        </label>
+        <p id="tiles-plan" class="hint"></p>
+        <div class="align-actions">
+          <button type="button" id="tiles-go" class="bar-btn" disabled>Build tiles</button>
+          <button type="button" id="tiles-stop" class="ghost-btn" hidden>Stop</button>
+        </div>
+        <p id="tiles-msg" class="hint" aria-live="polite"></p>
+        <ul id="tiles-list" class="img-list"></ul>
+        <p id="tiles-empty" class="hint">No tile sets built yet.</p>
       </section>
 
       <details class="imagery" id="products" open>

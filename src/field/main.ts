@@ -27,6 +27,7 @@ import { download, stamp, toCsv, toPhotoZip } from './exporter';
 import { photoTakenOn } from './exif';
 import { extensionFor, kb, shrinkPhoto } from './photo';
 import { ALL_CARDS, CARDS, visibleCards, type Mode } from './modes';
+import { addTileOverlays } from '../imagery/tilelayer';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -108,6 +109,10 @@ L.tileLayer(
   'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
   { maxZoom: 22, maxNativeZoom: 20 },
 ).addTo(map);
+// A campus tile set built on the image calibration page, on a laptop that has
+// one: a layers button appears for it. On a phone that never built one,
+// nothing changes.
+void addTileOverlays(map, null);
 
 // Leaflet's default icon resolves image URLs relative to its own CSS, which a
 // bundler rewrites — the marker renders broken and cannot be grabbed. Drawing
