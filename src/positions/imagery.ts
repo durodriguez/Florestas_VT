@@ -42,7 +42,7 @@ interface Live extends Stored {
  * corner exactly where the fit says. Redrawn on every zoom, hidden during the
  * zoom animation itself rather than drawn wrong for a quarter of a second.
  */
-class WarpedImage extends L.Layer {
+export class WarpedImage extends L.Layer {
   private el: HTMLImageElement | null = null;
   private corners: Array<[number, number]> = [];
   private opacity = 1;

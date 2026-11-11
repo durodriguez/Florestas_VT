@@ -1,0 +1,23 @@
+/* Image calibration: the positions tool's look (imported before this), plus
+   the parts only this page has. */
+
+.side { width: 360px; }
+.add-btn { text-align: center; }
+.img-files--3 { grid-template-columns: 1fr 1fr 1fr; }
+.img-pick { margin: 0; width: 1rem; height: 1rem; accent-color: var(--uvm-green); }
+
+.make { gap: .45rem; }
+.make .field { display: grid; grid-template-columns: 4.5rem 1fr auto; align-items: center; gap: .4rem; font-size: .85rem; }
+.make .field input[type="text"], .make .field select {
+  width: 100%; padding: .3rem .4rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); font: inherit;
+}
+.make .field:not(#make-quality-row) > :last-child { grid-column: 2 / 4; }
+.make .bar-btn { align-self: flex-start; }
+#make-msg { color: var(--text); }
+
+/* While aligning, the made images step aside: points go on the sources. */
+body.is-aligning .leaflet-made-imagery-pane { display: none; }
+
+@media (max-width: 48rem) {
+  .side { width: auto; }
+}

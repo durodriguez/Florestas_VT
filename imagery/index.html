@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Align, merge, clip and compress aerial images of campus.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#154734">
+  <title>Image calibration — UVM Trees</title>
+</head>
+<body>
+  <header class="bar">
+    <img class="bar-mark" src="/uvm-mark.png" alt="" width="28" height="28">
+    <h1>Image calibration</h1>
+  </header>
+
+  <main class="layout">
+    <aside class="side">
+      <details class="help">
+        <summary>How it works</summary>
+        <ul>
+          <li><strong>Add</strong> aerial images, each with its <code>.geprint</code> if it is a Google Earth print, and <strong>Align</strong> each one: click a feature on your image, then the same feature on the satellite map, four or more times. Two points place it; four or more correct its tilt.</li>
+          <li>The images and alignments are the same ones the <a href="../positions/">positions tool</a> uses: both pages keep them in this browser, so work done in either shows in the other after a reload. Alignment files from either page import into both.</li>
+          <li><strong>Tick</strong> the images to work with, then <strong>Make image</strong>. One image ticked recompresses it onto the map's grid; several are merged into one. Where they overlap, the image with the lowest alignment error (1 in the list) wins.</li>
+          <li><strong>Clip to</strong> keeps only what lies inside the campus boundary or one campus area. <strong>Detail</strong> sets the pixel size; finer is sharper and larger.</li>
+          <li>Made images are kept in this browser and listed under <strong>Made images</strong>. <strong>Export .zip</strong> saves the picture, a placement file this page can import again, and a world file (<code>.wld</code>, Web Mercator, EPSG:3857) for QGIS and other GIS programs.</li>
+          <li>Nothing is uploaded. Google Earth prints may not be published as a map layer, and neither may anything made from them; see <code>docs/IMAGERY.md</code>.</li>
+        </ul>
+      </details>
+
+      <details class="imagery" id="imagery" open>
+        <summary>Source images <span id="img-count" class="count">0</span></summary>
+        <label class="ghost-btn add-btn">Add images and .geprint files…
+          <input type="file" id="img-add" multiple accept=".jpg,.jpeg,.png,.webp,.geprint" hidden>
+        </label>
+        <div class="img-files">
+          <button type="button" id="align-export" class="ghost-btn" disabled>Export alignments</button>
+          <label class="ghost-btn">Import alignments
+            <input type="file" id="align-import" accept=".json,application/json" hidden>
+          </label>
+        </div>
+        <p id="img-msg" class="hint img-msg"></p>
+        <div class="img-controls">
+          <label class="opacity">Opacity <input type="range" id="img-opacity" min="0" max="100" value="100"></label>
+        </div>
+        <div class="img-files img-files--3">
+          <button type="button" id="img-show-all" class="ghost-btn">Show all</button>
+          <button type="button" id="img-hide-all" class="ghost-btn">Hide all</button>
+          <button type="button" id="img-pick-all" class="ghost-btn">Tick all</button>
+        </div>
+        <p class="hint">Images start hidden each time this page opens, so it loads quickly. The number is the stacking order: where images overlap, 1 is on top.</p>
+        <ul id="img-list" class="img-list"></ul>
+        <p id="img-empty" class="hint">No images added yet.</p>
+      </details>
+
+      <section id="align-panel" class="card align-panel" hidden>
+        <span id="align-title" class="name"></span>
+        <p id="align-step" class="align-step"></p>
+        <p id="align-fit" class="hint"></p>
+        <div class="align-actions">
+          <button type="button" id="align-undo" class="ghost-btn">Undo last point</button>
+          <button type="button" id="align-done" class="bar-btn">Done</button>
+        </div>
+      </section>
+
+      <section class="card make" id="make">
+        <span class="label">Make image</span>
+        <p id="make-sources" class="hint"></p>
+        <label class="field">Name <input type="text" id="make-name" autocomplete="off" spellcheck="false" placeholder="e.g. central-campus-2026"></label>
+        <label class="field">Clip to
+          <select id="make-clip"><option value="">Nothing (the images' full extent)</option></select>
+        </label>
+        <label class="field">Detail
+          <select id="make-mpp">
+            <option value="">Finest of the images</option>
+            <option value="0.1">0.1 m per pixel</option>
+            <option value="0.15">0.15 m per pixel</option>
+            <option value="0.25">0.25 m per pixel</option>
+            <option value="0.5">0.5 m per pixel</option>
+            <option value="1">1 m per pixel</option>
+          </select>
+        </label>
+        <label class="field">Format
+          <select id="make-format">
+            <option value="image/webp">WebP (small, keeps transparency)</option>
+            <option value="image/jpeg">JPEG (outside the clip turns white)</option>
+            <option value="image/png">PNG (lossless, large)</option>
+          </select>
+        </label>
+        <label class="field" id="make-quality-row">Quality <input type="range" id="make-quality" min="40" max="100" value="80"> <span id="make-quality-val">80</span></label>
+        <p id="make-plan" class="hint"></p>
+        <button type="button" id="make-go" class="bar-btn" disabled>Make image</button>
+        <p id="make-msg" class="hint" aria-live="polite"></p>
+      </section>
+
+      <details class="imagery" id="products" open>
+        <summary>Made images <span id="prod-count" class="count">0</span></summary>
+        <div class="img-controls">
+          <label class="ghost-btn">Import .zip
+            <input type="file" id="prod-import" accept=".zip,application/zip" hidden>
+          </label>
+          <label class="opacity">Opacity <input type="range" id="prod-opacity" min="0" max="100" value="100"></label>
+        </div>
+        <p id="prod-msg" class="hint img-msg"></p>
+        <ul id="prod-list" class="img-list"></ul>
+        <p id="prod-empty" class="hint">Nothing made yet.</p>
+      </details>
+      <p id="usage" class="hint"></p>
+    </aside>
+
+    <div id="side-split" class="side-split" role="separator" tabindex="0"
+         aria-orientation="horizontal" aria-controls="map" aria-valuemin="0"
+         aria-valuemax="100" aria-valuenow="38"
+         aria-label="Resize the panel and the map. Drag, or use the arrow keys."
+         title="Drag up or down to give the map or the panel more room. Double-tap to reset.">
+      <span class="side-split-grip" aria-hidden="true"></span>
+    </div>
+
+    <div id="map" class="map" aria-label="Map of campus on satellite imagery"></div>
+  </main>
+
+  <script type="module" src="../src/imagery/main.ts"></script>
+</body>
+</html>

@@ -129,6 +129,12 @@ you a file that `npm run positions` applies. A correction is not a survey visit
 and the public map does not show it as one. See
 [docs/POSITIONS.md](docs/POSITIONS.md).
 
+**Image calibration** — an internal tool at `/imagery/` for aerial images:
+add and align them as in the position editor (the two share the same images
+and alignments), then merge overlapping images, clip them to the campus
+boundary or a campus area, and compress them, kept in the browser and exported
+with a world file for GIS. See [docs/IMAGERY.md](docs/IMAGERY.md).
+
 **Survey intake** — `npm run import` merges a field export into the dataset:
 assigns accession numbers, resolves species from common or scientific names,
 normalises `EXC`/`Very Good`/`g` onto the condition vocabulary, reads whatever
