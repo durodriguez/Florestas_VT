@@ -251,3 +251,55 @@ export function boxOfGeometry(
   const polys = geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates;
   return boxOfPoints(polys.flatMap((poly) => poly[0]!.map(([lng, lat]) => [lat!, lng!] as [number, number])));
 }
+
+// ---------------------------------------------------------------- tiles
+
+/** Leaflet's tile edge, in pixels. */
+export const TILE_PX = TILE;
+
+/** The tiles at zoom z that cover a box: x from x0 up to (not including) x1, likewise y. */
+export function tilesCovering(box: Box, z: number): { x0: number; x1: number; y0: number; y1: number } {
+  const g = gridFor(box, z);
+  return {
+    x0: Math.floor(g.x0 / TILE), x1: Math.ceil((g.x0 + g.width) / TILE),
+    y0: Math.floor(g.y0 / TILE), y1: Math.ceil((g.y0 + g.height) / TILE),
+  };
+}
+
+/**
+ * The tiles cut into square blocks of `size` tiles a side, worked one at a
+ * time: a whole campus at full detail is hundreds of megapixels, far beyond
+ * one browser canvas, but a block of 16 × 16 tiles is 4,096 pixels square.
+ */
+export function blocksOf(t: { x0: number; x1: number; y0: number; y1: number }, z: number, size: number): Grid[] {
+  const out: Grid[] = [];
+  for (let ty = t.y0; ty < t.y1; ty += size) {
+    for (let tx = t.x0; tx < t.x1; tx += size) {
+      const w = Math.min(size, t.x1 - tx);
+      const h = Math.min(size, t.y1 - ty);
+      out.push({ z, x0: tx * TILE, y0: ty * TILE, width: w * TILE, height: h * TILE });
+    }
+  }
+  return out;
+}
+
+/** Whether a tile's square in a block has any pixel that is not transparent. */
+export function tileHasPixels(rgba: Uint8ClampedArray, blockWidth: number, col: number, row: number): boolean {
+  const x0 = col * TILE;
+  const y0 = row * TILE;
+  for (let y = y0; y < y0 + TILE; y++) {
+    const start = (y * blockWidth + x0) * 4 + 3;
+    for (let i = start; i < start + TILE * 4; i += 4) if (rgba[i] !== 0) return true;
+  }
+  return false;
+}
+
+/** The tiles one zoom out that the given tiles fall in, each once. */
+export function parentsOf(tiles: Iterable<[number, number]>): Array<[number, number]> {
+  const seen = new Map<string, [number, number]>();
+  for (const [x, y] of tiles) {
+    const p: [number, number] = [Math.floor(x / 2), Math.floor(y / 2)];
+    seen.set(`${p[0]}/${p[1]}`, p);
+  }
+  return [...seen.values()];
+}

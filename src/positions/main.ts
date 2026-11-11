@@ -7,6 +7,7 @@ import { normalizeTag } from '../accession';
 import { TYPE_LABELS } from '../palette';
 import type { Plant } from '../types';
 import { initImagery } from './imagery';
+import { addTileOverlays } from '../imagery/tilelayer';
 import { initLocate } from './locate';
 import { initSideSplit } from './split';
 import { parsePeaks, type Peak, type PeaksFile } from './peaks';
@@ -73,6 +74,8 @@ const streets = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 22, maxNativeZoom: 19, attribution: '© OpenStreetMap contributors',
 });
 const layersControl = L.control.layers({ 'Satellite': imagery, 'Streets': streets }, undefined, { position: 'topright' }).addTo(map);
+// Campus tile sets built on the image calibration page in this browser, if any.
+void addTileOverlays(map, layersControl);
 
 // Campus outlines: above the surveyor's own imagery (250), below the trees.
 map.createPane('campus');
