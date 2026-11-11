@@ -400,6 +400,8 @@ body[data-mode] [data-only="none"] { display: none !important; }
   text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 3px #000;
 }
 .leaflet-tooltip.tree-num::before { display: none; }
+/* The pin while it only marks the surveyor: taps pass to the dots beneath. */
+.tree-pin.is-passive { pointer-events: none; }
 
 /* "Show what it sends": raw receiver lines, small and scrollable. */
 .receiver-log { margin-top: 4px; font-size: 13px; }
