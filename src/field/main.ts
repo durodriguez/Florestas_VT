@@ -1721,7 +1721,7 @@ $('export-photos').addEventListener('click', async () => {
 $('clear-all').addEventListener('click', async () => {
   const rows = await allRecords();
   if (!rows.length) return toast('Nothing saved.');
-  if (!confirm(`Delete all ${rows.length} saved record(s) and their photos from this phone? Export first — this cannot be undone.`)) return;
+  if (!confirm(`Delete all ${rows.length} saved record(s) and their photos from this device? Export first — this cannot be undone.`)) return;
   await clearAll();
   await renderList();
   await refreshCount();
@@ -1753,6 +1753,12 @@ void initSpecies();
 void initTrees();
 void refreshCount();
 gps.start();
+
+// The laptop layout pins the map card below the header; the header's height
+// varies with the device's safe area, so it is measured, not assumed.
+const syncBarHeight = () => document.documentElement.style.setProperty('--bar-h', `${document.querySelector('.bar')!.getBoundingClientRect().height}px`);
+syncBarHeight();
+window.addEventListener('resize', syncBarHeight);
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
