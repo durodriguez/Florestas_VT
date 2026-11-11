@@ -265,6 +265,21 @@ textarea { min-height: 78px; resize: vertical; }
 }
 .btn-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 
+/* ---- a laptop in the field ----
+   The phone layout is one column, which on a laptop leaves most of the screen
+   empty and the map a strip. From laptop width the map card fills the left of
+   the screen and stays put, and the rest of the form scrolls in a column on
+   the right. Same page, same order: on a phone nothing changes. --bar-h is
+   the header's height, set from main.ts. */
+@media (min-width: 64rem) {
+  #screen-form { max-width: 36rem; margin: 0 12px 0 auto; padding-right: 0; }
+  #card-position {
+    position: fixed; z-index: 1;
+    top: calc(var(--bar-h, 56px) + 12px); bottom: 12px; left: 12px; right: calc(36rem + 36px);
+  }
+  #card-position .pin-map { flex: 1; height: auto; min-height: 0; }
+}
+
 /* ---- condition segmented control ---- */
 
 .seg { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
