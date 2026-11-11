@@ -88,6 +88,8 @@ let pendingTagRead = '';
 let prefilledDedication = '';
 /** Exactly what the last render put on screen, so a tap cannot mis-resolve. */
 let offered: NearbyTree[] = [];
+/** The trees drawn on the opening map, for a tap that lands beside a dot. */
+let startOffered: NearbyTree[] = [];
 let manualLatLng: L.LatLng | null = null;
 
 // ---------------------------------------------------------------- map
@@ -197,8 +199,28 @@ const pinPlaces = (): boolean => mode === 'new' || (mode === 'update' && movingT
 // Tapping is far easier than dragging a small target one-handed in gloves, and
 // it does not depend on touch-drag behaviour varying between devices.
 map.on('click', (e: L.LeafletMouseEvent) => {
-  if (pinPlaces()) movePin(e.latlng);
+  if (pinPlaces()) return movePin(e.latlng);
+  // Picking a tree: a fingertip is far wider than a dot, so a tap that lands
+  // beside one, rather than on it, takes the nearest dot within reach.
+  const choices = mode === null ? startOffered : mode === 'update' && !claimed ? offered : [];
+  const hit = nearestOnScreen(choices, e.containerPoint, TAP_REACH_PX);
+  if (!hit) return;
+  if (mode === null) setMode('update');
+  claim(hit);
 });
+
+/** How far from a dot, in screen pixels, a tap still counts as on it. */
+const TAP_REACH_PX = 24;
+
+function nearestOnScreen(choices: NearbyTree[], at: L.Point, reach: number): NearbyTree | null {
+  let best: NearbyTree | null = null;
+  let bestD = reach;
+  for (const c of choices) {
+    const d = map.latLngToContainerPoint([c.tree.lat, c.tree.lng]).distanceTo(at);
+    if (d <= bestD) { best = c; bestD = d; }
+  }
+  return best;
+}
 
 // ---------------------------------------------------------------- gps
 
@@ -485,6 +507,7 @@ function renderNearby(): void {
     box.hidden = true;
     list.innerHTML = '';
     nearbyLayer.clearLayers();
+    offered = [];
     numberDot(L.circleMarker([claimed.tree.lat, claimed.tree.lng], {
       radius: 9, color: '#ffffff', weight: 3, fillColor: '#FFD100', fillOpacity: 1,
       bubblingMouseEvents: false, interactive: false,
@@ -496,6 +519,7 @@ function renderNearby(): void {
     box.hidden = true;
     list.innerHTML = '';
     nearbyLayer.clearLayers();
+    offered = [];
     return;
   }
 
@@ -504,6 +528,7 @@ function renderNearby(): void {
     box.hidden = true;
     list.innerHTML = '';
     nearbyLayer.clearLayers();
+    offered = [];
     return;
   }
 
@@ -580,6 +605,7 @@ function renderStartMap(point: { lat: number; lng: number } | null): void {
   $('nearby').hidden = true;
   $('nearby-list').innerHTML = '';
   nearbyLayer.clearLayers();
+  startOffered = [];
   const note = $('start-note');
   if (!point) {
     note.textContent = 'Waiting for your location to show the mapped trees around you…';
@@ -590,6 +616,7 @@ function renderStartMap(point: { lat: number; lng: number } | null): void {
     return;
   }
   const hits = nearbyTrees(point.lat, point.lng, mapped, { radiusM: START_RADIUS_M, limit: Infinity });
+  startOffered = hits;
   // The nearest keep the colours the update list will give them, so a dot
   // seen here is the same colour in the next step.
   hits.forEach((hit, i) => {
@@ -790,6 +817,9 @@ function renderMode(): void {
     if (pinPlaces()) pin.dragging.enable();
     else pin.dragging.disable();
   }
+  // While the pin only marks where the surveyor stands, taps go through it:
+  // it sits on the nearest trees, the ones most likely to be picked.
+  pin.getElement()?.classList.toggle('is-passive', !pinPlaces());
   setTimeout(() => map.invalidateSize(), 50);
 }
 
