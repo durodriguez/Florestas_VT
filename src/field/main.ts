@@ -167,6 +167,18 @@ function renderContext(): void {
 }
 map.on('moveend', renderContext);
 
+/**
+ * The number beside a dot the surveyor can pick, as the positions tool shows
+ * it: the tag, or # and the accession for a tree with no tag. It is what the
+ * surveyor matches against the metal tag on the trunk, so it is always shown,
+ * not only on hover, which a phone does not have.
+ */
+function numberDot(dot: L.CircleMarker, t: MappedTree): L.CircleMarker {
+  return dot.bindTooltip(escapeHtml(t.tag || t.id.replace(/^UVM-/, '#')), {
+    permanent: true, direction: 'right', offset: [8, 0], className: 'tree-num', interactive: false,
+  });
+}
+
 const pin = L.marker([44.4777, -73.1956], { draggable: true, icon: pinIcon, autoPan: true }).addTo(map);
 const accuracyRing = L.circle([44.4777, -73.1956], { radius: 0, color: '#1d6fe0', weight: 1, fillOpacity: 0.1 }).addTo(map);
 
@@ -473,10 +485,10 @@ function renderNearby(): void {
     box.hidden = true;
     list.innerHTML = '';
     nearbyLayer.clearLayers();
-    L.circleMarker([claimed.tree.lat, claimed.tree.lng], {
+    numberDot(L.circleMarker([claimed.tree.lat, claimed.tree.lng], {
       radius: 9, color: '#ffffff', weight: 3, fillColor: '#FFD100', fillOpacity: 1,
       bubblingMouseEvents: false, interactive: false,
-    }).addTo(nearbyLayer);
+    }), claimed.tree).addTo(nearbyLayer);
     return;
   }
   if (mode === null) return renderStartMap(point);
@@ -500,7 +512,7 @@ function renderNearby(): void {
   // would point at the wrong box.
   nearbyLayer.clearLayers();
   hits.forEach((hit, i) => {
-    L.circleMarker([hit.tree.lat, hit.tree.lng], {
+    numberDot(L.circleMarker([hit.tree.lat, hit.tree.lng], {
       radius: 7,
       color: '#ffffff',
       weight: 2,
@@ -511,7 +523,7 @@ function renderNearby(): void {
       // finger landed and marked as positioned on imagery, when a claim must
       // never move a tree.
       bubblingMouseEvents: false,
-    })
+    }), hit.tree)
       // Tapping the circle claims the tree, exactly as tapping its box does.
       // Standing under a tree and pointing at it on the map is the more
       // natural gesture of the two.
@@ -582,15 +594,14 @@ function renderStartMap(point: { lat: number; lng: number } | null): void {
   // seen here is the same colour in the next step.
   hits.forEach((hit, i) => {
     const colour = i < NEARBY_COLOURS.length ? NEARBY_COLOURS[i]! : '#ffffff';
-    L.circleMarker([hit.tree.lat, hit.tree.lng], {
+    numberDot(L.circleMarker([hit.tree.lat, hit.tree.lng], {
       radius: 7,
       color: i < NEARBY_COLOURS.length ? '#ffffff' : '#101820',
       weight: 2,
       fillColor: colour,
       fillOpacity: 0.95,
       bubblingMouseEvents: false,
-    })
-      .bindTooltip(`${hit.tree.common} · ${hit.tree.id}`, { direction: 'top', offset: [0, -6] })
+    }), hit.tree)
       .on('click', () => {
         setMode('update');
         claim(hit);
@@ -774,7 +785,7 @@ function renderMode(): void {
     ? movingTree
       ? 'Tap the map or drag the pin to where the tree really stands. That position replaces the mapped one.'
       : 'The gold dot is where the map has this tree. Its position is kept unless you say it is wrong.'
-    : 'The blue ring is you. Tap a coloured dot, or its line in the list, to pick that tree.';
+    : 'The blue ring is you. Tap a colored dot, or its line in the list, to pick that tree.';
   if (pin.dragging) {
     if (pinPlaces()) pin.dragging.enable();
     else pin.dragging.disable();
