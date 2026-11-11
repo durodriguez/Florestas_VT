@@ -726,4 +726,5 @@ description, not from a checked source.
 - [x] **Verdant Hills boxwood** (*Buxus 'Verdant Hills'*, `buxus-verdant-hills`): description + fun fact
 - [x] **Virginia creeper** (*Parthenocissus quinquefolia*, `parthenocissus-quinquefolia`): description + fun fact
 - [x] **Weeping Alaska cedar** (*Callitropsis nootkatensis 'Pendula'*, `callitropsis-nootkatensis-pendula`): description + fun fact
+- [x] **Weeping European beech** (*Fagus sylvatica 'Pendula'*, `fagus-sylvatica-pendula`): description + fun fact
 - [x] **White Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodtwo'*, `hibiscus-syriacus-notwoodtwo`): description + fun fact
