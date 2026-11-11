@@ -188,10 +188,9 @@ by name, so an image is easy to find; the number beside each is its place in
 the stacking, from 1 on top. Error only counts once it has been measured:
 an image needs five or more points to rank by it — four always fit exactly and
 report zero, which proves nothing — so those rank below, then stretched images,
-then unaligned ones. Nothing is merged into one picture: at campus size and
-this resolution that would be hundreds of megapixels, beyond what a browser
-draws, for a result that looks the same. Only images in view are drawn, so
-fourteen large prints do not slow the page.
+then unaligned ones. Nothing is merged into one picture here; the image
+calibration page ([IMAGERY.md](IMAGERY.md)) does that, from the same images.
+Only images in view are drawn, so fourteen large prints do not slow the page.
 
 **Images start hidden each time the page opens,** so it loads quickly with
 many large prints stored. **Show all**, or **Show** on one image, draws them.
