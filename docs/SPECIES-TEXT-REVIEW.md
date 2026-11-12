@@ -756,6 +756,14 @@ conifers"). Bladdernut's rattling seeds and lasting pods, Amur honeysuckle's
 promotion by the Soil Conservation Service from the 1960s, and black willow
 as the largest North American willow were confirmed.
 
+A second ten on 12 November 2026, blue ash to creeping juniper. Creeping
+juniper settled: Go Botany lists it as native to Vermont, extremely rare
+(S1) and threatened, so its origin is now Vermont native and its fun fact
+says so. Kathleen Meserve's blue hollies (English holly crossed with
+*Ilex rugosa*, on Long Island), Dièreville and the Acadian plants he
+brought to Tournefort, and sweetshrub's clove-and-camphor bark were
+confirmed.
+
 - [x] **American bladdernut** (*Staphylea trifolia*, `staphylea-trifolia`): description + fun fact
 - [x] **American holly** (*Ilex opaca*, `ilex-opaca`): description + fun fact
 - [x] **American plum** (*Prunus americana*, `prunus-americana`): description + fun fact
@@ -766,16 +774,16 @@ as the largest North American willow were confirmed.
 - [x] **Black chokeberry** (*Aronia melanocarpa*, `aronia-melanocarpa`): description + fun fact
 - [x] **Black willow** (*Salix nigra*, `salix-nigra`): description + fun fact
 - [x] **Blackhaw** (*Viburnum prunifolium*, `viburnum-prunifolium`): description + fun fact
-- [ ] **Blue ash** (*Fraxinus quadrangulata*, `fraxinus-quadrangulata`): description + fun fact
-- [ ] **Blue holly** (*Ilex x meserveae*, `ilex-x-meserveae`): description + fun fact
-- [ ] **Bush honeysuckle** (*Diervilla lonicera*, `diervilla-lonicera`): description + fun fact
-- [ ] **Buttonbush** (*Cephalanthus occidentalis*, `cephalanthus-occidentalis`): description + fun fact
-- [ ] **Carolina allspice** (*Calycanthus floridus*, `calycanthus-floridus`): description + fun fact
-- [ ] **Cedar of Lebanon** (*Cedrus libani*, `cedrus-libani`): description + fun fact
-- [ ] **Chinese chestnut** (*Castanea mollissima*, `castanea-mollissima`): description + fun fact
-- [ ] **Chinese redbud** (*Cercis chinensis*, `cercis-chinensis`): description + fun fact
-- [ ] **Common privet** (*Ligustrum vulgare*, `ligustrum-vulgare`): description + fun fact
-- [ ] **Creeping juniper** (*Juniperus horizontalis*, `juniperus-horizontalis`): description + fun fact
+- [x] **Blue ash** (*Fraxinus quadrangulata*, `fraxinus-quadrangulata`): description + fun fact
+- [x] **Blue holly** (*Ilex x meserveae*, `ilex-x-meserveae`): description + fun fact
+- [x] **Bush honeysuckle** (*Diervilla lonicera*, `diervilla-lonicera`): description + fun fact
+- [x] **Buttonbush** (*Cephalanthus occidentalis*, `cephalanthus-occidentalis`): description + fun fact
+- [x] **Carolina allspice** (*Calycanthus floridus*, `calycanthus-floridus`): description + fun fact
+- [x] **Cedar of Lebanon** (*Cedrus libani*, `cedrus-libani`): description + fun fact
+- [x] **Chinese chestnut** (*Castanea mollissima*, `castanea-mollissima`): description + fun fact
+- [x] **Chinese redbud** (*Cercis chinensis*, `cercis-chinensis`): description + fun fact
+- [x] **Common privet** (*Ligustrum vulgare*, `ligustrum-vulgare`): description + fun fact
+- [x] **Creeping juniper** (*Juniperus horizontalis*, `juniperus-horizontalis`): description + fun fact
 - [ ] **Downy serviceberry** (*Amelanchier arborea*, `amelanchier-arborea`): description + fun fact
 - [ ] **English yew** (*Taxus baccata*, `taxus-baccata`): description + fun fact
 - [ ] **Fragrant sumac** (*Rhus aromatica*, `rhus-aromatica`): description + fun fact
