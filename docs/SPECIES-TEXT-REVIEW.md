@@ -795,8 +795,10 @@ which ticks every box in this batch. Sweet crabapple settled as introduced:
 it is absent from New England (Trees and Shrubs Online), so a Vermont tree is
 planted. Wintercreeper's fun fact now says Fortune took the tea plants for
 the East India Company. Betty Smith's tree of heaven ("the only tree that
-grows out of cement") was confirmed. Of the six Vermont statuses left blank
-at the start, only mockernut hickory is still open.
+grows out of cement") was confirmed. Blackhaw settled as introduced: Go
+Botany restricts it in New England to southwestern Connecticut. Of the six
+Vermont statuses left blank at the start, only mockernut hickory is still
+open.
 
 - [x] **American bladdernut** (*Staphylea trifolia*, `staphylea-trifolia`): description + fun fact
 - [x] **American holly** (*Ilex opaca*, `ilex-opaca`): description + fun fact
