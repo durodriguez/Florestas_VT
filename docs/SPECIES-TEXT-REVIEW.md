@@ -726,4 +726,135 @@ description, not from a checked source.
 - [x] **Verdant Hills boxwood** (*Buxus 'Verdant Hills'*, `buxus-verdant-hills`): description + fun fact
 - [x] **Virginia creeper** (*Parthenocissus quinquefolia*, `parthenocissus-quinquefolia`): description + fun fact
 - [x] **Weeping Alaska cedar** (*Callitropsis nootkatensis 'Pendula'*, `callitropsis-nootkatensis-pendula`): description + fun fact
+- [x] **Weeping European beech** (*Fagus sylvatica 'Pendula'*, `fagus-sylvatica-pendula`): description + fun fact
 - [x] **White Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodtwo'*, `hibiscus-syriacus-notwoodtwo`): description + fun fact
+
+### Added 12 November 2026: species likely on an Ohio campus
+
+Fifty-eight species commonly planted or wild on Ohio campuses, added in one
+batch. Unlike the entries above, **their text was written from general
+knowledge, not from sources**, so every box starts empty and each wants the
+usual check, fun facts and dates first. Traits (size, months, hardiness)
+are typical figures and want the same look.
+
+`origin` means Vermont, not Ohio. Four are marked Vermont invasive because
+they are on Vermont's noxious weed list as far as could be found: tree of
+heaven, Amur honeysuckle, Japanese barberry and multiflora rose. Common
+privet, black alder, wintercreeper and Japanese spirea, which some places
+treat as invasive, were not found on it and are marked introduced. Six are
+left blank because their Vermont status could not be settled: mockernut
+hickory, sweet crabapple, blackhaw, smooth hydrangea, fragrant sumac and
+creeping juniper.
+
+Checked on 12 November 2026, the first ten (American bladdernut to
+blackhaw). Three fun facts adjusted: American plum (USDA names Plains
+peoples who ate the plums fresh or dried; "dried for winter" rested on
+weaker sources), arrowwood (the arrow-shaft use is reported, not
+documented, so "said to have been") and Atlas cedar (cedars shed pollen in
+autumn; the comparison now names pines, spruces and firs rather than "most
+conifers"). Bladdernut's rattling seeds and lasting pods, Amur honeysuckle's
+promotion by the Soil Conservation Service from the 1960s, and black willow
+as the largest North American willow were confirmed.
+
+A second ten on 12 November 2026, blue ash to creeping juniper. Creeping
+juniper settled: Go Botany lists it as native to Vermont, extremely rare
+(S1) and threatened, so its origin is now Vermont native and its fun fact
+says so. Kathleen Meserve's blue hollies (English holly crossed with
+*Ilex rugosa*, on Long Island), Dièreville and the Acadian plants he
+brought to Tournefort, and sweetshrub's clove-and-camphor bark were
+confirmed.
+
+A third ten on 12 November 2026, downy serviceberry to Japanese cornel.
+Fragrant sumac settled as Vermont native (Go Botany: present in Vermont,
+uncommon, native in the west of New England; GRIN: native in western
+Vermont). Two fun facts made exact: Japanese cedar (the Nikko avenue was
+planted from about 1625 and keeps some twelve thousand trees; the count
+planted is disputed) and Japanese barberry (the tick studies were in
+Connecticut, by its Agricultural Experiment Station).
+
+A fourth ten on 12 November 2026, Japanese spirea to overcup oak. Overcup
+oak's fun fact reworded: that the acorns float on floodwater is well
+documented (Missouri Department of Conservation, USDA), what makes them
+float less so. Mockernut hickory's origin stays blank: the Forest Service's
+Silvics includes Vermont in its range, but a 1973 study of herbarium
+specimens (Manning) found none from Vermont. Fortune's weigela (1844 or
+1845), the Alabama state wildflower and the multiflora rose's career as a
+living fence were confirmed.
+
+A fifth ten on 12 November 2026, post oak to sugarberry. Smooth hydrangea
+settled as introduced (Go Botany: present in Vermont, but New England's few
+populations, mostly in disturbed ground, are considered introduced). Two fun
+facts fixed: red buckeye (the fish-stunning is reported, with seeds or
+branches; the roots made soap) and slippery elm (the name is for the slimy
+wet bark, not for its medicinal use). Benjamin Shumard, Texas state
+geologist from 1858, and 'Annabelle' from a wild plant near Anna, Illinois,
+were confirmed.
+
+The last eight on 12 November 2026, sweet crabapple to yellow buckeye,
+which ticks every box in this batch. Sweet crabapple settled as introduced:
+it is absent from New England (Trees and Shrubs Online), so a Vermont tree is
+planted. Wintercreeper's fun fact now says Fortune took the tea plants for
+the East India Company. Betty Smith's tree of heaven ("the only tree that
+grows out of cement") was confirmed. Blackhaw settled as introduced: Go
+Botany restricts it in New England to southwestern Connecticut. Of the six
+Vermont statuses left blank at the start, only mockernut hickory is still
+open.
+
+- [x] **American bladdernut** (*Staphylea trifolia*, `staphylea-trifolia`): description + fun fact
+- [x] **American holly** (*Ilex opaca*, `ilex-opaca`): description + fun fact
+- [x] **American plum** (*Prunus americana*, `prunus-americana`): description + fun fact
+- [x] **Amur honeysuckle** (*Lonicera maackii*, `lonicera-maackii`): description + fun fact
+- [x] **Arrowwood viburnum** (*Viburnum dentatum*, `viburnum-dentatum`): description + fun fact
+- [x] **Atlas cedar** (*Cedrus atlantica*, `cedrus-atlantica`): description + fun fact
+- [x] **Black alder** (*Alnus glutinosa*, `alnus-glutinosa`): description + fun fact
+- [x] **Black chokeberry** (*Aronia melanocarpa*, `aronia-melanocarpa`): description + fun fact
+- [x] **Black willow** (*Salix nigra*, `salix-nigra`): description + fun fact
+- [x] **Blackhaw** (*Viburnum prunifolium*, `viburnum-prunifolium`): description + fun fact
+- [x] **Blue ash** (*Fraxinus quadrangulata*, `fraxinus-quadrangulata`): description + fun fact
+- [x] **Blue holly** (*Ilex x meserveae*, `ilex-x-meserveae`): description + fun fact
+- [x] **Bush honeysuckle** (*Diervilla lonicera*, `diervilla-lonicera`): description + fun fact
+- [x] **Buttonbush** (*Cephalanthus occidentalis*, `cephalanthus-occidentalis`): description + fun fact
+- [x] **Carolina allspice** (*Calycanthus floridus*, `calycanthus-floridus`): description + fun fact
+- [x] **Cedar of Lebanon** (*Cedrus libani*, `cedrus-libani`): description + fun fact
+- [x] **Chinese chestnut** (*Castanea mollissima*, `castanea-mollissima`): description + fun fact
+- [x] **Chinese redbud** (*Cercis chinensis*, `cercis-chinensis`): description + fun fact
+- [x] **Common privet** (*Ligustrum vulgare*, `ligustrum-vulgare`): description + fun fact
+- [x] **Creeping juniper** (*Juniperus horizontalis*, `juniperus-horizontalis`): description + fun fact
+- [x] **Downy serviceberry** (*Amelanchier arborea*, `amelanchier-arborea`): description + fun fact
+- [x] **English yew** (*Taxus baccata*, `taxus-baccata`): description + fun fact
+- [x] **Fragrant sumac** (*Rhus aromatica*, `rhus-aromatica`): description + fun fact
+- [x] **Fraser fir** (*Abies fraseri*, `abies-fraseri`): description + fun fact
+- [x] **Gray dogwood** (*Cornus racemosa*, `cornus-racemosa`): description + fun fact
+- [x] **Hybrid witchhazel** (*Hamamelis x intermedia*, `hamamelis-x-intermedia`): description + fun fact
+- [x] **Inkberry** (*Ilex glabra*, `ilex-glabra`): description + fun fact
+- [x] **Japanese barberry** (*Berberis thunbergii*, `berberis-thunbergii`): description + fun fact
+- [x] **Japanese cedar** (*Cryptomeria japonica*, `cryptomeria-japonica`): description + fun fact
+- [x] **Japanese cornel** (*Cornus officinalis*, `cornus-officinalis`): description + fun fact
+- [x] **Japanese spirea** (*Spiraea japonica*, `spiraea-japonica`): description + fun fact
+- [x] **Large fothergilla** (*Fothergilla major*, `fothergilla-major`): description + fun fact
+- [x] **Mimosa** (*Albizia julibrissin*, `albizia-julibrissin`): description + fun fact
+- [x] **Mockernut hickory** (*Carya tomentosa*, `carya-tomentosa`): description + fun fact
+- [x] **Multiflora rose** (*Rosa multiflora*, `rosa-multiflora`): description + fun fact
+- [x] **Ninebark** (*Physocarpus opulifolius*, `physocarpus-opulifolius`): description + fun fact
+- [x] **Oakleaf hydrangea** (*Hydrangea quercifolia*, `hydrangea-quercifolia`): description + fun fact
+- [x] **Old-fashioned weigela** (*Weigela florida*, `weigela-florida`): description + fun fact
+- [x] **Oriental spruce** (*Picea orientalis*, `picea-orientalis`): description + fun fact
+- [x] **Overcup oak** (*Quercus lyrata*, `quercus-lyrata`): description + fun fact
+- [x] **Post oak** (*Quercus stellata*, `quercus-stellata`): description + fun fact
+- [x] **Red buckeye** (*Aesculus pavia*, `aesculus-pavia`): description + fun fact
+- [x] **Shumard oak** (*Quercus shumardii*, `quercus-shumardii`): description + fun fact
+- [x] **Slippery elm** (*Ulmus rubra*, `ulmus-rubra`): description + fun fact
+- [x] **Smooth hydrangea** (*Hydrangea arborescens*, `hydrangea-arborescens`): description + fun fact
+- [x] **Sourwood** (*Oxydendrum arboreum*, `oxydendrum-arboreum`): description + fun fact
+- [x] **Southern catalpa** (*Catalpa bignonioides*, `catalpa-bignonioides`): description + fun fact
+- [x] **Speckled alder** (*Alnus incana subsp. rugosa*, `alnus-incana-rugosa`): description + fun fact
+- [x] **Staghorn sumac** (*Rhus typhina*, `rhus-typhina`): description + fun fact
+- [x] **Sugarberry** (*Celtis laevigata*, `celtis-laevigata`): description + fun fact
+- [x] **Sweet crabapple** (*Malus coronaria*, `malus-coronaria`): description + fun fact
+- [x] **Tree of heaven** (*Ailanthus altissima*, `ailanthus-altissima`): description + fun fact
+- [x] **Virginia sweetspire** (*Itea virginica*, `itea-virginica`): description + fun fact
+- [x] **Weeping willow** (*Salix babylonica*, `salix-babylonica`): description + fun fact
+- [x] **Willow oak** (*Quercus phellos*, `quercus-phellos`): description + fun fact
+- [x] **Winterberry** (*Ilex verticillata*, `ilex-verticillata`): description + fun fact
+- [x] **Wintercreeper** (*Euonymus fortunei*, `euonymus-fortunei`): description + fun fact
+- [x] **Yellow buckeye** (*Aesculus flava*, `aesculus-flava`): description + fun fact

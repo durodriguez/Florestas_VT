@@ -792,7 +792,7 @@ list grows into the hundreds, foliage may be worth reviving for them alone.
 - **`vermont-native`** — occurs naturally in Vermont, generally meaning present
   before European settlement.
 - **`vermont-invasive`** — spreads aggressively here and displaces other
-  plants. Nine taxa currently carry it, including Norway maple, common
+  plants. Eighteen taxa currently carry it, including Norway maple, common
   buckthorn and Russian olive.
 - **`introduced`** — brought here and not known to be a problem.
 
