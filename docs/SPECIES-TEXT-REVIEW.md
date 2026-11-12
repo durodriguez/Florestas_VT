@@ -764,6 +764,14 @@ says so. Kathleen Meserve's blue hollies (English holly crossed with
 brought to Tournefort, and sweetshrub's clove-and-camphor bark were
 confirmed.
 
+A third ten on 12 November 2026, downy serviceberry to Japanese cornel.
+Fragrant sumac settled as Vermont native (Go Botany: present in Vermont,
+uncommon, native in the west of New England; GRIN: native in western
+Vermont). Two fun facts made exact: Japanese cedar (the Nikko avenue was
+planted from about 1625 and keeps some twelve thousand trees; the count
+planted is disputed) and Japanese barberry (the tick studies were in
+Connecticut, by its Agricultural Experiment Station).
+
 - [x] **American bladdernut** (*Staphylea trifolia*, `staphylea-trifolia`): description + fun fact
 - [x] **American holly** (*Ilex opaca*, `ilex-opaca`): description + fun fact
 - [x] **American plum** (*Prunus americana*, `prunus-americana`): description + fun fact
@@ -784,16 +792,16 @@ confirmed.
 - [x] **Chinese redbud** (*Cercis chinensis*, `cercis-chinensis`): description + fun fact
 - [x] **Common privet** (*Ligustrum vulgare*, `ligustrum-vulgare`): description + fun fact
 - [x] **Creeping juniper** (*Juniperus horizontalis*, `juniperus-horizontalis`): description + fun fact
-- [ ] **Downy serviceberry** (*Amelanchier arborea*, `amelanchier-arborea`): description + fun fact
-- [ ] **English yew** (*Taxus baccata*, `taxus-baccata`): description + fun fact
-- [ ] **Fragrant sumac** (*Rhus aromatica*, `rhus-aromatica`): description + fun fact
-- [ ] **Fraser fir** (*Abies fraseri*, `abies-fraseri`): description + fun fact
-- [ ] **Gray dogwood** (*Cornus racemosa*, `cornus-racemosa`): description + fun fact
-- [ ] **Hybrid witchhazel** (*Hamamelis x intermedia*, `hamamelis-x-intermedia`): description + fun fact
-- [ ] **Inkberry** (*Ilex glabra*, `ilex-glabra`): description + fun fact
-- [ ] **Japanese barberry** (*Berberis thunbergii*, `berberis-thunbergii`): description + fun fact
-- [ ] **Japanese cedar** (*Cryptomeria japonica*, `cryptomeria-japonica`): description + fun fact
-- [ ] **Japanese cornel** (*Cornus officinalis*, `cornus-officinalis`): description + fun fact
+- [x] **Downy serviceberry** (*Amelanchier arborea*, `amelanchier-arborea`): description + fun fact
+- [x] **English yew** (*Taxus baccata*, `taxus-baccata`): description + fun fact
+- [x] **Fragrant sumac** (*Rhus aromatica*, `rhus-aromatica`): description + fun fact
+- [x] **Fraser fir** (*Abies fraseri*, `abies-fraseri`): description + fun fact
+- [x] **Gray dogwood** (*Cornus racemosa*, `cornus-racemosa`): description + fun fact
+- [x] **Hybrid witchhazel** (*Hamamelis x intermedia*, `hamamelis-x-intermedia`): description + fun fact
+- [x] **Inkberry** (*Ilex glabra*, `ilex-glabra`): description + fun fact
+- [x] **Japanese barberry** (*Berberis thunbergii*, `berberis-thunbergii`): description + fun fact
+- [x] **Japanese cedar** (*Cryptomeria japonica*, `cryptomeria-japonica`): description + fun fact
+- [x] **Japanese cornel** (*Cornus officinalis*, `cornus-officinalis`): description + fun fact
 - [ ] **Japanese spirea** (*Spiraea japonica*, `spiraea-japonica`): description + fun fact
 - [ ] **Large fothergilla** (*Fothergilla major*, `fothergilla-major`): description + fun fact
 - [ ] **Mimosa** (*Albizia julibrissin*, `albizia-julibrissin`): description + fun fact
