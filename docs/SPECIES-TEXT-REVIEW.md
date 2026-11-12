@@ -772,6 +772,15 @@ planted from about 1625 and keeps some twelve thousand trees; the count
 planted is disputed) and Japanese barberry (the tick studies were in
 Connecticut, by its Agricultural Experiment Station).
 
+A fourth ten on 12 November 2026, Japanese spirea to overcup oak. Overcup
+oak's fun fact reworded: that the acorns float on floodwater is well
+documented (Missouri Department of Conservation, USDA), what makes them
+float less so. Mockernut hickory's origin stays blank: the Forest Service's
+Silvics includes Vermont in its range, but a 1973 study of herbarium
+specimens (Manning) found none from Vermont. Fortune's weigela (1844 or
+1845), the Alabama state wildflower and the multiflora rose's career as a
+living fence were confirmed.
+
 - [x] **American bladdernut** (*Staphylea trifolia*, `staphylea-trifolia`): description + fun fact
 - [x] **American holly** (*Ilex opaca*, `ilex-opaca`): description + fun fact
 - [x] **American plum** (*Prunus americana*, `prunus-americana`): description + fun fact
@@ -802,16 +811,16 @@ Connecticut, by its Agricultural Experiment Station).
 - [x] **Japanese barberry** (*Berberis thunbergii*, `berberis-thunbergii`): description + fun fact
 - [x] **Japanese cedar** (*Cryptomeria japonica*, `cryptomeria-japonica`): description + fun fact
 - [x] **Japanese cornel** (*Cornus officinalis*, `cornus-officinalis`): description + fun fact
-- [ ] **Japanese spirea** (*Spiraea japonica*, `spiraea-japonica`): description + fun fact
-- [ ] **Large fothergilla** (*Fothergilla major*, `fothergilla-major`): description + fun fact
-- [ ] **Mimosa** (*Albizia julibrissin*, `albizia-julibrissin`): description + fun fact
-- [ ] **Mockernut hickory** (*Carya tomentosa*, `carya-tomentosa`): description + fun fact
-- [ ] **Multiflora rose** (*Rosa multiflora*, `rosa-multiflora`): description + fun fact
-- [ ] **Ninebark** (*Physocarpus opulifolius*, `physocarpus-opulifolius`): description + fun fact
-- [ ] **Oakleaf hydrangea** (*Hydrangea quercifolia*, `hydrangea-quercifolia`): description + fun fact
-- [ ] **Old-fashioned weigela** (*Weigela florida*, `weigela-florida`): description + fun fact
-- [ ] **Oriental spruce** (*Picea orientalis*, `picea-orientalis`): description + fun fact
-- [ ] **Overcup oak** (*Quercus lyrata*, `quercus-lyrata`): description + fun fact
+- [x] **Japanese spirea** (*Spiraea japonica*, `spiraea-japonica`): description + fun fact
+- [x] **Large fothergilla** (*Fothergilla major*, `fothergilla-major`): description + fun fact
+- [x] **Mimosa** (*Albizia julibrissin*, `albizia-julibrissin`): description + fun fact
+- [x] **Mockernut hickory** (*Carya tomentosa*, `carya-tomentosa`): description + fun fact
+- [x] **Multiflora rose** (*Rosa multiflora*, `rosa-multiflora`): description + fun fact
+- [x] **Ninebark** (*Physocarpus opulifolius*, `physocarpus-opulifolius`): description + fun fact
+- [x] **Oakleaf hydrangea** (*Hydrangea quercifolia*, `hydrangea-quercifolia`): description + fun fact
+- [x] **Old-fashioned weigela** (*Weigela florida*, `weigela-florida`): description + fun fact
+- [x] **Oriental spruce** (*Picea orientalis*, `picea-orientalis`): description + fun fact
+- [x] **Overcup oak** (*Quercus lyrata*, `quercus-lyrata`): description + fun fact
 - [ ] **Post oak** (*Quercus stellata*, `quercus-stellata`): description + fun fact
 - [ ] **Red buckeye** (*Aesculus pavia*, `aesculus-pavia`): description + fun fact
 - [ ] **Shumard oak** (*Quercus shumardii*, `quercus-shumardii`): description + fun fact
