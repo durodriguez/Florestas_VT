@@ -781,6 +781,15 @@ specimens (Manning) found none from Vermont. Fortune's weigela (1844 or
 1845), the Alabama state wildflower and the multiflora rose's career as a
 living fence were confirmed.
 
+A fifth ten on 12 November 2026, post oak to sugarberry. Smooth hydrangea
+settled as introduced (Go Botany: present in Vermont, but New England's few
+populations, mostly in disturbed ground, are considered introduced). Two fun
+facts fixed: red buckeye (the fish-stunning is reported, with seeds or
+branches; the roots made soap) and slippery elm (the name is for the slimy
+wet bark, not for its medicinal use). Benjamin Shumard, Texas state
+geologist from 1858, and 'Annabelle' from a wild plant near Anna, Illinois,
+were confirmed.
+
 - [x] **American bladdernut** (*Staphylea trifolia*, `staphylea-trifolia`): description + fun fact
 - [x] **American holly** (*Ilex opaca*, `ilex-opaca`): description + fun fact
 - [x] **American plum** (*Prunus americana*, `prunus-americana`): description + fun fact
@@ -821,16 +830,16 @@ living fence were confirmed.
 - [x] **Old-fashioned weigela** (*Weigela florida*, `weigela-florida`): description + fun fact
 - [x] **Oriental spruce** (*Picea orientalis*, `picea-orientalis`): description + fun fact
 - [x] **Overcup oak** (*Quercus lyrata*, `quercus-lyrata`): description + fun fact
-- [ ] **Post oak** (*Quercus stellata*, `quercus-stellata`): description + fun fact
-- [ ] **Red buckeye** (*Aesculus pavia*, `aesculus-pavia`): description + fun fact
-- [ ] **Shumard oak** (*Quercus shumardii*, `quercus-shumardii`): description + fun fact
-- [ ] **Slippery elm** (*Ulmus rubra*, `ulmus-rubra`): description + fun fact
-- [ ] **Smooth hydrangea** (*Hydrangea arborescens*, `hydrangea-arborescens`): description + fun fact
-- [ ] **Sourwood** (*Oxydendrum arboreum*, `oxydendrum-arboreum`): description + fun fact
-- [ ] **Southern catalpa** (*Catalpa bignonioides*, `catalpa-bignonioides`): description + fun fact
-- [ ] **Speckled alder** (*Alnus incana subsp. rugosa*, `alnus-incana-rugosa`): description + fun fact
-- [ ] **Staghorn sumac** (*Rhus typhina*, `rhus-typhina`): description + fun fact
-- [ ] **Sugarberry** (*Celtis laevigata*, `celtis-laevigata`): description + fun fact
+- [x] **Post oak** (*Quercus stellata*, `quercus-stellata`): description + fun fact
+- [x] **Red buckeye** (*Aesculus pavia*, `aesculus-pavia`): description + fun fact
+- [x] **Shumard oak** (*Quercus shumardii*, `quercus-shumardii`): description + fun fact
+- [x] **Slippery elm** (*Ulmus rubra*, `ulmus-rubra`): description + fun fact
+- [x] **Smooth hydrangea** (*Hydrangea arborescens*, `hydrangea-arborescens`): description + fun fact
+- [x] **Sourwood** (*Oxydendrum arboreum*, `oxydendrum-arboreum`): description + fun fact
+- [x] **Southern catalpa** (*Catalpa bignonioides*, `catalpa-bignonioides`): description + fun fact
+- [x] **Speckled alder** (*Alnus incana subsp. rugosa*, `alnus-incana-rugosa`): description + fun fact
+- [x] **Staghorn sumac** (*Rhus typhina*, `rhus-typhina`): description + fun fact
+- [x] **Sugarberry** (*Celtis laevigata*, `celtis-laevigata`): description + fun fact
 - [ ] **Sweet crabapple** (*Malus coronaria*, `malus-coronaria`): description + fun fact
 - [ ] **Tree of heaven** (*Ailanthus altissima*, `ailanthus-altissima`): description + fun fact
 - [ ] **Virginia sweetspire** (*Itea virginica*, `itea-virginica`): description + fun fact
