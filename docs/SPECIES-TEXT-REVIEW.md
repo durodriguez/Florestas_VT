@@ -728,3 +728,79 @@ description, not from a checked source.
 - [x] **Weeping Alaska cedar** (*Callitropsis nootkatensis 'Pendula'*, `callitropsis-nootkatensis-pendula`): description + fun fact
 - [x] **Weeping European beech** (*Fagus sylvatica 'Pendula'*, `fagus-sylvatica-pendula`): description + fun fact
 - [x] **White Chiffon rose of Sharon** (*Hibiscus syriacus 'Notwoodtwo'*, `hibiscus-syriacus-notwoodtwo`): description + fun fact
+
+### Added 12 November 2026: species likely on an Ohio campus
+
+Fifty-eight species commonly planted or wild on Ohio campuses, added in one
+batch. Unlike the entries above, **their text was written from general
+knowledge, not from sources**, so every box starts empty and each wants the
+usual check, fun facts and dates first. Traits (size, months, hardiness)
+are typical figures and want the same look.
+
+`origin` means Vermont, not Ohio. Four are marked Vermont invasive because
+they are on Vermont's noxious weed list as far as could be found: tree of
+heaven, Amur honeysuckle, Japanese barberry and multiflora rose. Common
+privet, black alder, wintercreeper and Japanese spirea, which some places
+treat as invasive, were not found on it and are marked introduced. Six are
+left blank because their Vermont status could not be settled: mockernut
+hickory, sweet crabapple, blackhaw, smooth hydrangea, fragrant sumac and
+creeping juniper.
+
+- [ ] **American bladdernut** (*Staphylea trifolia*, `staphylea-trifolia`): description + fun fact
+- [ ] **American holly** (*Ilex opaca*, `ilex-opaca`): description + fun fact
+- [ ] **American plum** (*Prunus americana*, `prunus-americana`): description + fun fact
+- [ ] **Amur honeysuckle** (*Lonicera maackii*, `lonicera-maackii`): description + fun fact
+- [ ] **Arrowwood viburnum** (*Viburnum dentatum*, `viburnum-dentatum`): description + fun fact
+- [ ] **Atlas cedar** (*Cedrus atlantica*, `cedrus-atlantica`): description + fun fact
+- [ ] **Black alder** (*Alnus glutinosa*, `alnus-glutinosa`): description + fun fact
+- [ ] **Black chokeberry** (*Aronia melanocarpa*, `aronia-melanocarpa`): description + fun fact
+- [ ] **Black willow** (*Salix nigra*, `salix-nigra`): description + fun fact
+- [ ] **Blackhaw** (*Viburnum prunifolium*, `viburnum-prunifolium`): description + fun fact
+- [ ] **Blue ash** (*Fraxinus quadrangulata*, `fraxinus-quadrangulata`): description + fun fact
+- [ ] **Blue holly** (*Ilex x meserveae*, `ilex-x-meserveae`): description + fun fact
+- [ ] **Bush honeysuckle** (*Diervilla lonicera*, `diervilla-lonicera`): description + fun fact
+- [ ] **Buttonbush** (*Cephalanthus occidentalis*, `cephalanthus-occidentalis`): description + fun fact
+- [ ] **Carolina allspice** (*Calycanthus floridus*, `calycanthus-floridus`): description + fun fact
+- [ ] **Cedar of Lebanon** (*Cedrus libani*, `cedrus-libani`): description + fun fact
+- [ ] **Chinese chestnut** (*Castanea mollissima*, `castanea-mollissima`): description + fun fact
+- [ ] **Chinese redbud** (*Cercis chinensis*, `cercis-chinensis`): description + fun fact
+- [ ] **Common privet** (*Ligustrum vulgare*, `ligustrum-vulgare`): description + fun fact
+- [ ] **Creeping juniper** (*Juniperus horizontalis*, `juniperus-horizontalis`): description + fun fact
+- [ ] **Downy serviceberry** (*Amelanchier arborea*, `amelanchier-arborea`): description + fun fact
+- [ ] **English yew** (*Taxus baccata*, `taxus-baccata`): description + fun fact
+- [ ] **Fragrant sumac** (*Rhus aromatica*, `rhus-aromatica`): description + fun fact
+- [ ] **Fraser fir** (*Abies fraseri*, `abies-fraseri`): description + fun fact
+- [ ] **Gray dogwood** (*Cornus racemosa*, `cornus-racemosa`): description + fun fact
+- [ ] **Hybrid witchhazel** (*Hamamelis x intermedia*, `hamamelis-x-intermedia`): description + fun fact
+- [ ] **Inkberry** (*Ilex glabra*, `ilex-glabra`): description + fun fact
+- [ ] **Japanese barberry** (*Berberis thunbergii*, `berberis-thunbergii`): description + fun fact
+- [ ] **Japanese cedar** (*Cryptomeria japonica*, `cryptomeria-japonica`): description + fun fact
+- [ ] **Japanese cornel** (*Cornus officinalis*, `cornus-officinalis`): description + fun fact
+- [ ] **Japanese spirea** (*Spiraea japonica*, `spiraea-japonica`): description + fun fact
+- [ ] **Large fothergilla** (*Fothergilla major*, `fothergilla-major`): description + fun fact
+- [ ] **Mimosa** (*Albizia julibrissin*, `albizia-julibrissin`): description + fun fact
+- [ ] **Mockernut hickory** (*Carya tomentosa*, `carya-tomentosa`): description + fun fact
+- [ ] **Multiflora rose** (*Rosa multiflora*, `rosa-multiflora`): description + fun fact
+- [ ] **Ninebark** (*Physocarpus opulifolius*, `physocarpus-opulifolius`): description + fun fact
+- [ ] **Oakleaf hydrangea** (*Hydrangea quercifolia*, `hydrangea-quercifolia`): description + fun fact
+- [ ] **Old-fashioned weigela** (*Weigela florida*, `weigela-florida`): description + fun fact
+- [ ] **Oriental spruce** (*Picea orientalis*, `picea-orientalis`): description + fun fact
+- [ ] **Overcup oak** (*Quercus lyrata*, `quercus-lyrata`): description + fun fact
+- [ ] **Post oak** (*Quercus stellata*, `quercus-stellata`): description + fun fact
+- [ ] **Red buckeye** (*Aesculus pavia*, `aesculus-pavia`): description + fun fact
+- [ ] **Shumard oak** (*Quercus shumardii*, `quercus-shumardii`): description + fun fact
+- [ ] **Slippery elm** (*Ulmus rubra*, `ulmus-rubra`): description + fun fact
+- [ ] **Smooth hydrangea** (*Hydrangea arborescens*, `hydrangea-arborescens`): description + fun fact
+- [ ] **Sourwood** (*Oxydendrum arboreum*, `oxydendrum-arboreum`): description + fun fact
+- [ ] **Southern catalpa** (*Catalpa bignonioides*, `catalpa-bignonioides`): description + fun fact
+- [ ] **Speckled alder** (*Alnus incana subsp. rugosa*, `alnus-incana-rugosa`): description + fun fact
+- [ ] **Staghorn sumac** (*Rhus typhina*, `rhus-typhina`): description + fun fact
+- [ ] **Sugarberry** (*Celtis laevigata*, `celtis-laevigata`): description + fun fact
+- [ ] **Sweet crabapple** (*Malus coronaria*, `malus-coronaria`): description + fun fact
+- [ ] **Tree of heaven** (*Ailanthus altissima*, `ailanthus-altissima`): description + fun fact
+- [ ] **Virginia sweetspire** (*Itea virginica*, `itea-virginica`): description + fun fact
+- [ ] **Weeping willow** (*Salix babylonica*, `salix-babylonica`): description + fun fact
+- [ ] **Willow oak** (*Quercus phellos*, `quercus-phellos`): description + fun fact
+- [ ] **Winterberry** (*Ilex verticillata*, `ilex-verticillata`): description + fun fact
+- [ ] **Wintercreeper** (*Euonymus fortunei*, `euonymus-fortunei`): description + fun fact
+- [ ] **Yellow buckeye** (*Aesculus flava*, `aesculus-flava`): description + fun fact
