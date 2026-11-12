@@ -746,16 +746,26 @@ left blank because their Vermont status could not be settled: mockernut
 hickory, sweet crabapple, blackhaw, smooth hydrangea, fragrant sumac and
 creeping juniper.
 
-- [ ] **American bladdernut** (*Staphylea trifolia*, `staphylea-trifolia`): description + fun fact
-- [ ] **American holly** (*Ilex opaca*, `ilex-opaca`): description + fun fact
-- [ ] **American plum** (*Prunus americana*, `prunus-americana`): description + fun fact
-- [ ] **Amur honeysuckle** (*Lonicera maackii*, `lonicera-maackii`): description + fun fact
-- [ ] **Arrowwood viburnum** (*Viburnum dentatum*, `viburnum-dentatum`): description + fun fact
-- [ ] **Atlas cedar** (*Cedrus atlantica*, `cedrus-atlantica`): description + fun fact
-- [ ] **Black alder** (*Alnus glutinosa*, `alnus-glutinosa`): description + fun fact
-- [ ] **Black chokeberry** (*Aronia melanocarpa*, `aronia-melanocarpa`): description + fun fact
-- [ ] **Black willow** (*Salix nigra*, `salix-nigra`): description + fun fact
-- [ ] **Blackhaw** (*Viburnum prunifolium*, `viburnum-prunifolium`): description + fun fact
+Checked on 12 November 2026, the first ten (American bladdernut to
+blackhaw). Three fun facts adjusted: American plum (USDA names Plains
+peoples who ate the plums fresh or dried; "dried for winter" rested on
+weaker sources), arrowwood (the arrow-shaft use is reported, not
+documented, so "said to have been") and Atlas cedar (cedars shed pollen in
+autumn; the comparison now names pines, spruces and firs rather than "most
+conifers"). Bladdernut's rattling seeds and lasting pods, Amur honeysuckle's
+promotion by the Soil Conservation Service from the 1960s, and black willow
+as the largest North American willow were confirmed.
+
+- [x] **American bladdernut** (*Staphylea trifolia*, `staphylea-trifolia`): description + fun fact
+- [x] **American holly** (*Ilex opaca*, `ilex-opaca`): description + fun fact
+- [x] **American plum** (*Prunus americana*, `prunus-americana`): description + fun fact
+- [x] **Amur honeysuckle** (*Lonicera maackii*, `lonicera-maackii`): description + fun fact
+- [x] **Arrowwood viburnum** (*Viburnum dentatum*, `viburnum-dentatum`): description + fun fact
+- [x] **Atlas cedar** (*Cedrus atlantica*, `cedrus-atlantica`): description + fun fact
+- [x] **Black alder** (*Alnus glutinosa*, `alnus-glutinosa`): description + fun fact
+- [x] **Black chokeberry** (*Aronia melanocarpa*, `aronia-melanocarpa`): description + fun fact
+- [x] **Black willow** (*Salix nigra*, `salix-nigra`): description + fun fact
+- [x] **Blackhaw** (*Viburnum prunifolium*, `viburnum-prunifolium`): description + fun fact
 - [ ] **Blue ash** (*Fraxinus quadrangulata*, `fraxinus-quadrangulata`): description + fun fact
 - [ ] **Blue holly** (*Ilex x meserveae*, `ilex-x-meserveae`): description + fun fact
 - [ ] **Bush honeysuckle** (*Diervilla lonicera*, `diervilla-lonicera`): description + fun fact
