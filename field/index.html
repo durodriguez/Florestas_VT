@@ -129,11 +129,24 @@
     <!-- 5. measurements --------------------------------------------------- -->
     <section class="card" id="measurements-card">
       <span class="field-label">Measurements</span>
-      <div class="grid-3">
-        <label>DBH (in)<input id="dbh" type="number" inputmode="decimal" step="0.1" min="0"></label>
-        <label>Height (ft)<input id="height" type="number" inputmode="numeric" step="1" min="0"></label>
-        <label>Spread (ft)<input id="spread" type="number" inputmode="numeric" step="1" min="0"></label>
+      <!-- Whatever tape the surveyor carries. Remembered on this device; the
+           record is always saved in inches and feet. -->
+      <div class="measure-prefs">
+        <div class="seg seg--2 seg--small" id="units-seg" role="radiogroup" aria-label="Units of your tape">
+          <button type="button" class="seg-btn" role="radio" aria-checked="true" data-units="imperial">in · ft</button>
+          <button type="button" class="seg-btn" role="radio" aria-checked="false" data-units="metric">cm · m</button>
+        </div>
+        <div class="seg seg--2 seg--small" id="trunk-seg" role="radiogroup" aria-label="What your tape measures on the trunk">
+          <button type="button" class="seg-btn" role="radio" aria-checked="true" data-trunk="diameter">Diameter</button>
+          <button type="button" class="seg-btn" role="radio" aria-checked="false" data-trunk="circumference">Circumference</button>
+        </div>
       </div>
+      <div class="grid-3">
+        <label><span id="dbh-label">DBH (in)</span><input id="dbh" type="number" inputmode="decimal" step="0.1" min="0"></label>
+        <label><span id="height-label">Height (ft)</span><input id="height" type="number" inputmode="decimal" step="any" min="0"></label>
+        <label><span id="spread-label">Spread (ft)</span><input id="spread" type="number" inputmode="decimal" step="any" min="0"></label>
+      </div>
+      <p id="trunk-hint" class="hint"></p>
       <label class="field-label" for="condition">Condition</label>
       <div class="seg" id="condition-seg" role="radiogroup" aria-label="Condition"></div>
       <p id="condition-meaning" class="hint condition-meaning" hidden></p>
