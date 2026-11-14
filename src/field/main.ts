@@ -28,6 +28,7 @@ import { photoTakenOn } from './exif';
 import { extensionFor, kb, shrinkPhoto } from './photo';
 import { ALL_CARDS, CARDS, visibleCards, type Mode } from './modes';
 import { addTileOverlays } from '../imagery/tilelayer';
+import { breastHeight, fromStored, labels, loadPrefs, savePrefs, toStored, type MeasurePrefs } from './units';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -1075,6 +1076,68 @@ function selectedStatus(): string {
  * The photo stays available on purpose: a picture of the empty ground is the
  * evidence, and is the only thing that makes the record checkable later.
  */
+// ---------------------------------------------------------------- tape
+
+/** The surveyor's tape: units and what it measures on the trunk. */
+let measure: MeasurePrefs = loadPrefs();
+
+const entered = () => {
+  const v = (id: string): number | null => {
+    const t = $<HTMLInputElement>(id).value.trim();
+    return t === '' ? null : Number(t);
+  };
+  return { trunk: v('dbh'), height: v('height'), spread: v('spread') };
+};
+
+function renderMeasure(): void {
+  const l = labels(measure);
+  $('dbh-label').textContent = l.trunk;
+  $('height-label').textContent = l.height;
+  $('spread-label').textContent = l.spread;
+  for (const b of $('units-seg').querySelectorAll('[data-units]')) b.setAttribute('aria-checked', String(b.getAttribute('data-units') === measure.units));
+  for (const b of $('trunk-seg').querySelectorAll('[data-trunk]')) b.setAttribute('aria-checked', String(b.getAttribute('data-trunk') === measure.trunk));
+  renderTrunkHint();
+}
+
+/**
+ * Where to put the tape, and, when the tape is not inches of diameter, the
+ * DBH that will be saved: a circumference typed into a DBH box would be
+ * three times too big, and the line makes that mistake visible.
+ */
+function renderTrunkHint(): void {
+  const where = `${measure.trunk === 'circumference' ? 'Around the trunk' : 'Across the trunk'} at ${breastHeight(measure)} above the ground, on the uphill side.`;
+  const { dbhIn } = toStored(entered(), measure);
+  const plain = measure.units === 'imperial' && measure.trunk === 'diameter';
+  $('trunk-hint').textContent = where + (!plain && dbhIn !== null ? ` Saved as ${dbhIn} in DBH.` : '');
+}
+
+/** Switching tape mid-entry converts what is typed, rather than reading it in the wrong units. */
+function setMeasure(next: MeasurePrefs): void {
+  const kept = toStored(entered(), measure);
+  measure = next;
+  savePrefs(measure);
+  const shown = fromStored(kept, measure);
+  const put = (id: string, v: number | null) => {
+    const el = $<HTMLInputElement>(id);
+    if (!el.disabled) el.value = v === null ? '' : String(v);
+  };
+  put('dbh', shown.trunk);
+  put('height', shown.height);
+  put('spread', shown.spread);
+  renderMeasure();
+}
+
+$('units-seg').addEventListener('click', (e) => {
+  const u = (e.target as HTMLElement).closest('[data-units]')?.getAttribute('data-units');
+  if (u === 'imperial' || u === 'metric') setMeasure({ ...measure, units: u });
+});
+$('trunk-seg').addEventListener('click', (e) => {
+  const t = (e.target as HTMLElement).closest('[data-trunk]')?.getAttribute('data-trunk');
+  if (t === 'diameter' || t === 'circumference') setMeasure({ ...measure, trunk: t });
+});
+$('dbh').addEventListener('input', renderTrunkHint);
+renderMeasure();
+
 function applyStatus(): void {
   const gone = absent(selectedStatus());
   $('measurements-card').classList.toggle('is-void', gone);
@@ -1088,6 +1151,7 @@ function applyStatus(): void {
     if (gone) b.setAttribute('aria-checked', 'false');
   }
   renderConditionMeaning();
+  renderTrunkHint();
 }
 
 function resetForm(): void {
@@ -1232,9 +1296,8 @@ async function save(): Promise<void> {
     lng: at.lng,
     accuracy: pinAdjusted || !point ? null : (fix?.accuracy ?? null),
     pinAdjusted,
-    dbhIn: num('dbh'),
-    heightFt: num('height'),
-    spreadFt: num('spread'),
+    // Whatever the tape, saved as DBH in inches and feet: see units.ts.
+    ...toStored(entered(), measure),
     status,
     condition: selectedCondition(),
     plantedYear: plantedUnknown ? null : num('planted'),

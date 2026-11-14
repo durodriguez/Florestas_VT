@@ -68,9 +68,18 @@ Put an existing accession there when you are re-surveying that tree. `species`
 takes a common name, a scientific name or a `taxon_id`, whichever your crew
 finds easier — and your app's own column names are fine, see section 6.
 
-**Measuring DBH**: diameter at 4.5 ft above ground on the uphill side. Use a
-diameter tape, not a regular one. For a tree forking below 4.5 ft, measure the
-largest stem and note the rest.
+**Measuring DBH**: diameter at 4.5 ft (1.37 m) above ground on the uphill side.
+For a tree forking below that height, measure the largest stem and note the
+rest.
+
+**Any tape will do.** Above the measurement boxes the survey app has two
+settings, remembered on each phone or laptop: **in · ft** or **cm · m**, and
+**Diameter** (a diameter tape) or **Circumference** (an ordinary tape round
+the trunk). The boxes take whatever the tape reads, and the app saves the
+trunk as DBH in inches and the height and spread in feet, so the export is the
+same whichever tape was used. When the tape is not inches of diameter, the
+line under the boxes shows the DBH that will be saved. Switching settings
+with numbers already typed converts them.
 
 **Height and spread** can be estimated to the nearest 5 ft; a clinometer app is
 plenty accurate for an arboretum inventory.

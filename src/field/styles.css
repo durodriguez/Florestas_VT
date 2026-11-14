@@ -256,6 +256,9 @@ textarea { min-height: 78px; resize: vertical; }
 .receiver-msg { font-weight: 600; }
 .receiver-msg.is-warn { color: var(--poor); }
 .pin-map {
+  /* Its own stacking context: Leaflet's panes run to z-index 700, and without
+     this the dots and labels drew over the sticky header when scrolled under it. */
+  isolation: isolate;
   height: 230px; border-radius: 10px; overflow: hidden;
   border: 1px solid var(--rule); background: var(--ground);
 }
@@ -291,6 +294,10 @@ textarea { min-height: 78px; resize: vertical; }
 .seg-btn[aria-checked="true"] {
   background: var(--green); border-color: var(--green); color: #fff; font-weight: 650;
 }
+
+/* The tape the surveyor carries: small, so it reads as a setting, not a question. */
+.measure-prefs { display: grid; grid-template-columns: 1fr 1.4fr; gap: 8px; }
+.seg--small .seg-btn { min-height: 34px; font-size: 12.5px; }
 
 /* ---- buttons ---- */
 
