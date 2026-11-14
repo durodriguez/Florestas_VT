@@ -47,6 +47,6 @@ describe('fromStored', () => {
 describe('labels', () => {
   it('names the box after the tape', () => {
     expect(labels(IMP_D).trunk).toBe('DBH (in)');
-    expect(labels(MET_C)).toEqual({ trunk: 'Circumference (cm)', height: 'Height (m)', spread: 'Spread (m)' });
+    expect(labels(MET_C)).toEqual({ trunk: 'Circ. (cm)', height: 'Height (m)', spread: 'Spread (m)' });
   });
 });

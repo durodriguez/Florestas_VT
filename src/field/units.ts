@@ -76,7 +76,8 @@ export function labels(p: MeasurePrefs): { trunk: string; height: string; spread
   const small = p.units === 'metric' ? 'cm' : 'in';
   const big = p.units === 'metric' ? 'm' : 'ft';
   return {
-    trunk: `${p.trunk === 'circumference' ? 'Circumference' : 'DBH'} (${small})`,
+    // "Circ." so the label fits one line, as "DBH" does, and the boxes stay level.
+    trunk: `${p.trunk === 'circumference' ? 'Circ.' : 'DBH'} (${small})`,
     height: `Height (${big})`,
     spread: `Spread (${big})`,
   };

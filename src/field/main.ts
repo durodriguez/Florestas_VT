@@ -1092,6 +1092,8 @@ const entered = () => {
 function renderMeasure(): void {
   const l = labels(measure);
   $('dbh-label').textContent = l.trunk;
+  // The label is abbreviated to fit; a screen reader gets the whole word.
+  $<HTMLInputElement>('dbh').setAttribute('aria-label', l.trunk.replace('Circ.', 'Circumference'));
   $('height-label').textContent = l.height;
   $('spread-label').textContent = l.spread;
   for (const b of $('units-seg').querySelectorAll('[data-units]')) b.setAttribute('aria-checked', String(b.getAttribute('data-units') === measure.units));
