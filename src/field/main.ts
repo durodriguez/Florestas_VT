@@ -28,6 +28,7 @@ import { photoTakenOn } from './exif';
 import { extensionFor, kb, shrinkPhoto } from './photo';
 import { ALL_CARDS, CARDS, visibleCards, type Mode } from './modes';
 import { addTileOverlays } from '../imagery/tilelayer';
+import { registerOffline } from '../offline';
 import { breastHeight, fromStored, labels, loadPrefs, savePrefs, toStored, type MeasurePrefs } from './units';
 
 const BASE = import.meta.env.BASE_URL;
@@ -1830,13 +1831,8 @@ const syncBarHeight = () => document.documentElement.style.setProperty('--bar-h'
 syncBarHeight();
 window.addEventListener('resize', syncBarHeight);
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register(`${BASE}field/sw.js`, { scope: `${BASE}field/` }).catch(() => {
-      /* offline support is a bonus; the app works without it */
-    });
-  });
-}
+// Offline once opened with a signal: see src/offline.ts and public/field/sw.js.
+registerOffline(`${BASE}field/sw.js`, `${BASE}field/`);
 
 // Surfaced for the browser test to drive without a real camera or GPS.
 Object.assign(window as unknown as Record<string, unknown>, {

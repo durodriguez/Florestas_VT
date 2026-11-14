@@ -16,11 +16,29 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
+      // Only this app's older caches: the positions tool keeps its own on the
+      // same site, and deleting every other cache would wipe it.
+      .then((keys) => Promise.all(keys.filter((k) => k.startsWith('uvm-field-') && k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim()),
   );
 });
 
+// The page lists what it loaded before this worker was running (see
+// src/offline.ts); keep those too, so the first visit is enough to work offline.
+self.addEventListener('message', (event) => {
+  const data = event.data;
+  if (!data || data.type !== 'keep' || !Array.isArray(data.urls)) return;
+  event.waitUntil(caches.open(CACHE).then((c) => Promise.all(
+    data.urls
+      .filter((u) => typeof u === 'string' && new URL(u).origin === self.location.origin)
+      .map((u) => c.match(u, { ignoreVary: true }).then((hit) => hit || fetch(u).then((res) => (res.ok ? c.put(u, res) : undefined)).catch(() => undefined))),
+  )));
+});
+
+// Saved files are matched by address alone. The server's Vary header (Origin
+// on some hosts, Accept-Encoding on others) would otherwise make a saved copy
+// miss the page's own request for the same file; these files never change
+// under one name, so nothing is lost by ignoring it.
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
@@ -37,13 +55,13 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE).then((c) => c.put(request, copy));
           return res;
         })
-        .catch(() => caches.match(request).then((hit) => hit || caches.match('./'))),
+        .catch(() => caches.match(request, { ignoreVary: true }).then((hit) => hit || caches.match('./', { ignoreVary: true }))),
     );
     return;
   }
 
   event.respondWith(
-    caches.match(request).then((hit) => {
+    caches.match(request, { ignoreVary: true }).then((hit) => {
       if (hit) return hit;
       return fetch(request).then((res) => {
         if (res.ok && res.type === 'basic') {

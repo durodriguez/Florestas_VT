@@ -24,6 +24,13 @@ with its tag number, or `#` and its accession if it has none.
 
 ## Checking positions on site
 
+**It works with no signal**, once it has been opened with one on that device:
+the page, its code, the trees and the LiDAR peaks are kept as they load, and
+moves are saved in the browser as always. The satellite layer is the exception:
+its tiles come from Esri and are not kept, so offline the trees sit on a blank
+background, except where you have built a campus tile layer on that computer
+([IMAGERY.md](IMAGERY.md#campus-tile-layer)), which is stored locally.
+
 **◎**, at the right of the header (the same button as the public map's "Find
 plants near me"), shows where you are: a blue dot that follows the
 device as you walk, inside a shaded circle as wide as the device's own estimate

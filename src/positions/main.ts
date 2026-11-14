@@ -7,6 +7,7 @@ import { normalizeTag } from '../accession';
 import { TYPE_LABELS } from '../palette';
 import type { Plant } from '../types';
 import { initImagery } from './imagery';
+import { registerOffline } from '../offline';
 import { addTileOverlays } from '../imagery/tilelayer';
 import { initLocate } from './locate';
 import { initSideSplit } from './split';
@@ -894,6 +895,11 @@ window.addEventListener('beforeunload', (e) => {
 });
 
 // ---------------------------------------------------------------- start
+
+// Offline: the page, its code and the tree data are kept as they load, so the
+// tool opens with no signal once it has been opened with one. Satellite tiles
+// come from another site and are not kept. See public/positions/sw.js.
+registerOffline(`${BASE}positions/sw.js`, `${BASE}positions/`);
 
 loadData(BASE).then(({ dataset, plants: all }) => {
   // Lines only, in colours that read on aerial imagery — the explorer's
