@@ -303,7 +303,7 @@ textarea { min-height: 78px; resize: vertical; }
 .multi-panel { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; border: 1px solid var(--rule); border-radius: 10px; }
 .multi-row { display: grid; grid-template-columns: 1fr 7.5rem; align-items: center; gap: 10px; font-size: 13.5px; color: var(--ink-2); }
 #ms-stems { display: flex; flex-direction: column; gap: 8px; }
-#dbh[readonly] { background: var(--surface); color: var(--ink); }
+#dbh[readonly], #spread[readonly] { background: var(--surface); color: var(--ink); }
 
 /* ---- buttons ---- */
 

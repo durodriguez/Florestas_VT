@@ -147,9 +147,47 @@ export function convertTrunk(v: number | null, from: MeasurePrefs, to: MeasurePr
 }
 
 /** What to measure, for the box the surveyor is in. */
-export function guidance(field: 'trunk' | 'height' | 'spread', p: MeasurePrefs): string {
+export function guidance(field: 'trunk' | 'height' | 'spread', p: MeasurePrefs, averaging = false): string {
   if (field === 'height') return 'Height: from the highest point on the tree straight down to the ground.';
-  if (field === 'spread') return 'Spread: from the dripline to the dripline on the opposite side of the crown.';
+  if (field === 'spread') {
+    return averaging
+      ? 'Spread: first the widest spread, dripline to dripline; then across the crown at right angles to that line. The app averages the two.'
+      : 'Spread: from the dripline to the dripline on the opposite side of the crown.';
+  }
   // Named first, like the height and spread lines.
   return `${p.trunk === 'circumference' ? 'Circumference: Around the trunk' : 'Diameter: Across the trunk'} at ${breastHeight(p)} above the ground, on the uphill side.`;
+}
+
+// ---------------------------------------------------------------- crown spread
+
+/**
+ * Average crown spread: the widest spread and the spread at right angles to
+ * it, averaged, as champion-tree measuring does. One reading alone is used
+ * as it is; the order does not matter, so a "widest" that turns out not to
+ * be the widest changes nothing.
+ */
+export function averageSpread(widest: number | null, across: number | null): number | null {
+  const v = [widest, across].filter(ok);
+  if (!v.length) return null;
+  return round(v.reduce((a, b) => a + b, 0) / v.length, 1);
+}
+
+/** A length in feet or metres, as the other unit would read it. */
+export function convertLength(v: number | null, from: Units, to: Units): number | null {
+  if (!ok(v)) return null;
+  if (from === to) return v;
+  // Metres to the centimetre: a tenth of a metre is four inches, too coarse
+  // to switch there and back without the reading creeping.
+  return to === 'metric' ? round(v * M_PER_FT, 2) : round(v / M_PER_FT, 1);
+}
+
+const AVG_KEY = 'uvm-field/average-spread';
+
+/** Whether this device averages two spreads: a crew that does, does it for every tree. */
+export function loadAverageSpread(): boolean {
+  try { return localStorage.getItem(AVG_KEY) === '1'; } catch { return false; }
+}
+
+export function saveAverageSpread(on: boolean): void {
+  try { localStorage.setItem(AVG_KEY, on ? '1' : '0'); } catch { /* this visit only */ }
 }
