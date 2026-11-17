@@ -150,5 +150,6 @@ export function convertTrunk(v: number | null, from: MeasurePrefs, to: MeasurePr
 export function guidance(field: 'trunk' | 'height' | 'spread', p: MeasurePrefs): string {
   if (field === 'height') return 'Height: from the highest point on the tree straight down to the ground.';
   if (field === 'spread') return 'Spread: from the dripline to the dripline on the opposite side of the crown.';
-  return `${p.trunk === 'circumference' ? 'Around the trunk' : 'Across the trunk'} at ${breastHeight(p)} above the ground, on the uphill side.`;
+  // Named first, like the height and spread lines.
+  return `${p.trunk === 'circumference' ? 'Circumference: Around the trunk' : 'Diameter: Across the trunk'} at ${breastHeight(p)} above the ground, on the uphill side.`;
 }

@@ -80,6 +80,7 @@ describe('multi-trunk trees', async () => {
   it('says what to measure for each box', () => {
     expect(guidance('height', IMP_D)).toMatch(/highest point on the tree straight down to the ground/);
     expect(guidance('spread', MET_C)).toMatch(/dripline to the dripline on the opposite side of the crown/);
-    expect(guidance('trunk', MET_C)).toMatch(/Around the trunk at 1\.37 m/);
+    expect(guidance('trunk', MET_C)).toBe('Circumference: Around the trunk at 1.37 m above the ground, on the uphill side.');
+    expect(guidance('trunk', IMP_D)).toBe('Diameter: Across the trunk at 4.5 ft above the ground, on the uphill side.');
   });
 });
