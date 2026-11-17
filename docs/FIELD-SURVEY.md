@@ -94,6 +94,12 @@ can be checked later.
 **Height and spread** can be estimated to the nearest 5 ft; a clinometer app is
 plenty accurate for an arboretum inventory.
 
+**Average two spreads.** A crown is rarely round, so one spread can mislead.
+Tick **Average two spreads** (remembered on each phone or laptop) and measure
+the widest spread, dripline to dripline, then the spread across the crown at
+right angles to that line. The app averages the two into the Spread box and
+adds both readings to the notes.
+
 **Condition** — use the five-point scale consistently. The survey app shows
 the chosen grade's meaning under the buttons, and the whole scale behind
 *What the grades mean*; both come from `src/field/conditions.ts`.

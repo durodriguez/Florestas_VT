@@ -161,6 +161,19 @@
         <button type="button" id="ms-add" class="ghost-btn">+ Add a trunk</button>
         <p id="ms-result" class="hint" aria-live="polite"></p>
       </div>
+      <!-- Average crown spread: the widest spread and the one at right angles.
+           Remembered on this device. -->
+      <label class="check">
+        <input type="checkbox" id="avg-spread">
+        <span>Average two spreads</span>
+      </label>
+      <div id="spread-panel" class="multi-panel" hidden>
+        <label class="multi-row"><span id="sp-wide-label">Widest spread</span>
+          <input id="sp-wide" type="number" inputmode="decimal" step="any" min="0"></label>
+        <label class="multi-row"><span id="sp-cross-label">At right angles to it</span>
+          <input id="sp-cross" type="number" inputmode="decimal" step="any" min="0"></label>
+        <p id="sp-result" class="hint" aria-live="polite"></p>
+      </div>
       <label class="field-label" for="condition">Condition</label>
       <div class="seg" id="condition-seg" role="radiogroup" aria-label="Condition"></div>
       <p id="condition-meaning" class="hint condition-meaning" hidden></p>

@@ -29,7 +29,10 @@ import { extensionFor, kb, shrinkPhoto } from './photo';
 import { ALL_CARDS, CARDS, visibleCards, type Mode } from './modes';
 import { addTileOverlays } from '../imagery/tilelayer';
 import { registerOffline } from '../offline';
-import { convertTrunk, fromStored, guidance, labels, loadPrefs, multiStemTrunk, savePrefs, toStored, type MeasurePrefs } from './units';
+import {
+  averageSpread, convertLength, convertTrunk, fromStored, guidance, labels, loadAverageSpread, loadPrefs, multiStemTrunk,
+  saveAverageSpread, savePrefs, toStored, type MeasurePrefs,
+} from './units';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -1112,7 +1115,7 @@ let guiding: 'trunk' | 'height' | 'spread' = 'trunk';
  * line makes that mistake visible.
  */
 function renderTrunkHint(): void {
-  let text = guidance(guiding, measure);
+  let text = guidance(guiding, measure, $<HTMLInputElement>('avg-spread').checked);
   if (guiding === 'trunk') {
     const { dbhIn } = toStored(entered(), measure);
     const plain = measure.units === 'imperial' && measure.trunk === 'diameter';
@@ -1192,6 +1195,61 @@ function resetMultiStem(): void {
   renderMultiStem();
 }
 
+// ---- average crown spread
+
+/** Labels in the surveyor's units. */
+function labelSpread(): void {
+  const unit = measure.units === 'metric' ? 'm' : 'ft';
+  $('sp-wide-label').textContent = `Widest spread (${unit})`;
+  $('sp-cross-label').textContent = `At right angles to it (${unit})`;
+}
+
+/** The average goes into the Spread box, read-only while the option is on. */
+function renderSpread(): void {
+  const on = $<HTMLInputElement>('avg-spread').checked;
+  $('spread-panel').hidden = !on;
+  const spread = $<HTMLInputElement>('spread');
+  spread.readOnly = on;
+  if (!on) return;
+  const w = msValue($<HTMLInputElement>('sp-wide'));
+  const c = msValue($<HTMLInputElement>('sp-cross'));
+  const avg = averageSpread(w, c);
+  const unit = measure.units === 'metric' ? 'm' : 'ft';
+  if (!spread.disabled) spread.value = avg === null ? '' : String(avg);
+  $('sp-result').textContent = avg === null
+    ? 'Enter the widest spread, then the one at right angles to it.'
+    : w !== null && c !== null ? `Average of ${w} and ${c} ${unit}: ${avg} ${unit}.` : `Only one spread so far: ${avg} ${unit}.`;
+}
+
+/** Both readings, for the notes, so the average can be checked later. */
+function spreadNote(): string {
+  if (!$<HTMLInputElement>('avg-spread').checked) return '';
+  const w = msValue($<HTMLInputElement>('sp-wide'));
+  const c = msValue($<HTMLInputElement>('sp-cross'));
+  if (w === null || c === null) return '';
+  const unit = measure.units === 'metric' ? 'm' : 'ft';
+  return `Spread averaged (${unit}): widest ${w}, at right angles ${c}.`;
+}
+
+function clearSpreadReadings(): void {
+  $<HTMLInputElement>('sp-wide').value = '';
+  $<HTMLInputElement>('sp-cross').value = '';
+  $('sp-result').textContent = '';
+  renderSpread();
+}
+
+$<HTMLInputElement>('avg-spread').checked = loadAverageSpread();
+$('avg-spread').addEventListener('change', () => {
+  saveAverageSpread($<HTMLInputElement>('avg-spread').checked);
+  renderSpread();
+  guiding = 'spread';
+  renderTrunkHint();
+});
+for (const id of ['sp-wide', 'sp-cross']) {
+  $(id).addEventListener('input', renderSpread);
+  $(id).addEventListener('focus', () => { guiding = 'spread'; renderTrunkHint(); });
+}
+
 $('multi-stem').addEventListener('change', renderMultiStem);
 $('ms-waist').addEventListener('input', renderMultiStem);
 $('ms-add').addEventListener('click', () => addStem());
@@ -1216,9 +1274,15 @@ function setMeasure(next: MeasurePrefs): void {
     const v = convertTrunk(msValue(el), before, measure);
     el.value = v === null ? '' : String(v);
   }
+  for (const el of [$<HTMLInputElement>('sp-wide'), $<HTMLInputElement>('sp-cross')]) {
+    const v = convertLength(msValue(el), before.units, measure.units);
+    el.value = v === null ? '' : String(v);
+  }
   renderMeasure();
   labelStems();
   renderMultiStem();
+  labelSpread();
+  renderSpread();
 }
 
 $('units-seg').addEventListener('click', (e) => {
@@ -1235,12 +1299,15 @@ for (const [id, f] of [['dbh', 'trunk'], ['height', 'height'], ['spread', 'sprea
 $('dbh').addEventListener('input', renderTrunkHint);
 renderMeasure();
 resetMultiStem();
+labelSpread();
+clearSpreadReadings();
 
 function applyStatus(): void {
   const gone = absent(selectedStatus());
   $('measurements-card').classList.toggle('is-void', gone);
   if (gone && $<HTMLInputElement>('multi-stem').checked) resetMultiStem();
-  for (const id of ['dbh', 'height', 'spread', 'multi-stem']) {
+  if (gone) clearSpreadReadings();
+  for (const id of ['dbh', 'height', 'spread', 'multi-stem', 'avg-spread', 'sp-wide', 'sp-cross']) {
     const el = $<HTMLInputElement>(id);
     el.disabled = gone;
     if (gone && el.type !== 'checkbox') el.value = '';
@@ -1260,6 +1327,8 @@ function resetForm(): void {
   setPlantedUnknown(false);
   setHasPlaque(false);
   resetMultiStem();
+  // The option itself is kept: it is this device's way of measuring.
+  clearSpreadReadings();
   reference = { species: '', taxonId: '', source: '' };
   claimed = null;
   prefilledDedication = '';
@@ -1403,7 +1472,7 @@ async function save(): Promise<void> {
     plantedYear: plantedUnknown ? null : num('planted'),
     plantedUnknown,
     // The multi-trunk readings ride in the notes, so the DBH can be checked later.
-    notes: [$<HTMLTextAreaElement>('notes').value.trim(), multiStemNote()].filter(Boolean).join(' '),
+    notes: [$<HTMLTextAreaElement>('notes').value.trim(), multiStemNote(), spreadNote()].filter(Boolean).join(' '),
     dedication: $<HTMLTextAreaElement>('dedication').value.trim(),
     surveyedOn: $<HTMLInputElement>('date').value || stamp(),
     surveyor: $<HTMLInputElement>('surveyor').value.trim(),

@@ -84,3 +84,26 @@ describe('multi-trunk trees', async () => {
     expect(guidance('trunk', IMP_D)).toBe('Diameter: Across the trunk at 4.5 ft above the ground, on the uphill side.');
   });
 });
+
+describe('average crown spread', async () => {
+  const { averageSpread, convertLength, guidance } = await import('../src/field/units');
+  it('averages the widest spread and the one at right angles', () => {
+    expect(averageSpread(32, 26)).toBe(29);
+    expect(averageSpread(10.5, 9.2)).toBe(9.9);
+  });
+  it('uses one reading alone, in either order, and nothing when blank', () => {
+    expect(averageSpread(32, null)).toBe(32);
+    expect(averageSpread(26, 32)).toBe(29);
+    expect(averageSpread(null, null)).toBeNull();
+  });
+  it('converts feet and metres', () => {
+    expect(convertLength(32, 'imperial', 'metric')).toBe(9.75);
+    expect(convertLength(9.8, 'metric', 'imperial')).toBe(32.2);
+    for (const ft of [32, 26, 18.5]) expect(convertLength(convertLength(ft, 'imperial', 'metric'), 'metric', 'imperial')).toBe(ft);
+    expect(convertLength(9, 'metric', 'metric')).toBe(9);
+  });
+  it('explains the two readings when averaging', () => {
+    expect(guidance('spread', IMP_D, true)).toMatch(/widest spread, dripline to dripline; then across the crown at right angles/);
+    expect(guidance('spread', IMP_D, false)).toMatch(/dripline to the dripline on the opposite side/);
+  });
+});
