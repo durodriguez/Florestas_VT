@@ -299,6 +299,12 @@ textarea { min-height: 78px; resize: vertical; }
 .measure-prefs { display: grid; grid-template-columns: 1fr 1.4fr; gap: 8px; }
 .seg--small .seg-btn { min-height: 34px; font-size: 12.5px; }
 
+/* Multi-stemmed trees: the waist and each stem, one row apiece. */
+.multi-panel { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; border: 1px solid var(--rule); border-radius: 10px; }
+.multi-row { display: grid; grid-template-columns: 1fr 7.5rem; align-items: center; gap: 10px; font-size: 13.5px; color: var(--ink-2); }
+#ms-stems { display: flex; flex-direction: column; gap: 8px; }
+#dbh[readonly] { background: var(--surface); color: var(--ink); }
+
 /* ---- buttons ---- */
 
 .big-btn, .save-btn, .danger-btn {

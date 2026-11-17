@@ -103,3 +103,52 @@ export function savePrefs(p: MeasurePrefs): void {
     localStorage.setItem(KEY, JSON.stringify(p));
   } catch { /* the choice lasts this visit only */ }
 }
+
+// ---------------------------------------------------------------- multi-trunk
+
+/**
+ * The functional size of several trunks: one trunk with the same total
+ * cross-section. Square each trunk, add the squares, take the square root.
+ * It works the same on circumferences or diameters, in any unit, since they
+ * are all in proportion; null with fewer than two trunks measured.
+ */
+export function functionalSize(stems: Array<number | null>): number | null {
+  const s = stems.filter(ok);
+  if (s.length < 2) return null;
+  return round(Math.sqrt(s.reduce((sum, v) => sum + v * v, 0)), 1);
+}
+
+/**
+ * A multi-trunk tree: the narrowest waist below the split and the trunks'
+ * functional size, and the smaller of the two, which is what is
+ * recorded. Either alone is used if only one was measured.
+ */
+export function multiStemTrunk(waist: number | null, stems: Array<number | null>): {
+  functional: number | null;
+  used: number | null;
+  from: 'waist' | 'stems' | null;
+} {
+  const functional = functionalSize(stems);
+  const w = ok(waist) ? waist : null;
+  if (w === null && functional === null) return { functional, used: null, from: null };
+  if (functional === null || (w !== null && w <= functional)) return { functional, used: w, from: 'waist' };
+  return { functional, used: functional, from: 'stems' };
+}
+
+/** A trunk reading taken with one tape, as another tape would read it. */
+export function convertTrunk(v: number | null, from: MeasurePrefs, to: MeasurePrefs): number | null {
+  if (!ok(v)) return null;
+  // Directly, rounding once at the end: going through the saved DBH would
+  // round to a tenth of an inch first, and a circumference multiplies that by
+  // pi, so switching tapes back and forth would creep.
+  let x = from.units === 'metric' ? v / CM_PER_IN : v;
+  if (from.trunk !== to.trunk) x = to.trunk === 'circumference' ? x * Math.PI : x / Math.PI;
+  return round(to.units === 'metric' ? x * CM_PER_IN : x, 1);
+}
+
+/** What to measure, for the box the surveyor is in. */
+export function guidance(field: 'trunk' | 'height' | 'spread', p: MeasurePrefs): string {
+  if (field === 'height') return 'Height: from the highest point on the tree straight down to the ground.';
+  if (field === 'spread') return 'Spread: from the dripline to the dripline on the opposite side of the crown.';
+  return `${p.trunk === 'circumference' ? 'Around the trunk' : 'Across the trunk'} at ${breastHeight(p)} above the ground, on the uphill side.`;
+}

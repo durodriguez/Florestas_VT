@@ -29,7 +29,7 @@ import { extensionFor, kb, shrinkPhoto } from './photo';
 import { ALL_CARDS, CARDS, visibleCards, type Mode } from './modes';
 import { addTileOverlays } from '../imagery/tilelayer';
 import { registerOffline } from '../offline';
-import { breastHeight, fromStored, labels, loadPrefs, savePrefs, toStored, type MeasurePrefs } from './units';
+import { convertTrunk, fromStored, guidance, labels, loadPrefs, multiStemTrunk, savePrefs, toStored, type MeasurePrefs } from './units';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -1102,20 +1102,103 @@ function renderMeasure(): void {
   renderTrunkHint();
 }
 
+/** Which box the line under the measurements is about: the last one entered. */
+let guiding: 'trunk' | 'height' | 'spread' = 'trunk';
+
 /**
- * Where to put the tape, and, when the tape is not inches of diameter, the
- * DBH that will be saved: a circumference typed into a DBH box would be
- * three times too big, and the line makes that mistake visible.
+ * What to measure, for the box the surveyor is in. For the trunk, when the
+ * tape is not inches of diameter, it also gives the DBH that will be saved:
+ * a circumference typed into a DBH box would be three times too big, and the
+ * line makes that mistake visible.
  */
 function renderTrunkHint(): void {
-  const where = `${measure.trunk === 'circumference' ? 'Around the trunk' : 'Across the trunk'} at ${breastHeight(measure)} above the ground, on the uphill side.`;
-  const { dbhIn } = toStored(entered(), measure);
-  const plain = measure.units === 'imperial' && measure.trunk === 'diameter';
-  $('trunk-hint').textContent = where + (!plain && dbhIn !== null ? ` Saved as ${dbhIn} in DBH.` : '');
+  let text = guidance(guiding, measure);
+  if (guiding === 'trunk') {
+    const { dbhIn } = toStored(entered(), measure);
+    const plain = measure.units === 'imperial' && measure.trunk === 'diameter';
+    if (!plain && dbhIn !== null) text += ` Saved as ${dbhIn} in DBH.`;
+  }
+  $('trunk-hint').textContent = text;
 }
+
+// ---- multi-trunk trees
+
+const msValue = (el: HTMLInputElement): number | null => (el.value.trim() === '' ? null : Number(el.value));
+const stemInputs = (): HTMLInputElement[] => [...$('ms-stems').querySelectorAll<HTMLInputElement>('input')];
+
+function addStem(value = ''): void {
+  const n = stemInputs().length + 1;
+  const row = document.createElement('label');
+  row.className = 'multi-row';
+  row.innerHTML = `<span class="ms-stem-label"></span><input type="number" inputmode="decimal" step="any" min="0">`;
+  row.querySelector('input')!.value = value;
+  $('ms-stems').append(row);
+  row.querySelector('input')!.addEventListener('input', renderMultiStem);
+  labelStems();
+  if (n > 2) row.querySelector('input')!.focus();
+}
+
+function labelStems(): void {
+  const unit = measure.units === 'metric' ? 'cm' : 'in';
+  const what = measure.trunk === 'circumference' ? 'circ.' : 'diameter';
+  $('ms-waist-label').textContent = `Waist below the split, ${what} (${unit})`;
+  $('ms-stems').querySelectorAll('.ms-stem-label').forEach((el, i) => { el.textContent = `Trunk ${i + 1}, ${what} (${unit})`; });
+}
+
+/**
+ * The smaller of the waist and the trunks' functional size goes into the trunk
+ * box, read-only while the panel is open, so the rest of the form (the line
+ * under the boxes, the save) treats it like any trunk reading.
+ */
+function renderMultiStem(): void {
+  const on = $<HTMLInputElement>('multi-stem').checked;
+  $('multi-panel').hidden = !on;
+  const dbh = $<HTMLInputElement>('dbh');
+  dbh.readOnly = on;
+  if (!on) { renderTrunkHint(); return; }
+  const r = multiStemTrunk(msValue($<HTMLInputElement>('ms-waist')), stemInputs().map(msValue));
+  const word = measure.trunk === 'circumference' ? 'circumference' : 'diameter';
+  const unit = measure.units === 'metric' ? 'cm' : 'in';
+  dbh.value = r.used === null ? '' : String(r.used);
+  $('ms-result').textContent = r.used === null
+    ? `Enter the waist, or two or more trunks.`
+    : (r.functional !== null ? `Functional ${word} ${r.functional} ${unit}. ` : '') +
+      `Using the ${r.from === 'waist' ? 'waist' : 'functional ' + word}, ${r.used} ${unit}${r.functional !== null && msValue($<HTMLInputElement>('ms-waist')) !== null ? ', the smaller' : ''}.`;
+  guiding = 'trunk';
+  renderTrunkHint();
+}
+
+/** What the multi-trunk panel recorded, for the notes, so the saved DBH can be checked later. */
+function multiStemNote(): string {
+  if (!$<HTMLInputElement>('multi-stem').checked) return '';
+  const unit = measure.units === 'metric' ? 'cm' : 'in';
+  const word = measure.trunk === 'circumference' ? 'circumference' : 'diameter';
+  const waist = msValue($<HTMLInputElement>('ms-waist'));
+  const stems = stemInputs().map(msValue).filter((v): v is number => v !== null);
+  const r = multiStemTrunk(waist, stems);
+  if (r.used === null) return '';
+  return `Multi-trunk (${word}, ${unit}): ` +
+    [waist !== null ? `waist ${waist}` : '', stems.length ? `trunks ${stems.join(', ')}${r.functional !== null ? ` (functional ${r.functional})` : ''}` : '']
+      .filter(Boolean).join('; ') + `; used ${r.from === 'waist' ? 'the waist' : 'the functional size'}.`;
+}
+
+function resetMultiStem(): void {
+  $<HTMLInputElement>('multi-stem').checked = false;
+  $<HTMLInputElement>('ms-waist').value = '';
+  $('ms-stems').innerHTML = '';
+  addStem();
+  addStem();
+  $('ms-result').textContent = '';
+  renderMultiStem();
+}
+
+$('multi-stem').addEventListener('change', renderMultiStem);
+$('ms-waist').addEventListener('input', renderMultiStem);
+$('ms-add').addEventListener('click', () => addStem());
 
 /** Switching tape mid-entry converts what is typed, rather than reading it in the wrong units. */
 function setMeasure(next: MeasurePrefs): void {
+  const before = measure;
   const kept = toStored(entered(), measure);
   measure = next;
   savePrefs(measure);
@@ -1124,10 +1207,18 @@ function setMeasure(next: MeasurePrefs): void {
     const el = $<HTMLInputElement>(id);
     if (!el.disabled) el.value = v === null ? '' : String(v);
   };
-  put('dbh', shown.trunk);
+  // The trunk directly, so switching tapes back and forth does not creep.
+  put('dbh', convertTrunk(kept.dbhIn === null ? null : entered().trunk, before, measure));
   put('height', shown.height);
   put('spread', shown.spread);
+  // The multi-trunk readings are trunk readings too.
+  for (const el of [$<HTMLInputElement>('ms-waist'), ...stemInputs()]) {
+    const v = convertTrunk(msValue(el), before, measure);
+    el.value = v === null ? '' : String(v);
+  }
   renderMeasure();
+  labelStems();
+  renderMultiStem();
 }
 
 $('units-seg').addEventListener('click', (e) => {
@@ -1138,16 +1229,21 @@ $('trunk-seg').addEventListener('click', (e) => {
   const t = (e.target as HTMLElement).closest('[data-trunk]')?.getAttribute('data-trunk');
   if (t === 'diameter' || t === 'circumference') setMeasure({ ...measure, trunk: t });
 });
+for (const [id, f] of [['dbh', 'trunk'], ['height', 'height'], ['spread', 'spread']] as const) {
+  $(id).addEventListener('focus', () => { guiding = f; renderTrunkHint(); });
+}
 $('dbh').addEventListener('input', renderTrunkHint);
 renderMeasure();
+resetMultiStem();
 
 function applyStatus(): void {
   const gone = absent(selectedStatus());
   $('measurements-card').classList.toggle('is-void', gone);
-  for (const id of ['dbh', 'height', 'spread']) {
+  if (gone && $<HTMLInputElement>('multi-stem').checked) resetMultiStem();
+  for (const id of ['dbh', 'height', 'spread', 'multi-stem']) {
     const el = $<HTMLInputElement>(id);
     el.disabled = gone;
-    if (gone) el.value = '';
+    if (gone && el.type !== 'checkbox') el.value = '';
   }
   for (const b of $('condition-seg').querySelectorAll<HTMLButtonElement>('[aria-checked]')) {
     b.disabled = gone;
@@ -1163,6 +1259,7 @@ function resetForm(): void {
   }
   setPlantedUnknown(false);
   setHasPlaque(false);
+  resetMultiStem();
   reference = { species: '', taxonId: '', source: '' };
   claimed = null;
   prefilledDedication = '';
@@ -1305,7 +1402,8 @@ async function save(): Promise<void> {
     condition: selectedCondition(),
     plantedYear: plantedUnknown ? null : num('planted'),
     plantedUnknown,
-    notes: $<HTMLTextAreaElement>('notes').value.trim(),
+    // The multi-trunk readings ride in the notes, so the DBH can be checked later.
+    notes: [$<HTMLTextAreaElement>('notes').value.trim(), multiStemNote()].filter(Boolean).join(' '),
     dedication: $<HTMLTextAreaElement>('dedication').value.trim(),
     surveyedOn: $<HTMLInputElement>('date').value || stamp(),
     surveyor: $<HTMLInputElement>('surveyor').value.trim(),

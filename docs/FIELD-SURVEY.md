@@ -69,8 +69,7 @@ takes a common name, a scientific name or a `taxon_id`, whichever your crew
 finds easier — and your app's own column names are fine, see section 6.
 
 **Measuring DBH**: diameter at 4.5 ft (1.37 m) above ground on the uphill side.
-For a tree forking below that height, measure the largest stem and note the
-rest.
+For a tree forking below that height, see *Multi-trunk trees* below.
 
 **Any tape will do.** Above the measurement boxes the survey app has two
 settings, remembered on each phone or laptop: **in · ft** or **cm · m**, and
@@ -79,7 +78,18 @@ the trunk). The boxes take whatever the tape reads, and the app saves the
 trunk as DBH in inches and the height and spread in feet, so the export is the
 same whichever tape was used. When the tape is not inches of diameter, the
 line under the boxes shows the DBH that will be saved. Switching settings
-with numbers already typed converts them.
+with numbers already typed converts them. The line under the boxes follows
+the box you are in: for **height**, from the highest point on the tree
+straight down to the ground; for **spread**, from the dripline to the
+dripline on the opposite side of the crown.
+
+**Multi-trunk trees.** Tick **Multi-trunk tree** and measure two things: the
+narrowest "waist" below the split, and each trunk on its own (**+ Add a
+trunk** for more than two). The app works out the trunks' functional size,
+the one trunk with the same total cross-section (square each trunk, add the
+squares, take the square root), and fills the smaller of that and the waist
+into the trunk box. The readings are added to the notes, so the saved DBH
+can be checked later.
 
 **Height and spread** can be estimated to the nearest 5 ft; a clinometer app is
 plenty accurate for an arboretum inventory.
