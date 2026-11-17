@@ -146,7 +146,21 @@
         <label><span id="height-label">Height (ft)</span><input id="height" type="number" inputmode="decimal" step="any" min="0"></label>
         <label><span id="spread-label">Spread (ft)</span><input id="spread" type="number" inputmode="decimal" step="any" min="0"></label>
       </div>
-      <p id="trunk-hint" class="hint"></p>
+      <p id="trunk-hint" class="hint" aria-live="polite"></p>
+      <!-- A tree that splits into several trunks below breast height. -->
+      <label class="check">
+        <input type="checkbox" id="multi-stem">
+        <span>Multi-trunk tree</span>
+      </label>
+      <div id="multi-panel" class="multi-panel" hidden>
+        <p class="hint">Measure the narrowest &ldquo;waist&rdquo; below the split, and each trunk on its own.
+          The app works out the trunks' functional size and fills in the smaller of the two.</p>
+        <label class="multi-row"><span id="ms-waist-label">Waist below the split</span>
+          <input id="ms-waist" type="number" inputmode="decimal" step="any" min="0"></label>
+        <div id="ms-stems"></div>
+        <button type="button" id="ms-add" class="ghost-btn">+ Add a trunk</button>
+        <p id="ms-result" class="hint" aria-live="polite"></p>
+      </div>
       <label class="field-label" for="condition">Condition</label>
       <div class="seg" id="condition-seg" role="radiogroup" aria-label="Condition"></div>
       <p id="condition-meaning" class="hint condition-meaning" hidden></p>

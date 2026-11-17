@@ -50,3 +50,36 @@ describe('labels', () => {
     expect(labels(MET_C)).toEqual({ trunk: 'Circ. (cm)', height: 'Height (m)', spread: 'Spread (m)' });
   });
 });
+
+describe('multi-trunk trees', async () => {
+  const { functionalSize, multiStemTrunk, convertTrunk, guidance } = await import('../src/field/units');
+  it('adds trunks by area: square, sum, square root', () => {
+    expect(functionalSize([30, 40])).toBe(50);
+    expect(functionalSize([20, 20, 20, 20])).toBe(40);
+  });
+  it('needs at least two trunks', () => {
+    expect(functionalSize([30])).toBeNull();
+    expect(functionalSize([30, null])).toBeNull();
+  });
+  it('records the smaller of the waist and the functional size', () => {
+    expect(multiStemTrunk(45, [30, 40])).toEqual({ functional: 50, used: 45, from: 'waist' });
+    expect(multiStemTrunk(60, [30, 40])).toEqual({ functional: 50, used: 50, from: 'stems' });
+  });
+  it('uses whichever was measured when only one was', () => {
+    expect(multiStemTrunk(null, [30, 40]).used).toBe(50);
+    expect(multiStemTrunk(45, [30]).used).toBe(45);
+    expect(multiStemTrunk(null, []).used).toBeNull();
+  });
+  it('converts a trunk reading between tapes', () => {
+    expect(convertTrunk(31.4, IMP_C, IMP_D)).toBe(10);
+    expect(convertTrunk(10, IMP_D, MET_D)).toBe(25.4);
+  });
+  it('comes back to the same reading after switching units there and back', () => {
+    for (const v of [30, 40, 20, 45]) expect(convertTrunk(convertTrunk(v, IMP_C, MET_C), MET_C, IMP_C)).toBe(v);
+  });
+  it('says what to measure for each box', () => {
+    expect(guidance('height', IMP_D)).toMatch(/highest point on the tree straight down to the ground/);
+    expect(guidance('spread', MET_C)).toMatch(/dripline to the dripline on the opposite side of the crown/);
+    expect(guidance('trunk', MET_C)).toMatch(/Around the trunk at 1\.37 m/);
+  });
+});
