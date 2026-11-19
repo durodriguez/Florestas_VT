@@ -161,12 +161,23 @@
           <option value="origin">Color by origin</option>
           <option value="condition">Color by condition</option>
           <option value="collection">Color by campus area</option>
+          <option value="season">Color by season</option>
         </select>
+        <div class="season-month" id="season-month" hidden>
+          <button type="button" id="season-prev" aria-label="Previous month">‹</button>
+          <span id="season-month-name" aria-live="polite"></span>
+          <button type="button" id="season-next" aria-label="Next month">›</button>
+        </div>
         <div class="tree-display" role="group" aria-label="How trees are drawn">
           <button type="button" data-display="clusters" aria-pressed="true" title="Group nearby trees into numbered bubbles">Clusters</button>
           <button type="button" data-display="every" aria-pressed="false" title="Draw every tree as its own dot">Every tree</button>
         </div>
         <ul id="legend-items" class="legend"></ul>
+        <details id="season-picks" class="season-picks" hidden>
+          <summary>In season</summary>
+          <ul id="season-picks-list"></ul>
+          <p class="season-note">Each species' usual months, not dates seen on campus. Fall color is shown in October.</p>
+        </details>
       </div>
 
       <section id="detail" class="detail" aria-label="Plant details" hidden></section>

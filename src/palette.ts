@@ -1,4 +1,5 @@
 import type { ColorBy, Dataset, Plant } from './types';
+import { season } from './season';
 
 // Seven colors chosen by the project lead (October 2026). The two tree greens
 // used to be close on purpose, "trees, two sorts", but were too hard to tell
@@ -46,7 +47,8 @@ export const ORIGIN_LABELS: Record<string, string> = {
   introduced: 'Introduced',
 };
 
-export function colorFor(plant: Plant, mode: ColorBy): string {
+/** `month` (1–12) matters only for 'season'. */
+export function colorFor(plant: Plant, mode: ColorBy, month = new Date().getMonth() + 1): string {
   switch (mode) {
     case 'type':
       return TYPE_COLORS[plant.taxon.type] ?? FALLBACK;
@@ -56,6 +58,8 @@ export function colorFor(plant: Plant, mode: ColorBy): string {
       return plant.condition ? CONDITION_COLORS[plant.condition] ?? FALLBACK : FALLBACK;
     case 'collection':
       return plant.collection?.color ?? FALLBACK;
+    case 'season':
+      return season(plant.taxon, month).color;
   }
 }
 
@@ -84,5 +88,8 @@ export function legendFor(
       return dataset.vocab.conditions.map((c) => ({ label: c, color: CONDITION_COLORS[c] ?? FALLBACK }));
     case 'collection':
       return dataset.collections.map((c) => ({ label: c.name, color: c.color }));
+    case 'season':
+      // Counted from what is on the map, for the month chosen: see seasonLegend in main.ts.
+      return [];
   }
 }

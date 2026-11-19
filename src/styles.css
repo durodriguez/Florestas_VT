@@ -279,6 +279,35 @@ button, input, select { font: inherit; color: inherit; }
 }
 .tree-display button:focus-visible { outline: 2px solid var(--uvm-green-light); outline-offset: 1px; }
 
+/* "Color by season": step through the months. */
+.season-month {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .25rem; margin-top: .4rem;
+}
+.season-month[hidden] { display: none; }
+.season-month span { text-align: center; font-size: .82rem; font-weight: 600; }
+.season-month button {
+  font: inherit; font-size: 1rem; line-height: 1; width: 1.9rem; height: 1.7rem; cursor: pointer;
+  border: 1px solid var(--border); border-radius: 6px; background: var(--bg-sunk); color: var(--text);
+}
+.season-month button:focus-visible { outline: 2px solid var(--uvm-green-light); outline-offset: 1px; }
+/* What to go and see this month: each species a button that shows it on the map. */
+.season-picks { margin-top: .5rem; border-top: 1px solid var(--border); padding-top: .4rem; }
+.season-picks[hidden] { display: none; }
+.season-picks summary { cursor: pointer; font-size: .78rem; font-weight: 600; }
+.season-picks ul { list-style: none; margin: .3rem 0 0; padding: 0; display: grid; gap: .1rem; }
+.season-picks li button {
+  display: flex; align-items: center; gap: .4rem; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; font-size: .76rem; line-height: 1.3; padding: .2rem .25rem; border: 0; border-radius: 4px;
+  background: none; color: var(--text);
+}
+.season-picks li button:hover { background: var(--bg-sunk); }
+.season-picks li button[aria-pressed="true"] { background: var(--bg-sunk); font-weight: 600; box-shadow: inset 2px 0 0 var(--uvm-green-light); }
+.season-picks .pick-state { color: var(--text-dim); }
+.season-picks li button:focus-visible { outline: 2px solid var(--uvm-green-light); outline-offset: 0; }
+.season-picks .pick-n { margin-left: auto; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+.season-picks .empty { font-size: .76rem; color: var(--text-dim); }
+.season-note { margin: .35rem 0 0; font-size: .7rem; line-height: 1.35; color: var(--text-dim); }
+
 .legend { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: .2rem; }
 .legend li { display: flex; align-items: center; gap: .4rem; font-size: .76rem; }
 .swatch {
