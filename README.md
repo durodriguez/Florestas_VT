@@ -48,7 +48,10 @@ campus"); or the only one of its species on campus. A campus-wide claim waits
 until at least 30 trees have that measurement, and a species claim until the
 species has at least 5 trees on campus, every one measured. **Champion points**, American
 Forests' big-tree score (trunk circumference in inches + height in feet + a
-quarter of the crown spread), show on any tree measured all three ways. Worked out from the inventory each time the page loads, so it
+quarter of the crown spread), show on any tree measured all three ways.
+Burlington's street trees get the same, ranked only among themselves and
+worded so ("Most champion points of the city's trees on campus"), never
+against UVM's. Worked out from the inventory each time the page loads, so it
 changes as trees are measured; "measured", because most trees aren't yet. A
 *Notable trees* filter shows them all.
 

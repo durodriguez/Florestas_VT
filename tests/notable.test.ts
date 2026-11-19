@@ -78,3 +78,17 @@ describe('height, crown and champion points', () => {
     expect(oneMissing.get('P0')).toBeUndefined();
   });
 });
+
+describe("the city's trees", async () => {
+  const { CITY_WORDING } = await import('../src/notable');
+  it('are ranked among themselves, and say so', () => {
+    const trees = [...filler(30, () => ({ dbh: 10, h: 30, s: 20 })), p('OAK', 'oak', { dbh: 40, h: 65, s: 40 })];
+    const f = notableFacts(trees, CITY_WORDING);
+    expect(f.get('OAK')).toEqual(expect.arrayContaining([
+      "Largest trunk of the city's trees on campus",
+      "Tallest of the city's trees on campus",
+      "Most champion points of the city's trees on campus",
+    ]));
+    expect(f.get('F0')).toContain("The city's only one on campus");
+  });
+});

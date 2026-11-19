@@ -55,6 +55,8 @@ export interface CityTree {
   itree: CityTreeItree | null;
   /** Free-text haystack, same idea as Plant.search. */
   search: string;
+  /** Notable notes, ranked among the city's trees only; see notable.ts. */
+  notable?: string[];
 }
 
 export interface CityTreeItree {

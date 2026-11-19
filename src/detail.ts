@@ -42,6 +42,14 @@ function row(label: string, value: string | null | undefined, hint?: string): st
 const DBH_LABEL = 'Trunk diameter';
 const DBH_HINT = 'Diameter at breast height: measured 4.5 ft above the ground';
 
+const CHAMPION_HINT = "American Forests' big-tree score: trunk circumference in inches + height in feet + a quarter of the crown spread in feet";
+
+/** What makes a tree stand out (notable.ts), one note a line. */
+const notableRow = (notes: string[] | undefined): string =>
+  row('Notable', notes?.length
+    ? `<ul class="detail-notable">${notes.map((n) => `<li>${escapeHtml(n)}</li>`).join('')}</ul>`
+    : null);
+
 const numOr = (v: number | null, unit: string): string | null =>
   v === null ? null : `${v}${unit}`;
 
@@ -200,11 +208,8 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
         plant.dbhOn ? ` <span class="fact-when">(${escapeHtml(surveyDate(plant.dbhOn))})</span>` : ''}`, DBH_HINT)}
       ${row('Height', numOr(plant.heightFt, ' ft'))}
       ${row('Canopy spread', numOr(plant.spreadFt, ' ft'))}
-      ${row('Champion points', championPoints(plant)?.toString() ?? null,
-        "American Forests' big-tree score: trunk circumference in inches + height in feet + a quarter of the crown spread in feet")}
-      ${row('Notable', plant.notable?.length
-        ? `<ul class="detail-notable">${plant.notable.map((n) => `<li>${escapeHtml(n)}</li>`).join('')}</ul>`
-        : null)}
+      ${row('Champion points', championPoints(plant)?.toString() ?? null, CHAMPION_HINT)}
+      ${notableRow(plant.notable)}
       ${row('Last surveyed', plant.surveyedOn
         ? `${escapeHtml(surveyDate(plant.surveyedOn))}${plant.history.length > 1 ? ` (${plant.history.length} surveys)` : ''}`
         : 'Not yet surveyed')}
@@ -324,6 +329,8 @@ export function renderCityDetail(tree: CityTree, base: string): string {
       ${row(DBH_LABEL, tree.dbhIn === null ? null : `${tree.dbhIn} in`, DBH_HINT)}
       ${row('Height', tree.heightFt === null ? null : `${tree.heightFt} ft`)}
       ${row('Canopy spread', tree.spreadFt === null ? null : `${tree.spreadFt} ft`)}
+      ${row('Champion points', championPoints(tree)?.toString() ?? null, CHAMPION_HINT)}
+      ${notableRow(tree.notable)}
       ${row('Planted', tree.plantedYear ? `${tree.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
       ${row('Coordinates', `${tree.lat.toFixed(6)}, ${tree.lng.toFixed(6)}`)}
     </dl>

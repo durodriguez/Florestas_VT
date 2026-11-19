@@ -49,6 +49,33 @@ interface Measure {
   species: string;
 }
 
+/**
+ * How the notes are worded. UVM's trees are ranked against each other;
+ * Burlington's street trees on campus are ranked separately, against each
+ * other only, and their notes say so, so a city tree's note never reads as a
+ * claim about the university's collection.
+ */
+export interface Wording {
+  campus: (m: Measure) => string;
+  ranked: (rank: number, of: number) => string;
+  species: (m: Measure, of: number) => string;
+  only: string;
+}
+
+export const UVM_WORDING: Wording = {
+  campus: (m) => m.campus,
+  ranked: (rank, of) => `No. ${rank} of the ${of.toLocaleString()} trunks measured on campus`,
+  species: (m, of) => `${m.species} of the ${of} on campus`,
+  only: 'The only one on campus',
+};
+
+export const CITY_WORDING: Wording = {
+  campus: (m) => `${m.species} of the city's trees on campus`,
+  ranked: (rank, of) => `No. ${rank} of the city's ${of.toLocaleString()} trunks on campus`,
+  species: (m, of) => `${m.species} of the city's ${of} on campus`,
+  only: "The city's only one on campus",
+};
+
 const MEASURES: Measure[] = [
   { value: (p) => p.dbhIn, campus: 'Largest trunk measured on campus', species: 'Largest trunk' },
   { value: (p) => p.heightFt, campus: 'Tallest measured on campus', species: 'Tallest' },
@@ -59,7 +86,7 @@ const MEASURES: Measure[] = [
 /** "Largest trunk measured on campus" -> "Tied for the largest trunk measured on campus". */
 const tiedFor = (text: string) => `Tied for the ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
 
-export function notableFacts(plants: Item[]): Map<string, string[]> {
+export function notableFacts(plants: Item[], words: Wording = UVM_WORDING): Map<string, string[]> {
   const facts = new Map<string, string[]>();
   const add = (id: string, text: string) => facts.set(id, [...(facts.get(id) ?? []), text]);
   const standing = plants.filter((p) => p.status === 'active');
@@ -78,7 +105,7 @@ export function notableFacts(plants: Item[]): Map<string, string[]> {
     const top = m.value(list[0]!)!;
     const leaders = list.filter((p) => m.value(p) === top);
     for (const p of leaders) {
-      add(p.id, leaders.length > 1 ? tiedFor(m.campus) : m.campus);
+      add(p.id, leaders.length > 1 ? tiedFor(words.campus(m)) : words.campus(m));
       campusFirst.get(m)!.add(p.id);
     }
     if (m !== MEASURES[0]) continue;
@@ -88,7 +115,7 @@ export function notableFacts(plants: Item[]): Map<string, string[]> {
       if (rank === 1) continue;
       if (rank > TOP) break;
       const tied = list.filter((q) => m.value(q) === v).length > 1;
-      add(p.id, `${tied ? 'Tied for ' : ''}No. ${rank} of the ${list.length.toLocaleString()} trunks measured on campus`);
+      add(p.id, `${tied ? 'Tied for ' : ''}${words.ranked(rank, list.length)}`);
     }
   }
 
@@ -98,7 +125,7 @@ export function notableFacts(plants: Item[]): Map<string, string[]> {
     // One of a kind. Not for a tree named only to genus ("Elm"), which may
     // well be the same species as others.
     if (group.length === 1 && group[0]!.taxon.species) {
-      add(group[0]!.id, 'The only one on campus');
+      add(group[0]!.id, words.only);
       continue;
     }
     if (group.length < MIN_SPECIES) continue;
@@ -107,7 +134,7 @@ export function notableFacts(plants: Item[]): Map<string, string[]> {
       if (list.length < group.length) continue;
       const top = m.value(list[0]!)!;
       const leaders = list.filter((p) => m.value(p) === top);
-      const text = `${m.species} of the ${group.length} on campus`;
+      const text = words.species(m, group.length);
       for (const p of leaders) {
         if (campusFirst.get(m)!.has(p.id)) continue;
         add(p.id, leaders.length > 1 ? tiedFor(text) : text);
