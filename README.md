@@ -40,6 +40,13 @@ in fruit, evergreen, in leaf or bare. Arrows step through the months, starting
 at the current one, and an *In season* list names the species worth seeing;
 tapping one shows just those trees.
 
+**Notable trees** — a tree's record says, under *This specimen*, when it stands out: the largest
+trunk measured on campus and the next nine (ranked), the largest trunk of its
+species ("Largest trunk of the 27 on campus"), or the only one of its species
+on campus. Worked out from the inventory each time the page loads, so it
+changes as trees are measured; "measured", because most trees aren't yet. A
+*Notable trees* filter shows them all.
+
 **Search** — free text across common name, scientific name, family, cultivar,
 campus area and accession number. Every term must match, so extra words narrow
 the result. A word you have finished typing matches whole words only, so "red

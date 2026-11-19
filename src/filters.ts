@@ -13,6 +13,8 @@ export type Filterable = Pick<Plant | CityTree, 'taxon' | 'collection' | 'dbhIn'
   status?: string;
   /** Plaque wording. City trees carry none, so they never match "dedicated". */
   dedicationLabel?: string | null;
+  /** City trees carry none, so they never match "notable". */
+  notable?: string[];
 };
 
 export function emptyFilters(): FilterState {
@@ -27,6 +29,7 @@ export function emptyFilters(): FilterState {
     bloomMonth: null,
     minDbh: null,
     dedicated: false,
+    notable: false,
     includeRemoved: false,
   };
 }
@@ -43,6 +46,7 @@ export function isFilterActive(f: FilterState): boolean {
     f.bloomMonth !== null ||
     f.minDbh !== null ||
     f.dedicated ||
+    f.notable ||
     f.includeRemoved
   );
 }
@@ -94,6 +98,7 @@ export function matchesFilters(plant: Filterable, f: FilterState): boolean {
   if (f.bloomMonth !== null && !plant.taxon.flowerMonths.includes(f.bloomMonth)) return false;
   if (f.minDbh !== null && (plant.dbhIn === null || plant.dbhIn < f.minDbh)) return false;
   if (f.dedicated && !plant.dedicationLabel) return false;
+  if (f.notable && !plant.notable?.length) return false;
   if (f.q.trim() !== '' && !matchesQuery(plant, f.q)) return false;
   return true;
 }

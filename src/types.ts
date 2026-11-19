@@ -203,6 +203,11 @@ export interface Plant {
    * dedicated one — there is no separate flag to disagree with it.
    */
   dedicationLabel: string | null;
+  /**
+   * What makes this tree stand out ("Largest trunk of the 27 on campus"),
+   * worked out on load from the whole inventory; see notable.ts.
+   */
+  notable?: string[];
   /** One line about *this* tree — where it came from, what happened to it. */
   story: string | null;
   /**
@@ -236,6 +241,8 @@ export interface FilterState {
   minDbh: number | null;
   /** Only plants whose plaque wording is on record. */
   dedicated: boolean;
+  /** Only trees with a note in notable.ts. */
+  notable: boolean;
   /**
    * Not a control any more: set only when a QR code lands on a removed or
    * missing plant, so its old label still opens it.
