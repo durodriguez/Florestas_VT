@@ -40,6 +40,13 @@ in fruit, evergreen, in leaf or bare. Arrows step through the months, starting
 at the current one, and an *In season* list names the species worth seeing;
 tapping one shows just those trees.
 
+**How old each number is** — every trunk size, height and spread on a
+record carries its date, and its age once it is two years or more: "49 in
+(2014, 12 years ago)". The results list gives the year beside each trunk
+size. **Color by when measured** shows which trees were measured within five
+years, five to ten, over ten years ago, or not yet: a map of what to
+re-measure.
+
 **Notable trees** — a tree's record says, under *This specimen*, when it stands out: the largest
 trunk measured on campus and the next nine (ranked); the tallest, the widest
 crown or the most champion points measured on campus; the largest, tallest,
@@ -48,7 +55,10 @@ campus"); or the only one of its species on campus. A campus-wide claim waits
 until at least 30 trees have that measurement, and a species claim until the
 species has at least 5 trees on campus, every one measured. **Champion points**, American
 Forests' big-tree score (trunk circumference in inches + height in feet + a
-quarter of the crown spread), show on any tree measured all three ways. Worked out from the inventory each time the page loads, so it
+quarter of the crown spread), show on any tree measured all three ways.
+Burlington's street trees get the same, ranked only among themselves and
+worded so ("Most champion points of the city's trees on campus"), never
+against UVM's. Worked out from the inventory each time the page loads, so it
 changes as trees are measured; "measured", because most trees aren't yet. A
 *Notable trees* filter shows them all.
 

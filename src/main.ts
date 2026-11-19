@@ -7,7 +7,7 @@ import { indexByTag, normalizeTag } from './accession';
 import { PlantMap, escapeHtml } from './map';
 import { renderCityDetail, renderDetail, renderResultItem } from './detail';
 import { legendFor, ORIGIN_LABELS, TYPE_LABELS, typesInUse } from './palette';
-import { notableFacts } from './notable';
+import { CITY_WORDING, notableFacts } from './notable';
 import { MONTH_NAMES, SEASON_LABELS, SEASON_STATES, summarizeSeason, swatch } from './season';
 import {
   applyFilters, emptyFilters, facetCounts, isFilterActive, toCsv,
@@ -56,6 +56,9 @@ class App {
     this.byTag = indexByTag(plants);
     for (const [id, facts] of notableFacts(plants)) this.byId.get(id)!.notable = facts;
     this.cityTrees = expandCityTrees(dataset);
+    // Ranked among themselves, never against UVM's trees.
+    const cityNotes = notableFacts(this.cityTrees.map((t) => ({ ...t, status: 'active' })), CITY_WORDING);
+    for (const tree of this.cityTrees) tree.notable = cityNotes.get(tree.id);
     this.map = new PlantMap($('#map'), dataset, plants, {
       onSelect: (plant) => this.select(plant),
       onSelectCityTree: (tree) => this.selectCityTree(tree),

@@ -3,6 +3,7 @@ import { escapeHtml } from './map';
 import { ORIGIN_LABELS, TYPE_LABELS } from './palette';
 import { photoSeries, photoTaken, photoUrl } from './photos';
 import { championPoints } from './notable';
+import { measuredOn, whenText } from './measured';
 
 const MONTHS = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -41,6 +42,22 @@ function row(label: string, value: string | null | undefined, hint?: string): st
 /** Short enough for the panel; the hover says exactly what was measured. */
 const DBH_LABEL = 'Trunk diameter';
 const DBH_HINT = 'Diameter at breast height: measured 4.5 ft above the ground';
+
+const CHAMPION_HINT = "American Forests' big-tree score: trunk circumference in inches + height in feet + a quarter of the crown spread in feet";
+
+/** What makes a tree stand out (notable.ts), one note a line. */
+const notableRow = (notes: string[] | undefined): string =>
+  row('Notable', notes?.length
+    ? `<ul class="detail-notable">${notes.map((n) => `<li>${escapeHtml(n)}</li>`).join('')}</ul>`
+    : null);
+
+/**
+ * When a measurement was taken, after the number: every one, so a trunk
+ * size from 2014 never reads as today's. Its age in years once it is two or
+ * more years old.
+ */
+const when = (date: string | null): string =>
+  date ? ` <span class="fact-when">(${escapeHtml(whenText(date))})</span>` : '';
 
 const numOr = (v: number | null, unit: string): string | null =>
   v === null ? null : `${v}${unit}`;
@@ -134,6 +151,7 @@ function photoStrip(plant: Plant, base: string, photoBaseUrl?: string): string {
 export function renderDetail(plant: Plant, dataset: Dataset, base: string): string {
   const t = plant.taxon;
   const age = plant.plantedYear ? `${new Date().getFullYear() - plant.plantedYear} years` : null;
+  const on = measuredOn(plant);
 
   const taken = photoTaken(plant.photoOn ?? plant.surveyedOn);
   const photo = plant.photo
@@ -195,16 +213,11 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
           plant.conditionOn ? ` <span class="fact-when">(${escapeHtml(surveyDate(plant.conditionOn))})</span>` : ''}`
         : null)}
       ${row('Planted', plant.plantedYear ? `${plant.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
-      ${row(DBH_LABEL, plant.dbhIn === null ? null : `${numOr(plant.dbhIn, ' in')}${
-        // From an earlier visit than the latest, as every 2014 measurement is.
-        plant.dbhOn ? ` <span class="fact-when">(${escapeHtml(surveyDate(plant.dbhOn))})</span>` : ''}`, DBH_HINT)}
-      ${row('Height', numOr(plant.heightFt, ' ft'))}
-      ${row('Canopy spread', numOr(plant.spreadFt, ' ft'))}
-      ${row('Champion points', championPoints(plant)?.toString() ?? null,
-        "American Forests' big-tree score: trunk circumference in inches + height in feet + a quarter of the crown spread in feet")}
-      ${row('Notable', plant.notable?.length
-        ? `<ul class="detail-notable">${plant.notable.map((n) => `<li>${escapeHtml(n)}</li>`).join('')}</ul>`
-        : null)}
+      ${row(DBH_LABEL, plant.dbhIn === null ? null : `${numOr(plant.dbhIn, ' in')}${when(on.dbh)}`, DBH_HINT)}
+      ${row('Height', plant.heightFt === null ? null : `${numOr(plant.heightFt, ' ft')}${when(on.height)}`)}
+      ${row('Canopy spread', plant.spreadFt === null ? null : `${numOr(plant.spreadFt, ' ft')}${when(on.spread)}`)}
+      ${row('Champion points', championPoints(plant)?.toString() ?? null, CHAMPION_HINT)}
+      ${notableRow(plant.notable)}
       ${row('Last surveyed', plant.surveyedOn
         ? `${escapeHtml(surveyDate(plant.surveyedOn))}${plant.history.length > 1 ? ` (${plant.history.length} surveys)` : ''}`
         : 'Not yet surveyed')}
@@ -227,6 +240,12 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
   `;
 }
 
+/** The year of a trunk size in the results list: "49″ DBH (2014)". */
+function resultYear(plant: Plant): string {
+  const date = measuredOn(plant).dbh;
+  return date ? ` (${escapeHtml(date.slice(0, 4))})` : '';
+}
+
 export function renderResultItem(plant: Plant, distance?: number): string {
   const dist =
     distance === undefined
@@ -239,7 +258,7 @@ export function renderResultItem(plant: Plant, distance?: number): string {
           <span class="result-common">${escapeHtml(plant.taxon.common)}</span>
           <span class="result-sci">${escapeHtml(plant.taxon.sci)}</span>
         </span>
-        <span class="result-meta">${escapeHtml(plant.id)}${plant.dbhIn ? ` · ${plant.dbhIn}″ DBH` : ''}</span>
+        <span class="result-meta">${escapeHtml(plant.id)}${plant.dbhIn ? ` · ${plant.dbhIn}″ DBH${resultYear(plant)}` : ''}</span>
         ${dist}
       </button>
     </li>`;
@@ -324,6 +343,8 @@ export function renderCityDetail(tree: CityTree, base: string): string {
       ${row(DBH_LABEL, tree.dbhIn === null ? null : `${tree.dbhIn} in`, DBH_HINT)}
       ${row('Height', tree.heightFt === null ? null : `${tree.heightFt} ft`)}
       ${row('Canopy spread', tree.spreadFt === null ? null : `${tree.spreadFt} ft`)}
+      ${row('Champion points', championPoints(tree)?.toString() ?? null, CHAMPION_HINT)}
+      ${notableRow(tree.notable)}
       ${row('Planted', tree.plantedYear ? `${tree.plantedYear}${age ? ` (about ${age})` : ''}` : null)}
       ${row('Coordinates', `${tree.lat.toFixed(6)}, ${tree.lng.toFixed(6)}`)}
     </dl>
