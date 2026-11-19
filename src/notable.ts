@@ -12,7 +12,8 @@
  * Every superlative says "measured": most trees have no measurement yet, and
  * a bigger one may simply not have been measured. A campus-wide claim needs
  * at least MIN_CAMPUS trees measured; a claim about a species needs at least
- * three of them on campus and two measured. Only standing trees count. No DOM
+ * MIN_SPECIES of them on campus, every one measured, so "the largest of the
+ * 27" is never the largest of the few that happened to be measured. Only standing trees count. No DOM
  * here, so the rules can be tested.
  */
 
@@ -25,10 +26,9 @@ type Item = Pick<Plant, 'id' | 'dbhIn' | 'heightFt' | 'spreadFt' | 'status'> & {
 /** How many of the biggest trunks on campus get a ranked note. */
 const TOP = 10;
 /** Fewest trees measured before anything is called the most on campus. */
-export const MIN_CAMPUS = 10;
-/** Fewest trees of a species on campus, and measured, for "of the N". */
-const MIN_SPECIES = 3;
-const MIN_SPECIES_MEASURED = 2;
+export const MIN_CAMPUS = 30;
+/** Fewest trees of a species on campus, all of them measured, for "of the N". */
+export const MIN_SPECIES = 5;
 
 /**
  * American Forests' big-tree score, as used by the National Register of
@@ -104,7 +104,7 @@ export function notableFacts(plants: Item[]): Map<string, string[]> {
     if (group.length < MIN_SPECIES) continue;
     for (const m of MEASURES) {
       const list = ranked(group, m);
-      if (list.length < MIN_SPECIES_MEASURED) continue;
+      if (list.length < group.length) continue;
       const top = m.value(list[0]!)!;
       const leaders = list.filter((p) => m.value(p) === top);
       const text = `${m.species} of the ${group.length} on campus`;
