@@ -173,6 +173,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
       <p class="detail-sci">${formatScientific(plant)}</p>
       <p class="detail-family">${escapeHtml(t.family)} &middot; ${escapeHtml(TYPE_LABELS[t.type] ?? titleCase(t.type))}
         &middot; ${escapeHtml(ORIGIN_LABELS[t.origin] ?? titleCase(t.origin))}</p>
+      ${plant.notable?.length ? `<ul class="detail-notable">${plant.notable.map((n) => `<li>${escapeHtml(n)}</li>`).join('')}</ul>` : ''}
     </header>
     ${removed}
     ${photo}

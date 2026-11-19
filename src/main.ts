@@ -7,6 +7,7 @@ import { indexByTag, normalizeTag } from './accession';
 import { PlantMap, escapeHtml } from './map';
 import { renderCityDetail, renderDetail, renderResultItem } from './detail';
 import { legendFor, ORIGIN_LABELS, TYPE_LABELS, typesInUse } from './palette';
+import { notableFacts } from './notable';
 import { MONTH_NAMES, SEASON_LABELS, SEASON_STATES, summarizeSeason, swatch } from './season';
 import {
   applyFilters, emptyFilters, facetCounts, isFilterActive, toCsv,
@@ -53,6 +54,7 @@ class App {
   ) {
     this.byId = new Map(plants.map((p) => [p.id, p]));
     this.byTag = indexByTag(plants);
+    for (const [id, facts] of notableFacts(plants)) this.byId.get(id)!.notable = facts;
     this.cityTrees = expandCityTrees(dataset);
     this.map = new PlantMap($('#map'), dataset, plants, {
       onSelect: (plant) => this.select(plant),
@@ -141,6 +143,9 @@ class App {
     const relaxed = { ...this.filters, dedicated: false };
     $('#dedicated-count').textContent = String(
       applyFilters(this.plants, relaxed).filter((p) => p.dedicationLabel).length,
+    );
+    $('#notable-count').textContent = String(
+      applyFilters(this.plants, { ...this.filters, notable: false }).filter((p) => p.notable?.length).length,
     );
   }
 
@@ -537,6 +542,11 @@ class App {
 
     $<HTMLInputElement>('#filter-dedicated').addEventListener('change', (e) => {
       this.filters.dedicated = (e.target as HTMLInputElement).checked;
+      this.refresh();
+    });
+
+    $<HTMLInputElement>('#filter-notable').addEventListener('change', (e) => {
+      this.filters.notable = (e.target as HTMLInputElement).checked;
       this.refresh();
     });
 
