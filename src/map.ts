@@ -2,6 +2,7 @@ import L from 'leaflet';
 import 'leaflet.markercluster';
 import type { CampusAreaProps, CityTree, ColorBy, Dataset, Plant, TrailProps } from './types';
 import { colorFor } from './palette';
+import { dotScale, type TreeDisplay } from './tree-display';
 
 /**
  * Raster basemaps that need no API key or account, so the map keeps working
@@ -89,6 +90,16 @@ export class PlantMap {
    */
   private readonly cityCluster: L.MarkerClusterGroup;
   private cityShown = false;
+  /** Clusters, or every tree as its own dot (see tree-display.ts). */
+  private display: TreeDisplay = 'clusters';
+  /** Where the trees go when every one is drawn: a plain group, no clustering. */
+  private readonly treeLayer = L.layerGroup();
+  private readonly cityLayer = L.layerGroup();
+  /** The UVM trees the filters currently let through, biggest first. */
+  private shown: L.CircleMarker[] = [];
+  private cityMarkers: L.CircleMarker[] = [];
+  /** Each dot's full size; every-tree mode shrinks it when zoomed out. */
+  private readonly baseRadius = new WeakMap<L.CircleMarker, number>();
   private readonly trailLayer: L.GeoJSON;
   /** The whole-campus outline: the one boundary the layers control switches. */
   private readonly outlineLayer: L.GeoJSON;
@@ -243,6 +254,7 @@ export class PlantMap {
 
     this.watchTiles(layers);
     this.map.on('zoomend', () => this.updateCampusLabels());
+    this.map.on('zoomend', () => { if (this.display === 'every') this.restyleAll(); });
     this.updateCampusLabels();
 
     this.buildMarkers(plants);
@@ -290,6 +302,7 @@ export class PlantMap {
   private buildMarkers(plants: Plant[]): void {
     for (const plant of plants) {
       const marker = L.circleMarker([plant.lat, plant.lng], this.markerStyle(plant));
+      this.baseRadius.set(marker, radiusFor(plant));
       marker.on('click', () => this.options.onSelect(plant));
       marker.bindTooltip(`${plant.taxon.common} · ${plant.id}`, { direction: 'top', offset: [0, -6] });
       this.markers.set(plant.id, marker);
@@ -299,10 +312,11 @@ export class PlantMap {
   private markerStyle(plant: Plant): L.CircleMarkerOptions {
     const color = colorFor(plant, this.colorBy);
     const removed = plant.status !== 'active';
+    const { scale, weight } = dotScale(this.display, this.map.getZoom());
     return {
-      radius: radiusFor(plant),
+      radius: radiusFor(plant) * scale,
       color: '#ffffff',
-      weight: 1.5,
+      weight,
       opacity: removed ? 0.6 : 1,
       fillColor: color,
       fillOpacity: removed ? 0.35 : 0.9,
@@ -310,15 +324,52 @@ export class PlantMap {
     };
   }
 
-  /** Swap the visible set. Called on every filter change. */
+  /**
+   * Swap the visible set. Called on every filter change. Biggest first, so
+   * when every tree is drawn a small tree sits on top of a big neighbor,
+   * never hidden under it.
+   */
   show(plants: Plant[]): void {
-    this.cluster.clearLayers();
     const layers: L.CircleMarker[] = [];
     for (const plant of plants) {
       const marker = this.markers.get(plant.id);
       if (marker) layers.push(marker);
     }
-    this.cluster.addLayers(layers);
+    layers.sort((a, b) => (this.baseRadius.get(b) ?? 0) - (this.baseRadius.get(a) ?? 0));
+    this.shown = layers;
+    fill(this.display === 'clusters' ? this.cluster : this.treeLayer, layers);
+  }
+
+  /**
+   * Clusters or every tree. The same dots move from one container to the
+   * other; nothing is rebuilt, and the selection and colors carry over.
+   */
+  setDisplay(display: TreeDisplay): void {
+    if (display === this.display) return;
+    const [from, to] = display === 'every'
+      ? [this.cluster, this.treeLayer] : [this.treeLayer, this.cluster];
+    const [cityFrom, cityTo] = display === 'every'
+      ? [this.cityCluster, this.cityLayer] : [this.cityLayer, this.cityCluster];
+    this.map.removeLayer(from);
+    from.clearLayers();
+    this.display = display;
+    this.restyleAll();
+    to.addTo(this.map);
+    fill(to, this.shown);
+    if (this.cityShown) {
+      this.map.removeLayer(cityFrom);
+      cityFrom.clearLayers();
+      cityTo.addTo(this.map);
+      fill(cityTo, this.cityMarkers);
+    }
+  }
+
+  /** Every dot's size and edge, for the current zoom and display. */
+  private restyleAll(): void {
+    const { scale, weight } = dotScale(this.display, this.map.getZoom());
+    for (const marker of [...this.markers.values(), ...this.cityMarkers]) {
+      marker.setStyle({ radius: (this.baseRadius.get(marker) ?? 5.5) * scale, weight });
+    }
   }
 
   /**
@@ -329,14 +380,15 @@ export class PlantMap {
    * should not have to work out which pins are which.
    */
   showCityTrees(trees: CityTree[]): void {
-    this.cityCluster.clearLayers();
+    const container = this.display === 'clusters' ? this.cityCluster : this.cityLayer;
+    const { scale, weight } = dotScale(this.display, this.map.getZoom());
     const layers = trees.map((tree) => {
       const marker = L.circleMarker([tree.lat, tree.lng], {
-        radius: cityRadiusFor(tree),
+        radius: cityRadiusFor(tree) * scale,
         // Blue fill, thin white stroke — the same treatment a UVM marker gets,
         // which is a green fill and a thin white stroke.
         color: BTV_WHITE,
-        weight: 1.5,
+        weight,
         opacity: 1,
         fillColor: BTV_BLUE,
         fillOpacity: 0.9,
@@ -346,20 +398,25 @@ export class PlantMap {
         direction: 'top',
         offset: [0, -6],
       });
+      this.baseRadius.set(marker, cityRadiusFor(tree));
       marker.on('click', () => this.options.onSelectCityTree?.(tree));
       return marker;
     });
-    this.cityCluster.addLayers(layers);
+    layers.sort((a, b) => (this.baseRadius.get(b) ?? 0) - (this.baseRadius.get(a) ?? 0));
+    this.cityMarkers = layers;
+    fill(container, layers);
     if (!this.cityShown) {
-      this.cityCluster.addTo(this.map);
+      container.addTo(this.map);
       this.cityShown = true;
     }
   }
 
   hideCityTrees(): void {
     if (!this.cityShown) return;
-    this.map.removeLayer(this.cityCluster);
-    this.cityCluster.clearLayers();
+    const container = this.display === 'clusters' ? this.cityCluster : this.cityLayer;
+    this.map.removeLayer(container);
+    container.clearLayers();
+    this.cityMarkers = [];
     this.cityShown = false;
   }
 
@@ -527,6 +584,13 @@ function campusLabels(
     );
   }
   return labels;
+}
+
+/** Empty a container and fill it again: clusters take the dots in one batch. */
+function fill(container: L.LayerGroup, markers: L.CircleMarker[]): void {
+  container.clearLayers();
+  if (container instanceof L.MarkerClusterGroup) container.addLayers(markers);
+  else for (const marker of markers) container.addLayer(marker);
 }
 
 /** Bigger trunks read as bigger dots, which makes specimen trees findable. */
