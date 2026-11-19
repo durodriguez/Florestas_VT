@@ -222,7 +222,7 @@ export interface Plant {
   search: string;
 }
 
-export type ColorBy = 'type' | 'origin' | 'condition' | 'collection' | 'season';
+export type ColorBy = 'type' | 'origin' | 'condition' | 'collection' | 'season' | 'measured';
 
 export interface FilterState {
   q: string;

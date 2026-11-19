@@ -1,5 +1,6 @@
 import type { ColorBy, Dataset, Plant } from './types';
 import { season } from './season';
+import { ageBand, measuredOn, type AgeBand } from './measured';
 
 // Seven colors chosen by the project lead (October 2026). The two tree greens
 // used to be close on purpose, "trees, two sorts", but were too hard to tell
@@ -26,6 +27,22 @@ const CONDITION_COLORS: Record<string, string> = {
   fair: '#d4a017',
   poor: '#d1642c',
   dead: '#7c7c7c',
+};
+
+/** How old a tree's trunk measurement is (the legend says trunk only by
+ * implication: height and spread follow once trees have them). Gold flags the
+ * oldest, for re-measuring. */
+const AGE_COLORS: Record<AgeBand, string> = {
+  recent: '#1a7f37',
+  older: '#8fbf4d',
+  old: '#e0a400',
+  none: '#b9b2a6',
+};
+const AGE_LABELS: Record<AgeBand, string> = {
+  recent: 'Measured within 5 years',
+  older: 'Measured 5 to 10 years ago',
+  old: 'Measured over 10 years ago',
+  none: 'Not measured yet',
 };
 
 const FALLBACK = '#6b7280';
@@ -60,6 +77,8 @@ export function colorFor(plant: Plant, mode: ColorBy, month = new Date().getMont
       return plant.collection?.color ?? FALLBACK;
     case 'season':
       return season(plant.taxon, month).color;
+    case 'measured':
+      return AGE_COLORS[ageBand(measuredOn(plant).dbh)];
   }
 }
 
@@ -89,7 +108,9 @@ export function legendFor(
     case 'collection':
       return dataset.collections.map((c) => ({ label: c.name, color: c.color }));
     case 'season':
-      // Counted from what is on the map, for the month chosen: see seasonLegend in main.ts.
+      // Counted from what is on the map, for the month chosen: see renderLegend in main.ts.
       return [];
+    case 'measured':
+      return (Object.keys(AGE_LABELS) as AgeBand[]).map((b) => ({ label: AGE_LABELS[b], color: AGE_COLORS[b] }));
   }
 }

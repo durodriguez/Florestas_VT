@@ -40,6 +40,13 @@ in fruit, evergreen, in leaf or bare. Arrows step through the months, starting
 at the current one, and an *In season* list names the species worth seeing;
 tapping one shows just those trees.
 
+**How old each number is** — every trunk size, height and spread on a
+record carries its date, and its age once it is two years or more: "49 in
+(2014, 12 years ago)". The results list gives the year beside each trunk
+size. **Color by when measured** shows which trees were measured within five
+years, five to ten, over ten years ago, or not yet: a map of what to
+re-measure.
+
 **Notable trees** — a tree's record says, under *This specimen*, when it stands out: the largest
 trunk measured on campus and the next nine (ranked); the tallest, the widest
 crown or the most champion points measured on campus; the largest, tallest,
