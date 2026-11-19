@@ -14,6 +14,7 @@ import { distanceMeters } from './geo';
 import { initPanelSplit } from './panel-split';
 import { SHARE_BUTTON, renderShareMenu } from './share';
 import type { CityTree, ColorBy, Dataset, FilterState, Plant } from './types';
+import type { TreeDisplay } from './tree-display';
 
 const BASE = import.meta.env.BASE_URL;
 const MAX_RESULTS_RENDERED = 250;
@@ -81,6 +82,11 @@ class App {
     this.bindEvents();
     this.refresh();
     this.applyUrlState();
+    // The LiDAR canopy is background, and the biggest file the map loads: it
+    // waits until the trees are on screen and the record, if any, is open.
+    window.setTimeout(() => {
+      this.map.loadCanopy(`${BASE}data/crown-peaks.json?v=${__DATA_VERSION__}`).catch(() => {});
+    }, 0);
   }
 
   // ---- filter panel ------------------------------------------------------
@@ -352,6 +358,18 @@ class App {
 
   // ---- URL state ---------------------------------------------------------
 
+  /**
+   * Clusters or every tree. In the URL like the city trees, so a shared link
+   * shows what its sender saw; absent means clusters, the default.
+   */
+  private setTreeDisplay(display: TreeDisplay): void {
+    this.map.setDisplay(display);
+    document.querySelectorAll<HTMLButtonElement>('.tree-display button').forEach((b) => {
+      b.setAttribute('aria-pressed', String(b.dataset.display === display));
+    });
+    this.setUrlParam('trees', display === 'every' ? 'every' : null);
+  }
+
   private setUrlParam(key: string, value: string | null): void {
     const url = new URL(location.href);
     if (value === null) url.searchParams.delete(key);
@@ -374,6 +392,8 @@ class App {
         this.map.fitTo(this.results);
       }
     }
+
+    if (params.get('trees') === 'every') this.setTreeDisplay('every');
 
     if (params.get('city') === '1' && this.cityTrees.length) {
       $<HTMLInputElement>('#filter-city').checked = true;
@@ -503,6 +523,11 @@ class App {
       this.colorBy = (e.target as HTMLSelectElement).value as ColorBy;
       this.map.setColorBy(this.colorBy, this.plants);
       this.renderLegend();
+    });
+
+    $('.tree-display').addEventListener('click', (e) => {
+      const button = (e.target as Element).closest<HTMLButtonElement>('button[data-display]');
+      if (button) this.setTreeDisplay(button.dataset.display as TreeDisplay);
     });
 
     $('#clear-filters').addEventListener('click', () => {

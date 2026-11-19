@@ -264,6 +264,21 @@ button, input, select { font: inherit; color: inherit; }
   border-radius: 6px; background: var(--bg-sunk); font-size: .8rem;
 }
 
+/* Clusters or every tree: two halves of one switch, under the color menu,
+   since both decide how the dots look. */
+.tree-display {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: .4rem; padding: 2px;
+  background: var(--bg-sunk); border: 1px solid var(--border); border-radius: 6px;
+}
+.tree-display button {
+  font: inherit; font-size: .76rem; line-height: 1.2; padding: .28rem .3rem; white-space: nowrap;
+  border: 0; border-radius: 4px; background: none; color: var(--text-dim); cursor: pointer;
+}
+.tree-display button[aria-pressed="true"] {
+  background: var(--bg); color: var(--text); font-weight: 600; box-shadow: 0 1px 2px rgb(0 0 0 / 15%);
+}
+.tree-display button:focus-visible { outline: 2px solid var(--uvm-green-light); outline-offset: 1px; }
+
 .legend { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: .2rem; }
 .legend li { display: flex; align-items: center; gap: .4rem; font-size: .76rem; }
 .swatch {

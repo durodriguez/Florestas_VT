@@ -26,10 +26,18 @@ npm run dev          # http://localhost:5173
 
 ## What it does
 
-**Map** — clustered plant markers over three keyless basemaps (OpenStreetMap,
+**Map** — plant markers over three keyless basemaps (OpenStreetMap,
 Esri satellite, Esri topographic) — no API key, no account. Markers scale with trunk diameter, and can be
-coloured by plant type, origin, condition or campus area, with a matching
-legend.
+colored by plant type, origin, condition or campus area, with a matching
+legend. A switch under the color menu chooses how they are drawn:
+**Clusters**, the default, groups nearby trees into numbered bubbles so the
+opening view is not a couple of thousand dots; **Every tree** draws each one,
+smaller when zoomed out, so the collection's pattern shows. The choice goes
+into the link (`?trees=every`), like the city trees. Under everything, in
+faint green, is the tree canopy from Vermont's April 2023 LiDAR: 8,284 crown
+peaks (docs/LIDAR.md), switched from the layers control as *Tree canopy (2023
+LiDAR)*. Canopy with no dot on it is a tree nobody has mapped, or one mapped
+in the wrong place.
 
 **Search** — free text across common name, scientific name, family, cultivar,
 campus area and accession number. Every term must match, so extra words narrow
