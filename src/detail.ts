@@ -173,7 +173,6 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
       <p class="detail-sci">${formatScientific(plant)}</p>
       <p class="detail-family">${escapeHtml(t.family)} &middot; ${escapeHtml(TYPE_LABELS[t.type] ?? titleCase(t.type))}
         &middot; ${escapeHtml(ORIGIN_LABELS[t.origin] ?? titleCase(t.origin))}</p>
-      ${plant.notable?.length ? `<ul class="detail-notable">${plant.notable.map((n) => `<li>${escapeHtml(n)}</li>`).join('')}</ul>` : ''}
     </header>
     ${removed}
     ${photo}
@@ -200,6 +199,9 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
         plant.dbhOn ? ` <span class="fact-when">(${escapeHtml(surveyDate(plant.dbhOn))})</span>` : ''}`, DBH_HINT)}
       ${row('Height', numOr(plant.heightFt, ' ft'))}
       ${row('Canopy spread', numOr(plant.spreadFt, ' ft'))}
+      ${row('Notable', plant.notable?.length
+        ? `<ul class="detail-notable">${plant.notable.map((n) => `<li>${escapeHtml(n)}</li>`).join('')}</ul>`
+        : null)}
       ${row('Last surveyed', plant.surveyedOn
         ? `${escapeHtml(surveyDate(plant.surveyedOn))}${plant.history.length > 1 ? ` (${plant.history.length} surveys)` : ''}`
         : 'Not yet surveyed')}

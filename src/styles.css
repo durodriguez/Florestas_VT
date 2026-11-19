@@ -479,16 +479,11 @@ button, input, select { font: inherit; color: inherit; }
 /* Sits under its own "Dedication plaque" heading. pre-line: one line on the
    plaque, one line here — without it the browser folds the surveyor's line
    breaks into spaces. */
-/* What makes this tree stand out: gold, like the selection ring. */
-.detail-notable { list-style: none; margin: .5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .3rem; }
-.detail-notable li {
-  font-size: .78rem; font-weight: 600; line-height: 1.3; padding: .2rem .55rem; border-radius: 99px;
-  background: #fff3b8; color: #4d3d00; border: 1px solid #e8cf5a;
-}
-.detail-notable li::before { content: "★ "; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .detail-notable li { background: #3d3410; color: #ffe27a; border-color: #6b5a14; }
-}
+/* What makes this tree stand out, in "This specimen": one note a line,
+   each with a gold star like the selection ring. */
+.detail-notable { list-style: none; margin: 0; padding: 0; display: grid; gap: .2rem; }
+.detail-notable li { padding-left: 1.1em; text-indent: -1.1em; }
+.detail-notable li::before { content: "★"; display: inline-block; width: 1.1em; text-indent: 0; color: #c9a000; }
 .detail-dedication {
   margin: 0; padding: .5rem .7rem; font-size: .85rem; white-space: pre-line;
   background: var(--bg-sunk); border-left: 3px solid var(--uvm-green-light);
