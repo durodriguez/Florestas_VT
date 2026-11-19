@@ -7,6 +7,7 @@ import { indexByTag, normalizeTag } from './accession';
 import { PlantMap, escapeHtml } from './map';
 import { renderCityDetail, renderDetail, renderResultItem } from './detail';
 import { legendFor, ORIGIN_LABELS, TYPE_LABELS, typesInUse } from './palette';
+import { MONTH_NAMES, SEASON_LABELS, SEASON_STATES, summarizeSeason, swatch } from './season';
 import {
   applyFilters, emptyFilters, facetCounts, isFilterActive, toCsv,
 } from './filters';
@@ -38,6 +39,8 @@ class App {
   private cityTrees: CityTree[] = [];
   private showCity = false;
   private colorBy: ColorBy = 'type';
+  /** The month "Color by season" shows: this month, until stepped. */
+  private month = new Date().getMonth() + 1;
   private userPos: { lat: number; lng: number } | null = null;
   private readonly byId: Map<string, Plant>;
   /** Trees by the number on the trunk. Built once; search hits it per keystroke. */
@@ -142,12 +145,45 @@ class App {
   }
 
   private renderLegend(): void {
-    $('#legend-items').innerHTML = legendFor(this.colorBy, this.dataset, this.typesShown())
+    const season = this.colorBy === 'season' ? summarizeSeason(this.results, this.month) : null;
+    const entries = season
+      // Counted from the trees the filters let through, and only the states
+      // that month has: no "Fall color (0)" in May.
+      ? SEASON_STATES.filter((s) => season.counts[s] > 0).map((s) => ({
+        label: `${SEASON_LABELS[s]} (${season.counts[s].toLocaleString()})`,
+        color: swatch(season.colors[s]),
+      }))
+      : legendFor(this.colorBy, this.dataset, this.typesShown());
+    $('#legend-items').innerHTML = entries
       .map(
         (e) =>
           `<li><span class="swatch" style="background:${escapeHtml(e.color)}"></span>${escapeHtml(titleCase(e.label))}</li>`,
       )
       .join('');
+
+    $('#season-month').hidden = !season;
+    $('#season-picks').hidden = !season;
+    if (!season) return;
+    $('#season-month-name').textContent = MONTH_NAMES[this.month - 1]!;
+    // The list ignores a species already picked from it, so the others stay
+    // in reach and the picked one can be tapped again to show everything.
+    const chosen = this.filters.taxon;
+    const pool = chosen === null ? season : summarizeSeason(applyFilters(this.plants, { ...this.filters, taxon: null }), this.month);
+    const picks = pool.picks.slice(0, 6);
+    $('#season-picks-list').innerHTML = picks.length
+      ? picks.map((p) =>
+        `<li><button type="button" data-taxon="${escapeHtml(p.taxon.id)}" aria-pressed="${p.taxon.id === chosen}" ` +
+        `title="${p.taxon.id === chosen ? 'Show every tree again' : `Show only ${escapeHtml(p.taxon.common)} on the map`}">` +
+        `<span class="swatch" style="background:${escapeHtml(p.color)}"></span>` +
+        `<span>${escapeHtml(p.taxon.common)} <span class="pick-state">${escapeHtml(SEASON_LABELS[p.state].toLowerCase())}</span></span>` +
+        `<span class="pick-n">${p.n}</span></button></li>`).join('')
+      : '<li class="empty">Nothing showy this month: evergreens and bark.</li>';
+  }
+
+  /** "Color by season" on or off, or a new month for it. */
+  private applySeason(): void {
+    this.map.setColorBy(this.colorBy, this.plants, this.month);
+    this.renderLegend();
   }
 
   // ---- core loop ---------------------------------------------------------
@@ -516,8 +552,27 @@ class App {
 
     $<HTMLSelectElement>('#color-by').addEventListener('change', (e) => {
       this.colorBy = (e.target as HTMLSelectElement).value as ColorBy;
-      this.map.setColorBy(this.colorBy, this.plants);
-      this.renderLegend();
+      // The list of what's in season starts open where there is room for it;
+      // on a phone it is one line until tapped, so it doesn't cover the map.
+      if (this.colorBy === 'season') {
+        $<HTMLDetailsElement>('#season-picks').open = !window.matchMedia('(max-width: 48rem)').matches;
+      }
+      this.applySeason();
+    });
+
+    const step = (by: number) => {
+      this.month = ((this.month - 1 + by + 12) % 12) + 1;
+      this.applySeason();
+    };
+    $('#season-prev').addEventListener('click', () => step(-1));
+    $('#season-next').addEventListener('click', () => step(1));
+    // A species in the list: show just those trees, as "Show all" does.
+    $('#season-picks-list').addEventListener('click', (e) => {
+      const button = (e.target as Element).closest<HTMLButtonElement>('button[data-taxon]');
+      if (!button) return;
+      const id = button.dataset.taxon!;
+      this.setTaxon(this.filters.taxon === id ? null : id);
+      this.map.fitTo(this.results);
     });
 
     $('.tree-display').addEventListener('click', (e) => {

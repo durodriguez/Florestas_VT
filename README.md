@@ -33,7 +33,12 @@ legend. A switch under the color menu chooses how they are drawn:
 **Clusters**, the default, groups nearby trees into numbered bubbles so the
 opening view is not a couple of thousand dots; **Every tree** draws each one,
 smaller when zoomed out, so the collection's pattern shows. The choice goes
-into the link (`?trees=every`), like the city trees.
+into the link (`?trees=every`), like the city trees. **Color by season** colors each tree by what it is doing in a month,
+from its species' calendar in `taxa.csv`: in flower (in the flower's color),
+fall color (in October, since the data gives the color but not the timing),
+in fruit, evergreen, in leaf or bare. Arrows step through the months, starting
+at the current one, and an *In season* list names the species worth seeing;
+tapping one shows just those trees.
 
 **Search** — free text across common name, scientific name, family, cultivar,
 campus area and accession number. Every term must match, so extra words narrow

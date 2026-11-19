@@ -2,6 +2,7 @@ import L from 'leaflet';
 import 'leaflet.markercluster';
 import type { CampusAreaProps, CityTree, ColorBy, Dataset, Plant, TrailProps } from './types';
 import { colorFor } from './palette';
+import { isPale } from './season';
 import { dotScale, type TreeDisplay } from './tree-display';
 
 /**
@@ -118,6 +119,8 @@ export class PlantMap {
   private readonly markers = new Map<string, L.CircleMarker>();
   private locationMarker: L.CircleMarker | null = null;
   private colorBy: ColorBy = 'type';
+  /** The month "Color by season" shows, 1–12. */
+  private month = new Date().getMonth() + 1;
   private tileErrors = 0;
   private reportedTrouble = new Set<string>();
 
@@ -310,12 +313,13 @@ export class PlantMap {
   }
 
   private markerStyle(plant: Plant): L.CircleMarkerOptions {
-    const color = colorFor(plant, this.colorBy);
+    const color = colorFor(plant, this.colorBy, this.month);
     const removed = plant.status !== 'active';
     const { scale, weight } = dotScale(this.display, this.map.getZoom());
     return {
       radius: radiusFor(plant) * scale,
-      color: '#ffffff',
+      // White blossom with a white edge would vanish on the light basemap.
+      color: isPale(color) ? '#6b716c' : '#ffffff',
       weight,
       opacity: removed ? 0.6 : 1,
       fillColor: color,
@@ -420,8 +424,9 @@ export class PlantMap {
     this.cityShown = false;
   }
 
-  setColorBy(mode: ColorBy, plants: Plant[]): void {
+  setColorBy(mode: ColorBy, plants: Plant[], month = this.month): void {
     this.colorBy = mode;
+    this.month = month;
     for (const plant of plants) {
       this.markers.get(plant.id)?.setStyle(this.markerStyle(plant));
     }
