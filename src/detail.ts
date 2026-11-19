@@ -2,6 +2,7 @@ import type { CityTree, CityTreeItree, Dataset, Observation, Plant, Taxon } from
 import { escapeHtml } from './map';
 import { ORIGIN_LABELS, TYPE_LABELS } from './palette';
 import { photoSeries, photoTaken, photoUrl } from './photos';
+import { championPoints } from './notable';
 
 const MONTHS = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -199,6 +200,8 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
         plant.dbhOn ? ` <span class="fact-when">(${escapeHtml(surveyDate(plant.dbhOn))})</span>` : ''}`, DBH_HINT)}
       ${row('Height', numOr(plant.heightFt, ' ft'))}
       ${row('Canopy spread', numOr(plant.spreadFt, ' ft'))}
+      ${row('Champion points', championPoints(plant)?.toString() ?? null,
+        "American Forests' big-tree score: trunk circumference in inches + height in feet + a quarter of the crown spread in feet")}
       ${row('Notable', plant.notable?.length
         ? `<ul class="detail-notable">${plant.notable.map((n) => `<li>${escapeHtml(n)}</li>`).join('')}</ul>`
         : null)}

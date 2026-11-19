@@ -41,9 +41,14 @@ at the current one, and an *In season* list names the species worth seeing;
 tapping one shows just those trees.
 
 **Notable trees** — a tree's record says, under *This specimen*, when it stands out: the largest
-trunk measured on campus and the next nine (ranked), the largest trunk of its
-species ("Largest trunk of the 27 on campus"), or the only one of its species
-on campus. Worked out from the inventory each time the page loads, so it
+trunk measured on campus and the next nine (ranked); the tallest, the widest
+crown or the most champion points measured on campus; the largest, tallest,
+widest or highest-scoring of its species ("Largest trunk of the 27 on
+campus"); or the only one of its species on campus. A campus-wide claim waits
+until at least 10 trees have that measurement, and a species claim until the
+species has 3 trees on campus and 2 measured. **Champion points**, American
+Forests' big-tree score (trunk circumference in inches + height in feet + a
+quarter of the crown spread), show on any tree measured all three ways. Worked out from the inventory each time the page loads, so it
 changes as trees are measured; "measured", because most trees aren't yet. A
 *Notable trees* filter shows them all.
 
