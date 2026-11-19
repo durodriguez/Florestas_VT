@@ -146,17 +146,6 @@ recorded (in cm or in, converted to inches here).
 The collection date is known only to the year; the rows are dated
 2022-12-31 and shown as "2022" (see DATA-MODEL.md).
 
-## 6. Crown peaks from Vermont's 2023 LiDAR
-
-**`data/crown-peaks.csv`** — 8,284 crown peaks inside the campus boundary,
-found by `scripts/lidar/crown_peaks.py` in Vermont's statewide LiDAR, flown
-leaf-off on 21 April 2023 (USGS 3DEP collection `VT_Statewide_2_A23`, quality
-level 1). The method is in [LIDAR.md](../docs/LIDAR.md).
-
-**Terms.** US federal data, in the public domain. The peaks can be published
-freely, and are: the position editor draws them, and the map draws them as its
-*Tree canopy (2023 LiDAR)* layer, credited in the map's attribution line.
-
 ## On ShareAlike
 
 CC BY-SA requires that derivative works carry the same licence. How far that
