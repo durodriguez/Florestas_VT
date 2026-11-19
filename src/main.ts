@@ -82,6 +82,11 @@ class App {
     this.bindEvents();
     this.refresh();
     this.applyUrlState();
+    // The LiDAR canopy is background, and the biggest file the map loads: it
+    // waits until the trees are on screen and the record, if any, is open.
+    window.setTimeout(() => {
+      this.map.loadCanopy(`${BASE}data/crown-peaks.json?v=${__DATA_VERSION__}`).catch(() => {});
+    }, 0);
   }
 
   // ---- filter panel ------------------------------------------------------
