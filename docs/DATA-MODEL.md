@@ -388,11 +388,13 @@ in the CSV export.
 
 ### The 2014 inventory's rows
 
-896 rows, all dated `2014-12-31` with `surveyor` **`UVM 2014 inventory`**, are
+900 rows, all dated `2014-12-31` with `surveyor` **`UVM 2014 inventory`**, are
 the 2014 UVM campus tree inventory's measurements of trees still on the map:
 its diameter, its condition, and (in `notes`) its tree number and age class.
-Added on 6 November 2026, matched by tag, and only where the 2014 species and
-the map's agree at least on genus. The 54 that disagree are held back until
+896 were added on 6 November 2026, matched by tag, and only where the 2014
+species and the map's agree at least on genus. Four more were added on
+20 November 2026 for trees first recorded that day whose tags and species
+match 2014's: UVM-1943, UVM-2026, UVM-2036 and UVM-2037. The 54 that disagree are held back until
 someone checks which tree the tag is on now.
 
 The inventory was collected over the whole of 2014 with no date per tree, so
