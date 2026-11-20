@@ -56,7 +56,7 @@ export function currentStatus(observationRows) {
  *   issues: {level: string, message: string}[]
  * }}
  */
-export function applyPositions(plantRows, moveRows, { bounds, areas, statusOf = () => 'active' } = {}) {
+export function applyPositions(plantRows, moveRows, { bounds, areas, statusOf = () => 'active', renamed = new Map() } = {}) {
   const byId = new Map(plantRows.map((p) => [String(p.plant_id ?? '').trim(), p]));
   const updates = [];
   const removals = [];
@@ -66,7 +66,9 @@ export function applyPositions(plantRows, moveRows, { bounds, areas, statusOf = 
   const warn = (message) => issues.push({ level: 'warning', message });
 
   for (const m of moveRows) {
-    const id = String(m.plant_id ?? '').trim();
+    // A tree renumbered since the browser saved this move (renumbered.csv).
+    const asked = String(m.plant_id ?? '').trim();
+    const id = renamed.get(asked) ?? asked;
     if (!id) { err('a row has no plant_id'); continue; }
     if (seen.has(id)) { err(`${id} appears twice — export again from /positions/`); continue; }
     seen.add(id);

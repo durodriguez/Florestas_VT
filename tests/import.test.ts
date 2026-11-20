@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
-import { importSurvey, parseCoord, parseLatLng, resolveColumns, nextSequence, taxaStubs } from '../scripts/lib/import.mjs';
+import { importSurvey, parseCoord, parseLatLng, resolveColumns, nextSequence, taxaStubs, renumberMap, tagOnTrunk } from '../scripts/lib/import.mjs';
 
 const mapping = JSON.parse(
   // eslint-disable-next-line no-undef
@@ -728,5 +728,79 @@ describe('importSurvey — campus from coordinates', () => {
     const r = run([row({ tag: 'UVM-2025-0007', area: '', lat: '44.4700', lng: '-73.2000' })],
       { campusAreas, plantRows: misfiled });
     expect(r.updates.flatMap((u: { changes: object }) => Object.keys(u.changes))).not.toContain('collection_id');
+  });
+});
+
+describe('importSurvey — renumbering a tree to the tag on its trunk', () => {
+  // UVM-4521, issued from the untagged block in 2023–24, has since been
+  // tagged 2805 by the grounds crew. The surveyor picks it from the map and
+  // types 2805 in "Tag on the trunk"; the app writes this note.
+  const bare = { plant_id: 'UVM-4521', tag: '', taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955' };
+  const onTrunk = (id: string, tag: string) => `CLAIMED BY POSITION: matched to ${id} from 7 m. TAG ON TRUNK: the trunk reads ${tag}; ${id} is on file with no tag`;
+  const visit = (over: Record<string, string> = {}) => row({ tag: 'UVM-4521', notes: onTrunk('UVM-4521', '2805'), ...over });
+  const obs = [{ plant_id: 'UVM-4521', surveyed_on: '2024-01-09', surveyor: 'EC', condition: 'good', status: 'active' }];
+
+  it('reads the tag from the note the field app writes', () => {
+    expect(tagOnTrunk(onTrunk('UVM-4521', '2805'))).toBe('2805');
+    expect(tagOnTrunk('TAG ON TRUNK: the trunk reads 0600; UVM-4749 is on file with no tag')).toBe('600');
+    expect(tagOnTrunk('TAG ON TRUNK: the trunk reads 38?9; UVM-4521 is on file with no tag')).toBeNull();
+    expect(tagOnTrunk('TAG MISMATCH: the trunk reads 3849; UVM-3326 is on file as tag 3326')).toBeNull();
+  });
+
+  it('renumbers a bare tree from the untagged block to its tag, and files the visit there', () => {
+    const r = run([visit()], { plantRows: [...plantRows, bare], observationRows: obs });
+    expect(r.summary.errors).toBe(0);
+    expect(r.renumbers).toEqual([{ from: 'UVM-4521', to: 'UVM-2805', tag: '2805' }]);
+    expect(r.observations.map((o: { plant_id: string }) => o.plant_id)).toEqual(['UVM-2805']);
+    expect(r.updates.every((u: { plant_id: string }) => u.plant_id === 'UVM-2805')).toBe(true);
+  });
+
+  it('files every row for that tree in the same file under the new number', () => {
+    const r = run([visit(), visit({ date: '2026-11-21', notes: '' }), row({ tag: '2805', date: '2026-11-22' })],
+      { plantRows: [...plantRows, bare], observationRows: obs });
+    expect(r.summary.errors).toBe(0);
+    expect(r.renumbers).toHaveLength(1);
+    expect(r.observations.map((o: { plant_id: string }) => o.plant_id)).toEqual(['UVM-2805', 'UVM-2805', 'UVM-2805']);
+  });
+
+  it('leaves a tree alone, with a warning, when the tag is worn by another tree or its number is taken', () => {
+    const worn = run([visit()], { plantRows: [...plantRows, bare, { plant_id: 'UVM-0105', tag: '2805', taxon_id: 'acer-saccharum', lat: '44.47', lng: '-73.19' }] });
+    expect(worn.renumbers).toEqual([]);
+    expect(worn.issues.some((i: { message: string }) => /UVM-0105 is on file with that tag/.test(i.message))).toBe(true);
+    const taken = run([visit()], { plantRows: [...plantRows, bare, { plant_id: 'UVM-2805', tag: '', taxon_id: 'acer-saccharum', lat: '44.47', lng: '-73.19' }] });
+    expect(taken.renumbers).toEqual([]);
+    expect(taken.issues.some((i: { message: string }) => /UVM-2805 is already another tree's number/.test(i.message))).toBe(true);
+  });
+
+  it('only renumbers numbers from the untagged block, and only bare trees', () => {
+    const legacy = { ...bare, plant_id: 'UVM-0493' };
+    expect(run([row({ tag: 'UVM-0493', notes: onTrunk('UVM-0493', '2805') })], { plantRows: [...plantRows, legacy] }).renumbers).toEqual([]);
+    // A tree on file with a tag gets a TAG MISMATCH note, never TAG ON TRUNK; a stray one changes nothing.
+    expect(run([visit()], { plantRows: [...plantRows, { ...bare, tag: '777' }] }).renumbers).toEqual([]);
+  });
+
+  it('reaches a renumbered tree from its old number, which is never issued again', () => {
+    const renumberedRows = [{ old_id: 'UVM-4521', new_id: 'UVM-2805' }];
+    const now = [...plantRows, { ...bare, plant_id: 'UVM-2805', tag: '2805' }];
+    const r = run([row({ tag: 'UVM-4521', notes: onTrunk('UVM-4521', '2805') })], { plantRows: now, renumberedRows });
+    expect(r.summary.errors).toBe(0);
+    expect(r.renumbers).toEqual([]);
+    expect(r.observations[0].plant_id).toBe('UVM-2805');
+    // The block continues past a retired number rather than reusing it.
+    const fresh = run([row()], { plantRows: plantRows, renumberedRows: [{ old_id: 'UVM-4001', new_id: 'UVM-0676' }] });
+    expect(fresh.inserts[0].plant_id).toBe('UVM-4002');
+  });
+
+  it('recognises a re-export of a visit filed before the renumbering', () => {
+    const renumberedRows = [{ old_id: 'UVM-4521', new_id: 'UVM-2805' }];
+    const now = [...plantRows, { ...bare, plant_id: 'UVM-2805', tag: '2805' }];
+    const filed = [{ plant_id: 'UVM-2805', surveyed_on: '2026-09-01', surveyor: '', dbh_in: '30', height_ft: '', spread_ft: '', condition: 'good', status: 'active', photo: '', notes: onTrunk('UVM-4521', '2805') }];
+    const r = run([visit()], { plantRows: now, observationRows: filed, renumberedRows });
+    expect(r.summary.errors).toBe(0);
+    expect(r.reimported).toHaveLength(1);
+  });
+
+  it('follows a chain of renumberings to the end', () => {
+    expect(renumberMap([{ old_id: 'A', new_id: 'B' }, { old_id: 'B', new_id: 'C' }]).get('A')).toBe('C');
   });
 });

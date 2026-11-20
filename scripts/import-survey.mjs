@@ -23,6 +23,7 @@ import { OBSERVATION_COLUMNS, QA_NOTE } from './lib/vocab.mjs';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const plantsPath = join(root, 'data', 'plants.csv');
 const observationsPath = join(root, 'data', 'observations.csv');
+const renumberedPath = join(root, 'data', 'renumbered.csv');
 
 const argv = process.argv.slice(2);
 const flag = (name) => argv.includes(`--${name}`);
@@ -76,6 +77,7 @@ const result = importSurvey({
   collectionRows: parse(join(root, 'data', 'collections.csv')).rows,
   campusAreas: JSON.parse(readFileSync(join(root, 'data', 'campus-areas.geojson'), 'utf8')),
   config: JSON.parse(readFileSync(join(root, 'data', 'config.json'), 'utf8')),
+  renumberedRows: existsSync(renumberedPath) ? parse(renumberedPath).rows : [],
   year: Number(opt('year', new Date().getFullYear())),
   duplicateMeters: flag('allow-duplicates') ? 0 : Number(opt('duplicate-meters', 2)),
 });
@@ -110,6 +112,12 @@ if (result.updates.length) {
     const diff = Object.entries(u.changes).map(([k, v]) => `${k}=${v}`).join(', ');
     console.log(`  ${u.plant_id}: ${diff}`);
   }
+}
+
+if (result.renumbers.length) {
+  console.log(`\n${result.renumbers.length} tree(s) renumbered to match the tag read off the trunk:`);
+  for (const r of result.renumbers) console.log(`  ${r.from} → ${r.to} (tag ${r.tag})`);
+  console.log('  Their earlier visits move with them, and data/renumbered.csv records the change.');
 }
 
 if (result.observations.length) {
@@ -155,6 +163,7 @@ if (result.inserts.length) {
 
 console.log(
   `\n${s.inserts} new plant(s), ${s.observations} observation(s), ${s.updates} correction(s), ` +
+  `${s.renumbers ? `${s.renumbers} renumbered, ` : ''}` +
   `${s.reimported} already on file, ${s.errors} error(s), ${s.warnings} warning(s)`,
 );
 
@@ -165,7 +174,7 @@ if (s.errors > 0) {
   process.exit(1);
 }
 
-if (s.inserts === 0 && s.updates === 0 && s.observations === 0) {
+if (s.inserts === 0 && s.updates === 0 && s.observations === 0 && s.renumbers === 0) {
   console.log('\nNothing to import.');
   process.exit(0);
 }
@@ -187,6 +196,10 @@ if (!flag('write') && !opt('out')) {
 // Staging to --out writes one file for review, so both halves have to go in it
 // — splitting them would hand back a plants file whose observations vanished.
 if (outPath !== plantsPath) {
+  if (result.renumbers.length) {
+    console.error('\n✗ This file renumbers trees, which rewrites lines already in data/; stage it with --write on a branch instead of --out.');
+    process.exit(1);
+  }
   writeFileSync(outPath, Papa.unparse([...plants.rows, ...newRows], { columns: header, newline: '\n' }) + '\n');
   const stem = outPath.replace(/\.csv$/i, '');
   const obsOut = `${stem}-observations.csv`;
@@ -202,7 +215,16 @@ if (outPath !== plantsPath) {
 copyFileSync(plantsPath, `${plantsPath}.bak`);
 copyFileSync(observationsPath, `${observationsPath}.bak`);
 
-if (result.updates.length > 0) {
+// A renumbered tree's line takes its new accession and its tag before the
+// corrections are applied, since they are filed under the new number.
+for (const r of result.renumbers) {
+  const row = plants.rows.find((p) => p.plant_id?.trim() === r.from);
+  if (!row || row.tag?.trim()) throw new Error(`${r.from} is not on file without a tag; not renumbering it`);
+  row.plant_id = r.to;
+  row.tag = r.tag;
+}
+
+if (result.updates.length > 0 || result.renumbers.length > 0) {
   // Every write here says newline: '\n'. Papa's default is \r\n, while every
   // other script writes \n, and a file holding both is misread by the next
   // script to parse it: a bare \n at the end of a \r\n file becomes part of
@@ -230,5 +252,27 @@ if (result.observations.length > 0) {
   );
 }
 
-console.log('\n✓ data/plants.csv and data/observations.csv updated (previous versions saved as .bak)');
+// Renumbering, the rest: the tree's earlier visits in observations.csv are
+// filed under its new accession (the visits themselves are untouched), and
+// data/renumbered.csv records old → new, so an old link or a later export
+// carrying the old number still reaches it.
+if (result.renumbers.length > 0) {
+  const relabel = (path, fix) => {
+    const lines = readFileSync(path, 'utf8').split('\n');
+    writeFileSync(path, lines.map((line) => {
+      for (const r of result.renumbers) if (line.startsWith(`${r.from},`)) return fix(line, r);
+      return line;
+    }).join('\n'));
+  };
+  relabel(observationsPath, (line, r) => `${r.to}${line.slice(r.from.length)}`);
+  const on = new Date().toISOString().slice(0, 10);
+  const rows = result.renumbers.map((r) => ({
+    old_id: r.from, new_id: r.to, renumbered_on: on,
+    reason: `Wears tag ${r.tag}; renumbered to match it by the survey importer`,
+  }));
+  const lines = Papa.unparse(rows, { columns: ['old_id', 'new_id', 'renumbered_on', 'reason'], header: !existsSync(renumberedPath), newline: '\n' });
+  writeFileSync(renumberedPath, (existsSync(renumberedPath) ? readFileSync(renumberedPath, 'utf8').replace(/\n*$/, '\n') : '') + lines + '\n');
+}
+
+console.log(`\n✓ data/plants.csv and data/observations.csv${result.renumbers.length ? ' and data/renumbered.csv' : ''} updated (previous versions saved as .bak)`);
 console.log('  Next: npm run data');

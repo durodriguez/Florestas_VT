@@ -176,6 +176,34 @@ export function nextSequence(existingIds, prefix, year) {
   return max + 1;
 }
 
+/**
+ * Old accession → current one, from data/renumbered.csv, following a chain
+ * (A → B, then B → C) to its end. A number is renumbered when a tree issued
+ * one from the untagged block turns out to wear a tag (see importSurvey).
+ */
+export function renumberMap(renumberedRows = []) {
+  const step = new Map(renumberedRows.map((r) => [trim(r.old_id), trim(r.new_id)]).filter(([a, b]) => a && b));
+  const out = new Map();
+  for (const old of step.keys()) {
+    let to = step.get(old);
+    for (let i = 0; i < 20 && step.has(to); i++) to = step.get(to);
+    out.set(old, to);
+  }
+  return out;
+}
+
+/**
+ * The tag a surveyor read off the trunk of a tree they picked from the map,
+ * when the tree is on file with none. The field app writes it into the notes
+ * in exactly this form (TAG ON TRUNK in src/field/exporter.ts), and older
+ * exports carry no column for it, so the note is the one place it always is.
+ * Only a whole number counts: a part-legible "38?9" is left for a person.
+ */
+export function tagOnTrunk(notes) {
+  const m = /TAG ON TRUNK: the trunk reads (\d{1,4}); /.exec(notes ?? '');
+  return m ? String(Number(m[1])) : null;
+}
+
 /** `UVM-2026-0001` for a newly issued number, `UVM-0772` for an adopted tag. */
 const formatAccession = (prefix, year, seq) =>
   year === null
@@ -254,6 +282,9 @@ export function importSurvey({
   // the campus its coordinates fall in (see "collection" below).
   campusAreas = null,
   config,
+  // data/renumbered.csv: accessions changed after issue, so an export still
+  // carrying an old number lands on the tree under its new one.
+  renumberedRows = [],
   year = new Date().getFullYear(),
   duplicateMeters = 2,
   movedMeters = 0.5,
@@ -274,8 +305,13 @@ export function importSurvey({
   const prefix = config.accessionPrefix ?? 'PLANT';
   const bounds = config?.map?.bounds;
 
-  let seq = nextUntagged(existing.keys(), prefix);
-  const takenIds = new Set(existing.keys());
+  const renamed = renumberMap(renumberedRows);
+  // A retired number is never issued again, to anyone: an old link or label
+  // pointing at it must not reach a different tree.
+  let seq = nextUntagged([...existing.keys(), ...renamed.keys()], prefix);
+  const takenIds = new Set([...existing.keys(), ...renamed.keys()]);
+  /** Trees this run gives a new accession because they wear a tag: {from, to, tag}. */
+  const renumbers = [];
 
   const inserts = [];
   const observations = [];
@@ -542,7 +578,13 @@ export function importSurvey({
     }
 
     // --- new accession, or another visit to an existing one ----------------
-    const tag = get(row, 'plant_id');
+    // An accession since renumbered still reaches its tree. The field app
+    // exports everything it has saved, so a visit recorded under the old
+    // number comes back after the change, in this run or a later one.
+    // (A tree renumbered by this run keeps its old number until the run ends,
+    // so its rows all meet in one place; see "this run's" below.)
+    const tagRaw = get(row, 'plant_id');
+    const tag = renamed.get(tagRaw) ?? tagRaw;
     if (tag) {
       // A bare number is a physical tag stamped on the tree. Its accession is
       // that number in the project's prefix form, so a surveyor reading "772"
@@ -602,6 +644,29 @@ export function importSurvey({
       // The visit itself is always recorded. Only corrections to the tree's
       // identity touch plants.csv — a re-measured trunk is new history, not an
       // edit, which is the whole reason the two files are separate.
+      // Picked from the map with a tag read off a trunk the record says is
+      // bare: if the tree's number came from the untagged block and the
+      // tag's own number is free, the tree takes it (UVM-4521 wearing 2805
+      // becomes UVM-2805), as the grounds crew numbers trees. Anything less
+      // clear stays a note for review: a tree on file with a different tag
+      // (TAG MISMATCH), a tag another tree wears or whose number is taken, or
+      // a tree whose number did not come from the untagged block.
+      const reading = tagOnTrunk(observation.notes);
+      const blockNo = new RegExp(`^${prefix}-(\\d{4})$`).exec(known);
+      const already = renumbers.some((r) => r.from === known);
+      if (reading && !already && !trim(existing.get(known).tag) && blockNo && Number(blockNo[1]) >= UNTAGGED_BLOCK_START) {
+        const to = formatAccession(prefix, null, Number(reading));
+        if (byTag.has(reading)) {
+          warn(`${known}'s trunk reads ${reading}, but ${byTag.get(reading)} is on file with that tag; not renumbered`);
+        } else if (takenIds.has(to)) {
+          warn(`${known}'s trunk reads ${reading}, but ${to} is already another tree's number; not renumbered`);
+        } else {
+          renumbers.push({ from: known, to, tag: reading });
+          takenIds.add(to);
+          // Under its old number for the rest of the run, like its visits.
+          byTag.set(reading, known);
+        }
+      }
       const recorded = surveyedOn ? recordObservation(known, observation, error) : false;
 
       // Only carry across what the surveyor actually recorded, so a re-survey
@@ -636,6 +701,13 @@ export function importSurvey({
     inserts.push({ plant_id: id, ...record, collection_id: record.collection_id || derivedCollection });
     if (surveyedOn) recordObservation(id, observation, error);
   });
+
+  // This run's renumberings take effect here, once every row is read: visits
+  // and corrections recorded under a number just retired go to the new one.
+  for (const { from, to } of renumbers) {
+    for (const o of observations) if (o.plant_id === from) o.plant_id = to;
+    for (const u of updates) if (u.plant_id === from) u.plant_id = to;
+  }
 
   // A field export carries no accession for a new plant, so importing the same
   // file twice would add every tree again. Flag inserts that land on top of a
@@ -677,6 +749,7 @@ export function importSurvey({
     inserts,
     observations,
     updates,
+    renumbers,
     duplicates,
     reimported,
     issues,
@@ -688,6 +761,7 @@ export function importSurvey({
       inserts: inserts.length,
       observations: observations.length,
       updates: updates.length,
+      renumbers: renumbers.length,
       duplicates: duplicates.length,
       reimported: reimported.length,
       errors: issues.filter((i) => i.level === 'error').length,

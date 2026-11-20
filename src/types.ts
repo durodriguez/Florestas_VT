@@ -135,6 +135,11 @@ export interface Dataset {
   taxa: Taxon[];
   /** Walking tours, from tours.csv and tour-stops.csv. */
   tours: Tour[];
+  /**
+   * Accessions changed after issue, old → current, from renumbered.csv: a
+   * link or QR code carrying the old number still opens the tree.
+   */
+  renumbered?: Record<string, string>;
   campusAreas: GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon, CampusAreaProps>;
   /** Compact rows, expanded by expandCityTrees. See CITY_TREE_FIELDS. */
   cityTrees: { fields: string[]; rows: unknown[][] };

@@ -125,16 +125,26 @@ working with them simpler. If another tree already holds that accession (as
 `UVM-0105` holds 105, though it now wears 3497), the new tree is issued the
 next number from the untagged block instead, and the importer warns. A tree
 with no tag is issued a number from the untagged block (`UVM-4001` and up).
-Either way, the tag also goes in the `tag` column, and once issued the
-accession does not follow the metal: a replaced tag changes the `tag` column
-only.
+Either way, the tag also goes in the `tag` column. A replaced tag changes the
+`tag` column only.
+
+**An older tree from the untagged block takes its tag when one is read.** Many
+trees mapped in 2023–24 were issued numbers from the untagged block and have
+since been tagged by the grounds crew (the zelkova `UVM-4521` wears 2805). When
+a surveyor picks such a tree in the field app and types the number on its
+trunk, the survey importer renumbers it to that tag (`UVM-2805`), if three
+things hold: its number is from the untagged block, it has no tag on file, and
+the tag's number is free and on no other tree. Its earlier visits move with it,
+and the change is recorded in `renumbered.csv` (below). Anything less clear
+stays a note for review. Accessions below 4001 are never renumbered this way:
+those were minted from tags and tie trees to the 2014 inventory.
 
 A tag of 4001 or higher would land inside the untagged block. The importer
 still never issues one number twice, but such a tree would read like an
 untagged one. No tag on file is that high yet (the highest is 3849).
 
 Before this rule, new tagged trees were issued numbers from the untagged
-block, and one was renumbered by hand to match its tag: the dawn redwood
+block, and three were renumbered by hand to match their tags: the dawn redwood
 wearing tag 676, issued `UVM-4729` on 4 November 2026, became `UVM-0676` on
 6 November, before any label or link depended on the old number. When the
 rule changed, the two trees whose tags then disagreed with recent accessions
@@ -152,6 +162,31 @@ collect.
 
 It is provenance, not identity: nothing in the site reads it, and it is not
 sent to the browser, for the same reason `geolocation_notes` never was.
+
+### renumbered.csv
+
+Every accession changed after issue, one row each:
+
+| Column | Meaning |
+|---|---|
+| `old_id` | The number the tree had |
+| `new_id` | The number it has now |
+| `renumbered_on` | When |
+| `reason` | Why, in a few words |
+
+The survey importer appends to it when it renumbers a tree; the three earlier
+renumberings by hand are in it too. It does three jobs:
+
+- **Old links and labels still work.** The build publishes it, and the map and
+  the field guide open the tree when a link carries its old number
+  (`?plant=UVM-4521` opens `UVM-2805`).
+- **A re-export still imports.** The field app exports every visit it has
+  saved, so a visit recorded under the old number comes back. The survey and
+  positions importers read it under the new number.
+- **A retired number is never issued again**, to any tree.
+
+The build refuses an `old_id` still in `plants.csv`, or a `new_id` (followed
+through any chain) that is not.
 
 ### The description and the fun fact must not say the same thing
 
