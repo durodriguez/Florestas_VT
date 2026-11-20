@@ -10,7 +10,7 @@ data/taxa.csv         one row per species/cultivar   (what a plant is)
 data/plants.csv       one row per mapped individual  (what it is, where it stands)
 data/observations.csv one row per plant per visit    (what someone measured, and when)
 data/collections.csv  campus areas / beds
-data/trails.geojson   self-guided walking tours
+data/tours.csv        walking tours, and data/tour-stops.csv their stops
 data/campus-areas.geojson  campus boundary + the six named campuses
 data/species-aliases.csv   free-text species names -> taxon_id
 data/config.json      site name, map centre, campus bounds
@@ -648,16 +648,8 @@ largest trunks measured on and around the University Green, in nearest-next
 walking order, each note giving the tree's measured size, its year and its
 rank among the trunks measured on campus.
 
-## trails.geojson
-
-A GeoJSON `FeatureCollection` of `LineString` features. Each needs
-`trail_id`, `name`, `color`, `length_mi`, `duration_min`, `description`, and
-`stops` — an array of `plant_id` values in walking order. Draw the lines in
-[geojson.io](https://geojson.io) or QGIS and paste them in.
-
-While the file holds no trails, the map leaves *Walking trails* out of its
-layers control; the option appears once a trail is added. Tours (above) have
-taken over this job, so the file is likely to stay empty.
+`data/trails.geojson`, hand-drawn trail lines, came before tours. It never
+held a trail and was removed in November 2026.
 
 ### Filling in a new taxon
 
@@ -849,8 +841,8 @@ wrong:
 coordinates or measurements, and a value outside a controlled vocabulary.
 
 **Warnings** (build continues) — coordinates outside the campus bounds in
-`config.json`, a plant with no `collection_id`, a trail stop that is not a known
-accession, a count of campus areas whose geometry is still provisional, and a count
+`config.json`, a plant with no `collection_id`, a tour stop on a tree no longer
+standing, a count of campus areas whose geometry is still provisional, and a count
 of taxa no active plant references. That last one is
 summarised in a single line rather than one per taxon, because the species list
 legitimately runs ahead of the survey: `taxa.csv` holds every species known to

@@ -7,7 +7,7 @@ and Spear Street, which is detached and sits over a kilometre south of the rest.
 Both now exist here as an optional overlay.
 
 The public map shows it under **Campus areas** in the layers control
-(bottom-right), as a checkbox alongside *Walking trails*. The three basemaps —
+(bottom-right), as a checkbox. The three basemaps —
 Streets, Satellite, Topographic — stay radio buttons, because you can only have
 one basemap; the overlays are checkboxes, because you can have any combination.
 

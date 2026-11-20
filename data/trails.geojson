@@ -1,5 +1,0 @@
-{
-  "type": "FeatureCollection",
-  "comment": "No trails defined yet. Add LineString features with trail_id, name, color, length_mi, duration_min, description and a stops array of plant_id values. See docs/DATA-MODEL.md.",
-  "features": []
-}

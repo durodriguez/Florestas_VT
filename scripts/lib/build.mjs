@@ -52,7 +52,7 @@ function inBounds(lat, lng, config) {
   return lat >= south && lat <= north && lng >= west && lng <= east;
 }
 
-export function buildDataset({ taxaRows, plantRows, observationRows = [], collectionRows, trails, campusAreas, aliasRows = [], cityTreeRows = [], itreeRows = [], itreeRun = null, tourRows = [], tourStopRows = [], config }) {
+export function buildDataset({ taxaRows, plantRows, observationRows = [], collectionRows, campusAreas, aliasRows = [], cityTreeRows = [], itreeRows = [], itreeRun = null, tourRows = [], tourStopRows = [], config }) {
   const errors = [];
   const warnings = [];
   const err = (where, msg) => errors.push(`${where}: ${msg}`);
@@ -508,21 +508,6 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     );
   }
 
-  // ---- trails ------------------------------------------------------------
-  const trailFeatures = (trails?.features ?? []).map((f, i) => {
-    const where = `trails.geojson feature ${i}`;
-    const stops = f.properties?.stops ?? [];
-    for (const stop of stops) {
-      if (!seenPlantIds.has(stop)) {
-        warn(where, `stop "${stop}" is not a plant_id in plants.csv`);
-      }
-    }
-    if (f.geometry?.type !== 'LineString') {
-      err(where, `geometry must be a LineString, got "${f.geometry?.type}"`);
-    }
-    return f;
-  });
-
   // ---- tours -------------------------------------------------------------
   // tours.csv and tour-stops.csv; see tours.mjs. Checked against the plants
   // as built, so a stop on a removed tree is caught here.
@@ -663,7 +648,6 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     },
     collections,
     taxa,
-    trails: { type: 'FeatureCollection', features: trailFeatures },
     tours: toursBuilt.tours,
     campusAreas: { type: 'FeatureCollection', features: areaFeatures },
     cityTrees: { fields: CITY_TREE_FIELDS, rows: cityTrees },
@@ -676,7 +660,6 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       unsurveyed: plantsMeta.filter((p) => !history.has(p.id)).length,
       active: plantRowsOut.filter((r) => r[PLANT_FIELDS.indexOf('status')] === STATUSES.indexOf('active')).length,
       collections: collections.length,
-      trails: trailFeatures.length,
       tours: toursBuilt.tours.length,
       campusAreas: areaFeatures.length,
       aliases: aliasCount,

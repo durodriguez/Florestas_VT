@@ -59,7 +59,6 @@ const build = (over: Partial<Parameters<typeof buildDataset>[0]> = {}) =>
     plantRows: [plant()],
     observationRows: [observation()],
     collectionRows: [collection],
-    trails: { type: 'FeatureCollection', features: [] },
     campusAreas: { type: 'FeatureCollection', features: [] },
     config,
     ...over,
@@ -619,35 +618,6 @@ describe('buildDataset', () => {
     expect(r.errors.join('\n')).toMatch(/BTV-9.*no matching row/);
     expect(r.errors.join('\n')).toMatch(/total_benefits_usd_yr "N\/A"/);
     expect(r.errors.join('\n')).toMatch(/itree-run\.json: missing/);
-  });
-
-  it('warns when a trail stop is not a known accession', () => {
-    const r = build({
-      trails: {
-        type: 'FeatureCollection',
-        features: [{
-          type: 'Feature',
-          properties: { stops: ['UVM-0001', 'UVM-9999'] },
-          geometry: { type: 'LineString', coordinates: [[-73.19, 44.47], [-73.18, 44.48]] },
-        }],
-      },
-    });
-    expect(r.warnings.join()).toMatch(/UVM-9999.*not a plant_id/);
-    expect(r.errors).toEqual([]);
-  });
-
-  it('rejects a trail that is not a LineString', () => {
-    const r = build({
-      trails: {
-        type: 'FeatureCollection',
-        features: [{
-          type: 'Feature',
-          properties: { stops: [] },
-          geometry: { type: 'Point', coordinates: [-73.19, 44.47] },
-        }],
-      },
-    });
-    expect(r.errors.join()).toMatch(/must be a LineString/);
   });
 });
 

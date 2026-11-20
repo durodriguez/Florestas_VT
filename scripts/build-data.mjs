@@ -64,7 +64,6 @@ const result = buildDataset({
   plantRows: readCsv('plants.csv'),
   observationRows: readCsv('observations.csv'),
   collectionRows: readCsv('collections.csv'),
-  trails: JSON.parse(readFileSync(join(dataDir, 'trails.geojson'), 'utf8')),
   campusAreas: JSON.parse(readFileSync(join(dataDir, 'campus-areas.geojson'), 'utf8')),
   aliasRows: readCsv('species-aliases.csv'),
   tourRows: readCsv('tours.csv'),
@@ -275,7 +274,7 @@ mkdirSync(healthDir, { recursive: true });
 // make every visitor re-download data that had not actually changed.
 const version = createHash('sha256')
   .update(
-    ['taxa.csv', 'plants.csv', 'observations.csv', 'collections.csv', 'trails.geojson', 'tours.csv', 'tour-stops.csv',
+    ['taxa.csv', 'plants.csv', 'observations.csv', 'collections.csv', 'tours.csv', 'tour-stops.csv',
       'campus-areas.geojson', 'species-aliases.csv', 'config.json', 'city-trees.csv', 'itree-city-trees.csv', 'itree-run.json', peaksFile]
       .filter((name) => existsSync(join(dataDir, name)))
       .map((name) => readFileSync(join(dataDir, name)))
@@ -289,7 +288,7 @@ const kb = (s) => `${(Buffer.byteLength(s) / 1024).toFixed(1)} kB`;
 const c = result.dataset.counts;
 console.log(
   `\n✓ ${c.plants} plants (${c.active} active) · ${c.taxa} taxa · ` +
-  `${c.collections} collections · ${c.trails} trails · ${c.campusAreas} campus areas · ` +
+  `${c.collections} collections · ${c.tours} tour${c.tours === 1 ? "" : "s"} · ${c.campusAreas} campus areas · ` +
   `${c.aliases} species aliases` +
   `${result.warnings.length ? ` · ${result.warnings.length} warning(s)` : ''}`
 );
