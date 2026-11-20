@@ -13,6 +13,7 @@ import { UNKNOWN_TAXON } from './lib/vocab.mjs';
 import { normalizeName } from './lib/species.mjs';
 import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS } from './lib/species-pages.mjs';
 import { renderItreePage } from './lib/itree-page.mjs';
+import { collectionHealth, renderHealthPage } from './lib/health.mjs';
 import { SPECIES_SEARCH_JS } from './lib/species-search.mjs';
 import { photoUrl } from './lib/photo-url.mjs';
 
@@ -246,6 +247,19 @@ if (result.dataset.itree) {
   mkdirSync(itreeDir, { recursive: true });
   writeFileSync(join(itreeDir, 'index.html'), renderItreePage(
     result.dataset.itree, readCsv('itree-city-trees.csv'), { base: siteBase, config },
+  ));
+}
+
+// ---- the collection-health page --------------------------------------------
+// Diversity, pest exposure, origin, condition and survey progress (health.mjs).
+const healthDir = join(root, 'public', 'health');
+rmSync(healthDir, { recursive: true, force: true });
+mkdirSync(healthDir, { recursive: true });
+{
+  const now = new Date();
+  writeFileSync(join(healthDir, 'index.html'), renderHealthPage(
+    collectionHealth(result.dataset, result.plants, now.getFullYear()),
+    { base: siteBase, config, today: now.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) },
   ));
 }
 
