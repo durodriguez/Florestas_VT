@@ -385,8 +385,9 @@ it. Type `772` and you reach the tree wearing 772, whatever its accession says.
 Re-surveying still works the way it always did: type the number again next year
 and the importer adds an observation rather than a second record.
 
-A number nobody has on file is a tree nobody has recorded, so it gets an
-accession from the untagged block with its tag beside it. A mistyped tag
+A number nobody has on file is a tree nobody has recorded, so it gets its tag
+as its accession (or a number from the untagged block, if that accession is
+taken), with its tag beside it. A mistyped tag
 therefore creates a spurious tree rather than being refused — which is what the
 position-collision check and the dry run are for. Read the dry run.
 

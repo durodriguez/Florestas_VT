@@ -1681,7 +1681,7 @@ UVM-4517,2024-01-09,EC,,,,good,active,,
 UVM-4518,2024-01-09,EC,,,,good,active,,
 UVM-4519,2024-01-09,EC,,,,good,active,,
 UVM-4520,2024-01-09,EC,,,,good,active,,
-UVM-4521,2024-01-09,EC,,,,good,active,,
+UVM-2805,2024-01-09,EC,,,,good,active,,
 UVM-4522,2024-01-09,EC,,,,good,active,,
 UVM-4523,2024-01-09,EC,,,,good,active,,
 UVM-2016,2024-01-09,EC,,,,good,active,,
@@ -3151,8 +3151,19 @@ UVM-4748,2026-10-14,EMR,,,,excellent,active,untagged-1793996846745.webp,
 UVM-0509,2026-11-11,EMR,,,,,removed,,
 UVM-1039,2026-11-11,EMR,,,,,removed,,
 UVM-0417,2026-11-11,EMR,,,,,removed,,
-UVM-4749,2026-11-11,EMR,,,,fair,active,600-1794409848422.webp,
+UVM-0600,2026-11-11,EMR,,,,fair,active,600-1794409848422.webp,
 UVM-4750,2026-11-11,EMR,,,,fair,active,untagged-1794409772575.webp,
 UVM-1008,2026-11-11,EMR,,,,,removed,,
 UVM-4101,2026-11-17,EMR,,,,,removed,,CLAIMED BY POSITION: matched to UVM-4101 from 29 m
 UVM-4102,2026-11-17,EMR,,,,,removed,,CLAIMED BY POSITION: matched to UVM-4102 from 5 m
+UVM-1943,2026-11-20,EMR,,,,fair,active,,
+UVM-2715,2026-11-20,EMR,,,,,active,,
+UVM-2707,2026-11-20,EMR,,,,,active,,
+UVM-2805,2026-11-20,EMR,,,,excellent,active,,CLAIMED BY POSITION: matched to UVM-4521 from 7 m. TAG ON TRUNK: the trunk reads 2805; UVM-4521 is on file with no tag
+UVM-2037,2026-11-20,EMR,,,,,active,,
+UVM-2026,2026-11-20,EMR,,,,,active,,
+UVM-2036,2026-11-20,EMR,,,,fair,active,,
+UVM-1943,2014-12-31,UVM 2014 inventory,25,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1943; age class Mature"
+UVM-2026,2014-12-31,UVM 2014 inventory,5,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 2026; age class Young"
+UVM-2036,2014-12-31,UVM 2014 inventory,5,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 2036; age class Semi-mature"
+UVM-2037,2014-12-31,UVM 2014 inventory,7,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 2037; age class Young"

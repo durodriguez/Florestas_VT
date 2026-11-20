@@ -151,12 +151,9 @@ export function resolveColumns(headers, columnAliases) {
 export const UNTAGGED_BLOCK_START = 4001;
 
 /**
- * The next free number in the untagged block.
- *
- * Every accession this importer issues now comes from here, including for a
- * tree that *does* wear a tag. That is the point of splitting the two: an
- * accession is permanent and arbitrary, and the tag goes in its own column
- * where it can change without dragging the identifier along.
+ * The next free number in the untagged block: the accession for a new tree
+ * with no tag, or for a tagged one whose tag's accession is already taken.
+ * A new tagged tree otherwise takes its tag as its accession.
  */
 export function nextUntagged(existingIds, prefix, start = UNTAGGED_BLOCK_START) {
   const re = new RegExp(`^${prefix}-(\\d{4})$`, 'i');
@@ -577,11 +574,20 @@ export function importSurvey({
           error(`"${tag}" is neither an accession on file nor a tag number`);
           return;
         }
-        // A tagged tree nobody has recorded yet. It gets an ordinary accession
-        // from the untagged block and keeps its tag in the tag column, which
-        // is the whole shape of the split: the number on the metal never
-        // becomes the identifier again.
-        const id = formatAccession(prefix, null, seq++);
+        // A tagged tree nobody has recorded yet. Its accession is its tag
+        // (772 → UVM-0772), because that is how the grounds crew numbers
+        // trees, and one number for both makes working with them simpler.
+        // If another tree already holds that accession, it gets the next
+        // number from the untagged block instead, and the importer says so.
+        // Either way the tag goes in the tag column too, and once issued the
+        // accession is permanent: a tag replaced later does not move it.
+        const fromTag = formatAccession(prefix, null, Number(tag));
+        let id = fromTag;
+        if (takenIds.has(fromTag)) {
+          id = formatAccession(prefix, null, seq++);
+          while (takenIds.has(id)) id = formatAccession(prefix, null, seq++);
+          warn(`tag ${Number(tag)} would be ${fromTag}, but that accession is another tree's, so this one is ${id}`);
+        }
         takenIds.add(id);
         // Registered so a second row cannot claim the same tag. Without this
         // the second would find the first through byTag and be read as a

@@ -107,9 +107,10 @@ Two consequences worth stating:
 reads it — `763`, not `0763` — and blank for the 708 trees that wear none.
 
 The first 1,349 accessions were minted from tags, so `UVM-0763` still reads
-like "tag 763". **That is history, not a rule.** An accession is permanent and
-is what a label and a link encode; a tag corrodes, falls off, and gets replaced
-with a different number. `UVM-0105` wears tag 3497 today.
+like "tag 763", and new tagged trees are numbered the same way (below). But an
+accession is permanent and is what a label and a link encode; a tag corrodes,
+falls off, and gets replaced with a different number. `UVM-0105` wears tag
+3497 today, so the two can disagree.
 
 Which means a tag is **looked up, never computed**. Everything that turns a
 number read off a trunk into a record goes through the `tag` column — the map's
@@ -117,17 +118,31 @@ search, the field app's lookup, the survey importer. The build refuses two
 trees claiming one tag, which was impossible before only because the tag *was*
 the identifier.
 
-New accessions are issued from the untagged block (`UVM-4001` and up) whether
-or not the tree wears a tag. There is one shape for a number this project
-issued, and the metal never becomes the identifier again.
+**A new tree's accession is its tag, unless that accession is taken.** Since
+20 November 2026, a new tree wearing tag 2715 is issued `UVM-2715`, because
+that is how UVM's grounds crew numbers trees, and one number for both makes
+working with them simpler. If another tree already holds that accession (as
+`UVM-0105` holds 105, though it now wears 3497), the new tree is issued the
+next number from the untagged block instead, and the importer warns. A tree
+with no tag is issued a number from the untagged block (`UVM-4001` and up).
+Either way, the tag also goes in the `tag` column, and once issued the
+accession does not follow the metal: a replaced tag changes the `tag` column
+only.
 
-One accession has been changed after issue, as a deliberate exception: the
-dawn redwood wearing tag 676, issued `UVM-4729` when it was added on
-4 November 2026, became `UVM-0676` on 6 November, before any label or link
-could depend on the old number. It was renumbered so that the one new tree
-in the original tag range would not read differently from its neighbors. The
-rule above still stands for trees added from now on; the map's panel shows
-each tree's tag beside its accession, so a mismatch explains itself.
+A tag of 4001 or higher would land inside the untagged block. The importer
+still never issues one number twice, but such a tree would read like an
+untagged one. No tag on file is that high yet (the highest is 3849).
+
+Before this rule, new tagged trees were issued numbers from the untagged
+block, and one was renumbered by hand to match its tag: the dawn redwood
+wearing tag 676, issued `UVM-4729` on 4 November 2026, became `UVM-0676` on
+6 November, before any label or link depended on the old number. When the
+rule changed, the two trees whose tags then disagreed with recent accessions
+were renumbered the same way, on 20 November 2026: the Japanese zelkova
+wearing tag 2805, `UVM-4521` → `UVM-2805`, and the northern white cedar
+wearing tag 600, `UVM-4749` → `UVM-0600`. `UVM-0105`, which has worn tag 3497
+since at least September 2026, keeps its number, which ties it to its 2014
+record as tag 105.
 
 **Tag history is deliberately not kept.** A re-tagging overwrites the column.
 Finding out that a tree was renumbered takes somebody noticing in the field,
@@ -373,11 +388,13 @@ in the CSV export.
 
 ### The 2014 inventory's rows
 
-896 rows, all dated `2014-12-31` with `surveyor` **`UVM 2014 inventory`**, are
+900 rows, all dated `2014-12-31` with `surveyor` **`UVM 2014 inventory`**, are
 the 2014 UVM campus tree inventory's measurements of trees still on the map:
 its diameter, its condition, and (in `notes`) its tree number and age class.
-Added on 6 November 2026, matched by tag, and only where the 2014 species and
-the map's agree at least on genus. The 54 that disagree are held back until
+896 were added on 6 November 2026, matched by tag, and only where the 2014
+species and the map's agree at least on genus. Four more were added on
+20 November 2026 for trees first recorded that day whose tags and species
+match 2014's: UVM-1943, UVM-2026, UVM-2036 and UVM-2037. The 54 that disagree are held back until
 someone checks which tree the tag is on now.
 
 The inventory was collected over the whole of 2014 with no date per tree, so
