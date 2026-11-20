@@ -44,9 +44,18 @@
           <button type="button" id="taxon-filter-clear" class="taxon-filter-clear"
                   aria-label="Show every species again">&times;</button>
         </p>
+        <p id="tour-filter" class="taxon-filter" hidden>
+          <span>On the tour <strong id="tour-filter-name"></strong></span>
+          <button type="button" id="tour-filter-clear" class="taxon-filter-clear"
+                  aria-label="End the tour">&times;</button>
+        </p>
       </div>
 
       <form id="filters" class="panel-filters">
+        <section id="tours" class="panel-tours" hidden>
+          <h2 class="panel-heading">Walking tours</h2>
+          <ul id="tour-list" class="tour-list"></ul>
+        </section>
         <h2 class="panel-heading">Filters</h2>
         <details>
           <summary>Campus area</summary>

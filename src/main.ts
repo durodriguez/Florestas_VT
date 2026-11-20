@@ -5,7 +5,7 @@ import './styles.css';
 import { expandCityTrees, loadData } from './data';
 import { indexByTag, normalizeTag } from './accession';
 import { PlantMap, escapeHtml } from './map';
-import { renderCityDetail, renderDetail, renderResultItem } from './detail';
+import { renderCityDetail, renderDetail, renderResultItem, type TourStop } from './detail';
 import { legendFor, ORIGIN_LABELS, TYPE_LABELS, typesInUse } from './palette';
 import { CITY_WORDING, notableFacts } from './notable';
 import { MONTH_NAMES, SEASON_LABELS, SEASON_STATES, summarizeSeason, swatch } from './season';
@@ -15,7 +15,7 @@ import {
 import { distanceMeters } from './geo';
 import { initPanelSplit } from './panel-split';
 import { SHARE_BUTTON, renderShareMenu } from './share';
-import type { CityTree, ColorBy, Dataset, FilterState, Plant } from './types';
+import type { CityTree, ColorBy, Dataset, FilterState, Plant, Tour } from './types';
 import type { TreeDisplay } from './tree-display';
 
 const BASE = import.meta.env.BASE_URL;
@@ -55,6 +55,12 @@ class App {
     this.byId = new Map(plants.map((p) => [p.id, p]));
     this.byTag = indexByTag(plants);
     for (const [id, facts] of notableFacts(plants)) this.byId.get(id)!.notable = facts;
+    for (const tour of dataset.tours ?? []) {
+      tour.stops.forEach((s, i) => {
+        const p = this.byId.get(s.plantId);
+        if (p) p.tourStops = { ...p.tourStops, [tour.id]: i + 1 };
+      });
+    }
     this.cityTrees = expandCityTrees(dataset);
     // Ranked among themselves, never against UVM's trees.
     const cityNotes = notableFacts(this.cityTrees.map((t) => ({ ...t, status: 'active' })), CITY_WORDING);
@@ -86,6 +92,7 @@ class App {
     $('#site-tagline').textContent = dataset.config.tagline;
 
     this.buildFilterUi();
+    this.renderTourList();
     initPanelSplit($('.panel'), $('#filters'), $('#panel-split'));
     this.bindEvents();
     this.refresh();
@@ -205,7 +212,13 @@ class App {
           distanceMeters(lat, lng, a.lat, a.lng) - distanceMeters(lat, lng, b.lat, b.lng),
       );
     }
+    // On a tour, the stops in walking order.
+    const tour = this.activeTour();
+    if (tour) this.results.sort((a, b) => a.tourStops![tour.id]! - b.tourStops![tour.id]!);
     this.map.show(this.results);
+    this.map.showTour(tour ? this.tourPlants(tour) : null);
+    $('#tour-filter').hidden = !tour;
+    $('#tour-filter-name').textContent = tour?.name ?? '';
     this.renderCityTrees();
     this.renderTaxonFilter();
     this.renderResults();
@@ -250,7 +263,7 @@ class App {
     panel.innerHTML =
       `<button type="button" class="detail-close" data-action="close-detail" aria-label="Close">&times;</button>` +
       SHARE_BUTTON +
-      renderDetail(plant, this.dataset, BASE);
+      renderDetail(plant, this.dataset, BASE, this.tourStopOf(plant));
     panel.scrollTop = 0;
     this.map.focus(plant);
     this.setUrlParam('plant', plant.id);
@@ -409,6 +422,72 @@ class App {
     this.setUrlParam('trees', display === 'every' ? 'every' : null);
   }
 
+  // ---- walking tours -----------------------------------------------------
+
+  private activeTour(): Tour | undefined {
+    const id = this.filters.tour;
+    return id === null ? undefined : this.dataset.tours?.find((t) => t.id === id);
+  }
+
+  private tourPlants(tour: Tour): Plant[] {
+    return tour.stops.map((s) => this.byId.get(s.plantId)).filter((p): p is Plant => p !== undefined);
+  }
+
+  /** Where a tree sits on the tour being walked, if it is on it. */
+  private tourStopOf(plant: Plant): TourStop | undefined {
+    const tour = this.activeTour();
+    const n = tour && plant.tourStops?.[tour.id];
+    if (!tour || !n) return undefined;
+    const stops = this.tourPlants(tour);
+    const next = stops[n] ?? null;
+    return {
+      tour, index: n - 1, prev: stops[n - 2] ?? null, next,
+      toNext: next ? distanceMeters(plant.lat, plant.lng, next.lat, next.lng) : null,
+    };
+  }
+
+  private renderTourList(): void {
+    const tours = this.dataset.tours ?? [];
+    $('#tours').hidden = tours.length === 0;
+    $('#tour-list').innerHTML = tours.map((t) => {
+      const mi = t.lengthM / 1609.34;
+      return `<li><button type="button" class="tour-pick" data-tour="${escapeHtml(t.id)}">
+        <span class="tour-pick-name">${escapeHtml(t.name)}</span>
+        <span class="tour-pick-meta">${t.stops.length} stops &middot; about ${mi < 0.95 ? mi.toFixed(1) : Math.round(mi)} mi from stop to stop</span>
+        <span class="tour-pick-desc">${escapeHtml(t.description)}</span>
+      </button></li>`;
+    }).join('');
+  }
+
+  /**
+   * Start a tour: the map shows only its stops, numbered and joined in
+   * order, and opens the first. Other filters are lifted, since a tour hides
+   * nothing on it.
+   */
+  private startTour(id: string, openFirst = true): void {
+    const tour = this.dataset.tours?.find((t) => t.id === id);
+    if (!tour) return;
+    this.filters = { ...emptyFilters(), tour: id };
+    $<HTMLFormElement>('#filters').reset();
+    $<HTMLInputElement>('#search').value = '';
+    $('#filter-dbh-value').textContent = 'Any size';
+    this.setUrlParam('taxon', null);
+    this.setUrlParam('tour', id);
+    this.refresh();
+    const stops = this.tourPlants(tour);
+    this.map.fitTo(stops);
+    if (openFirst && stops[0]) this.select(stops[0]);
+  }
+
+  private endTour(): void {
+    if (this.filters.tour === null) return;
+    this.filters.tour = null;
+    this.setUrlParam('tour', null);
+    this.refresh();
+    // The record stays open, without the tour bar.
+    if (this.selected) this.select(this.selected);
+  }
+
   private setUrlParam(key: string, value: string | null): void {
     const url = new URL(location.href);
     if (value === null) url.searchParams.delete(key);
@@ -433,6 +512,11 @@ class App {
     }
 
     if (params.get('trees') === 'every') this.setTreeDisplay('every');
+
+    // A shared tour link opens the tour, and its first stop unless the link
+    // names a tree of its own.
+    const tourId = params.get('tour');
+    if (tourId) this.startTour(tourId, !params.get('plant'));
 
     if (params.get('city') === '1' && this.cityTrees.length) {
       $<HTMLInputElement>('#filter-city').checked = true;
@@ -496,6 +580,11 @@ class App {
         // Typing is a new question, so it lifts a species chosen by "Show
         // all" — otherwise a search for another tree would find nothing and
         // not say why.
+        // A search lifts a tour too: it asks about the whole map.
+        if (value.trim() !== '' && this.filters.tour !== null) {
+          this.filters.tour = null;
+          this.setUrlParam('tour', null);
+        }
         if (value.trim() !== '' && this.filters.taxon !== null) this.setTaxon(null);
         else this.refresh();
       }, 150);
@@ -593,7 +682,25 @@ class App {
       if (button) this.setTreeDisplay(button.dataset.display as TreeDisplay);
     });
 
+    $('#tour-list').addEventListener('click', (e) => {
+      const button = (e.target as Element).closest<HTMLButtonElement>('[data-tour]');
+      if (!button) return;
+      this.startTour(button.dataset.tour!);
+      // On a phone the panel is a drawer over the map: get it out of the way.
+      document.body.classList.remove('panel-open');
+    });
+    $('#tour-filter-clear').addEventListener('click', () => this.endTour());
+    $('#detail').addEventListener('click', (e) => {
+      const go = (e.target as Element).closest<HTMLButtonElement>('[data-tour-go]')?.dataset.tourGo;
+      if (!go || !this.selected) return;
+      const at = this.tourStopOf(this.selected);
+      if (go === 'end') return this.endTour();
+      const to = go === 'next' ? at?.next : at?.prev;
+      if (to) this.select(to);
+    });
+
     $('#clear-filters').addEventListener('click', () => {
+      this.setUrlParam('tour', null);
       this.filters = emptyFilters();
       this.userPos = null;
       $<HTMLFormElement>('#filters').reset();

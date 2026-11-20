@@ -127,9 +127,14 @@ from the same layers control as the basemaps. The shapes shipped today are
 hand-drawn estimates, marked as such on the map; `/tracer/` replaces them with
 traced ones. See [docs/CAMPUS-AREAS.md](docs/CAMPUS-AREAS.md).
 
-**Walking trails** — self-guided tours drawn from `data/trails.geojson`, each
-with a stop list. None are drawn yet, so the map does not offer the option; it
-appears in the layers control once the file holds a trail.
+**Walking tours** — listed at the top of the side panel, from
+`data/tours.csv` and `data/tour-stops.csv`. Choosing one shows only its stops,
+numbered and joined in walking order, and opens the first; each stop's record
+starts with the tour's name, the stop number, a note on why the tree is on the
+tour, and the way to the previous and next stops. The link names the tour
+(`?tour=giants-of-the-green`), so a tour can be shared or printed as a QR code.
+The first, *Giants of the Green*, visits ten of the largest trunks measured on
+campus. See [docs/DATA-MODEL.md](docs/DATA-MODEL.md).
 
 **Near me** — sorts results by distance from the visitor's location, for
 "what am I standing under?"

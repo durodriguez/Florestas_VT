@@ -9,6 +9,7 @@ import {
   CITY_TREE_FIELDS, YEAR_ONLY_SURVEYORS,
 } from './vocab.mjs';
 import { buildSpeciesLookup } from './species.mjs';
+import { buildTours } from './tours.mjs';
 
 const trim = (v) => (typeof v === 'string' ? v.trim() : v ?? '');
 
@@ -51,7 +52,7 @@ function inBounds(lat, lng, config) {
   return lat >= south && lat <= north && lng >= west && lng <= east;
 }
 
-export function buildDataset({ taxaRows, plantRows, observationRows = [], collectionRows, trails, campusAreas, aliasRows = [], cityTreeRows = [], itreeRows = [], itreeRun = null, config }) {
+export function buildDataset({ taxaRows, plantRows, observationRows = [], collectionRows, trails, campusAreas, aliasRows = [], cityTreeRows = [], itreeRows = [], itreeRun = null, tourRows = [], tourStopRows = [], config }) {
   const errors = [];
   const warnings = [];
   const err = (where, msg) => errors.push(`${where}: ${msg}`);
@@ -522,6 +523,21 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     return f;
   });
 
+  // ---- tours -------------------------------------------------------------
+  // tours.csv and tour-stops.csv; see tours.mjs. Checked against the plants
+  // as built, so a stop on a removed tree is caught here.
+  const plantOut = new Map(plantRowsOut.map((r) => [r[PLANT_FIELDS.indexOf('plant_id')], r]));
+  const toursBuilt = buildTours(tourRows, tourStopRows, (id) => {
+    const r = plantOut.get(id);
+    return r && {
+      lat: r[PLANT_FIELDS.indexOf('lat')],
+      lng: r[PLANT_FIELDS.indexOf('lng')],
+      active: r[PLANT_FIELDS.indexOf('status')] === STATUSES.indexOf('active'),
+    };
+  });
+  errors.push(...toursBuilt.errors);
+  warnings.push(...toursBuilt.warnings);
+
   // ---- species aliases ---------------------------------------------------
   // Not used by the map, which only ever sees canonical names — but validated
   // here so a broken alias fails the build rather than surfacing months later
@@ -648,6 +664,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     collections,
     taxa,
     trails: { type: 'FeatureCollection', features: trailFeatures },
+    tours: toursBuilt.tours,
     campusAreas: { type: 'FeatureCollection', features: areaFeatures },
     cityTrees: { fields: CITY_TREE_FIELDS, rows: cityTrees },
     itree: itreeById.size ? itreeRun : null,
@@ -660,6 +677,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       active: plantRowsOut.filter((r) => r[PLANT_FIELDS.indexOf('status')] === STATUSES.indexOf('active')).length,
       collections: collections.length,
       trails: trailFeatures.length,
+      tours: toursBuilt.tours.length,
       campusAreas: areaFeatures.length,
       aliases: aliasCount,
       cityTrees: cityTrees.length,

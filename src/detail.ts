@@ -1,4 +1,4 @@
-import type { CityTree, CityTreeItree, Dataset, Observation, Plant, Taxon } from './types';
+import type { CityTree, CityTreeItree, Dataset, Observation, Plant, Taxon, Tour } from './types';
 import { escapeHtml } from './map';
 import { ORIGIN_LABELS, TYPE_LABELS } from './palette';
 import { photoSeries, photoTaken, photoUrl } from './photos';
@@ -158,7 +158,38 @@ function photoStrip(plant: Plant, base: string, photoBaseUrl?: string): string {
   }).join('')}</div>`;
 }
 
-export function renderDetail(plant: Plant, dataset: Dataset, base: string): string {
+/** Where a tree sits on the tour being walked, for the bar on its record. */
+export interface TourStop {
+  tour: Tour;
+  /** 0-based. */
+  index: number;
+  prev: Plant | null;
+  next: Plant | null;
+  /** Straight-line meters to the next stop. */
+  toNext: number | null;
+}
+
+/**
+ * The tour bar at the top of a stop's record: which tour, which stop, why
+ * the tree is on it, and the way on. First on the record, so on a phone it
+ * is what shows above the fold.
+ */
+function tourBar(s: TourStop): string {
+  const note = s.tour.stops[s.index]?.note ?? '';
+  return `
+    <div class="tour-bar">
+      <p class="tour-bar-head"><strong>${escapeHtml(s.tour.name)}</strong> &middot; Stop ${s.index + 1} of ${s.tour.stops.length}</p>
+      ${note ? `<p class="tour-bar-note">${escapeHtml(note)}</p>` : ''}
+      <div class="tour-bar-nav">
+        <button type="button" class="tour-btn" data-tour-go="prev" ${s.prev ? '' : 'disabled'}>&lsaquo; Previous</button>
+        ${s.next
+          ? `<button type="button" class="tour-btn tour-btn--next" data-tour-go="next">Next: ${escapeHtml(s.next.taxon.common)}${s.toNext === null ? '' : `, ${Math.round(s.toNext)} m`} &rsaquo;</button>`
+          : '<button type="button" class="tour-btn tour-btn--next" data-tour-go="end">End of the tour</button>'}
+      </div>
+    </div>`;
+}
+
+export function renderDetail(plant: Plant, dataset: Dataset, base: string, stop?: TourStop): string {
   const t = plant.taxon;
   const age = plant.plantedYear ? `${new Date().getFullYear() - plant.plantedYear} years` : null;
   const on = measuredOn(plant);
@@ -196,6 +227,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
     : '';
 
   return `
+    ${stop ? tourBar(stop) : ''}
     <header class="detail-header">
       <p class="detail-eyebrow">${escapeHtml(plant.id)}</p>
       <h2 class="detail-title">${escapeHtml(t.common)}</h2>

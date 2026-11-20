@@ -66,6 +66,8 @@ const result = buildDataset({
   trails: JSON.parse(readFileSync(join(dataDir, 'trails.geojson'), 'utf8')),
   campusAreas: JSON.parse(readFileSync(join(dataDir, 'campus-areas.geojson'), 'utf8')),
   aliasRows: readCsv('species-aliases.csv'),
+  tourRows: readCsv('tours.csv'),
+  tourStopRows: readCsv('tour-stops.csv'),
   cityTreeRows: readCsv('city-trees.csv'),
   // i-Tree Eco's results for the city's trees (docs/ITREE.md). Optional, like
   // the crown peaks: without them the city trees simply show no estimates.
@@ -259,7 +261,7 @@ if (result.dataset.itree) {
 // make every visitor re-download data that had not actually changed.
 const version = createHash('sha256')
   .update(
-    ['taxa.csv', 'plants.csv', 'observations.csv', 'collections.csv', 'trails.geojson',
+    ['taxa.csv', 'plants.csv', 'observations.csv', 'collections.csv', 'trails.geojson', 'tours.csv', 'tour-stops.csv',
       'campus-areas.geojson', 'species-aliases.csv', 'config.json', 'city-trees.csv', 'itree-city-trees.csv', 'itree-run.json', peaksFile]
       .filter((name) => existsSync(join(dataDir, name)))
       .map((name) => readFileSync(join(dataDir, name)))

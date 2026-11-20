@@ -625,6 +625,29 @@ Full format, workflow and validation rules:
 Note that this file is *not* connected to `collections.csv` — the overlay is
 drawn, but nothing is computed from it.
 
+## tours.csv and tour-stops.csv
+
+Walking tours. `tours.csv` has one row per tour: `tour_id`, `name` and a
+`description` of a sentence or two. `tour-stops.csv` has one row per stop:
+`tour_id`, `stop` (1, 2, 3… in walking order), `plant_id`, and a one-line
+`note` on why the tree is on the tour, shown at the top of its record during
+the tour.
+
+No path is drawn: the map joins the stops in order with a dotted line, so a
+tour is written in a spreadsheet, not in mapping software. Its length is the
+straight-line distance from stop to stop, which the map gives as "from stop to
+stop" because the walk itself is longer.
+
+The build refuses a stop on an unknown tree, a stop number used twice and a
+tour_id not in `tours.csv`. It warns about a stop on a tree no longer standing,
+and leaves a tour with fewer than two stops off the map. Notes should say only
+what the data backs, with the year of any measurement, since sizes go stale.
+
+The first tour, *Giants of the Green*, was drafted from the inventory: the ten
+largest trunks measured on and around the University Green, in nearest-next
+walking order, each note giving the tree's measured size, its year and its
+rank among the trunks measured on campus.
+
 ## trails.geojson
 
 A GeoJSON `FeatureCollection` of `LineString` features. Each needs
@@ -633,7 +656,8 @@ A GeoJSON `FeatureCollection` of `LineString` features. Each needs
 [geojson.io](https://geojson.io) or QGIS and paste them in.
 
 While the file holds no trails, the map leaves *Walking trails* out of its
-layers control; the option appears once a trail is added.
+layers control; the option appears once a trail is added. Tours (above) have
+taken over this job, so the file is likely to stay empty.
 
 ### Filling in a new taxon
 

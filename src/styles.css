@@ -674,3 +674,41 @@ body.is-loading .layout { opacity: .35; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+
+/* ---- walking tours ---- */
+.panel-tours { border-bottom: 1px solid var(--border); }
+.tour-list { list-style: none; margin: 0; padding: .4rem .75rem .6rem; display: grid; gap: .4rem; }
+.tour-pick {
+  display: grid; gap: .15rem; width: 100%; text-align: left; cursor: pointer; font: inherit; color: var(--text);
+  padding: .55rem .65rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-sunk);
+}
+.tour-pick:hover { border-color: var(--uvm-green-light); }
+.tour-pick:focus-visible { outline: 2px solid var(--uvm-green-light); outline-offset: 1px; }
+.tour-pick-name { font-weight: 650; }
+.tour-pick-meta { font-size: .78rem; color: var(--text-dim); }
+.tour-pick-desc { font-size: .8rem; line-height: 1.4; color: var(--text-dim); }
+/* A stop's record opens with where it is on the tour, and the way on. */
+.tour-bar {
+  margin: 0 0 .9rem; padding: .6rem .75rem; border-radius: var(--radius);
+  background: var(--bg-sunk); border-left: 3px solid var(--uvm-gold);
+  display: grid; gap: .4rem;
+}
+.tour-bar p { margin: 0; }
+/* Clear of the share and close buttons beside it. */
+.tour-bar-head { font-size: .82rem; color: var(--text-dim); padding-right: 4.5rem; }
+.tour-bar-head strong { color: var(--text); }
+.tour-bar-note { font-size: .9rem; line-height: 1.45; }
+.tour-bar-nav { display: flex; gap: .4rem; flex-wrap: wrap; }
+.tour-btn {
+  font: inherit; font-size: .8rem; padding: .35rem .6rem; border-radius: 6px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--bg); color: var(--text);
+}
+.tour-btn:disabled { opacity: .45; cursor: default; }
+.tour-btn--next { background: var(--uvm-green); border-color: var(--uvm-green); color: #fff; flex: 1; }
+.tour-btn:focus-visible { outline: 2px solid var(--uvm-gold); outline-offset: 1px; }
+/* The stops on the map: numbered gold discs, above the tree dots. */
+.tour-stop span {
+  display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
+  background: #ffd100; color: #101820; font: 800 13px/1 var(--font);
+  box-shadow: 0 0 0 2px #154734, 0 2px 6px rgb(0 0 0 / 30%);
+}

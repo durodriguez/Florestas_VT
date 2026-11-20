@@ -134,6 +134,8 @@ export interface Dataset {
   collections: Collection[];
   taxa: Taxon[];
   trails: GeoJSON.FeatureCollection<GeoJSON.LineString, TrailProps>;
+  /** Walking tours, from tours.csv and tour-stops.csv. */
+  tours: Tour[];
   campusAreas: GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon, CampusAreaProps>;
   /** Compact rows, expanded by expandCityTrees. See CITY_TREE_FIELDS. */
   cityTrees: { fields: string[]; rows: unknown[][] };
@@ -150,6 +152,16 @@ export interface TrailProps {
   duration_min: number;
   description: string;
   stops: string[];
+}
+
+/** A walking tour: its stops in order, each a tree and why it is there. */
+export interface Tour {
+  id: string;
+  name: string;
+  description: string;
+  /** Straight-line distance from stop to stop, in meters: shorter than the walk. */
+  lengthM: number;
+  stops: Array<{ plantId: string; note: string }>;
 }
 
 export interface CampusAreaProps {
@@ -210,6 +222,8 @@ export interface Plant {
    * worked out on load from the whole inventory; see notable.ts.
    */
   notable?: string[];
+  /** Its stop number on each tour it is on, by tour id; set on load. */
+  tourStops?: Record<string, number>;
   /** One line about *this* tree — where it came from, what happened to it. */
   story: string | null;
   /**
@@ -234,6 +248,8 @@ export interface FilterState {
    * among the red maples.
    */
   taxon: string | null;
+  /** On a walking tour: only its stops. */
+  tour: string | null;
   types: Set<string>;
   origins: Set<string>;
   conditions: Set<string>;

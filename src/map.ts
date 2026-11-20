@@ -101,6 +101,8 @@ export class PlantMap {
   private cityMarkers: L.CircleMarker[] = [];
   /** Each dot's full size; every-tree mode shrinks it when zoomed out. */
   private readonly baseRadius = new WeakMap<L.CircleMarker, number>();
+  /** A walking tour's route and numbered stops, while one is on. */
+  private readonly tourLayer = L.layerGroup();
   private readonly trailLayer: L.GeoJSON;
   /** The whole-campus outline: the one boundary the layers control switches. */
   private readonly outlineLayer: L.GeoJSON;
@@ -430,6 +432,31 @@ export class PlantMap {
     for (const plant of plants) {
       this.markers.get(plant.id)?.setStyle(this.markerStyle(plant));
     }
+  }
+
+  /**
+   * Draw a tour: a dotted line from stop to stop, in order, and a gold disc
+   * with its number on each stop, above the tree dots. A tap on a disc opens
+   * that stop's tree. Null takes the tour away.
+   */
+  showTour(stops: Plant[] | null): void {
+    this.tourLayer.clearLayers();
+    if (!stops?.length) {
+      this.tourLayer.remove();
+      return;
+    }
+    if (!this.map.getPane('tour')) this.map.createPane('tour').style.zIndex = '640';
+    L.polyline(stops.map((p) => [p.lat, p.lng] as [number, number]), {
+      color: '#154734', weight: 3, opacity: 0.8, dashArray: '2 8', lineCap: 'round', interactive: false,
+    }).addTo(this.tourLayer);
+    stops.forEach((plant, i) => {
+      L.marker([plant.lat, plant.lng], {
+        pane: 'tour',
+        icon: L.divIcon({ className: 'tour-stop', html: `<span>${i + 1}</span>`, iconSize: [26, 26], iconAnchor: [13, 13] }),
+        title: `Stop ${i + 1}: ${plant.taxon.common}`,
+      }).on('click', () => this.options.onSelect(plant)).addTo(this.tourLayer);
+    });
+    this.tourLayer.addTo(this.map);
   }
 
   /** Centre on a plant and ring it, opening its cluster if it is collapsed. */
