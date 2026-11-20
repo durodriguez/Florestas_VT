@@ -1,6 +1,6 @@
 import L from 'leaflet';
 import 'leaflet.markercluster';
-import type { CampusAreaProps, CityTree, ColorBy, Dataset, Plant, TrailProps } from './types';
+import type { CampusAreaProps, CityTree, ColorBy, Dataset, Plant } from './types';
 import { colorFor } from './palette';
 import { isPale } from './season';
 import { dotScale, type TreeDisplay } from './tree-display';
@@ -109,7 +109,6 @@ export class PlantMap {
   private readonly baseRadius = new WeakMap<L.CircleMarker, number>();
   /** A walking tour's route and numbered stops, while one is on. */
   private readonly tourLayer = L.layerGroup();
-  private readonly trailLayer: L.GeoJSON;
   /** The whole-campus outline: the one boundary the layers control switches. */
   private readonly outlineLayer: L.GeoJSON;
   /**
@@ -156,24 +155,6 @@ export class PlantMap {
 
     L.control.zoom({ position: 'bottomright' }).addTo(this.map);
     L.control.scale({ imperial: true, metric: false, position: 'bottomleft' }).addTo(this.map);
-
-    this.trailLayer = L.geoJSON(dataset.trails, {
-      style: (feature) => ({
-        color: (feature?.properties as TrailProps | undefined)?.color ?? '#154734',
-        weight: 5,
-        opacity: 0.85,
-        dashArray: '1 10',
-        lineCap: 'round',
-      }),
-      onEachFeature: (feature, layer) => {
-        const p = feature.properties as TrailProps;
-        layer.bindPopup(
-          `<h3 class="popup-title">${escapeHtml(p.name)}</h3>` +
-            `<p class="popup-meta">${p.length_mi} mi · about ${p.duration_min} min · ${p.stops.length} stops</p>` +
-            `<p>${escapeHtml(p.description)}</p>`,
-        );
-      },
-    });
 
     // Radius grows with zoom so dense beds stay readable when you zoom in.
     this.cluster = L.markerClusterGroup({
@@ -234,9 +215,6 @@ export class PlantMap {
     const overlays: Record<string, L.Layer> = {
       [`Campus outline${provisional ? ' (approximate)' : ''}`]: this.outlineLayer,
     };
-    // The trails option is offered only once data/trails.geojson holds a
-    // trail: an empty checkbox would show nothing. Adding a trail brings it back.
-    if (dataset.trails.features.length > 0) overlays['Walking trails'] = this.trailLayer;
     L.control
       .layers(
         layers,
@@ -275,8 +253,6 @@ export class PlantMap {
     this.outlineLayer.addTo(this.map);
     this.quietCampus = false;
     this.cluster.addTo(this.map);
-    // Walking trails start hidden; the layers control (bottom right) shows them,
-    // once there are any.
     this.highlight.addTo(this.map);
     this.hoverRing.addTo(this.map);
   }
@@ -541,10 +517,6 @@ export class PlantMap {
     this.map.setView([lat, lng], Math.max(this.map.getZoom(), 18));
   }
 
-  toggleTrails(visible: boolean): void {
-    if (visible) this.trailLayer.addTo(this.map);
-    else this.trailLayer.remove();
-  }
 
   /**
    * Show exactly these campus areas, by area_id (the outline's included);

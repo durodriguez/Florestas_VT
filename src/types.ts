@@ -133,7 +133,6 @@ export interface Dataset {
   vocab: Vocab;
   collections: Collection[];
   taxa: Taxon[];
-  trails: GeoJSON.FeatureCollection<GeoJSON.LineString, TrailProps>;
   /** Walking tours, from tours.csv and tour-stops.csv. */
   tours: Tour[];
   campusAreas: GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon, CampusAreaProps>;
@@ -142,16 +141,6 @@ export interface Dataset {
   /** The run behind the city trees' i-Tree estimates, or null without them. */
   itree?: ItreeRun | null;
   counts: Record<string, number>;
-}
-
-export interface TrailProps {
-  trail_id: string;
-  name: string;
-  color: string;
-  length_mi: number;
-  duration_min: number;
-  description: string;
-  stops: string[];
 }
 
 /** A walking tour: its stops in order, each a tree and why it is there. */

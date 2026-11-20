@@ -407,7 +407,6 @@ button, input, select { font: inherit; color: inherit; }
     0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff,
     1px 1px 2px rgb(255 255 255 / 90%), -1px -1px 2px rgb(255 255 255 / 90%);
 }
-.popup-title { font-size: .95rem; margin-bottom: .2rem; }
 
 /* A flag is a claim about a plant, and the note under it is what the claim
    means. Worth the space: "prohibited" and "invasive" are not the same thing
@@ -420,7 +419,6 @@ button, input, select { font: inherit; color: inherit; }
 .detail-flags { display: flex; flex-wrap: wrap; gap: .35rem; margin: .5rem 0 0; }
 .pill--prohibited { background: #b3452c; color: #fff; }
 .pill--invasive { background: #d1642c; color: #fff; }
-.popup-meta { margin: 0 0 .4rem; font-size: .78rem; color: #5d665f; }
 
 /* ---- detail panel ----------------------------------------------------- */
 
