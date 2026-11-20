@@ -523,6 +523,27 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
   errors.push(...toursBuilt.errors);
   warnings.push(...toursBuilt.warnings);
 
+  // A stop's note is written by hand, and one quoting a trunk's rank ("No. 7
+  // of the 940 trunks measured on campus") goes stale as trunks are added.
+  // Ranked as notable.ts ranks them: standing trees with a diameter, one more
+  // than the number larger.
+  const dbhAt = PLANT_FIELDS.indexOf('dbh_in');
+  const statusAt = PLANT_FIELDS.indexOf('status');
+  const trunks = plantRowsOut
+    .filter((r) => r[statusAt] === STATUSES.indexOf('active') && typeof r[dbhAt] === 'number')
+    .map((r) => r[dbhAt]);
+  for (const tour of toursBuilt.tours) {
+    tour.stops.forEach((stop, i) => {
+      const m = /No\. (\d+) of the (\d+) trunks measured on campus/.exec(stop.note);
+      const dbh = plantOut.get(stop.plantId)?.[dbhAt];
+      if (!m || typeof dbh !== 'number') return;
+      const rank = 1 + trunks.filter((v) => v > dbh).length;
+      if (Number(m[1]) !== rank || Number(m[2]) !== trunks.length) {
+        warnings.push(`tour-stops.csv: ${tour.id} stop ${i + 1} says "No. ${m[1]} of the ${m[2]}", but ${stop.plantId} is now No. ${rank} of the ${trunks.length}; update the note`);
+      }
+    });
+  }
+
   // ---- renumbered accessions --------------------------------------------
   // renumbered.csv: old number → new, for trees renumbered to match their
   // tag. Published so a link or QR code with the old number still opens the

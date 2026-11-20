@@ -723,3 +723,24 @@ describe('buildDataset — renumbered accessions', () => {
       .toMatch(/still in plants\.csv.*not in plants\.csv/);
   });
 });
+
+describe('buildDataset — a tour note quoting a stale rank', () => {
+  const tourRows = [{ tour_id: 't', name: 'T', description: 'A tour.' }];
+  const stops = (note: string) => [
+    { tour_id: 't', stop: '1', plant_id: 'UVM-0001', note },
+    { tour_id: 't', stop: '2', plant_id: 'UVM-0002', note: '' },
+  ];
+  const plants = [plant({ plant_id: 'UVM-0001' }), plant({ plant_id: 'UVM-0002', lat: '44.4780' })];
+  const obs = [
+    observation({ plant_id: 'UVM-0001', dbh_in: '20' }),
+    observation({ plant_id: 'UVM-0002', dbh_in: '30' }),
+  ];
+  const run = (note: string) => build({ plantRows: plants, observationRows: obs, tourRows, tourStopRows: stops(note) }).warnings.join(' ');
+  it('warns when the rank or the count has moved', () => {
+    expect(run('No. 1 of the 2 trunks measured on campus.')).toMatch(/now No\. 2 of the 2/);
+    expect(run('No. 2 of the 5 trunks measured on campus.')).toMatch(/now No\. 2 of the 2/);
+  });
+  it('is quiet when it still holds', () => {
+    expect(run('No. 2 of the 2 trunks measured on campus.')).not.toMatch(/tour-stops/);
+  });
+});

@@ -1100,7 +1100,7 @@ UVM-2852,2023-11-11,EC,,,,good,active,,
 UVM-1684,2023-11-11,EC,,,,good,active,,
 UVM-1687,2023-11-11,EC,,,,good,active,,
 UVM-2851,2023-11-11,EC,,,,good,active,,
-UVM-4325,2023-11-11,EC,,,,good,active,,
+UVM-2849,2023-11-11,EC,,,,good,active,,
 UVM-4326,2023-11-11,EC,,,,good,active,,
 UVM-1682,2023-11-11,EC,,,,good,active,,
 UVM-2850,2023-11-11,EC,,,,good,active,,
@@ -1628,16 +1628,16 @@ UVM-2881,2024-01-09,EC,,,,good,active,,
 UVM-1759,2024-01-09,EC,,,,good,active,,
 UVM-2880,2024-01-09,EC,,,,good,active,,
 UVM-4485,2024-01-09,EC,,,,good,active,,
-UVM-4486,2024-01-09,EC,,,,good,active,,
+UVM-2919,2024-01-09,EC,,,,good,active,,
 UVM-1932,2024-01-09,EC,,,,good,active,,
 UVM-1933,2024-01-09,EC,,,,good,active,,
 UVM-1931,2024-01-09,EC,,,,good,active,,
-UVM-4487,2024-01-09,EC,,,,good,active,,
-UVM-4488,2024-01-09,EC,,,,good,active,,
-UVM-4489,2024-01-09,EC,,,,good,active,,
-UVM-4490,2024-01-09,EC,,,,good,active,,
-UVM-4491,2024-01-09,EC,,,,good,active,,
-UVM-4492,2024-01-09,EC,,,,good,active,,
+UVM-2924,2024-01-09,EC,,,,good,active,,
+UVM-2925,2024-01-09,EC,,,,good,active,,
+UVM-2923,2024-01-09,EC,,,,good,active,,
+UVM-2922,2024-01-09,EC,,,,good,active,,
+UVM-2921,2024-01-09,EC,,,,good,active,,
+UVM-2920,2024-01-09,EC,,,,good,active,,
 UVM-1918,2024-01-09,EC,,,,good,active,,
 UVM-1919,2024-01-09,EC,,,,good,active,,
 UVM-1920,2024-01-09,EC,,,,good,active,,
@@ -1654,21 +1654,21 @@ UVM-1903,2024-01-09,EC,,,,good,active,,
 UVM-1902,2024-01-09,EC,,,,good,active,,
 UVM-4500,2024-01-09,EC,,,,good,active,,
 UVM-4501,2024-01-09,EC,,,,good,active,,
-UVM-4502,2024-01-09,EC,,,,good,active,,
-UVM-4503,2024-01-09,EC,,,,good,active,,
-UVM-4504,2024-01-09,EC,,,,good,active,,
-UVM-4505,2024-01-09,EC,,,,good,active,,
-UVM-4506,2024-01-09,EC,,,,good,active,,
-UVM-4507,2024-01-09,EC,,,,good,active,,
+UVM-2824,2024-01-09,EC,,,,good,active,,
+UVM-2823,2024-01-09,EC,,,,good,active,,
+UVM-2822,2024-01-09,EC,,,,good,active,,
+UVM-2821,2024-01-09,EC,,,,good,active,,
+UVM-2820,2024-01-09,EC,,,,good,active,,
+UVM-2819,2024-01-09,EC,,,,good,active,,
 UVM-4508,2024-01-09,EC,,,,good,active,,
-UVM-4509,2024-01-09,EC,,,,good,active,,
-UVM-4510,2024-01-09,EC,,,,good,active,,
+UVM-2818,2024-01-09,EC,,,,good,active,,
+UVM-2816,2024-01-09,EC,,,,good,active,,
 UVM-2002,2024-01-09,EC,,,,good,active,,
 UVM-2003,2024-01-09,EC,,,,good,active,,
 UVM-2004,2024-01-09,EC,,,,good,active,,
-UVM-4511,2024-01-09,EC,,,,good,active,,
-UVM-4512,2024-01-09,EC,,,,good,active,,
-UVM-4513,2024-01-09,EC,,,,good,active,,
+UVM-2813,2024-01-09,EC,,,,good,active,,
+UVM-2812,2024-01-09,EC,,,,good,active,,
+UVM-2811,2024-01-09,EC,,,,good,active,,
 UVM-2005,2024-01-09,EC,,,,good,active,,
 UVM-2006,2024-01-09,EC,,,,good,active,,
 UVM-2008,2024-01-09,EC,,,,good,active,,
@@ -2085,7 +2085,7 @@ UVM-4715,2026-09-25,EMR,,,,excellent,active,untagged-1790365491422.webp,
 UVM-0304,2026-09-25,EMR,,,,excellent,active,untagged-1790365435388.webp,CLAIMED BY POSITION: matched to UVM-0304 from 2 m
 UVM-3341,2026-10-05,,,,,,active,3341-1791224241033.webp,
 UVM-2353,2026-10-05,,,,,excellent,active,2353-1791224171740.webp,
-UVM-4325,2026-10-05,,,,,excellent,active,UVM-4325-1791223081186.webp,CLAIMED BY POSITION: matched to UVM-4325 from 4 m
+UVM-2849,2026-10-05,,,,,excellent,active,UVM-4325-1791223081186.webp,CLAIMED BY POSITION: matched to UVM-4325 from 4 m
 UVM-4716,2026-10-05,,,,,,active,untagged-1791222951452.webp,
 UVM-4717,2026-10-05,,,,,,active,untagged-1791222679561.webp,
 UVM-1736,2026-10-05,,,,,,active,1736-1791222442501.webp,
@@ -3167,3 +3167,102 @@ UVM-1943,2014-12-31,UVM 2014 inventory,25,,,fair,active,,"From the 2014 UVM camp
 UVM-2026,2014-12-31,UVM 2014 inventory,5,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 2026; age class Young"
 UVM-2036,2014-12-31,UVM 2014 inventory,5,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 2036; age class Semi-mature"
 UVM-2037,2014-12-31,UVM 2014 inventory,7,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 2037; age class Young"
+UVM-1975,2026-11-20,EMR,,,,fair,active,,
+UVM-1974,2026-11-20,EMR,,,,fair,active,,
+UVM-4751,2026-11-20,EMR,,,,fair,active,,
+UVM-1984,2026-11-20,EMR,,,,poor,active,,
+UVM-1983,2026-11-20,EMR,,,,fair,active,,
+UVM-1982,2026-11-20,EMR,,,,fair,active,,
+UVM-1981,2026-11-20,EMR,,,,poor,active,,
+UVM-1973,2026-11-20,EMR,,,,fair,active,,
+UVM-1972,2026-11-20,EMR,,,,poor,active,,
+UVM-1971,2026-11-20,EMR,,,,poor,active,,
+UVM-1970,2026-11-20,EMR,,,,poor,active,,
+UVM-1969,2026-11-20,EMR,,,,poor,active,,
+UVM-1968,2026-11-20,EMR,,,,fair,active,,
+UVM-1956,2026-11-20,EMR,,,,fair,active,,
+UVM-1957,2026-11-20,EMR,,,,dead,active,,
+UVM-1958,2026-11-20,EMR,,,,fair,active,,
+UVM-1959,2026-11-20,EMR,,,,poor,active,,
+UVM-1960,2026-11-20,EMR,,,,fair,active,,
+UVM-1961,2026-11-20,EMR,,,,fair,active,,
+UVM-1962,2026-11-20,EMR,,,,fair,active,,
+UVM-1945,2026-11-20,EMR,,,,good,active,,
+UVM-1946,2026-11-20,EMR,,,,good,active,,
+UVM-1947,2026-11-20,EMR,,,,good,active,,
+UVM-1993,2026-11-20,EMR,,,,good,active,,
+UVM-1994,2026-11-20,EMR,,,,poor,active,,
+UVM-1995,2026-11-20,EMR,,,,excellent,active,,
+UVM-1996,2026-11-20,EMR,,,,excellent,active,,
+UVM-1997,2026-11-20,EMR,,,,excellent,active,,
+UVM-1998,2026-11-20,EMR,,,,excellent,active,,
+UVM-2811,2026-11-20,EMR,,,,excellent,active,,CLAIMED BY POSITION: matched to UVM-4513 from 7 m. TAG ON TRUNK: the trunk reads 2811; UVM-4513 is on file with no tag
+UVM-2812,2026-11-20,EMR,,,,excellent,active,,CLAIMED BY POSITION: matched to UVM-4512 from 6 m. TAG ON TRUNK: the trunk reads 2812; UVM-4512 is on file with no tag
+UVM-2813,2026-11-20,EMR,,,,excellent,active,,CLAIMED BY POSITION: matched to UVM-4511 from 4 m. TAG ON TRUNK: the trunk reads 2813; UVM-4511 is on file with no tag
+UVM-2817,2026-11-20,EMR,,,,excellent,active,,
+UVM-2816,2026-11-20,EMR,,,,good,active,,CLAIMED BY POSITION: matched to UVM-4510 from 6 m. TAG ON TRUNK: the trunk reads 2816; UVM-4510 is on file with no tag
+UVM-2002,2026-11-20,EMR,,,,good,active,,TAG MISMATCH: the trunk reads 2815; UVM-2002 is on file as tag 2002
+UVM-2003,2026-11-20,EMR,,,,good,active,,
+UVM-2004,2026-11-20,EMR,,,,excellent,active,,TAG MISMATCH: the trunk reads 2814; UVM-2004 is on file as tag 2004
+UVM-2818,2026-11-20,EMR,,,,excellent,active,,CLAIMED BY POSITION: matched to UVM-4509 from 1 m. TAG ON TRUNK: the trunk reads 2818; UVM-4509 is on file with no tag
+UVM-2819,2026-11-20,EMR,,,,good,active,,CLAIMED BY POSITION: matched to UVM-4507 from 3 m. TAG ON TRUNK: the trunk reads 2819; UVM-4507 is on file with no tag
+UVM-2820,2026-11-20,EMR,,,,excellent,active,,CLAIMED BY POSITION: matched to UVM-4506 from 4 m. TAG ON TRUNK: the trunk reads 2820; UVM-4506 is on file with no tag
+UVM-2821,2026-11-20,EMR,,,,fair,active,,CLAIMED BY POSITION: matched to UVM-4505 from 4 m. TAG ON TRUNK: the trunk reads 2821; UVM-4505 is on file with no tag
+UVM-2822,2026-11-20,EMR,,,,,active,,CLAIMED BY POSITION: matched to UVM-4504 from 7 m. TAG ON TRUNK: the trunk reads 2822; UVM-4504 is on file with no tag
+UVM-2823,2026-11-20,EMR,,,,,active,,CLAIMED BY POSITION: matched to UVM-4503 from 4 m. TAG ON TRUNK: the trunk reads 2823; UVM-4503 is on file with no tag
+UVM-2824,2026-11-20,EMR,,,,,active,,CLAIMED BY POSITION: matched to UVM-4502 from 1 m. TAG ON TRUNK: the trunk reads 2824; UVM-4502 is on file with no tag
+UVM-2924,2026-11-20,EMR,,,,,active,,CLAIMED BY POSITION: matched to UVM-4487 from 3 m. TAG ON TRUNK: the trunk reads 2924; UVM-4487 is on file with no tag
+UVM-2925,2026-11-20,EMR,,,,,active,,CLAIMED BY POSITION: matched to UVM-4488 from 9 m. TAG ON TRUNK: the trunk reads 2925; UVM-4488 is on file with no tag
+UVM-2923,2026-11-20,EMR,,,,,active,,"CLAIMED BY POSITION: matched to UVM-4492 from 4 m. TAG ON TRUNK: the trunk reads 2923; UVM-4492 is on file with no tag. Corrected at import: picked as UVM-4492, but UVM-4492 is the tree tagged 2920 (matched from 1 m, at its mapped spot); this one stands 2 m from UVM-4489, a Freeman maple"
+UVM-2919,2026-11-20,EMR,,,,,active,,CLAIMED BY POSITION: matched to UVM-4486 from 7 m. TAG ON TRUNK: the trunk reads 2919; UVM-4486 is on file with no tag
+UVM-2922,2026-11-20,EMR,,,,,active,,CLAIMED BY POSITION: matched to UVM-4490 from 6 m. TAG ON TRUNK: the trunk reads 2922; UVM-4490 is on file with no tag
+UVM-2921,2026-11-20,EMR,,,,,active,,CLAIMED BY POSITION: matched to UVM-4491 from 4 m. TAG ON TRUNK: the trunk reads 2921; UVM-4491 is on file with no tag
+UVM-2920,2026-11-20,EMR,,,,,active,,CLAIMED BY POSITION: matched to UVM-4492 from 1 m. TAG ON TRUNK: the trunk reads 2920; UVM-4492 is on file with no tag
+UVM-1671,2026-11-20,EMR,,,,good,active,,
+UVM-1672,2026-11-20,EMR,,,,fair,active,,
+UVM-1673,2026-11-20,EMR,,,,good,active,,
+UVM-1674,2026-11-20,EMR,,,,fair,active,,
+UVM-1675,2026-11-20,EMR,,,,good,active,,
+UVM-2849,2026-11-20,EMR,,,,,active,,CLAIMED BY POSITION: matched to UVM-4325 from 2 m. TAG ON TRUNK: the trunk reads 2849; UVM-4325 is on file with no tag
+UVM-2674,2026-11-20,EMR,,,,excellent,active,,
+UVM-2675,2026-11-20,EMR,,,,excellent,active,,
+UVM-2676,2026-11-20,EMR,,,,excellent,active,,
+UVM-1696,2026-11-20,EMR,,,,excellent,active,,
+UVM-2679,2026-11-20,EMR,,,,excellent,active,,
+UVM-2678,2026-11-20,EMR,,,,excellent,active,,
+UVM-2677,2026-11-20,EMR,,,,excellent,active,,
+UVM-3353,2026-11-20,EMR,,,,good,active,,SPECIES CHANGED: the inventory records tag 3353 as Taxodium distichum; recorded as Metasequoia glyptostroboides
+UVM-1975,2014-12-31,UVM 2014 inventory,24,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1975; age class Mature"
+UVM-1974,2014-12-31,UVM 2014 inventory,23,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1974; age class Mature"
+UVM-1984,2014-12-31,UVM 2014 inventory,17,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1984; age class Mature"
+UVM-1983,2014-12-31,UVM 2014 inventory,12,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1983; age class Mature"
+UVM-1982,2014-12-31,UVM 2014 inventory,13,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1982; age class Mature"
+UVM-1981,2014-12-31,UVM 2014 inventory,16,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1981; age class Mature"
+UVM-1973,2014-12-31,UVM 2014 inventory,43,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1973; age class Mature"
+UVM-1972,2014-12-31,UVM 2014 inventory,5,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1972; age class Young"
+UVM-1971,2014-12-31,UVM 2014 inventory,12,,,poor,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1971; age class Mature"
+UVM-1970,2014-12-31,UVM 2014 inventory,5,,,poor,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1970; age class Mature"
+UVM-1969,2014-12-31,UVM 2014 inventory,6,,,poor,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1969; age class Mature"
+UVM-1968,2014-12-31,UVM 2014 inventory,19,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1968; age class Mature"
+UVM-1956,2014-12-31,UVM 2014 inventory,7,,,poor,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1956; age class Semi-mature"
+UVM-1957,2014-12-31,UVM 2014 inventory,5,,,poor,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1957; age class Semi-mature"
+UVM-1958,2014-12-31,UVM 2014 inventory,5,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1958; age class Semi-mature"
+UVM-1959,2014-12-31,UVM 2014 inventory,6,,,poor,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1959; age class Semi-mature"
+UVM-1960,2014-12-31,UVM 2014 inventory,5,,,poor,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1960; age class Semi-mature"
+UVM-1961,2014-12-31,UVM 2014 inventory,6,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1961; age class Semi-mature"
+UVM-1962,2014-12-31,UVM 2014 inventory,18,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1962; age class Mature"
+UVM-1945,2014-12-31,UVM 2014 inventory,14,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1945; age class Mature"
+UVM-1946,2014-12-31,UVM 2014 inventory,7,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1946; age class Semi-mature"
+UVM-1947,2014-12-31,UVM 2014 inventory,12,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1947; age class Semi-mature"
+UVM-1993,2014-12-31,UVM 2014 inventory,11,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1993; age class Mature"
+UVM-1994,2014-12-31,UVM 2014 inventory,42,,,poor,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1994; age class Mature"
+UVM-1995,2014-12-31,UVM 2014 inventory,22,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1995; age class Mature"
+UVM-1996,2014-12-31,UVM 2014 inventory,20,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1996; age class Mature"
+UVM-1997,2014-12-31,UVM 2014 inventory,20,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1997; age class Mature"
+UVM-1998,2014-12-31,UVM 2014 inventory,20,,,fair,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1998; age class Mature"
+UVM-1671,2014-12-31,UVM 2014 inventory,15,,,good,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1671; age class Semi-mature"
+UVM-1672,2014-12-31,UVM 2014 inventory,23,,,good,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1672; age class Mature"
+UVM-1673,2014-12-31,UVM 2014 inventory,24,,,good,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1673; age class Mature"
+UVM-1674,2014-12-31,UVM 2014 inventory,14,,,good,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1674; age class Semi-mature"
+UVM-1675,2014-12-31,UVM 2014 inventory,16,,,good,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1675; age class Semi-mature"
+UVM-1696,2014-12-31,UVM 2014 inventory,2,,,good,active,,"From the 2014 UVM campus tree inventory (FEMC archive), tree 1696; age class Young"
