@@ -165,6 +165,15 @@ const trees = result.plants.rows.map((row) => {
     // So an update shows the plaque on record rather than an empty box. Left
     // out when there is none, which is nearly every tree.
     ...(at(row, 'dedication_label') ? { dedication: at(row, 'dedication_label') } : {}),
+    // What the tree still needs, for the survey app's route to trees that
+    // need a visit: when its trunk was measured, whether it has a photo,
+    // whether it is named only to genus, and its campus. Left out when empty.
+    ...(at(row, 'dbh_in') !== null ? { measured: at(row, 'dbh_on') ?? at(row, 'surveyed_on') } : {}),
+    ...(at(row, 'photo') ? { photo: true } : {}),
+    ...(taxon && !taxon.species ? { genusOnly: true } : {}),
+    ...(at(row, 'collection') !== null ? { area: result.dataset.collections[at(row, 'collection')]?.name } : {}),
+    // Removed or not found: still matchable, never a stop on a route.
+    ...(at(row, 'status') !== 0 ? { gone: true } : {}),
   };
 });
 const treesJson = JSON.stringify(trees);

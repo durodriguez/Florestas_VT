@@ -29,6 +29,17 @@ export interface MappedTree {
   surveyed: string | null;
   /** What its plaque says, when the map records one. Absent otherwise. */
   dedication?: string;
+  /**
+   * For planning a route (route.ts): when its trunk size was measured, absent
+   * if it has none; whether it has a photo; whether it is named only to genus;
+   * and its campus area. Each left out when false or empty, to keep the file small.
+   */
+  measured?: string;
+  photo?: true;
+  genusOnly?: true;
+  area?: string;
+  /** Removed or not found: still matchable, never a stop on a route. */
+  gone?: true;
 }
 
 export interface NearbyTree {

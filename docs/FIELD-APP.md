@@ -28,6 +28,24 @@ It used to start with the metal tag, which made sense while the work ran off
 the 2014 inventory. Now the map comes from the 2023–24 inventory, so most
 visits are to a tree already on it, and the first question is *which one*.
 
+### Where to go next: a route to trees that need a visit
+
+Under the map on the opening screen, **Plan a route to trees that need a
+visit** lists the nearest trees still missing what you tick: a trunk size, a
+photo, or a species (trees named only to genus, such as "Crabapple" or "Elm").
+Up to 12 trees within 500 m, in walking order, each the closest one left, with
+the distance from the one before. They are drawn on the map as gold numbered
+stops. Tap a stop, on the map or in the list, to update that tree.
+
+The route is planned from where you stand when you open it, when you change
+what to look for, and each time you save. A tree saved on this phone drops off,
+so the list shrinks as you work; **Plan again from here** starts over from
+where you are now. What you tick is remembered on the phone. Below the list, a
+line says how much of the campus you are on has a trunk size. It counts the
+published map, so it moves when your visits are imported, not as you save.
+
+Removed and not-found trees never appear on a route.
+
 ### Update a mapped tree
 
 1. **Which tree.** Type the number on its metal tag (or its UVM number from the

@@ -101,6 +101,20 @@
       </details>
       <div id="pin-map" class="pin-map" aria-label="Map of the trees around you"></div>
       <p class="hint" id="start-note" data-only="none"></p>
+      <!-- Where to go next: the nearest trees still missing something. -->
+      <details id="route" class="route" data-only="none">
+        <summary>Plan a route to trees that need a visit</summary>
+        <fieldset class="route-wants">
+          <legend>Trees missing</legend>
+          <label><input type="checkbox" name="route-want" value="trunk"> A trunk size</label>
+          <label><input type="checkbox" name="route-want" value="photo"> A photo</label>
+          <label><input type="checkbox" name="route-want" value="species"> A species (named only to genus)</label>
+        </fieldset>
+        <p id="route-summary" class="hint"></p>
+        <ol id="route-list" class="route-list"></ol>
+        <button type="button" id="route-replan" class="ghost-btn" hidden>Plan again from here</button>
+        <p id="route-coverage" class="hint route-coverage"></p>
+      </details>
       <p class="hint" data-only="new">Tap the map to place the pin on the tree's crown, or drag it. Imagery beats GPS under canopy.</p>
       <p class="hint" id="pin-hint-update" data-only="update"></p>
       <div id="dup-warn" class="tag-result tag-result--info" hidden></div>
