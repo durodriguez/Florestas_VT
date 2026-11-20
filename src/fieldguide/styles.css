@@ -32,6 +32,9 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
   padding: .35rem .7rem; border-radius: 99px; background: var(--bg); color: var(--ink);
   font-size: .82rem; font-weight: 600; box-shadow: 0 2px 10px rgb(0 0 0 / 18%);
 }
+/* The map's credits, under the month chip. */
+.fg-map .leaflet-top.leaflet-left { top: 2.9rem; }
+.fg-map .leaflet-control-attribution { margin: 0 0 0 .7rem; border-radius: 6px; font-size: 10px; }
 /* Under the basemap switch, top right: clear of the sheet at any height. */
 .fg-locate {
   position: absolute; z-index: 500; right: .7rem; top: 4.4rem;
@@ -46,8 +49,16 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
   background: var(--bg); border-radius: 18px 18px 0 0; box-shadow: 0 -4px 20px rgb(0 0 0 / 16%);
 }
 .fg-sheet::before { content: ""; display: block; width: 2.4rem; height: 4px; border-radius: 2px; background: var(--rule); margin: 0 auto .5rem; }
-.fg-sheet h2 { margin: 0; font-size: 1.05rem; display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
-.fg-sheet h2 small { font-size: .78rem; font-weight: 500; color: var(--dim); }
+.fg-tabs { display: flex; align-items: baseline; gap: .2rem; }
+.fg-tabs[hidden] { display: none; }
+.fg-tabs button {
+  font: inherit; font-size: 1.02rem; font-weight: 700; padding: .15rem .55rem .3rem; border: 0; border-bottom: 3px solid transparent;
+  background: none; color: var(--dim); cursor: pointer;
+}
+.fg-tabs button:first-child { padding-left: 0; }
+.fg-tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--gold); }
+.fg-tabs button[hidden] { display: none; }
+.fg-tabs small { margin-left: auto; font-size: .78rem; font-weight: 500; color: var(--dim); }
 .fg-where { margin: .2rem 0 .6rem; font-size: .82rem; color: var(--dim); }
 .fg-cards { list-style: none; margin: 0; padding: 0 0 .2rem; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(9.5rem, 46%); gap: .55rem; overflow-x: auto; scroll-snap-type: x mandatory; }
 .fg-cards li { scroll-snap-align: start; }
@@ -66,6 +77,37 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
 .fg-card-text span { color: var(--dim); }
 .fg-empty { color: var(--dim); font-size: .85rem; }
 @media (prefers-color-scheme: dark) { .fg-card-text em { color: #ffd95a; } }
+/* Tours: the list, then the stop being walked. */
+.fg-tour-list { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: .5rem; max-height: 40vh; overflow-y: auto; }
+.fg-tour {
+  width: 100%; display: grid; gap: .15rem; padding: .6rem .75rem; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--rule); border-left: 4px solid var(--gold); border-radius: 12px;
+}
+.fg-tour b { font-size: .98rem; }
+.fg-tour-meta { font-size: .8rem; color: var(--dim); }
+.fg-tour-desc { font-size: .82rem; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.fg-walk-head { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem; margin-bottom: .45rem; }
+.fg-walk-head h2 { margin: 0; font-size: 1rem; display: flex; flex-wrap: wrap; gap: 0 .45rem; align-items: baseline; }
+.fg-walk-head small { font-size: .8rem; font-weight: 600; color: var(--dim); }
+.fg-linkbtn { font: inherit; font-size: .85rem; font-weight: 600; padding: 0; border: 0; background: none; color: var(--green-2); text-decoration: underline; cursor: pointer; white-space: nowrap; }
+.fg-card--stop { grid-template-columns: 5.5rem 1fr; grid-template-rows: none; }
+.fg-card--stop .fg-thumb { height: auto; min-height: 5.2rem; }
+.fg-note { color: var(--ink) !important; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.fg-walk-offer { margin: .45rem 0 0; font-size: .82rem; color: var(--dim); }
+.fg-walk-nav { display: flex; gap: .45rem; margin-top: .5rem; }
+.fg-step {
+  font: inherit; font-size: .88rem; font-weight: 600; padding: .55rem .8rem; border-radius: 10px; cursor: pointer;
+  background: var(--sunk); color: var(--ink); border: 1px solid var(--rule);
+}
+.fg-step:disabled { opacity: .4; cursor: default; }
+.fg-step--next { flex: 1; text-align: left; background: var(--green); color: #fff; border-color: var(--green); }
+.fg-walk-explorer { display: inline-block; margin-top: .45rem; font-size: .8rem; color: var(--dim); }
+.fg-stop span {
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  background: #ffd100; color: #101820; font: 800 13px/1 var(--font);
+  box-shadow: 0 0 0 2px #154734, 0 2px 6px rgb(0 0 0 / 30%);
+}
+
 @media (min-width: 48rem) {
   .fg-sheet { left: 1rem; right: auto; bottom: 1rem; width: 22rem; border-radius: 14px; }
   .fg-sheet::before { display: none; }
@@ -85,7 +127,8 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
   font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer; background: rgb(255 255 255 / 92%); color: #17211c;
   box-shadow: 0 2px 10px rgb(0 0 0 / 20%);
 }
-.fg-photo { margin: -2.6rem 0 0; }
+.fg-photo { margin: -2.6rem 0 0; position: relative; }
+.fg-photo figcaption { position: absolute; right: .6rem; bottom: .5rem; padding: .15rem .5rem; border-radius: 99px; font-size: .72rem; background: rgb(0 0 0 / 55%); color: #fff; }
 .fg-photo img { display: block; width: 100%; max-height: 62vh; object-fit: cover; }
 .fg-nophoto {
   height: 11rem; display: grid; place-items: end start; padding: 1rem;
@@ -113,7 +156,24 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
 .fg-tree-body p { line-height: 1.55; }
 .fg-fun { margin-top: .8rem; padding-left: .8rem; border-left: 2px solid var(--rule); }
 .fg-fun summary { cursor: pointer; font-weight: 600; color: var(--dim); }
-.fg-actions { margin-top: 1.4rem; }
+.fg-story { margin: .9rem 0 0; font-style: italic; }
+.fg-absent { margin: 0 0 .8rem; padding: .5rem .75rem; border-radius: 10px; font-size: .88rem; background: var(--sunk); border: 1px solid var(--rule); }
+.fg-plaque { white-space: pre-line; padding: .7rem .9rem; border-radius: 8px; background: var(--sunk); border: 1px solid var(--rule); font-family: Georgia, "Times New Roman", serif; }
+.fg-tourbar { margin: 0 0 1rem; padding: .7rem .85rem; border-radius: 12px; background: var(--sunk); border-left: 4px solid var(--gold); display: grid; gap: .4rem; }
+.fg-tourbar p { margin: 0; font-size: .88rem; line-height: 1.4; }
+.fg-tourbar .fg-step { justify-self: start; }
+/* The year: twelve months, this one outlined. */
+.fg-year { list-style: none; margin: .3rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; }
+.fg-year li { display: grid; gap: .2rem; text-align: center; }
+.fg-year li > span:first-child { height: 1.6rem; border-radius: 4px; box-shadow: inset 0 0 0 1px rgb(0 0 0 / 10%); }
+.fg-year b { font-size: .7rem; font-weight: 600; color: var(--dim); }
+.fg-year .fg-now > span:first-child { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink); }
+.fg-year .fg-now b { color: var(--ink); font-weight: 800; }
+.fg-year-words { margin: .6rem 0 0; }
+.fg-year-words .fg-when { display: block; margin-top: .15rem; }
+.fg-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.fg-kin-map { height: 13rem; margin-top: .5rem; border-radius: 12px; border: 1px solid var(--rule); background: #e9ece6; }
+.fg-actions { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: .5rem; }
 .fg-btn {
   display: inline-block; padding: .55rem .95rem; border-radius: 10px; text-decoration: none; font-size: .9rem; font-weight: 600;
   background: var(--sunk); color: var(--ink); border: 1px solid var(--rule);

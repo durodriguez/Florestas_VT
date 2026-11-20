@@ -53,7 +53,7 @@ const LEAF = '#4ea72e';
 const BARE = '#c9bfae';
 
 const LEAF_MONTHS = new Set([5, 6, 7, 8, 9, 10]);
-const FALL_MONTH = 10;
+export const FALL_MONTH = 10;
 
 type Calendar = Pick<Taxon, 'type' | 'flowerMonths' | 'flowerColor' | 'fruitMonths' | 'fruitColor' | 'fallColor'>;
 
@@ -76,6 +76,20 @@ export function season(t: Calendar, month: number): { state: SeasonState; color:
   if (evergreen) return { state: 'evergreen', color: EVERGREEN };
   if (LEAF_MONTHS.has(month)) return { state: 'leaf', color: LEAF };
   return { state: 'bare', color: BARE };
+}
+
+/**
+ * Whether a species' flowers, fruit or fall color are showy enough to count,
+ * by the same rules as season(). Evergreens' flowers and fall color never
+ * count: what they have is pollen and needles.
+ */
+export function showy(t: Calendar): { flower: boolean; fruit: boolean; fall: boolean } {
+  const evergreen = t.type === 'evergreen-tree';
+  return {
+    flower: !evergreen && t.flowerMonths.length > 0 && !!FLOWER[t.flowerColor],
+    fruit: t.fruitMonths.length > 0 && !!FRUIT[t.fruitColor],
+    fall: !evergreen && !!FALL[t.fallColor],
+  };
 }
 
 /** Pale enough that a white edge would lose it on a light basemap. */

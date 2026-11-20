@@ -77,6 +77,16 @@ button, input, select { font: inherit; color: inherit; }
 }
 @media (hover: hover) { .brand:hover { background: rgb(255 255 255 / 10%); } }
 .brand:has(.brand-reset:focus-visible) { outline: 2px solid #fff; outline-offset: 1px; }
+/* The field guide, the other way into the same trees. */
+.topbar-link {
+  margin-left: auto; flex: 0 0 auto; padding: .3rem .7rem; border-radius: 99px; white-space: nowrap;
+  color: #fff; text-decoration: none; font-size: .85rem; border: 1px solid rgb(255 255 255 / 45%);
+}
+.topbar-link:hover { background: rgb(255 255 255 / 12%); }
+.topbar-link + #locate { margin-left: 0; }
+/* On a phone the link and the tagline do not both fit beside the name; the
+   tagline gives way, as the page title already says what the site is. */
+@media (max-width: 30rem) { #site-tagline { display: none; } }
 #locate { margin-left: auto; }
 .brand h1 { font-size: 1.05rem; letter-spacing: .01em; }
 .brand-reset {
@@ -685,6 +695,8 @@ body.is-loading .layout { opacity: .35; }
 .tour-pick-name { font-weight: 650; }
 .tour-pick-meta { font-size: .78rem; color: var(--text-dim); }
 .tour-pick-desc { font-size: .8rem; line-height: 1.4; color: var(--text-dim); }
+.tour-walk { font-size: .8rem; justify-self: start; margin: -.1rem 0 0 .2rem; color: var(--uvm-green-light); }
+.tour-list li { display: grid; gap: .3rem; }
 /* A stop's record opens with where it is on the tour, and the way on. */
 .tour-bar {
   margin: 0 0 .9rem; padding: .6rem .75rem; border-radius: var(--radius);

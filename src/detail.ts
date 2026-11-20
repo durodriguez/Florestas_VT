@@ -271,6 +271,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string, stop?
 
     <div class="detail-actions">
       <button type="button" class="btn" data-action="same-taxon">Show all</button>
+      ${plant.status === 'active' ? `<a class="btn" href="${base}fieldguide/?plant=${encodeURIComponent(plant.id)}">In the field guide</a>` : ''}
       ${t.id === UNKNOWN_TAXON ? '' : `<a class="btn" href="${base}species/${encodeURIComponent(t.id)}/">More about this species</a>`}
       <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=${plant.lat},${plant.lng}"
          target="_blank" rel="noopener">Directions</a>

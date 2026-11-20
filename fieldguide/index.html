@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="A field guide to the trees around you on the University of Vermont campus.">
+  <meta name="description" content="A field guide to the trees around you on the University of Vermont campus, with walking tours.">
   <meta name="theme-color" content="#154734">
   <title>Field guide — UVM Trees</title>
   <link rel="icon" type="image/png" href="/uvm-mark.png">
@@ -19,10 +19,20 @@
     <div id="fg-map" class="fg-map" role="application" aria-label="Map of the trees around you"></div>
     <p id="fg-season" class="fg-chip" hidden></p>
     <button type="button" id="fg-locate" class="fg-locate" aria-label="Show where I am" title="Show where I am">◎</button>
-    <section id="fg-sheet" class="fg-sheet" aria-labelledby="fg-sheet-title">
-      <h2 id="fg-sheet-title">Around you <small id="fg-count"></small></h2>
-      <p id="fg-where" class="fg-where">Loading the trees…</p>
-      <ul id="fg-cards" class="fg-cards"></ul>
+    <section id="fg-sheet" class="fg-sheet" aria-label="Trees to see">
+      <div id="fg-tabs" class="fg-tabs" role="tablist">
+        <button type="button" role="tab" data-tab="around" aria-selected="true" aria-controls="fg-around">Around you</button>
+        <button type="button" role="tab" id="fg-tab-tours" data-tab="tours" aria-selected="false" aria-controls="fg-tours" hidden>Tours</button>
+        <small id="fg-count"></small>
+      </div>
+      <div id="fg-around" role="tabpanel">
+        <p id="fg-where" class="fg-where">Loading the trees…</p>
+        <ul id="fg-cards" class="fg-cards"></ul>
+      </div>
+      <div id="fg-tours" role="tabpanel" hidden>
+        <ul id="fg-tour-list" class="fg-tour-list"></ul>
+      </div>
+      <div id="fg-walk" class="fg-walk" hidden></div>
     </section>
   </main>
 
