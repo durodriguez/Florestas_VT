@@ -3,7 +3,7 @@
 
 import {
   CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES, BOOLEANISH, PROSE_MAX,
-  TAXON_REQUIRED, PLANT_REQUIRED, OBSERVATION_REQUIRED,
+  TAXON_REQUIRED, PLANT_REQUIRED, OBSERVATION_REQUIRED, UNKNOWN_TAXON,
   TAXON_NUMERIC, PLANT_NUMERIC, OBSERVATION_NUMERIC,
   OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS,
   CITY_TREE_FIELDS, YEAR_ONLY_SURVEYORS,
@@ -91,6 +91,8 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     const id = trim(row.taxon_id);
 
     for (const field of TAXON_REQUIRED) {
+      // The placeholder for an unidentified plant has no genus to give.
+      if (field === 'genus' && id === UNKNOWN_TAXON) continue;
       if (!trim(row[field])) err(where, `missing required field "${field}"`);
     }
     if (!id) return;

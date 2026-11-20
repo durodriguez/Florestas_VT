@@ -13,6 +13,8 @@ const TYPE_COLORS: Record<string, string> = {
   annual: '#860000',
   vine: '#7030a0',
   grass: '#b8b400',
+  // A plant mapped before anyone knew what it was (taxon "unknown").
+  unknown: '#9aa09b',
 };
 
 const ORIGIN_COLORS: Record<string, string> = {
@@ -56,6 +58,7 @@ export const TYPE_LABELS: Record<string, string> = {
   annual: 'Annual',
   vine: 'Vine/climber',
   grass: 'Grass',
+  unknown: 'Unknown',
 };
 
 export const ORIGIN_LABELS: Record<string, string> = {

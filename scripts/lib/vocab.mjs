@@ -38,7 +38,16 @@ export const PLANT_TYPES = [
   'annual',
   'vine',
   'grass',
+  // For the one placeholder taxon below, whose kind nobody has said yet.
+  'unknown',
 ];
+
+/**
+ * The placeholder for a plant mapped before anyone knew what it was: the
+ * survey app's "Don't know yet". It has no genus or species, gets no species
+ * page, and is corrected on a later visit like any other wrong species.
+ */
+export const UNKNOWN_TAXON = 'unknown';
 
 /**
  * Where the plant is from, and whether it is a problem here. One value per

@@ -311,6 +311,15 @@ to publish an updated one: the URL carries the data version, so a phone picks
 up a new list on its next load rather than serving the first one it ever saw
 out of the service worker cache forever.
 
+
+**Don't know yet.** Under the species box, **Don't know yet: save as Unknown
+(TBD)** maps a tree nobody can identify yet, such as one planted this season.
+It is saved with the placeholder species *Unknown (TBD)* (`unknown` in
+`taxa.csv`) and imports like any other tree. On the map it reads "Species not
+identified yet", in gray, with no species page. To name it later, update the
+tree and pick its species: that is saved as a correction, as for any wrong
+species. Until then it carries the "Species?" flag on a route to trees that
+need a visit.
 ### The app will not let you save a bad position
 
 Above ±10 m it refuses, because a fix that loose puts the tree in the wrong bed

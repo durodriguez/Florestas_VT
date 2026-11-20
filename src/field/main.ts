@@ -1759,6 +1759,15 @@ $('nearby-none').addEventListener('click', () => {
   setMode('new');
   $('card-tag').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
+// "Don't know yet": map the tree now, with the placeholder taxon, and give it
+// its real species on a later visit, as any correction of a species is made.
+$('species-unknown').addEventListener('click', () => {
+  const entry = species.find((e) => e.id === 'unknown');
+  if (!entry) return toast('The species list has not loaded yet. Try again in a moment.');
+  setTaxon(entry, false);
+  closeSuggestions();
+});
+
 // The route to trees that need a visit: what to look for is remembered on
 // this phone; opening it, or changing that, plans it from here.
 {

@@ -482,3 +482,6 @@ body[data-mode] [data-only="none"] { display: none !important; }
   display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
   background: #ffd100; color: #101820; font: 800 13px/1 var(--sans); box-shadow: 0 0 0 2px #101820, 0 2px 6px rgb(0 0 0 / 35%);
 }
+
+/* "Don't know yet": under the species box, quieter than the box itself. */
+.species-unknown { margin-top: 8px; width: 100%; }

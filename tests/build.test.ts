@@ -331,6 +331,12 @@ describe('buildDataset', () => {
     expect(r.errors.join()).toMatch(/missing required field "family"/);
   });
 
+  it('lets the "unknown" placeholder go without a genus, and nothing else', () => {
+    const unknown = taxon({ taxon_id: 'unknown', scientific_name: 'Unknown', common_name: 'Unknown (TBD)', family: 'Unknown', genus: '', species: '', plant_type: 'unknown' });
+    expect(build({ taxaRows: [taxon(), unknown] }).errors).toEqual([]);
+    expect(build({ taxaRows: [taxon({ genus: '' })] }).errors.join()).toMatch(/missing required field "genus"/);
+  });
+
   it('warns, but does not fail, on coordinates outside campus bounds', () => {
     const r = build({ plantRows: [plant({ lat: '40.7128', lng: '-74.0060' })] });
     expect(r.errors).toEqual([]);

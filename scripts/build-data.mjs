@@ -9,6 +9,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Papa from 'papaparse';
 import { buildDataset } from './lib/build.mjs';
+import { UNKNOWN_TAXON } from './lib/vocab.mjs';
 import { normalizeName } from './lib/species.mjs';
 import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS } from './lib/species-pages.mjs';
 import { renderItreePage } from './lib/itree-page.mjs';
@@ -217,7 +218,9 @@ for (const row of result.plants.rows) {
   }
 }
 
-for (const taxon of result.dataset.taxa) {
+// Not for the placeholder of an unidentified plant: there is no species to describe.
+const describable = result.dataset.taxa.filter((t) => t.id !== UNKNOWN_TAXON);
+for (const taxon of describable) {
   const dir = join(speciesDir, taxon.id);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, 'index.html'), renderSpeciesPage(taxon, {
@@ -229,7 +232,7 @@ for (const taxon of result.dataset.taxa) {
 }
 writeFileSync(
   join(speciesDir, 'index.html'),
-  renderSpeciesIndex(result.dataset.taxa, { base: siteBase, config }),
+  renderSpeciesIndex(describable, { base: siteBase, config }),
 );
 
 // ---- the i-Tree page -------------------------------------------------------
