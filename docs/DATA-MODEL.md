@@ -423,13 +423,14 @@ in the CSV export.
 
 ### The 2014 inventory's rows
 
-900 rows, all dated `2014-12-31` with `surveyor` **`UVM 2014 inventory`**, are
+934 rows, all dated `2014-12-31` with `surveyor` **`UVM 2014 inventory`**, are
 the 2014 UVM campus tree inventory's measurements of trees still on the map:
 its diameter, its condition, and (in `notes`) its tree number and age class.
 896 were added on 6 November 2026, matched by tag, and only where the 2014
-species and the map's agree at least on genus. Four more were added on
-20 November 2026 for trees first recorded that day whose tags and species
-match 2014's: UVM-1943, UVM-2026, UVM-2036 and UVM-2037. The 54 that disagree are held back until
+species and the map's agree at least on genus. 38 more were added on
+20 November 2026, for trees first recorded that day whose tags and species
+match 2014's, most of them in the run of tags 1944–2001 at Redstone that had
+never been mapped. The 54 that disagree are held back until
 someone checks which tree the tag is on now.
 
 The inventory was collected over the whole of 2014 with no date per tree, so
@@ -698,7 +699,10 @@ what the data backs, with the year of any measurement, since sizes go stale.
 The first tour, *Giants of the Green*, was drafted from the inventory: the ten
 largest trunks measured on and around the University Green, in nearest-next
 walking order, each note giving the tree's measured size, its year and its
-rank among the trunks measured on campus.
+rank among the trunks measured on campus. A rank goes stale as trunks are
+added (on 20 November 2026 the count went from 940 to 978, and every stop but
+the first dropped two places), so the build warns when a note's "No. 7 of the
+940 trunks measured on campus" no longer matches the data.
 
 `data/trails.geojson`, hand-drawn trail lines, came before tours. It never
 held a trail and was removed in November 2026.

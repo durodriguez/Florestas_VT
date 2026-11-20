@@ -1097,7 +1097,7 @@ UVM-2852,2852,picea-pungens,44.472524,-73.197257,"Position corrected on imagery,
 UVM-1684,1684,picea-abies,44.472478,-73.197339,"Position corrected on imagery, 2026-11-20",athletic,,,,aa5f2277-9285-4f08-84fe-8812ac4b703e
 UVM-1687,1687,picea-abies,44.472473,-73.197228,"Position corrected on imagery, 2026-11-20",athletic,,,,8ae01e01-0366-418f-b051-37f9fa1d8b4f
 UVM-2851,2851,picea-abies,44.472441,-73.197424,"Position corrected on imagery, 2026-11-20",athletic,,,,42cd7bcb-f738-4360-9996-92f2db6c002d
-UVM-4325,,picea-abies,44.472201,-73.197384,Position set by pin on imagery,athletic,,,,6e338b05-3c5c-4ea8-b783-45c93876d8b0
+UVM-2849,2849,picea-abies,44.472201,-73.197384,Position set by pin on imagery,athletic,,,,6e338b05-3c5c-4ea8-b783-45c93876d8b0
 UVM-4326,,picea-abies,44.472107,-73.197466,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,59b6a865-86d5-48e9-b71f-08e25aa7e3f6
 UVM-1682,1682,picea-abies,44.472336,-73.197439,"Position corrected on imagery, 2026-11-20",athletic,,,,ae3f2e73-de94-4c12-841d-ce6858d7f4be
 UVM-2850,2850,picea-abies,44.472292,-73.197431,"Position corrected on imagery, 2026-11-20",athletic,,,,cce0bf99-3d41-412b-a4a5-90aa71bdcefe
@@ -1449,7 +1449,7 @@ UVM-4437,,amelanchier-sp,44.472655,-73.196447,"Mapped in UVM's ArcGIS tree layer
 UVM-4438,,amelanchier-sp,44.472696,-73.196418,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,c03da7f2-509e-485b-bea1-d64c2b540146
 UVM-1468,1468,taxodium-distichum,44.472744,-73.196326,"Position corrected on imagery, 2026-11-20",athletic,,,,f4e97fc6-c9a0-49a8-b880-1104bcb16697
 UVM-1467,1467,taxodium-distichum,44.472778,-73.196318,"Position corrected on imagery, 2026-11-20",athletic,,,,7002532f-21bb-4e22-8efd-9389da0dd7f0
-UVM-3353,3353,taxodium-distichum,44.472805,-73.196433,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,80a6664f-de96-45c5-98c4-77b7fcffcf60
+UVM-3353,3353,metasequoia-glyptostroboides,44.472805,-73.196433,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,80a6664f-de96-45c5-98c4-77b7fcffcf60
 UVM-4439,,pinus-strobus,44.472774,-73.196452,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,469c9b76-5895-4ddb-b49d-4f58176d4816
 UVM-1465,1465,quercus-rubra,44.472728,-73.196486,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,e5533fc1-740b-4c57-af76-5b4dea64b5b5
 UVM-1466,1466,quercus-bicolor,44.472671,-73.196504,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,0c02e176-95cf-4c8e-af28-3609a89a20e3
@@ -1625,16 +1625,16 @@ UVM-2881,2881,quercus-bicolor,44.471922,-73.196944,"Mapped in UVM's ArcGIS tree 
 UVM-1759,1759,pinus-strobus,44.471979,-73.196940,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,80a173ba-93d6-4cae-b7bd-a813f75b1dcc
 UVM-2880,2880,quercus-bicolor,44.471992,-73.196869,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,59ab59f5-9189-4724-818c-07c73bb7ea8f
 UVM-4485,,chionanthus-virginicus,44.472021,-73.196884,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,010ec337-d6e3-41f0-9095-065528e79c7b
-UVM-4486,,acer-triflorum,44.471275,-73.197595,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,758af880-6b04-41ae-b80b-fa28a2e2ec38
+UVM-2919,2919,acer-triflorum,44.471269,-73.197627,Position set by pin on imagery,redstone,,,,758af880-6b04-41ae-b80b-fa28a2e2ec38
 UVM-1932,1932,betula-papyrifera,44.471072,-73.197389,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,7866cfab-d3c6-420f-999b-67a719ae49b4
 UVM-1933,1933,acer-saccharum,44.471117,-73.197278,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,d37e0b0a-c373-4816-9ab6-f9d2afa3c28c
 UVM-1931,1931,acer-saccharum,44.471215,-73.197294,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,cfc9c68a-8788-47b9-afb8-ea33ab478733
-UVM-4487,,acer-x-freemanii,44.470934,-73.197676,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,58e20e02-c747-4e2b-ad3b-522acd8bb0bd
-UVM-4488,,acer-triflorum,44.470998,-73.197539,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,bfe8be47-c6e7-411b-8e6f-eacbd284ed74
-UVM-4489,,acer-x-freemanii,44.471026,-73.197684,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,78034099-38c0-407f-89c6-1c94afb347e6
-UVM-4490,,picea-glauca,44.471150,-73.197516,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,75567d4b-c0cc-460a-804d-12fbb1b1cae3
-UVM-4491,,acer-triflorum,44.471184,-73.197551,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,addceb7b-5e7f-4c15-ac38-c98af59d53fe
-UVM-4492,,acer-x-freemanii,44.471170,-73.197664,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,c61b544e-8e4b-4e05-bc4e-84d5fed3d48a
+UVM-2924,2924,acer-x-freemanii,44.470934,-73.197676,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,58e20e02-c747-4e2b-ad3b-522acd8bb0bd
+UVM-2925,2925,acer-triflorum,44.470996,-73.197552,Position set by pin on imagery,redstone,,,,bfe8be47-c6e7-411b-8e6f-eacbd284ed74
+UVM-2923,2923,acer-x-freemanii,44.471033,-73.197659,Position set by pin on imagery,redstone,,,,78034099-38c0-407f-89c6-1c94afb347e6
+UVM-2922,2922,picea-glauca,44.471147,-73.197536,Position set by pin on imagery,redstone,,,,75567d4b-c0cc-460a-804d-12fbb1b1cae3
+UVM-2921,2921,acer-triflorum,44.471173,-73.197579,Position set by pin on imagery,redstone,,,,addceb7b-5e7f-4c15-ac38-c98af59d53fe
+UVM-2920,2920,acer-x-freemanii,44.471170,-73.197664,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,c61b544e-8e4b-4e05-bc4e-84d5fed3d48a
 UVM-1918,1918,thuja-sp,44.470613,-73.197391,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,465f3990-da9c-46d0-97ee-aad7fce27944
 UVM-1919,1919,thuja-sp,44.470606,-73.197454,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,8d796dd9-886f-466b-8b80-40a2e9d97627
 UVM-1920,1920,thuja-sp,44.470597,-73.197502,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,5566378d-71bd-4d39-9f97-27cf863e85d1
@@ -1651,21 +1651,21 @@ UVM-1903,1903,quercus-rubra,44.469843,-73.197955,"Mapped in UVM's ArcGIS tree la
 UVM-1902,1902,quercus-rubra,44.469821,-73.198064,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,9aab3557-94a4-4ada-94f9-290992ce9292
 UVM-4500,,taxus-x-media,44.469985,-73.198049,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,f9d58134-f211-44aa-801d-cec00baaa92b
 UVM-4501,,taxus-x-media,44.470045,-73.198056,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,340bac74-043e-4dea-8605-3904117ee710
-UVM-4502,,zelkova-serrata,44.470288,-73.198294,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,764c0d08-89b8-4be0-a9ac-f6f9881b937f
-UVM-4503,,zelkova-serrata,44.470417,-73.198332,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,a8ace63c-f35f-4f1b-8200-39bc082514fa
-UVM-4504,,zelkova-serrata,44.470493,-73.198654,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,5497ce01-6969-434b-983c-ea28443f289d
-UVM-4505,,zelkova-serrata,44.470552,-73.198833,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,fcdb74da-3766-4abe-83b6-92587dea04b0
-UVM-4506,,zelkova-serrata,44.470576,-73.198917,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,a0dbdbd3-922f-4658-bf88-b76cfaa7004d
-UVM-4507,,zelkova-serrata,44.470602,-73.199003,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,ee50211a-6667-441f-9aa7-fa25fdcf81aa
+UVM-2824,2824,zelkova-serrata,44.470288,-73.198294,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,764c0d08-89b8-4be0-a9ac-f6f9881b937f
+UVM-2823,2823,zelkova-serrata,44.470395,-73.198296,Position set by pin on imagery,redstone,,,,a8ace63c-f35f-4f1b-8200-39bc082514fa
+UVM-2822,2822,zelkova-serrata,44.470502,-73.198565,Position set by pin on imagery,redstone,,,,5497ce01-6969-434b-983c-ea28443f289d
+UVM-2821,2821,zelkova-serrata,44.470561,-73.198787,Position set by pin on imagery,redstone,,,,fcdb74da-3766-4abe-83b6-92587dea04b0
+UVM-2820,2820,zelkova-serrata,44.470585,-73.198875,Position set by pin on imagery,redstone,,,,a0dbdbd3-922f-4658-bf88-b76cfaa7004d
+UVM-2819,2819,zelkova-serrata,44.470624,-73.198963,Position set by pin on imagery,redstone,,,,ee50211a-6667-441f-9aa7-fa25fdcf81aa
 UVM-4508,,zelkova-serrata,44.470637,-73.199078,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,c44d2f92-f428-4163-8279-0f7f68c339b8
-UVM-4509,,zelkova-serrata,44.470672,-73.199155,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,a062ac04-041f-446f-9855-6f032855628d
-UVM-4510,,acer-rubrum,44.470676,-73.199272,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,53ff49a1-66dd-4007-928d-4e263d681524
-UVM-2002,2002,acer-rubrum,44.470635,-73.199384,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,3bb024d0-4086-4f34-a218-c9294391f285
-UVM-2003,2003,acer-rubrum,44.470600,-73.199478,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,312df2ed-3b29-420a-b488-729e9279d9b7
-UVM-2004,2004,acer-rubrum,44.470568,-73.199559,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,2923693b-8e8f-4f08-9eea-e4e52f4390a3
-UVM-4511,,zelkova-serrata,44.470542,-73.199765,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,00745918-4666-431a-9fdd-f46113e9fb91
-UVM-4512,,zelkova-serrata,44.470523,-73.199856,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,24401ae4-80f8-4254-bda4-0b320c37b9b6
-UVM-4513,,zelkova-serrata,44.470522,-73.200008,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,e471d0b5-6631-42df-9751-56e03c0fd3cc
+UVM-2818,2818,zelkova-serrata,44.470697,-73.199139,Position set by pin on imagery,redstone,,,,a062ac04-041f-446f-9855-6f032855628d
+UVM-2816,2816,acer-rubrum,44.470695,-73.199365,Position set by pin on imagery,redstone,,,,53ff49a1-66dd-4007-928d-4e263d681524
+UVM-2002,2002,acer-rubrum,44.470664,-73.199430,Position set by pin on imagery,redstone,,,,3bb024d0-4086-4f34-a218-c9294391f285
+UVM-2003,2003,acer-rubrum,44.470640,-73.199505,Position set by pin on imagery,redstone,,,,312df2ed-3b29-420a-b488-729e9279d9b7
+UVM-2004,2004,acer-rubrum,44.470605,-73.199591,Position set by pin on imagery,redstone,,,,2923693b-8e8f-4f08-9eea-e4e52f4390a3
+UVM-2813,2813,zelkova-serrata,44.470534,-73.199813,Position set by pin on imagery,redstone,,,,00745918-4666-431a-9fdd-f46113e9fb91
+UVM-2812,2812,zelkova-serrata,44.470532,-73.199931,Position set by pin on imagery,redstone,,,,24401ae4-80f8-4254-bda4-0b320c37b9b6
+UVM-2811,2811,zelkova-serrata,44.470537,-73.200091,Position set by pin on imagery,redstone,,,,e471d0b5-6631-42df-9751-56e03c0fd3cc
 UVM-2005,2005,picea-abies,44.470456,-73.200253,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,452116c1-5b4b-44c1-9471-bc85a8293b6e
 UVM-2006,2006,acer-platanoides,44.470377,-73.200244,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,055d48e1-e493-4487-92f9-dd639ecc3fa0
 UVM-2008,2008,acer-saccharum,44.470137,-73.200229,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,1634d8c4-4765-45dd-90e2-c155912281f8
@@ -2108,3 +2108,48 @@ UVM-2707,2707,acer-platanoides,44.471134,-73.198323,GPS ±1 m,redstone,,,,
 UVM-2037,2037,robinia-pseudoacacia,44.469576,-73.198664,GPS ±1 m,redstone,,,,
 UVM-2026,2026,acer-platanoides,44.469772,-73.198745,GPS ±2 m,redstone,,,,
 UVM-2036,2036,acer-platanoides,44.469578,-73.198731,GPS ±2 m,redstone,,,,
+UVM-1975,1975,abies-concolor,44.471380,-73.199949,Position set by pin on imagery,redstone,,,,
+UVM-1974,1974,quercus-palustris,44.471437,-73.199840,Position set by pin on imagery,redstone,,,,
+UVM-4751,,unknown,44.471489,-73.200041,Position set by pin on imagery,redstone,,"In Memoriam
+Lufuno Tshikororo
+Colleague and Friend
+1999",,
+UVM-1984,1984,thuja-occidentalis,44.471588,-73.200070,Position set by pin on imagery,redstone,,,,
+UVM-1983,1983,thuja-occidentalis,44.471607,-73.200063,Position set by pin on imagery,redstone,,,,
+UVM-1982,1982,thuja-occidentalis,44.471603,-73.200044,Position set by pin on imagery,redstone,,,,
+UVM-1981,1981,thuja-occidentalis,44.471590,-73.200030,Position set by pin on imagery,redstone,,,,
+UVM-1973,1973,quercus-rubra,44.471550,-73.199828,Position set by pin on imagery,redstone,,,,
+UVM-1972,1972,acer-platanoides,44.471611,-73.199367,GPS ±1 m,redstone,,,,
+UVM-1971,1971,rhamnus-cathartica,44.471608,-73.199377,Position set by pin on imagery,redstone,,,,
+UVM-1970,1970,rhamnus-cathartica,44.471627,-73.199378,GPS ±1 m,redstone,,,,
+UVM-1969,1969,rhamnus-cathartica,44.471611,-73.199352,Position set by pin on imagery,redstone,,,,
+UVM-1968,1968,acer-platanoides,44.471617,-73.199341,Position set by pin on imagery,redstone,,,,
+UVM-1956,1956,thuja-occidentalis,44.471618,-73.199143,Position set by pin on imagery,redstone,,,,
+UVM-1957,1957,thuja-occidentalis,44.471622,-73.199177,Position set by pin on imagery,redstone,,,,
+UVM-1958,1958,ulmus-sp,44.471615,-73.199183,Position set by pin on imagery,redstone,,,,
+UVM-1959,1959,thuja-occidentalis,44.471627,-73.199200,Position set by pin on imagery,redstone,,,,
+UVM-1960,1960,thuja-occidentalis,44.471630,-73.199200,Position set by pin on imagery,redstone,,,,
+UVM-1961,1961,thuja-occidentalis,44.471621,-73.199208,Position set by pin on imagery,redstone,,,,
+UVM-1962,1962,aesculus-hippocastanum,44.471620,-73.199255,Position set by pin on imagery,redstone,,,,
+UVM-1945,1945,acer-negundo,44.471148,-73.199586,GPS ±1 m,redstone,,,,
+UVM-1946,1946,acer-negundo,44.471152,-73.199637,Position set by pin on imagery,redstone,,,,
+UVM-1947,1947,acer-negundo,44.471151,-73.199675,GPS ±1 m,redstone,,,,
+UVM-1993,1993,juglans-nigra,44.470993,-73.200321,Position set by pin on imagery,redstone,,,,
+UVM-1994,1994,quercus-alba,44.470829,-73.200309,Position set by pin on imagery,redstone,,,,
+UVM-1995,1995,acer-platanoides,44.470761,-73.200177,Position set by pin on imagery,redstone,,,,
+UVM-1996,1996,picea-abies,44.470708,-73.200332,Position set by pin on imagery,redstone,,,,
+UVM-1997,1997,picea-abies,44.470669,-73.200323,Position set by pin on imagery,redstone,,,,
+UVM-1998,1998,picea-abies,44.470638,-73.200270,Position set by pin on imagery,redstone,,,,
+UVM-2817,2817,zelkova-serrata,44.470713,-73.199243,Position set by pin on imagery,redstone,,,,
+UVM-1671,1671,quercus-robur,44.472213,-73.197810,Position set by pin on imagery,athletic,,,,
+UVM-1672,1672,quercus-robur,44.472186,-73.197796,Position set by pin on imagery,athletic,,,,
+UVM-1673,1673,quercus-alba,44.472175,-73.197814,Position set by pin on imagery,athletic,,,,
+UVM-1674,1674,quercus-robur,44.472165,-73.197792,Position set by pin on imagery,athletic,,,,
+UVM-1675,1675,quercus-robur,44.472147,-73.197798,Position set by pin on imagery,athletic,,,,
+UVM-2674,2674,picea-abies,44.472288,-73.197269,Position set by pin on imagery,athletic,,,,
+UVM-2675,2675,picea-abies,44.472360,-73.197375,Position set by pin on imagery,athletic,,,,
+UVM-2676,2676,thuja-occidentalis,44.472735,-73.197285,Position set by pin on imagery,athletic,,,,
+UVM-1696,1696,thuja-occidentalis,44.472906,-73.197262,GPS ±1 m,athletic,,,,
+UVM-2679,2679,thuja-occidentalis,44.472862,-73.197233,Position set by pin on imagery,athletic,,,,
+UVM-2678,2678,thuja-occidentalis,44.472814,-73.197263,Position set by pin on imagery,athletic,,,,
+UVM-2677,2677,thuja-occidentalis,44.472774,-73.197229,Position set by pin on imagery,athletic,,,,
