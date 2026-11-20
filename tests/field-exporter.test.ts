@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+// @ts-expect-error plain JS module, no type declarations
+import { tagOnTrunk } from '../scripts/lib/import.mjs';
 import Papa from 'papaparse';
 import { stamp, toCsv } from '../src/field/exporter';
 import { extensionFor } from '../src/field/photo';
@@ -289,6 +291,12 @@ describe('the note when a trunk tag disagrees with the record', () => {
     expect(notes(claimed({ tagOnTrunk: '4100' }))).toContain(
       'TAG ON TRUNK: the trunk reads 4100; UVM-0493 is on file with no tag',
     );
+  });
+
+  it('writes the tag on the trunk in the form the importer reads back', () => {
+    // The importer renumbers a bare tree to this tag (scripts/lib/import.mjs),
+    // so the two must agree on the wording.
+    expect(tagOnTrunk(notes(claimed({ tagOnTrunk: '2805' })))).toBe('2805');
   });
 
   it('says nothing when the reading agrees, leading zeros and all', () => {

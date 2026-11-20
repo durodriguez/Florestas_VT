@@ -14,11 +14,12 @@
 //
 // Refuses to write anything if any row has an error, like the other importers.
 
-import { readFileSync, writeFileSync, copyFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, copyFileSync, existsSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Papa from 'papaparse';
 import { applyPositions, currentStatus } from './lib/positions.mjs';
+import { renumberMap } from './lib/import.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dataDir = join(root, 'data');
@@ -42,6 +43,7 @@ const areas = JSON.parse(readFileSync(join(dataDir, 'campus-areas.geojson'), 'ut
 console.log(`\nRead ${moves.data.length} row(s) from ${file}`);
 const { updates, removals, issues } = applyPositions(plants.data, moves.data, {
   bounds: config.map.bounds, areas, statusOf: currentStatus(observations.data),
+  renamed: existsSync(join(dataDir, 'renumbered.csv')) ? renumberMap(parse(readFileSync(join(dataDir, 'renumbered.csv'), 'utf8')).data) : new Map(),
 });
 
 const errors = issues.filter((i) => i.level === 'error');

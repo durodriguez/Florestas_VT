@@ -77,9 +77,16 @@ its position.
 trunk** box on the picked tree's card takes the number on the metal, if there
 is one. Agreement is noted on screen and nothing more. A different number, or a
 tag on a tree the map has none for, goes in the export as a `TAG MISMATCH` or
-`TAG ON TRUNK` note, which `npm run import` lists for review. It never changes
-the tree's tag: which number is right is a question for the records and for
-grounds, not for the importer.
+`TAG ON TRUNK` note, which `npm run import` lists for review.
+
+One case is acted on: a `TAG ON TRUNK` reading on a tree whose number is from
+the untagged block (`UVM-4001` and up). If no other tree wears that tag and its
+number is free, the importer renumbers the tree to it (`UVM-4521` wearing 2805
+becomes `UVM-2805`), as the grounds crew numbers trees. The dry run lists each
+one. Its earlier visits move with it, and old links still find it; see
+[renumbered.csv](DATA-MODEL.md#renumberedcsv). A `TAG MISMATCH`, a tag already
+on another tree, or a tree numbered below 4001 is left for review, because
+which number is right is then a question for the records and for grounds.
 
 **The tree keeps its mapped position** unless you press **Its mapped position
 is wrong** and move the pin. Until then a tap on the map does nothing, so a

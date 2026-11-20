@@ -68,6 +68,7 @@ const result = buildDataset({
   aliasRows: readCsv('species-aliases.csv'),
   tourRows: readCsv('tours.csv'),
   tourStopRows: readCsv('tour-stops.csv'),
+  ...(existsSync(join(dataDir, 'renumbered.csv')) && { renumberedRows: readCsv('renumbered.csv') }),
   cityTreeRows: readCsv('city-trees.csv'),
   // i-Tree Eco's results for the city's trees (docs/ITREE.md). Optional, like
   // the crown peaks: without them the city trees simply show no estimates.
@@ -274,7 +275,7 @@ mkdirSync(healthDir, { recursive: true });
 // make every visitor re-download data that had not actually changed.
 const version = createHash('sha256')
   .update(
-    ['taxa.csv', 'plants.csv', 'observations.csv', 'collections.csv', 'tours.csv', 'tour-stops.csv',
+    ['taxa.csv', 'plants.csv', 'observations.csv', 'collections.csv', 'tours.csv', 'tour-stops.csv', 'renumbered.csv',
       'campus-areas.geojson', 'species-aliases.csv', 'config.json', 'city-trees.csv', 'itree-city-trees.csv', 'itree-run.json', peaksFile]
       .filter((name) => existsSync(join(dataDir, name)))
       .map((name) => readFileSync(join(dataDir, name)))

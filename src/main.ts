@@ -545,7 +545,10 @@ class App {
       this.renderCityTrees();
     }
 
-    const plantId = params.get('plant');
+    const asked = params.get('plant');
+    // A number since changed to match the tree's tag still finds the tree;
+    // selecting it puts the current number in the address.
+    const plantId = asked && (this.dataset.renumbered?.[asked] ?? asked);
     if (plantId) {
       const plant = this.byId.get(plantId);
       if (plant) {

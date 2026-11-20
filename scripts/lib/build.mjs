@@ -52,7 +52,7 @@ function inBounds(lat, lng, config) {
   return lat >= south && lat <= north && lng >= west && lng <= east;
 }
 
-export function buildDataset({ taxaRows, plantRows, observationRows = [], collectionRows, campusAreas, aliasRows = [], cityTreeRows = [], itreeRows = [], itreeRun = null, tourRows = [], tourStopRows = [], config }) {
+export function buildDataset({ taxaRows, plantRows, observationRows = [], collectionRows, campusAreas, aliasRows = [], cityTreeRows = [], itreeRows = [], itreeRun = null, tourRows = [], tourStopRows = [], renumberedRows = [], config }) {
   const errors = [];
   const warnings = [];
   const err = (where, msg) => errors.push(`${where}: ${msg}`);
@@ -523,6 +523,28 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
   errors.push(...toursBuilt.errors);
   warnings.push(...toursBuilt.warnings);
 
+  // ---- renumbered accessions --------------------------------------------
+  // renumbered.csv: old number → new, for trees renumbered to match their
+  // tag. Published so a link or QR code with the old number still opens the
+  // tree. An old number still on a plant, or a new one on none, is a broken
+  // renumbering.
+  const renumbered = {};
+  renumberedRows.forEach((r, i) => {
+    const where = `renumbered.csv row ${i + 2}`;
+    const from = String(r.old_id ?? '').trim();
+    const to = String(r.new_id ?? '').trim();
+    if (!from || !to) return errors.push(`${where}: needs both old_id and new_id`);
+    if (renumbered[from]) return errors.push(`${where}: ${from} is renumbered twice`);
+    if (plantOut.has(from)) errors.push(`${where}: ${from} was renumbered but is still in plants.csv`);
+    renumbered[from] = to;
+  });
+  for (const [from, first] of Object.entries(renumbered)) {
+    let to = first;
+    for (let i = 0; i < 20 && renumbered[to]; i++) to = renumbered[to];
+    if (!plantOut.has(to)) errors.push(`renumbered.csv: ${from} → ${to}, which is not in plants.csv`);
+    renumbered[from] = to;
+  }
+
   // ---- species aliases ---------------------------------------------------
   // Not used by the map, which only ever sees canonical names — but validated
   // here so a broken alias fails the build rather than surfacing months later
@@ -649,6 +671,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     collections,
     taxa,
     tours: toursBuilt.tours,
+    renumbered,
     campusAreas: { type: 'FeatureCollection', features: areaFeatures },
     cityTrees: { fields: CITY_TREE_FIELDS, rows: cityTrees },
     itree: itreeById.size ? itreeRun : null,

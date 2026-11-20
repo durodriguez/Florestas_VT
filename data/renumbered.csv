@@ -1,0 +1,4 @@
+old_id,new_id,renumbered_on,reason
+UVM-4729,UVM-0676,2026-11-06,"Wears tag 676; renumbered to match it, by hand"
+UVM-4521,UVM-2805,2026-11-20,"Wears tag 2805; renumbered to match it, by hand"
+UVM-4749,UVM-0600,2026-11-20,"Wears tag 600; renumbered to match it, by hand"

@@ -710,3 +710,16 @@ describe('alias search terms', () => {
     expect(r.dataset.taxa[0].alt).toBe('');
   });
 });
+
+describe('buildDataset — renumbered accessions', () => {
+  const PLANT_ID = 'UVM-0001';
+  it('publishes old → current, following a chain', () => {
+    const r = build({ renumberedRows: [{ old_id: 'UVM-4001', new_id: 'UVM-4002' }, { old_id: 'UVM-4002', new_id: PLANT_ID }] });
+    expect(r.errors).toEqual([]);
+    expect(r.dataset.renumbered).toEqual({ 'UVM-4001': PLANT_ID, 'UVM-4002': PLANT_ID });
+  });
+  it('refuses an old number still on a plant, or a new one on none', () => {
+    expect(build({ renumberedRows: [{ old_id: PLANT_ID, new_id: 'UVM-9999' }] }).errors.join(' '))
+      .toMatch(/still in plants\.csv.*not in plants\.csv/);
+  });
+});

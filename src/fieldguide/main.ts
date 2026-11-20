@@ -133,6 +133,11 @@ function showPoint(at: { lat: number; lng: number }, zoom: number): void {
 
 // ---------------------------------------------------------------- the URL
 
+/** A tree by its accession, or by a number it had before being renumbered. */
+function plantNamed(id: string | null): Plant | undefined {
+  return id ? byId.get(dataset.renumbered?.[id] ?? id) : undefined;
+}
+
 /** The address for what is open now. */
 function url(): string {
   const q = new URLSearchParams();
@@ -153,7 +158,7 @@ function followUrl(): void {
   if (tour && walking?.tour !== tour) startTour(tour, stop, 'none');
   else if (tour && walking && walking.index !== stop) goToStop(stop, 'none');
   else if (!tour && walking) endTour('none');
-  const p = byId.get(q.get('plant') ?? '');
+  const p = plantNamed(q.get('plant'));
   if (p) openTree(p, 'none');
   else if (reading) closeTree();
 }
@@ -545,8 +550,10 @@ loadData(BASE).then((d) => {
   showPoint(here, 18);
   locate();
   const q = new URLSearchParams(location.search);
-  const p = byId.get(q.get('plant') ?? '');
+  const p = plantNamed(q.get('plant'));
   followUrl();
+  // An old number, since changed to match the tree's tag: show the current one.
+  if (reading && q.get('plant') !== reading.id) record('replace');
   if (p && !walking) map.setView([p.lat, p.lng], 19);
 }).catch((err: Error) => {
   $('fg-where').textContent = `The trees did not load: ${err.message}`;

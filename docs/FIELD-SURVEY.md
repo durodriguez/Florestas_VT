@@ -191,6 +191,10 @@ The importer does the tedious, error-prone work:
   accession, unless that accession is taken; a new tree without one, or whose
   tag's accession is taken, gets the next number in the untagged block. Leave
   the `tag` column blank for a tree that wears no tag.
+- **Renumbers a tree to the tag read off its trunk** when its number is from
+  the untagged block, it has no tag on file, and the tag's number is free: see
+  [renumbered.csv](DATA-MODEL.md#renumberedcsv). An export carrying a number
+  since renumbered imports under the new one.
 - **Treats a claimed accession as a visit to that tree.** For an untagged tree
   the surveyor matched by position, the app puts that tree's accession in the
   `tag` column, so the row imports as another observation of it rather than a
