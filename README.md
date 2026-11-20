@@ -92,8 +92,9 @@ X. The link opens the map on that tree. The service logos are from Simple Icons
 
 **Field guide** — a second way into the same trees, at `/fieldguide/`, for
 someone standing among them: a full-screen map in this month's colors, every
-tree drawn, a few trees near you worth the walk and why, and a page for each
-tree. See [docs/FIELDGUIDE.md](docs/FIELDGUIDE.md).
+tree drawn, a few trees near you worth the walk and why, the walking tours
+stop by stop, and a page for each tree with its year and the others of its
+kind. See [docs/FIELDGUIDE.md](docs/FIELDGUIDE.md).
 
 **Collection health** — a page at `/health/`, linked from the map's results
 and from every species page, for Grounds and planners: the 10-20-30 diversity

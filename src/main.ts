@@ -472,7 +472,8 @@ class App {
         <span class="tour-pick-name">${escapeHtml(t.name)}</span>
         <span class="tour-pick-meta">${t.stops.length} stops &middot; about ${mi < 0.95 ? mi.toFixed(1) : Math.round(mi)} mi from stop to stop</span>
         <span class="tour-pick-desc">${escapeHtml(t.description)}</span>
-      </button></li>`;
+      </button>
+      <a class="tour-walk" href="fieldguide/?tour=${encodeURIComponent(t.id)}">Walk it with the field guide, stop by stop &rsaquo;</a></li>`;
     }).join('');
   }
 
