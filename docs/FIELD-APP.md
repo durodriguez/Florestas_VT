@@ -28,6 +28,24 @@ It used to start with the metal tag, which made sense while the work ran off
 the 2014 inventory. Now the map comes from the 2023–24 inventory, so most
 visits are to a tree already on it, and the first question is *which one*.
 
+### Where to go next: a route to trees that need a visit
+
+Under the map on the opening screen, **Plan a route to trees that need a
+visit** lists the nearest trees still missing what you tick: a trunk size, a
+photo, or a species (trees named only to genus, such as "Crabapple" or "Elm").
+Up to 12 trees within 500 m, in walking order, each the closest one left, with
+the distance from the one before. They are drawn on the map as gold numbered
+stops. Tap a stop, on the map or in the list, to update that tree.
+
+The route is planned from where you stand when you open it, when you change
+what to look for, and each time you save. A tree saved on this phone drops off,
+so the list shrinks as you work; **Plan again from here** starts over from
+where you are now. What you tick is remembered on the phone. Below the list, a
+line says how much of the campus you are on has a trunk size. It counts the
+published map, so it moves when your visits are imported, not as you save.
+
+Removed and not-found trees never appear on a route.
+
 ### Update a mapped tree
 
 1. **Which tree.** Type the number on its metal tag (or its UVM number from the
@@ -293,6 +311,15 @@ to publish an updated one: the URL carries the data version, so a phone picks
 up a new list on its next load rather than serving the first one it ever saw
 out of the service worker cache forever.
 
+
+**Don't know yet.** Under the species box, **Don't know yet: save as Unknown
+(TBD)** maps a tree nobody can identify yet, such as one planted this season.
+It is saved with the placeholder species *Unknown (TBD)* (`unknown` in
+`taxa.csv`) and imports like any other tree. On the map it reads "Species not
+identified yet", in gray, with no species page. To name it later, update the
+tree and pick its species: that is saved as a correction, as for any wrong
+species. Until then it carries the "Species?" flag on a route to trees that
+need a visit.
 ### The app will not let you save a bad position
 
 Above ±10 m it refuses, because a fix that loose puts the tree in the wrong bed

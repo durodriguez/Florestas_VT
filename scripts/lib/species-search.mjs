@@ -76,7 +76,8 @@ export const SPECIES_SEARCH_JS = `// Written by npm run data from scripts/lib/sp
   const pageOf = (e) => new URL(encodeURIComponent(e.id) + '/', here).href;
 
   const load = () => entries ?? (entries = fetch(new URL('../field/species.json', here))
-    .then((r) => r.json()).catch(() => []));
+    // The survey app's "Don't know yet" placeholder has no page to go to.
+    .then((r) => r.json()).then((all) => all.filter((e) => e.id !== 'unknown')).catch(() => []));
 
   const show = () => {
     list.innerHTML = hits.map((e, i) => '<li role="option" id="hit-' + i + '"' + (i === active ? ' aria-selected="true"' : '') + '>'

@@ -33,6 +33,16 @@ function formatScientific(plant: Plant): string {
   return parts.join(' ') || escapeHtml(t.sci);
 }
 
+/** The survey app's "Don't know yet": a plant mapped before it was identified. */
+export const UNKNOWN_TAXON = 'unknown';
+
+/** Family, kind and origin, leaving out any nobody has recorded. */
+function familyLine(t: Taxon): string {
+  if (t.id === UNKNOWN_TAXON) return 'Species not identified yet';
+  return [t.family, TYPE_LABELS[t.type] ?? titleCase(t.type), ORIGIN_LABELS[t.origin] ?? titleCase(t.origin)]
+    .filter(Boolean).map(escapeHtml).join(' &middot; ');
+}
+
 function row(label: string, value: string | null | undefined, hint?: string): string {
   if (value === null || value === undefined || value === '' || value === '—') return '';
   const title = hint ? ` title="${escapeHtml(hint)}"` : '';
@@ -189,9 +199,8 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
     <header class="detail-header">
       <p class="detail-eyebrow">${escapeHtml(plant.id)}</p>
       <h2 class="detail-title">${escapeHtml(t.common)}</h2>
-      <p class="detail-sci">${formatScientific(plant)}</p>
-      <p class="detail-family">${escapeHtml(t.family)} &middot; ${escapeHtml(TYPE_LABELS[t.type] ?? titleCase(t.type))}
-        &middot; ${escapeHtml(ORIGIN_LABELS[t.origin] ?? titleCase(t.origin))}</p>
+      ${t.id === UNKNOWN_TAXON ? '' : `<p class="detail-sci">${formatScientific(plant)}</p>`}
+      <p class="detail-family">${familyLine(t)}</p>
     </header>
     ${removed}
     ${photo}
@@ -230,7 +239,7 @@ export function renderDetail(plant: Plant, dataset: Dataset, base: string): stri
 
     <div class="detail-actions">
       <button type="button" class="btn" data-action="same-taxon">Show all</button>
-      <a class="btn" href="${base}species/${encodeURIComponent(t.id)}/">More about this species</a>
+      ${t.id === UNKNOWN_TAXON ? '' : `<a class="btn" href="${base}species/${encodeURIComponent(t.id)}/">More about this species</a>`}
       <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=${plant.lat},${plant.lng}"
          target="_blank" rel="noopener">Directions</a>
       ${t.wikipedia ? `<a class="btn" href="${escapeHtml(t.wikipedia)}" target="_blank" rel="noopener">Wikipedia</a>` : ''}

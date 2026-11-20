@@ -29,6 +29,7 @@ import { extensionFor, kb, shrinkPhoto } from './photo';
 import { ALL_CARDS, CARDS, visibleCards, type Mode } from './modes';
 import { addTileOverlays } from '../imagery/tilelayer';
 import { registerOffline } from '../offline';
+import { coverage, NEED_LABELS, planRoute, routeLength, type Need, type Stop } from './route';
 import {
   averageSpread, convertLength, convertTrunk, fromStored, guidance, labels, loadAverageSpread, loadPrefs, multiStemTrunk,
   saveAverageSpread, savePrefs, toStored, type MeasurePrefs,
@@ -146,6 +147,107 @@ const contextLayer = L.layerGroup().addTo(map);
 const CONTEXT_MIN_ZOOM = 17;
 /** From this zoom each reference dot carries its genus and number. */
 const CONTEXT_LABEL_ZOOM = 19;
+
+// ---------------------------------------------------------------- route
+
+/**
+ * The route to trees that need a visit (route.ts), on the opening screen. It
+ * is planned when it is opened, when what to look for changes, and after each
+ * save, from where the surveyor stands then; not on every GPS update, which
+ * would reshuffle the stops while they walk. Visited trees drop off.
+ */
+const routeLayer = L.layerGroup().addTo(map);
+let route: Stop[] = [];
+let routePlanned = false;
+/**
+ * Where the surveyor last was. A save resets the GPS so the next tree gets a
+ * fresh fix; the route is planned from here meanwhile, a few seconds old.
+ */
+let lastFix: { lat: number; lng: number } | null = null;
+const WANTS_KEY = 'uvm-field/route-wants';
+
+function loadWants(): Set<Need> {
+  try {
+    const raw = JSON.parse(localStorage.getItem(WANTS_KEY) ?? 'null') as Need[] | null;
+    if (Array.isArray(raw)) return new Set(raw);
+  } catch { /* fall through to the default */ }
+  return new Set<Need>(['trunk']);
+}
+function wantsNow(): Set<Need> {
+  return new Set([...document.querySelectorAll<HTMLInputElement>('input[name="route-want"]:checked')].map((i) => i.value as Need));
+}
+
+async function planFromHere(): Promise<void> {
+  routeLayer.clearLayers();
+  route = [];
+  const open = $<HTMLDetailsElement>('route').open && mode === null;
+  if (!open) { routePlanned = false; return; }
+  const point = currentLatLng() ?? lastFix;
+  if (!point || mapped.length === 0) {
+    $('route-summary').textContent = point ? 'The mapped trees have not loaded yet.' : 'Waiting for your location…';
+    $('route-list').innerHTML = '';
+    $('route-replan').hidden = true;
+    return;
+  }
+  const wants = wantsNow();
+  // A tree saved on this phone today is done, whichever way it was named.
+  const visited = new Set<string>();
+  for (const r of await allRecords()) {
+    const id = r.claimedPlantId || (r.tag ? mappedFor(r.tag)?.id : undefined);
+    if (id) visited.add(id);
+  }
+  route = wants.size ? planRoute(point, mapped, { wants, visited }) : [];
+  routePlanned = true;
+  renderRoute(point);
+}
+
+function renderRoute(point: { lat: number; lng: number }): void {
+  const meters = routeLength(route);
+  $('route-summary').textContent = wantsNow().size === 0
+    ? 'Tick what you are looking for.'
+    : route.length === 0
+      ? 'No tree within 500 m is missing that. Try another choice, or walk on and plan again.'
+      : `${route.length} trees, about ${meters < 1000 ? `${Math.round(meters / 10) * 10} m` : `${(meters / 1609.34).toFixed(1)} mi`} of walking, nearest next. Tap one to update it.`;
+  $('route-list').innerHTML = route.map((s, i) => `
+    <li><button type="button" class="route-stop-btn" data-stop="${i}">
+      <span class="route-n">${i + 1}</span>
+      <span class="route-what">${escapeHtml(s.tree.common)}
+        <span class="route-meta">${escapeHtml(s.tree.tag ? `tag ${s.tree.tag}` : s.tree.id)} · ${Math.round(s.legM)} m</span></span>
+      <span class="route-needs">${s.needs.map((n) => `<i class="route-need route-need--${n}">${NEED_LABELS[n]}</i>`).join('')}</span>
+    </button></li>`).join('');
+  $('route-replan').hidden = false;
+
+  // How far along the campus is, for the one the surveyor is on: the area of
+  // the nearest mapped tree.
+  const near = nearbyTrees(point.lat, point.lng, mapped.filter((t) => t.area), { radiusM: Infinity, limit: 1 })[0];
+  const area = near?.tree.area;
+  if (area) {
+    const c = coverage(mapped.filter((t) => !t.gone), area);
+    $('route-coverage').textContent = `${area}: ${c.measured} of ${c.total} trees have a trunk size (${Math.round((c.measured / c.total) * 100)}%).`;
+  }
+
+  routeLayer.clearLayers();
+  if (!route.length) return;
+  L.polyline([[point.lat, point.lng], ...route.map((s) => [s.tree.lat, s.tree.lng] as [number, number])], {
+    color: '#ffd100', weight: 3, dashArray: '2 7', lineCap: 'round', interactive: false,
+  }).addTo(routeLayer);
+  route.forEach((s, i) => {
+    L.marker([s.tree.lat, s.tree.lng], {
+      icon: L.divIcon({ className: 'route-stop', html: `<span>${i + 1}</span>`, iconSize: [26, 26], iconAnchor: [13, 13] }),
+      keyboard: false,
+    }).on('click', () => takeStop(i)).addTo(routeLayer);
+  });
+  map.fitBounds(L.latLngBounds([[point.lat, point.lng], ...route.map((s) => [s.tree.lat, s.tree.lng] as [number, number])]),
+    { padding: [30, 30], maxZoom: 19 });
+}
+
+/** A stop picked from the route: an update to that tree, as a tap on its dot is. */
+function takeStop(i: number): void {
+  const stop = route[i];
+  if (!stop) return;
+  setMode('update');
+  claim(asClaim(stop.tree));
+}
 
 function setMapped(trees: MappedTree[]): void {
   mapped = trees;
@@ -268,11 +370,14 @@ function onGps(state: GpsState): void {
         : 'Good fix.';
 
   accuracyRing.setLatLng([fix.lat, fix.lng]).setRadius(fix.accuracy);
+  lastFix = { lat: fix.lat, lng: fix.lng };
   // Not while an update is moving a tree: the pin is on the tree then, and
   // snapping it back to the surveyor would undo the move they are making.
   if (!pinAdjusted && !movingTree) {
     pin.setLatLng([fix.lat, fix.lng]);
-    map.setView([fix.lat, fix.lng], Math.max(map.getZoom(), 19));
+    // Not while a route is shown on the opening screen: the map is zoomed out
+    // to the whole walk, and following each fix would undo that.
+    if (!(mode === null && route.length)) map.setView([fix.lat, fix.lng], Math.max(map.getZoom(), 19));
   }
   renderCoords();
 }
@@ -627,6 +732,8 @@ function renderStartMap(point: { lat: number; lng: number } | null): void {
   }
   const hits = nearbyTrees(point.lat, point.lng, mapped, { radiusM: START_RADIUS_M, limit: Infinity });
   startOffered = hits;
+  // A route opened before the first fix, planned as soon as there is one.
+  if (!routePlanned && $<HTMLDetailsElement>('route').open) void planFromHere();
   // The nearest keep the colours the update list will give them, so a dot
   // seen here is the same colour in the next step.
   hits.forEach((hit, i) => {
@@ -762,6 +869,9 @@ const FOOT = ['update-wait', 'form-error', 'save', 'save-foot'];
 function setMode(next: Mode | null): void {
   if (next === mode) return;
   mode = next;
+  // Back on the opening screen, after a save or a change of mind: plan the
+  // route again from here, without the tree just done.
+  if (next === null) routePlanned = false;
   // A claim, a tag and an absence all belong to one kind of visit. Carried
   // into the other they would say something the surveyor did not.
   if (claimed) claim(null);
@@ -830,6 +940,7 @@ function renderMode(): void {
   // While the pin only marks where the surveyor stands, taps go through it:
   // it sits on the nearest trees, the ones most likely to be picked.
   pin.getElement()?.classList.toggle('is-passive', !pinPlaces());
+  if (mode !== null) { routeLayer.clearLayers(); route = []; } else if (!routePlanned) void planFromHere();
   setTimeout(() => map.invalidateSize(), 50);
 }
 
@@ -1648,6 +1759,34 @@ $('nearby-none').addEventListener('click', () => {
   setMode('new');
   $('card-tag').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
+// "Don't know yet": map the tree now, with the placeholder taxon, and give it
+// its real species on a later visit, as any correction of a species is made.
+$('species-unknown').addEventListener('click', () => {
+  const entry = species.find((e) => e.id === 'unknown');
+  if (!entry) return toast('The species list has not loaded yet. Try again in a moment.');
+  setTaxon(entry, false);
+  closeSuggestions();
+});
+
+// The route to trees that need a visit: what to look for is remembered on
+// this phone; opening it, or changing that, plans it from here.
+{
+  const wants = loadWants();
+  for (const box of document.querySelectorAll<HTMLInputElement>('input[name="route-want"]')) {
+    box.checked = wants.has(box.value as Need);
+    box.addEventListener('change', () => {
+      try { localStorage.setItem(WANTS_KEY, JSON.stringify([...wantsNow()])); } catch { /* this visit only */ }
+      void planFromHere();
+    });
+  }
+  $('route').addEventListener('toggle', () => void planFromHere());
+  $('route-replan').addEventListener('click', () => void planFromHere());
+  $('route-list').addEventListener('click', (e) => {
+    const button = (e.target as Element).closest<HTMLButtonElement>('[data-stop]');
+    if (button) takeStop(Number(button.dataset.stop));
+  });
+}
+
 $('mode-seg').addEventListener('click', (e) => {
   const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-mode]');
   if (btn) setMode(btn.dataset.mode as Mode);

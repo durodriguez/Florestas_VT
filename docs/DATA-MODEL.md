@@ -44,11 +44,11 @@ reading, and the earlier ones are still there to be asked about.
 | `scientific_name` | ✅ | Full name as normally written, e.g. `Acer saccharum` |
 | `common_name` | ✅ | `Sugar maple` |
 | `family` | ✅ | `Sapindaceae` |
-| `genus` | ✅ | `Acer` |
+| `genus` | ✅ | `Acer` — blank only for `unknown`, below |
 | `species` | | `saccharum` — blank for hybrids and genus-only cultivars |
 | `infraspecific` | | `var. inermis`, `subsp. nigrum` |
 | `cultivar` | | `Princeton` — no quote marks, the site adds them |
-| `plant_type` | ✅ | `deciduous-tree`, `evergreen-tree`, `shrub`, `perennial`, `annual`, `vine`, `grass` |
+| `plant_type` | ✅ | `deciduous-tree`, `evergreen-tree`, `shrub`, `perennial`, `annual`, `vine`, `grass`, `unknown` |
 | `origin` | | `vermont-native`, `vermont-invasive`, `introduced` |
 | `flower_color` | | free text, one word: `pink`, `yellow-green` — a hyphenated pair here is one blended colour, not a sequence |
 | `flower_months` | | month numbers, e.g. `4,5` for April–May |
@@ -786,6 +786,16 @@ and leaves one value for a surveyor to pick instead of two that have to agree.
 One thing went with it: an evergreen shrub — yew, box, rhododendron — is now
 just `shrub`. With five shrubs in the file that costs nothing. If the shrub
 list grows into the hundreds, foliage may be worth reviving for them alone.
+
+### The `unknown` taxon
+
+One row in `taxa.csv` is a placeholder, not a species: `unknown`, *Unknown
+(TBD)*, with family `Unknown`, no genus, and plant type `unknown`, which no
+other row uses. It is what the survey app's **Don't know yet** saves, so a tree
+can be mapped the day it is planted and named on a later visit, when the
+update's species is imported as a correction. The build lets it go without a
+genus; it gets no species page and is left out of the species index and
+search; the map shows it as "Species not identified yet", in gray.
 
 ### origin
 

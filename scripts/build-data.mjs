@@ -9,6 +9,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Papa from 'papaparse';
 import { buildDataset } from './lib/build.mjs';
+import { UNKNOWN_TAXON } from './lib/vocab.mjs';
 import { normalizeName } from './lib/species.mjs';
 import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS } from './lib/species-pages.mjs';
 import { renderItreePage } from './lib/itree-page.mjs';
@@ -165,6 +166,15 @@ const trees = result.plants.rows.map((row) => {
     // So an update shows the plaque on record rather than an empty box. Left
     // out when there is none, which is nearly every tree.
     ...(at(row, 'dedication_label') ? { dedication: at(row, 'dedication_label') } : {}),
+    // What the tree still needs, for the survey app's route to trees that
+    // need a visit: when its trunk was measured, whether it has a photo,
+    // whether it is named only to genus, and its campus. Left out when empty.
+    ...(at(row, 'dbh_in') !== null ? { measured: at(row, 'dbh_on') ?? at(row, 'surveyed_on') } : {}),
+    ...(at(row, 'photo') ? { photo: true } : {}),
+    ...(taxon && !taxon.species ? { genusOnly: true } : {}),
+    ...(at(row, 'collection') !== null ? { area: result.dataset.collections[at(row, 'collection')]?.name } : {}),
+    // Removed or not found: still matchable, never a stop on a route.
+    ...(at(row, 'status') !== 0 ? { gone: true } : {}),
   };
 });
 const treesJson = JSON.stringify(trees);
@@ -208,7 +218,9 @@ for (const row of result.plants.rows) {
   }
 }
 
-for (const taxon of result.dataset.taxa) {
+// Not for the placeholder of an unidentified plant: there is no species to describe.
+const describable = result.dataset.taxa.filter((t) => t.id !== UNKNOWN_TAXON);
+for (const taxon of describable) {
   const dir = join(speciesDir, taxon.id);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, 'index.html'), renderSpeciesPage(taxon, {
@@ -220,7 +232,7 @@ for (const taxon of result.dataset.taxa) {
 }
 writeFileSync(
   join(speciesDir, 'index.html'),
-  renderSpeciesIndex(result.dataset.taxa, { base: siteBase, config }),
+  renderSpeciesIndex(describable, { base: siteBase, config }),
 );
 
 // ---- the i-Tree page -------------------------------------------------------
