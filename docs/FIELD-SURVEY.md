@@ -12,9 +12,10 @@ UVM-0763
     └── zero-padded sequence, never reused
 ```
 
-The first 1,349 numbers were minted from the metal tags, so most of them still
-read like the tag on the trunk. New numbers come from the **untagged block**,
-`UVM-4001` and up, and carry no year — the year a number was issued says
+The first 1,349 numbers were minted from the metal tags, and a new tagged
+tree is numbered from its tag too (tag 2715 → `UVM-2715`) unless that number
+is taken. A tree with no tag gets a number from the **untagged block**,
+`UVM-4001` and up. Numbers carry no year: the year a number was issued says
 nothing about the tree. Which number a tree wears in the field is the separate
 `tag` column; see [DATA-MODEL.md](DATA-MODEL.md).
 
@@ -145,9 +146,10 @@ npm run import -- survey/2026-09-green.csv --write  # apply
 ```
 
 Put whatever is stamped on the trunk in the `tag` column. The importer looks it
-up against the tags on file; if no tree wears it, the tree is new and gets an
-accession of its own with the tag recorded beside it. `--adopt-tags` is gone —
-see [the accession and the tag](#the-accession-and-the-tag) below.
+up against the tags on file; if no tree wears it, the tree is new, and its
+accession is its tag (`UVM-2715` for tag 2715) unless another tree already has
+that accession. See [the accession and the tag](#the-accession-and-the-tag)
+below.
 
 ### The accession and the tag
 
@@ -158,10 +160,10 @@ points at, and what every observation is keyed to. A tag is a piece of metal
 that corrodes, falls off and gets replaced with a different number.
 
 The first 1,349 accessions were minted from tags, so `UVM-0763` still reads
-like "tag 763", and for most trees the two do still agree. **That is history,
-not a rule.** `UVM-0105` wears tag 3497 — found in September 2026, photographed
-— and its accession did not move, because a number that moves breaks a label
-already in the ground.
+like "tag 763", and for most trees the two do still agree. New tagged trees
+follow the same pattern (below). But they can disagree: `UVM-0105` wears tag
+3497 (found in September 2026, photographed), and its accession did not move,
+because a number that moves breaks a label already in the ground.
 
 So a tag is looked up, never computed:
 
@@ -173,19 +175,22 @@ So a tag is looked up, never computed:
 - Type `4001` and you reach nothing. `UVM-4001` is a number this project
   invented for a tree with a bare trunk; nobody can read it off anything.
 
-A new tagged tree gets an ordinary accession from the untagged block and keeps
-its tag in the `tag` column. The number on the metal never becomes the
-identifier again.
+**A new tagged tree's accession is its tag**, as the grounds crew numbers
+trees: tag 2715 becomes `UVM-2715`, with 2715 in the `tag` column as well. If
+that accession already belongs to another tree, the new one gets the next
+number from the untagged block, and the dry run warns you which. A tree with
+no tag always gets a number from the untagged block. After that the accession
+is fixed: if the tree's tag is later replaced, only the `tag` column changes.
 
 `survey/field-template.csv` shows the shape it expects, though you rarely need
 to match it exactly — see the next section.
 
 The importer does the tedious, error-prone work:
 
-- **Assigns accession numbers** from the untagged block, continuing from the
-  highest already issued. Leave the `tag` column blank for a tree that wears no
-  tag; fill it in for one that does, and the number goes in the `tag` column
-  rather than into the accession.
+- **Assigns accession numbers.** A new tree with a tag takes its tag as its
+  accession, unless that accession is taken; a new tree without one, or whose
+  tag's accession is taken, gets the next number in the untagged block. Leave
+  the `tag` column blank for a tree that wears no tag.
 - **Treats a claimed accession as a visit to that tree.** For an untagged tree
   the surveyor matched by position, the app puts that tree's accession in the
   `tag` column, so the row imports as another observation of it rather than a

@@ -578,12 +578,25 @@ describe('importSurvey — dates', () => {
 });
 
 describe('importSurvey — tags', () => {
-  it('records a new tagged tree with an ordinary accession and its tag beside it', () => {
-    // The old behaviour was to adopt 772 as UVM-0772. That is what welded the
-    // identifier to a piece of metal, and it is what this undoes.
+  it('gives a new tagged tree its tag as its accession, with the tag beside it', () => {
+    // How the grounds crew numbers trees: tag 772 is tree 772.
     const r = run([row({ tag: '772' })]);
     expect(r.summary.errors).toBe(0);
-    expect(r.inserts[0]).toMatchObject({ plant_id: 'UVM-4001', tag: '772' });
+    expect(r.inserts[0]).toMatchObject({ plant_id: 'UVM-0772', tag: '772' });
+  });
+
+  it('falls back to the untagged block when the tag’s accession is taken, and says so', () => {
+    // UVM-0105 wears tag 3497, so 105 is on no trunk, but the accession is still its.
+    const taken = [...plantRows, { plant_id: 'UVM-0105', tag: '3497', taxon_id: 'acer-saccharum', lat: '44.4779', lng: '-73.1955' }];
+    const r = run([row({ tag: '105' })], { plantRows: taken });
+    expect(r.summary.errors).toBe(0);
+    expect(r.inserts[0]).toMatchObject({ plant_id: 'UVM-4001', tag: '105' });
+    expect(r.issues.some((i: { level: string; message: string }) => i.level === 'warning' && /UVM-0105, but that accession is another tree's, so this one is UVM-4001/.test(i.message))).toBe(true);
+  });
+
+  it('keeps tag-numbered and untagged trees in one file from colliding', () => {
+    const r = run([row({ tag: '4001' }), row({ lat: '44.4781' })]);
+    expect(r.inserts.map((i: { plant_id: string }) => i.plant_id)).toEqual(['UVM-4001', 'UVM-4002']);
   });
 
   it('finds a tree by the tag it wears, not by what its accession looks like', () => {
