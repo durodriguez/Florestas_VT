@@ -1,0 +1,122 @@
+/* The field guide: a full-screen map, an "Around you" sheet, and a page per
+   tree. UVM's green and gold, as on the explorer. */
+:root {
+  --green: #154734; --green-2: #1f6f4a; --gold: #ffd100;
+  --bg: #ffffff; --sunk: #f3f6f2; --rule: #dfe4de; --ink: #17211c; --dim: #5a655e;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --bar-h: 3.25rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #141816; --sunk: #1c221f; --rule: #2e3733; --ink: #e7ece9; --dim: #9aa8a1; --green-2: #7fc9a3; }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { font-family: var(--font); color: var(--ink); background: var(--bg); overflow: hidden; }
+
+.fg-bar {
+  position: fixed; inset: 0 0 auto; z-index: 1000; height: calc(var(--bar-h) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) max(12px, env(safe-area-inset-right, 0px)) 0 max(12px, env(safe-area-inset-left, 0px));
+  display: flex; align-items: center; gap: .7rem; background: var(--green); color: #fff; border-bottom: 3px solid var(--gold);
+}
+.fg-bar a { color: #fff; text-decoration: none; }
+.fg-home { display: flex; align-items: center; gap: .5rem; font-weight: 700; white-space: nowrap; }
+.fg-title { font-size: .9rem; opacity: .85; padding-left: .7rem; border-left: 1px solid rgb(255 255 255 / 35%); white-space: nowrap; }
+.fg-link { margin-left: auto; font-size: .88rem; padding: .3rem .7rem; border: 1px solid rgb(255 255 255 / 45%); border-radius: 99px; white-space: nowrap; }
+.fg-link:hover { background: rgb(255 255 255 / 12%); }
+
+.fg-main { position: fixed; inset: calc(var(--bar-h) + 3px + env(safe-area-inset-top, 0px)) 0 0; }
+.fg-map { position: absolute; inset: 0; background: #e9ece6; }
+
+.fg-chip {
+  position: absolute; z-index: 500; top: .7rem; left: .7rem; margin: 0; max-width: calc(100% - 6rem);
+  padding: .35rem .7rem; border-radius: 99px; background: var(--bg); color: var(--ink);
+  font-size: .82rem; font-weight: 600; box-shadow: 0 2px 10px rgb(0 0 0 / 18%);
+}
+/* Under the basemap switch, top right: clear of the sheet at any height. */
+.fg-locate {
+  position: absolute; z-index: 500; right: .7rem; top: 4.4rem;
+  width: 2.8rem; height: 2.8rem; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--bg); color: var(--green-2); font-size: 1.35rem; box-shadow: 0 2px 10px rgb(0 0 0 / 22%);
+}
+
+/* "Around you": a sheet along the bottom on a phone, a card at the left on a desktop. */
+.fg-sheet {
+  position: absolute; z-index: 600; left: 0; right: 0; bottom: 0;
+  padding: .55rem max(14px, env(safe-area-inset-right, 0px)) calc(.9rem + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px));
+  background: var(--bg); border-radius: 18px 18px 0 0; box-shadow: 0 -4px 20px rgb(0 0 0 / 16%);
+}
+.fg-sheet::before { content: ""; display: block; width: 2.4rem; height: 4px; border-radius: 2px; background: var(--rule); margin: 0 auto .5rem; }
+.fg-sheet h2 { margin: 0; font-size: 1.05rem; display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+.fg-sheet h2 small { font-size: .78rem; font-weight: 500; color: var(--dim); }
+.fg-where { margin: .2rem 0 .6rem; font-size: .82rem; color: var(--dim); }
+.fg-cards { list-style: none; margin: 0; padding: 0 0 .2rem; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(9.5rem, 46%); gap: .55rem; overflow-x: auto; scroll-snap-type: x mandatory; }
+.fg-cards li { scroll-snap-align: start; }
+.fg-card {
+  width: 100%; height: 100%; display: grid; grid-template-rows: auto 1fr; padding: 0; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden;
+}
+.fg-card:focus-visible { outline: 3px solid var(--gold); outline-offset: 1px; }
+.fg-thumb { position: relative; overflow: hidden; display: grid; place-items: center; height: 5.2rem; background: var(--sunk); }
+/* Fills the frame, whatever the photo's own size, and never spills past it. */
+.fg-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.fg-disc { width: 2.6rem; height: 2.6rem; border-radius: 50%; box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--rule); }
+.fg-card-text { display: grid; gap: .1rem; padding: .45rem .6rem .6rem; font-size: .8rem; line-height: 1.3; }
+.fg-card-text b { font-size: .9rem; }
+.fg-card-text em { font-style: normal; font-weight: 600; color: #7a5f00; }
+.fg-card-text span { color: var(--dim); }
+.fg-empty { color: var(--dim); font-size: .85rem; }
+@media (prefers-color-scheme: dark) { .fg-card-text em { color: #ffd95a; } }
+@media (min-width: 48rem) {
+  .fg-sheet { left: 1rem; right: auto; bottom: 1rem; width: 22rem; border-radius: 14px; }
+  .fg-sheet::before { display: none; }
+  .fg-cards { grid-auto-flow: row; grid-auto-columns: auto; overflow: visible; }
+  .fg-card { grid-template-columns: 5.5rem 1fr; grid-template-rows: none; }
+  .fg-thumb { height: auto; min-height: 4.6rem; }
+}
+
+/* The tree page, over the map. */
+.fg-tree {
+  position: fixed; z-index: 1100; inset: calc(var(--bar-h) + 3px + env(safe-area-inset-top, 0px)) 0 0;
+  overflow-y: auto; background: var(--bg);
+}
+.fg-tree[hidden] { display: none; }
+.fg-back {
+  position: sticky; top: .6rem; z-index: 2; margin: .6rem 0 0 .7rem; padding: .4rem .8rem; border-radius: 99px; border: 0;
+  font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer; background: rgb(255 255 255 / 92%); color: #17211c;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 20%);
+}
+.fg-photo { margin: -2.6rem 0 0; }
+.fg-photo img { display: block; width: 100%; max-height: 62vh; object-fit: cover; }
+.fg-nophoto {
+  height: 11rem; display: grid; place-items: end start; padding: 1rem;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--c) 55%, var(--sunk)), var(--sunk));
+}
+.fg-nophoto span { font-size: .8rem; color: var(--dim); }
+.fg-tree-body { max-width: 40rem; margin: 0 auto; padding: 1rem max(16px, env(safe-area-inset-left, 0px)) calc(2rem + env(safe-area-inset-bottom, 0px)); }
+.fg-eyebrow { margin: 0; font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
+.fg-tree-body h1 { margin: .15rem 0 0; font-size: 1.9rem; line-height: 1.1; }
+.fg-sci { margin: .2rem 0 0; color: var(--dim); }
+.fg-notable { list-style: none; margin: .8rem 0 0; padding: 0; display: grid; gap: .3rem; }
+.fg-notable li {
+  padding: .35rem .7rem; border-radius: 10px; font-size: .88rem; font-weight: 600;
+  background: #fff3b8; color: #4d3d00; border: 1px solid #e8cf5a;
+}
+.fg-notable li::before { content: "★ "; }
+@media (prefers-color-scheme: dark) { .fg-notable li { background: #3d3410; color: #ffe27a; border-color: #6b5a14; } }
+.fg-facts { margin: 1rem 0 0; display: grid; gap: .35rem; }
+.fg-facts div { display: grid; grid-template-columns: 8.5rem 1fr; gap: .6rem; font-size: .92rem; }
+.fg-facts dt { color: var(--dim); }
+.fg-facts dd { margin: 0; }
+.fg-when { color: var(--dim); font-size: .85em; }
+.fg-dot { display: inline-block; width: .7rem; height: .7rem; border-radius: 50%; margin-right: .35rem; vertical-align: -.05rem; box-shadow: 0 0 0 1px rgb(0 0 0 / 20%); }
+.fg-tree-body h2 { margin: 1.4rem 0 .3rem; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+.fg-tree-body p { line-height: 1.55; }
+.fg-fun { margin-top: .8rem; padding-left: .8rem; border-left: 2px solid var(--rule); }
+.fg-fun summary { cursor: pointer; font-weight: 600; color: var(--dim); }
+.fg-actions { margin-top: 1.4rem; }
+.fg-btn {
+  display: inline-block; padding: .55rem .95rem; border-radius: 10px; text-decoration: none; font-size: .9rem; font-weight: 600;
+  background: var(--sunk); color: var(--ink); border: 1px solid var(--rule);
+}
+.fg-btn:hover { border-color: var(--green-2); }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
