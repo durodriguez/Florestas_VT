@@ -1681,14 +1681,14 @@ UVM-4520,,zelkova-serrata,44.469376,-73.199605,"Mapped in UVM's ArcGIS tree laye
 UVM-4521,,zelkova-serrata,44.469395,-73.199432,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,a3a49323-6ffd-4356-a030-6751938a772f
 UVM-4522,,zelkova-serrata,44.469405,-73.199256,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,07b9d911-3d9e-4608-abe8-a370fb25914c
 UVM-4523,,zelkova-serrata,44.469418,-73.199114,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,4f1d8bbe-f34b-4628-b073-cb1e28a6af5d
-UVM-2016,2016,acer-platanoides,44.469553,-73.199109,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,3fdaabd4-48ee-4171-974c-b202ba34ecad
-UVM-2034,2034,picea-glauca,44.469842,-73.199033,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,26c459ff-72da-4fc2-aeb9-57e65d772058
-UVM-2033,2033,picea-glauca,44.469922,-73.199031,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,bdbfe112-74e0-4a8a-a098-8d27aa569262
-UVM-2018,2018,picea-glauca,44.470035,-73.199228,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,823e9390-d405-428b-8d3a-bcdc8f1080d8
+UVM-2016,2016,acer-platanoides,44.469511,-73.199083,"Position corrected on imagery, 2026-11-20",redstone,,,,3fdaabd4-48ee-4171-974c-b202ba34ecad
+UVM-2034,2034,picea-glauca,44.469839,-73.199039,"Position corrected on imagery, 2026-11-20",redstone,,,,26c459ff-72da-4fc2-aeb9-57e65d772058
+UVM-2033,2033,picea-glauca,44.469737,-73.198929,"Position corrected on imagery, 2026-11-20",redstone,,,,bdbfe112-74e0-4a8a-a098-8d27aa569262
+UVM-2018,2018,picea-glauca,44.469899,-73.199132,"Position corrected on imagery, 2026-11-20",redstone,,,,823e9390-d405-428b-8d3a-bcdc8f1080d8
 UVM-4524,,picea-glauca,44.470051,-73.199218,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,0f40de75-bec1-4857-b8e6-b41eb8e34d6e
 UVM-4525,,picea-glauca,44.470071,-73.199177,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,726c220e-38e2-476b-8179-5ead72cb8f5b
 UVM-2021,2021,picea-glauca,44.470088,-73.199152,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,6a11324d-bb27-4fc6-bf7e-14f7b434889f
-UVM-2022,2022,picea-glauca,44.470077,-73.199125,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,eae30f43-2958-4b97-aea9-97aad919b797
+UVM-2022,2022,picea-glauca,44.469954,-73.198996,"Position corrected on imagery, 2026-11-20",redstone,,,,eae30f43-2958-4b97-aea9-97aad919b797
 UVM-2023,2023,acer-platanoides,44.469966,-73.198699,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,6be71f30-c3ac-4fb1-8d66-1febe0bb330a
 UVM-4526,,zelkova-serrata,44.469405,-73.198763,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,92b4e075-34d6-42e0-bffe-7a94e7bcdf51
 UVM-4527,,tilia-americana,44.469403,-73.198438,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,f4972737-2a65-40d8-b693-908ffd20a77d
@@ -1850,93 +1850,93 @@ UVM-4591,,malus-sp,44.469162,-73.200152,"Mapped in UVM's ArcGIS tree layer, 2023
 UVM-2082,2082,thuja-occidentalis,44.469059,-73.200063,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,857d78c9-dd8b-490b-b568-e36047e7c912
 UVM-4592,,acer-saccharum,44.469144,-73.200062,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,4f20f0ab-1799-4c42-9735-ffe9c59495b1
 UVM-2792,2792,quercus-bicolor,44.469123,-73.199927,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,a6b90526-b8a4-4343-ad5e-b514284474e8
-UVM-1937,1937,quercus-palustris,44.470583,-73.198018,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,86a3141f-c342-4032-84c9-204c4710e9dc
-UVM-2759,2759,pinus-strobus,44.470684,-73.197975,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,48a5442e-3c9b-4760-8853-c63ff5a06d62
-UVM-2760,2760,pinus-strobus,44.470760,-73.197952,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,bf79c3b5-1a0a-4ca5-8d00-e9a132894c3b
-UVM-2762,2762,pinus-strobus,44.470757,-73.198031,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,2a7d510b-4a23-4906-acee-ed3c67bb0321
-UVM-2754,2754,pinus-strobus,44.470690,-73.198052,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,7d0fad93-df53-44cd-9bbc-955fe58b098e
-UVM-2753,2753,pinus-strobus,44.470676,-73.198168,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,67072f66-2811-4284-b808-a0ff92b18d8c
-UVM-2751,2751,pinus-strobus,44.470685,-73.198300,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,72067dcf-8349-4a4f-a21d-1d32ac8acc33
-UVM-2752,2752,pinus-strobus,44.470809,-73.198156,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,bf7a987a-6830-4631-b315-7cb366a5ff0a
-UVM-2749,2749,pinus-strobus,44.470767,-73.198340,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,e7daa4db-1a87-4bd0-b3d7-6861ef6bd777
-UVM-2748,2748,pinus-strobus,44.470758,-73.198392,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,3ec662f2-0227-4837-acdc-6821e599272c
-UVM-2750,2750,pinus-strobus,44.470785,-73.198488,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,e0048046-7731-43bd-a002-2cb773b7b95f
-UVM-2767,2767,pinus-strobus,44.470844,-73.198598,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,59e044da-9f80-4cdc-81a6-105f68131549
-UVM-2747,2747,pinus-strobus,44.470786,-73.198654,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,86a12147-ed47-4faf-95ea-78dc82490458
-UVM-2757,2757,pinus-strobus,44.470798,-73.198757,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,0db1ceab-16b8-49af-86ae-9a244c66431b
-UVM-2758,2758,pinus-strobus,44.470822,-73.198798,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,14e6bdc7-e843-4c1a-8d4d-bb236de2db06
-UVM-2746,2746,pinus-strobus,44.470858,-73.198799,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,72d97fc0-8e8a-4b59-8dd1-d1bbe270a035
-UVM-2745,2745,pinus-strobus,44.470792,-73.198828,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,865ddd65-06ca-4437-b5ea-35713179fa1d
-UVM-2756,2756,pinus-strobus,44.470822,-73.198855,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,0b912a3e-2f03-4d5a-9020-9a11a6debb2c
-UVM-2744,2744,pinus-strobus,44.470814,-73.198903,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,a01c8209-665d-4309-848f-eaf507c081f6
-UVM-2755,2755,pinus-strobus,44.470839,-73.198934,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,f2320a81-3065-4354-913f-90d70fa8597a
-UVM-2743,2743,pinus-strobus,44.470796,-73.198940,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,63d282e9-741e-437e-bf35-06f6d422b78d
-UVM-2742,2742,pinus-strobus,44.470822,-73.198979,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,8d47fdbf-9958-4756-9b16-fd9236790d86
-UVM-2740,2740,pinus-strobus,44.470818,-73.199022,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,26568022-5ec0-4038-9b4f-9f1732d76b9c
-UVM-2739,2739,picea-abies,44.470799,-73.199096,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,7999d285-51b7-42c7-b283-05b08aa1340e
-UVM-2741,2741,pinus-strobus,44.470878,-73.199058,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,cb8040d1-000a-4fa5-97f6-560e7876a222
-UVM-2785,2785,pinus-strobus,44.470905,-73.199020,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,feefe256-a99a-412b-9989-97b55283f8d1
-UVM-2784,2784,pinus-strobus,44.470868,-73.199011,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,04e76106-31f2-4862-a5f9-3339d45520a1
-UVM-2773,2773,pinus-strobus,44.470870,-73.198975,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,c443a117-c911-426c-b29b-01d0107394ad
-UVM-2774,2774,pinus-strobus,44.470893,-73.198943,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,d68e5b7a-e7e3-48ad-8f44-72bedbbd10c7
-UVM-2783,2783,pinus-strobus,44.470905,-73.198905,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,f444dcc3-8f76-4915-8cd9-060b86439bd7
-UVM-2775,2775,pinus-strobus,44.470923,-73.198873,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,4d83aa78-7b7a-4b13-95f3-2f006b91725a
-UVM-2778,2778,pinus-strobus,44.470897,-73.198664,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,fa7db252-1cea-4684-a65a-b086e5a86929
-UVM-2766,2766,pinus-strobus,44.470903,-73.198591,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,823b1132-e94e-49d4-9795-98e6193ebeb0
-UVM-2765,2765,pinus-strobus,44.470908,-73.198462,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,dcc93eb6-4f53-4b1a-a8fc-00e9a26d1d94
-UVM-2763,2763,pinus-strobus,44.470941,-73.198094,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,ef4cd5cf-34ed-4b27-a9f6-b64109873a54
-UVM-2776,2776,pinus-strobus,44.470999,-73.198071,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,4e5f2dca-11d5-4de4-8414-2b10eda0a80a
+UVM-1937,1937,quercus-palustris,44.470586,-73.198120,"Position corrected on imagery, 2026-11-20",redstone,,,,86a3141f-c342-4032-84c9-204c4710e9dc
+UVM-2759,2759,pinus-strobus,44.470669,-73.197998,"Position corrected on imagery, 2026-11-20",redstone,,,,48a5442e-3c9b-4760-8853-c63ff5a06d62
+UVM-2760,2760,pinus-strobus,44.470724,-73.197976,"Position corrected on imagery, 2026-11-20",redstone,,,,bf79c3b5-1a0a-4ca5-8d00-e9a132894c3b
+UVM-2762,2762,pinus-strobus,44.470735,-73.198020,"Position corrected on imagery, 2026-11-20",redstone,,,,2a7d510b-4a23-4906-acee-ed3c67bb0321
+UVM-2754,2754,pinus-strobus,44.470697,-73.198062,"Position corrected on imagery, 2026-11-20",redstone,,,,7d0fad93-df53-44cd-9bbc-955fe58b098e
+UVM-2753,2753,pinus-strobus,44.470619,-73.198224,"Position corrected on imagery, 2026-11-20",redstone,,,,67072f66-2811-4284-b808-a0ff92b18d8c
+UVM-2751,2751,pinus-strobus,44.470711,-73.198140,"Position corrected on imagery, 2026-11-20",redstone,,,,72067dcf-8349-4a4f-a21d-1d32ac8acc33
+UVM-2752,2752,pinus-strobus,44.470750,-73.198119,"Position corrected on imagery, 2026-11-20",redstone,,,,bf7a987a-6830-4631-b315-7cb366a5ff0a
+UVM-2749,2749,pinus-strobus,44.470739,-73.198131,"Position corrected on imagery, 2026-11-20",redstone,,,,e7daa4db-1a87-4bd0-b3d7-6861ef6bd777
+UVM-2748,2748,pinus-strobus,44.470735,-73.198171,"Position corrected on imagery, 2026-11-20",redstone,,,,3ec662f2-0227-4837-acdc-6821e599272c
+UVM-2750,2750,pinus-strobus,44.470769,-73.198228,"Position corrected on imagery, 2026-11-20",redstone,,,,e0048046-7731-43bd-a002-2cb773b7b95f
+UVM-2767,2767,pinus-strobus,44.470768,-73.198349,"Position corrected on imagery, 2026-11-20",redstone,,,,59e044da-9f80-4cdc-81a6-105f68131549
+UVM-2747,2747,pinus-strobus,44.470734,-73.198401,"Position corrected on imagery, 2026-11-20",redstone,,,,86a12147-ed47-4faf-95ea-78dc82490458
+UVM-2757,2757,pinus-strobus,44.470676,-73.198463,"Position corrected on imagery, 2026-11-20",redstone,,,,0db1ceab-16b8-49af-86ae-9a244c66431b
+UVM-2758,2758,pinus-strobus,44.470689,-73.198496,"Position corrected on imagery, 2026-11-20",redstone,,,,14e6bdc7-e843-4c1a-8d4d-bb236de2db06
+UVM-2746,2746,pinus-strobus,44.470701,-73.198520,"Position corrected on imagery, 2026-11-20",redstone,,,,72d97fc0-8e8a-4b59-8dd1-d1bbe270a035
+UVM-2745,2745,pinus-strobus,44.470647,-73.198517,"Position corrected on imagery, 2026-11-20",redstone,,,,865ddd65-06ca-4437-b5ea-35713179fa1d
+UVM-2756,2756,pinus-strobus,44.470669,-73.198519,"Position corrected on imagery, 2026-11-20",redstone,,,,0b912a3e-2f03-4d5a-9020-9a11a6debb2c
+UVM-2744,2744,pinus-strobus,44.470662,-73.198563,"Position corrected on imagery, 2026-11-20",redstone,,,,a01c8209-665d-4309-848f-eaf507c081f6
+UVM-2755,2755,pinus-strobus,44.470668,-73.198580,"Position corrected on imagery, 2026-11-20",redstone,,,,f2320a81-3065-4354-913f-90d70fa8597a
+UVM-2743,2743,pinus-strobus,44.470643,-73.198593,"Position corrected on imagery, 2026-11-20",redstone,,,,63d282e9-741e-437e-bf35-06f6d422b78d
+UVM-2742,2742,pinus-strobus,44.470681,-73.198626,"Position corrected on imagery, 2026-11-20",redstone,,,,8d47fdbf-9958-4756-9b16-fd9236790d86
+UVM-2740,2740,pinus-strobus,44.470673,-73.198642,"Position corrected on imagery, 2026-11-20",redstone,,,,26568022-5ec0-4038-9b4f-9f1732d76b9c
+UVM-2739,2739,picea-abies,44.470640,-73.198713,"Position corrected on imagery, 2026-11-20",redstone,,,,7999d285-51b7-42c7-b283-05b08aa1340e
+UVM-2741,2741,pinus-strobus,44.470735,-73.198717,"Position corrected on imagery, 2026-11-20",redstone,,,,cb8040d1-000a-4fa5-97f6-560e7876a222
+UVM-2785,2785,pinus-strobus,44.470763,-73.198688,"Position corrected on imagery, 2026-11-20",redstone,,,,feefe256-a99a-412b-9989-97b55283f8d1
+UVM-2784,2784,pinus-strobus,44.470711,-73.198637,"Position corrected on imagery, 2026-11-20",redstone,,,,04e76106-31f2-4862-a5f9-3339d45520a1
+UVM-2773,2773,pinus-strobus,44.470728,-73.198617,"Position corrected on imagery, 2026-11-20",redstone,,,,c443a117-c911-426c-b29b-01d0107394ad
+UVM-2774,2774,pinus-strobus,44.470902,-73.198577,"Position corrected on imagery, 2026-11-20",redstone,,,,d68e5b7a-e7e3-48ad-8f44-72bedbbd10c7
+UVM-2783,2783,pinus-strobus,44.470811,-73.198541,"Position corrected on imagery, 2026-11-20",redstone,,,,f444dcc3-8f76-4915-8cd9-060b86439bd7
+UVM-2775,2775,pinus-strobus,44.470838,-73.198486,"Position corrected on imagery, 2026-11-20",redstone,,,,4d83aa78-7b7a-4b13-95f3-2f006b91725a
+UVM-2778,2778,pinus-strobus,44.470823,-73.198397,"Position corrected on imagery, 2026-11-20",redstone,,,,fa7db252-1cea-4684-a65a-b086e5a86929
+UVM-2766,2766,pinus-strobus,44.470826,-73.198331,"Position corrected on imagery, 2026-11-20",redstone,,,,823b1132-e94e-49d4-9795-98e6193ebeb0
+UVM-2765,2765,pinus-strobus,44.470835,-73.198241,"Position corrected on imagery, 2026-11-20",redstone,,,,dcc93eb6-4f53-4b1a-a8fc-00e9a26d1d94
+UVM-2763,2763,pinus-strobus,44.470887,-73.198056,"Position corrected on imagery, 2026-11-20",redstone,,,,ef4cd5cf-34ed-4b27-a9f6-b64109873a54
+UVM-2776,2776,pinus-strobus,44.470927,-73.198055,"Position corrected on imagery, 2026-11-20",redstone,,,,4e5f2dca-11d5-4de4-8414-2b10eda0a80a
 UVM-4593,,pinus-strobus,44.470995,-73.198156,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,91abdd5c-1667-4a15-a512-b198aedff88a
-UVM-2768,2768,pinus-strobus,44.470967,-73.198596,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,7a5035cd-6db7-4d8b-a002-6e7746b2485f
-UVM-2779,2779,pinus-strobus,44.471003,-73.198647,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,23ce419c-a972-46d2-a621-1f2521b62d6d
-UVM-2761,2761,pinus-strobus,44.470972,-73.198703,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,76c44b58-6246-4693-9dc2-917da5b9d366
-UVM-2680,2680,pinus-strobus,44.471020,-73.198746,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,5adc35de-2f3b-4cb9-b297-341bfd1f3d10
-UVM-2769,2769,pinus-strobus,44.470981,-73.198747,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,a868f936-e819-4de8-bf88-9fd8005d92a3
-UVM-2770,2770,pinus-strobus,44.470961,-73.198794,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,6c3aedb7-ec1f-4bfd-a057-0f251435463b
-UVM-2781,2781,pinus-strobus,44.471050,-73.198820,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,73abc905-c1a7-43b7-ae77-5e00a23dafc0
-UVM-2782,2782,pinus-strobus,44.471031,-73.198881,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,e5e5fdae-7c5e-4bed-8212-7776e9986595
-UVM-2771,2771,pinus-strobus,44.470990,-73.198905,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,4319afc8-6f0c-40df-8358-03a1434b02d4
-UVM-2772,2772,pinus-strobus,44.470967,-73.198966,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,be66c46e-ebdd-431d-ab80-3f08168abdd8
-UVM-2737,2737,pinus-strobus,44.471006,-73.199055,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,0b2b4add-90a8-4bf6-8229-ad50aeceba8d
-UVM-2733,2733,pinus-strobus,44.470953,-73.199100,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,036bfac5-2377-4661-b130-e523160c1cf1
-UVM-2738,2738,pinus-strobus,44.470991,-73.199121,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,8c7953b4-b89e-4c22-bf02-dc7752a2570b
-UVM-2732,2732,pinus-strobus,44.471028,-73.199088,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,cab913d6-9bf2-4434-8431-5fe80a1830be
-UVM-2736,2736,pinus-strobus,44.471043,-73.199141,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,c4c6c1cb-a239-4b06-9112-1706848dad25
-UVM-2735,2735,pinus-strobus,44.471081,-73.199113,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,192806e2-6232-422d-8420-87662495f10c
-UVM-2731,2731,pinus-strobus,44.471101,-73.199065,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,c449fe92-5397-4e3c-ab92-f1431c248240
-UVM-2730,2730,pinus-strobus,44.471114,-73.199107,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,105503db-5e91-4cd5-9ef6-92f9c5ffede9
-UVM-2734,2734,pinus-strobus,44.471151,-73.199132,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,f423a14c-6442-4171-a1e2-5f3f3feaa147
-UVM-2724,2724,pinus-strobus,44.471151,-73.199087,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,9144fb51-a4e3-4af8-83d8-b316148e1961
-UVM-2723,2723,pinus-strobus,44.471184,-73.199102,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,e9f43db7-abef-4ecd-a911-c339b0d80782
-UVM-2786,2786,pinus-strobus,44.471183,-73.198995,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,09f2003e-daae-4e93-9099-4cc1dfdae172
-UVM-2788,2788,pinus-strobus,44.471214,-73.198972,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,0d5b80c8-7767-43c4-a4cf-dbae774d7ded
-UVM-2787,2787,pinus-strobus,44.471184,-73.198942,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,864c9aeb-b1ca-45d8-816f-ec6316ec3568
-UVM-2789,2789,pinus-strobus,44.471219,-73.198926,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,d60f71a7-7c43-4a16-9f0a-5034e73968b9
-UVM-2790,2790,pinus-strobus,44.471201,-73.198887,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,776d3bb8-a68e-441b-8fd4-cd5a5258be8c
-UVM-2791,2791,pinus-strobus,44.471196,-73.198724,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,0de5bd60-233c-40be-91fb-b1d277aae6b3
-UVM-2706,2706,quercus-rubra,44.471175,-73.198598,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,f0b173f8-f21b-440c-8f37-8167f69009f7
-UVM-2777,2777,pinus-strobus,44.470981,-73.198183,Position set by pin on imagery,redstone,,,,ba34efe5-5b1b-48d9-aa75-36d289b1c21e
+UVM-2768,2768,pinus-strobus,44.470864,-73.198328,"Position corrected on imagery, 2026-11-20",redstone,,,,7a5035cd-6db7-4d8b-a002-6e7746b2485f
+UVM-2779,2779,pinus-strobus,44.470907,-73.198302,"Position corrected on imagery, 2026-11-20",redstone,,,,23ce419c-a972-46d2-a621-1f2521b62d6d
+UVM-2761,2761,pinus-strobus,44.470884,-73.198374,"Position corrected on imagery, 2026-11-20",redstone,,,,76c44b58-6246-4693-9dc2-917da5b9d366
+UVM-2680,2680,pinus-strobus,44.470884,-73.198448,"Position corrected on imagery, 2026-11-20",redstone,,,,5adc35de-2f3b-4cb9-b297-341bfd1f3d10
+UVM-2769,2769,pinus-strobus,44.470866,-73.198446,"Position corrected on imagery, 2026-11-20",redstone,,,,a868f936-e819-4de8-bf88-9fd8005d92a3
+UVM-2770,2770,pinus-strobus,44.470915,-73.198545,"Position corrected on imagery, 2026-11-20",redstone,,,,6c3aedb7-ec1f-4bfd-a057-0f251435463b
+UVM-2781,2781,pinus-strobus,44.470926,-73.198490,"Position corrected on imagery, 2026-11-20",redstone,,,,73abc905-c1a7-43b7-ae77-5e00a23dafc0
+UVM-2782,2782,pinus-strobus,44.470780,-73.198572,"Position corrected on imagery, 2026-11-20",redstone,,,,e5e5fdae-7c5e-4bed-8212-7776e9986595
+UVM-2771,2771,pinus-strobus,44.470887,-73.198561,"Position corrected on imagery, 2026-11-20",redstone,,,,4319afc8-6f0c-40df-8358-03a1434b02d4
+UVM-2772,2772,pinus-strobus,44.470881,-73.198611,"Position corrected on imagery, 2026-11-20",redstone,,,,be66c46e-ebdd-431d-ab80-3f08168abdd8
+UVM-2737,2737,pinus-strobus,44.470823,-73.198779,"Position corrected on imagery, 2026-11-20",redstone,,,,0b2b4add-90a8-4bf6-8229-ad50aeceba8d
+UVM-2733,2733,pinus-strobus,44.470772,-73.198822,"Position corrected on imagery, 2026-11-20",redstone,,,,036bfac5-2377-4661-b130-e523160c1cf1
+UVM-2738,2738,pinus-strobus,44.470793,-73.198827,"Position corrected on imagery, 2026-11-20",redstone,,,,8c7953b4-b89e-4c22-bf02-dc7752a2570b
+UVM-2732,2732,pinus-strobus,44.470855,-73.198794,"Position corrected on imagery, 2026-11-20",redstone,,,,cab913d6-9bf2-4434-8431-5fe80a1830be
+UVM-2736,2736,pinus-strobus,44.470856,-73.198835,"Position corrected on imagery, 2026-11-20",redstone,,,,c4c6c1cb-a239-4b06-9112-1706848dad25
+UVM-2735,2735,pinus-strobus,44.470870,-73.198810,"Position corrected on imagery, 2026-11-20",redstone,,,,192806e2-6232-422d-8420-87662495f10c
+UVM-2731,2731,pinus-strobus,44.470908,-73.198756,"Position corrected on imagery, 2026-11-20",redstone,,,,c449fe92-5397-4e3c-ab92-f1431c248240
+UVM-2730,2730,pinus-strobus,44.470912,-73.198857,"Position corrected on imagery, 2026-11-20",redstone,,,,105503db-5e91-4cd5-9ef6-92f9c5ffede9
+UVM-2734,2734,pinus-strobus,44.470930,-73.198854,"Position corrected on imagery, 2026-11-20",redstone,,,,f423a14c-6442-4171-a1e2-5f3f3feaa147
+UVM-2724,2724,pinus-strobus,44.470951,-73.198847,"Position corrected on imagery, 2026-11-20",redstone,,,,9144fb51-a4e3-4af8-83d8-b316148e1961
+UVM-2723,2723,pinus-strobus,44.470954,-73.198856,"Position corrected on imagery, 2026-11-20",redstone,,,,e9f43db7-abef-4ecd-a911-c339b0d80782
+UVM-2786,2786,pinus-strobus,44.470967,-73.198716,"Position corrected on imagery, 2026-11-20",redstone,,,,09f2003e-daae-4e93-9099-4cc1dfdae172
+UVM-2788,2788,pinus-strobus,44.471014,-73.198691,"Position corrected on imagery, 2026-11-20",redstone,,,,0d5b80c8-7767-43c4-a4cf-dbae774d7ded
+UVM-2787,2787,pinus-strobus,44.470992,-73.198677,"Position corrected on imagery, 2026-11-20",redstone,,,,864c9aeb-b1ca-45d8-816f-ec6316ec3568
+UVM-2789,2789,pinus-strobus,44.471033,-73.198677,"Position corrected on imagery, 2026-11-20",redstone,,,,d60f71a7-7c43-4a16-9f0a-5034e73968b9
+UVM-2790,2790,pinus-strobus,44.470995,-73.198601,"Position corrected on imagery, 2026-11-20",redstone,,,,776d3bb8-a68e-441b-8fd4-cd5a5258be8c
+UVM-2791,2791,pinus-strobus,44.471024,-73.198416,"Position corrected on imagery, 2026-11-20",redstone,,,,0de5bd60-233c-40be-91fb-b1d277aae6b3
+UVM-2706,2706,quercus-rubra,44.471031,-73.198330,"Position corrected on imagery, 2026-11-20",redstone,,,,f0b173f8-f21b-440c-8f37-8167f69009f7
+UVM-2777,2777,pinus-strobus,44.470979,-73.198223,"Position corrected on imagery, 2026-11-20",redstone,,,,ba34efe5-5b1b-48d9-aa75-36d289b1c21e
 UVM-4594,,pinus-strobus,44.471188,-73.198170,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,45736f60-9771-491d-8078-056f9a23af84
 UVM-4595,,pinus-strobus,44.471255,-73.198262,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,263fccc3-38f5-4194-8cc5-d7bc88e114be
 UVM-4596,,pinus-strobus,44.471278,-73.198246,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,72305ba3-ffc0-455d-a2a4-2c3f33d5447f
-UVM-2713,2713,pinus-strobus,44.471287,-73.198630,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,153040ea-a703-4dde-a855-464c55f283ed
-UVM-2717,2717,pinus-strobus,44.471286,-73.198746,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,ac8f3530-cd91-4325-9301-ccba858f4ba2
-UVM-2710,2710,pinus-strobus,44.471294,-73.198793,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,c2dd46c3-96fb-4721-aecc-4cc257438793
-UVM-2718,2718,pinus-strobus,44.471272,-73.198839,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,ba1375aa-b049-49b0-b482-e1c965f3c5c5
-UVM-2720,2720,pinus-strobus,44.471309,-73.198870,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,7257aa8d-d9d2-4a58-b890-6f50dd581f82
-UVM-2719,2719,pinus-strobus,44.471284,-73.198903,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,8d443c80-0cf6-4690-a888-647efb064441
-UVM-2721,2721,pinus-strobus,44.471282,-73.198993,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,d1080cfd-20b3-44d9-89de-94f06b62a91f
-UVM-2729,2729,pinus-strobus,44.471256,-73.199079,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,bbe9605b-9a67-41fa-b23d-d6864a243ceb
-UVM-2725,2725,pinus-strobus,44.471232,-73.199128,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,32fc5cc2-9183-4373-a033-d8685e742bb8
-UVM-2728,2728,pinus-strobus,44.471281,-73.199136,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,880e565c-1e26-47ec-8091-e894de2dd98c
-UVM-2726,2726,pinus-strobus,44.471292,-73.199116,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,c22502d6-3903-42ef-b4e8-1f4d84616592
+UVM-2713,2713,pinus-strobus,44.471053,-73.198412,"Position corrected on imagery, 2026-11-20",redstone,,,,153040ea-a703-4dde-a855-464c55f283ed
+UVM-2717,2717,pinus-strobus,44.471141,-73.198549,"Position corrected on imagery, 2026-11-20",redstone,,,,ac8f3530-cd91-4325-9301-ccba858f4ba2
+UVM-2710,2710,pinus-strobus,44.471136,-73.198574,"Position corrected on imagery, 2026-11-20",redstone,,,,c2dd46c3-96fb-4721-aecc-4cc257438793
+UVM-2718,2718,pinus-strobus,44.471107,-73.198674,"Position corrected on imagery, 2026-11-20",redstone,,,,ba1375aa-b049-49b0-b482-e1c965f3c5c5
+UVM-2720,2720,pinus-strobus,44.471151,-73.198663,"Position corrected on imagery, 2026-11-20",redstone,,,,7257aa8d-d9d2-4a58-b890-6f50dd581f82
+UVM-2719,2719,pinus-strobus,44.471149,-73.198692,"Position corrected on imagery, 2026-11-20",redstone,,,,8d443c80-0cf6-4690-a888-647efb064441
+UVM-2721,2721,pinus-strobus,44.471034,-73.198777,"Position corrected on imagery, 2026-11-20",redstone,,,,d1080cfd-20b3-44d9-89de-94f06b62a91f
+UVM-2729,2729,pinus-strobus,44.471015,-73.198831,"Position corrected on imagery, 2026-11-20",redstone,,,,bbe9605b-9a67-41fa-b23d-d6864a243ceb
+UVM-2725,2725,pinus-strobus,44.470919,-73.198945,"Position corrected on imagery, 2026-11-20",redstone,,,,32fc5cc2-9183-4373-a033-d8685e742bb8
+UVM-2728,2728,pinus-strobus,44.470960,-73.199022,"Position corrected on imagery, 2026-11-20",redstone,,,,880e565c-1e26-47ec-8091-e894de2dd98c
+UVM-2726,2726,pinus-strobus,44.470987,-73.198976,"Position corrected on imagery, 2026-11-20",redstone,,,,c22502d6-3903-42ef-b4e8-1f4d84616592
 UVM-4597,,pinus-strobus,44.471319,-73.199141,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,7a6f2152-d169-4d16-91c3-6495bf5e1156
-UVM-2727,2727,pinus-strobus,44.471338,-73.199135,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,54fd6330-8d63-46b9-9be7-71454ab55f8e
-UVM-2722,2722,pinus-strobus,44.471381,-73.199139,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,6694c206-71e1-4664-91be-43f739528eea
-UVM-2714,2714,pinus-strobus,44.471387,-73.199039,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,ab673cba-c552-4fae-84d2-9f4ed4c9f421
-UVM-1941,1941,acer-platanoides,44.471458,-73.199131,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,e7eb4f83-713d-4900-83f4-aa76ccb220e1
-UVM-1942,1942,acer-platanoides,44.471477,-73.199158,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,40b35b0d-ae61-4bd0-9801-a718ce697500
-UVM-1940,1940,pinus-strobus,44.471320,-73.199190,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,ccd47534-2052-47f9-b85b-c7339faa8674
+UVM-2727,2727,pinus-strobus,44.470996,-73.198965,"Position corrected on imagery, 2026-11-20",redstone,,,,54fd6330-8d63-46b9-9be7-71454ab55f8e
+UVM-2722,2722,pinus-strobus,44.471035,-73.198972,"Position corrected on imagery, 2026-11-20",redstone,,,,6694c206-71e1-4664-91be-43f739528eea
+UVM-2714,2714,pinus-strobus,44.471048,-73.198847,"Position corrected on imagery, 2026-11-20",redstone,,,,ab673cba-c552-4fae-84d2-9f4ed4c9f421
+UVM-1941,1941,acer-platanoides,44.471103,-73.198998,"Position corrected on imagery, 2026-11-20",redstone,,,,e7eb4f83-713d-4900-83f4-aa76ccb220e1
+UVM-1942,1942,acer-platanoides,44.471101,-73.198991,"Position corrected on imagery, 2026-11-20",redstone,,,,40b35b0d-ae61-4bd0-9801-a718ce697500
+UVM-1940,1940,pinus-strobus,44.471005,-73.199117,"Position corrected on imagery, 2026-11-20",redstone,,,,ccd47534-2052-47f9-b85b-c7339faa8674
 UVM-4598,,acer-platanoides,44.471225,-73.199186,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,a51870f7-fed9-46f8-9d47-c419aaa53263
 UVM-4599,,acer-platanoides,44.471206,-73.199203,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,ed337afa-6915-4e7c-8f05-9847090f77cb
 UVM-4600,,acer-platanoides,44.471255,-73.199180,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,4b17335b-df1d-4ed5-b6d4-e546e575e739
@@ -1944,20 +1944,20 @@ UVM-4601,,acer-platanoides,44.471267,-73.199167,"Mapped in UVM's ArcGIS tree lay
 UVM-4602,,acer-platanoides,44.471292,-73.199166,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,497249bc-873c-4267-8cb1-854f5ae181cd
 UVM-4603,,acer-platanoides,44.471313,-73.199162,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,8bde8f7d-a530-490b-8df2-f5b946910343
 UVM-4604,,acer-platanoides,44.471336,-73.199164,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,048736b5-8d72-43a5-90c9-f17fa43f865f
-UVM-2711,2711,pinus-strobus,44.471398,-73.198914,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,8cec590e-fbda-4ed2-abdb-e364f401aded
-UVM-2712,2712,pinus-strobus,44.471405,-73.198860,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,f6a2f581-918b-4cd2-834f-f9038aa523a3
+UVM-2711,2711,pinus-strobus,44.471180,-73.198768,"Position corrected on imagery, 2026-11-20",redstone,,,,8cec590e-fbda-4ed2-abdb-e364f401aded
+UVM-2712,2712,pinus-strobus,44.471218,-73.198678,"Position corrected on imagery, 2026-11-20",redstone,,,,f6a2f581-918b-4cd2-834f-f9038aa523a3
 UVM-4605,,pinus-strobus,44.471392,-73.198821,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,e70f3825-0806-4cdc-af29-2f4c2a08bc2d
-UVM-2709,2709,pinus-strobus,44.471436,-73.198737,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,593abad7-30ea-49cb-a43e-5e18e40f7cec
+UVM-2709,2709,pinus-strobus,44.471236,-73.198505,"Position corrected on imagery, 2026-11-20",redstone,,,,593abad7-30ea-49cb-a43e-5e18e40f7cec
 UVM-4606,,acer-platanoides,44.471429,-73.198673,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,27476277-388f-47d3-9401-b92159759a47
 UVM-4607,,acer-platanoides,44.471395,-73.198682,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,a447153f-defe-42d1-a59d-030ace55e0dd
-UVM-2708,2708,pinus-strobus,44.471405,-73.198613,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,86f68e70-b66d-4128-b239-843cda9e7463
+UVM-2708,2708,pinus-strobus,44.471180,-73.198369,"Position corrected on imagery, 2026-11-20",redstone,,,,86f68e70-b66d-4128-b239-843cda9e7463
 UVM-4608,,acer-platanoides,44.471369,-73.198581,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,bfe9e910-1d3a-4c4b-8706-5c74d8cd8fd9
 UVM-4609,,acer-platanoides,44.471396,-73.198542,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,28d141a8-1d20-4768-b6f5-7553797379a4
 UVM-4610,,pinus-strobus,44.471501,-73.198454,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,e3b0350e-f348-4090-a7e3-3fcdd79f0305
-UVM-2704,2704,pinus-strobus,44.471475,-73.198372,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,52681d06-2ee9-4502-9745-03ae171e0dcc
-UVM-2703,2703,pinus-strobus,44.471443,-73.198362,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,184f864a-93d7-4c99-b4ad-f66bcad53673
-UVM-2705,2705,pinus-strobus,44.471449,-73.198316,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,035f8ed6-0102-44cc-9198-41c58ce6e5d1
-UVM-2702,2702,pinus-strobus,44.471135,-73.197883,Position set by pin on imagery,redstone,,,,c71eaa7c-da34-4781-b426-81643083bd00
+UVM-2704,2704,pinus-strobus,44.471037,-73.198040,"Position corrected on imagery, 2026-11-20",redstone,,,,52681d06-2ee9-4502-9745-03ae171e0dcc
+UVM-2703,2703,pinus-strobus,44.471078,-73.198145,"Position corrected on imagery, 2026-11-20",redstone,,,,184f864a-93d7-4c99-b4ad-f66bcad53673
+UVM-2705,2705,pinus-strobus,44.471094,-73.198117,"Position corrected on imagery, 2026-11-20",redstone,,,,035f8ed6-0102-44cc-9198-41c58ce6e5d1
+UVM-2702,2702,pinus-strobus,44.471134,-73.197910,"Position corrected on imagery, 2026-11-20",redstone,,,,c71eaa7c-da34-4781-b426-81643083bd00
 UVM-4611,,ulmus-sp,44.475272,-73.193704,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c85592ee-b0ec-428c-ae8b-b3c2b4af3e76
 UVM-1429,1429,crataegus-sp,44.473219,-73.194744,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,add50391-912b-4d58-a0b7-a1987d519389
 UVM-1430,1430,crataegus-sp,44.473222,-73.194674,"Mapped in UVM's ArcGIS tree layer, 2023–24",athletic,,,,c4817d3f-5dda-46ab-87fc-7ce47196ef52
