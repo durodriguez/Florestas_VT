@@ -136,7 +136,13 @@ untagged one. No tag on file is that high yet (the highest is 3849).
 Before this rule, new tagged trees were issued numbers from the untagged
 block, and one was renumbered by hand to match its tag: the dawn redwood
 wearing tag 676, issued `UVM-4729` on 4 November 2026, became `UVM-0676` on
-6 November, before any label or link depended on the old number.
+6 November, before any label or link depended on the old number. When the
+rule changed, the two trees whose tags then disagreed with recent accessions
+were renumbered the same way, on 20 November 2026: the Japanese zelkova
+wearing tag 2805, `UVM-4521` → `UVM-2805`, and the northern white cedar
+wearing tag 600, `UVM-4749` → `UVM-0600`. `UVM-0105`, which has worn tag 3497
+since at least September 2026, keeps its number, which ties it to its 2014
+record as tag 105.
 
 **Tag history is deliberately not kept.** A re-tagging overwrites the column.
 Finding out that a tree was renumbered takes somebody noticing in the field,
