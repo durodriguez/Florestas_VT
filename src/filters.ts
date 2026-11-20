@@ -15,12 +15,15 @@ export type Filterable = Pick<Plant | CityTree, 'taxon' | 'collection' | 'dbhIn'
   dedicationLabel?: string | null;
   /** City trees carry none, so they never match "notable". */
   notable?: string[];
+  /** City trees are on no tour. */
+  tourStops?: Record<string, number>;
 };
 
 export function emptyFilters(): FilterState {
   return {
     q: '',
     taxon: null,
+    tour: null,
     types: new Set(),
     origins: new Set(),
     conditions: new Set(),
@@ -38,6 +41,7 @@ export function isFilterActive(f: FilterState): boolean {
   return (
     f.q.trim() !== '' ||
     f.taxon !== null ||
+    f.tour !== null ||
     f.types.size > 0 ||
     f.origins.size > 0 ||
     f.conditions.size > 0 ||
@@ -90,6 +94,7 @@ export function matchesFilters(plant: Filterable, f: FilterState): boolean {
   // The taxon itself or one of its named varieties: "Show all" on red maple
   // includes 'Red Sunset'.
   if (f.taxon !== null && plant.taxon.id !== f.taxon && plant.taxon.parent !== f.taxon) return false;
+  if (f.tour !== null && !plant.tourStops?.[f.tour]) return false;
   if (!inSet(f.types, plant.taxon.type)) return false;
   if (!inSet(f.origins, plant.taxon.origin)) return false;
   if (!inSet(f.conditions, plant.condition)) return false;
