@@ -4,7 +4,7 @@ import './styles.css';
 
 import { expandCityTrees, loadData } from './data';
 import { indexByTag, normalizeTag } from './accession';
-import { PlantMap, escapeHtml } from './map';
+import { type Covered, PlantMap, escapeHtml } from './map';
 import { renderCityDetail, renderDetail, renderResultItem, type TourStop } from './detail';
 import { legendFor, ORIGIN_LABELS, TYPE_LABELS, typesInUse } from './palette';
 import { CITY_WORDING, notableFacts } from './notable';
@@ -265,7 +265,7 @@ class App {
       SHARE_BUTTON +
       renderDetail(plant, this.dataset, BASE, this.tourStopOf(plant));
     panel.scrollTop = 0;
-    this.map.focus(plant);
+    this.map.focus(plant, 20, this.coveredByRecord());
     this.setUrlParam('plant', plant.id);
     document.body.classList.add('has-detail');
   }
@@ -420,6 +420,23 @@ class App {
       b.setAttribute('aria-pressed', String(b.dataset.display === display));
     });
     this.setUrlParam('trees', display === 'every' ? 'every' : null);
+  }
+
+  /**
+   * How much of the map the open record covers: the bottom of it on a phone,
+   * where the record is a sheet across the full width, or the right side on
+   * a desktop, where it is a column over the map.
+   */
+  private coveredByRecord(): Covered {
+    const panel = $('#detail');
+    if (panel.hidden) return { right: 0, bottom: 0 };
+    const m = $('#map').getBoundingClientRect();
+    const d = panel.getBoundingClientRect();
+    const overlap = (a0: number, a1: number, b0: number, b1: number) => Math.max(0, Math.min(a1, b1) - Math.max(a0, b0));
+    if (!overlap(m.left, m.right, d.left, d.right) || !overlap(m.top, m.bottom, d.top, d.bottom)) return { right: 0, bottom: 0 };
+    return d.width >= m.width - 2
+      ? { right: 0, bottom: Math.max(0, m.bottom - d.top) }
+      : { right: Math.max(0, m.right - d.left), bottom: 0 };
   }
 
   // ---- walking tours -----------------------------------------------------
