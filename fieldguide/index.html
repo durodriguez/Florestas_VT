@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="A field guide to the trees around you on the University of Vermont campus.">
+  <meta name="theme-color" content="#154734">
+  <title>Field guide — UVM Trees</title>
+  <link rel="icon" type="image/png" href="/uvm-mark.png">
+</head>
+<body>
+  <header class="fg-bar">
+    <a class="fg-home" href="../"><img src="/uvm-mark.png" alt="" width="28" height="28"><span>UVM Trees</span></a>
+    <span class="fg-title">Field guide</span>
+    <a class="fg-link" href="../" title="The full map, with search and filters">Explorer</a>
+  </header>
+
+  <main class="fg-main">
+    <div id="fg-map" class="fg-map" role="application" aria-label="Map of the trees around you"></div>
+    <p id="fg-season" class="fg-chip" hidden></p>
+    <button type="button" id="fg-locate" class="fg-locate" aria-label="Show where I am" title="Show where I am">◎</button>
+    <section id="fg-sheet" class="fg-sheet" aria-labelledby="fg-sheet-title">
+      <h2 id="fg-sheet-title">Around you <small id="fg-count"></small></h2>
+      <p id="fg-where" class="fg-where">Loading the trees…</p>
+      <ul id="fg-cards" class="fg-cards"></ul>
+    </section>
+  </main>
+
+  <article id="fg-tree" class="fg-tree" hidden aria-live="polite"></article>
+
+  <script type="module" src="/src/fieldguide/main.ts"></script>
+</body>
+</html>
