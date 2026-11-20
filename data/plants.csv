@@ -1678,7 +1678,7 @@ UVM-4517,,zelkova-serrata,44.469316,-73.200188,"Mapped in UVM's ArcGIS tree laye
 UVM-4518,,zelkova-serrata,44.469332,-73.200008,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,7c9766b8-cd9c-4de6-a37c-060f82e93d26
 UVM-4519,,zelkova-serrata,44.469356,-73.199806,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,c0a84b46-ce9d-4f36-b700-eca8adbe950b
 UVM-4520,,zelkova-serrata,44.469376,-73.199605,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,95eb3002-03d0-4485-8eab-19b3cea0a025
-UVM-4521,,zelkova-serrata,44.469395,-73.199432,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,a3a49323-6ffd-4356-a030-6751938a772f
+UVM-4521,2805,zelkova-serrata,44.469335,-73.199441,Position set by pin on imagery,redstone,,,,a3a49323-6ffd-4356-a030-6751938a772f
 UVM-4522,,zelkova-serrata,44.469405,-73.199256,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,07b9d911-3d9e-4608-abe8-a370fb25914c
 UVM-4523,,zelkova-serrata,44.469418,-73.199114,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,4f1d8bbe-f34b-4628-b073-cb1e28a6af5d
 UVM-2016,2016,acer-platanoides,44.469511,-73.199083,"Position corrected on imagery, 2026-11-20",redstone,,,,3fdaabd4-48ee-4171-974c-b202ba34ecad
@@ -2102,3 +2102,9 @@ UVM-4747,,hedera-helix,44.476541,-73.194948,Position set by pin on imagery,centr
 UVM-4748,,musa-basjoo,44.476688,-73.194614,Position set by pin on imagery,central,,,,
 UVM-4749,600,thuja-occidentalis,44.480091,-73.197784,Position set by pin on imagery,central,,,,
 UVM-4750,,thuja-occidentalis,44.480081,-73.197830,Position set by pin on imagery,central,,,,
+UVM-1943,1943,acer-platanoides,44.471180,-73.199115,GPS ±1 m,redstone,,,,
+UVM-2715,2715,acer-platanoides,44.471175,-73.198299,GPS ±1 m,redstone,,,,
+UVM-2707,2707,acer-platanoides,44.471134,-73.198323,GPS ±1 m,redstone,,,,
+UVM-2037,2037,robinia-pseudoacacia,44.469576,-73.198664,GPS ±1 m,redstone,,,,
+UVM-2026,2026,acer-platanoides,44.469772,-73.198745,GPS ±2 m,redstone,,,,
+UVM-2036,2036,acer-platanoides,44.469578,-73.198731,GPS ±2 m,redstone,,,,
