@@ -239,7 +239,7 @@ const share = (x: number) => `${(x * 100).toFixed(1)}%`;
 
 function setupPlanting(): void {
   candidates = plantingCandidates(plants, dataset.taxa, health.threats);
-  $('pl-rule').textContent = `Trees hardy in zone ${ZONE} (Burlington is 5b), not marked invasive in Vermont, from genera and families under the 20% and 30% limits. Natives first, then those whose family and genus campus has least of. Hosts of the pests above come last, flagged.`;
+  $('pl-rule').textContent = `Trees hardy in zone ${ZONE} (the campus is 5a), not marked invasive in Vermont, from genera and families under the 20% and 30% limits. Natives first, then those whose family and genus campus has least of. Hosts of the pests above come last, flagged.`;
   for (const id of ['pl-native', 'pl-size']) $(id).addEventListener('change', renderCandidates);
   renderCandidates();
 

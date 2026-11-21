@@ -53,8 +53,8 @@ tests). Starting points from the inventory's own data, not a prescription:
 the site, what nurseries can supply and Grounds' own plans decide.
 
 - **Plant more of:** the trees in `taxa.csv` that are a species (not a
-  cultivar or variety), hardy in zone 5 (Burlington is 5b on the USDA's 2023
-  map; a species counts when its recorded zones include 5), not marked
+  cultivar or variety), hardy in zone 5 (the campus is 5a on the USDA's 2023
+  map, the lakeshore 5b; a species counts when its recorded zones include 5), not marked
   invasive in Vermont, and from a genus under 20% and a family under 30% of
   campus. Vermont natives first, then those whose family and genus campus has
   least of. Hosts of the pests on the collection-health list come last,

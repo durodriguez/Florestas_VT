@@ -19,8 +19,10 @@
 import type { Plant, Taxon } from '../types';
 
 /**
- * Burlington's USDA hardiness zone on the 2023 map (5b). A species is hardy
- * here when its recorded zones ("4-8") include 5.
+ * The campus's USDA hardiness zone on the 2023 map: 5a, the colder half of
+ * zone 5 (Burlington's lakeshore is 5b). taxa.csv records zones as whole
+ * numbers, so a species is hardy here when its recorded zones ("4-8")
+ * include 5; one rated only to 5 is at its cold limit on campus.
  */
 export const ZONE = 5;
 export const LIMITS = { genus: 0.2, family: 0.3 };

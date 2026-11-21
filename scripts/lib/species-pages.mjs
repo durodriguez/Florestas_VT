@@ -253,7 +253,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     ? `${selected ? 'That range' : 'Its native range'} reaches into Vermont, but not as far as Burlington.`
     : `Burlington is ${home ? 'inside' : 'outside'} ${selected ? 'that range' : 'its native range'}.`}</p>
       ${t.soil ? `<p><b>Soil:</b> ${esc(t.soil)}</p>` : ''}
-      ${t.zones ? `<p><b>Hardiness zones:</b> ${esc(t.zones)}. Burlington is in zone 5.</p>` : ''}
+      ${t.zones ? `<p><b>Hardiness zones:</b> ${esc(t.zones)}. On the USDA's 2023 map the campus is in zone 5a, and Burlington's lakeshore in 5b.</p>` : ''}
     </div>
     <figure class="range">
       <div class="range-map"><img src="${esc(shared.rangeBase)}" alt="">${rangeSvg(range)}<img src="${esc(shared.rangeLines)}" alt=""></div>
