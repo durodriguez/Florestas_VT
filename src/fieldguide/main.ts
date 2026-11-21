@@ -67,7 +67,9 @@ const renderer = L.canvas({ padding: 0.3, tolerance: coarse ? 8 : 3 });
 const treeLayer = L.layerGroup().addTo(map);
 const pickLayer = L.layerGroup().addTo(map);
 const tourLayer = L.layerGroup().addTo(map);
+const starLayer = L.layerGroup().addTo(map);
 const youLayer = L.layerGroup().addTo(map);
+map.createPane('stars').style.zIndex = '620';
 map.createPane('tour').style.zIndex = '640';
 const dots = new Map<L.CircleMarker, number>();
 
@@ -97,9 +99,29 @@ map.on('zoomend', () => {
   for (const [dot, r] of dots) dot.setStyle({ radius: r * scale, weight });
 });
 
+/**
+ * A star on every standing tree with a notable note (notable.ts): the
+ * largest trunks measured on campus, the largest of a species, the only one
+ * of its kind. Above the dots, so a tap finds the star; a pick "Around you"
+ * gets its gold ring around the star.
+ */
+const STAR = '<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="#fff" d="M12 2.6l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.8l-5.8 3.3 1.4-6.4-4.9-4.4 6.5-.7z"/></svg>';
+function drawStars(): void {
+  for (const p of plants) {
+    if (p.status !== 'active' || !p.notable?.length) continue;
+    L.marker([p.lat, p.lng], {
+      pane: 'stars', keyboard: false, title: `${p.taxon.common}: ${p.notable[0]}`,
+      icon: L.divIcon({ className: 'fg-star', html: STAR, iconSize: [22, 22], iconAnchor: [11, 11] }),
+    }).on('click', () => openTree(p)).addTo(starLayer);
+  }
+}
+// Smaller stars zoomed out, where they would otherwise cover their neighbors.
+map.on('zoomend', () => $('fg-map').classList.toggle('fg-far', map.getZoom() < 17));
+
 /** Faded under a tour, so its numbered stops stand out; full strength otherwise. */
 function fadeTrees(faded: boolean): void {
   for (const dot of dots.keys()) dot.setStyle({ fillOpacity: faded ? 0.4 : 0.92, opacity: faded ? 0.4 : 1 });
+  $('fg-map').classList.toggle('fg-touring', faded);
 }
 
 function drawOutline(): void {
@@ -198,7 +220,7 @@ function renderAround(note: string): void {
     : `<li class="fg-empty">Nothing notable or in season within ${radius} m.</li>`;
   pickLayer.clearLayers();
   for (const p of picks) {
-    L.circleMarker([p.plant.lat, p.plant.lng], { radius: 14, color: '#ffd100', weight: 3, fill: false, interactive: false }).addTo(pickLayer);
+    L.circleMarker([p.plant.lat, p.plant.lng], { radius: 16, color: '#ffd100', weight: 3, fill: false, interactive: false }).addTo(pickLayer);
   }
 }
 
@@ -588,6 +610,8 @@ loadData(BASE).then((d) => {
   for (const [id, facts] of notableFacts(plants)) byId.get(id)!.notable = facts;
   drawOutline();
   drawTrees();
+  drawStars();
+  $('fg-map').classList.toggle('fg-far', map.getZoom() < 17);
   renderSeasonChip();
   renderAround('Finding your location…');
   renderTourList();

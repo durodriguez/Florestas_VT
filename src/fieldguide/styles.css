@@ -102,6 +102,13 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
 .fg-step:disabled { opacity: .4; cursor: default; }
 .fg-step--next { flex: 1; text-align: left; background: var(--green); color: #fff; border-color: var(--green); }
 .fg-walk-explorer { display: inline-block; margin-top: .45rem; font-size: .8rem; color: var(--dim); }
+/* Notable trees on the map: a white star on UVM green (main.ts, drawStars). */
+.fg-star {
+  display: grid; place-items: center; border-radius: 50%; background: #154734;
+  box-shadow: 0 0 0 2px #fff, 0 1px 5px rgb(0 0 0 / 35%); transition: transform .15s, opacity .15s;
+}
+.fg-far .fg-star { transform: scale(.72); }
+.fg-touring .fg-star { opacity: .35; }
 .fg-stop span {
   display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
   background: #ffd100; color: #101820; font: 800 13px/1 var(--font);
