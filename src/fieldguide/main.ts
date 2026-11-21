@@ -422,7 +422,7 @@ function openTree(p: Plant, how: Hist = 'push'): void {
     <div class="fg-tree-top"><button type="button" class="fg-back" data-back>&lsaquo; Map</button><span class="fg-tree-name" aria-hidden="true">${esc(t.common)}</span></div>
     <figure class="fg-photo${photo ? '' : ' fg-photo--none'}" style="--c:${esc(now.color)}">${photo
       ? `<button type="button" class="fg-photo-open" data-photo aria-label="See the whole photo">
-           <img src="${esc(photo)}" alt="${esc(t.common)}, ${esc(p.id)}"><span class="fg-photo-full" aria-hidden="true">⤢</span>
+           <img src="${esc(photo)}" alt="${esc(t.common)}, ${esc(p.id)}"><span class="fg-photo-full" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></span>
          </button>${taken ? `<figcaption>Photographed ${esc(taken)}</figcaption>` : ''}`
       : '<span class="fg-nophoto">No photo of this tree yet</span>'}</figure>
     <div class="fg-tree-body">
