@@ -6,7 +6,7 @@ import type { Taxon } from '../src/types';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
 import { yearSummary as mjsSummary, yearTable as mjsTable } from '../scripts/lib/year.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
-import { BURLINGTON, SIZE, inRange, project, rangeTouches } from '../scripts/lib/range-map.mjs';
+import { BURLINGTON, SIZE, inRange, project, rangeTouches, whereIn } from '../scripts/lib/range-map.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
 import { crownForm, treeDrawing } from '../scripts/lib/tree-drawing.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
@@ -42,6 +42,13 @@ describe('native range maps', () => {
   it('puts Burlington inside red maple\'s range and outside baldcypress\'s', () => {
     expect(inRange(range('acer-rubrum'), BURLINGTON.lat, BURLINGTON.lng)).toBe(true);
     expect(inRange(range('taxodium-distichum'), BURLINGTON.lat, BURLINGTON.lng)).toBe(false);
+  });
+
+  it('tells the main body of a range from a patch Little drew apart from it', () => {
+    const at = (name: string) => whereIn(range(name), BURLINGTON.lat, BURLINGTON.lng);
+    expect(at('acer-rubrum')).toBe('main');
+    expect(at('pinus-rigida')).toBe('outlier');
+    expect(at('taxodium-distichum')).toBeNull();
   });
 
   it('knows a range that reaches only the south of Vermont', () => {

@@ -274,7 +274,7 @@ function renderCandidates(): void {
     <tbody>${list.slice(0, SHOW).map((c) => {
       const t = c.taxon;
       const size = t.matureHeightFt ? `${t.matureHeightFt}${t.matureSpreadFt ? ` × ${t.matureSpreadFt}` : ''} ft` : '—';
-      const notes = [c.onCampus === 0 ? 'New to campus' : '', ...c.hostOf.map((h) => `Host of ${h.toLowerCase()}`)].filter(Boolean);
+      const notes = [c.onCampus === 0 ? 'New to campus' : '', c.atLimit ? 'At its cold limit' : '', ...c.hostOf.map((h) => `Host of ${h.toLowerCase()}`)].filter(Boolean);
       return `<tr>
         <td><a href="${esc(BASE)}species/${encodeURIComponent(t.id)}/">${esc(t.common)}</a> <span class="st-dim"><i>${esc(t.sci)}</i></span></td>
         <td>${c.native ? 'Vermont native' : 'Introduced'}</td>
@@ -283,7 +283,7 @@ function renderCandidates(): void {
         <td>${esc(t.family)} ${share(c.familyShare)}</td>
         <td>${esc(size)}</td>
         <td>${esc(t.zones)}</td>
-        <td>${notes.map((n) => `<span class="${n.startsWith('Host') ? 'st-flag' : 'st-tag'}">${esc(n)}</span>`).join(' ')}</td>
+        <td>${notes.map((n) => `<span class="${n === 'New to campus' ? 'st-tag' : 'st-flag'}"${n === 'At its cold limit' ? ' title="Rated hardy only to zone 5; the campus is 5a, the colder half"' : ''}>${esc(n)}</span>`).join(' ')}</td>
         <td class="st-wrap">${esc(t.pests || '—')}</td>
       </tr>`;
     }).join('')}</tbody>`;

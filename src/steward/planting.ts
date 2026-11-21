@@ -38,6 +38,8 @@ export interface Candidate {
   familyShare: number;
   /** The pests from the health list whose hosts include this genus. */
   hostOf: string[];
+  /** Rated hardy only to zone 5: at its cold limit in the campus's 5a. */
+  atLimit: boolean;
 }
 
 /** "4-8" → [4, 8]; null when not recorded or not a range. */
@@ -71,6 +73,7 @@ export function plantingCandidates(plants: Plant[], taxa: Taxon[], threats: Thre
       genusShare: (byGenus.get(t.genus) ?? 0) / n,
       familyShare: (byFamily.get(t.family) ?? 0) / n,
       hostOf: threats.filter((th) => th.hosts.includes(t.genus)).map((th) => th.name),
+      atLimit: zoneRange(t.zones)![0] === ZONE,
     }))
     // Never toward a limit already reached.
     .filter((c) => c.genusShare < LIMITS.genus && c.familyShare < LIMITS.family)

@@ -42,10 +42,13 @@ hand (below).
    two, *Amelanchier laevis* and *Crataegus crus-galli*, which the atlas does
    not map. A cultivar or variety shows its species' range, and says so; a
    hybrid has none. The sentence beside the map is worked out from it:
-   Burlington inside the range, outside it, or outside it with the range
+   Burlington inside the range, outside it, outside it with the range
    reaching another part of Vermont (flowering dogwood, chestnut oak and
-   others native only to the south of the state). Then the soil and
-   hardiness zones from `taxa.csv`.
+   others native only to the south of the state), or in a small outlying
+   area Little drew apart from the main range (bur oak, pitch pine, tulip
+   tree: under 2 square degrees, about three quarters of Vermont). Then the
+   soil and hardiness zones from `taxa.csv`, and the campus's zone, 5a on the
+   USDA's 2023 map (the lakeshore is 5b).
 6. **On campus**: how many are mapped, by campus, the other photos, the
    buttons to the map and Wikipedia, and a small campus map with each tree as
    a red dot linking to it on the map (`scripts/lib/campus-map.mjs`). Not a
@@ -83,9 +86,13 @@ used, listed in `scripts/fetch-ranges.mjs`.
 
 The maps are hand-drawn at continental scale. Whether Burlington is inside a
 range is read off them as drawn, and near a range's edge it is only as good
-as the drawing. Two disagree with `taxa.csv`'s origin column and want a
-look: the atlas puts Burlington inside the range of tulip tree (recorded as
-introduced) and mockernut hickory (no origin recorded).
+as the drawing; an outlying area is said to be Little's, not the page's.
+Little marks one at Burlington for mockernut hickory, which other sources
+disagree about (*Silvics of North America* puts Vermont at its northern
+limit; Wikipedia says it is absent from the state), so `taxa.csv` records no
+origin for it. Tulip tree, marked there too, is native to Vermont but rare
+(S1, endangered, per the Native Plant Trust's Go Botany), and since November
+2026 is recorded as a Vermont native.
 
 ## Phase 2: what is still to come
 
