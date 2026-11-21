@@ -253,24 +253,14 @@ if (result.dataset.itree) {
 
 // ---- collection health ------------------------------------------------------
 // Diversity, pest exposure, origin, condition and survey progress (health.mjs),
-// for the steward console, which shows them at /steward/#health. /health/ was
-// a page of its own until November 2026; it stays as a redirect so links to it
-// from before keep working.
-const healthDir = join(root, 'public', 'health');
-rmSync(healthDir, { recursive: true, force: true });
-mkdirSync(healthDir, { recursive: true });
+// for the steward console's Collection health section. The console is for
+// administrators: no public page links to it. /health/ was a public page until
+// November 2026 and is no longer built.
+rmSync(join(root, 'public', 'health'), { recursive: true, force: true });
 writeFileSync(
   join(root, 'public', 'data', 'health.json'),
   JSON.stringify(collectionHealth(result.dataset, result.plants, new Date().getFullYear())),
 );
-writeFileSync(join(healthDir, 'index.html'), `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>Collection health — UVM Trees</title>
-<meta name="robots" content="noindex">
-<meta http-equiv="refresh" content="0; url=../steward/#health">
-<link rel="canonical" href="../steward/#health">
-<script>location.replace('../steward/#health')</script></head>
-<body><p>Collection health is now part of the <a href="../steward/#health">steward console</a>.</p></body></html>
-`);
 
 // ---- the review inbox ---------------------------------------------------------
 // Survey files waiting for approval, in survey/inbox/, each run through the

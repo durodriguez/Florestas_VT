@@ -96,8 +96,8 @@ days, collection health (the 10-20-30 diversity guideline, pest and disease
 exposure, origin, condition, how fresh the measurements are), and worklists of
 the trees that still need a trunk size, a photo or a species, with CSV and
 GeoJSON exports, a planting plan, and a review inbox for survey files (built,
-not yet active). The map's results and every species page link to its
-collection health. See
+not yet active). For administrators: no public
+page links to it. See
 [docs/STEWARD.md](docs/STEWARD.md).
 
 **Field guide** — a second way into the same trees, at `/fieldguide/`, for

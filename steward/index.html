@@ -163,7 +163,7 @@
             <li><b>The approver checks it.</b> <b>Approve</b> runs the importer for real, on GitHub: it writes the trees and visits, checks every row as now, moves the file to <span class="st-mono">survey/imported/</span>, and the site redeploys with the changes. <b>Send back</b> removes the file with a note saying what to fix.</li>
             <li><b>Every step is a commit</b> in the repository's history, so any approval can be looked at again or undone.</li>
           </ol>
-          <p class="st-text"><b>Who can do what.</b> Anyone with the link can see the inbox, as everything in it becomes public on the map anyway. Adding a file and approving need write access to the repository: for the test run, only you, signed in once in this browser with a GitHub token.</p>
+          <p class="st-text"><b>Who can do what.</b> Anyone with the console's address can see the inbox; nothing public links here. Adding a file and approving need write access to the repository: for the test run, only you, signed in once in this browser with a GitHub token.</p>
           <p class="st-text"><b>What is left to switch it on:</b> the <b>Add a survey file</b> button, the two GitHub Actions behind Approve and Send back, and your token. Until then, survey files come to the importer as they do now.</p>
         </div>
       </section>

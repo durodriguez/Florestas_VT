@@ -6,8 +6,10 @@ visit. It reads the same data files as the map and the field guide, so it is
 as current as they are. The code is in `src/steward/`; the rules for what a
 tree still needs are in `src/steward/worklist.ts`, with tests.
 
-It is not hidden, but it is kept out of search engines (`noindex`), and
-nothing on it is private: every number comes from the public data.
+It is for administrators. No public page links to it and it is kept out of
+search engines (`noindex`), but it is not locked: the site is static, on
+GitHub Pages, so anyone who has the address can open it, and the data it reads
+is the same public data as the map's.
 
 ## Overview
 
@@ -43,8 +45,6 @@ November 2026 (that address now leads here):
 - **Origin**, and the species marked invasive in Vermont.
 - **Condition** ratings, with a note that they come from different scales.
 - **How fresh the trunk measurements are.**
-
-The map's results and every species page link here as "Collection health".
 
 ## Planting plan
 
@@ -122,7 +122,7 @@ off.**
    approver's note.
 4. Every step is a commit, so any approval can be reviewed or undone.
 
-Reading the inbox needs nothing: it is public data. Adding and approving need
+Reading the inbox needs only the console's address. Adding and approving need
 write access to the repository; for the test run, only the project's owner,
 with a GitHub token entered once in the browser.
 
