@@ -419,7 +419,7 @@ function openTree(p: Plant, how: Hist = 'push'): void {
   reading = p;
 
   $('fg-tree').innerHTML = `
-    <button type="button" class="fg-back" data-back>&lsaquo; Map</button>
+    <div class="fg-tree-top"><button type="button" class="fg-back" data-back>&lsaquo; Map</button><span class="fg-tree-name" aria-hidden="true">${esc(t.common)}</span></div>
     <figure class="fg-photo${photo ? '' : ' fg-photo--none'}" style="--c:${esc(now.color)}">${photo
       ? `<button type="button" class="fg-photo-open" data-photo aria-label="See the whole photo">
            <img src="${esc(photo)}" alt="${esc(t.common)}, ${esc(p.id)}"><span class="fg-photo-full" aria-hidden="true">⤢</span>
@@ -465,6 +465,7 @@ function openTree(p: Plant, how: Hist = 'push'): void {
     </div>`;
   $('fg-tree').hidden = false;
   $('fg-tree').scrollTop = 0;
+  $('fg-tree').classList.remove('fg-scrolled');
   if (others.length) drawKin(p, others.map((o) => o.plant));
   record(how, how === 'push' ? { plant: p.id } : history.state);
 }
@@ -543,6 +544,13 @@ function closeTree(): void {
   if (kinMap) { kinMap.remove(); kinMap = null; }
   $('fg-tree').hidden = true;
 }
+
+// Past the photo, the way back gets a solid strip of its own (styles.css).
+$('fg-tree').addEventListener('scroll', () => {
+  const photo = $('fg-tree').querySelector<HTMLElement>('.fg-photo');
+  const past = $('fg-tree').scrollTop > (photo ? photo.offsetHeight : 0) - 52;
+  $('fg-tree').classList.toggle('fg-scrolled', past);
+}, { passive: true });
 
 $('fg-tree').addEventListener('click', (e) => {
   const el = e.target as Element;
