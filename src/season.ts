@@ -48,11 +48,11 @@ const FALL: Record<string, string> = {
   bronze: '#a8742f', 'yellow-brown': '#c9a24a', brown: '#9a7550',
 };
 /** The same greens as "Color by plant type", so the two modes agree. */
-const EVERGREEN = '#12501a';
-const LEAF = '#4ea72e';
+export const EVERGREEN = '#12501a';
+export const LEAF = '#4ea72e';
 const BARE = '#c9bfae';
 
-const LEAF_MONTHS = new Set([5, 6, 7, 8, 9, 10]);
+export const LEAF_MONTHS = new Set([5, 6, 7, 8, 9, 10]);
 export const FALL_MONTH = 10;
 
 type Calendar = Pick<Taxon, 'type' | 'flowerMonths' | 'flowerColor' | 'fruitMonths' | 'fruitColor' | 'fallColor'>;

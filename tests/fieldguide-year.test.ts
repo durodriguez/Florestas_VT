@@ -1,11 +1,14 @@
 import { describe, it, expect } from 'vitest';
-import { monthRuns, yearInWords, yearOf } from '../src/fieldguide/year';
+import { colorOf, monthRuns, yearSummary, yearTable } from '../src/fieldguide/year';
+import { tilesFor, yearText } from '../src/fieldguide/tiles';
 import { neighbours, othersOfItsKind, step, stepText } from '../src/fieldguide/walk';
 import type { Plant } from '../src/types';
 
 const cal = (over: Record<string, unknown> = {}) => ({
-  type: 'deciduous-tree', flowerMonths: [] as number[], flowerColor: '', fruitMonths: [] as number[], fruitColor: '', fallColor: '', ...over,
-}) as Parameters<typeof yearOf>[0];
+  type: 'deciduous-tree', family: 'Rosaceae', flowerMonths: [] as number[], flowerColor: '', fruitMonths: [] as number[], fruitColor: '', fallColor: '', ...over,
+}) as Parameters<typeof yearTable>[0];
+const crab = cal({ flowerColor: 'pink', flowerMonths: [5], fruitColor: 'red', fruitMonths: [9, 10, 11], fallColor: 'yellow' });
+const filled = (row: { cells: unknown[] }) => row.cells.map((c, i) => (c ? i + 1 : 0)).filter(Boolean);
 
 describe('a tree’s year', () => {
   it('names months as runs, across New Year too', () => {
@@ -16,19 +19,61 @@ describe('a tree’s year', () => {
     expect(monthRuns([])).toBe('');
     expect(monthRuns([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])).toBe('all year');
   });
-  it('a strip of twelve months, the same as the map colors', () => {
-    const crab = cal({ flowerColor: 'pink', flowerMonths: [5], fruitColor: 'red', fruitMonths: [9, 10, 11], fallColor: 'yellow' });
-    expect(yearOf(crab).map((m) => m.state)).toEqual(['bare', 'bare', 'bare', 'bare', 'flower', 'leaf', 'leaf', 'leaf', 'fruit', 'fall', 'fruit', 'bare']);
+  it('has three rows: leaves, with October in the fall color; flowers; fruit', () => {
+    const [leaves, flowers, fruit] = yearTable(crab);
+    expect(leaves!.label).toBe('Leaves');
+    expect(filled(leaves!)).toEqual([5, 6, 7, 8, 9, 10]);
+    expect(leaves!.cells[9]!.title).toBe('Yellow fall color');
+    expect(leaves!.cells[9]!.color).toBe(colorOf('yellow'));
+    expect(filled(flowers!)).toEqual([5]);
+    expect(filled(fruit!)).toEqual([9, 10, 11]);
   });
-  it('says the showy parts in the order they come', () => {
-    const crab = cal({ flowerColor: 'pink', flowerMonths: [5], fruitColor: 'red', fruitMonths: [9, 10, 11], fallColor: 'yellow' });
-    expect(yearInWords(crab)).toEqual(['Pink flowers in May.', 'Red fruit from September to November.', 'Yellow fall color in October.']);
+  it('shows every flower and fruit in its real color, green and brown included', () => {
+    const oak = cal({ family: 'Fagaceae', flowerColor: 'yellow-green', flowerMonths: [5], fruitColor: 'brown', fruitMonths: [9, 10], fallColor: 'purple' });
+    const [, flowers, fruit] = yearTable(oak);
+    expect(flowers!.cells[4]!.color).toContain('color-mix');
+    expect(fruit!.cells[8]!.title).toBe('Brown fruit');
   });
-  it('leaves out green flowers, and an evergreen’s pollen and fall color', () => {
-    expect(yearInWords(cal({ flowerColor: 'green', flowerMonths: [4], fallColor: 'red' }))).toEqual(['Red fall color in October.']);
-    expect(yearInWords(cal({ type: 'evergreen-tree', flowerColor: 'red', flowerMonths: [5], fruitColor: 'red', fruitMonths: [9], fallColor: 'yellow' })))
-      .toEqual(['Red fruit in September.']);
-    expect(yearInWords(cal())).toEqual([]);
+  it('calls a conifer’s fruit cones, and keeps an evergreen in leaf all year', () => {
+    const spruce = cal({ type: 'evergreen-tree', family: 'Pinaceae', flowerColor: 'red', flowerMonths: [5], fruitColor: 'brown', fruitMonths: [9, 10], fallColor: 'none' });
+    const [leaves, , cones] = yearTable(spruce);
+    expect(filled(leaves!)).toHaveLength(12);
+    expect(cones!.label).toBe('Cones');
+    expect(yearSummary(spruce)).toBe('Red flowers in May. Brown cones from September to October.');
+  });
+  it('says the table in words, in the order the year goes', () => {
+    expect(yearSummary(crab)).toBe('Pink flowers in May. Red fruit from September to November. Yellow fall color in October.');
+    expect(yearSummary(cal({ flowerColor: 'green', flowerMonths: [4, 5], fruitColor: 'tan', fruitMonths: [9, 10], fallColor: 'yellow' })))
+      .toBe('Green flowers from April to May. Tan fruit from September to October. Yellow fall color in October.');
+    expect(yearSummary(cal())).toBe('');
+  });
+});
+
+describe('the two tiles', () => {
+  const NOW = new Date(2026, 10, 21);
+  const tree = (over: Partial<Plant> = {}) => ({
+    id: 'UVM-0001', taxon: { id: 'malus-sp', ...crab }, dbhIn: null, dbhOn: null, heightFt: null, spreadFt: null,
+    condition: 'good', conditionOn: null, surveyedOn: '2023-10-05', ...over,
+  }) as unknown as Plant;
+  it('dates to the year, so a tile fits one line', () => {
+    expect(yearText('2023-10-05', NOW)).toBe('2023, 3 years ago');
+    expect(yearText('2026-09-01', NOW)).toBe('2026');
+  });
+  it('size first, then what it is doing this month', () => {
+    const t = tilesFor(tree({ dbhIn: 10, dbhOn: '2014' }), 11, NOW);
+    expect(t.tiles.map((x) => [x.label, x.value, x.sub])).toEqual([['Trunk diameter', '10 in', '2014, 12 years ago'], ['Right now', 'In fruit', 'November']]);
+    expect(t.conditionShown).toBe(false);
+  });
+  it('condition in the first tile when nothing is measured', () => {
+    const t = tilesFor(tree(), 11, NOW);
+    expect(t.tiles.map((x) => x.label)).toEqual(['Condition', 'Right now']);
+    expect(t.tiles[0]!.sub).toBe('2023, 3 years ago');
+  });
+  it('one tile for a tree not yet identified, with nothing measured', () => {
+    const t = tilesFor(tree({ taxon: { id: 'unknown' } as Plant['taxon'] }), 11, NOW);
+    expect(t.tiles.map((x) => x.label)).toEqual(['Condition']);
+    const sized = tilesFor(tree({ taxon: { id: 'unknown' } as Plant['taxon'], dbhIn: 8, dbhOn: '2014' }), 11, NOW);
+    expect(sized.tiles.map((x) => x.label)).toEqual(['Trunk diameter', 'Condition']);
   });
 });
 
