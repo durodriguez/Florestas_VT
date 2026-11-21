@@ -326,6 +326,15 @@ than the horticultural columns measured, and it is what you should expect —
 facts with dates and numbers in them are easier to get slightly wrong than a
 bloom window is. **Treat the column as a good draft to check, not a reference.**
 
+### Crown forms, habitats and facts: three more files
+
+`data/crown-forms.csv`, `data/habitat.csv` and `data/facts.csv` add to a
+species page what `taxa.csv` does not carry: the drawing's shape, where the
+species grows wild, and facts beyond the fun fact. They are separate files
+rather than columns because most taxa will have none for a long while, and a
+habitat or a fact needs its source beside it. The same rule as the fun fact
+applies, with the source written down. See SPECIES-PAGES.md.
+
 ### Notes are internal
 
 An observation's `notes` is what the surveyor saw that day, and it stays
