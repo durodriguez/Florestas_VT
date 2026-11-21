@@ -1,16 +1,16 @@
 /**
- * The collection-health page (/health/): what the inventory says about the
- * collection as a whole, for Grounds and whoever plans the planting. How
- * diverse it is, which pests and diseases it is exposed to, how much of it is
- * invasive, and how complete and how fresh the survey is, campus by campus.
+ * Collection health: what the inventory says about the collection as a
+ * whole, for Grounds and whoever plans the planting. How diverse it is, which
+ * pests and diseases it is exposed to, how much of it is invasive, and how
+ * complete and how fresh the survey is, campus by campus.
  *
  * Worked out at build time from the same data as the map, so it is never out
- * of date. collectionHealth() does the counting and is tested; the page only
- * lays it out. Exposure is not damage: the page says which trees belong to
+ * of date, and written to public/data/health.json for the steward console
+ * (/steward/#health), which lays it out. collectionHealth() does the counting
+ * and is tested. Exposure is not damage: the page says which trees belong to
  * the genera a pest attacks, not which are infested.
  */
 
-import { esc, row, shell } from './species-pages.mjs';
 import { STATUSES, UNKNOWN_TAXON } from './vocab.mjs';
 
 /**
@@ -118,102 +118,4 @@ export function collectionHealth(dataset, plants, year) {
     knownTrees: known.length,
     threats, invasive, origins, conditions, unrated, age, areas,
   };
-}
-
-const fmt = (x) => x.toLocaleString('en-US');
-const pct = (x, digits = 0) => `${(x * 100).toFixed(digits)}%`;
-const ORIGIN_NAMES = { 'vermont-native': 'Native to Vermont', introduced: 'Introduced', 'vermont-invasive': 'Marked invasive in Vermont', 'not assessed': 'Not assessed' };
-
-/** A bar for a share, with the guideline's limit marked on it. */
-function limitBar(d, level) {
-  const scale = 0.35;
-  return `<div class="hbar" role="img" aria-label="${esc(`${level}: ${pct(d.share, 1)}, limit ${pct(d.limit)}`)}">
-    <span class="hbar-fill${d.within ? '' : ' over'}" style="width:${Math.min(100, (d.share / scale) * 100).toFixed(1)}%"></span>
-    <span class="hbar-limit" style="left:${((d.limit / scale) * 100).toFixed(1)}%"></span>
-  </div>`;
-}
-
-function table(head, rows) {
-  return `<div class="table-wrap"><table class="htable">
-    <thead><tr>${head.map((h, i) => `<th${i ? ' class="num"' : ''}>${esc(h)}</th>`).join('')}</tr></thead>
-    <tbody>${rows.map((r) => `<tr>${r.map((c, i) => `<td${i ? ' class="num"' : ''}>${c}</td>`).join('')}</tr>`).join('')}</tbody>
-  </table></div>`;
-}
-
-export function renderHealthPage(h, { base, config, today }) {
-  const levels = [['species', 'Species'], ['genus', 'Genus'], ['family', 'Family']];
-  const body = `<main class="page health">
-  <h1>Collection health</h1>
-  <p class="label">What the inventory says about the campus collection as a whole, as of ${esc(today)}</p>
-
-  <p class="desc">
-    Worked out from the same data as the map, each time it is updated: ${fmt(h.trees)} standing trees,
-    shrubs and vines in UVM's collection. Burlington's street trees are not counted.
-  </p>
-
-  <h2>At a glance</h2>
-  <dl class="facts">
-    ${row('Plants', fmt(h.trees))}
-    ${row('Species and other kinds', `${fmt(h.taxa)}`)}
-    ${row('Trunk measured', `${fmt(h.measured)} (${pct(h.measured / h.trees)})`)}
-    ${row('Named to species', `${fmt(h.trees - h.genusOnly - h.unknown)} (${pct((h.trees - h.genusOnly - h.unknown) / h.trees)}); ${fmt(h.genusOnly)} to genus only${h.unknown ? `, ${fmt(h.unknown)} not yet identified` : ''}`)}
-    ${row('Photographed', `${fmt(h.photo)} (${pct(h.photo / h.trees, 1)})`)}
-  </dl>
-
-  <h2>Diversity</h2>
-  <p class="desc">
-    A common guideline for resilient urban trees: no more than 10% of them one species, 20% one genus,
-    30% one family, so that one pest or disease cannot take out a large share at once. The red line marks
-    each limit. Counted over the ${fmt(h.knownTrees)} identified plants; a genus named without a species
-    (${fmt(h.genusOnly)} plants) counts as one species, so the species figure is, if anything, high.
-  </p>
-  <div class="limits">
-    ${levels.map(([k, label]) => {
-      const d = h.diversity[k];
-      return `<div class="limit-row"><span>${label}</span>${limitBar(d, label)}<span class="limit-note">${pct(d.share, 1)} ${esc(d.name)} <em class="${d.within ? 'ok' : 'over'}">${d.within ? 'within' : 'over'} ${pct(d.limit)}</em></span></div>`;
-    }).join('')}
-  </div>
-  <details class="more"><summary>The ten most common species, genera and families</summary>
-    ${levels.map(([k, label]) => `<h3>${label}</h3>${table([label, 'Plants', 'Share'], h.top[k].map(([name, c]) => [esc(name), fmt(c), pct(c / h.knownTrees, 1)]))}`).join('')}
-  </details>
-
-  <h2>Pest and disease exposure</h2>
-  <p class="desc">
-    Plants of the genera that some well-known pests and diseases of the northeast attack. This is
-    exposure, not damage: it says where a pest would find hosts, not which trees are affected.
-  </p>
-  ${table(['Pest or disease', 'Host plants on campus'], h.threats.map((t) => [`${esc(t.name)} <span class="quiet">(${esc(t.label)})</span>`, fmt(t.trees)]))}
-
-  <h2>Origin</h2>
-  ${table(['Origin', 'Plants', 'Share'], h.origins.map(([o, c]) => [esc(ORIGIN_NAMES[o] ?? o), fmt(c), pct(c / h.trees, 1)]))}
-  ${h.invasive.length ? `<p class="desc">Species the inventory marks as invasive in Vermont: ${h.invasive.map(([name, c]) => `${esc(name)} (${fmt(c)})`).join(', ')}.</p>` : ''}
-
-  <h2>Condition</h2>
-  ${table(['Latest rating', 'Plants'], [...h.conditions.map(([c, k]) => [esc(c.charAt(0).toUpperCase() + c.slice(1)), fmt(k)]), ...(h.unrated ? [['Not rated', fmt(h.unrated)]] : [])])}
-  <p class="desc quiet">
-    Ratings come from different surveys on different scales: the 2014 inventory, the 2023–24 ArcGIS layer
-    and visits since. Until more trees have two ratings from the same kind of survey, a change in rating is
-    weak evidence of a change in the tree.
-  </p>
-
-  <h2>How fresh the measurements are</h2>
-  ${table(['Trunk measured', 'Plants'], [
-    ['Within 5 years', fmt(h.age.recent)],
-    ['5 to 10 years ago', fmt(h.age.older)],
-    ['More than 10 years ago', fmt(h.age.old)],
-    ['Not measured yet', fmt(h.age.none)],
-  ])}
-
-  <h2>Survey progress by campus</h2>
-  ${table(['Campus', 'Plants', 'Trunk measured', 'Photo', 'Named to species', 'Visited since last year'],
-    h.areas.map((a) => [esc(a.area), fmt(a.trees), pct(a.measured / a.trees), pct(a.photo / a.trees), pct(a.species / a.trees), fmt(a.recent)]))}
-  <p class="desc quiet">"Visited since last year" counts plants whose latest survey is from this year or last.</p>
-
-  <p class="actions"><a class="btn" href="${esc(base)}">Back to the map</a></p>
-</main>`;
-  return shell({
-    title: `Collection health — ${config.siteName}`,
-    description: `Diversity, pest exposure, origin, condition and survey progress for ${config.siteName}.`,
-    base, body, root: '../',
-  });
 }

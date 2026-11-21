@@ -90,7 +90,7 @@ ${search ? `<script src="${up}search.js?v=${assetVersion()}" defer></script>\n` 
 <header class="bar">
   <a class="bar-home" href="${esc(base)}"><img class="bar-mark" src="${mark}" alt="" width="30" height="30">UVM Trees</a>
   ${allSpecies ? `<a class="bar-link" href="${esc(base)}species/">All species</a>` : ''}
-  <a class="bar-link" href="${esc(base)}health/"><span class="bar-long">Collection health</span><span class="bar-short">Health</span></a>
+  <a class="bar-link" href="${esc(base)}steward/#health"><span class="bar-long">Collection health</span><span class="bar-short">Health</span></a>
   ${search ? SEARCH_FORM : ''}
 </header>
 ${body}
@@ -416,29 +416,6 @@ h2 {
   .bar.searching .hits { right: 2.8rem; }
 }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-
-/* The collection-health page (health.mjs). */
-.health h3 { font-size: .95rem; margin: 1.2rem 0 .4rem; }
-.table-wrap { overflow-x: auto; }
-.htable { border-collapse: collapse; width: 100%; font-size: .88rem; }
-.htable th, .htable td { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid var(--border); }
-.htable th { font-size: .74rem; letter-spacing: .05em; text-transform: uppercase; color: var(--dim); font-weight: 600; }
-.htable .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.limits { display: grid; gap: .55rem; margin: .8rem 0; }
-.limit-row { display: grid; grid-template-columns: 4.5rem 1fr minmax(11rem, auto); gap: .7rem; align-items: center; font-size: .88rem; }
-.hbar { position: relative; height: .7rem; background: var(--sunk); border-radius: 3px; }
-.hbar-fill { position: absolute; inset: 0 auto 0 0; background: var(--green-light); border-radius: 3px; }
-.hbar-fill.over { background: #c4512b; }
-.hbar-limit { position: absolute; top: -.25rem; bottom: -.25rem; width: 2px; background: #c4512b; }
-.limit-note em { font-style: normal; font-size: .78rem; margin-left: .3rem; }
-.limit-note em.ok { color: var(--green-light); }
-.limit-note em.over { color: #c4512b; font-weight: 600; }
-.more { margin: .6rem 0 0; font-size: .9rem; }
-.more summary { cursor: pointer; font-weight: 600; color: var(--dim); }
-@media (max-width: 36rem) {
-  .limit-row { grid-template-columns: 4rem 1fr; }
-  .limit-note { grid-column: 1 / -1; }
-}
 
 .index { list-style: none; padding: 0; margin: 1.2rem 0 0; }
 .index li {
