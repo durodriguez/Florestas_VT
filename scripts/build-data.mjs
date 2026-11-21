@@ -12,6 +12,8 @@ import { buildDataset } from './lib/build.mjs';
 import { UNKNOWN_TAXON } from './lib/vocab.mjs';
 import { normalizeName } from './lib/species.mjs';
 import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS } from './lib/species-pages.mjs';
+import { rangeBaseSvg, rangeLinesSvg } from './lib/range-map.mjs';
+import { campusFrame, campusBaseSvg } from './lib/campus-map.mjs';
 import { renderItreePage } from './lib/itree-page.mjs';
 import { collectionHealth } from './lib/health.mjs';
 import { reviewSubmission } from './lib/review.mjs';
@@ -197,13 +199,24 @@ mkdirSync(speciesDir, { recursive: true });
 writeFileSync(join(speciesDir, 'species.css'), SPECIES_CSS);
 writeFileSync(join(speciesDir, 'search.js'), SPECIES_SEARCH_JS);
 
-// Campus photos and areas, grouped by species, so a page can show the trees
-// actually standing on campus rather than a stock image of the species.
+// Campus photos, areas and standing trees, grouped by species, so a page can
+// show the trees actually standing on campus rather than a stock image.
 const photosByTaxon = new Map();
 const areasByTaxon = new Map();
+const treesByTaxon = new Map();
+const standing = [];
 for (const row of result.plants.rows) {
   const taxon = result.dataset.taxa[at(row, 'taxon')];
   if (!taxon) continue;
+  if (at(row, 'status') === 0 && typeof at(row, 'lat') === 'number') {
+    const tree = {
+      id: at(row, 'plant_id'), lat: at(row, 'lat'), lng: at(row, 'lng'), dbh: at(row, 'dbh_in'),
+      campus: result.dataset.collections[at(row, 'collection')]?.name ?? null,
+    };
+    standing.push(tree);
+    if (!treesByTaxon.has(taxon.id)) treesByTaxon.set(taxon.id, []);
+    treesByTaxon.get(taxon.id).push(tree);
+  }
   const file = at(row, 'photo');
   if (file) {
     if (!photosByTaxon.has(taxon.id)) photosByTaxon.set(taxon.id, []);
@@ -222,6 +235,28 @@ for (const row of result.plants.rows) {
   }
 }
 
+// Native ranges (data/ranges/, from Little's atlas; scripts/fetch-ranges.mjs)
+// and the files every page's two maps share, each with a fingerprint in its
+// address so a browser holding an old copy fetches the new one.
+const rangesDir = join(root, 'data', 'ranges');
+const basemap = JSON.parse(readFileSync(join(rangesDir, 'basemap.json'), 'utf8'));
+const ranges = new Map(readdirSync(rangesDir).filter((f) => f.endsWith('.json') && f !== 'basemap.json')
+  .map((f) => [f.replace(/\.json$/, ''), JSON.parse(readFileSync(join(rangesDir, f), 'utf8'))]));
+const campus = campusFrame(standing);
+const sharedFile = (name, text) => {
+  writeFileSync(join(speciesDir, name), text);
+  return `../${name}?v=${createHash('sha256').update(text).digest('hex').slice(0, 10)}`;
+};
+const shared = {
+  rangeBase: sharedFile('range-base.svg', rangeBaseSvg(basemap)),
+  rangeLines: sharedFile('range-lines.svg', rangeLinesSvg(basemap)),
+  campusBase: sharedFile('campus-map.svg', campusBaseSvg(campus, result.dataset.campusAreas, standing)),
+};
+/** A taxon's range: its species', so a cultivar or variety shows the wild range it came from. Not for hybrids. */
+const rangeOf = (t) => (t.genus && t.species && !/^x\b/.test(t.species)
+  ? ranges.get(`${t.genus} ${t.species}`.toLowerCase().replace(/\s+/g, '-')) ?? null
+  : null);
+
 // Not for the placeholder of an unidentified plant: there is no species to describe.
 const describable = result.dataset.taxa.filter((t) => t.id !== UNKNOWN_TAXON);
 for (const taxon of describable) {
@@ -230,6 +265,10 @@ for (const taxon of describable) {
   writeFileSync(join(dir, 'index.html'), renderSpeciesPage(taxon, {
     photos: photosByTaxon.get(taxon.id) ?? [],
     areas: [...(areasByTaxon.get(taxon.id) ?? [])].sort(),
+    trees: treesByTaxon.get(taxon.id) ?? [],
+    range: rangeOf(taxon),
+    maps: { campus, vermont: basemap.states.find((st) => st.name === 'Vermont')?.polygons ?? null },
+    shared,
     base: siteBase,
     config,
   }));

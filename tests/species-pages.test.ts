@@ -59,17 +59,15 @@ describe('renderSpeciesPage', () => {
     expect(page()).toContain('Jun–Jul');
   });
 
-  it('labels the fun fact and folds it away, like the map does', () => {
+  it('puts the fun fact first in Worth knowing', () => {
     const html = page();
-    expect(html).toContain('<summary>Fun fact</summary>');
-    // <details> with no open attribute: shut until someone asks for it.
-    expect(html).toContain('<details class="fun">');
-    expect(html).not.toContain('<details class="fun" open');
-    expect(html).toContain('Linden honey is prized across Europe.');
+    const box = html.slice(html.indexOf('<aside class="worth">'), html.indexOf('</aside>'));
+    expect(box).toContain('<h2>Worth knowing</h2>');
+    expect(box).toMatch(/<ul><li>Linden honey is prized across Europe\.<\/li>/);
   });
 
-  it('leaves out the fold entirely when there is no fun fact', () => {
-    expect(page(taxon({ funFact: '' }))).not.toContain('Fun fact');
+  it('leaves out Worth knowing when there is nothing to put in it', () => {
+    expect(page(taxon({ funFact: '' }))).not.toContain('Worth knowing');
   });
 
   it('links to the trees on the map when some are mapped', () => {
@@ -112,15 +110,22 @@ describe('renderSpeciesPage', () => {
     expect(page(taxon({ count: 0 }))).toMatch(/<p class="actions"><a class="btn" href="https:\/\/en\.wikipedia[^"]*" rel="noopener">Wikipedia<\/a><\/p>/);
   });
 
-  it('puts the photos in On campus, under its text and above its button', () => {
-    const html = page(taxon(), {
-      photos: [{ id: 'UVM-0493', url: 'https://uvm.edu/photos/493.webp' }],
+  it('leads with the newest campus photo and puts the rest in On campus, above its button', () => {
+    const html = page(taxon({ count: 2 }), {
+      photos: [
+        { id: 'UVM-0493', url: 'https://uvm.edu/photos/493.webp', taken: '2026-05-01' },
+        { id: 'UVM-0494', url: 'https://uvm.edu/photos/494.webp', taken: '2026-09-01' },
+      ],
     });
     const at = (s: string) => html.indexOf(s);
-    expect(at('<h2>On campus</h2>')).toBeGreaterThan(at('<h2>Characteristics</h2>'));
-    expect(at('1 mapped on campus')).toBeGreaterThan(at('<h2>On campus</h2>'));
-    expect(at('class="shots"')).toBeGreaterThan(at('1 mapped on campus'));
+    expect(at('<figure class="lead">')).toBeLessThan(at('<h2>On campus</h2>'));
+    expect(html.slice(at('<figure class="lead">'), at('</figure>'))).toContain('494.webp');
+    expect(html).toContain('photographed Sep 2026');
+    expect(at('2 mapped on campus')).toBeGreaterThan(at('<h2>On campus</h2>'));
+    expect(at('class="shots"')).toBeGreaterThan(at('2 mapped on campus'));
+    expect(html.slice(at('class="shots"'))).toContain('493.webp');
     expect(at('Show them on the map')).toBeGreaterThan(at('class="shots"'));
+    expect(at('<h2>Characteristics</h2>')).toBeGreaterThan(at('<h2>On campus</h2>'));
   });
 
   it('keeps the base path so the pages work under a project URL', () => {

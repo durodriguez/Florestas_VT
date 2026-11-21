@@ -11,12 +11,19 @@
  * query string, a search engine can read them without running any JavaScript,
  * and nothing about the map's bundle has to change.
  *
- * Everything on them is already in taxa.csv and plants.csv. Nothing new is
- * authored here; this is a second view of data the map already carries.
+ * Everything on them is in taxa.csv and plants.csv, apart from the native
+ * range maps, which are Little's Atlas of United States Trees in data/ranges/
+ * (range-map.mjs). The drawing of the tree at maturity (tree-drawing.mjs), the
+ * year (year.mjs) and the campus facts are worked out from those, at every
+ * build. See docs/SPECIES-PAGES.md.
  */
 
 import { createHash } from 'node:crypto';
 import { SEARCH_FORM, SPECIES_SEARCH_JS } from './species-search.mjs';
+import { treeDrawing } from './tree-drawing.mjs';
+import { yearTable, yearSummary, MONTH_NAMES } from './year.mjs';
+import { BURLINGTON, inRange, rangeSvg, rangeTouches } from './range-map.mjs';
+import { campusSvg } from './campus-map.mjs';
 
 export const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) =>
@@ -98,32 +105,189 @@ ${body}
 `;
 }
 
-/** One species: what it is, what it looks like, and where it is on campus. */
-export function renderSpeciesPage(taxon, { photos, areas, base, config }) {
-  const t = taxon;
-  const label = [
-    esc(t.family),
-    TYPE_LABELS[t.type] ?? titleCase(t.type),
-    ORIGIN_LABELS[t.origin] ?? titleCase(t.origin),
-  ].filter(Boolean).join(' &middot; ');
+/** "1 tree", "53 trees". */
+const plural = (n, one, many = `${one}s`) => `${n.toLocaleString('en-US')} ${n === 1 ? one : many}`;
 
-  const gallery = photos.length
-    ? `<ul class="shots">${photos.map((p) => {
+/** "a, b and c". */
+const listing = (items) => (items.length <= 1 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items.at(-1)}`);
+
+/**
+ * Where the trees of a species stand, by campus, largest share first:
+ * "30 on Redstone Campus, 10 on Athletic Campus and 4 on Central Campus".
+ */
+function byCampus(trees) {
+  const counts = new Map();
+  for (const t of trees) if (t.campus) counts.set(t.campus, (counts.get(t.campus) ?? 0) + 1);
+  return listing([...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([c, n]) => `${n} on ${esc(c)}`));
+}
+
+/** The campus every one of them is on, or null when they are spread or not placed. */
+function oneCampus(trees) {
+  const names = new Set(trees.map((t) => t.campus));
+  return names.size === 1 && trees[0].campus ? trees[0].campus : null;
+}
+
+/** "53 trees mapped on campus: 30 on Redstone Campus, …", "2 trees mapped on campus, both on Central Campus". */
+export function whereSentence(trees) {
+  const count = plural(trees.length, 'tree');
+  const only = oneCampus(trees);
+  if (only) {
+    const all = trees.length === 1 ? '' : trees.length === 2 ? 'both ' : 'all ';
+    return `${count} mapped on campus, ${all}on ${esc(only)}.`;
+  }
+  const where = byCampus(trees);
+  return where ? `${count} mapped on campus: ${where}.` : `${count} mapped on campus.`;
+}
+
+/**
+ * Facts the inventory itself can vouch for, worked out at every build so they
+ * stay true: that it is the only one, or the largest trunk measured.
+ * "Measured so far", because most trees have no measurement yet.
+ */
+export function campusFacts(trees, base) {
+  if (!trees.length) return [];
+  const facts = [];
+  // How many and where is On campus's to say; here only that there is one.
+  if (trees.length === 1) facts.push(`The only one mapped on campus${trees[0].campus ? `, on ${esc(trees[0].campus)}` : ''}.`);
+  const measured = trees.filter((t) => typeof t.dbh === 'number' && t.dbh > 0);
+  if (trees.length > 1 && measured.length) {
+    const top = Math.max(...measured.map((t) => t.dbh));
+    const biggest = measured.filter((t) => t.dbh === top).sort((a, b) => a.id.localeCompare(b.id)).slice(0, 3);
+    const link = (t) => `<a href="${esc(base)}?plant=${encodeURIComponent(t.id)}">${esc(t.id)}</a>`;
+    // The campus once when they share it, after each when they do not.
+    const shared = oneCampus(biggest);
+    const named = shared
+      ? `${listing(biggest.map(link))}, ${biggest.length === 2 ? 'both ' : biggest.length > 2 ? 'all ' : ''}on ${esc(shared)}`
+      : listing(biggest.map((t) => `${link(t)}${t.campus ? ` on ${esc(t.campus)}` : ''}`));
+    facts.push(`The largest trunk measured so far is ${top} in across: ${named}.`);
+  }
+  return facts;
+}
+
+/** The year in a table, as the field guide shows it, with the same words under it. */
+function yearSection(t) {
+  const rows = yearTable(t);
+  const summary = yearSummary(t);
+  const shows = rows.some((r) => r.cells.some(Boolean));
+  if (!shows) return '';
+  const head = MONTH_NAMES.map((m) => `<th scope="col" title="${m}">${m[0]}</th>`).join('');
+  const body = rows.map((r) => `<tr><th scope="row">${esc(r.label)}</th>${r.cells.map((c, i) => c
+    ? `<td style="--cell:${esc(c.color)}" title="${esc(`${c.title}, ${MONTH_NAMES[i]}`)}"><span>${esc(c.title)}</span></td>`
+    : '<td></td>').join('')}</tr>`).join('');
+  return `<h2>Through the year</h2>
+  <table class="year"><thead><tr><td></td>${head}</tr></thead><tbody>${body}</tbody></table>
+  ${summary ? `<p class="year-words">${esc(summary)}</p>` : ''}
+  <p class="note">Typical months for this species, not dates seen on campus.</p>`;
+}
+
+/**
+ * One species: what it is and looks like, its year, where it grows wild, and
+ * where it stands on campus.
+ *
+ * `trees` are its standing trees ({ id, lat, lng, dbh, campus }); `range` is
+ * its native range from data/ranges/, or null; `maps` holds what the range and
+ * campus maps need (range-map.mjs, campus-map.mjs); `shared` the addresses of
+ * the files every page shares. All but the first three are optional, so a
+ * page can be rendered from a taxon alone.
+ */
+export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = [], range = null, maps = null, shared = {} }) {
+  const t = taxon;
+  const kicker = [esc(t.family), TYPE_LABELS[t.type] ?? titleCase(t.type)].filter(Boolean).join(' &middot; ');
+  const origin = ORIGIN_LABELS[t.origin] ?? titleCase(t.origin);
+
+  // The newest campus photo leads the page; the rest go with the trees below.
+  const shots = [...photos].sort((a, b) => String(b.taken ?? '').localeCompare(String(a.taken ?? '')));
+  const lead = shots[0];
+  const rest = shots.slice(1);
+  const shotButton = (p) => `<button type="button" class="shot-open" aria-label="Show the photo full size">
+          <img src="${esc(p.url)}" alt="${esc(t.common)} on campus, accession ${esc(p.id)}" loading="lazy">
+        </button>`;
+  const gallery = rest.length
+    ? `<ul class="shots">${rest.map((p) => {
       const taken = photoTaken(p.taken);
       return `<li>
-        <button type="button" class="shot-open" aria-label="Show the photo full size">
-          <img src="${esc(p.url)}" alt="${esc(t.common)} on campus, accession ${esc(p.id)}" loading="lazy">
-        </button>
+        ${shotButton(p)}
         <span><a href="${esc(base)}?plant=${encodeURIComponent(p.id)}">${esc(p.id)}</a>${taken ? ` &middot; ${esc(taken)}` : ''}</span>
       </li>`;
     }).join('')}</ul>`
     : '';
 
+  const drawing = treeDrawing(t);
+  const stats = [
+    t.matureHeightFt ? `<div><dt>Mature height</dt><dd>${t.matureHeightFt} ft</dd></div>` : '',
+    t.matureSpreadFt ? `<div><dt>Spread</dt><dd>${t.matureSpreadFt} ft</dd></div>` : '',
+    t.zones ? `<div><dt>Hardiness zones</dt><dd>${esc(t.zones)}</dd></div>` : '',
+  ].join('');
+  const drawingCard = drawing
+    ? `<figure class="mature">${drawing}<dl class="stats">${stats}</dl>
+      <figcaption>At maturity, drawn to scale beside a person.</figcaption></figure>`
+    : '';
+  const leadPhoto = lead
+    ? `<figure class="lead">${shotButton(lead)}
+      <figcaption><b>On campus.</b> <a href="${esc(base)}?plant=${encodeURIComponent(lead.id)}">${esc(lead.id)}</a>${photoTaken(lead.taken) ? `, photographed ${esc(photoTaken(lead.taken))}` : ''}.</figcaption></figure>`
+    : '';
+  const hero = drawingCard || leadPhoto
+    ? `<section class="hero${drawingCard && leadPhoto ? '' : ' hero--one'}">${drawingCard}${leadPhoto}</section>`
+    : '';
+
+  // Worth knowing: the fun fact, then what the inventory can vouch for.
+  const facts = [t.funFact ? esc(t.funFact) : '', ...campusFacts(trees, base)].filter(Boolean);
+  const factsBox = facts.length
+    ? `<aside class="worth"><h2>Worth knowing</h2><ul>${facts.map((f) => `<li>${f}</li>`).join('')}</ul></aside>`
+    : '';
+
+  // Where it grows wild: Little's map, for the species a cultivar or variety
+  // was selected from.
+  let rangeSection = '';
+  if (range && maps) {
+    const selected = t.cultivar || t.infra;
+    const home = inRange(range, BURLINGTON.lat, BURLINGTON.lng);
+    // A Vermont native can grow wild only in another corner of the state, as
+    // flowering dogwood does in the south; the sentence says so rather than
+    // leave "native" and "outside" side by side unexplained.
+    const reachesVermont = !home && maps.vermont && rangeTouches(range, maps.vermont);
+    rangeSection = `<h2>Where it grows wild</h2>
+  <section class="wild">
+    <div>
+      <p>${selected ? `The map shows the native range of <i>${esc(range.species)}</i>, the species this was selected from. ` : ''}${reachesVermont
+    ? `${selected ? 'That range' : 'Its native range'} reaches into Vermont, but not as far as Burlington.`
+    : `Burlington is ${home ? 'inside' : 'outside'} ${selected ? 'that range' : 'its native range'}.`}</p>
+      ${t.soil ? `<p><b>Soil:</b> ${esc(t.soil)}</p>` : ''}
+      ${t.zones ? `<p><b>Hardiness zones:</b> ${esc(t.zones)}. Burlington is in zone 5.</p>` : ''}
+    </div>
+    <figure class="range">
+      <div class="range-map"><img src="${esc(shared.rangeBase)}" alt="">${rangeSvg(range)}<img src="${esc(shared.rangeLines)}" alt=""></div>
+      <figcaption><span class="key"><i></i>Grows wild</span><span class="key star">&#9733; Burlington</span><span class="key vt">Vermont</span></figcaption>
+    </figure>
+  </section>`;
+  }
+
+  const campusMap = trees.length && maps?.campus
+    ? `<figure class="campus"><div class="campus-map"><img src="${esc(shared.campusBase)}" alt="">${campusSvg(maps.campus, trees, base)}</div>
+      <figcaption>Each red dot is one; tap it to open it on the map.</figcaption></figure>`
+    : '';
+  const where = trees.length
+    ? `<p>${whereSentence(trees)}</p>`
+    : t.count > 0
+      ? `<p>${t.count} mapped on campus${areas.length ? ` &mdash; ${areas.map(esc).join(', ')}` : ''}.</p>`
+      // Most of taxa.csv is a species list running ahead of the survey, and
+      // saying so is more use than an empty section.
+      : `<p class="quiet">None mapped yet. The species list runs ahead of the
+       survey, so this one may be on campus without having been recorded.</p>`;
+
+  // One row of buttons, as the map's record panel has: the map first, then
+  // Wikipedia beside it.
+  const buttons = [
+    t.count > 0 ? `<a class="btn" href="${esc(base)}?taxon=${encodeURIComponent(t.id)}">Show them on the map</a>` : '',
+    t.wikipedia ? `<a class="btn" href="${esc(t.wikipedia)}" rel="noopener">Wikipedia</a>` : '',
+  ].filter(Boolean);
+  const actions = buttons.length ? `<p class="actions">${buttons.join('\n    ')}</p>` : '';
+
   // Only what is known. A species with no flower colour recorded shows no
   // flower row rather than an em dash, which reads as "nobody has said".
-  const facts = [
+  const characteristics = [
     row('Plant type', esc(TYPE_LABELS[t.type] ?? titleCase(t.type))),
-    row('Origin', esc(ORIGIN_LABELS[t.origin] ?? titleCase(t.origin))),
+    row('Origin', esc(origin)),
     row('Flowers', [titleCase(t.flowerColor), monthRange(t.flowerMonths)].filter(Boolean).map(esc).join(' &middot; ')),
     row('Fruit', [titleCase(t.fruitColor), monthRange(t.fruitMonths)].filter(Boolean).map(esc).join(' &middot; ')),
     row('Fall color', esc(titleCase(t.fallColor))),
@@ -135,41 +299,42 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config }) {
     row('Hardiness zones', esc(t.zones)),
   ].join('');
 
-  // Photos of the trees on campus belong with them: under what says how many
-  // there are and where, above the button that shows them on the map.
-  const where = t.count > 0
-    ? `<p>${t.count} mapped on campus${areas.length ? ` &mdash; ${areas.map(esc).join(', ')}` : ''}.</p>
-       ${gallery}`
-    // Most of taxa.csv is a species list running ahead of the survey, and
-    // saying so is more use than an empty section.
-    : `<p class="quiet">None mapped yet. The species list runs ahead of the
-       survey, so this one may be on campus without having been recorded.</p>`;
-
-  // One row of buttons, as the map's record panel has: the map first, then
-  // Wikipedia beside it.
-  const buttons = [
-    t.count > 0 ? `<a class="btn" href="${esc(base)}?taxon=${encodeURIComponent(t.id)}">Show them on the map</a>` : '',
-    t.wikipedia ? `<a class="btn" href="${esc(t.wikipedia)}" rel="noopener">Wikipedia</a>` : '',
+  const sources = [
+    range && maps ? `Range: Little, E.L., Jr., <i>Atlas of United States Trees</i>, U.S. Department of Agriculture, 1971&ndash;1978 (public domain), as digitized by the U.S. Geological Survey.` : '',
+    drawing ? 'Drawing: from the mature height and spread on file.' : '',
   ].filter(Boolean);
-  const actions = buttons.length ? `<p class="actions">${buttons.join('\n    ')}</p>` : '';
 
-  const body = `<main class="page">
-  <h1>${esc(t.common)}</h1>
-  <p class="sci">${sciHtml(t)}</p>
-  <p class="label">${label}</p>
-  ${t.description ? `<p class="desc"><strong>Description:</strong> ${esc(t.description)}</p>` : ''}
-  ${t.funFact ? `<details class="fun">
-    <summary>Fun fact</summary>
-    <p>${esc(t.funFact)}</p>
-  </details>` : ''}
+  const body = `<main class="page sp">
+  <header class="sp-head">
+    ${kicker ? `<p class="kicker">${kicker}</p>` : ''}
+    <h1>${esc(t.common)}</h1>
+    <p class="sci">${sciHtml(t)}</p>
+    ${origin ? `<p class="badge badge--${esc(t.origin)}">${esc(origin)}</p>` : ''}
+  </header>
+  ${hero}
+  <section class="intro${factsBox ? '' : ' intro--one'}">
+    ${t.description ? `<p class="lede">${esc(t.description)}</p>` : '<div></div>'}
+    ${factsBox}
+  </section>
 
-  <h2>Characteristics</h2>
-  <dl class="facts">${facts}</dl>
+  ${yearSection(t)}
+
+  ${rangeSection}
 
   <h2>On campus</h2>
-  ${where}
+  <section class="oncampus${campusMap ? '' : ' oncampus--one'}">
+    <div>
+      ${where}
+      ${gallery}
+      ${actions}
+    </div>
+    ${campusMap}
+  </section>
 
-  ${actions}
+  <h2>Characteristics</h2>
+  <dl class="facts">${characteristics}</dl>
+
+  ${sources.length ? `<p class="sources"><b>Sources.</b> ${sources.join(' ')}</p>` : ''}
   <p class="foot">Something look wrong? Email
     <a href="mailto:${esc(config.contactEmail)}?subject=${encodeURIComponent(`${config.siteName} species ${t.id}`)}">${esc(config.contactEmail)}</a>.</p>
 </main>${photos.length ? `\n<script>${LIGHTBOX_JS}</script>` : ''}`;
@@ -297,10 +462,14 @@ export function renderSpeciesIndex(taxa, { base, config }) {
 export const SPECIES_CSS = `:root {
   --green: #154734; --green-light: #1f6f4a; --gold: #ffd100;
   --bg: #fff; --sunk: #f4f6f4; --border: #dfe3df; --ink: #1b201d; --dim: #5d665f;
+  --band: #e7efe9; --note: #f5f1e3; --note-ink: #6b5a14; --mint: #e1efe5; --tan: #efe7d6; --tan-ink: #6b4f12;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
-  :root { --bg: #141816; --sunk: #1c221f; --border: #2e3733; --ink: #e7ece9; --dim: #9aa8a1; }
+  :root { --bg: #141816; --sunk: #1c221f; --border: #2e3733; --ink: #e7ece9; --dim: #9aa8a1;
+    --band: #1d2a23; --note: #2a2716; --note-ink: #e8d48a; --mint: #1d3326; --tan: #33291a; --tan-ink: #e6cf9f; }
+  .sp h2 { color: #9fd3b4; }
+  .badge--vermont-native { color: #9fd3b4; }
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); line-height: 1.55; }
@@ -442,6 +611,91 @@ h2 {
 .sort button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: #fff; }
 
 .foot { margin-top: 2rem; font-size: .8rem; color: var(--dim); }
+
+/* ---- a species page: the layout of the report's mock-up ---- */
+.page.sp { max-width: 62rem; }
+.sp h2 {
+  color: var(--green-light); border: 0; margin: 2.2rem 0 .8rem; padding: .35rem .7rem;
+  background: var(--band); border-radius: 6px;
+}
+.sp-head h1 { font-size: 2.4rem; letter-spacing: -.01em; margin-top: .1rem; }
+.kicker { margin: 0; font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+.sp .sci { font-size: 1.1rem; }
+.badge { display: inline-block; margin: .6rem 0 0; padding: .12rem .6rem; border-radius: 99px;
+  font-size: .78rem; font-weight: 600; background: var(--tan); color: var(--tan-ink); }
+.badge--vermont-native { background: var(--mint); color: var(--green-light); }
+.badge--vermont-invasive { background: #fbe3dc; color: #7a2410; }
+
+.hero { display: grid; grid-template-columns: 18rem 1fr; gap: 1.3rem; margin-top: 1.4rem; align-items: start; }
+.hero--one { grid-template-columns: minmax(0, 28rem); }
+figure { margin: 0; }
+.mature { background: var(--sunk); border-radius: 14px; padding: .8rem .8rem .7rem; }
+.tree-drawing { display: block; width: 100%; height: auto; max-height: 26rem; }
+.td-guide { stroke: var(--border); stroke-dasharray: 2 4; }
+.td-ft { font-size: 9px; fill: var(--dim); }
+.td-ground { stroke: var(--dim); }
+.td-shade { fill: rgb(0 0 0 / 8%); }
+.td-trunk { fill: #6b4a33; }
+.td-limb { fill: none; stroke: #6b4a33; stroke-width: 3; stroke-linecap: round; }
+.td-person { fill: var(--ink); opacity: .75; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr)); gap: .4rem; margin: .5rem 0 .3rem; }
+.stats div { background: var(--bg); border-radius: 8px; padding: .35rem .55rem; }
+.stats dt { font-size: .68rem; color: var(--dim); }
+.stats dd { margin: 0; font-weight: 700; font-size: 1.05rem; }
+.sp figcaption { font-size: .78rem; color: var(--dim); margin-top: .35rem; }
+.sp figcaption a { color: inherit; }
+/* Aimed a little above the middle, where a crown usually is, as in the field guide. */
+.lead .shot-open img { width: 100%; height: 30rem; object-fit: cover; object-position: 50% 30%; border-radius: 14px; display: block; }
+.hero--one .lead .shot-open img { height: auto; max-height: 34rem; }
+
+.intro { display: grid; grid-template-columns: 1fr 19rem; gap: 1.6rem; margin-top: 1.6rem; align-items: start; }
+.intro--one { grid-template-columns: 1fr; }
+.lede { margin: 0; font-size: 1.15rem; line-height: 1.6; }
+.worth { background: var(--note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: .8rem 1rem .5rem; }
+.sp .worth h2 { margin: 0 0 .4rem; padding: 0; background: none; color: var(--note-ink); }
+.worth ul { margin: 0; padding-left: 1.1rem; font-size: .87rem; }
+.worth li { margin-bottom: .45rem; }
+.worth a { color: inherit; }
+
+.year { width: 100%; border-collapse: separate; border-spacing: 3px; table-layout: fixed; }
+.year thead th { font-size: .74rem; font-weight: 500; color: var(--dim); text-align: center; }
+.year thead td, .year tbody th { width: 5rem; }
+.year tbody th { font-size: .82rem; font-weight: 500; text-align: left; padding: 0; }
+.year tbody td { height: 1.1rem; padding: 0; border-radius: 4px; background: var(--cell, var(--sunk)); box-shadow: inset 0 0 0 1px rgb(0 0 0 / 7%); }
+.year tbody td span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.year-words { margin: .6rem 0 0; font-size: .92rem; }
+.note { margin: .2rem 0 0; font-size: .78rem; color: var(--dim); }
+
+.wild { display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.6rem; align-items: start; }
+.wild p { margin: 0 0 .8rem; font-size: .93rem; }
+.range-map, .campus-map { position: relative; }
+.range-map img, .campus-map img { display: block; width: 100%; height: auto; }
+.range-map img { border-radius: 10px; border: 1px solid var(--border); }
+.range-map img + svg, .range-map img:last-child, .campus-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.range-map img:last-child { border-color: transparent; }
+.range-fill path { fill: #3d8a5e; fill-opacity: .85; }
+.key { margin-right: .9rem; white-space: nowrap; }
+.key i { display: inline-block; width: .8rem; height: .8rem; margin-right: .3rem; vertical-align: -1px; background: #3d8a5e; border-radius: 2px; }
+.key.star { color: #8a6d00; }
+.key.vt { border-bottom: 2px solid var(--green); }
+
+.oncampus { display: grid; grid-template-columns: 1fr 14rem; gap: 1.4rem; align-items: start; }
+.oncampus--one { grid-template-columns: 1fr; }
+.oncampus p:first-child { margin-top: 0; }
+.campus-map img { border-radius: 10px; border: 1px solid var(--border); }
+.campus-trees circle { fill: #c0392b; stroke: #fff; stroke-width: 1.4; }
+.campus-trees a:hover circle, .campus-trees a:focus circle { fill: var(--gold); stroke: var(--green); }
+.foot a, .sources a { color: inherit; }
+.sources { margin-top: 2.2rem; padding-top: .8rem; border-top: 1px solid var(--border); font-size: .76rem; color: var(--dim); }
+
+@media (max-width: 48rem) {
+  .sp-head h1 { font-size: 1.9rem; }
+  .hero, .intro, .wild, .oncampus { grid-template-columns: 1fr; }
+  .hero .lead { order: -1; }
+  .lead .shot-open img { height: 22rem; }
+  .mature { max-width: 22rem; }
+  .campus { max-width: 15rem; }
+}
 
 @media (max-width: 30rem) {
   /* Stacked label over value, so each row is two lines: kept tight. */
