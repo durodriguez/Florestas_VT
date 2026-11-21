@@ -20,7 +20,9 @@
     <nav class="st-nav" aria-label="Sections">
       <a href="#overview" data-section="overview">Overview</a>
       <a href="#health" data-section="health">Collection health</a>
+      <a href="#planting" data-section="planting">Planting plan</a>
       <a href="#worklists" data-section="worklists">Worklists</a>
+      <a href="#inbox" data-section="inbox">Review inbox <span id="st-inbox-count" class="st-badge" hidden></span></a>
       <a href="#exports" data-section="exports">Exports</a>
     </nav>
 
@@ -89,6 +91,42 @@
         </div>
       </section>
 
+      <section id="planting" class="st-section" aria-labelledby="pl-h" hidden>
+        <h1 id="pl-h">Planting plan</h1>
+        <p class="st-lede">What to plant more of and less of to keep the collection diverse and out of reach of the pests it is exposed to, and the places the inventory already knows need a tree. Starting points from the inventory's own data, not a prescription: the site (soil, light, space, wires), what nurseries can supply and Grounds' own plans decide.</p>
+
+        <div class="st-panel">
+          <div class="st-panel-head">
+            <h2>Plant more of</h2>
+            <div class="st-controls">
+              <label class="st-check"><input type="checkbox" id="pl-native"> Vermont natives only</label>
+              <label class="st-select">Size
+                <select id="pl-size"><option value="">any</option><option value="small">small (under 30 ft)</option><option value="medium">medium (30–50 ft)</option><option value="large">large (over 50 ft)</option></select>
+              </label>
+            </div>
+          </div>
+          <p class="st-text" id="pl-rule"></p>
+          <p class="st-count" id="pl-count"></p>
+          <div class="st-table-wrap"><table class="st-table" id="pl-table"></table></div>
+          <p class="st-note" id="pl-more"></p>
+        </div>
+
+        <div class="st-grid st-grid--even">
+          <div class="st-panel">
+            <h2>Plant less of</h2>
+            <p class="st-text">The genera and families campus has most of, against the 20% and 30% limits, and the pests each is a host of.</p>
+            <div id="pl-less"></div>
+            <p class="st-text" id="pl-invasive"></p>
+          </div>
+          <div class="st-panel">
+            <h2>Places that need a tree</h2>
+            <p class="st-text">Where the record says a tree was removed or could not be found, or a standing tree is rated dead or poor. Open ground that could take a tree needs building and pavement outlines the data does not have yet.</p>
+            <div id="pl-map" class="st-map st-map--small" role="application" aria-label="Map of the places that need a tree"></div>
+            <div class="st-table-wrap"><table class="st-table" id="pl-sites"></table></div>
+          </div>
+        </div>
+      </section>
+
       <section id="worklists" class="st-section" aria-labelledby="wl-h" hidden>
         <h1 id="wl-h">Worklists</h1>
         <p class="st-lede">The standing trees that still need something, campus by campus, for a crew to work through or to hand to Grounds.</p>
@@ -105,6 +143,29 @@
         <p id="st-wl-count" class="st-count"></p>
         <div class="st-table-wrap"><table class="st-table" id="st-wl-table"></table></div>
         <p id="st-wl-more" class="st-note"></p>
+      </section>
+
+      <section id="inbox" class="st-section" aria-labelledby="in-h" hidden>
+        <h1 id="in-h">Review inbox</h1>
+        <p class="st-lede">Survey files wait here for a person to approve them before they reach the map. Each is run through the importer as a dry run, so you see exactly what it would change.</p>
+        <div id="in-banner" class="st-banner" hidden>
+          <b>Not active yet.</b> This is how the inbox will look and work. The submissions below are made-up examples; nothing sends files here yet, and Approve and Send back are switched off. <a href="#in-how">How it would work</a>
+        </div>
+        <div class="st-inbox">
+          <ul id="in-list" class="st-inbox-list" aria-label="Submissions"></ul>
+          <div id="in-detail" class="st-inbox-detail"></div>
+        </div>
+        <div class="st-panel" id="in-how">
+          <h2>How it would work</h2>
+          <ol class="st-steps">
+            <li><b>A surveyor sends a file.</b> They export from the survey app as now, and instead of emailing it, add it here with <b>Add a survey file</b>. The file is saved to <span class="st-mono">survey/inbox/</span> in the project's GitHub repository.</li>
+            <li><b>It appears here in a few minutes</b>, once the site rebuilds, run through the importer as a dry run: new trees, visits, corrections, renumberings, the notes for review, and anything that blocks it. Nothing on the map changes yet.</li>
+            <li><b>The approver checks it.</b> <b>Approve</b> runs the importer for real, on GitHub: it writes the trees and visits, checks every row as now, moves the file to <span class="st-mono">survey/imported/</span>, and the site redeploys with the changes. <b>Send back</b> removes the file with a note saying what to fix.</li>
+            <li><b>Every step is a commit</b> in the repository's history, so any approval can be looked at again or undone.</li>
+          </ol>
+          <p class="st-text"><b>Who can do what.</b> Anyone with the console's address can see the inbox; nothing public links here. Adding a file and approving need write access to the repository: for the test run, only you, signed in once in this browser with a GitHub token.</p>
+          <p class="st-text"><b>What is left to switch it on:</b> the <b>Add a survey file</b> button, the two GitHub Actions behind Approve and Send back, and your token. Until then, survey files come to the importer as they do now.</p>
+        </div>
       </section>
 
       <section id="exports" class="st-section" aria-labelledby="ex-h" hidden>

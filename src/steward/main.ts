@@ -18,6 +18,7 @@ import { colorFor, legendFor } from '../palette';
 import { measuredOn } from '../measured';
 import { toCsv } from '../filters';
 import { NEEDS, surveyDays, worklist, type Need } from './worklist';
+import { LIMITS, ZONE, plantingCandidates, replacementSites, sizeOf, type Candidate } from './planting';
 import type { Dataset, Plant } from '../types';
 
 const BASE = import.meta.env.BASE_URL;
@@ -33,17 +34,30 @@ interface Health {
   conditions: Array<[string, number]>; unrated: number;
   age: { recent: number; older: number; old: number; none: number };
   diversity: Record<'species' | 'genus' | 'family', { name: string; count: number; share: number; limit: number; within: boolean }>;
-  threats: Array<{ name: string; label: string; trees: number }>;
+  threats: Array<{ name: string; label: string; hosts: string[]; trees: number }>;
   areas: Array<{ area: string; trees: number; measured: number; photo: number; species: number; recent: number }>;
 }
 
+interface Submission {
+  example: boolean; file: string; rows: number; dates: string[]; status: 'ready' | 'blocked';
+  summary: { newTrees: number; visits: number; corrections: number; renumbered: number; alreadyOnFile: number; errors: number; warnings: number; notes: number };
+  newTrees: Array<{ plant: string; tag: string; common: string; lat: number; lng: number; campus: string | null }>;
+  visits: Array<{ plant: string; common: string; date: string; dbh: string; condition: string; status: string; photo: boolean; lat: number; lng: number }>;
+  corrections: Array<{ plant: string; common: string; changes: Array<{ field: string; from: string; to: string }>; moved: { from: [number, number]; to: [number, number]; metres: number } | null }>;
+  renumbered: Array<{ from: string; to: string; tag: string; common: string }>;
+  issues: Array<{ row: number; level: string; message: string }>;
+  notes: Array<{ plant: string; note: string }>;
+}
+interface Inbox { active: boolean; submissions: Submission[] }
+
 let dataset: Dataset;
+let inbox: Inbox = { active: false, submissions: [] };
 let plants: Plant[] = [];
 let health: Health;
 
 // ---------------------------------------------------------------- sections
 
-const SECTIONS = ['overview', 'health', 'worklists', 'exports'];
+const SECTIONS = ['overview', 'health', 'planting', 'worklists', 'inbox', 'exports'];
 function show(): void {
   const want = location.hash.slice(1);
   const id = SECTIONS.includes(want) ? want : 'overview';
@@ -54,6 +68,8 @@ function show(): void {
   }
   // Leaflet measures its box when shown; a map drawn while hidden is blank.
   if (id === 'overview') setTimeout(() => map?.invalidateSize(), 0);
+  if (id === 'planting') setTimeout(() => sitesMap ? sitesMap.invalidateSize() : drawSitesMap(), 0);
+  if (id === 'inbox') setTimeout(() => inboxMap?.invalidateSize(), 0);
 }
 window.addEventListener('hashchange', show);
 
@@ -105,8 +121,8 @@ function limits(): string {
 }
 
 /** A plain table: a first column of names, then numbers. */
-function table(head: string[], rows: string[][]): string {
-  return `<div class="st-table-wrap"><table class="st-table st-numtable">
+function table(head: string[], rows: string[][], numeric = true): string {
+  return `<div class="st-table-wrap"><table class="st-table${numeric ? ' st-numtable' : ''}">
     <thead><tr>${head.map((h) => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead>
     <tbody>${rows.map((r) => `<tr>${r.map((c, i) => (i ? `<td>${c}</td>` : `<th scope="row">${c}</th>`)).join('')}</tr>`).join('')}</tbody>
   </table></div>`;
@@ -215,6 +231,80 @@ function recolor(): void {
 }
 $('st-mapmode').addEventListener('change', recolor);
 
+// ---------------------------------------------------------------- planting plan
+
+let candidates: Candidate[] = [];
+const SHOW = 30;
+const share = (x: number) => `${(x * 100).toFixed(1)}%`;
+
+function setupPlanting(): void {
+  candidates = plantingCandidates(plants, dataset.taxa, health.threats);
+  $('pl-rule').textContent = `Trees hardy in zone ${ZONE} (Burlington is 5b), not marked invasive in Vermont, from genera and families under the 20% and 30% limits. Natives first, then those whose family and genus campus has least of. Hosts of the pests above come last, flagged.`;
+  for (const id of ['pl-native', 'pl-size']) $(id).addEventListener('change', renderCandidates);
+  renderCandidates();
+
+  const genusRows = health.top.genus.slice(0, 6).map(([g, n]) => {
+    const hosts = health.threats.filter((t) => t.hosts.includes(g)).map((t) => t.name);
+    return [`<i>${esc(g)}</i>${hosts.length ? ` <span class="st-flag">host of ${esc(hosts.join(', ').toLowerCase())}</span>` : ''}`, bar(n / health.knownTrees, LIMITS.genus)];
+  });
+  const familyRows = health.top.family.slice(0, 4).map(([f, n]) => [esc(f), bar(n / health.knownTrees, LIMITS.family)]);
+  $('pl-less').innerHTML = table(['Genus', 'Share, against 20%'], genusRows) + table(['Family', 'Share, against 30%'], familyRows);
+  $('pl-invasive').textContent = health.invasive.length
+    ? `Not to replace in kind, as marked invasive in Vermont: ${health.invasive.map(([name, n]) => `${name} (${fmt(n)} on campus)`).join(', ')}.` : '';
+
+  const sites = replacementSites(plants);
+  $('pl-sites').innerHTML = `<thead><tr><th scope="col">Tree</th><th scope="col">Why</th><th scope="col">Campus</th></tr></thead><tbody>${sites.map((x) => `<tr>
+    <td><a class="st-mono" href="${esc(BASE)}?plant=${encodeURIComponent(x.plant.id)}">${esc(x.plant.id)}</a> ${esc(x.plant.taxon.common)}</td>
+    <td>${esc(x.why)}</td><td>${esc(x.plant.collection?.name ?? '—')}</td></tr>`).join('')}</tbody>`;
+}
+
+/** A share against its limit, as a small bar with the limit marked. */
+function bar(x: number, limit: number): string {
+  const scale = limit * 1.5;
+  return `<span class="st-minibar"><i style="width:${Math.min(100, (x / scale) * 100).toFixed(1)}%"></i><u style="left:${((limit / scale) * 100).toFixed(1)}%"></u></span>${share(x)}`;
+}
+
+function renderCandidates(): void {
+  const native = $<HTMLInputElement>('pl-native').checked;
+  const size = $<HTMLSelectElement>('pl-size').value;
+  const list = candidates.filter((c) => (!native || c.native) && (!size || sizeOf(c.taxon) === size));
+  $('pl-count').textContent = `${fmt(list.length)} species fit${list.length > SHOW ? `; the first ${SHOW}` : ''}.`;
+  $('pl-table').innerHTML = `<thead><tr><th scope="col">Species</th><th scope="col">Origin</th><th scope="col">On campus</th>
+    <th scope="col">Its genus now</th><th scope="col">Its family now</th><th scope="col">Mature size</th><th scope="col">Zones</th><th scope="col">Notes</th><th scope="col">Watch for</th></tr></thead>
+    <tbody>${list.slice(0, SHOW).map((c) => {
+      const t = c.taxon;
+      const size = t.matureHeightFt ? `${t.matureHeightFt}${t.matureSpreadFt ? ` × ${t.matureSpreadFt}` : ''} ft` : '—';
+      const notes = [c.onCampus === 0 ? 'New to campus' : '', ...c.hostOf.map((h) => `Host of ${h.toLowerCase()}`)].filter(Boolean);
+      return `<tr>
+        <td><a href="${esc(BASE)}species/${encodeURIComponent(t.id)}/">${esc(t.common)}</a> <span class="st-dim"><i>${esc(t.sci)}</i></span></td>
+        <td>${c.native ? 'Vermont native' : 'Introduced'}</td>
+        <td>${fmt(c.onCampus)}</td>
+        <td><i>${esc(t.genus)}</i> ${share(c.genusShare)}</td>
+        <td>${esc(t.family)} ${share(c.familyShare)}</td>
+        <td>${esc(size)}</td>
+        <td>${esc(t.zones)}</td>
+        <td>${notes.map((n) => `<span class="${n.startsWith('Host') ? 'st-flag' : 'st-tag'}">${esc(n)}</span>`).join(' ')}</td>
+        <td class="st-wrap">${esc(t.pests || '—')}</td>
+      </tr>`;
+    }).join('')}</tbody>`;
+  $('pl-more').textContent = list.length > SHOW ? `${fmt(list.length - SHOW)} more fit; narrow by origin or size to see them.` : '';
+}
+
+let sitesMap: L.Map | null = null;
+function drawSitesMap(): void {
+  const sites = replacementSites(plants);
+  sitesMap = L.map($('pl-map'), { zoomControl: true, scrollWheelZoom: false });
+  basemaps(20).Streets!.addTo(sitesMap);
+  const color: Record<string, string> = { 'Standing, rated dead': '#c4512b', Removed: '#5a655e', 'Not found on a survey': '#9aa8a1', 'Rated poor': '#e0a400' };
+  for (const x of sites) {
+    L.circleMarker([x.plant.lat, x.plant.lng], { radius: 6, weight: 1.5, color: '#fff', fillColor: color[x.why] ?? '#5a655e', fillOpacity: 1 })
+      .bindPopup(() => `<b>${esc(x.plant.taxon.common)}</b><br>${esc(x.plant.id)} · ${esc(x.why)}<br><a href="${esc(BASE)}?plant=${encodeURIComponent(x.plant.id)}">Explorer</a>`)
+      .addTo(sitesMap);
+  }
+  if (sites.length) sitesMap.fitBounds(L.latLngBounds(sites.map((x) => [x.plant.lat, x.plant.lng] as [number, number])), { padding: [24, 24], maxZoom: 17 });
+  else sitesMap.setView(dataset.config.map.center, 15);
+}
+
 // ---------------------------------------------------------------- worklists
 
 const LIMIT = 300;
@@ -268,6 +358,104 @@ $('st-wl-csv').addEventListener('click', () => {
 });
 $('st-wl-print').addEventListener('click', () => window.print());
 
+// ---------------------------------------------------------------- review inbox
+
+let selected = 0;
+let inboxMap: L.Map | null = null;
+const FIELD_NAMES: Record<string, string> = {
+  taxon_id: 'Species', tag: 'Tag', geolocation_notes: 'Position note', collection_id: 'Campus', planted_year: 'Planted', dedication_label: 'Plaque',
+};
+const dateText = (d: string) => new Date(`${d}T12:00:00`).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+const plural = (n: number, one: string, many = `${one}s`) => `${fmt(n)} ${n === 1 ? one : many}`;
+
+function setupInbox(): void {
+  const real = inbox.submissions.filter((x) => !x.example).length;
+  $('in-banner').hidden = inbox.active;
+  const badge = $('st-inbox-count');
+  badge.textContent = String(real || inbox.submissions.length);
+  badge.hidden = inbox.submissions.length === 0;
+  badge.classList.toggle('st-badge--example', real === 0);
+  renderInboxList();
+  renderSubmission();
+}
+
+function renderInboxList(): void {
+  $('in-list').innerHTML = inbox.submissions.length ? inbox.submissions.map((x, i) => `
+    <li><button type="button" class="st-sub${i === selected ? ' on' : ''}" data-sub="${i}" aria-pressed="${i === selected}">
+      <span class="st-sub-top">${x.example ? '<span class="st-tag">Example</span>' : ''}<span class="st-pill st-pill--${x.status}">${x.status === 'ready' ? 'Ready to approve' : `Can't be approved: ${plural(x.summary.errors, 'error')}`}</span></span>
+      <b class="st-mono">${esc(x.file.split('/').pop()!)}</b>
+      <span>${x.dates.length ? esc(x.dates.map(dateText).join(' – ')) : 'No survey date'} · ${plural(x.rows, 'row')}</span>
+      <span class="st-dim">${[x.summary.newTrees && plural(x.summary.newTrees, 'new tree'), x.summary.visits && plural(x.summary.visits, 'visit'), x.summary.corrections && plural(x.summary.corrections, 'correction'), x.summary.renumbered && `${fmt(x.summary.renumbered)} renumbered`].filter(Boolean).join(' · ')}</span>
+    </button></li>`).join('') : '<li class="st-note">Nothing is waiting.</li>';
+}
+$('in-list').addEventListener('click', (e) => {
+  const i = (e.target as Element).closest<HTMLElement>('[data-sub]')?.dataset.sub;
+  if (i === undefined) return;
+  selected = Number(i);
+  renderInboxList();
+  renderSubmission();
+});
+
+function renderSubmission(): void {
+  const x = inbox.submissions[selected];
+  if (inboxMap) { inboxMap.remove(); inboxMap = null; }
+  if (!x) { $('in-detail').innerHTML = ''; return; }
+  const s = x.summary;
+  const tile = (one: string, many: string, n: number, cls = '') => `<div class="st-mini${cls}"><b>${fmt(n)}</b><small>${esc(n === 1 ? one : many)}</small></div>`;
+  const errors = x.issues.filter((i) => i.level === 'error');
+  const warnings = x.issues.filter((i) => i.level !== 'error');
+  const treeLink = (id: string) => `<a class="st-mono" href="${esc(BASE)}?plant=${encodeURIComponent(id)}">${esc(id)}</a>`;
+  $('in-detail').innerHTML = `
+    <div class="st-panel">
+      <div class="st-panel-head"><h2 class="st-mono">${esc(x.file)}</h2>${x.example ? '<span class="st-tag">Example: made-up rows, never imported</span>' : ''}</div>
+      <div class="st-minis">
+        ${tile('new tree', 'new trees', s.newTrees)}${tile('visit', 'visits', s.visits)}${tile('correction', 'corrections', s.corrections)}${tile('renumbered', 'renumbered', s.renumbered)}
+        ${tile('already on file', 'already on file', s.alreadyOnFile)}${tile('note to check', 'notes to check', s.notes)}${tile('error', 'errors', s.errors, s.errors ? ' st-mini--bad' : '')}
+      </div>
+      ${errors.length ? `<div class="st-errors"><b>${plural(errors.length, 'error')} ${errors.length === 1 ? 'stops' : 'stop'} this file.</b> Nothing in it is imported until every row is right, so the rows beside a bad one wait too.
+        <ul>${errors.map((i) => `<li>${i.row ? `Row ${i.row}: ` : ''}${esc(i.message)}</li>`).join('')}</ul>Send it back with a note, or fix the file and add it again.</div>` : ''}
+      ${warnings.length ? `<div class="st-warnings"><b>${plural(warnings.length, 'warning')}</b> (these do not stop it)<ul>${warnings.map((i) => `<li>${i.row ? `Row ${i.row}: ` : ''}${esc(i.message)}</li>`).join('')}</ul></div>` : ''}
+      <div id="in-map" class="st-map st-map--small" role="application" aria-label="Map of what this file changes"></div>
+      <ul class="st-legend"><li><i style="background:#ffd100"></i>New tree</li><li><i style="background:#1f6f4a"></i>Visit</li><li><i style="background:#c4512b"></i>Moved (old spot, line to new)</li><li><i style="background:#5a655e"></i>Reported removed or not found</li></ul>
+      <div class="st-actions">
+        <button type="button" class="st-btn st-btn--go" disabled title="Not active yet">Approve</button>
+        <button type="button" class="st-btn" disabled title="Not active yet">Send back with a note</button>
+        <span class="st-note">${inbox.active ? '' : 'Switched off while the inbox is not active.'} ${x.status === 'ready' ? 'Approve would import every row below and update the map.' : 'This file cannot be approved until its errors are fixed.'}</span>
+      </div>
+    </div>
+    ${x.notes.length ? `<div class="st-panel"><h2>Notes to check</h2><p class="st-note">Left by the survey app for the desk: a tree matched by position, a tag that disagrees, a species changed.</p>
+      <ul class="st-list">${x.notes.map((n) => `<li><span>${treeLink(n.plant)} ${esc(n.note)}</span></li>`).join('')}</ul></div>` : ''}
+    ${x.newTrees.length ? `<div class="st-panel"><h2>New trees</h2>${table(['Tree', 'Tag', 'Species', 'Campus'], x.newTrees.map((t) => [`<span class="st-mono">${esc(t.plant)}</span>`, esc(t.tag || '—'), esc(t.common), esc(t.campus ?? '—')]), false)}</div>` : ''}
+    ${x.renumbered.length ? `<div class="st-panel"><h2>Renumbered to the tag on the trunk</h2>${table(['Now', 'Becomes', 'Tag', 'Species'], x.renumbered.map((r) => [treeLink(r.from), `<span class="st-mono">${esc(r.to)}</span>`, esc(r.tag), esc(r.common)]), false)}</div>` : ''}
+    ${x.corrections.length ? `<div class="st-panel"><h2>Corrections to what a tree is</h2>${table(['Tree', 'Change'], x.corrections.map((c) => [`${treeLink(c.plant)} ${esc(c.common)}`,
+      `<span class="st-cellwrap">${[c.moved ? `Moved ${c.moved.metres} m` : '', ...c.changes.map((ch) => `${esc(FIELD_NAMES[ch.field] ?? ch.field)}: ${esc(ch.from || '—')} → ${esc(ch.to)}`)].filter(Boolean).join('<br>')}</span>`]), false)}</div>` : ''}
+    ${x.visits.length ? `<div class="st-panel"><h2>Visits</h2>${table(['Tree', 'Date', 'Trunk', 'Condition', 'Status', 'Photo'], x.visits.map((v) => [`${esc(v.plant)} <span class="st-dim">${esc(v.common)}</span>`,
+      esc(v.date ? dateText(v.date) : '—'), esc(v.dbh ? `${v.dbh} in` : '—'), esc(v.condition || '—'), esc(v.status), v.photo ? 'Yes' : '—']), false)}</div>` : ''}`;
+  drawInboxMap(x);
+}
+
+function drawInboxMap(x: Submission): void {
+  const points: Array<[number, number]> = [];
+  inboxMap = L.map($('in-map'), { scrollWheelZoom: false });
+  basemaps(20).Streets!.addTo(inboxMap);
+  const dot = (at: [number, number], color: string, tip: string) => {
+    if (!Number.isFinite(at[0])) return;
+    points.push(at);
+    L.circleMarker(at, { radius: 6, weight: 1.5, color: '#fff', fillColor: color, fillOpacity: 1 }).bindTooltip(esc(tip)).addTo(inboxMap!);
+  };
+  const newIds = new Set(x.newTrees.map((t) => t.plant));
+  const moved = new Set(x.corrections.filter((c) => c.moved).map((c) => c.plant));
+  for (const v of x.visits) if (!newIds.has(v.plant) && !moved.has(v.plant)) dot([v.lat, v.lng], v.status === 'active' ? '#1f6f4a' : '#5a655e', `${v.plant} ${v.common}`);
+  for (const c of x.corrections) if (c.moved) {
+    L.polyline([c.moved.from, c.moved.to], { color: '#c4512b', weight: 2, dashArray: '4 4' }).addTo(inboxMap);
+    dot(c.moved.from, '#c4512b', `${c.plant}: on file here`);
+    dot(c.moved.to, '#1f6f4a', `${c.plant}: moved here, ${c.moved.metres} m`);
+  }
+  for (const t of x.newTrees) dot([t.lat, t.lng], '#ffd100', `${t.plant} ${t.common} (new)`);
+  if (points.length) inboxMap.fitBounds(L.latLngBounds(points), { padding: [30, 30], maxZoom: 19 });
+  else inboxMap.setView(dataset.config.map.center, 15);
+}
+
 // ---------------------------------------------------------------- exports
 
 function geojson(): string {
@@ -297,18 +485,23 @@ Promise.all([
     if (!r.ok) throw new Error(`Could not load health.json (HTTP ${r.status}). Run \`npm run data\` first.`);
     return r.json() as Promise<Health>;
   }),
-]).then(([d, h]) => {
+  // Optional: a build from before the inbox has no inbox.json.
+  fetch(`${BASE}data/inbox.json?v=${__DATA_VERSION__}`).then((r) => (r.ok ? r.json() as Promise<Inbox> : { active: false, submissions: [] })),
+]).then(([d, h, ib]) => {
   dataset = d.dataset;
   plants = d.plants;
   health = h;
+  inbox = ib;
   $('st-status').hidden = true;
   renderKpis();
   render1020();
   renderHealth();
+  setupPlanting();
   renderThreats();
   renderDays();
   renderAreas();
   setupWorklists();
+  setupInbox();
   show();
   drawMap();
 }).catch((err: Error) => {

@@ -90,7 +90,6 @@ ${search ? `<script src="${up}search.js?v=${assetVersion()}" defer></script>\n` 
 <header class="bar">
   <a class="bar-home" href="${esc(base)}"><img class="bar-mark" src="${mark}" alt="" width="30" height="30">UVM Trees</a>
   ${allSpecies ? `<a class="bar-link" href="${esc(base)}species/">All species</a>` : ''}
-  <a class="bar-link" href="${esc(base)}steward/#health"><span class="bar-long">Collection health</span><span class="bar-short">Health</span></a>
   ${search ? SEARCH_FORM : ''}
 </header>
 ${body}
@@ -318,8 +317,7 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
 .bar-link { font-size: .9rem; opacity: .9; white-space: nowrap; }
 .bar-home { white-space: nowrap; }
 /* A phone has room for the home link, two short links and the search button. */
-.bar-short { display: none; }
-@media (max-width: 30rem) { .bar-long { display: none; } .bar-short { display: inline; } .bar { gap: .8rem; } }
+@media (max-width: 30rem) { .bar { gap: .8rem; } }
 .bar a:hover { text-decoration: underline; }
 
 .page { max-width: 44rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }

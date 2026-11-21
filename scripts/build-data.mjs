@@ -4,7 +4,7 @@
 // `npm run build`). Exits non-zero on validation errors so CI catches bad data.
 
 import { createHash } from 'node:crypto';
-import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Papa from 'papaparse';
@@ -14,6 +14,7 @@ import { normalizeName } from './lib/species.mjs';
 import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS } from './lib/species-pages.mjs';
 import { renderItreePage } from './lib/itree-page.mjs';
 import { collectionHealth } from './lib/health.mjs';
+import { reviewSubmission } from './lib/review.mjs';
 import { SPECIES_SEARCH_JS } from './lib/species-search.mjs';
 import { photoUrl } from './lib/photo-url.mjs';
 
@@ -252,24 +253,45 @@ if (result.dataset.itree) {
 
 // ---- collection health ------------------------------------------------------
 // Diversity, pest exposure, origin, condition and survey progress (health.mjs),
-// for the steward console, which shows them at /steward/#health. /health/ was
-// a page of its own until November 2026; it stays as a redirect so links to it
-// from before keep working.
-const healthDir = join(root, 'public', 'health');
-rmSync(healthDir, { recursive: true, force: true });
-mkdirSync(healthDir, { recursive: true });
+// for the steward console's Collection health section. The console is for
+// administrators: no public page links to it. /health/ was a public page until
+// November 2026 and is no longer built.
+rmSync(join(root, 'public', 'health'), { recursive: true, force: true });
 writeFileSync(
   join(root, 'public', 'data', 'health.json'),
   JSON.stringify(collectionHealth(result.dataset, result.plants, new Date().getFullYear())),
 );
-writeFileSync(join(healthDir, 'index.html'), `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>Collection health — UVM Trees</title>
-<meta name="robots" content="noindex">
-<meta http-equiv="refresh" content="0; url=../steward/#health">
-<link rel="canonical" href="../steward/#health">
-<script>location.replace('../steward/#health')</script></head>
-<body><p>Collection health is now part of the <a href="../steward/#health">steward console</a>.</p></body></html>
-`);
+
+// ---- the review inbox ---------------------------------------------------------
+// Survey files waiting for approval, in survey/inbox/, each run through the
+// importer as a dry run against the data as it stands (review.mjs), for the
+// steward console's Review inbox. survey/inbox-examples/ holds made-up ones
+// so the inbox has something to show while it is not yet active. A file with
+// errors does not stop the build: showing them is the point.
+{
+  const surveyDir = join(root, 'survey');
+  const parseFile = (path) => Papa.parse(readFileSync(path, 'utf8'), { header: true, delimiter: ',', skipEmptyLines: 'greedy', transformHeader: (h) => h.trim() });
+  const inputs = {
+    mapping: JSON.parse(readFileSync(join(surveyDir, 'mapping.json'), 'utf8')),
+    taxaRows: readCsv('taxa.csv'), plantRows: readCsv('plants.csv'), observationRows: readCsv('observations.csv'),
+    collectionRows: readCsv('collections.csv'), campusAreas: JSON.parse(readFileSync(join(dataDir, 'campus-areas.geojson'), 'utf8')),
+    config, renumberedRows: existsSync(join(dataDir, 'renumbered.csv')) ? readCsv('renumbered.csv') : [],
+  };
+  const submissions = [];
+  for (const [dir, example] of [['inbox', false], ['inbox-examples', true]]) {
+    const at = join(surveyDir, dir);
+    if (!existsSync(at)) continue;
+    for (const name of readdirSync(at).filter((n) => n.toLowerCase().endsWith('.csv')).sort()) {
+      const parsed = parseFile(join(at, name));
+      submissions.push({ example, ...reviewSubmission({ ...inputs, file: `survey/${dir}/${name}`, rows: parsed.data, headers: parsed.meta.fields ?? [] }) });
+    }
+  }
+  // Not active yet: the console shows the inbox, but nothing feeds it and
+  // approving is switched off (docs/STEWARD.md).
+  writeFileSync(join(root, 'public', 'data', 'inbox.json'), JSON.stringify({ active: false, submissions }));
+  const waiting = submissions.filter((x) => !x.example).length;
+  if (waiting) console.log(`  ${waiting} survey file(s) waiting in survey/inbox/ for review`);
+}
 
 // These two files keep the same URL forever — Vite hashes JS and CSS
 // filenames, but copies public/ through untouched. Without a cache-buster a
@@ -287,6 +309,12 @@ const version = createHash('sha256')
       'campus-areas.geojson', 'species-aliases.csv', 'config.json', 'city-trees.csv', 'itree-city-trees.csv', 'itree-run.json', peaksFile]
       .filter((name) => existsSync(join(dataDir, name)))
       .map((name) => readFileSync(join(dataDir, name)))
+      // The review inbox's files too, so a new submission is not hidden behind
+      // a cached copy of the last inbox.
+      .concat(['inbox', 'inbox-examples'].flatMap((dir) => {
+        const at = join(root, 'survey', dir);
+        return existsSync(at) ? readdirSync(at).filter((n) => n.endsWith('.csv')).sort().map((n) => readFileSync(join(at, n))) : [];
+      }))
       .reduce((a, b) => Buffer.concat([a, b]), Buffer.alloc(0)),
   )
   .digest('hex')

@@ -1,0 +1,3 @@
+tag,taxon_id,species,lat,lng,area,dbh_in,height_ft,spread_ft,status,condition,planted_year,surveyor,date,photo,geolocation_notes,dedication_label,notes
+3991,,Acer rubrom,44.470300,-73.199800,,4,,,active,good,,EX,2026-11-21,,GPS ±2 m,,Example only: a misspelled species
+2003,acer-rubrum,Acer rubrum,44.470640,-73.199505,,,,,active,good,,EX,2026-11-21,,,,Example only: a visit held up by the row above
