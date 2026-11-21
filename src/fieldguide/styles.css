@@ -129,7 +129,11 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
   position: sticky; top: 0; z-index: 3; height: 3.2rem; margin-bottom: -3.2rem;
   display: flex; align-items: center; gap: .7rem; padding: 0 .7rem;
   transition: background-color .15s, box-shadow .15s;
+  /* Invisible over the photo, so taps go through to it (and to ⤢); only
+     the Map button catches them. Solid once scrolled, it catches its own. */
+  pointer-events: none;
 }
+.fg-tree-top .fg-back, .fg-tree.fg-scrolled .fg-tree-top { pointer-events: auto; }
 .fg-tree.fg-scrolled .fg-tree-top { background: var(--bg); box-shadow: 0 1px 0 var(--rule), 0 4px 12px rgb(0 0 0 / 10%); }
 .fg-back {
   flex: none; padding: .4rem .8rem; border-radius: 99px; border: 0;
@@ -147,9 +151,12 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
 .fg-photo--none { aspect-ratio: auto; height: 11rem; }
 .fg-photo-open { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
 .fg-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+/* Says the photo opens in full. A tap anywhere on the photo does that; this
+   just shows it. Dark and translucent, like the caption, so it sits on the
+   photo rather than on top of it. */
 .fg-photo-full {
-  position: absolute; top: .6rem; right: .7rem; width: 2.1rem; height: 2.1rem; border-radius: 50%; display: grid; place-items: center;
-  background: rgb(255 255 255 / 92%); color: #17211c; font-size: 1.05rem; box-shadow: 0 2px 10px rgb(0 0 0 / 20%);
+  position: absolute; top: .65rem; right: .7rem; width: 2.25rem; height: 2.25rem; border-radius: 50%; display: grid; place-items: center;
+  background: rgb(0 0 0 / 45%); color: #fff; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
 }
 .fg-photo figcaption { position: absolute; right: .6rem; bottom: .5rem; padding: .15rem .5rem; border-radius: 99px; font-size: .72rem; background: rgb(0 0 0 / 55%); color: #fff; pointer-events: none; }
 .fg-nophoto { position: absolute; left: 1rem; bottom: .9rem; font-size: .8rem; color: var(--dim); }
