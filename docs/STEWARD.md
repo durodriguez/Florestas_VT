@@ -46,6 +46,29 @@ November 2026 (that address now leads here):
 
 The map's results and every species page link here as "Collection health".
 
+## Planting plan
+
+What to plant more of and less of, and where (`src/steward/planting.ts`, with
+tests). Starting points from the inventory's own data, not a prescription:
+the site, what nurseries can supply and Grounds' own plans decide.
+
+- **Plant more of:** the trees in `taxa.csv` that are a species (not a
+  cultivar or variety), hardy in zone 5 (Burlington is 5b on the USDA's 2023
+  map; a species counts when its recorded zones include 5), not marked
+  invasive in Vermont, and from a genus under 20% and a family under 30% of
+  campus. Vermont natives first, then those whose family and genus campus has
+  least of. Hosts of the pests on the collection-health list come last,
+  flagged. Each shows its mature size, zones and the pests recorded for it,
+  so a species whose own pest is serious (butternut canker) says so. Filter
+  to natives only, or by size.
+- **Plant less of:** the six most common genera and four most common
+  families against their limits, with the pests each hosts, and the species
+  marked invasive in Vermont, not to replace in kind.
+- **Places that need a tree:** where the record says a tree was removed or
+  not found, and standing trees rated dead or poor, on a map and in a list.
+  Open ground that could take a tree needs building and pavement outlines the
+  data does not have yet.
+
 ## Worklists
 
 The standing trees that need one of these, on one campus or all, ordered by
@@ -71,6 +94,4 @@ GitHub. Made in the browser from the live data.
 ## Not built yet
 
 From the report's mock-up: a **review inbox**, where survey uploads wait for
-a person to approve them (to-do 22), and a **planting plan**. The inbox needs
-a decision about where uploads go and who approves them; the planting plan
-needs a decision about what it should plan.
+a person to approve them (to-do 22).

@@ -18,6 +18,7 @@ import { colorFor, legendFor } from '../palette';
 import { measuredOn } from '../measured';
 import { toCsv } from '../filters';
 import { NEEDS, surveyDays, worklist, type Need } from './worklist';
+import { LIMITS, ZONE, plantingCandidates, replacementSites, sizeOf, type Candidate } from './planting';
 import type { Dataset, Plant } from '../types';
 
 const BASE = import.meta.env.BASE_URL;
@@ -33,7 +34,7 @@ interface Health {
   conditions: Array<[string, number]>; unrated: number;
   age: { recent: number; older: number; old: number; none: number };
   diversity: Record<'species' | 'genus' | 'family', { name: string; count: number; share: number; limit: number; within: boolean }>;
-  threats: Array<{ name: string; label: string; trees: number }>;
+  threats: Array<{ name: string; label: string; hosts: string[]; trees: number }>;
   areas: Array<{ area: string; trees: number; measured: number; photo: number; species: number; recent: number }>;
 }
 
@@ -43,7 +44,7 @@ let health: Health;
 
 // ---------------------------------------------------------------- sections
 
-const SECTIONS = ['overview', 'health', 'worklists', 'exports'];
+const SECTIONS = ['overview', 'health', 'planting', 'worklists', 'exports'];
 function show(): void {
   const want = location.hash.slice(1);
   const id = SECTIONS.includes(want) ? want : 'overview';
@@ -54,6 +55,7 @@ function show(): void {
   }
   // Leaflet measures its box when shown; a map drawn while hidden is blank.
   if (id === 'overview') setTimeout(() => map?.invalidateSize(), 0);
+  if (id === 'planting') setTimeout(() => sitesMap ? sitesMap.invalidateSize() : drawSitesMap(), 0);
 }
 window.addEventListener('hashchange', show);
 
@@ -215,6 +217,80 @@ function recolor(): void {
 }
 $('st-mapmode').addEventListener('change', recolor);
 
+// ---------------------------------------------------------------- planting plan
+
+let candidates: Candidate[] = [];
+const SHOW = 30;
+const share = (x: number) => `${(x * 100).toFixed(1)}%`;
+
+function setupPlanting(): void {
+  candidates = plantingCandidates(plants, dataset.taxa, health.threats);
+  $('pl-rule').textContent = `Trees hardy in zone ${ZONE} (Burlington is 5b), not marked invasive in Vermont, from genera and families under the 20% and 30% limits. Natives first, then those whose family and genus campus has least of. Hosts of the pests above come last, flagged.`;
+  for (const id of ['pl-native', 'pl-size']) $(id).addEventListener('change', renderCandidates);
+  renderCandidates();
+
+  const genusRows = health.top.genus.slice(0, 6).map(([g, n]) => {
+    const hosts = health.threats.filter((t) => t.hosts.includes(g)).map((t) => t.name);
+    return [`<i>${esc(g)}</i>${hosts.length ? ` <span class="st-flag">host of ${esc(hosts.join(', ').toLowerCase())}</span>` : ''}`, bar(n / health.knownTrees, LIMITS.genus)];
+  });
+  const familyRows = health.top.family.slice(0, 4).map(([f, n]) => [esc(f), bar(n / health.knownTrees, LIMITS.family)]);
+  $('pl-less').innerHTML = table(['Genus', 'Share, against 20%'], genusRows) + table(['Family', 'Share, against 30%'], familyRows);
+  $('pl-invasive').textContent = health.invasive.length
+    ? `Not to replace in kind, as marked invasive in Vermont: ${health.invasive.map(([name, n]) => `${name} (${fmt(n)} on campus)`).join(', ')}.` : '';
+
+  const sites = replacementSites(plants);
+  $('pl-sites').innerHTML = `<thead><tr><th scope="col">Tree</th><th scope="col">Why</th><th scope="col">Campus</th></tr></thead><tbody>${sites.map((x) => `<tr>
+    <td><a class="st-mono" href="${esc(BASE)}?plant=${encodeURIComponent(x.plant.id)}">${esc(x.plant.id)}</a> ${esc(x.plant.taxon.common)}</td>
+    <td>${esc(x.why)}</td><td>${esc(x.plant.collection?.name ?? '—')}</td></tr>`).join('')}</tbody>`;
+}
+
+/** A share against its limit, as a small bar with the limit marked. */
+function bar(x: number, limit: number): string {
+  const scale = limit * 1.5;
+  return `<span class="st-minibar"><i style="width:${Math.min(100, (x / scale) * 100).toFixed(1)}%"></i><u style="left:${((limit / scale) * 100).toFixed(1)}%"></u></span>${share(x)}`;
+}
+
+function renderCandidates(): void {
+  const native = $<HTMLInputElement>('pl-native').checked;
+  const size = $<HTMLSelectElement>('pl-size').value;
+  const list = candidates.filter((c) => (!native || c.native) && (!size || sizeOf(c.taxon) === size));
+  $('pl-count').textContent = `${fmt(list.length)} species fit${list.length > SHOW ? `; the first ${SHOW}` : ''}.`;
+  $('pl-table').innerHTML = `<thead><tr><th scope="col">Species</th><th scope="col">Origin</th><th scope="col">On campus</th>
+    <th scope="col">Its genus now</th><th scope="col">Its family now</th><th scope="col">Mature size</th><th scope="col">Zones</th><th scope="col">Notes</th><th scope="col">Watch for</th></tr></thead>
+    <tbody>${list.slice(0, SHOW).map((c) => {
+      const t = c.taxon;
+      const size = t.matureHeightFt ? `${t.matureHeightFt}${t.matureSpreadFt ? ` × ${t.matureSpreadFt}` : ''} ft` : '—';
+      const notes = [c.onCampus === 0 ? 'New to campus' : '', ...c.hostOf.map((h) => `Host of ${h.toLowerCase()}`)].filter(Boolean);
+      return `<tr>
+        <td><a href="${esc(BASE)}species/${encodeURIComponent(t.id)}/">${esc(t.common)}</a> <span class="st-dim"><i>${esc(t.sci)}</i></span></td>
+        <td>${c.native ? 'Vermont native' : 'Introduced'}</td>
+        <td>${fmt(c.onCampus)}</td>
+        <td><i>${esc(t.genus)}</i> ${share(c.genusShare)}</td>
+        <td>${esc(t.family)} ${share(c.familyShare)}</td>
+        <td>${esc(size)}</td>
+        <td>${esc(t.zones)}</td>
+        <td>${notes.map((n) => `<span class="${n.startsWith('Host') ? 'st-flag' : 'st-tag'}">${esc(n)}</span>`).join(' ')}</td>
+        <td class="st-wrap">${esc(t.pests || '—')}</td>
+      </tr>`;
+    }).join('')}</tbody>`;
+  $('pl-more').textContent = list.length > SHOW ? `${fmt(list.length - SHOW)} more fit; narrow by origin or size to see them.` : '';
+}
+
+let sitesMap: L.Map | null = null;
+function drawSitesMap(): void {
+  const sites = replacementSites(plants);
+  sitesMap = L.map($('pl-map'), { zoomControl: true, scrollWheelZoom: false });
+  basemaps(20).Streets!.addTo(sitesMap);
+  const color: Record<string, string> = { 'Standing, rated dead': '#c4512b', Removed: '#5a655e', 'Not found on a survey': '#9aa8a1', 'Rated poor': '#e0a400' };
+  for (const x of sites) {
+    L.circleMarker([x.plant.lat, x.plant.lng], { radius: 6, weight: 1.5, color: '#fff', fillColor: color[x.why] ?? '#5a655e', fillOpacity: 1 })
+      .bindPopup(() => `<b>${esc(x.plant.taxon.common)}</b><br>${esc(x.plant.id)} · ${esc(x.why)}<br><a href="${esc(BASE)}?plant=${encodeURIComponent(x.plant.id)}">Explorer</a>`)
+      .addTo(sitesMap);
+  }
+  if (sites.length) sitesMap.fitBounds(L.latLngBounds(sites.map((x) => [x.plant.lat, x.plant.lng] as [number, number])), { padding: [24, 24], maxZoom: 17 });
+  else sitesMap.setView(dataset.config.map.center, 15);
+}
+
 // ---------------------------------------------------------------- worklists
 
 const LIMIT = 300;
@@ -305,6 +381,7 @@ Promise.all([
   renderKpis();
   render1020();
   renderHealth();
+  setupPlanting();
   renderThreats();
   renderDays();
   renderAreas();
