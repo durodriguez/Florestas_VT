@@ -38,14 +38,16 @@ export const MONTH_NAMES = [
 
 const FLOWER: Record<string, string> = {
   white: '#f7f4ea', cream: '#efe2b0', pink: '#f19cbb', red: '#d8434e', purple: '#9b6cc4', yellow: '#f2c934',
+  'pink-purple': '#c46aa8', 'purple-red': '#b2385a', blue: '#5b7fd1',
 };
 const FRUIT: Record<string, string> = {
   red: '#c8323e', orange: '#e57a1f', yellow: '#e8c22c', purple: '#6d3b8f', blue: '#4166b0',
   'blue-black': '#2c3550', black: '#2b2b2b',
+  white: '#f4f2ea', 'red-black': '#6b1f2a', 'pink-red': '#e0567a', 'red-purple': '#8a2f5e', 'yellow-red': '#e8862c', 'red-orange': '#e0552b',
 };
 const FALL: Record<string, string> = {
   yellow: '#f0c419', orange: '#ef8a2b', red: '#d43d33', 'orange-red': '#e8602c', purple: '#8c3c6e',
-  bronze: '#a8742f', 'yellow-brown': '#c9a24a', brown: '#9a7550',
+  bronze: '#a8742f', 'yellow-brown': '#c9a24a', brown: '#9a7550', gold: '#e0a91c', 'yellow-red': '#ec7a2a',
 };
 /** The same greens as "Color by plant type", so the two modes agree. */
 export const EVERGREEN = '#12501a';

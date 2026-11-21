@@ -58,3 +58,18 @@ describe('the season summary', () => {
     expect(isPale('#12501a')).toBe(false);
   });
 });
+
+describe('season — every showy color the species list uses', () => {
+  const cal = (over: Record<string, unknown>) => ({
+    type: 'deciduous-tree', flowerMonths: [] as number[], flowerColor: '', fruitMonths: [] as number[], fruitColor: '', fallColor: '', ...over,
+  }) as Parameters<typeof season>[0];
+  it('counts gold fall color, blended flowers and white berries, as the year table shows them', () => {
+    expect(season(cal({ fallColor: 'gold' }), 10).state).toBe('fall');
+    expect(season(cal({ flowerColor: 'pink-purple', flowerMonths: [5] }), 5).state).toBe('flower');
+    expect(season(cal({ fruitColor: 'white', fruitMonths: [9] }), 9).state).toBe('fruit');
+  });
+  it('still leaves out green flowers and brown fruit', () => {
+    expect(season(cal({ flowerColor: 'yellow-green', flowerMonths: [5] }), 5).state).toBe('leaf');
+    expect(season(cal({ fruitColor: 'brown', fruitMonths: [9] }), 9).state).toBe('leaf');
+  });
+});
