@@ -49,6 +49,8 @@ let byId = new Map<string, Plant>();
 let tours: Tour[] = [];
 let here = GREEN;
 let located = false;
+/** A spot picked by tapping the map: "Around you" then shows the trees around it instead. */
+let spot: { lat: number; lng: number } | null = null;
 let lastPicksAt: { lat: number; lng: number } | null = null;
 /** The tour being walked, the stop the visitor is on (0-based), and which way: 1 forward, -1 in reverse. */
 let walking: { tour: Tour; stops: Plant[]; index: number; dir: 1 | -1 } | null = null;
@@ -60,8 +62,12 @@ const map = L.map($('fg-map'), { zoomControl: false, center: [GREEN.lat, GREEN.l
 const layers = basemaps(21);
 layers.Streets!.addTo(map);
 L.control.layers({ Streets: layers.Streets!, Satellite: layers.Satellite! }, {}, { position: 'topright' }).addTo(map);
-// Top left, under the month: at the bottom the sheet would cover it.
-map.attributionControl.setPosition('topleft');
+// The map's credits: bottom right on a desktop, where nothing covers them;
+// on a phone the sheet fills the bottom, so top left, above the month.
+const wideScreen = window.matchMedia('(min-width: 48rem)');
+const placeCredits = () => map.attributionControl.setPosition(wideScreen.matches ? 'bottomright' : 'topleft');
+placeCredits();
+wideScreen.addEventListener('change', placeCredits);
 const coarse = window.matchMedia('(pointer: coarse)').matches;
 const renderer = L.canvas({ padding: 0.3, tolerance: coarse ? 8 : 3 });
 const treeLayer = L.layerGroup().addTo(map);
@@ -210,11 +216,23 @@ $('fg-tabs').addEventListener('click', (e) => {
 
 // ---------------------------------------------------------------- around you
 
+const PIN = '<svg viewBox="0 0 24 32" width="26" height="34" aria-hidden="true"><path fill="#154734" stroke="#fff" stroke-width="2" d="M12 1C6 1 1.5 5.4 1.5 11.2 1.5 19 12 31 12 31s10.5-12 10.5-19.8C22.5 5.4 18 1 12 1z"/><circle cx="12" cy="11" r="4" fill="#ffd100"/></svg>';
+
+/**
+ * The trees worth a look around the visitor, or around the spot they tapped,
+ * with a gold ring on each on the map. `note` says where that is; with a
+ * spot picked it is ignored.
+ */
 function renderAround(note: string): void {
-  const { picks, radius, within } = aroundYou(plants, here, MONTH);
-  lastPicksAt = here;
-  $('fg-where').textContent = note;
-  $('fg-count').textContent = located ? `${within} trees within 150 m` : '';
+  const at = spot ?? here;
+  const { picks, radius, within } = aroundYou(plants, at, MONTH);
+  if (!spot) lastPicksAt = here;
+  $('fg-where').textContent = spot ? 'The trees worth a look around the pin, and how far each is from it.' : note;
+  $('fg-hint').hidden = Boolean(spot);
+  $('fg-unpick').hidden = !spot;
+  $('fg-unpick').textContent = located ? 'Back to where you are' : 'Back to the University Green';
+  $('fg-tab-around').textContent = spot ? 'Around the pin' : 'Around you';
+  $('fg-count').textContent = located || spot ? `${within} trees within 150 m` : '';
   $('fg-cards').innerHTML = picks.length
     ? picks.map((p) => card(p)).join('')
     : `<li class="fg-empty">Nothing notable or in season within ${radius} m.</li>`;
@@ -222,7 +240,43 @@ function renderAround(note: string): void {
   for (const p of picks) {
     L.circleMarker([p.plant.lat, p.plant.lng], { radius: 16, color: '#ffd100', weight: 3, fill: false, interactive: false }).addTo(pickLayer);
   }
+  if (spot) {
+    L.marker([spot.lat, spot.lng], {
+      interactive: false, keyboard: false,
+      icon: L.divIcon({ className: 'fg-pin', html: PIN, iconSize: [26, 34], iconAnchor: [13, 33] }),
+    }).addTo(pickLayer);
+  }
 }
+
+/** The last note for the visitor's own position, to go back to when the pin is lifted. */
+let ownNote = 'Finding your location…';
+function renderOwn(note: string): void {
+  ownNote = note;
+  if (!spot) renderAround(note);
+}
+
+function pickSpot(at: { lat: number; lng: number }): void {
+  spot = at;
+  setTab('around');
+  renderAround('');
+}
+function unpick(): void {
+  spot = null;
+  renderAround(ownNote);
+  showPoint(here, Math.max(map.getZoom(), 17));
+}
+$('fg-unpick').addEventListener('click', unpick);
+
+// A tap on open ground (a tap on a tree opens its page instead) picks that
+// spot. Held back a moment, so the first tap of a double tap, which zooms,
+// does not drop a pin.
+let tapTimer = 0;
+map.on('click', (e: L.LeafletMouseEvent) => {
+  if (walking || reading) return;
+  window.clearTimeout(tapTimer);
+  tapTimer = window.setTimeout(() => pickSpot({ lat: e.latlng.lat, lng: e.latlng.lng }), 300);
+});
+map.on('dblclick', () => window.clearTimeout(tapTimer));
 
 function thumb(p: Plant): string {
   const photo = p.photo ? photoUrl(p.photo, BASE, dataset.config.photoBaseUrl) : '';
@@ -261,12 +315,12 @@ $('fg-sheet').addEventListener('click', (e) => {
 });
 
 function locate(): void {
-  if (!('geolocation' in navigator)) return renderAround('Your phone cannot share its location, so here are the trees around the University Green.');
+  if (!('geolocation' in navigator)) return renderOwn('Your phone cannot share its location, so here are the trees around the University Green.');
   navigator.geolocation.watchPosition((pos) => {
     const at = { lat: pos.coords.latitude, lng: pos.coords.longitude };
     const center = { lat: dataset.config.map.center[0], lng: dataset.config.map.center[1] };
     if (distanceMeters(at.lat, at.lng, center.lat, center.lng) > AWAY_M) {
-      if (!located) renderAround('You are away from campus, so here are the trees around the University Green.');
+      if (!located) renderOwn('You are away from campus, so here are the trees around the University Green.');
       return;
     }
     const first = !located;
@@ -276,19 +330,20 @@ function locate(): void {
     L.circle([at.lat, at.lng], { radius: pos.coords.accuracy, color: '#1d6fe0', weight: 1, fillOpacity: 0.08, interactive: false }).addTo(youLayer);
     L.circleMarker([at.lat, at.lng], { radius: 7, color: '#fff', weight: 3, fillColor: '#1d6fe0', fillOpacity: 1, interactive: false }).addTo(youLayer);
     // A tour or a shared link has already put the map where it should be.
-    if (first && !walking && !reading) showPoint(here, 18);
+    if (first && !walking && !reading && !spot) showPoint(here, 18);
     // Not on every fix: the cards would shuffle as the visitor walks.
     if (first || !lastPicksAt || distanceMeters(at.lat, at.lng, lastPicksAt.lat, lastPicksAt.lng) > 25) {
-      renderAround('The trees worth a look near you, and why.');
+      renderOwn('The trees worth a look near you, and why.');
       renderTourList();
       if (walking) renderWalk();
     }
   }, () => {
-    if (!located) renderAround('Without your location, here are the trees around the University Green. Allow location to see the trees around you.');
+    if (!located) renderOwn('Without your location, here are the trees around the University Green. Allow location to see the trees around you.');
   }, { enableHighAccuracy: true, maximumAge: 10000 });
 }
 
 $('fg-locate').addEventListener('click', () => {
+  if (spot) { spot = null; renderAround(ownNote); }
   showPoint(here, Math.max(map.getZoom(), 18));
   if (!located) locate();
 });
@@ -613,7 +668,7 @@ loadData(BASE).then((d) => {
   drawStars();
   $('fg-map').classList.toggle('fg-far', map.getZoom() < 17);
   renderSeasonChip();
-  renderAround('Finding your location…');
+  renderOwn('Finding your location…');
   renderTourList();
   showPoint(here, 18);
   locate();

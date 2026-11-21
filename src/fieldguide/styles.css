@@ -32,9 +32,13 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
   padding: .35rem .7rem; border-radius: 99px; background: var(--bg); color: var(--ink);
   font-size: .82rem; font-weight: 600; box-shadow: 0 2px 10px rgb(0 0 0 / 18%);
 }
-/* The map's credits, under the month chip. */
-.fg-map .leaflet-top.leaflet-left { top: 2.9rem; }
-.fg-map .leaflet-control-attribution { margin: 0 0 0 .7rem; border-radius: 6px; font-size: 10px; }
+/* The map's credits: on a phone at the top left, above the month chip (main.ts
+   puts them there); on a desktop at the bottom right. */
+.fg-map .leaflet-control-attribution { border-radius: 6px; font-size: 10px; }
+.fg-map .leaflet-top.leaflet-left .leaflet-control-attribution { margin: .3rem 0 0 .7rem; }
+@media (max-width: 47.99rem) { .fg-chip { top: 1.85rem; } }
+.fg-pin { pointer-events: none; }
+.fg-pin svg { display: block; filter: drop-shadow(0 2px 3px rgb(0 0 0 / 35%)); }
 /* Under the basemap switch, top right: clear of the sheet at any height. */
 .fg-locate {
   position: absolute; z-index: 500; right: .7rem; top: 4.4rem;
@@ -49,17 +53,24 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
   background: var(--bg); border-radius: 18px 18px 0 0; box-shadow: 0 -4px 20px rgb(0 0 0 / 16%);
 }
 .fg-sheet::before { content: ""; display: block; width: 2.4rem; height: 4px; border-radius: 2px; background: var(--rule); margin: 0 auto .5rem; }
-.fg-tabs { display: flex; align-items: baseline; gap: .2rem; }
+.fg-tabs { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .2rem; }
 .fg-tabs[hidden] { display: none; }
 .fg-tabs button {
-  font: inherit; font-size: 1.02rem; font-weight: 700; padding: .15rem .55rem .3rem; border: 0; border-bottom: 3px solid transparent;
+  font: inherit; font-size: 1.02rem; font-weight: 700; white-space: nowrap; padding: .15rem .55rem .3rem; border: 0; border-bottom: 3px solid transparent;
   background: none; color: var(--dim); cursor: pointer;
 }
 .fg-tabs button:first-child { padding-left: 0; }
 .fg-tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--gold); }
 .fg-tabs button[hidden] { display: none; }
-.fg-tabs small { margin-left: auto; font-size: .78rem; font-weight: 500; color: var(--dim); }
+.fg-tabs small { margin-left: auto; white-space: nowrap; font-size: .78rem; font-weight: 500; color: var(--dim); }
 .fg-where { margin: .2rem 0 .6rem; font-size: .82rem; color: var(--dim); }
+.fg-where:has(+ .fg-hint:not([hidden])) { margin-bottom: .15rem; }
+.fg-hint { margin: 0 0 .6rem; font-size: .78rem; color: var(--dim); font-style: italic; }
+.fg-hint[hidden], .fg-unpick[hidden] { display: none; }
+.fg-unpick {
+  margin: -.3rem 0 .6rem; padding: .25rem .7rem; border: 1px solid var(--rule); border-radius: 99px;
+  background: none; color: var(--green-2); font: inherit; font-size: .8rem; font-weight: 600; cursor: pointer;
+}
 .fg-cards { list-style: none; margin: 0; padding: 0 0 .2rem; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(9.5rem, 46%); gap: .55rem; overflow-x: auto; scroll-snap-type: x mandatory; }
 .fg-cards li { scroll-snap-align: start; }
 .fg-card {
