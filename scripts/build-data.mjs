@@ -257,10 +257,14 @@ rmSync(healthDir, { recursive: true, force: true });
 mkdirSync(healthDir, { recursive: true });
 {
   const now = new Date();
+  const health = collectionHealth(result.dataset, result.plants, now.getFullYear());
   writeFileSync(join(healthDir, 'index.html'), renderHealthPage(
-    collectionHealth(result.dataset, result.plants, now.getFullYear()),
+    health,
     { base: siteBase, config, today: now.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) },
   ));
+  // The same numbers for the steward console (/steward/), which is an app
+  // and cannot run health.mjs itself: one count, two pages.
+  writeFileSync(join(root, 'public', 'data', 'health.json'), JSON.stringify(health));
 }
 
 // These two files keep the same URL forever — Vite hashes JS and CSS

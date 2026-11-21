@@ -29,8 +29,8 @@ export default defineConfig({
     target: 'es2022',
     sourcemap: true,
     rollupOptions: {
-      // Six apps from one build: the public map at /, the field guide at
-      // /fieldguide/, the field survey PWA
+      // Seven apps from one build: the public map at /, the field guide at
+      // /fieldguide/, the steward console at /steward/, the field survey PWA
       // at /field/, the internal boundary tracer at /tracer/, the internal
       // position editor at /positions/, and the internal image calibration
       // tool at /imagery/. They share
@@ -42,6 +42,7 @@ export default defineConfig({
         positions: resolve(__dirname, 'positions/index.html'),
         imagery: resolve(__dirname, 'imagery/index.html'),
         fieldguide: resolve(__dirname, 'fieldguide/index.html'),
+        steward: resolve(__dirname, 'steward/index.html'),
       },
     },
   },

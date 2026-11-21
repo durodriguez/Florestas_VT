@@ -90,6 +90,12 @@ desktop a menu to copy the link or share it to WhatsApp, LinkedIn, Facebook or
 X. The link opens the map on that tree. The service logos are from Simple Icons
 (CC0).
 
+**Steward console** — the inventory for Grounds and planners, at
+`/steward/`: how complete it is, a map of where the gaps are, diversity and
+pest exposure, recent survey days, and worklists of the trees that still need
+a trunk size, a photo or a species, with CSV and GeoJSON exports. See
+[docs/STEWARD.md](docs/STEWARD.md).
+
 **Field guide** — a second way into the same trees, at `/fieldguide/`, for
 someone standing among them: a full-screen map in this month's colors, every
 tree drawn, a few trees near you worth the walk and why, the walking tours
