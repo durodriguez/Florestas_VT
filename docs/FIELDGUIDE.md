@@ -12,7 +12,7 @@ disagree; only the way in differs. The code is in `src/fieldguide/`.
 - **The map.** Full screen, every tree drawn (no clusters), colored by what its
   species is doing this month: flowers in their color, fruit, fall color,
   evergreen, in leaf or bare. A chip at the top counts what is in
-  flower, fruit or color. Streets or satellite, from the switch at top right;
+  flower, fruit or color. Notable trees (the largest trunks measured on campus, the largest of a species, the only one of its kind) carry a white star on UVM green; tapping one opens the tree. Streets or satellite, from the switch at top right;
   the button under it returns to where you are.
 - **Around you.** A sheet along the bottom (a card at the left on a desktop)
   with up to four trees near you worth the walk, each with its reason and its
