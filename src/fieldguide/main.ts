@@ -21,10 +21,12 @@ import { notableFacts } from '../notable';
 import { isPale, MONTH_NAMES, SEASON_LABELS, season, summarizeSeason } from '../season';
 import { dotScale } from '../tree-display';
 import { photoTaken, photoUrl } from '../photos';
-import { measuredOn, whenText } from '../measured';
+import { whenText } from '../measured';
 import { distanceMeters } from '../geo';
 import { aroundYou, type Pick } from './picks';
-import { yearInWords, yearOf } from './year';
+import { yearSummary, yearTable } from './year';
+import { tilesFor } from './tiles';
+import { ORIGIN_LABELS } from '../palette';
 import { neighbours, othersOfItsKind, step, stepText } from './walk';
 import type { Dataset, Plant, Tour } from '../types';
 
@@ -162,7 +164,11 @@ function followUrl(): void {
   if (p) openTree(p, 'none');
   else if (reading) closeTree();
 }
-window.addEventListener('popstate', followUrl);
+window.addEventListener('popstate', () => {
+  // Back with the whole photo open closes the photo, and nothing else.
+  if (!$('fg-lightbox').hidden) return closePhoto();
+  followUrl();
+});
 
 // ---------------------------------------------------------------- the sheet
 
@@ -397,50 +403,51 @@ const ABSENT: Record<string, string> = {
 function openTree(p: Plant, how: Hist = 'push'): void {
   const t = p.taxon;
   const unknown = t.id === 'unknown';
-  const on = measuredOn(p);
   const now = season(t, MONTH);
-  const when = (d: string | null) => (d ? ` <span class="fg-when">(${esc(whenText(d))})</span>` : '');
-  const fact = (label: string, value: string | null) => (value ? `<div><dt>${esc(label)}</dt><dd>${value}</dd></div>` : '');
   const photo = p.photo ? photoUrl(p.photo, BASE, dataset.config.photoBaseUrl) : '';
   const taken = photoTaken(p.photoOn ?? p.surveyedOn);
-  const age = p.plantedYear ? new Date().getFullYear() - p.plantedYear : null;
   const others = othersOfItsKind(p, plants);
-  const words = unknown ? [] : yearInWords(t);
+  const { tiles, conditionShown } = tilesFor(p, MONTH);
+  // What the tiles leave out, in one line under them.
+  const rest: Array<[string, string]> = [];
+  if (!conditionShown && p.condition) rest.push(['Condition', cap(p.condition)]);
+  if (p.plantedYear) rest.push(['Planted', String(p.plantedYear)]);
+  rest.push(['Last surveyed', p.surveyedOn ? whenText(p.surveyedOn) : 'Not yet']);
+  const origin = (ORIGIN_LABELS[t.origin] ?? '').replace(/^Introduced$/, 'introduced');
+  const summary = unknown ? '' : yearSummary(t);
   if (kinMap) { kinMap.remove(); kinMap = null; }
   reading = p;
 
   $('fg-tree').innerHTML = `
     <button type="button" class="fg-back" data-back>&lsaquo; Map</button>
-    <figure class="fg-photo">${photo
-      ? `<img src="${esc(photo)}" alt="${esc(t.common)}, ${esc(p.id)}">${taken ? `<figcaption>Photographed ${esc(taken)}</figcaption>` : ''}`
-      : `<div class="fg-nophoto" style="--c:${esc(now.color)}"><span>No photo of this tree yet</span></div>`}</figure>
+    <figure class="fg-photo${photo ? '' : ' fg-photo--none'}" style="--c:${esc(now.color)}">${photo
+      ? `<button type="button" class="fg-photo-open" data-photo aria-label="See the whole photo">
+           <img src="${esc(photo)}" alt="${esc(t.common)}, ${esc(p.id)}"><span class="fg-photo-full" aria-hidden="true">⤢</span>
+         </button>${taken ? `<figcaption>Photographed ${esc(taken)}</figcaption>` : ''}`
+      : '<span class="fg-nophoto">No photo of this tree yet</span>'}</figure>
     <div class="fg-tree-body">
       ${tourBar(p)}
       ${ABSENT[p.status] ? `<p class="fg-absent">${ABSENT[p.status]}</p>` : ''}
-      <p class="fg-eyebrow">${esc(p.id)}${p.tag ? ` · tag ${esc(p.tag)}` : ''}${p.collection ? ` · ${esc(p.collection.name)}` : ''}</p>
+      <p class="fg-eyebrow">${esc(p.id)}${p.collection ? ` · ${esc(p.collection.name)}` : ''} · ${p.tag ? `tag ${esc(p.tag)}` : 'no tag'}</p>
       <h1>${esc(t.common)}</h1>
-      <p class="fg-sci">${unknown ? 'Species not identified yet' : `<i>${esc(t.sci)}</i>`}</p>
+      <p class="fg-sci">${unknown ? 'Species not identified yet' : `<i>${esc(t.sci)}</i>${t.family ? ` · ${esc(t.family)}` : ''}${origin ? ` · ${esc(origin)}` : ''}`}</p>
       ${p.notable?.length ? `<ul class="fg-notable">${p.notable.map((n) => `<li>${esc(n)}</li>`).join('')}</ul>` : ''}
       ${p.story ? `<p class="fg-story">${esc(p.story)}</p>` : ''}
-      <dl class="fg-facts">
-        ${fact('Right now', `<span class="fg-dot" style="background:${esc(now.color)}"></span>${esc(SEASON_LABELS[now.state])} <span class="fg-when">(${esc(MONTH_NAMES[MONTH - 1]!)}, usually)</span>`)}
-        ${fact('Trunk diameter', p.dbhIn === null ? null : `${p.dbhIn} in${when(on.dbh)}`)}
-        ${fact('Height', p.heightFt === null ? null : `${p.heightFt} ft${when(on.height)}`)}
-        ${fact('Crown spread', p.spreadFt === null ? null : `${p.spreadFt} ft${when(on.spread)}`)}
-        ${fact('Planted', p.plantedYear ? `${p.plantedYear}${age !== null && age >= 2 ? ` <span class="fg-when">(about ${age} years ago)</span>` : ''}` : null)}
-        ${fact('Condition', p.condition ? `${esc(cap(p.condition))}${p.conditionOn ? when(p.conditionOn) : ''}` : null)}
-        ${fact('Last surveyed', p.surveyedOn ? esc(whenText(p.surveyedOn)) : 'Not yet')}
-      </dl>
+      ${tiles.length ? `<div class="fg-tiles${tiles.length === 1 ? ' fg-tiles--one' : ''}">${tiles.map((x) => `
+        <div class="fg-tile"><small>${esc(x.label)}</small>
+          <strong>${x.dot ? `<i style="background:${esc(x.dot)}"></i>` : ''}${esc(x.value)}</strong>${x.sub ? `<em>${esc(x.sub)}</em>` : ''}</div>`).join('')}
+      </div>` : ''}
+      <p class="fg-rest">${rest.map(([k, v]) => `<span>${esc(k)}: <b>${esc(v)}</b></span>`).join('')}</p>
       ${unknown ? '' : `
-        <h2>Its year</h2>
-        <ol class="fg-year" aria-label="What this species does each month">${yearOf(t).map((m) => `
-          <li class="${m.month === MONTH ? 'fg-now' : ''}" title="${esc(MONTH_NAMES[m.month - 1]!)}: ${esc(SEASON_LABELS[m.state])}">
-            <span style="background:${esc(m.color)}"></span><b aria-hidden="true">${esc(MONTH_NAMES[m.month - 1]![0]!)}</b>
-            <span class="fg-sr">${esc(MONTH_NAMES[m.month - 1]!)}: ${esc(SEASON_LABELS[m.state])}</span>
-          </li>`).join('')}
-        </ol>
-        <p class="fg-year-words">${words.length ? esc(words.join(' ')) : 'Nothing showy: no bright flowers, fruit or fall color.'}
-          <span class="fg-when">The species' usual months, not dates seen on this tree.</span></p>`}
+        <table class="fg-year">
+          <caption class="fg-sr">What this species does each month</caption>
+          <thead><tr><td></td>${MONTH_NAMES.map((n, i) => `<th scope="col" class="${i + 1 === MONTH ? 'fg-now' : ''}" abbr="${esc(n)}">${esc(n[0]!)}</th>`).join('')}</tr></thead>
+          <tbody>${yearTable(t).map((row) => `<tr><th scope="row">${esc(row.label)}</th>${row.cells.map((c, i) =>
+            `<td class="${i + 1 === MONTH ? 'fg-now' : ''}"${c ? ` style="--cell:${esc(c.color)}" title="${esc(MONTH_NAMES[i]!)}: ${esc(c.title)}"` : ''}><span>${c ? esc(c.title) : ''}</span></td>`).join('')}</tr>`).join('')}
+          </tbody>
+        </table>
+        ${summary ? `<p class="fg-summary">${esc(summary)}</p>` : ''}
+        <p class="fg-note">Table shows typical months for this species.</p>`}
       ${t.description ? `<h2>Look for</h2><p>${esc(t.description)}</p>` : ''}
       ${t.funFact ? `<details class="fg-fun"><summary>Did you know?</summary><p>${esc(t.funFact)}</p></details>` : ''}
       ${p.dedicationLabel ? `<h2>Dedication plaque</h2><p class="fg-plaque">${esc(p.dedicationLabel)}</p>` : ''}
@@ -461,6 +468,34 @@ function openTree(p: Plant, how: Hist = 'push'): void {
   if (others.length) drawKin(p, others.map((o) => o.plant));
   record(how, how === 'push' ? { plant: p.id } : history.state);
 }
+
+// ---------------------------------------------------------------- the whole photo
+
+/**
+ * The page crops the photo to a fixed frame, aimed a little above the middle
+ * where a crown usually is. A tap opens the whole of it, uncropped, on black.
+ * It takes a history entry, so the phone's back button closes it rather than
+ * the page.
+ */
+function openPhoto(): void {
+  const img = $('fg-tree').querySelector<HTMLImageElement>('.fg-photo img');
+  if (!img) return;
+  const caption = $('fg-tree').querySelector('.fg-photo figcaption')?.textContent ?? '';
+  $('fg-lightbox').innerHTML = `
+    <button type="button" class="fg-lb-close" data-close aria-label="Close the photo">✕</button>
+    <img src="${esc(img.src)}" alt="${esc(img.alt)}">
+    <p>${esc(caption)}</p>`;
+  $('fg-lightbox').hidden = false;
+  history.pushState({ ...(history.state ?? {}), photo: true }, '', location.href);
+}
+function closePhoto(): void {
+  $('fg-lightbox').hidden = true;
+  $('fg-lightbox').innerHTML = '';
+}
+$('fg-lightbox').addEventListener('click', () => history.back());
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !$('fg-lightbox').hidden) history.back();
+});
 
 /** On a tour stop's page: which tour, which stop, why it is on it, and the way on. */
 function tourBar(p: Plant): string {
@@ -511,6 +546,7 @@ function closeTree(): void {
 
 $('fg-tree').addEventListener('click', (e) => {
   const el = e.target as Element;
+  if (el.closest('[data-photo]')) return openPhoto();
   if (el.closest('[data-back]')) {
     // Back through history when the page was opened here, so the phone's own
     // back button and this one agree; straight to the map from a shared link.

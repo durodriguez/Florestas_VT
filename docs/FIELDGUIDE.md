@@ -24,17 +24,31 @@ disagree; only the way in differs. The code is in `src/fieldguide/`.
   `src/fieldguide/picks.ts`, with tests.
 - **Without your location** (refused, unavailable, or more than 3 km from
   campus) it shows the trees around the University Green and says so.
-- **A tree's page.** Tapping a tree or a card opens it over the map. It shows:
-  - the photo and when it was taken, or a panel in its season's color where
-    there is none;
-  - its notable notes, its story, and what it is doing this month;
-  - trunk, height, spread, year planted, condition and last survey, each
-    with its date;
-  - **its year**: twelve months in the species' colors, this month outlined,
-    and the same in words ("Pink flowers in May. Red fruit from September to
-    November."). These are the species' usual months from `taxa.csv`, not
-    dates seen on this tree, and the page says so;
-  - what to look for, the fun fact, and a dedication plaque if it has one;
+- **A tree's page.** Tapping a tree or a card opens it over the map. Since
+  November 2026 it is laid out as the report's mock-up was:
+  - **the photo**, cropped to a fixed frame aimed a little above the middle,
+    where a crown usually is, with when it was taken. A tap on it (or on ⤢)
+    opens the whole photo, uncropped, on black; the phone's back button
+    closes it. With no photo, a panel in the tree's season color;
+  - its number, campus and tag; its name, scientific name, family and
+    origin; its notable notes and its story;
+  - **two tiles** (`src/fieldguide/tiles.ts`): its size (trunk diameter, else
+    height, else crown spread, else its condition), and what it is doing this
+    month. A tree whose species is not known yet has no "right now", so it
+    shows its condition instead, in one tile if that is all there is. Dates
+    are the year only ("2014, 12 years ago"), so a tile fits one line. Under
+    them, one line with whatever the tiles leave out: condition, year
+    planted, last survey;
+  - **its year** (`src/fieldguide/year.ts`): a table of leaves, flowers and
+    fruit (cones for conifers) across the months, each in the color the tree
+    shows: green in leaf, the fall color in October, every flower and fruit
+    in its real color (a ginkgo's green flowers, a spruce's brown cones), this
+    month marked. Under it the same in words, and "Table shows typical months
+    for this species": they are the species' months from `taxa.csv`, not
+    dates seen on this tree. Unlike the map's season colors and the "right
+    now" tile, which count only what a passer-by would notice, the table
+    shows everything;
+  - what to look for, the fun fact, a dedication plaque if it has one;
   - **others of its kind**: how many more of its species stand on campus,
     how far and which way the nearest is, and a small map of them all with
     this one ringed. Tapping a dot opens that tree;
