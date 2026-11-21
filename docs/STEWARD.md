@@ -85,6 +85,51 @@ as CSV, and prints as a plain table for a clipboard. In the field, the survey
 app's route (docs/FIELD-APP.md) walks a surveyor to the nearest of the same
 trees.
 
+## Review inbox (built, not active)
+
+Where survey files would wait for a person to approve them before they reach
+the map, instead of coming to the importer by hand. Built so it can be seen
+and judged; **nothing feeds it yet, and Approve and Send back are switched
+off.**
+
+- **What the approver sees.** Each file in `survey/inbox/` is run through the
+  importer as a dry run at every build (`scripts/lib/review.mjs`, tested),
+  against the data as it stands, and written to `public/data/inbox.json`.
+  The console lists the files, each marked *Ready to approve* or *Can't be
+  approved* with its errors, and for the one chosen shows: counts of new
+  trees, visits, corrections, renumberings and rows already on file; a map
+  of what it changes (new trees, visits, a moved tree's old spot and new);
+  the notes the survey app left for the desk (`CLAIMED BY POSITION`,
+  `TAG MISMATCH`, `SPECIES CHANGED`); and tables of the new trees, the
+  renumberings, the corrections with before and after, and the visits. An
+  error blocks the whole file, exactly as it blocks `npm run import`.
+- **Examples.** `survey/inbox-examples/` holds two made-up files, marked as
+  examples everywhere they appear and never imported: one ready to approve,
+  one blocked by a misspelled species. They can be deleted once real files
+  arrive.
+
+### How it would work once switched on
+
+1. A surveyor exports from the survey app as now and adds the file in the
+   console (**Add a survey file**), which saves it to `survey/inbox/` in the
+   repository.
+2. The site rebuilds in a few minutes and the file appears in the inbox with
+   its dry run. Nothing on the map changes.
+3. The approver checks it. **Approve** runs a GitHub Action that imports the
+   file for real (`npm run import -- <file> --write`), runs the build's
+   checks, moves the file to `survey/imported/` and commits; the site
+   redeploys. **Send back** runs one that removes the file and records the
+   approver's note.
+4. Every step is a commit, so any approval can be reviewed or undone.
+
+Reading the inbox needs nothing: it is public data. Adding and approving need
+write access to the repository; for the test run, only the project's owner,
+with a GitHub token entered once in the browser.
+
+**Left to switch it on:** the **Add a survey file** button, the two Actions,
+the token, and then setting `active: true` where the build writes
+`inbox.json`. Until then, files reach the importer as they do now.
+
 ## Exports
 
 All trees as CSV (the same columns as the map's "Export CSV"), the standing
@@ -93,5 +138,4 @@ GitHub. Made in the browser from the live data.
 
 ## Not built yet
 
-From the report's mock-up: a **review inbox**, where survey uploads wait for
-a person to approve them (to-do 22).
+Switching on the review inbox (above).

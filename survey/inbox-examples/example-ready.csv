@@ -1,0 +1,8 @@
+tag,taxon_id,species,lat,lng,area,dbh_in,height_ft,spread_ft,status,condition,planted_year,surveyor,date,photo,geolocation_notes,dedication_label,notes
+58,quercus-rubra,Quercus rubra,44.478825,-73.199962,,51,,,active,good,,EX,2026-11-21,,,,Example only: a made-up re-measurement to show a visit
+3990,acer-rubrum,Acer rubrum,44.470250,-73.199700,,3,,,active,good,,EX,2026-11-21,,GPS ±2 m,,Example only: a made-up new tree
+2016,acer-platanoides,Acer platanoides,44.469611,-73.199083,,,,,active,fair,,EX,2026-11-21,,Position set by pin on imagery,,Example only: a made-up position correction
+UVM-4520,zelkova-serrata,Zelkova serrata,44.469376,-73.199605,,,,,active,good,,EX,2026-11-21,,,,CLAIMED BY POSITION: matched to UVM-4520 from 3 m. TAG ON TRUNK: the trunk reads 2804; UVM-4520 is on file with no tag. Example only: a made-up tag
+2003,acer-rubrum,Acer rubrum,44.470640,-73.199505,,,,,active,good,,EX,2026-11-21,,,,TAG MISMATCH: the trunk reads 2899; UVM-2003 is on file as tag 2003. Example only: a made-up tag
+1412,malus-sp,Malus sp.,44.474322,-73.194864,,,,,removed,,,EX,2026-11-21,,,,Example only: a made-up removal; stump only
+1943,acer-platanoides,Acer platanoides,44.471180,-73.199115,,,,,active,fair,,EMR,2026-11-20,,GPS ±1 m,,

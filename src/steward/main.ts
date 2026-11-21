@@ -38,13 +38,26 @@ interface Health {
   areas: Array<{ area: string; trees: number; measured: number; photo: number; species: number; recent: number }>;
 }
 
+interface Submission {
+  example: boolean; file: string; rows: number; dates: string[]; status: 'ready' | 'blocked';
+  summary: { newTrees: number; visits: number; corrections: number; renumbered: number; alreadyOnFile: number; errors: number; warnings: number; notes: number };
+  newTrees: Array<{ plant: string; tag: string; common: string; lat: number; lng: number; campus: string | null }>;
+  visits: Array<{ plant: string; common: string; date: string; dbh: string; condition: string; status: string; photo: boolean; lat: number; lng: number }>;
+  corrections: Array<{ plant: string; common: string; changes: Array<{ field: string; from: string; to: string }>; moved: { from: [number, number]; to: [number, number]; metres: number } | null }>;
+  renumbered: Array<{ from: string; to: string; tag: string; common: string }>;
+  issues: Array<{ row: number; level: string; message: string }>;
+  notes: Array<{ plant: string; note: string }>;
+}
+interface Inbox { active: boolean; submissions: Submission[] }
+
 let dataset: Dataset;
+let inbox: Inbox = { active: false, submissions: [] };
 let plants: Plant[] = [];
 let health: Health;
 
 // ---------------------------------------------------------------- sections
 
-const SECTIONS = ['overview', 'health', 'planting', 'worklists', 'exports'];
+const SECTIONS = ['overview', 'health', 'planting', 'worklists', 'inbox', 'exports'];
 function show(): void {
   const want = location.hash.slice(1);
   const id = SECTIONS.includes(want) ? want : 'overview';
@@ -56,6 +69,7 @@ function show(): void {
   // Leaflet measures its box when shown; a map drawn while hidden is blank.
   if (id === 'overview') setTimeout(() => map?.invalidateSize(), 0);
   if (id === 'planting') setTimeout(() => sitesMap ? sitesMap.invalidateSize() : drawSitesMap(), 0);
+  if (id === 'inbox') setTimeout(() => inboxMap?.invalidateSize(), 0);
 }
 window.addEventListener('hashchange', show);
 
@@ -107,8 +121,8 @@ function limits(): string {
 }
 
 /** A plain table: a first column of names, then numbers. */
-function table(head: string[], rows: string[][]): string {
-  return `<div class="st-table-wrap"><table class="st-table st-numtable">
+function table(head: string[], rows: string[][], numeric = true): string {
+  return `<div class="st-table-wrap"><table class="st-table${numeric ? ' st-numtable' : ''}">
     <thead><tr>${head.map((h) => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead>
     <tbody>${rows.map((r) => `<tr>${r.map((c, i) => (i ? `<td>${c}</td>` : `<th scope="row">${c}</th>`)).join('')}</tr>`).join('')}</tbody>
   </table></div>`;
@@ -344,6 +358,104 @@ $('st-wl-csv').addEventListener('click', () => {
 });
 $('st-wl-print').addEventListener('click', () => window.print());
 
+// ---------------------------------------------------------------- review inbox
+
+let selected = 0;
+let inboxMap: L.Map | null = null;
+const FIELD_NAMES: Record<string, string> = {
+  taxon_id: 'Species', tag: 'Tag', geolocation_notes: 'Position note', collection_id: 'Campus', planted_year: 'Planted', dedication_label: 'Plaque',
+};
+const dateText = (d: string) => new Date(`${d}T12:00:00`).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+const plural = (n: number, one: string, many = `${one}s`) => `${fmt(n)} ${n === 1 ? one : many}`;
+
+function setupInbox(): void {
+  const real = inbox.submissions.filter((x) => !x.example).length;
+  $('in-banner').hidden = inbox.active;
+  const badge = $('st-inbox-count');
+  badge.textContent = String(real || inbox.submissions.length);
+  badge.hidden = inbox.submissions.length === 0;
+  badge.classList.toggle('st-badge--example', real === 0);
+  renderInboxList();
+  renderSubmission();
+}
+
+function renderInboxList(): void {
+  $('in-list').innerHTML = inbox.submissions.length ? inbox.submissions.map((x, i) => `
+    <li><button type="button" class="st-sub${i === selected ? ' on' : ''}" data-sub="${i}" aria-pressed="${i === selected}">
+      <span class="st-sub-top">${x.example ? '<span class="st-tag">Example</span>' : ''}<span class="st-pill st-pill--${x.status}">${x.status === 'ready' ? 'Ready to approve' : `Can't be approved: ${plural(x.summary.errors, 'error')}`}</span></span>
+      <b class="st-mono">${esc(x.file.split('/').pop()!)}</b>
+      <span>${x.dates.length ? esc(x.dates.map(dateText).join(' – ')) : 'No survey date'} · ${plural(x.rows, 'row')}</span>
+      <span class="st-dim">${[x.summary.newTrees && plural(x.summary.newTrees, 'new tree'), x.summary.visits && plural(x.summary.visits, 'visit'), x.summary.corrections && plural(x.summary.corrections, 'correction'), x.summary.renumbered && `${fmt(x.summary.renumbered)} renumbered`].filter(Boolean).join(' · ')}</span>
+    </button></li>`).join('') : '<li class="st-note">Nothing is waiting.</li>';
+}
+$('in-list').addEventListener('click', (e) => {
+  const i = (e.target as Element).closest<HTMLElement>('[data-sub]')?.dataset.sub;
+  if (i === undefined) return;
+  selected = Number(i);
+  renderInboxList();
+  renderSubmission();
+});
+
+function renderSubmission(): void {
+  const x = inbox.submissions[selected];
+  if (inboxMap) { inboxMap.remove(); inboxMap = null; }
+  if (!x) { $('in-detail').innerHTML = ''; return; }
+  const s = x.summary;
+  const tile = (one: string, many: string, n: number, cls = '') => `<div class="st-mini${cls}"><b>${fmt(n)}</b><small>${esc(n === 1 ? one : many)}</small></div>`;
+  const errors = x.issues.filter((i) => i.level === 'error');
+  const warnings = x.issues.filter((i) => i.level !== 'error');
+  const treeLink = (id: string) => `<a class="st-mono" href="${esc(BASE)}?plant=${encodeURIComponent(id)}">${esc(id)}</a>`;
+  $('in-detail').innerHTML = `
+    <div class="st-panel">
+      <div class="st-panel-head"><h2 class="st-mono">${esc(x.file)}</h2>${x.example ? '<span class="st-tag">Example: made-up rows, never imported</span>' : ''}</div>
+      <div class="st-minis">
+        ${tile('new tree', 'new trees', s.newTrees)}${tile('visit', 'visits', s.visits)}${tile('correction', 'corrections', s.corrections)}${tile('renumbered', 'renumbered', s.renumbered)}
+        ${tile('already on file', 'already on file', s.alreadyOnFile)}${tile('note to check', 'notes to check', s.notes)}${tile('error', 'errors', s.errors, s.errors ? ' st-mini--bad' : '')}
+      </div>
+      ${errors.length ? `<div class="st-errors"><b>${plural(errors.length, 'error')} ${errors.length === 1 ? 'stops' : 'stop'} this file.</b> Nothing in it is imported until every row is right, so the rows beside a bad one wait too.
+        <ul>${errors.map((i) => `<li>${i.row ? `Row ${i.row}: ` : ''}${esc(i.message)}</li>`).join('')}</ul>Send it back with a note, or fix the file and add it again.</div>` : ''}
+      ${warnings.length ? `<div class="st-warnings"><b>${plural(warnings.length, 'warning')}</b> (these do not stop it)<ul>${warnings.map((i) => `<li>${i.row ? `Row ${i.row}: ` : ''}${esc(i.message)}</li>`).join('')}</ul></div>` : ''}
+      <div id="in-map" class="st-map st-map--small" role="application" aria-label="Map of what this file changes"></div>
+      <ul class="st-legend"><li><i style="background:#ffd100"></i>New tree</li><li><i style="background:#1f6f4a"></i>Visit</li><li><i style="background:#c4512b"></i>Moved (old spot, line to new)</li><li><i style="background:#5a655e"></i>Reported removed or not found</li></ul>
+      <div class="st-actions">
+        <button type="button" class="st-btn st-btn--go" disabled title="Not active yet">Approve</button>
+        <button type="button" class="st-btn" disabled title="Not active yet">Send back with a note</button>
+        <span class="st-note">${inbox.active ? '' : 'Switched off while the inbox is not active.'} ${x.status === 'ready' ? 'Approve would import every row below and update the map.' : 'This file cannot be approved until its errors are fixed.'}</span>
+      </div>
+    </div>
+    ${x.notes.length ? `<div class="st-panel"><h2>Notes to check</h2><p class="st-note">Left by the survey app for the desk: a tree matched by position, a tag that disagrees, a species changed.</p>
+      <ul class="st-list">${x.notes.map((n) => `<li><span>${treeLink(n.plant)} ${esc(n.note)}</span></li>`).join('')}</ul></div>` : ''}
+    ${x.newTrees.length ? `<div class="st-panel"><h2>New trees</h2>${table(['Tree', 'Tag', 'Species', 'Campus'], x.newTrees.map((t) => [`<span class="st-mono">${esc(t.plant)}</span>`, esc(t.tag || '—'), esc(t.common), esc(t.campus ?? '—')]), false)}</div>` : ''}
+    ${x.renumbered.length ? `<div class="st-panel"><h2>Renumbered to the tag on the trunk</h2>${table(['Now', 'Becomes', 'Tag', 'Species'], x.renumbered.map((r) => [treeLink(r.from), `<span class="st-mono">${esc(r.to)}</span>`, esc(r.tag), esc(r.common)]), false)}</div>` : ''}
+    ${x.corrections.length ? `<div class="st-panel"><h2>Corrections to what a tree is</h2>${table(['Tree', 'Change'], x.corrections.map((c) => [`${treeLink(c.plant)} ${esc(c.common)}`,
+      `<span class="st-cellwrap">${[c.moved ? `Moved ${c.moved.metres} m` : '', ...c.changes.map((ch) => `${esc(FIELD_NAMES[ch.field] ?? ch.field)}: ${esc(ch.from || '—')} → ${esc(ch.to)}`)].filter(Boolean).join('<br>')}</span>`]), false)}</div>` : ''}
+    ${x.visits.length ? `<div class="st-panel"><h2>Visits</h2>${table(['Tree', 'Date', 'Trunk', 'Condition', 'Status', 'Photo'], x.visits.map((v) => [`${esc(v.plant)} <span class="st-dim">${esc(v.common)}</span>`,
+      esc(v.date ? dateText(v.date) : '—'), esc(v.dbh ? `${v.dbh} in` : '—'), esc(v.condition || '—'), esc(v.status), v.photo ? 'Yes' : '—']), false)}</div>` : ''}`;
+  drawInboxMap(x);
+}
+
+function drawInboxMap(x: Submission): void {
+  const points: Array<[number, number]> = [];
+  inboxMap = L.map($('in-map'), { scrollWheelZoom: false });
+  basemaps(20).Streets!.addTo(inboxMap);
+  const dot = (at: [number, number], color: string, tip: string) => {
+    if (!Number.isFinite(at[0])) return;
+    points.push(at);
+    L.circleMarker(at, { radius: 6, weight: 1.5, color: '#fff', fillColor: color, fillOpacity: 1 }).bindTooltip(esc(tip)).addTo(inboxMap!);
+  };
+  const newIds = new Set(x.newTrees.map((t) => t.plant));
+  const moved = new Set(x.corrections.filter((c) => c.moved).map((c) => c.plant));
+  for (const v of x.visits) if (!newIds.has(v.plant) && !moved.has(v.plant)) dot([v.lat, v.lng], v.status === 'active' ? '#1f6f4a' : '#5a655e', `${v.plant} ${v.common}`);
+  for (const c of x.corrections) if (c.moved) {
+    L.polyline([c.moved.from, c.moved.to], { color: '#c4512b', weight: 2, dashArray: '4 4' }).addTo(inboxMap);
+    dot(c.moved.from, '#c4512b', `${c.plant}: on file here`);
+    dot(c.moved.to, '#1f6f4a', `${c.plant}: moved here, ${c.moved.metres} m`);
+  }
+  for (const t of x.newTrees) dot([t.lat, t.lng], '#ffd100', `${t.plant} ${t.common} (new)`);
+  if (points.length) inboxMap.fitBounds(L.latLngBounds(points), { padding: [30, 30], maxZoom: 19 });
+  else inboxMap.setView(dataset.config.map.center, 15);
+}
+
 // ---------------------------------------------------------------- exports
 
 function geojson(): string {
@@ -373,10 +485,13 @@ Promise.all([
     if (!r.ok) throw new Error(`Could not load health.json (HTTP ${r.status}). Run \`npm run data\` first.`);
     return r.json() as Promise<Health>;
   }),
-]).then(([d, h]) => {
+  // Optional: a build from before the inbox has no inbox.json.
+  fetch(`${BASE}data/inbox.json?v=${__DATA_VERSION__}`).then((r) => (r.ok ? r.json() as Promise<Inbox> : { active: false, submissions: [] })),
+]).then(([d, h, ib]) => {
   dataset = d.dataset;
   plants = d.plants;
   health = h;
+  inbox = ib;
   $('st-status').hidden = true;
   renderKpis();
   render1020();
@@ -386,6 +501,7 @@ Promise.all([
   renderDays();
   renderAreas();
   setupWorklists();
+  setupInbox();
   show();
   drawMap();
 }).catch((err: Error) => {

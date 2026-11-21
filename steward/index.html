@@ -22,6 +22,7 @@
       <a href="#health" data-section="health">Collection health</a>
       <a href="#planting" data-section="planting">Planting plan</a>
       <a href="#worklists" data-section="worklists">Worklists</a>
+      <a href="#inbox" data-section="inbox">Review inbox <span id="st-inbox-count" class="st-badge" hidden></span></a>
       <a href="#exports" data-section="exports">Exports</a>
     </nav>
 
@@ -142,6 +143,29 @@
         <p id="st-wl-count" class="st-count"></p>
         <div class="st-table-wrap"><table class="st-table" id="st-wl-table"></table></div>
         <p id="st-wl-more" class="st-note"></p>
+      </section>
+
+      <section id="inbox" class="st-section" aria-labelledby="in-h" hidden>
+        <h1 id="in-h">Review inbox</h1>
+        <p class="st-lede">Survey files wait here for a person to approve them before they reach the map. Each is run through the importer as a dry run, so you see exactly what it would change.</p>
+        <div id="in-banner" class="st-banner" hidden>
+          <b>Not active yet.</b> This is how the inbox will look and work. The submissions below are made-up examples; nothing sends files here yet, and Approve and Send back are switched off. <a href="#in-how">How it would work</a>
+        </div>
+        <div class="st-inbox">
+          <ul id="in-list" class="st-inbox-list" aria-label="Submissions"></ul>
+          <div id="in-detail" class="st-inbox-detail"></div>
+        </div>
+        <div class="st-panel" id="in-how">
+          <h2>How it would work</h2>
+          <ol class="st-steps">
+            <li><b>A surveyor sends a file.</b> They export from the survey app as now, and instead of emailing it, add it here with <b>Add a survey file</b>. The file is saved to <span class="st-mono">survey/inbox/</span> in the project's GitHub repository.</li>
+            <li><b>It appears here in a few minutes</b>, once the site rebuilds, run through the importer as a dry run: new trees, visits, corrections, renumberings, the notes for review, and anything that blocks it. Nothing on the map changes yet.</li>
+            <li><b>The approver checks it.</b> <b>Approve</b> runs the importer for real, on GitHub: it writes the trees and visits, checks every row as now, moves the file to <span class="st-mono">survey/imported/</span>, and the site redeploys with the changes. <b>Send back</b> removes the file with a note saying what to fix.</li>
+            <li><b>Every step is a commit</b> in the repository's history, so any approval can be looked at again or undone.</li>
+          </ol>
+          <p class="st-text"><b>Who can do what.</b> Anyone with the link can see the inbox, as everything in it becomes public on the map anyway. Adding a file and approving need write access to the repository: for the test run, only you, signed in once in this browser with a GitHub token.</p>
+          <p class="st-text"><b>What is left to switch it on:</b> the <b>Add a survey file</b> button, the two GitHub Actions behind Approve and Send back, and your token. Until then, survey files come to the importer as they do now.</p>
+        </div>
       </section>
 
       <section id="exports" class="st-section" aria-labelledby="ex-h" hidden>
