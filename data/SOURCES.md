@@ -1,6 +1,6 @@
 # Where the data came from, and under what terms
 
-Three outside datasets feed this project, and one model's output. Each is recorded here with its
+Six outside datasets feed this project, and one model's output. Each is recorded here with its
 source, its licence and what was done to it, because attribution that lives
 only in somebody's memory is attribution that gets lost on the next refresh.
 
@@ -145,6 +145,46 @@ recorded (in cm or in, converted to inches here).
 
 The collection date is known only to the year; the rows are dated
 2022-12-31 and shown as "2022" (see DATA-MODEL.md).
+
+## 6. Native ranges: Little's *Atlas of United States Trees*
+
+**`data/ranges/<species>.json`** — where each of 126 species in `taxa.csv`
+grows wild, drawn on its species page.
+
+| | |
+| --- | --- |
+| Dataset | Digital representations of the range maps in Elbert L. Little Jr.'s *Atlas of United States Trees* |
+| Published by | U.S. Department of Agriculture (the atlas, 1971–1978); digitized by the U.S. Geological Survey |
+| Licence | **Public domain** (a work of the U.S. federal government, 17 U.S.C. § 105) |
+| Source | The USGS copy, withdrawn in 2017, as kept at https://github.com/wpetry/USTreeAtlas |
+
+**Citation**, for the volume most species come from:
+
+> Little, E.L., Jr., 1971, *Atlas of United States trees, volume 1, conifers
+> and important hardwoods*: U.S. Department of Agriculture Miscellaneous
+> Publication 1146.
+
+The other volumes (3, 1976; 4, 1977; 5, 1978) are cited in that repository's
+README, with each species' volume and map number.
+
+**What was changed.** `npm run ranges:fetch` (`scripts/fetch-ranges.mjs`)
+matches the atlas to `taxa.csv` by genus and species, cuts each range to the
+lower 48 and the edges of Canada and Mexico, simplifies it to about 4 km (half
+a pixel on the page's map) and drops specks smaller than a few square km. Eight
+species are matched under the older name Little used (listed in the script):
+chestnut oak, for one, is *Quercus prinus* in the atlas.
+
+**Known limits.** The maps are hand-drawn at continental scale, half a century
+ago, and the USGS warned of digitizing errors in some. They show the range in
+broad strokes; whether a town near an edge is inside one is not reliable. They
+cover species native to the United States only.
+
+## 7. Map outlines: Natural Earth
+
+**`data/ranges/basemap.json`** — the lower 48 states, Canada, Mexico and the
+large lakes, that the range maps are drawn on. From Natural Earth's 1:50m
+cultural and physical vectors (https://www.naturalearthdata.com), **public
+domain**, cut and simplified as the ranges are.
 
 ## On ShareAlike
 
