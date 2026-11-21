@@ -24,6 +24,16 @@ disagree; only the way in differs. The code is in `src/fieldguide/`.
   `src/fieldguide/picks.ts`, with tests.
 - **Without your location** (refused, unavailable, or more than 3 km from
   campus) it shows the trees around the University Green and says so.
+- **Around a spot you pick.** A tap or click on open ground drops a pin, and
+  the tab becomes "Around the pin": the same four picks, by the same rules,
+  around the pin instead of you, with distances from it. A tap on a tree
+  still opens the tree, so in a dense spot zoom in to tap between them. A
+  double tap zooms and drops no pin. "Back to where you are" (or "Back to the
+  University Green" without your location) and the ◎ button lift the pin.
+  While a pin is down, walking does not reshuffle the picks.
+- **The map's credits** (Leaflet, OpenStreetMap) sit at the bottom right on a
+  desktop and at the top left, above the month, on a phone, where the sheet
+  leaves them in view.
 - **A tree's page.** Tapping a tree or a card opens it over the map. Since
   November 2026 it is laid out as the report's mock-up was:
   - **the photo**, cropped to a fixed frame aimed a little above the middle,

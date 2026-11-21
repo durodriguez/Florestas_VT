@@ -21,12 +21,14 @@
     <button type="button" id="fg-locate" class="fg-locate" aria-label="Show where I am" title="Show where I am">◎</button>
     <section id="fg-sheet" class="fg-sheet" aria-label="Trees to see">
       <div id="fg-tabs" class="fg-tabs" role="tablist">
-        <button type="button" role="tab" data-tab="around" aria-selected="true" aria-controls="fg-around">Around you</button>
+        <button type="button" role="tab" id="fg-tab-around" data-tab="around" aria-selected="true" aria-controls="fg-around">Around you</button>
         <button type="button" role="tab" id="fg-tab-tours" data-tab="tours" aria-selected="false" aria-controls="fg-tours" hidden>Tours</button>
         <small id="fg-count"></small>
       </div>
       <div id="fg-around" role="tabpanel">
         <p id="fg-where" class="fg-where">Loading the trees…</p>
+        <p id="fg-hint" class="fg-hint">Tap or click the map to look somewhere else.</p>
+        <button type="button" id="fg-unpick" class="fg-unpick" hidden></button>
         <ul id="fg-cards" class="fg-cards"></ul>
       </div>
       <div id="fg-tours" role="tabpanel" hidden>
