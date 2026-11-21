@@ -13,7 +13,7 @@ import { UNKNOWN_TAXON } from './lib/vocab.mjs';
 import { normalizeName } from './lib/species.mjs';
 import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS } from './lib/species-pages.mjs';
 import { renderItreePage } from './lib/itree-page.mjs';
-import { collectionHealth, renderHealthPage } from './lib/health.mjs';
+import { collectionHealth } from './lib/health.mjs';
 import { SPECIES_SEARCH_JS } from './lib/species-search.mjs';
 import { photoUrl } from './lib/photo-url.mjs';
 
@@ -250,22 +250,26 @@ if (result.dataset.itree) {
   ));
 }
 
-// ---- the collection-health page --------------------------------------------
-// Diversity, pest exposure, origin, condition and survey progress (health.mjs).
+// ---- collection health ------------------------------------------------------
+// Diversity, pest exposure, origin, condition and survey progress (health.mjs),
+// for the steward console, which shows them at /steward/#health. /health/ was
+// a page of its own until November 2026; it stays as a redirect so links to it
+// from before keep working.
 const healthDir = join(root, 'public', 'health');
 rmSync(healthDir, { recursive: true, force: true });
 mkdirSync(healthDir, { recursive: true });
-{
-  const now = new Date();
-  const health = collectionHealth(result.dataset, result.plants, now.getFullYear());
-  writeFileSync(join(healthDir, 'index.html'), renderHealthPage(
-    health,
-    { base: siteBase, config, today: now.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) },
-  ));
-  // The same numbers for the steward console (/steward/), which is an app
-  // and cannot run health.mjs itself: one count, two pages.
-  writeFileSync(join(root, 'public', 'data', 'health.json'), JSON.stringify(health));
-}
+writeFileSync(
+  join(root, 'public', 'data', 'health.json'),
+  JSON.stringify(collectionHealth(result.dataset, result.plants, new Date().getFullYear())),
+);
+writeFileSync(join(healthDir, 'index.html'), `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Collection health — UVM Trees</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=../steward/#health">
+<link rel="canonical" href="../steward/#health">
+<script>location.replace('../steward/#health')</script></head>
+<body><p>Collection health is now part of the <a href="../steward/#health">steward console</a>.</p></body></html>
+`);
 
 // These two files keep the same URL forever — Vite hashes JS and CSS
 // filenames, but copies public/ through untouched. Without a cache-buster a

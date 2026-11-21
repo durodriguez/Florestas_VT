@@ -25,9 +25,26 @@ nothing on it is private: every number comes from the public data.
 - **By campus:** trees, trunk measured, photographed, named to species and
   visited, campus by campus.
 
-The diversity, pest, campus and headline numbers are the same count as the
-collection-health page (`/health/`): the build writes them to
-`public/data/health.json` for the console, so the two pages cannot disagree.
+The diversity, pest, campus and headline numbers are worked out by the build
+(`scripts/lib/health.mjs`, tested) and written to `public/data/health.json`,
+which the console reads.
+
+## Collection health
+
+The collection as a whole, as the separate `/health/` page showed it until
+November 2026 (that address now leads here):
+
+- **Diversity** against the 10-20-30 guideline, with the ten most common
+  species, genera and families. Counted over identified plants; a genus
+  named without a species counts as one species.
+- **Pest and disease exposure:** plants of the genera that emerald ash borer,
+  Dutch elm disease, oak wilt and spongy moth, fire blight, beech bark
+  disease and hemlock woolly adelgid attack. Hosts, not damage.
+- **Origin**, and the species marked invasive in Vermont.
+- **Condition** ratings, with a note that they come from different scales.
+- **How fresh the trunk measurements are.**
+
+The map's results and every species page link here as "Collection health".
 
 ## Worklists
 

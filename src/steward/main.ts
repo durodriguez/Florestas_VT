@@ -1,10 +1,11 @@
 /**
  * The steward console (/steward/): the inventory for Grounds and planners.
  * How complete it is and where the gaps are (Overview), lists of the trees
- * that still need a visit (Worklists), and the data as files (Exports). The
- * collection-health numbers come from the build (public/data/health.json,
- * the same count as /health/); everything else is worked out here from the
- * same data as the map. See docs/STEWARD.md.
+ * that still need a visit (Worklists), the collection as a whole (Collection
+ * health) and the data as files (Exports). The collection-health numbers come
+ * from the build (scripts/lib/health.mjs, written to public/data/health.json);
+ * everything else is worked out here from the same data as the map. See
+ * docs/STEWARD.md.
  */
 
 import 'leaflet/dist/leaflet.css';
@@ -26,7 +27,10 @@ const fmt = (n: number) => n.toLocaleString('en-US');
 const pct = (n: number, of: number, digits = 0) => (of ? `${((n / of) * 100).toFixed(digits)}%` : '—');
 
 interface Health {
-  trees: number; genusOnly: number; unknown: number; measured: number; photo: number; knownTrees: number;
+  trees: number; taxa: number; genusOnly: number; unknown: number; measured: number; photo: number; knownTrees: number;
+  top: Record<'species' | 'genus' | 'family', Array<[string, number]>>;
+  origins: Array<[string, number]>; invasive: Array<[string, number]>;
+  conditions: Array<[string, number]>; unrated: number;
   age: { recent: number; older: number; old: number; none: number };
   diversity: Record<'species' | 'genus' | 'family', { name: string; count: number; share: number; limit: number; within: boolean }>;
   threats: Array<{ name: string; label: string; trees: number }>;
@@ -39,7 +43,7 @@ let health: Health;
 
 // ---------------------------------------------------------------- sections
 
-const SECTIONS = ['overview', 'worklists', 'exports'];
+const SECTIONS = ['overview', 'health', 'worklists', 'exports'];
 function show(): void {
   const want = location.hash.slice(1);
   const id = SECTIONS.includes(want) ? want : 'overview';
@@ -75,10 +79,19 @@ function renderKpis(): void {
   ].join('');
 }
 
+const LEVELS = { species: 'Species', genus: 'Genus', family: 'Family' } as const;
+type Level = keyof typeof LEVELS;
+
 function render1020(): void {
+  $('st-1020').innerHTML = limits();
+  $('st-he-1020').innerHTML = limits();
+}
+
+/** The three levels against their limits; the red line is the limit. */
+function limits(): string {
   const scale = 0.35;
-  const names = { species: 'Species', genus: 'Genus', family: 'Family' } as const;
-  $('st-1020').innerHTML = (Object.keys(names) as Array<keyof typeof names>).map((level) => {
+  const names = LEVELS;
+  return (Object.keys(names) as Level[]).map((level) => {
     const d = health.diversity[level];
     return `<div class="st-limit">
       <span class="st-limit-name">${names[level]}<small>${esc(d.name)}</small></span>
@@ -89,6 +102,39 @@ function render1020(): void {
       <span class="st-limit-v">${(d.share * 100).toFixed(1)}%</span>
     </div>`;
   }).join('');
+}
+
+/** A plain table: a first column of names, then numbers. */
+function table(head: string[], rows: string[][]): string {
+  return `<div class="st-table-wrap"><table class="st-table st-numtable">
+    <thead><tr>${head.map((h) => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead>
+    <tbody>${rows.map((r) => `<tr>${r.map((c, i) => (i ? `<td>${c}</td>` : `<th scope="row">${c}</th>`)).join('')}</tr>`).join('')}</tbody>
+  </table></div>`;
+}
+
+const ORIGIN_NAMES: Record<string, string> = {
+  'vermont-native': 'Native to Vermont', introduced: 'Introduced', 'vermont-invasive': 'Marked invasive in Vermont', 'not assessed': 'Not assessed',
+};
+const cap = (s: string) => (s ? s[0]!.toUpperCase() + s.slice(1) : s);
+const PLURAL: Record<Level, string> = { species: 'species', genus: 'genera', family: 'families' };
+
+/** Collection health: what was the /health/ page, in full. */
+function renderHealth(): void {
+  const h = health;
+  $('st-he-lede').textContent = `What the inventory says about the campus collection as a whole: ${fmt(h.trees)} standing trees, shrubs and vines of ${fmt(h.taxa)} species and other kinds. Burlington's street trees are not counted.`;
+  $('st-he-known').textContent = `Counted over the ${fmt(h.knownTrees)} identified plants; a genus named without a species (${fmt(h.genusOnly)} plants) counts as one species, so the species figure is, if anything, high.`;
+  $('st-he-top').innerHTML = (Object.keys(LEVELS) as Level[]).map((level) => `<div><h3>Most common ${PLURAL[level]}</h3>
+    ${table([LEVELS[level], 'Plants', 'Share'], h.top[level].map(([name, n]) => [esc(name), fmt(n), pct(n, h.knownTrees, 1)]))}</div>`).join('');
+  $('st-he-threats').innerHTML = table(['Pest or disease', 'Host plants'], h.threats.slice().sort((a, b) => b.trees - a.trees)
+    .map((t) => [`${esc(t.name)} <span class="st-dim">${esc(t.label)}</span>`, fmt(t.trees)]));
+  $('st-he-origin').innerHTML = table(['Origin', 'Plants', 'Share'], h.origins.map(([o, n]) => [esc(ORIGIN_NAMES[o] ?? o), fmt(n), pct(n, h.trees, 1)]));
+  $('st-he-invasive').textContent = h.invasive.length
+    ? `Marked invasive in Vermont: ${h.invasive.map(([name, n]) => `${name} (${fmt(n)})`).join(', ')}.` : '';
+  $('st-he-condition').innerHTML = table(['Latest rating', 'Plants'],
+    [...h.conditions.map(([c, n]) => [esc(cap(c)), fmt(n)]), ...(h.unrated ? [['Not rated', fmt(h.unrated)]] : [])]);
+  $('st-he-age').innerHTML = table(['Trunk measured', 'Plants', 'Share'], ([
+    ['Within 5 years', h.age.recent], ['5 to 10 years ago', h.age.older], ['More than 10 years ago', h.age.old], ['Not measured yet', h.age.none],
+  ] as Array<[string, number]>).map(([label, n]) => [label, fmt(n), pct(n, h.trees)]));
 }
 
 function renderThreats(): void {
@@ -258,6 +304,7 @@ Promise.all([
   $('st-status').hidden = true;
   renderKpis();
   render1020();
+  renderHealth();
   renderThreats();
   renderDays();
   renderAreas();

@@ -13,15 +13,15 @@
   <header class="st-bar">
     <a class="st-home" href="../"><img src="/uvm-mark.png" alt="" width="28" height="28"><span>UVM Trees</span></a>
     <span class="st-title">Steward console</span>
-    <nav class="st-links" aria-label="Other pages"><a href="../">Map</a><a href="../fieldguide/">Field guide</a><a href="../health/">Collection health</a></nav>
+    <nav class="st-links" aria-label="Other pages"><a href="../">Map</a><a href="../fieldguide/">Field guide</a></nav>
   </header>
 
   <div class="st-layout">
     <nav class="st-nav" aria-label="Sections">
       <a href="#overview" data-section="overview">Overview</a>
+      <a href="#health" data-section="health">Collection health</a>
       <a href="#worklists" data-section="worklists">Worklists</a>
       <a href="#exports" data-section="exports">Exports</a>
-      <a class="st-nav-out" href="../health/">Collection health ↗</a>
     </nav>
 
     <main class="st-main">
@@ -47,13 +47,46 @@
           </div>
           <div class="st-side">
             <div class="st-panel"><h2>Diversity: the 10-20-30 guideline</h2><div id="st-1020"></div>
-              <p class="st-note">No species above 10% of the trees, no genus above 20%, no family above 30%. The line marks each limit.</p></div>
+              <p class="st-note">No species above 10% of the trees, no genus above 20%, no family above 30%. The line marks each limit. <a href="#health">More in Collection health</a></p></div>
             <div class="st-panel"><h2>Pest exposure</h2><ul id="st-threats" class="st-list"></ul>
-              <p class="st-note">Trees of the genera each pest attacks: hosts, not damage.</p></div>
+              <p class="st-note">Trees of the genera each pest attacks: hosts, not damage. <a href="#health">More in Collection health</a></p></div>
             <div class="st-panel"><h2>Recent survey days</h2><ul id="st-days" class="st-list"></ul></div>
           </div>
         </div>
         <div class="st-panel"><h2>By campus</h2><div id="st-areas"></div></div>
+      </section>
+
+      <section id="health" class="st-section" aria-labelledby="he-h" hidden>
+        <h1 id="he-h">Collection health</h1>
+        <p class="st-lede" id="st-he-lede"></p>
+        <div class="st-panel">
+          <h2>Diversity</h2>
+          <p class="st-text">A common guideline for resilient urban trees: no more than 10% of them one species, 20% one genus, 30% one family, so that one pest or disease cannot take out a large share at once. The red line marks each limit. <span id="st-he-known"></span></p>
+          <div id="st-he-1020"></div>
+          <div id="st-he-top" class="st-tops"></div>
+        </div>
+        <div class="st-grid st-grid--even">
+          <div class="st-panel">
+            <h2>Pest and disease exposure</h2>
+            <p class="st-text">Plants of the genera that some well-known pests and diseases of the northeast attack. This is exposure, not damage: it says where a pest would find hosts, not which trees are affected.</p>
+            <div id="st-he-threats"></div>
+          </div>
+          <div class="st-panel">
+            <h2>Origin</h2>
+            <div id="st-he-origin"></div>
+            <p class="st-text" id="st-he-invasive"></p>
+          </div>
+          <div class="st-panel">
+            <h2>Condition</h2>
+            <div id="st-he-condition"></div>
+            <p class="st-note">Ratings come from different surveys on different scales: the 2014 inventory, the 2023–24 ArcGIS layer and visits since. Until more trees have two ratings from the same kind of survey, a change in rating is weak evidence of a change in the tree.</p>
+          </div>
+          <div class="st-panel">
+            <h2>How fresh the trunk measurements are</h2>
+            <div id="st-he-age"></div>
+            <p class="st-note">Survey progress campus by campus is on the <a href="#overview">Overview</a>.</p>
+          </div>
+        </div>
       </section>
 
       <section id="worklists" class="st-section" aria-labelledby="wl-h" hidden>

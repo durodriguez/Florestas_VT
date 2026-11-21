@@ -29,7 +29,6 @@ a { color: var(--green-2); }
 .st-nav a { padding: .55rem .7rem; border-radius: 8px; color: var(--ink); text-decoration: none; font-size: .92rem; white-space: nowrap; }
 .st-nav a:hover { background: var(--sunk); }
 .st-nav a[aria-current="page"] { background: var(--sunk); font-weight: 650; box-shadow: inset 3px 0 0 var(--green-2); }
-.st-nav-out { margin-top: .8rem; color: var(--dim) !important; font-size: .86rem !important; }
 
 .st-main { padding: 1.2rem 1.4rem 3rem; min-width: 0; }
 .st-section { display: grid; gap: 1rem; max-width: 80rem; }
@@ -47,6 +46,13 @@ a { color: var(--green-2); }
 
 .st-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 1fr); gap: 1rem; align-items: start; }
 .st-side { display: grid; gap: 1rem; }
+.st-grid--even { grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); }
+.st-text { margin: 0; font-size: .9rem; line-height: 1.5; max-width: 72ch; }
+.st-panel h3 { margin: 0 0 .4rem; font-size: .88rem; }
+.st-tops { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1rem; margin-top: .4rem; }
+.st-numtable th[scope="row"] { font-weight: 500; white-space: normal; }
+.st-numtable td { text-align: right; font-variant-numeric: tabular-nums; }
+.st-numtable thead th:not(:first-child) { text-align: right; }
 .st-panel { background: var(--bg); border: 1px solid var(--rule); border-radius: 12px; padding: .9rem 1rem; display: grid; gap: .6rem; align-content: start; min-width: 0; }
 .st-panel h2 { margin: 0; font-size: 1rem; }
 .st-panel-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .5rem; }
@@ -104,14 +110,14 @@ a:focus-visible, button:focus-visible, select:focus-visible { outline: 3px solid
 @media (max-width: 44rem) {
   .st-layout { grid-template-columns: 1fr; }
   .st-nav { display: flex; overflow-x: auto; padding: .4rem; border-right: 0; border-bottom: 1px solid var(--rule); }
-  .st-nav-out { margin: 0 0 0 auto; }
   .st-links { display: none; }
   .st-main { padding: 1rem; }
   .st-map { height: 22rem; }
   .st-exports li { grid-template-columns: 1fr; }
 }
 @media print {
-  .st-bar, .st-nav, .st-controls, #overview, #exports { display: none !important; }
+  /* Whichever section is open prints, without the controls and the map. */
+  .st-bar, .st-nav, .st-controls, .st-mappanel { display: none !important; }
   .st-layout { display: block; }
   .st-table th, .st-table td { padding: .2rem .4rem; }
   a { color: inherit; text-decoration: none; }
