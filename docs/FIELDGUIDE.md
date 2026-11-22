@@ -38,8 +38,8 @@ disagree; only the way in differs. The code is in `src/fieldguide/`.
   November 2026 it is laid out as the report's mock-up was:
   - **the photo**: on a screen 60rem (960 px) wide or more, it fills the left
     half of the screen at full height and stays put while the page scrolls
-    beside it; narrower, it sits above the page,
-    where a crown usually is, with when it was taken. A tap on it (or on ⤢)
+    beside it; narrower, it sits above the page. Either way it is cropped
+    to fill its frame, aimed a little above the middle, where a crown usually is, with when it was taken. A tap on it (or on ⤢)
     opens the whole photo, uncropped, on black; the phone's back button
     closes it. With no photo, a panel in the tree's season color;
   - its number, campus and tag; its name, scientific name, family and
