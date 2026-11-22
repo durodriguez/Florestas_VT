@@ -47,3 +47,13 @@ A close photo of the one part, in focus, works best: the tile is small.
   Campus), the largest measured, and UVM-2498 (Trinity Campus).
 - [ ] **Sargent cherry**, fruit (`prunus-sargentii`, fruit). Small dark
   cherries in June and July; birds take them fast. The same trees.
+- [ ] **Lombardy poplar**, bark (`populus-nigra`, bark). Any time. Its
+  campus trees stand in rows; any of them.
+- [ ] **Lombardy poplar**, catkins (`populus-nigra`, flowers). Reddish male
+  catkins in March and April, before the leaves.
+- [ ] **American chestnut**, burs (`castanea-dentata`, fruit). Spiny burs
+  in September; rare on sprouts that are still small.
+- [ ] **Scotch pine**, needles (`pinus-sylvestris`, leaves). Short, twisted,
+  blue-green pairs; any time.
+- [ ] **Scotch pine**, cones (`pinus-sylvestris`, fruit). Small, pointed,
+  gray-brown, any time.

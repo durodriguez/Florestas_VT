@@ -166,6 +166,24 @@ catkins); two for Sargent cherry (flowers, leaves). Three of them, the
 hawthorn's leaf, the lilac's seed capsules and the cherry's leaf, are from
 iNaturalist.
 
+### Batch 4 (November 2026)
+
+Lombardy poplar, northern catalpa, American chestnut, Douglas fir, Scotch
+pine, black walnut, eastern redbud, white oak, eastern hemlock and tuliptree.
+All have a crown form and a habitat; six have new facts, all state or
+national trees. Lombardy poplar's habitat is its species', the black poplar's,
+as the cultivated clone grows wild nowhere. Photos: all four for Douglas fir, black walnut, redbud,
+white oak, eastern hemlock and tuliptree; three for northern catalpa (its
+pods from iNaturalist) and American chestnut; two for Scotch pine; one for
+Lombardy poplar. The rest are in PHOTO-GAPS.md.
+
+### Batch 5 (November 2026)
+
+Silver linden, dawn redwood, sweetgum, American beech, common smoketree,
+hedge maple, eastern hophornbeam, Alaska cedar, bigtooth aspen and shingle
+oak. All have a crown form and a habitat; two have new facts. The dawn
+redwood's is from the Arnold Arboretum's own history of its 1948 seed.
+
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
 
