@@ -120,3 +120,19 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
   }
   return { extras, errors, warnings };
 }
+
+/**
+ * docs/PHOTO-GAPS.md lists the part photos still wanted, one unticked line
+ * each, naming the taxon and part as (`taxon-id`, part). Returns a warning
+ * for every line still unticked whose photo is now in part-photos.csv.
+ */
+export function staleGaps(markdown, extras) {
+  const warnings = [];
+  for (const m of String(markdown ?? '').matchAll(/^- \[ \] .*?\(`([a-z0-9-]+)`, (bark|leaves|flowers|fruit)\)/gms)) {
+    const photos = extras.get(m[1])?.photos;
+    if (photos && !photos.inherited && photos[m[2]]) {
+      warnings.push(`docs/PHOTO-GAPS.md: ${m[1]} now has a ${m[2]} photo; tick its line off`);
+    }
+  }
+  return warnings;
+}

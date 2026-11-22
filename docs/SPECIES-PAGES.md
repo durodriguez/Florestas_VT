@@ -149,6 +149,23 @@ white cedar's cones from iNaturalist (every Commons result was oriental
 arborvitae, *Platycladus*); two for Japanese zelkova (no photos of its flowers or fruit
 on Commons).
 
+### Batch 3 (November 2026)
+
+American hornbeam, Washington hawthorn, Japanese tree lilac, American
+sycamore, black locust, common horsechestnut, English oak, common
+baldcypress, bur oak and Sargent cherry. All have a crown form and a
+habitat; five have new facts. Black locust's habitat says its original range
+is not known exactly, as Silvics does. For the horsechestnut's, sources
+disagree whether it still grows wild in Albania; the page includes it, as the
+European Atlas of Forest Tree Species does.
+
+Photos: all four parts for American sycamore, black locust, horsechestnut,
+English oak and baldcypress; three for American hornbeam (no catkins),
+Japanese tree lilac and Washington hawthorn (no bark) and bur oak (no
+catkins); two for Sargent cherry (flowers, leaves). Three of them, the
+hawthorn's leaf, the lilac's seed capsules and the cherry's leaf, are from
+iNaturalist.
+
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
 
@@ -179,7 +196,9 @@ one). Doubtful ones are left out: a part with no tile is better than the
 wrong tree. A second search, with other words, filled some gaps. Batch 1 has
 38: all four for every species but Colorado blue spruce, which has no pollen
 cones that were certainly pollen cones.
-Campus photos of the parts can replace them as the survey takes them.
+The parts still missing are listed in PHOTO-GAPS.md, a checklist for
+finding or taking them. Campus photos of the parts can replace them as the
+survey takes them.
 
 ## Still to come
 
