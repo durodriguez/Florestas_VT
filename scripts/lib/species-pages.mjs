@@ -22,7 +22,7 @@ import { createHash } from 'node:crypto';
 import { SEARCH_FORM, SPECIES_SEARCH_JS } from './species-search.mjs';
 import { treeDrawing } from './tree-drawing.mjs';
 import { yearTable, yearSummary, MONTH_NAMES } from './year.mjs';
-import { BURLINGTON, mainBody, rangeSvg, rangeTouches, whereIn } from './range-map.mjs';
+import { describeRange, rangeSvg } from './range-map.mjs';
 import { campusSvg } from './campus-map.mjs';
 
 export const esc = (s) =>
@@ -269,50 +269,39 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     ? `<aside class="worth"><h2>Worth knowing</h2><ul>${facts.map((f) => `<li>${f}</li>`).join('')}</ul></aside>`
     : '';
 
-  // Where it grows wild: Little's map, for the species a cultivar or variety
-  // was selected from.
-  const habitatPara = habitat
-    ? `<h3>Habitat</h3><p>${esc(habitat.text)}</p>`
-    : '';
+  // Where it grows wild: the habitat in words, beside Little's map when the
+  // species has one. Where no habitat is written yet, the map's own summary
+  // of the states it covers stands in for it (range-map.mjs, describeRange).
+  // Whether Burlington is inside is for the map's star to show.
+  const habitatText = habitat?.text || (range ? describeRange(range.where) : '');
+  const habitatPara = habitatText ? `<h3>Habitat</h3><p>${esc(habitatText)}</p>` : '';
   // A cultivar's or variety's habitat and range are its species', said once.
   const ofSpecies = (t.cultivar || t.infra) && (habitat?.inherited || range)
     ? `<p class="note of-species">For <i>${esc(`${t.genus} ${t.species}`)}</i>, the species this was selected from.</p>`
     : '';
-  let rangeSection = '';
-  if (!(range && maps) && habitat) {
-    rangeSection = `<h2>Where it grows wild</h2>
-  ${ofSpecies}
-  <section class="wild wild--text">
-    <div>${habitatPara}
+  const growing = `${habitatPara}
       ${t.soil ? `<p><b>Soil:</b> ${esc(t.soil)}</p>` : ''}
-    </div>
-  </section>`;
-  }
+      ${t.zones ? `<p><b>Hardiness zones:</b> ${esc(t.zones)}. On the USDA's 2023 map the campus is in zone 5a, and Burlington's lakeshore in 5b.</p>` : ''}`;
+  let rangeSection = '';
   if (range && maps) {
-    const where = whereIn(range, BURLINGTON.lat, BURLINGTON.lng);
-    const home = where === 'main';
-    // A Vermont native can grow wild only in another corner of the state, as
-    // flowering dogwood does in the south; the sentence says so rather than
-    // leave "native" and "outside" side by side unexplained.
-    const reachesVermont = !home && maps.vermont && rangeTouches(mainBody(range), maps.vermont);
     rangeSection = `<h2>Where it grows wild</h2>
   ${ofSpecies}
   <section class="wild">
     <div>
-      ${habitatPara}
-      ${habitat ? '<h3>Range</h3>' : ''}
-      <p>${where === 'outlier'
-    ? `Little's map marks a small outlying area around Burlington, apart from the main range${reachesVermont ? ', which also reaches into Vermont' : ''}.`
-    : reachesVermont
-      ? 'Its native range reaches into Vermont, but not as far as Burlington.'
-      : `Burlington is ${home ? 'inside' : 'outside'} its native range.`}</p>
-      ${t.soil ? `<p><b>Soil:</b> ${esc(t.soil)}</p>` : ''}
-      ${t.zones ? `<p><b>Hardiness zones:</b> ${esc(t.zones)}. On the USDA's 2023 map the campus is in zone 5a, and Burlington's lakeshore in 5b.</p>` : ''}
+      ${growing}
     </div>
     <figure class="range">
       <div class="range-map"><img src="${esc(shared.rangeBase)}" alt="">${rangeSvg(range)}<img src="${esc(shared.rangeLines)}" alt=""></div>
       <figcaption><span class="key"><i></i>Grows wild</span><span class="key star">&#9733; Burlington</span><span class="key vt">Vermont</span></figcaption>
     </figure>
+  </section>`;
+  } else if (habitat) {
+    rangeSection = `<h2>Where it grows wild</h2>
+  ${ofSpecies}
+  <section class="wild wild--text">
+    <div>
+      ${growing}
+    </div>
   </section>`;
   }
 

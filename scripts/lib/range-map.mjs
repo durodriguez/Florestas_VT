@@ -161,3 +161,98 @@ export function rangeSvg(range) {
   const d = pathOf([...range.range, ...range.absent]);
   return `<svg class="range-fill" viewBox="0 0 ${SIZE.width} ${SIZE.height}" aria-hidden="true"><path d="${d}" fill-rule="evenodd"/></svg>`;
 }
+
+/** Ray casting on one polygon's outer ring, with a bounding-box check first. */
+function boxOf(poly) {
+  let w = Infinity, e = -Infinity, s = Infinity, n = -Infinity;
+  for (const [x, y] of poly[0]) { if (x < w) w = x; if (x > e) e = x; if (y < s) s = y; if (y > n) n = y; }
+  return [w, e, s, n];
+}
+
+/**
+ * Which states a range covers, and whether it reaches into Canada or Mexico,
+ * read off a grid of points a quarter degree apart. Run once per species by
+ * fetch-ranges.mjs and stored with the range, as it is slow. A state counts
+ * when at least MIN_POINTS of its grid points fall in the range (a few
+ * hundred square km), so a speck at a border does not add a state.
+ */
+export function rangeStates(range, basemap) {
+  const MIN_POINTS = 3;
+  const states = basemap.states.map((s) => ({ name: s.name, polys: s.polygons.map((p) => ({ p, box: boxOf(p) })) }));
+  const nb = basemap.neighbors.map((p) => ({ p, box: boxOf(p) }));
+  const rp = range.range.map((p) => ({ p, box: boxOf(p) }));
+  const ap = range.absent.map((p) => ({ p, box: boxOf(p) }));
+  const hit = (list, x, y) => list.some(({ p, box }) => x >= box[0] && x <= box[1] && y >= box[2] && y <= box[3] && inRings(p, x, y));
+  const tally = new Map();
+  let canada = 0, mexico = 0;
+  for (let y = FRAME.south + 0.125; y < FRAME.north; y += 0.25) {
+    for (let x = FRAME.west + 0.125; x < FRAME.east; x += 0.25) {
+      if (!hit(rp, x, y) || hit(ap, x, y)) continue;
+      const st = states.find((s) => hit(s.polys, x, y));
+      if (st) {
+        const t = tally.get(st.name) ?? { name: st.name, n: 0, lat: 0, lng: 0 };
+        t.n += 1; t.lat += y; t.lng += x;
+        tally.set(st.name, t);
+      } else if (hit(nb, x, y)) {
+        if (y > 41) canada += 1; else if (y < 33) mexico += 1;
+      }
+    }
+  }
+  return {
+    states: [...tally.values()].filter((t) => t.n >= MIN_POINTS)
+      .map((t) => ({ name: t.name, lat: Math.round((t.lat / t.n) * 10) / 10, lng: Math.round((t.lng / t.n) * 10) / 10, n: t.n }))
+      .sort((a, b) => a.name.localeCompare(b.name)),
+    canada: canada >= MIN_POINTS,
+    mexico: mexico >= MIN_POINTS,
+  };
+}
+
+const listing = (items) => (items.length <= 1 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items.at(-1)}`);
+
+/**
+ * The range in a sentence, from rangeStates(): "Grows wild in 32 states, from
+ * Maine west to Minnesota and south to Florida and Texas, reaching north into
+ * Canada." Four states or fewer are named outright; a range lying east to
+ * west (under 6 degrees of latitude between its states, and far wider than it
+ * is tall) by its two ends.
+ * Otherwise the corners:
+ * the state farthest to the northeast, then northwest, southeast and
+ * southwest, by where the range lies within each, each named once and only
+ * where it really is in the north or south of the range.
+ */
+export function describeRange(info) {
+  const { states = [], canada = false, mexico = false } = info ?? {};
+  if (!states.length) return '';
+  const beyond = [canada ? 'north into Canada' : '', mexico ? 'south into Mexico' : ''].filter(Boolean);
+  const tail = beyond.length ? `, reaching ${listing(beyond)}` : '';
+  const count = `${states.length} ${states.length === 1 ? 'state' : 'states'}`;
+  if (states.length <= 4) {
+    const west = [...states].sort((a, b) => a.lng - b.lng).map((s) => s.name);
+    return `Grows wild in ${states.length === 1 ? '' : `${count}: `}${listing(west)}${tail}.`;
+  }
+  const lats = states.map((s) => s.lat);
+  const lngs = states.map((s) => s.lng);
+  const [s0, s1, w0, w1] = [Math.min(...lats), Math.max(...lats), Math.min(...lngs), Math.max(...lngs)];
+  // A range lying east to west, across the north as white spruce's does:
+  // its ends, east then west.
+  const wide = (w1 - w0) * Math.cos((((s0 + s1) / 2) * Math.PI) / 180);
+  if (s1 - s0 < 6 && wide > 2.5 * (s1 - s0)) {
+    const east = states.reduce((a, b) => (b.lng > a.lng ? b : a));
+    const west = states.reduce((a, b) => (b.lng < a.lng ? b : a));
+    return `Grows wild in ${count}, from ${east.name} west to ${west.name}${tail}.`;
+  }
+  const ny = (s) => (s.lat - s0) / (s1 - s0 || 1);
+  const nx = (s) => (s.lng - w0) / (w1 - w0 || 1);
+  const best = (score) => states.reduce((a, b) => (score(b) > score(a) ? b : a));
+  const ne = best((s) => nx(s) + ny(s));
+  const nw = best((s) => ny(s) - nx(s));
+  const se = best((s) => nx(s) - ny(s));
+  const sw = best((s) => -nx(s) - ny(s));
+  const north = [ne, nw].filter((s, i, a) => ny(s) >= 0.5 && a.indexOf(s) === i);
+  const south = [se, sw].filter((s, i, a) => ny(s) < 0.5 && a.indexOf(s) === i && !north.includes(s));
+  const from = north[0] ?? ne;
+  const parts = [];
+  if (north[1] && north[1] !== from) parts.push(`west to ${north[1].name}`);
+  if (south.length) parts.push(`south to ${listing(south.map((s) => s.name))}`);
+  return `Grows wild in ${count}, from ${from.name}${parts.length ? ` ${parts.join(' and ')}` : ''}${tail}.`;
+}

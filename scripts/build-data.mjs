@@ -281,7 +281,7 @@ for (const taxon of describable) {
     trees: treesByTaxon.get(taxon.id) ?? [],
     extras: extrasBuilt.extras.get(taxon.id),
     range: rangeOf(taxon),
-    maps: { campus, vermont: basemap.states.find((st) => st.name === 'Vermont')?.polygons ?? null },
+    maps: { campus },
     shared,
     base: siteBase,
     config,
