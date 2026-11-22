@@ -22,7 +22,7 @@ import { createHash } from 'node:crypto';
 import { SEARCH_FORM, SPECIES_SEARCH_JS } from './species-search.mjs';
 import { treeDrawing } from './tree-drawing.mjs';
 import { yearTable, yearSummary, MONTH_NAMES } from './year.mjs';
-import { BURLINGTON, inRange, rangeSvg, rangeTouches } from './range-map.mjs';
+import { BURLINGTON, mainBody, rangeSvg, rangeTouches, whereIn } from './range-map.mjs';
 import { campusSvg } from './campus-map.mjs';
 
 export const esc = (s) =>
@@ -164,6 +164,37 @@ export function campusFacts(trees, base) {
   return facts;
 }
 
+/**
+ * Know it by: a photo of its bark, leaves, flowers and fruit, from Wikimedia
+ * Commons (data/part-photos.csv), each with what taxa.csv says of that part
+ * and the photo's credit, as its license requires.
+ */
+function knowItBy(t, photos) {
+  if (!photos) return '';
+  const needles = t.family === 'Pinaceae';
+  const cones = t.family === 'Pinaceae' || t.family === 'Cupressaceae';
+  const when = (color, months) => [titleCase(color), monthRange(months)].filter(Boolean).map(esc).join(' &middot; ');
+  const parts = [
+    ['bark', 'Bark', esc(t.bark)],
+    ['leaves', needles ? 'Needles' : 'Leaves', t.type === 'evergreen-tree' ? 'Evergreen.' : t.fallColor ? `Fall color: ${esc(t.fallColor.replace(/-/g, ' '))}.` : ''],
+    ['flowers', cones ? 'Pollen cones' : 'Flowers', when(t.flowerColor, t.flowerMonths)],
+    ['fruit', cones ? 'Cones' : t.genus === 'Quercus' ? 'Acorns' : 'Fruit', when(t.fruitColor, t.fruitMonths)],
+  ].filter(([key]) => photos[key]);
+  if (!parts.length) return '';
+  const tiles = parts.map(([key, label, says]) => {
+    const p = photos[key];
+    const big = p.image.replace('/500px-', '/960px-');
+    const license = p.licenseUrl ? `<a href="${esc(p.licenseUrl)}" rel="noopener license">${esc(p.license)}</a>` : esc(p.license);
+    return `<figure class="part">
+      <img src="${esc(p.image)}" srcset="${esc(p.image)} 500w, ${esc(big)} 960w" sizes="(max-width: 48rem) 50vw, 15rem" alt="${esc(`${label} of ${t.common.toLowerCase()}`)}" loading="lazy">
+      <figcaption><b>${esc(label)}.</b> ${says}<span class="credit">Photo: <a href="${esc(p.page)}" rel="noopener">${esc(p.author)}</a>, ${license}, Wikimedia Commons</span></figcaption>
+    </figure>`;
+  }).join('');
+  return `<h2>Know it by</h2>
+  ${photos.inherited ? `<p class="note of-species">Photos of <i>${esc(`${t.genus} ${t.species}`)}</i>, the species this was selected from.</p>` : ''}
+  <section class="parts">${tiles}</section>`;
+}
+
 /** The year in a table, as the field guide shows it, with the same words under it. */
 function yearSection(t) {
   const rows = yearTable(t);
@@ -190,8 +221,10 @@ function yearSection(t) {
  * the files every page shares. All but the first three are optional, so a
  * page can be rendered from a taxon alone.
  */
-export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = [], range = null, maps = null, shared = {} }) {
+export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = [], range = null, maps = null, shared = {}, extras = null }) {
   const t = taxon;
+  const habitat = extras?.habitat ?? null;
+  const added = extras?.facts ?? [];
   const kicker = [esc(t.family), TYPE_LABELS[t.type] ?? titleCase(t.type)].filter(Boolean).join(' &middot; ');
   const origin = ORIGIN_LABELS[t.origin] ?? titleCase(t.origin);
 
@@ -212,7 +245,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     }).join('')}</ul>`
     : '';
 
-  const drawing = treeDrawing(t);
+  const drawing = treeDrawing({ ...t, crownForm: extras?.crownForm ?? null });
   const stats = [
     t.matureHeightFt ? `<div><dt>Mature height</dt><dd>${t.matureHeightFt} ft</dd></div>` : '',
     t.matureSpreadFt ? `<div><dt>Spread</dt><dd>${t.matureSpreadFt} ft</dd></div>` : '',
@@ -231,29 +264,50 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     : '';
 
   // Worth knowing: the fun fact, then what the inventory can vouch for.
-  const facts = [t.funFact ? esc(t.funFact) : '', ...campusFacts(trees, base)].filter(Boolean);
+  const facts = [t.funFact ? esc(t.funFact) : '', ...added.map((f) => esc(f.text)), ...campusFacts(trees, base)].filter(Boolean);
   const factsBox = facts.length
     ? `<aside class="worth"><h2>Worth knowing</h2><ul>${facts.map((f) => `<li>${f}</li>`).join('')}</ul></aside>`
     : '';
 
   // Where it grows wild: Little's map, for the species a cultivar or variety
   // was selected from.
+  const habitatPara = habitat
+    ? `<h3>Habitat</h3><p>${esc(habitat.text)}</p>`
+    : '';
+  // A cultivar's or variety's habitat and range are its species', said once.
+  const ofSpecies = (t.cultivar || t.infra) && (habitat?.inherited || range)
+    ? `<p class="note of-species">For <i>${esc(`${t.genus} ${t.species}`)}</i>, the species this was selected from.</p>`
+    : '';
   let rangeSection = '';
+  if (!(range && maps) && habitat) {
+    rangeSection = `<h2>Where it grows wild</h2>
+  ${ofSpecies}
+  <section class="wild wild--text">
+    <div>${habitatPara}
+      ${t.soil ? `<p><b>Soil:</b> ${esc(t.soil)}</p>` : ''}
+    </div>
+  </section>`;
+  }
   if (range && maps) {
-    const selected = t.cultivar || t.infra;
-    const home = inRange(range, BURLINGTON.lat, BURLINGTON.lng);
+    const where = whereIn(range, BURLINGTON.lat, BURLINGTON.lng);
+    const home = where === 'main';
     // A Vermont native can grow wild only in another corner of the state, as
     // flowering dogwood does in the south; the sentence says so rather than
     // leave "native" and "outside" side by side unexplained.
-    const reachesVermont = !home && maps.vermont && rangeTouches(range, maps.vermont);
+    const reachesVermont = !home && maps.vermont && rangeTouches(mainBody(range), maps.vermont);
     rangeSection = `<h2>Where it grows wild</h2>
+  ${ofSpecies}
   <section class="wild">
     <div>
-      <p>${selected ? `The map shows the native range of <i>${esc(range.species)}</i>, the species this was selected from. ` : ''}${reachesVermont
-    ? `${selected ? 'That range' : 'Its native range'} reaches into Vermont, but not as far as Burlington.`
-    : `Burlington is ${home ? 'inside' : 'outside'} ${selected ? 'that range' : 'its native range'}.`}</p>
+      ${habitatPara}
+      ${habitat ? '<h3>Range</h3>' : ''}
+      <p>${where === 'outlier'
+    ? `Little's map marks a small outlying area around Burlington, apart from the main range${reachesVermont ? ', which also reaches into Vermont' : ''}.`
+    : reachesVermont
+      ? 'Its native range reaches into Vermont, but not as far as Burlington.'
+      : `Burlington is ${home ? 'inside' : 'outside'} its native range.`}</p>
       ${t.soil ? `<p><b>Soil:</b> ${esc(t.soil)}</p>` : ''}
-      ${t.zones ? `<p><b>Hardiness zones:</b> ${esc(t.zones)}. Burlington is in zone 5.</p>` : ''}
+      ${t.zones ? `<p><b>Hardiness zones:</b> ${esc(t.zones)}. On the USDA's 2023 map the campus is in zone 5a, and Burlington's lakeshore in 5b.</p>` : ''}
     </div>
     <figure class="range">
       <div class="range-map"><img src="${esc(shared.rangeBase)}" alt="">${rangeSvg(range)}<img src="${esc(shared.rangeLines)}" alt=""></div>
@@ -299,8 +353,13 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     row('Hardiness zones', esc(t.zones)),
   ].join('');
 
+  const cite = (s) => `<a href="${esc(s.url)}" rel="noopener">${esc(s.source)}</a>`;
+  const factSources = [...new Map(added.map((f) => [f.url, f])).values()];
   const sources = [
+    habitat ? `Habitat: ${cite(habitat)}.` : '',
     range && maps ? `Range: Little, E.L., Jr., <i>Atlas of United States Trees</i>, U.S. Department of Agriculture, 1971&ndash;1978 (public domain), as digitized by the U.S. Geological Survey.` : '',
+    factSources.length ? `Worth knowing: ${factSources.map(cite).join('; ')}.` : '',
+    extras?.photos ? 'Photos of the bark, leaves, flowers and fruit: Wikimedia Commons, credited under each.' : '',
     drawing ? 'Drawing: from the mature height and spread on file.' : '',
   ].filter(Boolean);
 
@@ -316,6 +375,8 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     ${t.description ? `<p class="lede">${esc(t.description)}</p>` : '<div></div>'}
     ${factsBox}
   </section>
+
+  ${knowItBy(t, extras?.photos)}
 
   ${yearSection(t)}
 
@@ -636,7 +697,7 @@ figure { margin: 0; }
 .td-ground { stroke: var(--dim); }
 .td-shade { fill: rgb(0 0 0 / 8%); }
 .td-trunk { fill: #6b4a33; }
-.td-limb { fill: none; stroke: #6b4a33; stroke-width: 3; stroke-linecap: round; }
+.td-limb { fill: none; stroke: #6b4a33; stroke-linecap: round; }
 .td-person { fill: var(--ink); opacity: .75; }
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr)); gap: .4rem; margin: .5rem 0 .3rem; }
 .stats div { background: var(--bg); border-radius: 8px; padding: .35rem .55rem; }
@@ -657,6 +718,11 @@ figure { margin: 0; }
 .worth li { margin-bottom: .45rem; }
 .worth a { color: inherit; }
 
+.parts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.part img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: var(--sunk); }
+.part figcaption { font-size: .84rem; color: var(--ink); margin-top: .45rem; }
+.part .credit { display: block; margin-top: .2rem; font-size: .7rem; color: var(--dim); }
+.part .credit a { color: inherit; }
 .year { width: 100%; border-collapse: separate; border-spacing: 3px; table-layout: fixed; }
 .year thead th { font-size: .74rem; font-weight: 500; color: var(--dim); text-align: center; }
 .year thead td, .year tbody th { width: 5rem; }
@@ -668,6 +734,9 @@ figure { margin: 0; }
 
 .wild { display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.6rem; align-items: start; }
 .wild p { margin: 0 0 .8rem; font-size: .93rem; }
+.wild h3 { margin: 0 0 .25rem; font-size: .95rem; }
+.wild--text { grid-template-columns: minmax(0, 40rem); }
+.of-species { margin: -.3rem 0 .8rem; }
 .range-map, .campus-map { position: relative; }
 .range-map img, .campus-map img { display: block; width: 100%; height: auto; }
 .range-map img { border-radius: 10px; border: 1px solid var(--border); }
@@ -691,6 +760,7 @@ figure { margin: 0; }
 @media (max-width: 48rem) {
   .sp-head h1 { font-size: 1.9rem; }
   .hero, .intro, .wild, .oncampus { grid-template-columns: 1fr; }
+  .parts { grid-template-columns: repeat(2, 1fr); gap: .7rem; }
   .hero .lead { order: -1; }
   .lead .shot-open img { height: 22rem; }
   .mature { max-width: 22rem; }

@@ -34,6 +34,11 @@ describe('planting plan: species to plant more of', () => {
     ];
     expect(plantingCandidates(campus, list, []).map((x) => x.taxon.id)).toEqual(['ok']);
   });
+  it('flags a species rated hardy only to zone 5 as at its cold limit, and keeps it', () => {
+    const list = [taxon('edge', { zones: '5-9' }), taxon('hardy', { zones: '3-7' })];
+    const c = plantingCandidates(campus, list, []);
+    expect(c.map((x) => [x.taxon.id, x.atLimit])).toEqual([['edge', true], ['hardy', false]]);
+  });
   it('reads zones and sizes', () => {
     expect(zoneRange('4-8')).toEqual([4, 8]);
     expect(zoneRange('')).toBeNull();

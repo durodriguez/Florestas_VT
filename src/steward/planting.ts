@@ -19,8 +19,10 @@
 import type { Plant, Taxon } from '../types';
 
 /**
- * Burlington's USDA hardiness zone on the 2023 map (5b). A species is hardy
- * here when its recorded zones ("4-8") include 5.
+ * The campus's USDA hardiness zone on the 2023 map: 5a, the colder half of
+ * zone 5 (Burlington's lakeshore is 5b). taxa.csv records zones as whole
+ * numbers, so a species is hardy here when its recorded zones ("4-8")
+ * include 5; one rated only to 5 is at its cold limit on campus.
  */
 export const ZONE = 5;
 export const LIMITS = { genus: 0.2, family: 0.3 };
@@ -36,6 +38,8 @@ export interface Candidate {
   familyShare: number;
   /** The pests from the health list whose hosts include this genus. */
   hostOf: string[];
+  /** Rated hardy only to zone 5: at its cold limit in the campus's 5a. */
+  atLimit: boolean;
 }
 
 /** "4-8" → [4, 8]; null when not recorded or not a range. */
@@ -69,6 +73,7 @@ export function plantingCandidates(plants: Plant[], taxa: Taxon[], threats: Thre
       genusShare: (byGenus.get(t.genus) ?? 0) / n,
       familyShare: (byFamily.get(t.family) ?? 0) / n,
       hostOf: threats.filter((th) => th.hosts.includes(t.genus)).map((th) => th.name),
+      atLimit: zoneRange(t.zones)![0] === ZONE,
     }))
     // Never toward a limit already reached.
     .filter((c) => c.genusShare < LIMITS.genus && c.familyShare < LIMITS.family)

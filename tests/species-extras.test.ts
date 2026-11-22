@@ -6,9 +6,11 @@ import type { Taxon } from '../src/types';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
 import { yearSummary as mjsSummary, yearTable as mjsTable } from '../scripts/lib/year.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
-import { BURLINGTON, SIZE, inRange, project, rangeTouches } from '../scripts/lib/range-map.mjs';
+import { BURLINGTON, SIZE, inRange, project, rangeTouches, whereIn } from '../scripts/lib/range-map.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
-import { crownForm, treeDrawing } from '../scripts/lib/tree-drawing.mjs';
+import { CROWN_FORMS, crownForm, treeDrawing } from '../scripts/lib/tree-drawing.mjs';
+// @ts-expect-error -- plain .mjs module, intentionally untyped
+import { speciesExtras } from '../scripts/lib/species-extras.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
 import { campusFrame, campusSvg } from '../scripts/lib/campus-map.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
@@ -42,6 +44,13 @@ describe('native range maps', () => {
   it('puts Burlington inside red maple\'s range and outside baldcypress\'s', () => {
     expect(inRange(range('acer-rubrum'), BURLINGTON.lat, BURLINGTON.lng)).toBe(true);
     expect(inRange(range('taxodium-distichum'), BURLINGTON.lat, BURLINGTON.lng)).toBe(false);
+  });
+
+  it('tells the main body of a range from a patch Little drew apart from it', () => {
+    const at = (name: string) => whereIn(range(name), BURLINGTON.lat, BURLINGTON.lng);
+    expect(at('acer-rubrum')).toBe('main');
+    expect(at('pinus-rigida')).toBe('outlier');
+    expect(at('taxodium-distichum')).toBeNull();
   });
 
   it('knows a range that reaches only the south of Vermont', () => {
@@ -131,6 +140,105 @@ describe('the campus on a species page', () => {
       expect(x).toBeLessThanOrEqual(frame.width);
       expect(y).toBeGreaterThanOrEqual(0);
       expect(y).toBeLessThanOrEqual(frame.height);
+    }
+  });
+});
+
+
+describe('what species pages add by hand', () => {
+  const taxa = [
+    { id: 'gleditsia-triacanthos', genus: 'Gleditsia', species: 'triacanthos', infra: '', cultivar: '' },
+    { id: 'gleditsia-triacanthos-inermis', genus: 'Gleditsia', species: 'triacanthos', infra: 'var. inermis', cultivar: '' },
+    { id: 'gleditsia-triacanthos-inermis-skyline', genus: 'Gleditsia', species: 'triacanthos', infra: 'var. inermis', cultivar: 'Skyline' },
+  ];
+  const src = { source: 'Silvics', source_url: 'https://example.org/s' };
+
+  it('gives a cultivar or variety its species\' crown form and habitat, but not its facts', () => {
+    const { extras, errors } = speciesExtras({
+      crownRows: [{ taxon_id: 'gleditsia-triacanthos', crown_form: 'spreading' }],
+      habitatRows: [{ taxon_id: 'gleditsia-triacanthos', habitat: 'River bottoms.', ...src }],
+      factRows: [{ taxon_id: 'gleditsia-triacanthos', fact: 'Wild trees carry thorns.', ...src }],
+      taxa,
+    });
+    expect(errors).toEqual([]);
+    const skyline = extras.get('gleditsia-triacanthos-inermis-skyline');
+    expect(skyline.crownForm).toBe('spreading');
+    expect(skyline.habitat).toMatchObject({ text: 'River bottoms.', inherited: true });
+    expect(skyline.facts).toEqual([]);
+    expect(extras.get('gleditsia-triacanthos').facts.map((f: { text: string }) => f.text)).toEqual(['Wild trees carry thorns.']);
+    expect(extras.get('gleditsia-triacanthos').habitat.inherited).toBeUndefined();
+  });
+
+  it('lets a cultivar have a crown form of its own', () => {
+    const { extras } = speciesExtras({
+      crownRows: [
+        { taxon_id: 'gleditsia-triacanthos', crown_form: 'spreading' },
+        { taxon_id: 'gleditsia-triacanthos-inermis-skyline', crown_form: 'pyramidal' },
+      ],
+      taxa,
+    });
+    expect(extras.get('gleditsia-triacanthos-inermis-skyline').crownForm).toBe('pyramidal');
+    expect(extras.get('gleditsia-triacanthos-inermis').crownForm).toBe('spreading');
+  });
+
+  it('refuses an unknown taxon, an unknown form, a row twice, and a claim without a source', () => {
+    const { errors } = speciesExtras({
+      crownRows: [
+        { taxon_id: 'nope', crown_form: 'oval' },
+        { taxon_id: 'gleditsia-triacanthos', crown_form: 'blobby' },
+        { taxon_id: 'gleditsia-triacanthos-inermis', crown_form: 'oval' },
+        { taxon_id: 'gleditsia-triacanthos-inermis', crown_form: 'oval' },
+      ],
+      factRows: [{ taxon_id: 'gleditsia-triacanthos', fact: 'Unsourced.', source: '', source_url: '' }],
+      taxa,
+    });
+    expect(errors).toHaveLength(4);
+    expect(errors.join('\n')).toMatch(/no taxon "nope"/);
+    expect(errors.join('\n')).toMatch(/crown_form must be one of/);
+    expect(errors.join('\n')).toMatch(/listed twice/);
+    expect(errors.join('\n')).toMatch(/needs a source/);
+  });
+
+  it('takes a Commons photo under a free license, credited, and gives it to cultivars', () => {
+    const photo = {
+      taxon_id: 'gleditsia-triacanthos', part: 'bark', title: 'File:Bark.jpg',
+      page_url: 'https://commons.wikimedia.org/wiki/File:Bark.jpg',
+      image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Bark.jpg/500px-Bark.jpg',
+      author: 'A. Photographer', license: 'CC BY-SA 4.0', license_url: 'https://creativecommons.org/licenses/by-sa/4.0',
+    };
+    const ok = speciesExtras({ photoRows: [photo], taxa });
+    expect(ok.errors).toEqual([]);
+    expect(ok.extras.get('gleditsia-triacanthos').photos.bark.author).toBe('A. Photographer');
+    expect(ok.extras.get('gleditsia-triacanthos-inermis-skyline').photos).toMatchObject({ inherited: true, bark: { title: 'File:Bark.jpg' } });
+
+    const bad = speciesExtras({
+      photoRows: [
+        { ...photo, license: 'CC BY-NC 4.0' },
+        { ...photo, author: '' },
+        { ...photo, part: 'roots' },
+        { ...photo, image_url: 'https://example.org/bark.jpg' },
+      ],
+      taxa,
+    });
+    expect(bad.errors.join('\n')).toMatch(/not one that allows reuse/);
+    expect(bad.errors.join('\n')).toMatch(/author is empty/);
+    expect(bad.errors.join('\n')).toMatch(/part must be one of/);
+    expect(bad.errors.join('\n')).toMatch(/500px thumbnail/);
+  });
+
+  it('passes the files in data/', () => {
+    const read = (f: string) => Papa.parse<Record<string, string>>(readFileSync(`data/${f}`, 'utf8'), { header: true, skipEmptyLines: true }).data;
+    const all = rows.map((r) => ({ id: r.taxon_id, genus: r.genus, species: r.species, infra: r.infraspecific, cultivar: r.cultivar }));
+    const { errors, warnings } = speciesExtras({ crownRows: read('crown-forms.csv'), habitatRows: read('habitat.csv'), factRows: read('facts.csv'), photoRows: read('part-photos.csv'), taxa: all });
+    expect(errors).toEqual([]);
+    expect(warnings).toEqual([]);
+  });
+
+  it('draws every crown form', () => {
+    for (const form of CROWN_FORMS) {
+      const svg = treeDrawing({ id: `t-${form}`, common: 'Tree', family: 'Fagaceae', type: 'deciduous-tree', matureHeightFt: 50, matureSpreadFt: 30, crownForm: form });
+      expect(svg, form).toMatch(/<ellipse cx=/);
+      expect(svg, form).not.toContain('NaN');
     }
   });
 });

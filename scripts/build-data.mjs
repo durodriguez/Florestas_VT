@@ -13,6 +13,7 @@ import { UNKNOWN_TAXON } from './lib/vocab.mjs';
 import { normalizeName } from './lib/species.mjs';
 import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS } from './lib/species-pages.mjs';
 import { rangeBaseSvg, rangeLinesSvg } from './lib/range-map.mjs';
+import { speciesExtras } from './lib/species-extras.mjs';
 import { campusFrame, campusBaseSvg } from './lib/campus-map.mjs';
 import { renderItreePage } from './lib/itree-page.mjs';
 import { collectionHealth } from './lib/health.mjs';
@@ -83,6 +84,18 @@ const result = buildDataset({
   }),
   config,
 });
+
+// What species pages add by hand: crown forms, habitats, facts
+// (species-extras.mjs). Checked with the rest, so a bad row stops the build.
+const extrasBuilt = speciesExtras({
+  crownRows: readCsv('crown-forms.csv'),
+  habitatRows: readCsv('habitat.csv'),
+  factRows: readCsv('facts.csv'),
+  photoRows: readCsv('part-photos.csv'),
+  taxa: result.dataset.taxa,
+});
+result.errors.push(...extrasBuilt.errors);
+result.warnings.push(...extrasBuilt.warnings);
 
 for (const w of result.warnings) console.warn(`  ! ${w}`);
 
@@ -266,6 +279,7 @@ for (const taxon of describable) {
     photos: photosByTaxon.get(taxon.id) ?? [],
     areas: [...(areasByTaxon.get(taxon.id) ?? [])].sort(),
     trees: treesByTaxon.get(taxon.id) ?? [],
+    extras: extrasBuilt.extras.get(taxon.id),
     range: rangeOf(taxon),
     maps: { campus, vermont: basemap.states.find((st) => st.name === 'Vermont')?.polygons ?? null },
     shared,

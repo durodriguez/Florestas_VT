@@ -89,6 +89,33 @@ export function inRange(range, lat, lng) {
   return within && !range.absent.some((poly) => inRings(poly, lng, lat));
 }
 
+/** Shoelace area of a ring, in square degrees. */
+const areaOf = (ring) => Math.abs(ring.reduce((sum, [x, y], i) => {
+  const [nx, ny] = ring[(i + 1) % ring.length];
+  return sum + x * ny - nx * y;
+}, 0)) / 2;
+
+/**
+ * Smaller than this, in square degrees (about 18,000 km² at Vermont's
+ * latitude, three quarters of Vermont), an area of a range is an outlier: a
+ * patch Little drew apart from the main range, as he did for the Champlain
+ * Valley's bur oaks and pitch pines.
+ */
+const OUTLIER = 2;
+
+/** The range without its outlying patches. */
+export const mainBody = (range) => ({ ...range, range: range.range.filter((poly) => areaOf(poly[0]) >= OUTLIER) });
+
+/**
+ * Where a point stands against a range: in its main body ('main'), only in an
+ * outlying patch ('outlier'), or outside it (null).
+ */
+export function whereIn(range, lat, lng) {
+  if (!inRange(range, lat, lng)) return null;
+  const main = range.range.some((poly) => areaOf(poly[0]) >= OUTLIER && inRings(poly, lng, lat));
+  return main ? 'main' : 'outlier';
+}
+
 /**
  * Whether a range and a state's outline overlap: a corner of either inside the
  * other. Enough at this scale, where neither is drawn finer than a few km.
