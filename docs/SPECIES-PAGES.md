@@ -172,7 +172,10 @@ Lombardy poplar, northern catalpa, American chestnut, Douglas fir, Scotch
 pine, black walnut, eastern redbud, white oak, eastern hemlock and tuliptree.
 All have a crown form and a habitat; six have new facts, all state or
 national trees. Lombardy poplar's habitat is its species', the black poplar's,
-as the cultivated clone grows wild nowhere.
+as the cultivated clone grows wild nowhere. Photos: all four for Douglas fir, black walnut, redbud,
+white oak, eastern hemlock and tuliptree; three for northern catalpa (its
+pods from iNaturalist) and American chestnut; two for Scotch pine; one for
+Lombardy poplar. The rest are in PHOTO-GAPS.md.
 
 ### Batch 5 (November 2026)
 
