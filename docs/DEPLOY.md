@@ -36,6 +36,30 @@ passing it there too: `BASE_PATH=/arboretum/ npm run data`.
 Whichever you choose, set `publicUrl` in `data/config.json` to the final
 address **before** printing labels — that value is what the QR codes encode.
 
+## Handover checklist
+
+What to settle when the site moves to UVM. Each is a placeholder or an open
+question today, recorded here so it is not forgotten.
+
+- [ ] **Contact email.** `contactEmail` in `data/config.json` is
+  `campustrees@uvm.edu`, a placeholder: the address does not exist yet. Every
+  species page and every tree's record on the map shows it. Create it, or set
+  the one that will be read.
+- [ ] **Public address.** `publicUrl` in `data/config.json`, before any labels
+  are printed (above).
+- [ ] **Steward console.** No public page links to it, but it is not locked:
+  anyone with its address can open it (STEWARD.md). Decide whether it needs a
+  login.
+- [ ] **Review inbox.** Built but switched off; its approver and the steps to
+  switch it on are in STEWARD.md.
+- [ ] **ShareAlike.** Ask whoever at UVM handles licensing whether the way the
+  CC BY-SA data is kept and credited is sufficient (data/SOURCES.md, "On
+  ShareAlike").
+- [ ] **Photos from Wikimedia Commons.** Species pages load their bark, leaf,
+  flower and fruit photos from Wikimedia's servers (SPECIES-PAGES.md). Decide
+  whether that is acceptable for a university site or the photos should be
+  hosted with it.
+
 ## Basemap tiles
 
 The map ships with three keyless raster basemaps — OpenStreetMap (default),
