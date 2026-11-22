@@ -187,6 +187,17 @@ all four for silver linden, dawn redwood, sweetgum, American beech, common
 smoketree, hedge maple and Alaska cedar; three for eastern hophornbeam; two
 for bigtooth aspen (its bark from iNaturalist) and shingle oak.
 
+### Batch 6 (November 2026)
+
+Twenty this time: yellow birch, gray birch, white fringetree, katsuratree,
+European beech, Callery pear, Kentucky coffeetree, kousa dogwood, common
+apple, three-flower maple, boxelder, four-winged silverbell, flowering
+dogwood, yellowwood, paperbark maple, hackberry, Amur corktree, green ash,
+Japanese stewartia and European mountain ash, with crown forms for
+European beech's columnar and weeping forms. All have a crown form and a
+habitat; three have new facts. The common apple's habitat describes its wild
+ancestor, as the orchard apple grows wild only where it escapes.
+
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
 
