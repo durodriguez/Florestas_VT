@@ -57,3 +57,13 @@ A close photo of the one part, in focus, works best: the tile is small.
   blue-green pairs; any time.
 - [ ] **Scotch pine**, cones (`pinus-sylvestris`, fruit). Small, pointed,
   gray-brown, any time.
+- [ ] **Eastern hophornbeam**, catkins (`ostrya-virginiana`, flowers).
+  Slender hanging catkins in April and May, with the new leaves.
+- [ ] **Bigtooth aspen**, catkins (`populus-grandidentata`, flowers). Gray,
+  fuzzy catkins in March and April, before the leaves.
+- [ ] **Bigtooth aspen**, fruit (`populus-grandidentata`, fruit). Strings of
+  small capsules that split to release cottony seed in May and June.
+- [ ] **Shingle oak**, catkins (`quercus-imbricaria`, flowers). In April and
+  May, with the new leaves.
+- [ ] **Shingle oak**, acorns (`quercus-imbricaria`, fruit). Small, nearly
+  round, in a shallow cup; September and October.

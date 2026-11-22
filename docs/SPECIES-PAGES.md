@@ -182,7 +182,10 @@ Lombardy poplar. The rest are in PHOTO-GAPS.md.
 Silver linden, dawn redwood, sweetgum, American beech, common smoketree,
 hedge maple, eastern hophornbeam, Alaska cedar, bigtooth aspen and shingle
 oak. All have a crown form and a habitat; two have new facts. The dawn
-redwood's is from the Arnold Arboretum's own history of its 1948 seed.
+redwood's is from the Arnold Arboretum's own history of its 1948 seed. Photos:
+all four for silver linden, dawn redwood, sweetgum, American beech, common
+smoketree, hedge maple and Alaska cedar; three for eastern hophornbeam; two
+for bigtooth aspen (its bark from iNaturalist) and shingle oak.
 
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
