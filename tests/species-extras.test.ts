@@ -10,7 +10,7 @@ import { BURLINGTON, SIZE, describeRange, inRange, project, rangeTouches, whereI
 // @ts-expect-error -- plain .mjs module, intentionally untyped
 import { CROWN_FORMS, crownForm, treeDrawing } from '../scripts/lib/tree-drawing.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
-import { speciesExtras } from '../scripts/lib/species-extras.mjs';
+import { speciesExtras, staleGaps } from '../scripts/lib/species-extras.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
 import { campusFrame, campusSvg } from '../scripts/lib/campus-map.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
@@ -252,5 +252,18 @@ describe('what species pages add by hand', () => {
       expect(svg, form).toMatch(/<ellipse cx=/);
       expect(svg, form).not.toContain('NaN');
     }
+  });
+
+  it('warns about a missing-photo line whose photo has been added', () => {
+    const extras = new Map([['oak', { photos: { bark: {} } }], ['elm', { photos: null }]]);
+    const doc = '- [ ] **Oak**, bark (`oak`, bark). Any time.\n- [ ] **Elm**, leaves (`elm`, leaves).\n- [x] **Oak**, bark (`oak`, bark).';
+    expect(staleGaps(doc, extras)).toEqual(['docs/PHOTO-GAPS.md: oak now has a bark photo; tick its line off']);
+  });
+
+  it('lists in docs/PHOTO-GAPS.md only photos that are still missing', () => {
+    const read = (f: string) => Papa.parse<Record<string, string>>(readFileSync(`data/${f}`, 'utf8'), { header: true, skipEmptyLines: true }).data;
+    const all = rows.map((r) => ({ id: r.taxon_id, genus: r.genus, species: r.species, infra: r.infraspecific, cultivar: r.cultivar }));
+    const { extras } = speciesExtras({ photoRows: read('part-photos.csv'), taxa: all });
+    expect(staleGaps(readFileSync('docs/PHOTO-GAPS.md', 'utf8'), extras)).toEqual([]);
   });
 });

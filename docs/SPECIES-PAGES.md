@@ -196,7 +196,9 @@ one). Doubtful ones are left out: a part with no tile is better than the
 wrong tree. A second search, with other words, filled some gaps. Batch 1 has
 38: all four for every species but Colorado blue spruce, which has no pollen
 cones that were certainly pollen cones.
-Campus photos of the parts can replace them as the survey takes them.
+The parts still missing are listed in PHOTO-GAPS.md, a checklist for
+finding or taking them. Campus photos of the parts can replace them as the
+survey takes them.
 
 ## Still to come
 

@@ -13,7 +13,7 @@ import { UNKNOWN_TAXON } from './lib/vocab.mjs';
 import { normalizeName } from './lib/species.mjs';
 import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS } from './lib/species-pages.mjs';
 import { rangeBaseSvg, rangeLinesSvg } from './lib/range-map.mjs';
-import { speciesExtras } from './lib/species-extras.mjs';
+import { speciesExtras, staleGaps } from './lib/species-extras.mjs';
 import { campusFrame, campusBaseSvg } from './lib/campus-map.mjs';
 import { renderItreePage } from './lib/itree-page.mjs';
 import { collectionHealth } from './lib/health.mjs';
@@ -96,6 +96,8 @@ const extrasBuilt = speciesExtras({
 });
 result.errors.push(...extrasBuilt.errors);
 result.warnings.push(...extrasBuilt.warnings);
+const gapsDoc = join(root, 'docs', 'PHOTO-GAPS.md');
+if (existsSync(gapsDoc)) result.warnings.push(...staleGaps(readFileSync(gapsDoc, 'utf8'), extrasBuilt.extras));
 
 for (const w of result.warnings) console.warn(`  ! ${w}`);
 
