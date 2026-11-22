@@ -149,6 +149,16 @@ white cedar's cones from iNaturalist (every Commons result was oriental
 arborvitae, *Platycladus*); two for Japanese zelkova (no photos of its flowers or fruit
 on Commons).
 
+### Batch 3 (November 2026)
+
+American hornbeam, Washington hawthorn, Japanese tree lilac, American
+sycamore, black locust, common horsechestnut, English oak, common
+baldcypress, bur oak and Sargent cherry. All have a crown form and a
+habitat; five have new facts. Black locust's habitat says its original range
+is not known exactly, as Silvics does. For the horsechestnut's, sources
+disagree whether it still grows wild in Albania; the page includes it, as the
+European Atlas of Forest Tree Species does.
+
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
 
