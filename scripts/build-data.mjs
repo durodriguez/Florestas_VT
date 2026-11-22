@@ -91,6 +91,7 @@ const extrasBuilt = speciesExtras({
   crownRows: readCsv('crown-forms.csv'),
   habitatRows: readCsv('habitat.csv'),
   factRows: readCsv('facts.csv'),
+  photoRows: readCsv('part-photos.csv'),
   taxa: result.dataset.taxa,
 });
 result.errors.push(...extrasBuilt.errors);

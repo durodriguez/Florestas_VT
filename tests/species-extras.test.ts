@@ -199,10 +199,37 @@ describe('what species pages add by hand', () => {
     expect(errors.join('\n')).toMatch(/needs a source/);
   });
 
+  it('takes a Commons photo under a free license, credited, and gives it to cultivars', () => {
+    const photo = {
+      taxon_id: 'gleditsia-triacanthos', part: 'bark', title: 'File:Bark.jpg',
+      page_url: 'https://commons.wikimedia.org/wiki/File:Bark.jpg',
+      image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Bark.jpg/500px-Bark.jpg',
+      author: 'A. Photographer', license: 'CC BY-SA 4.0', license_url: 'https://creativecommons.org/licenses/by-sa/4.0',
+    };
+    const ok = speciesExtras({ photoRows: [photo], taxa });
+    expect(ok.errors).toEqual([]);
+    expect(ok.extras.get('gleditsia-triacanthos').photos.bark.author).toBe('A. Photographer');
+    expect(ok.extras.get('gleditsia-triacanthos-inermis-skyline').photos).toMatchObject({ inherited: true, bark: { title: 'File:Bark.jpg' } });
+
+    const bad = speciesExtras({
+      photoRows: [
+        { ...photo, license: 'CC BY-NC 4.0' },
+        { ...photo, author: '' },
+        { ...photo, part: 'roots' },
+        { ...photo, image_url: 'https://example.org/bark.jpg' },
+      ],
+      taxa,
+    });
+    expect(bad.errors.join('\n')).toMatch(/not one that allows reuse/);
+    expect(bad.errors.join('\n')).toMatch(/author is empty/);
+    expect(bad.errors.join('\n')).toMatch(/part must be one of/);
+    expect(bad.errors.join('\n')).toMatch(/500px thumbnail/);
+  });
+
   it('passes the files in data/', () => {
     const read = (f: string) => Papa.parse<Record<string, string>>(readFileSync(`data/${f}`, 'utf8'), { header: true, skipEmptyLines: true }).data;
     const all = rows.map((r) => ({ id: r.taxon_id, genus: r.genus, species: r.species, infra: r.infraspecific, cultivar: r.cultivar }));
-    const { errors, warnings } = speciesExtras({ crownRows: read('crown-forms.csv'), habitatRows: read('habitat.csv'), factRows: read('facts.csv'), taxa: all });
+    const { errors, warnings } = speciesExtras({ crownRows: read('crown-forms.csv'), habitatRows: read('habitat.csv'), factRows: read('facts.csv'), photoRows: read('part-photos.csv'), taxa: all });
     expect(errors).toEqual([]);
     expect(warnings).toEqual([]);
   });

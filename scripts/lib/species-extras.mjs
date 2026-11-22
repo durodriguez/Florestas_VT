@@ -8,8 +8,12 @@
  *   wild, in a few sentences.
  * - data/facts.csv: taxon_id, fact, source, source_url. One row per fact,
  *   shown in Worth knowing after the fun fact, in file order.
+ * - data/part-photos.csv: taxon_id, part, title, page_url, image_url, author,
+ *   license, license_url. A photo of its bark, leaves, flowers or fruit
+ *   (PARTS), from Wikimedia Commons under a free license, credited on the
+ *   page. image_url is the 500 px thumbnail on upload.wikimedia.org.
  *
- * A cultivar or variety without its own crown form or habitat takes its
+ * A cultivar or variety without its own crown form, habitat or photos takes its
  * species' (the taxon of the same genus and species, with neither): a
  * thornless honeylocust is shaped and grows wild like any other. Not its
  * facts: one about the species may not hold for a selection of it.
@@ -23,13 +27,16 @@ import { CROWN_FORMS } from './tree-drawing.mjs';
 const trim = (v) => (v ?? '').toString().trim();
 /** As the fun fact is held to: what a phone can show in a few lines. */
 export const MAX_FACT = 240;
+export const PARTS = ['bark', 'leaves', 'flowers', 'fruit'];
+/** Licenses that allow reuse with credit: public domain, CC0, CC BY, CC BY-SA. */
+const FREE = /^(public domain|pd|cc0( 1\.0)?|cc by(-sa)? \d\.\d( [a-z]+)?)$/i;
 
 /**
  * @param {object} args  crownRows, habitatRows, factRows (parsed CSV rows),
  *   taxa (the built dataset's taxa: id, genus, species, infra, cultivar).
  * @returns {{ extras: Map<string, { crownForm: string|null, habitat: object|null, facts: object[] }>, errors: string[], warnings: string[] }}
  */
-export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [], taxa }) {
+export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [], photoRows = [], taxa }) {
   const errors = [];
   const warnings = [];
   const ids = new Set(taxa.map((t) => t.id));
@@ -74,6 +81,25 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     facts.get(id).push({ text, source: trim(r.source), url: trim(r.source_url) });
   });
 
+  const photos = new Map();
+  photoRows.forEach((r, i) => {
+    const where = `part-photos.csv row ${i + 2}`;
+    const id = trim(r.taxon_id);
+    const part = trim(r.part);
+    if (!known('part-photos.csv', i, id)) return;
+    if (!PARTS.includes(part)) return errors.push(`${where}: part must be one of ${PARTS.join(', ')}, got "${part}"`);
+    if (!/^https:\/\/upload\.wikimedia\.org\/.+\/500px-[^/]+$/.test(trim(r.image_url))) return errors.push(`${where}: image_url must be a 500px thumbnail on upload.wikimedia.org`);
+    if (!/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(trim(r.page_url))) return errors.push(`${where}: page_url must be the photo's Commons page`);
+    if (!FREE.test(trim(r.license))) return errors.push(`${where}: license "${trim(r.license)}" is not one that allows reuse with credit`);
+    if (!trim(r.author)) return errors.push(`${where}: author is empty; credit is a condition of the license`);
+    if (!photos.has(id)) photos.set(id, {});
+    if (photos.get(id)[part]) return errors.push(`${where}: ${id} already has a ${part} photo`);
+    photos.get(id)[part] = {
+      title: trim(r.title), page: trim(r.page_url), image: trim(r.image_url),
+      author: trim(r.author), license: trim(r.license), licenseUrl: trim(r.license_url),
+    };
+  });
+
   // A cultivar's or variety's species: same genus and species, neither of its own.
   const speciesKey = (t) => `${t.genus}|${t.species}`;
   const speciesOf = new Map(taxa.filter((t) => t.species && !t.cultivar && !t.infra).map((t) => [speciesKey(t), t.id]));
@@ -86,6 +112,7 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
       crownForm: forms.get(t.id) ?? (parent ? forms.get(parent) ?? null : null),
       habitat,
       facts: facts.get(t.id) ?? [],
+      photos: photos.get(t.id) ? { ...photos.get(t.id) } : parent && photos.get(parent) ? { ...photos.get(parent), inherited: true } : null,
     });
   }
   return { extras, errors, warnings };

@@ -134,13 +134,31 @@ against a second source before writing; the pin oak's name is given as
 **For review:** every habitat and fact in this batch is a draft, written here,
 not by a botanist.
 
+## Know it by: photos of the parts
+
+`data/part-photos.csv` (taxon_id, part, title, page_url, image_url, author,
+license, license_url): a photo of a species' bark, leaves, flowers or fruit
+from Wikimedia Commons, shown in four tiles under the description, each with
+what `taxa.csv` says of that part and a credit line (photographer, license,
+link to the photo's Commons page), as the licenses require. The page loads the
+500 px thumbnail from Wikimedia, and the 960 px one on a sharp screen.
+
+The build refuses a photo that is not under public domain, CC0, CC BY or CC
+BY-SA, has no author, or is not a Commons thumbnail. A cultivar or variety
+without photos of its own shows its species', and says so.
+
+Each photo is chosen by eye from Commons search results: the right species
+(named in the file, not just a "maple leaf"), the part shown clearly, and the
+mature form where it differs (red maple's shaggy bark, not a sapling's smooth
+one). Batch 1 so far: red maple, eastern white pine, honeylocust and northern
+red oak, four each; river birch, three (no usable photo of its fruit).
+Campus photos of the parts can replace them as the survey takes them.
+
 ## Still to come
 
 - **More batches** of crown forms, habitats and facts, most common first: the
   genus-only entries (crabapples, elms, serviceberries, ashes) and hybrids
   (Freeman maple) want a decision first about what their page should say.
-- **Photos of the bark, leaves, flowers and fruit**, from Wikimedia Commons,
-  each checked for its license and identification and credited under it,
-  replaced by campus photos as the survey takes them. This needs the
-  environment this work runs in to reach Wikimedia.
+- **Photos of the bark, leaves, flowers and fruit** for the rest of batch 1
+  and later batches (see Know it by, below).
 - **Better drawings** still, if the drawn ones are not enough.

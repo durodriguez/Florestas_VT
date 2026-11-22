@@ -164,6 +164,37 @@ export function campusFacts(trees, base) {
   return facts;
 }
 
+/**
+ * Know it by: a photo of its bark, leaves, flowers and fruit, from Wikimedia
+ * Commons (data/part-photos.csv), each with what taxa.csv says of that part
+ * and the photo's credit, as its license requires.
+ */
+function knowItBy(t, photos) {
+  if (!photos) return '';
+  const needles = t.family === 'Pinaceae';
+  const cones = t.family === 'Pinaceae' || t.family === 'Cupressaceae';
+  const when = (color, months) => [titleCase(color), monthRange(months)].filter(Boolean).map(esc).join(' &middot; ');
+  const parts = [
+    ['bark', 'Bark', esc(t.bark)],
+    ['leaves', needles ? 'Needles' : 'Leaves', t.type === 'evergreen-tree' ? 'Evergreen.' : t.fallColor ? `Fall color: ${esc(t.fallColor.replace(/-/g, ' '))}.` : ''],
+    ['flowers', cones ? 'Pollen cones' : 'Flowers', when(t.flowerColor, t.flowerMonths)],
+    ['fruit', cones ? 'Cones' : t.genus === 'Quercus' ? 'Acorns' : 'Fruit', when(t.fruitColor, t.fruitMonths)],
+  ].filter(([key]) => photos[key]);
+  if (!parts.length) return '';
+  const tiles = parts.map(([key, label, says]) => {
+    const p = photos[key];
+    const big = p.image.replace('/500px-', '/960px-');
+    const license = p.licenseUrl ? `<a href="${esc(p.licenseUrl)}" rel="noopener license">${esc(p.license)}</a>` : esc(p.license);
+    return `<figure class="part">
+      <img src="${esc(p.image)}" srcset="${esc(p.image)} 500w, ${esc(big)} 960w" sizes="(max-width: 48rem) 50vw, 15rem" alt="${esc(`${label} of ${t.common.toLowerCase()}`)}" loading="lazy">
+      <figcaption><b>${esc(label)}.</b> ${says}<span class="credit">Photo: <a href="${esc(p.page)}" rel="noopener">${esc(p.author)}</a>, ${license}, Wikimedia Commons</span></figcaption>
+    </figure>`;
+  }).join('');
+  return `<h2>Know it by</h2>
+  ${photos.inherited ? `<p class="note of-species">Photos of <i>${esc(`${t.genus} ${t.species}`)}</i>, the species this was selected from.</p>` : ''}
+  <section class="parts">${tiles}</section>`;
+}
+
 /** The year in a table, as the field guide shows it, with the same words under it. */
 function yearSection(t) {
   const rows = yearTable(t);
@@ -328,6 +359,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     habitat ? `Habitat: ${cite(habitat)}.` : '',
     range && maps ? `Range: Little, E.L., Jr., <i>Atlas of United States Trees</i>, U.S. Department of Agriculture, 1971&ndash;1978 (public domain), as digitized by the U.S. Geological Survey.` : '',
     factSources.length ? `Worth knowing: ${factSources.map(cite).join('; ')}.` : '',
+    extras?.photos ? 'Photos of the bark, leaves, flowers and fruit: Wikimedia Commons, credited under each.' : '',
     drawing ? 'Drawing: from the mature height and spread on file.' : '',
   ].filter(Boolean);
 
@@ -343,6 +375,8 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     ${t.description ? `<p class="lede">${esc(t.description)}</p>` : '<div></div>'}
     ${factsBox}
   </section>
+
+  ${knowItBy(t, extras?.photos)}
 
   ${yearSection(t)}
 
@@ -684,6 +718,11 @@ figure { margin: 0; }
 .worth li { margin-bottom: .45rem; }
 .worth a { color: inherit; }
 
+.parts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.part img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: var(--sunk); }
+.part figcaption { font-size: .84rem; color: var(--ink); margin-top: .45rem; }
+.part .credit { display: block; margin-top: .2rem; font-size: .7rem; color: var(--dim); }
+.part .credit a { color: inherit; }
 .year { width: 100%; border-collapse: separate; border-spacing: 3px; table-layout: fixed; }
 .year thead th { font-size: .74rem; font-weight: 500; color: var(--dim); text-align: center; }
 .year thead td, .year tbody th { width: 5rem; }
@@ -721,6 +760,7 @@ figure { margin: 0; }
 @media (max-width: 48rem) {
   .sp-head h1 { font-size: 1.9rem; }
   .hero, .intro, .wild, .oncampus { grid-template-columns: 1fr; }
+  .parts { grid-template-columns: repeat(2, 1fr); gap: .7rem; }
   .hero .lead { order: -1; }
   .lead .shot-open img { height: 22rem; }
   .mature { max-width: 22rem; }
