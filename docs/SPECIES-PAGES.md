@@ -131,8 +131,20 @@ as such have their own crown form. The five least certain facts were checked
 against a second source before writing; the pin oak's name is given as
 "probably", because the sources disagree.
 
-**For review:** every habitat and fact in this batch is a draft, written here,
-not by a botanist.
+### Batch 2 (November 2026)
+
+The next ten: sugar maple, northern white cedar, white spruce, littleleaf
+linden, Norway spruce, Japanese zelkova, ginkgo, American basswood, silver
+maple and paper birch, with crown forms for their columnar cultivars
+('Smaragd' arborvitae, 'Princeton Sentry' ginkgo, 'Musashino' zelkova). All
+have a habitat; zelkova and silver maple have no new facts. Two facts were
+checked against more sources first and are hedged where those disagree:
+northern white cedar as "probably" the first North American tree grown in
+Europe (sources date it from 1536 to 1566), and littleleaf linden as national
+tree of the Czech Republic and Slovakia only (Slovenia's claim is weaker).
+
+**For review:** every habitat and fact in these batches is a draft, written
+here, not by a botanist.
 
 ## Know it by: photos of the parts
 
