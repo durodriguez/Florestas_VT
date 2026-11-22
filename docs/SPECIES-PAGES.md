@@ -159,6 +159,13 @@ is not known exactly, as Silvics does. For the horsechestnut's, sources
 disagree whether it still grows wild in Albania; the page includes it, as the
 European Atlas of Forest Tree Species does.
 
+Photos: all four parts for American sycamore, black locust, horsechestnut,
+English oak and baldcypress; three for American hornbeam (no catkins),
+Japanese tree lilac and Washington hawthorn (no bark) and bur oak (no
+catkins); two for Sargent cherry (flowers, leaves). Three of them, the
+hawthorn's leaf, the lilac's seed capsules and the cherry's leaf, are from
+iNaturalist.
+
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
 
