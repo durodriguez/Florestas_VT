@@ -44,18 +44,16 @@ by species, most common first.
    States Trees* (see below), including every Vermont-native tree species but
    two, *Amelanchier laevis* and *Crataegus crus-galli*, which the atlas does
    not map. A cultivar or variety shows its species' range, and says so; a
-   hybrid has none. Beside the map, a sentence on where the range lies
-   ("Grows wild in 32 states, from Maine west to Minnesota and south to
-   Florida and Texas, reaching north into Canada"), from the states it
-   covers, read off the map once by `npm run ranges:fetch` and stored with
-   it. Then a sentence on Burlington, also worked out from it:
-   Burlington inside the range, outside it, outside it with the range
-   reaching another part of Vermont (flowering dogwood, chestnut oak and
-   others native only to the south of the state), or in a small outlying
-   area Little drew apart from the main range (bur oak, pitch pine, tulip
-   tree: under 2 square degrees, about three quarters of Vermont). Then the
-   soil and hardiness zones from `taxa.csv`, and the campus's zone, 5a on the
-   USDA's 2023 map (the lakeshore is 5b).
+   hybrid has none. Beside the map, under *Habitat*, the species' habitat
+   from `data/habitat.csv` where one is written. Where none is yet, a
+   sentence on where the range lies stands in for it ("Grows wild in 32
+   states, from Maine west to Minnesota and south to Florida and Texas,
+   reaching north into Canada"), from the states it covers, read off the map
+   once by `npm run ranges:fetch` and stored with it. Then the soil and
+   hardiness zones from `taxa.csv`, and the campus's zone, 5a on the USDA's
+   2023 map (the lakeshore is 5b). Whether Burlington is inside the range is
+   left to the map, which marks it with a star; until November 2026 a
+   sentence said so, and it repeated the habitat.
 6. **On campus**: how many are mapped, by campus, the other photos, the
    buttons to the map and Wikipedia, and a small campus map with each tree as
    a red dot linking to it on the map (`scripts/lib/campus-map.mjs`). Not a
@@ -91,10 +89,9 @@ step that needs the network, and is run by hand, rarely: after species are
 added to `taxa.csv`. Eight species are matched under the older names Little
 used, listed in `scripts/fetch-ranges.mjs`.
 
-The maps are hand-drawn at continental scale. Whether Burlington is inside a
-range is read off them as drawn, and near a range's edge it is only as good
-as the drawing; an outlying area is said to be Little's, not the page's.
-Little marks one at Burlington for mockernut hickory, which other sources
+The maps are hand-drawn at continental scale, and near a range's edge they
+are only as good as the drawing. Little drew small outlying areas apart from
+some main ranges; he marks one at Burlington for mockernut hickory, which other sources
 disagree about (*Silvics of North America* puts Vermont at its northern
 limit; Wikipedia says it is absent from the state), so `taxa.csv` records no
 origin for it. Tulip tree, marked there too, is native to Vermont but rare
