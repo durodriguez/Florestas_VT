@@ -213,7 +213,7 @@ describe('what species pages add by hand', () => {
       taxon_id: 'gleditsia-triacanthos', part: 'bark', title: 'File:Bark.jpg',
       page_url: 'https://commons.wikimedia.org/wiki/File:Bark.jpg',
       image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Bark.jpg/500px-Bark.jpg',
-      author: 'A. Photographer', license: 'CC BY-SA 4.0', license_url: 'https://creativecommons.org/licenses/by-sa/4.0',
+      author: 'A. Photographer', license: 'CC BY-SA 4.0', license_url: 'https://creativecommons.org/licenses/by-sa/4.0', matches: 'gray, furrowed, as taxa.csv',
     };
     const ok = speciesExtras({ photoRows: [photo], taxa });
     expect(ok.errors).toEqual([]);
@@ -226,6 +226,7 @@ describe('what species pages add by hand', () => {
         { ...photo, author: '' },
         { ...photo, part: 'roots' },
         { ...photo, image_url: 'https://example.org/bark.jpg' },
+        { ...photo, matches: '' },
       ],
       taxa,
     });
@@ -233,6 +234,7 @@ describe('what species pages add by hand', () => {
     expect(bad.errors.join('\n')).toMatch(/author is empty/);
     expect(bad.errors.join('\n')).toMatch(/part must be one of/);
     expect(bad.errors.join('\n')).toMatch(/Commons 500px thumbnail/);
+    expect(bad.errors.join('\n')).toMatch(/matches is empty/);
     const inat = speciesExtras({ photoRows: [{ ...photo, image_url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/757919298/medium.jpg', page_url: 'https://www.inaturalist.org/observations/411951899', license: 'CC BY 4.0' }], taxa });
     expect(inat.errors).toEqual([]);
     expect(inat.extras.get('gleditsia-triacanthos').photos.bark.site).toBe('iNaturalist');

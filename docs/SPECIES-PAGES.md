@@ -210,6 +210,28 @@ BY-SA, has no author, or is not a Commons thumbnail or an iNaturalist
 observation photo. A cultivar or variety
 without photos of its own shows its species', and says so.
 
+### Choosing a photo
+
+A photo's label is not enough: uploaders get species wrong. In November 2026
+a photo of bright pink-red cones went in as northern white cedar's pollen
+cones because its Commons page said so; the cedar's are yellow, as taxa.csv
+records. A white-barked birch went in as river birch, whose bark taxa.csv
+records as salmon-pink. Both are now replaced, and every photo was checked
+again. The rules since:
+
+1. **It must agree with taxa.csv.** Look at the photo beside what taxa.csv
+   records for that part (the bark's description; the flowers' or fruit's
+   color and months) and write what agrees in the row's `matches` column
+   ("yellow pollen cones, as recorded"). The build refuses a row without it.
+   If they disagree, the photo is wrong until proved otherwise.
+2. **It must show the species' own marks**, not just the part: river birch's
+   peeling salmon bark, not any birch bark; sugar maple's long-stalked
+   flowers, not any maple's.
+3. **It must be identified to species at its source**: on Commons, filed in a
+   category that names the species; on iNaturalist, research grade.
+   `npm run check:photos` checks every row for this.
+4. **When in doubt, leave the part empty** and add it to PHOTO-GAPS.md.
+
 Each photo is chosen by eye from Commons search results: the right species
 (named in the file, not just a "maple leaf"), the part shown clearly, and the
 mature form where it differs (red maple's shaggy bark, not a sapling's smooth

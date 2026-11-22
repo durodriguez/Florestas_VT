@@ -9,7 +9,7 @@
  * - data/facts.csv: taxon_id, fact, source, source_url. One row per fact,
  *   shown in Worth knowing after the fun fact, in file order.
  * - data/part-photos.csv: taxon_id, part, title, page_url, image_url, author,
- *   license, license_url. A photo of its bark, leaves, flowers or fruit
+ *   license, license_url, matches. A photo of its bark, leaves, flowers or fruit
  *   (PARTS), from Wikimedia Commons under a free license, credited on the
  *   page. From Wikimedia Commons, image_url is the 500 px thumbnail on
  *   upload.wikimedia.org and page_url its Commons page; from iNaturalist, a
@@ -95,6 +95,10 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     if (!commons && !inat) return errors.push(`${where}: needs a Commons 500px thumbnail and its File: page, or an iNaturalist medium photo and its observation page`);
     if (!FREE.test(trim(r.license))) return errors.push(`${where}: license "${trim(r.license)}" is not one that allows reuse with credit`);
     if (!trim(r.author)) return errors.push(`${where}: author is empty; credit is a condition of the license`);
+    // What the photo shows that agrees with taxa.csv's record of that part:
+    // written when the photo is chosen, so no photo goes in on its label
+    // alone (docs/SPECIES-PAGES.md, "Choosing a photo").
+    if (!trim(r.matches)) return errors.push(`${where}: matches is empty; say what the photo shows that agrees with taxa.csv for this part`);
     if (!photos.has(id)) photos.set(id, {});
     if (photos.get(id)[part]) return errors.push(`${where}: ${id} already has a ${part} photo`);
     photos.get(id)[part] = {
