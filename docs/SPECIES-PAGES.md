@@ -174,6 +174,13 @@ All have a crown form and a habitat; six have new facts, all state or
 national trees. Lombardy poplar's habitat is its species', the black poplar's,
 as the cultivated clone grows wild nowhere.
 
+### Batch 5 (November 2026)
+
+Silver linden, dawn redwood, sweetgum, American beech, common smoketree,
+hedge maple, eastern hophornbeam, Alaska cedar, bigtooth aspen and shingle
+oak. All have a crown form and a habitat; two have new facts. The dawn
+redwood's is from the Arnold Arboretum's own history of its 1948 seed.
+
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
 
