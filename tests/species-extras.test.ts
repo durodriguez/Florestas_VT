@@ -6,7 +6,7 @@ import type { Taxon } from '../src/types';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
 import { yearSummary as mjsSummary, yearTable as mjsTable } from '../scripts/lib/year.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
-import { BURLINGTON, SIZE, inRange, project, rangeTouches, whereIn } from '../scripts/lib/range-map.mjs';
+import { BURLINGTON, SIZE, describeRange, inRange, project, rangeTouches, whereIn } from '../scripts/lib/range-map.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
 import { CROWN_FORMS, crownForm, treeDrawing } from '../scripts/lib/tree-drawing.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
@@ -51,6 +51,15 @@ describe('native range maps', () => {
     expect(at('acer-rubrum')).toBe('main');
     expect(at('pinus-rigida')).toBe('outlier');
     expect(at('taxodium-distichum')).toBeNull();
+  });
+
+  it('describes a range by the states it covers', () => {
+    expect(describeRange(range('acer-rubrum').where)).toBe('Grows wild in 32 states, from Maine west to Minnesota and south to Florida and Texas, reaching north into Canada.');
+    // A range lying east to west, by its ends.
+    expect(describeRange(range('picea-glauca').where)).toBe('Grows wild in 9 states, from Maine west to Montana, reaching north into Canada.');
+    // A few states, named outright, west to east.
+    expect(describeRange({ states: [{ name: 'Georgia', lat: 33, lng: -83, n: 9 }, { name: 'Alabama', lat: 33, lng: -87, n: 9 }] })).toBe('Grows wild in 2 states: Alabama and Georgia.');
+    expect(describeRange({ states: [] })).toBe('');
   });
 
   it('knows a range that reaches only the south of Vermont', () => {

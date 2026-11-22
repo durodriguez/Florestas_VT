@@ -22,7 +22,7 @@ import { createHash } from 'node:crypto';
 import { SEARCH_FORM, SPECIES_SEARCH_JS } from './species-search.mjs';
 import { treeDrawing } from './tree-drawing.mjs';
 import { yearTable, yearSummary, MONTH_NAMES } from './year.mjs';
-import { BURLINGTON, mainBody, rangeSvg, rangeTouches, whereIn } from './range-map.mjs';
+import { BURLINGTON, describeRange, mainBody, rangeSvg, rangeTouches, whereIn } from './range-map.mjs';
 import { campusSvg } from './campus-map.mjs';
 
 export const esc = (s) =>
@@ -301,6 +301,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     <div>
       ${habitatPara}
       ${habitat ? '<h3>Range</h3>' : ''}
+      ${describeRange(range.where) ? `<p>${esc(describeRange(range.where))}</p>` : ''}
       <p>${where === 'outlier'
     ? `Little's map marks a small outlying area around Burlington, apart from the main range${reachesVermont ? ', which also reaches into Vermont' : ''}.`
     : reachesVermont

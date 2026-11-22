@@ -23,7 +23,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Papa from 'papaparse';
 import polygonClipping from 'polygon-clipping';
-import { FRAME } from './lib/range-map.mjs';
+import { FRAME, rangeStates } from './lib/range-map.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = join(root, 'data', 'ranges');
@@ -161,6 +161,8 @@ async function main() {
       range: merge(features.filter((f) => f.properties.CODE === 1)),
       absent: merge(features.filter((f) => f.properties.CODE === 0)),
     };
+    // Which states it covers, for the sentence on its page (describeRange).
+    out.where = rangeStates(out, basemap);
     const file = `${name.toLowerCase().replace(/\s+/g, '-')}.json`;
     writeFileSync(join(outDir, file), JSON.stringify(out));
     console.log(`${file.padEnd(34)} ${code}${little !== name ? ` (as ${little})` : ''}`);

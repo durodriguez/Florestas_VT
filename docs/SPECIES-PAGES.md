@@ -44,7 +44,11 @@ by species, most common first.
    States Trees* (see below), including every Vermont-native tree species but
    two, *Amelanchier laevis* and *Crataegus crus-galli*, which the atlas does
    not map. A cultivar or variety shows its species' range, and says so; a
-   hybrid has none. The sentence beside the map is worked out from it:
+   hybrid has none. Beside the map, a sentence on where the range lies
+   ("Grows wild in 32 states, from Maine west to Minnesota and south to
+   Florida and Texas, reaching north into Canada"), from the states it
+   covers, read off the map once by `npm run ranges:fetch` and stored with
+   it. Then a sentence on Burlington, also worked out from it:
    Burlington inside the range, outside it, outside it with the range
    reaching another part of Vermont (flowering dogwood, chestnut oak and
    others native only to the south of the state), or in a small outlying
