@@ -143,9 +143,9 @@ northern white cedar as "probably" the first North American tree grown in
 Europe (sources date it from 1536 to 1566), and littleleaf linden as national
 tree of the Czech Republic and Slovakia only (Slovenia's claim is weaker).
 
-Photos: all four parts for seven species; three for silver maple and
-northern white cedar (no cones: every result was oriental arborvitae,
-*Platycladus*); two for Japanese zelkova (no photos of its flowers or fruit
+Photos: all four parts for seven species; three for silver maple; northern
+white cedar's cones from iNaturalist (every Commons result was oriental
+arborvitae, *Platycladus*); two for Japanese zelkova (no photos of its flowers or fruit
 on Commons).
 
 **For review:** every habitat and fact in these batches is a draft, written
@@ -160,8 +160,15 @@ what `taxa.csv` says of that part and a credit line (photographer, license,
 link to the photo's Commons page), as the licenses require. The page loads the
 500 px thumbnail from Wikimedia, and the 960 px one on a sharp screen.
 
+Where Commons has nothing usable, a photo can come from iNaturalist instead:
+from a research-grade observation (its species confirmed by other observers),
+credited "iNaturalist" and linked to the observation. The photos are links,
+not files: the repository holds one line per photo, and visitors' browsers
+fetch each from Wikimedia or iNaturalist.
+
 The build refuses a photo that is not under public domain, CC0, CC BY or CC
-BY-SA, has no author, or is not a Commons thumbnail. A cultivar or variety
+BY-SA, has no author, or is not a Commons thumbnail or an iNaturalist
+observation photo. A cultivar or variety
 without photos of its own shows its species', and says so.
 
 Each photo is chosen by eye from Commons search results: the right species

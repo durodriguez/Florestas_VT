@@ -183,11 +183,11 @@ function knowItBy(t, photos) {
   if (!parts.length) return '';
   const tiles = parts.map(([key, label, says]) => {
     const p = photos[key];
-    const big = p.image.replace('/500px-', '/960px-');
+    const big = p.site === 'iNaturalist' ? p.image.replace('/medium.', '/large.') : p.image.replace('/500px-', '/960px-');
     const license = p.licenseUrl ? `<a href="${esc(p.licenseUrl)}" rel="noopener license">${esc(p.license)}</a>` : esc(p.license);
     return `<figure class="part">
-      <img src="${esc(p.image)}" srcset="${esc(p.image)} 500w, ${esc(big)} 960w" sizes="(max-width: 48rem) 50vw, 15rem" alt="${esc(`${label} of ${t.common.toLowerCase()}`)}" loading="lazy">
-      <figcaption><b>${esc(label)}.</b> ${says}<span class="credit">Photo: <a href="${esc(p.page)}" rel="noopener">${esc(p.author)}</a>, ${license}, Wikimedia Commons</span></figcaption>
+      <img src="${esc(p.image)}" srcset="${esc(p.image)} 500w, ${esc(big)} ${p.site === 'iNaturalist' ? 1024 : 960}w" sizes="(max-width: 48rem) 50vw, 15rem" alt="${esc(`${label} of ${t.common.toLowerCase()}`)}" loading="lazy">
+      <figcaption><b>${esc(label)}.</b> ${says}<span class="credit">Photo: <a href="${esc(p.page)}" rel="noopener">${esc(p.author)}</a>, ${license}, ${esc(p.site)}</span></figcaption>
     </figure>`;
   }).join('');
   return `<h2>Know it by</h2>
@@ -359,7 +359,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     habitat ? `Habitat: ${cite(habitat)}.` : '',
     range && maps ? `Range: Little, E.L., Jr., <i>Atlas of United States Trees</i>, U.S. Department of Agriculture, 1971&ndash;1978 (public domain), as digitized by the U.S. Geological Survey.` : '',
     factSources.length ? `Worth knowing: ${factSources.map(cite).join('; ')}.` : '',
-    extras?.photos ? 'Photos of the bark, leaves, flowers and fruit: Wikimedia Commons, credited under each.' : '',
+    extras?.photos ? 'Photos of the bark, leaves, flowers and fruit: Wikimedia Commons and iNaturalist, credited under each.' : '',
     drawing ? 'Drawing: from the mature height and spread on file.' : '',
   ].filter(Boolean);
 

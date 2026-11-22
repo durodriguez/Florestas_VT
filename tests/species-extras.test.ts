@@ -223,7 +223,10 @@ describe('what species pages add by hand', () => {
     expect(bad.errors.join('\n')).toMatch(/not one that allows reuse/);
     expect(bad.errors.join('\n')).toMatch(/author is empty/);
     expect(bad.errors.join('\n')).toMatch(/part must be one of/);
-    expect(bad.errors.join('\n')).toMatch(/500px thumbnail/);
+    expect(bad.errors.join('\n')).toMatch(/Commons 500px thumbnail/);
+    const inat = speciesExtras({ photoRows: [{ ...photo, image_url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/757919298/medium.jpg', page_url: 'https://www.inaturalist.org/observations/411951899', license: 'CC BY 4.0' }], taxa });
+    expect(inat.errors).toEqual([]);
+    expect(inat.extras.get('gleditsia-triacanthos').photos.bark.site).toBe('iNaturalist');
   });
 
   it('passes the files in data/', () => {
