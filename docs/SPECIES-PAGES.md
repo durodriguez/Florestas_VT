@@ -166,6 +166,14 @@ catkins); two for Sargent cherry (flowers, leaves). Three of them, the
 hawthorn's leaf, the lilac's seed capsules and the cherry's leaf, are from
 iNaturalist.
 
+### Batch 4 (November 2026)
+
+Lombardy poplar, northern catalpa, American chestnut, Douglas fir, Scotch
+pine, black walnut, eastern redbud, white oak, eastern hemlock and tuliptree.
+All have a crown form and a habitat; six have new facts, all state or
+national trees. Lombardy poplar's habitat is its species', the black poplar's,
+as the cultivated clone grows wild nowhere.
+
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
 
