@@ -143,6 +143,13 @@ northern white cedar as "probably" the first North American tree grown in
 Europe (sources date it from 1536 to 1566), and littleleaf linden as national
 tree of the Czech Republic and Slovakia only (Slovenia's claim is weaker).
 
+Photos: all four parts for white spruce, littleleaf linden, Norway spruce,
+ginkgo, American basswood, paper birch and sugar maple; three for silver
+maple (no leaves showing their silver undersides); two for Japanese zelkova
+(bark, leaves) and northern white cedar (bark, pollen cones: every "cone"
+result was oriental arborvitae, *Platycladus*, and the foliage photos named
+only the genus).
+
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
 
