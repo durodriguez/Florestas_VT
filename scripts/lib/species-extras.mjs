@@ -11,7 +11,9 @@
  * - data/part-photos.csv: taxon_id, part, title, page_url, image_url, author,
  *   license, license_url. A photo of its bark, leaves, flowers or fruit
  *   (PARTS), from Wikimedia Commons under a free license, credited on the
- *   page. image_url is the 500 px thumbnail on upload.wikimedia.org.
+ *   page. From Wikimedia Commons, image_url is the 500 px thumbnail on
+ *   upload.wikimedia.org and page_url its Commons page; from iNaturalist, a
+ *   research-grade observation's medium photo and the observation's page.
  *
  * A cultivar or variety without its own crown form, habitat or photos takes its
  * species' (the taxon of the same genus and species, with neither): a
@@ -88,14 +90,15 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     const part = trim(r.part);
     if (!known('part-photos.csv', i, id)) return;
     if (!PARTS.includes(part)) return errors.push(`${where}: part must be one of ${PARTS.join(', ')}, got "${part}"`);
-    if (!/^https:\/\/upload\.wikimedia\.org\/.+\/500px-[^/]+$/.test(trim(r.image_url))) return errors.push(`${where}: image_url must be a 500px thumbnail on upload.wikimedia.org`);
-    if (!/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(trim(r.page_url))) return errors.push(`${where}: page_url must be the photo's Commons page`);
+    const commons = /^https:\/\/upload\.wikimedia\.org\/.+\/500px-[^/]+$/.test(trim(r.image_url)) && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(trim(r.page_url));
+    const inat = /^https:\/\/inaturalist-open-data\.s3\.amazonaws\.com\/photos\/\d+\/medium\.(jpe?g|png)$/.test(trim(r.image_url)) && /^https:\/\/www\.inaturalist\.org\/observations\/\d+$/.test(trim(r.page_url));
+    if (!commons && !inat) return errors.push(`${where}: needs a Commons 500px thumbnail and its File: page, or an iNaturalist medium photo and its observation page`);
     if (!FREE.test(trim(r.license))) return errors.push(`${where}: license "${trim(r.license)}" is not one that allows reuse with credit`);
     if (!trim(r.author)) return errors.push(`${where}: author is empty; credit is a condition of the license`);
     if (!photos.has(id)) photos.set(id, {});
     if (photos.get(id)[part]) return errors.push(`${where}: ${id} already has a ${part} photo`);
     photos.get(id)[part] = {
-      title: trim(r.title), page: trim(r.page_url), image: trim(r.image_url),
+      title: trim(r.title), page: trim(r.page_url), image: trim(r.image_url), site: inat ? 'iNaturalist' : 'Wikimedia Commons',
       author: trim(r.author), license: trim(r.license), licenseUrl: trim(r.license_url),
     };
   });
