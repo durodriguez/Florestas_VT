@@ -148,7 +148,7 @@ from the same layers control as the basemaps. The shapes shipped today are
 hand-drawn estimates, marked as such on the map; `/tracer/` replaces them with
 traced ones. See [docs/CAMPUS-AREAS.md](docs/CAMPUS-AREAS.md).
 
-**Walking tours** — listed at the top of the side panel, from
+**Walking tours** — listed at the foot of the side panel, below Filters and Layers, from
 `data/tours.csv` and `data/tour-stops.csv`. Choosing one shows only its stops,
 numbered and joined in walking order, and opens the first; each stop's record
 starts with the tour's name, the stop number, a note on why the tree is on the

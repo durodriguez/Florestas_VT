@@ -684,7 +684,7 @@ body.is-loading .layout { opacity: .35; }
 }
 
 /* ---- walking tours ---- */
-.panel-tours { border-bottom: 1px solid var(--border); }
+.panel-tours { border-top: 1px solid var(--border); margin-top: .2rem; }
 .tour-list { list-style: none; margin: 0; padding: .4rem .75rem .6rem; display: grid; gap: .4rem; }
 .tour-pick {
   display: grid; gap: .15rem; width: 100%; text-align: left; cursor: pointer; font: inherit; color: var(--text);
