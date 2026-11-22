@@ -131,8 +131,25 @@ as such have their own crown form. The five least certain facts were checked
 against a second source before writing; the pin oak's name is given as
 "probably", because the sources disagree.
 
-**For review:** every habitat and fact in this batch is a draft, written here,
-not by a botanist.
+### Batch 2 (November 2026)
+
+The next ten: sugar maple, northern white cedar, white spruce, littleleaf
+linden, Norway spruce, Japanese zelkova, ginkgo, American basswood, silver
+maple and paper birch, with crown forms for their columnar cultivars
+('Smaragd' arborvitae, 'Princeton Sentry' ginkgo, 'Musashino' zelkova). All
+have a habitat; zelkova and silver maple have no new facts. Two facts were
+checked against more sources first and are hedged where those disagree:
+northern white cedar as "probably" the first North American tree grown in
+Europe (sources date it from 1536 to 1566), and littleleaf linden as national
+tree of the Czech Republic and Slovakia only (Slovenia's claim is weaker).
+
+Photos: all four parts for seven species; three for silver maple and
+northern white cedar (no cones: every result was oriental arborvitae,
+*Platycladus*); two for Japanese zelkova (no photos of its flowers or fruit
+on Commons).
+
+**For review:** every habitat and fact in these batches is a draft, written
+here, not by a botanist.
 
 ## Know it by: photos of the parts
 
@@ -151,11 +168,9 @@ Each photo is chosen by eye from Commons search results: the right species
 (named in the file, not just a "maple leaf"), the part shown clearly, and the
 mature form where it differs (red maple's shaggy bark, not a sapling's smooth
 one). Doubtful ones are left out: a part with no tile is better than the
-wrong tree. Batch 1 has 36: all four for red maple, eastern white pine,
-honeylocust, northern red oak, Austrian pine and pin oak; three for river
-birch (no fruit), Norway maple (no leaves: the candidates were captioned as
-other maples), swamp white oak (no flowers on Commons) and Colorado blue
-spruce (no pollen cones that were certainly pollen cones).
+wrong tree. A second search, with other words, filled some gaps. Batch 1 has
+38: all four for every species but Colorado blue spruce, which has no pollen
+cones that were certainly pollen cones.
 Campus photos of the parts can replace them as the survey takes them.
 
 ## Still to come
