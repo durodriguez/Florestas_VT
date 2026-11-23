@@ -236,9 +236,10 @@ white ash its page; and 15 more PHOTO-GAPS.md lines were filled.
 
 ### Batch 9 (November 2026)
 
-Six more unmapped species: bigleaf linden, Siberian elm, Japanese pagoda
-tree, white willow, European bird cherry and Japanese flowering cherry, each
-with a crown form, a habitat and photos from iNaturalist (17 in all). Shumard,
+Ten more unmapped species: bigleaf linden, Siberian elm, Japanese pagoda
+tree, white willow, European bird cherry, Japanese flowering cherry, Japanese
+snowbell, Amur chokecherry, balsam poplar and common pear, each
+with a crown form, a habitat and photos from iNaturalist (28 in all). Shumard,
 willow and scarlet oak were tried and left: their iNaturalist results were
 largely other oaks, and the source check refused those photos.
 
