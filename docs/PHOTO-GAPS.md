@@ -26,13 +26,13 @@ A close photo of the one part, in focus, works best: the tile is small.
 
 ## The list
 
-- [ ] **Colorado blue spruce**, pollen cones (`picea-pungens`, flowers).
+- [x] **Colorado blue spruce**, pollen cones (`picea-pungens`, flowers).
   Small, reddish, at the branch tips in May, before the new shoots open.
   Try UVM-0593 and UVM-0576 (Central Campus), UVM-2852 (Athletic Campus).
 - [ ] **Japanese zelkova**, flowers (`zelkova-serrata`, flowers). Tiny and
   greenish, along the new shoots in April as the leaves open; easy to miss.
   Any of the zelkovas on Redstone Campus, such as UVM-4520 to UVM-4526.
-- [ ] **Japanese zelkova**, fruit (`zelkova-serrata`, fruit). Small, hard,
+- [x] **Japanese zelkova**, fruit (`zelkova-serrata`, fruit). Small, hard,
   lopsided, brown, along the twigs in September and October. The same trees.
 - [x] **American hornbeam**, catkins (`carpinus-caroliniana`, flowers).
   Hanging green catkins in April and May. Try UVM-2400, UVM-1489 and
@@ -45,9 +45,9 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [ ] **Sargent cherry**, bark (`prunus-sargentii`, bark). Polished
   red-brown with horizontal bands, any time of year. Try UVM-0747 (Central
   Campus), the largest measured, and UVM-2498 (Trinity Campus).
-- [ ] **Sargent cherry**, fruit (`prunus-sargentii`, fruit). Small dark
+- [x] **Sargent cherry**, fruit (`prunus-sargentii`, fruit). Small dark
   cherries in June and July; birds take them fast. The same trees.
-- [ ] **Lombardy poplar**, bark (`populus-nigra`, bark). Any time. Its
+- [x] **Lombardy poplar**, bark (`populus-nigra`, bark). Any time. Its
   campus trees stand in rows; any of them.
 - [x] **Lombardy poplar**, catkins (`populus-nigra`, flowers). Reddish male
   catkins in March and April, before the leaves.
@@ -71,11 +71,11 @@ A close photo of the one part, in focus, works best: the tile is small.
   Tiny yellow pollen cones at the tips of the sprays in April and May. Not
   the red-pink cones of some other *Thuja*: the photo used before was one of
   those.
-- [ ] **Norway spruce**, pollen cones (`picea-abies`, flowers). Small, red to
+- [x] **Norway spruce**, pollen cones (`picea-abies`, flowers). Small, red to
   yellow, along last year's shoots in May.
-- [ ] **Paper birch**, catkins (`betula-papyrifera`, flowers). Hanging green
+- [x] **Paper birch**, catkins (`betula-papyrifera`, flowers). Hanging green
   catkins as the leaves open, April and May.
-- [ ] **Paper birch**, leaves (`betula-papyrifera`, leaves). Oval, doubly
+- [x] **Paper birch**, leaves (`betula-papyrifera`, leaves). Oval, doubly
   toothed; any time in leaf.
 - [ ] **Japanese tree lilac**, bark (`syringa-reticulata`, bark). Glossy
   reddish-brown with horizontal lenticels, like a cherry's; a close photo.
@@ -90,13 +90,13 @@ A close photo of the one part, in focus, works best: the tile is small.
   not a purple-leaved form.
 - [ ] **Three-flower maple**, samaras (`acer-triflorum`, fruit). Brown, in
   September and October.
-- [ ] **Yellowwood**, pods (`cladrastis-kentukea`, fruit). Flat brown pods,
+- [x] **Yellowwood**, pods (`cladrastis-kentukea`, fruit). Flat brown pods,
   September and October; not every year.
-- [ ] **Paperbark maple**, samaras (`acer-griseum`, fruit). Large, fuzzy,
+- [x] **Paperbark maple**, samaras (`acer-griseum`, fruit). Large, fuzzy,
   brown; September and October.
 - [x] **Green ash**, samaras (`fraxinus-pennsylvanica`, fruit). Hanging
   clusters of narrow samaras, September and October.
-- [ ] **European mountain ash**, bark (`sorbus-aucuparia`, bark). Smooth,
+- [x] **European mountain ash**, bark (`sorbus-aucuparia`, bark). Smooth,
   shining gray, becoming scaly.
 - [x] **Balsam fir**, pollen cones (`abies-balsamea`, flowers). Yellow, May.
 - [x] **White fir**, pollen cones (`abies-concolor`, flowers). Yellow, May.
@@ -122,23 +122,23 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [ ] **Wafer ash**, bark (`ptelea-trifoliata`, bark). Smooth gray-brown with warty lenticels; any time of year.
 - [ ] **Amur maackia**, bark (`maackia-amurensis`, bark). Shiny copper-brown, peeling on young trunks; any time of year.
 - [x] **Corneliancherry dogwood**, leaves (`cornus-mas`, leaves). A close photo; fall color purple.
-- [ ] **White ash**, flowers (`fraxinus-americana`, flowers). Small purplish
+- [x] **White ash**, flowers (`fraxinus-americana`, flowers). Small purplish
   clusters on bare twigs in April and May, before the leaves. Not the brown,
   lumpy ash flower galls that hang on into autumn.
 - [ ] **Midland hawthorn**, bark (`crataegus-laevigata`, bark). Gray-brown,
   scaly, with thorns.
 - [ ] **Sour cherry**, bark (`prunus-cerasus`, bark). Red-brown, glossy, with
   horizontal lenticels.
-- [ ] **Sour cherry**, leaves (`prunus-cerasus`, leaves). Smaller, glossier and
+- [x] **Sour cherry**, leaves (`prunus-cerasus`, leaves). Smaller, glossier and
   less drooping than sweet cherry's, which iNaturalist often confuses with it.
-- [ ] **Sour cherry**, fruit (`prunus-cerasus`, fruit). Bright red, in July.
+- [x] **Sour cherry**, fruit (`prunus-cerasus`, fruit). Bright red, in July.
 - [ ] **Peking willow**, bark, leaves, flowers and fruit (`salix-matsudana`).
   Both iNaturalist and Commons now file it under weeping willow, *Salix
   babylonica*, so neither has photos labelled as this species. A campus photo
   of the dragon's claw willow's leaves or catkins is the likeliest way in.
 - [ ] **Coast redwood**, needles (`sequoia-sempervirens`, leaves). Flat, in two
   rows; a grown shoot, not a seedling.
-- [ ] **Giant sequoia**, pollen cones (`sequoiadendron-giganteum`, flowers).
+- [x] **Giant sequoia**, pollen cones (`sequoiadendron-giganteum`, flowers).
   Tiny, at the shoot tips in late winter.
 - [ ] **Giant sequoia**, cones (`sequoiadendron-giganteum`, fruit). Green on the
   tree, as recorded; the brown cones on the ground are old ones.

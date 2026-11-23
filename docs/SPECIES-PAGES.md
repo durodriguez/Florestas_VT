@@ -304,6 +304,27 @@ Christmas fern and Siberian iris, each with a habitat and a photo of its
 fronds or leaves (the iris also its flower). Ferns show only that tile: they
 have no bark, flowers or fruit.
 
+### Batch 18 (November 2026)
+
+The species skipped in batches 10 to 14 for want of good candidates, taken
+again: grand fir, Amur and trident maple, downy serviceberry, yellow buckeye,
+pecan, shellbark and mockernut hickory, devil's walkingstick and Japanese
+angelica tree, Atlantic white cedar, Chinese fringetree, Japanese cornel,
+blue ash, Chinese juniper, European larch, southern magnolia, Persian ironwood,
+Rocky Mountain juniper, American crabapple, green hawthorn, Oriental spruce,
+limber pine and Darlington oak. Each has a habitat, a crown form where it is a
+tree, and between one and four photos from iNaturalist (about 60 in all).
+
+### Batch 19 (November 2026)
+
+Twelve more, found once the photo search fell back to plain observations
+rather than only described or annotated ones: Atlas and Lebanon cedar, Serbian
+spruce, Swiss stone and Japanese white pine, Chinese redbud, red horse
+chestnut, willow and chinkapin oak, American plum, lacebark elm and common
+linden. Habitats and 30-odd photos. London plane is left: iNaturalist files it
+as *Platanus × hispanica*, which the identification check does not accept as
+*P. × acerifolia*.
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
@@ -320,6 +341,16 @@ iNaturalist, look at each candidate beside what taxa.csv records for that
 part, add the row with its `matches` note, then run `npm run check:photos`
 and `npm run data`. Commons rate-limits automated requests; one request every
 couple of seconds gets through.
+
+**When the Commons API refuses (HTTP 429).** In November 2026 it refused this
+project's requests for hours at a time while ordinary Commons pages still
+loaded. What worked: find files through the search page
+(`commons.wikimedia.org/w/index.php?title=Special:MediaSearch&search=…`) or a
+category's own page, fetch thumbnails at a standard width (250 or 500 px; other
+widths are refused), read a file's licence, author and categories from its
+page, and wait a few seconds between requests. `npm run check:photos` falls
+back to reading each file page itself when the API refuses, at one page every
+two seconds; a full run takes about fifteen minutes.
 
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
