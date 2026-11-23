@@ -264,6 +264,12 @@ Eight more: butternut, common persimmon, American holly, English walnut,
 European hazel, Japanese cedar, European ash and American smoketree, each
 with a crown form, a habitat and 27 photos between them from iNaturalist.
 
+### Batch 13 (November 2026)
+
+Eight more: tamarack, eastern redcedar, Osage orange, cucumbertree, sourwood,
+red mulberry, umbrella magnolia and goldenrain tree, each with a crown form, a
+habitat and 31 photos between them from iNaturalist.
+
 ### Adding photos from here on
 
 `data/part-photos.csv` is the record: edit it directly. Search Commons or
