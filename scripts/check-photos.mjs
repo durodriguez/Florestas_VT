@@ -43,11 +43,20 @@ const taxa = new Map(read('taxa.csv').map((t) => [t.taxon_id, t]));
 const rows = read('part-photos.csv');
 const problems = [];
 
+/**
+ * Names the photo sites use for a taxon that taxa.csv names otherwise: London
+ * plane is filed as P. × hispanica, saucer magnolia spelled "soulangeana".
+ */
+const PHOTO_NAMES = {
+  'Platanus x acerifolia': 'Platanus × hispanica',
+  'Magnolia x soulangiana': 'Magnolia × soulangeana',
+};
+
 const namesFor = (t) => {
   const sp = `${t.genus} ${t.species}`;
   // A hybrid is "Acer x freemanii" here and "Acer × freemanii" at both sources.
   const hybrid = / x /.test(sp) ? sp.replace(' x ', ' × ') : null;
-  return [sp, hybrid, SYNONYMS[sp], sp === 'Callitropsis nootkatensis' ? 'Cupressus nootkatensis' : null].filter(Boolean).map((n) => n.toLowerCase());
+  return [sp, hybrid, SYNONYMS[sp], PHOTO_NAMES[sp], sp === 'Callitropsis nootkatensis' ? 'Cupressus nootkatensis' : null].filter(Boolean).map((n) => n.toLowerCase());
 };
 
 /**
