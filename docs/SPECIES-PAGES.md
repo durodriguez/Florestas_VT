@@ -234,6 +234,30 @@ Also this round, for species already on the map: the eleven shrubs, ivy and
 hardy banana got habitats and 31 photos; Freeman maple a habitat and its leaf;
 white ash its page; and 15 more PHOTO-GAPS.md lines were filled.
 
+### Batch 9 (November 2026)
+
+Ten more unmapped species: bigleaf linden, Siberian elm, Japanese pagoda
+tree, white willow, European bird cherry, Japanese flowering cherry, Japanese
+snowbell, Amur chokecherry, balsam poplar and common pear, each
+with a crown form, a habitat and photos from iNaturalist (28 in all). Shumard,
+willow and scarlet oak were tried and left: their iNaturalist results were
+largely other oaks, and the source check refused those photos.
+
+### Batch 10 (November 2026)
+
+Eight more unmapped species, taking taxa.csv in order: Fraser fir, black
+maple, sycamore maple, Ohio buckeye, tree of heaven, mimosa, European alder
+and Allegheny serviceberry, each with a crown form, a habitat and 24 photos
+between them from iNaturalist. Skipped for now, with too few usable photos:
+grand fir, trident, Korean and Shantung maples, yellow buckeye, Manchurian
+alder and downy serviceberry.
+
+### Batch 11 (November 2026)
+
+Seven more: shagbark, bitternut and pignut hickory, pawpaw, southern catalpa,
+sugarberry and Chinese chestnut, each with a crown form, a habitat and 25
+photos between them from iNaturalist.
+
 ### Adding photos from here on
 
 `data/part-photos.csv` is the record: edit it directly. Search Commons or
