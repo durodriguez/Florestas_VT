@@ -45,7 +45,7 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [ ] **Sargent cherry**, bark (`prunus-sargentii`, bark). Polished
   red-brown with horizontal bands, any time of year. Try UVM-0747 (Central
   Campus), the largest measured, and UVM-2498 (Trinity Campus).
-- [ ] **Sargent cherry**, fruit (`prunus-sargentii`, fruit). Small dark
+- [x] **Sargent cherry**, fruit (`prunus-sargentii`, fruit). Small dark
   cherries in June and July; birds take them fast. The same trees.
 - [x] **Lombardy poplar**, bark (`populus-nigra`, bark). Any time. Its
   campus trees stand in rows; any of them.
@@ -96,7 +96,7 @@ A close photo of the one part, in focus, works best: the tile is small.
   brown; September and October.
 - [x] **Green ash**, samaras (`fraxinus-pennsylvanica`, fruit). Hanging
   clusters of narrow samaras, September and October.
-- [ ] **European mountain ash**, bark (`sorbus-aucuparia`, bark). Smooth,
+- [x] **European mountain ash**, bark (`sorbus-aucuparia`, bark). Smooth,
   shining gray, becoming scaly.
 - [x] **Balsam fir**, pollen cones (`abies-balsamea`, flowers). Yellow, May.
 - [x] **White fir**, pollen cones (`abies-concolor`, flowers). Yellow, May.
@@ -129,7 +129,7 @@ A close photo of the one part, in focus, works best: the tile is small.
   scaly, with thorns.
 - [ ] **Sour cherry**, bark (`prunus-cerasus`, bark). Red-brown, glossy, with
   horizontal lenticels.
-- [ ] **Sour cherry**, leaves (`prunus-cerasus`, leaves). Smaller, glossier and
+- [x] **Sour cherry**, leaves (`prunus-cerasus`, leaves). Smaller, glossier and
   less drooping than sweet cherry's, which iNaturalist often confuses with it.
 - [x] **Sour cherry**, fruit (`prunus-cerasus`, fruit). Bright red, in July.
 - [ ] **Peking willow**, bark, leaves, flowers and fruit (`salix-matsudana`).
@@ -138,7 +138,7 @@ A close photo of the one part, in focus, works best: the tile is small.
   of the dragon's claw willow's leaves or catkins is the likeliest way in.
 - [ ] **Coast redwood**, needles (`sequoia-sempervirens`, leaves). Flat, in two
   rows; a grown shoot, not a seedling.
-- [ ] **Giant sequoia**, pollen cones (`sequoiadendron-giganteum`, flowers).
+- [x] **Giant sequoia**, pollen cones (`sequoiadendron-giganteum`, flowers).
   Tiny, at the shoot tips in late winter.
 - [ ] **Giant sequoia**, cones (`sequoiadendron-giganteum`, fruit). Green on the
   tree, as recorded; the brown cones on the ground are old ones.
