@@ -98,3 +98,27 @@ A close photo of the one part, in focus, works best: the tile is small.
   clusters of narrow samaras, September and October.
 - [ ] **European mountain ash**, bark (`sorbus-aucuparia`, bark). Smooth,
   shining gray, becoming scaly.
+- [ ] **Balsam fir**, pollen cones (`abies-balsamea`, flowers). Yellow, May.
+- [ ] **White fir**, pollen cones (`abies-concolor`, flowers). Yellow, May.
+- [ ] **White fir**, cones (`abies-concolor`, fruit). Green, September to October.
+- [ ] **Sweet birch**, flowers (`betula-lenta`, flowers). Green, April to May.
+- [ ] **Sweet birch**, fruit (`betula-lenta`, fruit). Brown, August to September.
+- [ ] **Swamp chestnut oak**, bark (`quercus-michauxii`, bark). Light gray, flaking in loose scales; any time of year.
+- [ ] **Swamp chestnut oak**, flowers (`quercus-michauxii`, flowers). Yellow-green, May.
+- [ ] **Swamp chestnut oak**, fruit (`quercus-michauxii`, fruit). Brown, September to October.
+- [ ] **Hinoki falsecypress**, foliage (`chamaecyparis-obtusa`, leaves). A close photo of a shoot.
+- [ ] **Hinoki falsecypress**, pollen cones (`chamaecyparis-obtusa`, flowers). Brown, April.
+- [ ] **Bigleaf magnolia**, bark (`magnolia-macrophylla`, bark). Smooth pale gray; any time of year.
+- [ ] **Japanese maple**, bark (`acer-palmatum`, bark). Smooth gray-green, striated when young; any time of year.
+- [ ] **Seven-son flower**, flowers (`heptacodium-miconioides`, flowers). White, July to September.
+- [ ] **Seven-son flower**, fruit (`heptacodium-miconioides`, fruit). Red, September to October.
+- [ ] **Red pine**, needles (`pinus-resinosa`, leaves). A close photo of a shoot.
+- [ ] **Red pine**, pollen cones (`pinus-resinosa`, flowers). Yellow, May to June.
+- [ ] **Northern pin oak**, flowers (`quercus-ellipsoidalis`, flowers). Yellow-green, May.
+- [ ] **Northern pin oak**, fruit (`quercus-ellipsoidalis`, fruit). Brown, September to October.
+- [ ] **Russian olive**, fruit (`elaeagnus-angustifolia`, fruit). Yellow, August to September.
+- [ ] **Nordmann fir**, needles (`abies-nordmanniana`, leaves). A close photo of a shoot.
+- [ ] **Nordmann fir**, pollen cones (`abies-nordmanniana`, flowers). Yellow, May.
+- [ ] **Wafer ash**, bark (`ptelea-trifoliata`, bark). Smooth gray-brown with warty lenticels; any time of year.
+- [ ] **Amur maackia**, bark (`maackia-amurensis`, bark). Shiny copper-brown, peeling on young trunks; any time of year.
+- [ ] **Corneliancherry dogwood**, leaves (`cornus-mas`, leaves). A close photo; fall color purple.
