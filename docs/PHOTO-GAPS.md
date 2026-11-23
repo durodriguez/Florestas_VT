@@ -102,7 +102,7 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [x] **White fir**, pollen cones (`abies-concolor`, flowers). Yellow, May.
 - [x] **White fir**, cones (`abies-concolor`, fruit). Green, September to October.
 - [x] **Sweet birch**, flowers (`betula-lenta`, flowers). Green, April to May.
-- [ ] **Sweet birch**, fruit (`betula-lenta`, fruit). Brown, August to September.
+- [x] **Sweet birch**, fruit (`betula-lenta`, fruit). Brown, August to September.
 - [x] **Swamp chestnut oak**, bark (`quercus-michauxii`, bark). Light gray, flaking in loose scales; any time of year.
 - [ ] **Swamp chestnut oak**, flowers (`quercus-michauxii`, flowers). Yellow-green, May.
 - [x] **Swamp chestnut oak**, fruit (`quercus-michauxii`, fruit). Brown, September to October.
@@ -133,7 +133,9 @@ A close photo of the one part, in focus, works best: the tile is small.
   less drooping than sweet cherry's, which iNaturalist often confuses with it.
 - [ ] **Sour cherry**, fruit (`prunus-cerasus`, fruit). Bright red, in July.
 - [ ] **Peking willow**, bark, leaves, flowers and fruit (`salix-matsudana`).
-  iNaturalist files it under weeping willow, so these need Commons.
+  Both iNaturalist and Commons now file it under weeping willow, *Salix
+  babylonica*, so neither has photos labelled as this species. A campus photo
+  of the dragon's claw willow's leaves or catkins is the likeliest way in.
 - [ ] **Coast redwood**, needles (`sequoia-sempervirens`, leaves). Flat, in two
   rows; a grown shoot, not a seedling.
 - [ ] **Giant sequoia**, pollen cones (`sequoiadendron-giganteum`, flowers).
