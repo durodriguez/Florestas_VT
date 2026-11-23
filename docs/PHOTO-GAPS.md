@@ -122,3 +122,6 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [ ] **Wafer ash**, bark (`ptelea-trifoliata`, bark). Smooth gray-brown with warty lenticels; any time of year.
 - [ ] **Amur maackia**, bark (`maackia-amurensis`, bark). Shiny copper-brown, peeling on young trunks; any time of year.
 - [x] **Corneliancherry dogwood**, leaves (`cornus-mas`, leaves). A close photo; fall color purple.
+- [ ] **White ash**, flowers (`fraxinus-americana`, flowers). Small purplish
+  clusters on bare twigs in April and May, before the leaves. Not the brown,
+  lumpy ash flower galls that hang on into autumn.
