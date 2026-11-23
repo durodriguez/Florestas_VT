@@ -219,6 +219,21 @@ hawthorn), whose species have no row of their own, and the genus-only and
 hybrid entries (crabapples, elms, serviceberries, ashes, Freeman maple),
 which want a decision on what their pages should say.
 
+### Batch 8 (November 2026)
+
+The first species not on the campus map: twelve Vermont natives and street
+trees, chosen as the ones a visitor is likeliest to meet nearby. American and
+slippery elm, black, scarlet and chestnut oak, quaking aspen, eastern
+cottonwood, pin cherry, black willow, pitch pine, Tatarian maple and
+cockspur hawthorn: a crown form, a habitat (Silvics of North America for the
+natives) and 41 photos, all from iNaturalist, each research grade and looked
+at beside taxa.csv. Gaps are not listed in PHOTO-GAPS.md, which keeps to
+species on the map.
+
+Also this round, for species already on the map: the eleven shrubs, ivy and
+hardy banana got habitats and 31 photos; Freeman maple a habitat and its leaf;
+white ash its page; and 15 more PHOTO-GAPS.md lines were filled.
+
 ### Adding photos from here on
 
 `data/part-photos.csv` is the record: edit it directly. Search Commons or
