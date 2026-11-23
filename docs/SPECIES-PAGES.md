@@ -285,6 +285,34 @@ dogwood and bush honeysuckle, each with a habitat and 32 photos between them
 from iNaturalist. Shrubs take no crown form. Shadblow serviceberry's
 candidates were Allegheny serviceberry at their source, and were refused.
 
+### Batch 16 (November 2026)
+
+The remaining unmapped shrubs and vines with research-grade photos: 33
+species, among them burning bush, fothergilla, the hydrangeas, winterberry
+and inkberry, the junipers, privet, Amur honeysuckle, Virginia creeper and
+Boston ivy, ninebark, chokecherry, the sumacs, multiflora rose, elderberry
+and bladdernut, highbush blueberry, three viburnums, weigela and English yew,
+plus pond cypress. Each has a habitat and about 90 photos
+between them from iNaturalist. Not done: Tibetan bramble and Sargent
+crabapple, which have no usable research-grade photos, and the ferns
+and grasses.
+
+### Batch 17 (November 2026)
+
+The six perennials in taxa.csv: maidenhair, New York, lady, ostrich and
+Christmas fern and Siberian iris, each with a habitat and a photo of its
+fronds or leaves (the iris also its flower). Ferns show only that tile: they
+have no bark, flowers or fruit.
+
+### Genus-only pages: Which one?
+
+A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
+rest of the "sp." entries) now has a **Which one?** section in place of Know
+it by: a leaf of each species of that genus in the collection that has its own
+leaf photo, most planted on campus first, each labelled and linking to its page
+(species-extras.mjs, `kin`). Cultivars whose species is blank, such as the
+magnolia hybrids, do not get it: they are identified, just not to a species.
+
 ### Adding photos from here on
 
 `data/part-photos.csv` is the record: edit it directly. Search Commons or

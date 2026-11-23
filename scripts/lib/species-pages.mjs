@@ -195,6 +195,22 @@ function knowItBy(t, photos) {
   <section class="parts">${tiles}</section>`;
 }
 
+/** For a taxon named only to genus: a leaf of each species of the genus here, labelled and linked. */
+function whichOne(t, kin) {
+  if (!kin?.length) return '';
+  const tiles = kin.map((k) => {
+    const p = k.photo;
+    const license = p.licenseUrl ? `<a href="${esc(p.licenseUrl)}" rel="noopener license">${esc(p.license)}</a>` : esc(p.license);
+    return `<figure class="part">
+      <a href="../${esc(k.id)}/"><img src="${esc(p.image)}" alt="${esc(`Leaves of ${k.common.toLowerCase()}`)}" loading="lazy"></a>
+      <figcaption><b><a href="../${esc(k.id)}/">${esc(k.common)}</a></b> <i>${esc(k.sci)}</i>${k.count ? ` &middot; ${k.count} on campus` : ''}<span class="credit">Photo: <a href="${esc(p.page)}" rel="noopener">${esc(p.author)}</a>, ${license}, ${esc(p.site)}</span></figcaption>
+    </figure>`;
+  }).join('');
+  return `<h2>Which one?</h2>
+  <p class="note of-species">These trees are named only as <i>${esc(t.genus)}</i>, not yet to species. Below is a leaf of each <i>${esc(t.genus)}</i> species in the collection, most planted first.</p>
+  <section class="parts">${tiles}</section>`;
+}
+
 /** Says which photos are of the species a cultivar was selected from: all of them, or the parts named. */
 function ofSpeciesNote(t, photos, shown) {
   const species = `<i>${esc(`${t.genus} ${t.species}`)}</i>`;
@@ -376,6 +392,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
   </section>
 
   ${knowItBy(t, extras?.photos)}
+  ${whichOne(t, extras?.kin)}
 
   ${yearSection(t)}
 
