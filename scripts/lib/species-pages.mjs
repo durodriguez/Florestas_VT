@@ -191,8 +191,18 @@ function knowItBy(t, photos) {
     </figure>`;
   }).join('');
   return `<h2>Know it by</h2>
-  ${photos.inherited ? `<p class="note of-species">Photos of <i>${esc(`${t.genus} ${t.species}`)}</i>, the species this was selected from.</p>` : ''}
+  ${ofSpeciesNote(t, photos, parts.map(([key, label]) => [key, label]))}
   <section class="parts">${tiles}</section>`;
+}
+
+/** Says which photos are of the species a cultivar was selected from: all of them, or the parts named. */
+function ofSpeciesNote(t, photos, shown) {
+  const species = `<i>${esc(`${t.genus} ${t.species}`)}</i>`;
+  if (photos.inherited) return `<p class="note of-species">Photos of ${species}, the species this was selected from.</p>`;
+  const labels = shown.filter(([key]) => photos[key].inherited).map(([, label]) => label.toLowerCase());
+  if (!labels.length) return '';
+  const list = labels.length === 1 ? labels[0] : `${labels.slice(0, -1).join(', ')} and ${labels.at(-1)}`;
+  return `<p class="note of-species">The ${esc(list)} shown are of ${species}, the species this was selected from.</p>`;
 }
 
 /** The year in a table, as the field guide shows it, with the same words under it. */

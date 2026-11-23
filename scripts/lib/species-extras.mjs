@@ -16,7 +16,8 @@
  *   research-grade observation's medium photo and the observation's page.
  *
  * A cultivar or variety without its own crown form, habitat or photos takes its
- * species' (the taxon of the same genus and species, with neither): a
+ * species' (the taxon of the same genus and species, with neither; photos
+ * part by part, so it can replace just the part that differs): a
  * thornless honeylocust is shaped and grows wild like any other. Not its
  * facts: one about the species may not hold for a selection of it.
  *
@@ -35,7 +36,8 @@ const FREE = /^(public domain|pd|cc0( 1\.0)?|cc by(-sa)? \d\.\d( [a-z]+)?)$/i;
 
 /**
  * @param {object} args  crownRows, habitatRows, factRows (parsed CSV rows),
- *   taxa (the built dataset's taxa: id, genus, species, infra, cultivar).
+ *   taxa (the built dataset's taxa: id, genus, species, infra, cultivar, and
+ *   flowerColor and fruitColor where known).
  * @returns {{ extras: Map<string, { crownForm: string|null, habitat: object|null, facts: object[] }>, errors: string[], warnings: string[] }}
  */
 export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [], photoRows = [], taxa }) {
@@ -111,6 +113,14 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
   const speciesKey = (t) => `${t.genus}|${t.species}`;
   const speciesOf = new Map(taxa.filter((t) => t.species && !t.cultivar && !t.infra).map((t) => [speciesKey(t), t.id]));
 
+  const byId = new Map(taxa.map((t) => [t.id, t]));
+  // A part whose recorded color the cultivar changes (Crimson Cloud's red
+  // flowers, where the species' are white) is not the species' to lend.
+  // Compared by broad group, so "tan" and "brown" fruit, or "pink" and
+  // "purple" redbud flowers, are the same thing described twice.
+  const unlike = (t, species) => !species ? [] : [['flowers', 'flowerColor'], ['fruit', 'fruitColor']]
+    .filter(([, key]) => t[key] && species[key] && !sameColor(t[key], species[key])).map(([part]) => part);
+
   const extras = new Map();
   for (const t of taxa) {
     const parent = t.cultivar || t.infra ? speciesOf.get(speciesKey(t)) : undefined;
@@ -119,10 +129,44 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
       crownForm: forms.get(t.id) ?? (parent ? forms.get(parent) ?? null : null),
       habitat,
       facts: facts.get(t.id) ?? [],
-      photos: photos.get(t.id) ? { ...photos.get(t.id) } : parent && photos.get(parent) ? { ...photos.get(parent), inherited: true } : null,
+      photos: partPhotos(photos.get(t.id), parent ? photos.get(parent) : undefined, unlike(t, byId.get(parent))),
     });
   }
   return { extras, errors, warnings };
+}
+
+const COLOR_GROUPS = [
+  ['white', 'cream'],
+  ['yellow', 'green', 'gold'],
+  ['red', 'pink', 'purple', 'magenta', 'crimson'],
+  ['brown', 'tan', 'bronze', 'black', 'blue', 'gray'],
+  ['orange'],
+  ['none'],
+];
+/** Whether two recorded colors ("yellow-green", "pink-purple") fall in a common group. */
+function sameColor(a, b) {
+  const groups = (c) => new Set(c.toLowerCase().split(/[-\s]+/).map((w) => COLOR_GROUPS.findIndex((g) => g.includes(w))).filter((i) => i >= 0));
+  const ga = groups(a);
+  return [...groups(b)].some((i) => ga.has(i)) || a === b;
+}
+
+/**
+ * A taxon's photos, part by part: its own where it has one, else its
+ * species' (marked inherited), so a cultivar that differs in one part, such as
+ * Crimson King's purple leaves, needs only that part's photo. `inherited` on
+ * the whole is true when every part shown is the species'. Not a part in
+ * `unlike`: one whose recorded color the cultivar changes.
+ */
+function partPhotos(own = {}, species = {}, unlike = []) {
+  const out = {};
+  for (const part of PARTS) {
+    if (own[part]) out[part] = own[part];
+    else if (species[part] && !unlike.includes(part)) out[part] = { ...species[part], inherited: true };
+  }
+  const shown = PARTS.filter((p) => out[p]);
+  if (!shown.length) return null;
+  if (shown.every((p) => out[p].inherited)) out.inherited = true;
+  return out;
 }
 
 /**
@@ -134,7 +178,7 @@ export function staleGaps(markdown, extras) {
   const warnings = [];
   for (const m of String(markdown ?? '').matchAll(/^- \[ \] .*?\(`([a-z0-9-]+)`, (bark|leaves|flowers|fruit)\)/gms)) {
     const photos = extras.get(m[1])?.photos;
-    if (photos && !photos.inherited && photos[m[2]]) {
+    if (photos?.[m[2]] && !photos[m[2]].inherited) {
       warnings.push(`docs/PHOTO-GAPS.md: ${m[1]} now has a ${m[2]} photo; tick its line off`);
     }
   }

@@ -187,3 +187,23 @@ describe('renderSpeciesIndex', () => {
     expect(html).not.toContain('Black maple');
   });
 });
+
+describe('Know it by, for a cultivar', () => {
+  const shot = (name: string, inherited?: boolean) => ({
+    title: `File:${name}.jpg`, page: `https://commons.wikimedia.org/wiki/File:${name}.jpg`,
+    image: `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/${name}.jpg/500px-${name}.jpg`,
+    site: 'Wikimedia Commons', author: 'A. Photographer', license: 'CC BY 4.0', licenseUrl: '', ...(inherited ? { inherited } : {}),
+  });
+  const cultivar = taxon({ genus: 'Acer', species: 'platanoides', cultivar: 'Crimson King', family: 'Sapindaceae' });
+
+  it('names the parts that are its species\' photos when it has some of its own', () => {
+    const html = page(cultivar, { extras: { photos: { bark: shot('Bark', true), leaves: shot('Purple'), fruit: shot('Samaras', true) } } });
+    expect(html).toContain('The bark and fruit shown are of <i>Acer platanoides</i>');
+    expect(html).toContain('500px-Purple.jpg');
+  });
+
+  it('says all are its species\' when it has none of its own', () => {
+    const html = page(cultivar, { extras: { photos: { inherited: true, bark: shot('Bark', true) } } });
+    expect(html).toContain('Photos of <i>Acer platanoides</i>, the species this was selected from.');
+  });
+});
