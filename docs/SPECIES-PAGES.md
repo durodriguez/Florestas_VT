@@ -243,6 +243,15 @@ with a crown form, a habitat and photos from iNaturalist (28 in all). Shumard,
 willow and scarlet oak were tried and left: their iNaturalist results were
 largely other oaks, and the source check refused those photos.
 
+### Batch 10 (November 2026)
+
+Eight more unmapped species, taking taxa.csv in order: Fraser fir, black
+maple, sycamore maple, Ohio buckeye, tree of heaven, mimosa, European alder
+and Allegheny serviceberry, each with a crown form, a habitat and 24 photos
+between them from iNaturalist. Skipped for now, with too few usable photos:
+grand fir, trident, Korean and Shantung maples, yellow buckeye, Manchurian
+alder and downy serviceberry.
+
 ### Adding photos from here on
 
 `data/part-photos.csv` is the record: edit it directly. Search Commons or
