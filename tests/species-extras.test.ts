@@ -263,6 +263,14 @@ describe('what species pages add by hand', () => {
     expect(own.bark).toMatchObject({ title: 'File:Bark.jpg', inherited: true });
     expect(extras.get('gleditsia-triacanthos').photos.inherited).toBeUndefined();
 
+    // Not a flower photo when the cultivar's flowers are another color.
+    const hawthorns = [
+      { id: 'crataegus-laevigata', genus: 'Crataegus', species: 'laevigata', infra: '', cultivar: '', flowerColor: 'white', fruitColor: 'red' },
+      { id: 'crataegus-laevigata-crimson-cloud', genus: 'Crataegus', species: 'laevigata', infra: '', cultivar: 'Crimson Cloud', flowerColor: 'red', fruitColor: 'red' },
+    ];
+    const red = speciesExtras({ photoRows: [photo('crataegus-laevigata', 'flowers', 'White'), photo('crataegus-laevigata', 'fruit', 'Haws')], taxa: hawthorns });
+    expect(red.extras.get('crataegus-laevigata-crimson-cloud').photos).toEqual({ inherited: true, fruit: expect.objectContaining({ title: 'File:Haws.jpg' }) });
+
     const doc = '- [ ] **Skyline**, bark (`gleditsia-triacanthos-inermis-skyline`, bark).\n- [ ] **Skyline**, leaves (`gleditsia-triacanthos-inermis-skyline`, leaves).';
     expect(staleGaps(doc, extras)).toEqual(['docs/PHOTO-GAPS.md: gleditsia-triacanthos-inermis-skyline now has a leaves photo; tick its line off']);
   });
