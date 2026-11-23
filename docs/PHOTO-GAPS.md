@@ -83,3 +83,18 @@ A close photo of the one part, in focus, works best: the tile is small.
   oval, in opposite pairs; a close photo.
 - [ ] **Black locust**, pods (`robinia-pseudoacacia`, fruit). Flat brown pods
   hanging in bunches, September into winter.
+- [ ] **White fringetree**, bark (`chionanthus-virginicus`, bark). Smooth
+  gray-brown, ridged with age.
+- [ ] **European beech**, flowers (`fagus-sylvatica`, flowers). Small green
+  flowers with the new leaves in April and May; on the green-leaved species,
+  not a purple-leaved form.
+- [ ] **Three-flower maple**, samaras (`acer-triflorum`, fruit). Brown, in
+  September and October.
+- [ ] **Yellowwood**, pods (`cladrastis-kentukea`, fruit). Flat brown pods,
+  September and October; not every year.
+- [ ] **Paperbark maple**, samaras (`acer-griseum`, fruit). Large, fuzzy,
+  brown; September and October.
+- [ ] **Green ash**, samaras (`fraxinus-pennsylvanica`, fruit). Hanging
+  clusters of narrow samaras, September and October.
+- [ ] **European mountain ash**, bark (`sorbus-aucuparia`, bark). Smooth,
+  shining gray, becoming scaly.

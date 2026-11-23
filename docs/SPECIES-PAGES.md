@@ -196,7 +196,9 @@ dogwood, yellowwood, paperbark maple, hackberry, Amur corktree, green ash,
 Japanese stewartia and European mountain ash, with crown forms for
 European beech's columnar and weeping forms. All have a crown form and a
 habitat; three have new facts. The common apple's habitat describes its wild
-ancestor, as the orchard apple grows wild only where it escapes.
+ancestor, as the orchard apple grows wild only where it escapes. Photos: 73,
+chosen under the rules above, three of them from iNaturalist; seven parts are
+in PHOTO-GAPS.md.
 
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
