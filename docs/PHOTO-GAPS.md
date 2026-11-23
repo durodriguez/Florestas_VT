@@ -98,7 +98,7 @@ A close photo of the one part, in focus, works best: the tile is small.
   clusters of narrow samaras, September and October.
 - [ ] **European mountain ash**, bark (`sorbus-aucuparia`, bark). Smooth,
   shining gray, becoming scaly.
-- [ ] **Balsam fir**, pollen cones (`abies-balsamea`, flowers). Yellow, May.
+- [x] **Balsam fir**, pollen cones (`abies-balsamea`, flowers). Yellow, May.
 - [ ] **White fir**, pollen cones (`abies-concolor`, flowers). Yellow, May.
 - [x] **White fir**, cones (`abies-concolor`, fruit). Green, September to October.
 - [x] **Sweet birch**, flowers (`betula-lenta`, flowers). Green, April to May.
@@ -113,7 +113,7 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [ ] **Seven-son flower**, flowers (`heptacodium-miconioides`, flowers). White, July to September.
 - [x] **Seven-son flower**, fruit (`heptacodium-miconioides`, fruit). Red, September to October.
 - [ ] **Red pine**, needles (`pinus-resinosa`, leaves). A close photo of a shoot.
-- [ ] **Red pine**, pollen cones (`pinus-resinosa`, flowers). Yellow, May to June.
+- [x] **Red pine**, pollen cones (`pinus-resinosa`, flowers). Yellow, May to June.
 - [x] **Northern pin oak**, flowers (`quercus-ellipsoidalis`, flowers). Yellow-green, May.
 - [ ] **Northern pin oak**, fruit (`quercus-ellipsoidalis`, fruit). Brown, September to October.
 - [x] **Russian olive**, fruit (`elaeagnus-angustifolia`, fruit). Yellow, August to September.
