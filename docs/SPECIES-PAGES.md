@@ -321,6 +321,16 @@ part, add the row with its `matches` note, then run `npm run check:photos`
 and `npm run data`. Commons rate-limits automated requests; one request every
 couple of seconds gets through.
 
+**When the Commons API refuses (HTTP 429).** In November 2026 it refused this
+project's requests for hours at a time while ordinary Commons pages still
+loaded. What worked: find files through the search page
+(`commons.wikimedia.org/w/index.php?title=Special:MediaSearch&search=…`) or a
+category's own page, fetch thumbnails at a standard width (250 or 500 px; other
+widths are refused), read a file's licence, author and categories from its
+page, and wait a few seconds between requests. `npm run check:photos` falls
+back to reading each file page itself when the API refuses, at one page every
+two seconds; a full run takes about fifteen minutes.
+
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
 
