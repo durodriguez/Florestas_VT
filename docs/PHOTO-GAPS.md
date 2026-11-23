@@ -26,13 +26,13 @@ A close photo of the one part, in focus, works best: the tile is small.
 
 ## The list
 
-- [ ] **Colorado blue spruce**, pollen cones (`picea-pungens`, flowers).
+- [x] **Colorado blue spruce**, pollen cones (`picea-pungens`, flowers).
   Small, reddish, at the branch tips in May, before the new shoots open.
   Try UVM-0593 and UVM-0576 (Central Campus), UVM-2852 (Athletic Campus).
 - [ ] **Japanese zelkova**, flowers (`zelkova-serrata`, flowers). Tiny and
   greenish, along the new shoots in April as the leaves open; easy to miss.
   Any of the zelkovas on Redstone Campus, such as UVM-4520 to UVM-4526.
-- [ ] **Japanese zelkova**, fruit (`zelkova-serrata`, fruit). Small, hard,
+- [x] **Japanese zelkova**, fruit (`zelkova-serrata`, fruit). Small, hard,
   lopsided, brown, along the twigs in September and October. The same trees.
 - [x] **American hornbeam**, catkins (`carpinus-caroliniana`, flowers).
   Hanging green catkins in April and May. Try UVM-2400, UVM-1489 and
