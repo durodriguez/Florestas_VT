@@ -252,6 +252,12 @@ between them from iNaturalist. Skipped for now, with too few usable photos:
 grand fir, trident, Korean and Shantung maples, yellow buckeye, Manchurian
 alder and downy serviceberry.
 
+### Batch 11 (November 2026)
+
+Seven more: shagbark, bitternut and pignut hickory, pawpaw, southern catalpa,
+sugarberry and Chinese chestnut, each with a crown form, a habitat and 25
+photos between them from iNaturalist.
+
 ### Adding photos from here on
 
 `data/part-photos.csv` is the record: edit it directly. Search Commons or
