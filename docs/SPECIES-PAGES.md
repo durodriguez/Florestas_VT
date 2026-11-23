@@ -182,7 +182,21 @@ Lombardy poplar. The rest are in PHOTO-GAPS.md.
 Silver linden, dawn redwood, sweetgum, American beech, common smoketree,
 hedge maple, eastern hophornbeam, Alaska cedar, bigtooth aspen and shingle
 oak. All have a crown form and a habitat; two have new facts. The dawn
-redwood's is from the Arnold Arboretum's own history of its 1948 seed.
+redwood's is from the Arnold Arboretum's own history of its 1948 seed. Photos:
+all four for silver linden, dawn redwood, sweetgum, American beech, common
+smoketree, hedge maple and Alaska cedar; three for eastern hophornbeam; two
+for bigtooth aspen (its bark from iNaturalist) and shingle oak.
+
+### Batch 6 (November 2026)
+
+Twenty this time: yellow birch, gray birch, white fringetree, katsuratree,
+European beech, Callery pear, Kentucky coffeetree, kousa dogwood, common
+apple, three-flower maple, boxelder, four-winged silverbell, flowering
+dogwood, yellowwood, paperbark maple, hackberry, Amur corktree, green ash,
+Japanese stewartia and European mountain ash, with crown forms for
+European beech's columnar and weeping forms. All have a crown form and a
+habitat; three have new facts. The common apple's habitat describes its wild
+ancestor, as the orchard apple grows wild only where it escapes.
 
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
@@ -206,6 +220,28 @@ The build refuses a photo that is not under public domain, CC0, CC BY or CC
 BY-SA, has no author, or is not a Commons thumbnail or an iNaturalist
 observation photo. A cultivar or variety
 without photos of its own shows its species', and says so.
+
+### Choosing a photo
+
+A photo's label is not enough: uploaders get species wrong. In November 2026
+a photo of bright pink-red cones went in as northern white cedar's pollen
+cones because its Commons page said so; the cedar's are yellow, as taxa.csv
+records. A white-barked birch went in as river birch, whose bark taxa.csv
+records as salmon-pink. Both are now replaced, and every photo was checked
+again. The rules since:
+
+1. **It must agree with taxa.csv.** Look at the photo beside what taxa.csv
+   records for that part (the bark's description; the flowers' or fruit's
+   color and months) and write what agrees in the row's `matches` column
+   ("yellow pollen cones, as recorded"). The build refuses a row without it.
+   If they disagree, the photo is wrong until proved otherwise.
+2. **It must show the species' own marks**, not just the part: river birch's
+   peeling salmon bark, not any birch bark; sugar maple's long-stalked
+   flowers, not any maple's.
+3. **It must be identified to species at its source**: on Commons, filed in a
+   category that names the species; on iNaturalist, research grade.
+   `npm run check:photos` checks every row for this.
+4. **When in doubt, leave the part empty** and add it to PHOTO-GAPS.md.
 
 Each photo is chosen by eye from Commons search results: the right species
 (named in the file, not just a "maple leaf"), the part shown clearly, and the

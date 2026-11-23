@@ -27,7 +27,8 @@
     "import:city": "node scripts/import-city-trees.mjs",
     "areas:check": "node scripts/check-areas.mjs",
     "itree:import": "node scripts/import-itree.mjs",
-    "ranges:fetch": "node scripts/fetch-ranges.mjs"
+    "ranges:fetch": "node scripts/fetch-ranges.mjs",
+    "check:photos": "node scripts/check-photos.mjs"
   },
   "dependencies": {
     "jszip": "^3.10.1",
