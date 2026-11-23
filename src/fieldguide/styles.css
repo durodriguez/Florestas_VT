@@ -96,7 +96,7 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
 }
 .fg-tour b { font-size: .98rem; }
 .fg-tour-meta { font-size: .8rem; color: var(--dim); }
-.fg-tour-desc { font-size: .82rem; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.fg-tour-desc { font-size: .82rem; line-height: 1.35; }
 .fg-walk-head { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem; margin-bottom: .45rem; }
 .fg-walk-head h2 { margin: 0; font-size: 1rem; display: flex; flex-wrap: wrap; gap: 0 .45rem; align-items: baseline; }
 .fg-walk-head small { font-size: .8rem; font-weight: 600; color: var(--dim); }
