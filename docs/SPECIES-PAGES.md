@@ -258,6 +258,12 @@ Seven more: shagbark, bitternut and pignut hickory, pawpaw, southern catalpa,
 sugarberry and Chinese chestnut, each with a crown form, a habitat and 25
 photos between them from iNaturalist.
 
+### Batch 12 (November 2026)
+
+Eight more: butternut, common persimmon, American holly, English walnut,
+European hazel, Japanese cedar, European ash and American smoketree, each
+with a crown form, a habitat and 27 photos between them from iNaturalist.
+
 ### Adding photos from here on
 
 `data/part-photos.csv` is the record: edit it directly. Search Commons or
