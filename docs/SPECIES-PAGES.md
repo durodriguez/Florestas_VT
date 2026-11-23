@@ -258,6 +258,25 @@ Seven more: shagbark, bitternut and pignut hickory, pawpaw, southern catalpa,
 sugarberry and Chinese chestnut, each with a crown form, a habitat and 25
 photos between them from iNaturalist.
 
+### Batch 12 (November 2026)
+
+Eight more: butternut, common persimmon, American holly, English walnut,
+European hazel, Japanese cedar, European ash and American smoketree, each
+with a crown form, a habitat and 27 photos between them from iNaturalist.
+
+### Batch 13 (November 2026)
+
+Eight more: tamarack, eastern redcedar, Osage orange, cucumbertree, sourwood,
+red mulberry, umbrella magnolia and goldenrain tree, each with a crown form, a
+habitat and 31 photos between them from iNaturalist.
+
+### Batch 14 (November 2026)
+
+Seven more: red spruce, white poplar, post oak, peach, weeping willow,
+sawtooth oak and cherry plum, each with a crown form, a habitat and 24 photos
+between them from iNaturalist. Overcup oak's candidates were all other oaks
+at their source, and were refused.
+
 ### Adding photos from here on
 
 `data/part-photos.csv` is the record: edit it directly. Search Commons or
