@@ -304,3 +304,23 @@ describe('what species pages add by hand', () => {
     expect(staleGaps(readFileSync('docs/PHOTO-GAPS.md', 'utf8'), extras)).toEqual([]);
   });
 });
+
+describe('a taxon named only to genus', () => {
+  it('shows a leaf of each species of the genus, most planted first, and not for a cultivar', () => {
+    const leaf = (taxon_id: string) => ({
+      taxon_id, part: 'leaves', title: `File:${taxon_id}.jpg`,
+      page_url: `https://commons.wikimedia.org/wiki/File:${taxon_id}.jpg`,
+      image_url: `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/${taxon_id}.jpg/500px-${taxon_id}.jpg`,
+      author: 'A. Photographer', license: 'CC BY 4.0', license_url: '', matches: 'as recorded',
+    });
+    const taxa = [
+      { id: 'ulmus-sp', sci: 'Ulmus sp.', genus: 'Ulmus', species: '', infra: '', cultivar: '', common: 'Elm', count: 89 },
+      { id: 'ulmus-rubra', sci: 'Ulmus rubra', genus: 'Ulmus', species: 'rubra', infra: '', cultivar: '', common: 'Slippery elm', count: 0 },
+      { id: 'ulmus-americana', sci: 'Ulmus americana', genus: 'Ulmus', species: 'americana', infra: '', cultivar: '', common: 'American elm', count: 3 },
+      { id: 'ulmus-morton', sci: "Ulmus 'Morton'", genus: 'Ulmus', species: '', infra: '', cultivar: 'Morton', common: 'Accolade elm', count: 1 },
+    ];
+    const { extras } = speciesExtras({ photoRows: [leaf('ulmus-rubra'), leaf('ulmus-americana')], taxa });
+    expect(extras.get('ulmus-sp').kin.map((k: { id: string }) => k.id)).toEqual(['ulmus-americana', 'ulmus-rubra']);
+    expect(extras.get('ulmus-morton').kin).toBeUndefined();
+  });
+});

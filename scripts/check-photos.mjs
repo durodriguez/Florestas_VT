@@ -31,8 +31,8 @@ const UA = 'UVMTreesInventory/0.1 (+https://github.com/durodriguez/Florestas_VT)
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /** curl, as Node's own fetch cannot always resolve hosts here; with patient retries for rate limits. */
-async function getJson(url) {
-  for (let i = 0; i < 8; i++) {
+async function getJson(url, tries = 8) {
+  for (let i = 0; i < tries; i++) {
     try { return JSON.parse(execFileSync('curl', ['-sf', '--max-time', '30', '-A', UA, url], { maxBuffer: 1 << 26 }).toString()); }
     catch { await wait(5000 * (i + 1)); }
   }
@@ -50,15 +50,42 @@ const namesFor = (t) => {
   return [sp, hybrid, SYNONYMS[sp], sp === 'Callitropsis nootkatensis' ? 'Cupressus nootkatensis' : null].filter(Boolean).map((n) => n.toLowerCase());
 };
 
-// Commons, forty files to a request.
+/**
+ * A file's visible categories from its ordinary page, for when the API
+ * refuses (Commons rate-limits API clients far sooner than page views).
+ * Slow on purpose: one page every two seconds.
+ */
+async function pageCategories(page) {
+  for (let i = 0; i < 4; i++) {
+    try {
+      const html = execFileSync('curl', ['-sf', '--max-time', '30', '-A', UA, page], { maxBuffer: 1 << 26 }).toString();
+      await wait(2000);
+      const box = html.split('id="mw-normal-catlinks"')[1]?.split('</div>')[0] ?? '';
+      return [...box.matchAll(/href="\/wiki\/Category:([^"]+)"/g)].map((m) => `category:${decodeURIComponent(m[1]).replace(/_/g, ' ')}`.toLowerCase());
+    } catch { await wait(30000 * (i + 1)); }
+  }
+  return null;
+}
+
+// Commons, forty files to a request; file by file from its page if the API refuses.
 const commons = rows.filter((r) => r.page_url.includes('commons.wikimedia.org'));
+let viaPages = false;
 for (let i = 0; i < commons.length; i += 40) {
   const batch = commons.slice(i, i + 40);
   const titles = batch.map((r) => r.title).join('|');
-  const data = await getJson(`https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=categories&cllimit=max&clshow=!hidden&titles=${encodeURIComponent(titles)}`);
   const norm = (s) => s.replace(/_/g, ' ');
-  const cats = new Map(Object.values(data.query.pages).map((p) => [norm(p.title), (p.categories ?? []).map((c) => c.title.toLowerCase())]));
-  const renamed = new Map((data.query.normalized ?? []).map((n) => [n.from, n.to]));
+  let cats = new Map(), renamed = new Map();
+  let data = null;
+  if (!viaPages) {
+    try { data = await getJson(`https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=categories&cllimit=max&clshow=!hidden&titles=${encodeURIComponent(titles)}`, 2); }
+    catch { viaPages = true; console.log('The Commons API is refusing; reading each file page instead (slow).'); }
+  }
+  if (data) {
+    cats = new Map(Object.values(data.query.pages).map((p) => [norm(p.title), (p.categories ?? []).map((c) => c.title.toLowerCase())]));
+    renamed = new Map((data.query.normalized ?? []).map((n) => [n.from, n.to]));
+  } else {
+    for (const r of batch) { const c = await pageCategories(r.page_url); if (c) cats.set(norm(r.title), c); }
+  }
   for (const r of batch) {
     const t = taxa.get(r.taxon_id);
     const c = cats.get(norm(renamed.get(r.title) ?? r.title));
@@ -67,7 +94,7 @@ for (let i = 0; i < commons.length; i += 40) {
       problems.push(`${r.taxon_id} ${r.part}: ${r.title} is in no category naming ${t.genus} ${t.species}`);
     }
   }
-  await wait(2000);
+  if (!viaPages) await wait(2000);
 }
 
 // iNaturalist, thirty observations to a request.
