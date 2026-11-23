@@ -158,5 +158,5 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [ ] **Beautybush**, bark and leaves (`kolkwitzia-amabilis`). Shaggy, peeling
   old stems.
 - [ ] **Pieris**, bark (`pieris-japonica`, bark).
-- [ ] **Cistena plum** and **Anglojap yew** (`prunus-x-cistena`, `taxus-x-media`):
-  all four parts. iNaturalist has no research-grade observations of either hybrid.
+- [ ] **Cistena plum**, fruit (`prunus-x-cistena`, fruit). Black, July and August.
+- [ ] **Anglojap yew**, bark and fruit (`taxus-x-media`). Red arils in fall.
