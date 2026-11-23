@@ -71,11 +71,11 @@ A close photo of the one part, in focus, works best: the tile is small.
   Tiny yellow pollen cones at the tips of the sprays in April and May. Not
   the red-pink cones of some other *Thuja*: the photo used before was one of
   those.
-- [ ] **Norway spruce**, pollen cones (`picea-abies`, flowers). Small, red to
+- [x] **Norway spruce**, pollen cones (`picea-abies`, flowers). Small, red to
   yellow, along last year's shoots in May.
 - [ ] **Paper birch**, catkins (`betula-papyrifera`, flowers). Hanging green
   catkins as the leaves open, April and May.
-- [ ] **Paper birch**, leaves (`betula-papyrifera`, leaves). Oval, doubly
+- [x] **Paper birch**, leaves (`betula-papyrifera`, leaves). Oval, doubly
   toothed; any time in leaf.
 - [ ] **Japanese tree lilac**, bark (`syringa-reticulata`, bark). Glossy
   reddish-brown with horizontal lenticels, like a cherry's; a close photo.
