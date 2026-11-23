@@ -713,6 +713,9 @@ added (on 20 November 2026 the count went from 940 to 978, and every stop but
 the first dropped two places), so the build warns when a note's "No. 7 of the
 940 trunks measured on campus" no longer matches the data.
 
+In November 2026 the last stop, a Norway spruce off the Green (UVM-0308), was
+swapped for a smaller one on it (UVM-0144), to keep the walk on the Green.
+
 `data/trails.geojson`, hand-drawn trail lines, came before tours. It never
 held a trail and was removed in November 2026.
 
