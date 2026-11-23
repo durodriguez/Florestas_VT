@@ -196,7 +196,34 @@ dogwood, yellowwood, paperbark maple, hackberry, Amur corktree, green ash,
 Japanese stewartia and European mountain ash, with crown forms for
 European beech's columnar and weeping forms. All have a crown form and a
 habitat; three have new facts. The common apple's habitat describes its wild
-ancestor, as the orchard apple grows wild only where it escapes.
+ancestor, as the orchard apple grows wild only where it escapes. Photos: 73,
+chosen under the rules above, three of them from iNaturalist; seven parts are
+in PHOTO-GAPS.md.
+
+### Batch 7 (November 2026)
+
+The last 23 species-level trees with campus trees: balsam fir, white fir,
+black cherry, sweet birch, swamp chestnut oak, hinoki falsecypress, bigleaf
+magnolia, white mulberry, black tupelo, Japanese maple, seven-son flower, red
+pine, northern pin oak, European hornbeam, Turkish filbert, Scotch elm,
+Russian olive, Nordmann fir, wafer ash, Amur maackia, common sassafras,
+corneliancherry dogwood and sweetbay magnolia. All have a crown form and a
+habitat; two have new facts. Photos: 68, all from Commons, under the rules
+above; 24 parts are in PHOTO-GAPS.md. Not yet tried on iNaturalist.
+
+Every species-level tree on campus now has its page filled in. Left: the
+cultivar-only taxa (corkscrew willow, Montmorency cherry, Crimson Cloud
+hawthorn), whose species have no row of their own, and the genus-only and
+hybrid entries (crabapples, elms, serviceberries, ashes, Freeman maple),
+which want a decision on what their pages should say.
+
+### Adding photos from here on
+
+`data/part-photos.csv` is the record: edit it directly. Search Commons or
+iNaturalist, look at each candidate beside what taxa.csv records for that
+part, add the row with its `matches` note, then run `npm run check:photos`
+and `npm run data`. Commons rate-limits automated requests; one request every
+couple of seconds gets through.
 
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
