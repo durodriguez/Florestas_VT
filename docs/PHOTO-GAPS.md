@@ -140,3 +140,21 @@ A close photo of the one part, in focus, works best: the tile is small.
   Tiny, at the shoot tips in late winter.
 - [ ] **Giant sequoia**, cones (`sequoiadendron-giganteum`, fruit). Green on the
   tree, as recorded; the brown cones on the ground are old ones.
+- [ ] **Freeman maple**, bark (`acer-x-freemanii`, bark). Smooth gray, breaking
+  into plates; its 67 campus trees are the place to take it.
+- [ ] **Freeman maple**, flowers (`acer-x-freemanii`, flowers). Red, March and
+  April, before the leaves.
+- [ ] **Freeman maple**, fruit (`acer-x-freemanii`, fruit). Red samaras in May.
+- [ ] **Boxwood**, bark (`buxus-sempervirens`, bark). Pale, corky old stems.
+- [ ] **Summersweet**, bark and leaves (`clethra-alnifolia`).
+- [ ] **Witch hazel**, bark and fruit (`hamamelis-virginiana`). Brown woody
+  capsules in September and October.
+- [ ] **Spicebush**, bark (`lindera-benzoin`, bark).
+- [ ] **Common buckthorn**, bark (`rhamnus-cathartica`, bark). Peeling to show
+  orange inner bark.
+- [ ] **Common lilac**, bark (`syringa-vulgaris`, bark).
+- [ ] **Beautybush**, bark and leaves (`kolkwitzia-amabilis`). Shaggy, peeling
+  old stems.
+- [ ] **Pieris**, bark (`pieris-japonica`, bark).
+- [ ] **Cistena plum** and **Anglojap yew** (`prunus-x-cistena`, `taxus-x-media`):
+  all four parts. iNaturalist has no research-grade observations of either hybrid.
