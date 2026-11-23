@@ -297,6 +297,13 @@ between them from iNaturalist. Not done: Tibetan bramble and Sargent
 crabapple, which have no usable research-grade photos, and the ferns
 and grasses.
 
+### Batch 17 (November 2026)
+
+The six perennials in taxa.csv: maidenhair, New York, lady, ostrich and
+Christmas fern and Siberian iris, each with a habitat and a photo of its
+fronds or leaves (the iris also its flower). Ferns show only that tile: they
+have no bark, flowers or fruit.
+
 ### Adding photos from here on
 
 `data/part-photos.csv` is the record: edit it directly. Search Commons or
