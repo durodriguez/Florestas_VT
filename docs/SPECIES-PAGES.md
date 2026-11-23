@@ -277,6 +277,14 @@ sawtooth oak and cherry plum, each with a crown form, a habitat and 24 photos
 between them from iNaturalist. Overcup oak's candidates were all other oaks
 at their source, and were refused.
 
+### Batch 15 (November 2026)
+
+Ten unmapped shrubs: bottlebrush and red buckeye, black chokeberry, Japanese
+barberry, Carolina allspice, buttonbush, Siberian peashrub, gray and redosier
+dogwood and bush honeysuckle, each with a habitat and 32 photos between them
+from iNaturalist. Shrubs take no crown form. Shadblow serviceberry's
+candidates were Allegheny serviceberry at their source, and were refused.
+
 ### Adding photos from here on
 
 `data/part-photos.csv` is the record: edit it directly. Search Commons or
