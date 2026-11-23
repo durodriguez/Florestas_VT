@@ -304,6 +304,17 @@ Christmas fern and Siberian iris, each with a habitat and a photo of its
 fronds or leaves (the iris also its flower). Ferns show only that tile: they
 have no bark, flowers or fruit.
 
+### Batch 18 (November 2026)
+
+The species skipped in batches 10 to 14 for want of good candidates, taken
+again: grand fir, Amur and trident maple, downy serviceberry, yellow buckeye,
+pecan, shellbark and mockernut hickory, devil's walkingstick and Japanese
+angelica tree, Atlantic white cedar, Chinese fringetree, Japanese cornel,
+blue ash, Chinese juniper, European larch, southern magnolia, Persian ironwood,
+Rocky Mountain juniper, American crabapple, green hawthorn, Oriental spruce,
+limber pine and Darlington oak. Each has a habitat, a crown form where it is a
+tree, and between one and four photos from iNaturalist (about 60 in all).
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
