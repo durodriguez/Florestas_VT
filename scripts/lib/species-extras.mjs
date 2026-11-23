@@ -16,7 +16,8 @@
  *   research-grade observation's medium photo and the observation's page.
  *
  * A cultivar or variety without its own crown form, habitat or photos takes its
- * species' (the taxon of the same genus and species, with neither): a
+ * species' (the taxon of the same genus and species, with neither; photos
+ * part by part, so it can replace just the part that differs): a
  * thornless honeylocust is shaped and grows wild like any other. Not its
  * facts: one about the species may not hold for a selection of it.
  *
@@ -119,10 +120,28 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
       crownForm: forms.get(t.id) ?? (parent ? forms.get(parent) ?? null : null),
       habitat,
       facts: facts.get(t.id) ?? [],
-      photos: photos.get(t.id) ? { ...photos.get(t.id) } : parent && photos.get(parent) ? { ...photos.get(parent), inherited: true } : null,
+      photos: partPhotos(photos.get(t.id), parent ? photos.get(parent) : undefined),
     });
   }
   return { extras, errors, warnings };
+}
+
+/**
+ * A taxon's photos, part by part: its own where it has one, else its
+ * species' (marked inherited), so a cultivar that differs in one part, such as
+ * Crimson King's purple leaves, needs only that part's photo. `inherited` on
+ * the whole is true when every part shown is the species'.
+ */
+function partPhotos(own = {}, species = {}) {
+  const out = {};
+  for (const part of PARTS) {
+    if (own[part]) out[part] = own[part];
+    else if (species[part]) out[part] = { ...species[part], inherited: true };
+  }
+  const shown = PARTS.filter((p) => out[p]);
+  if (!shown.length) return null;
+  if (shown.every((p) => out[p].inherited)) out.inherited = true;
+  return out;
 }
 
 /**
@@ -134,7 +153,7 @@ export function staleGaps(markdown, extras) {
   const warnings = [];
   for (const m of String(markdown ?? '').matchAll(/^- \[ \] .*?\(`([a-z0-9-]+)`, (bark|leaves|flowers|fruit)\)/gms)) {
     const photos = extras.get(m[1])?.photos;
-    if (photos && !photos.inherited && photos[m[2]]) {
+    if (photos?.[m[2]] && !photos[m[2]].inherited) {
       warnings.push(`docs/PHOTO-GAPS.md: ${m[1]} now has a ${m[2]} photo; tick its line off`);
     }
   }

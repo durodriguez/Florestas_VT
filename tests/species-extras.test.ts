@@ -240,6 +240,33 @@ describe('what species pages add by hand', () => {
     expect(inat.extras.get('gleditsia-triacanthos').photos.bark.site).toBe('iNaturalist');
   });
 
+  it("lets a cultivar replace one part's photo and keep its species' others", () => {
+    const photo = (taxon_id: string, part: string, name: string) => ({
+      taxon_id, part, title: `File:${name}.jpg`,
+      page_url: `https://commons.wikimedia.org/wiki/File:${name}.jpg`,
+      image_url: `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/${name}.jpg/500px-${name}.jpg`,
+      author: 'A. Photographer', license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/', matches: 'as recorded',
+    });
+    const { errors, extras } = speciesExtras({
+      photoRows: [
+        photo('gleditsia-triacanthos', 'bark', 'Bark'),
+        photo('gleditsia-triacanthos', 'leaves', 'Green'),
+        photo('gleditsia-triacanthos-inermis-skyline', 'leaves', 'Gold'),
+      ],
+      taxa,
+    });
+    expect(errors).toEqual([]);
+    const own = extras.get('gleditsia-triacanthos-inermis-skyline').photos;
+    expect(own.inherited).toBeUndefined();
+    expect(own.leaves).toMatchObject({ title: 'File:Gold.jpg' });
+    expect(own.leaves.inherited).toBeUndefined();
+    expect(own.bark).toMatchObject({ title: 'File:Bark.jpg', inherited: true });
+    expect(extras.get('gleditsia-triacanthos').photos.inherited).toBeUndefined();
+
+    const doc = '- [ ] **Skyline**, bark (`gleditsia-triacanthos-inermis-skyline`, bark).\n- [ ] **Skyline**, leaves (`gleditsia-triacanthos-inermis-skyline`, leaves).';
+    expect(staleGaps(doc, extras)).toEqual(['docs/PHOTO-GAPS.md: gleditsia-triacanthos-inermis-skyline now has a leaves photo; tick its line off']);
+  });
+
   it('passes the files in data/', () => {
     const read = (f: string) => Papa.parse<Record<string, string>>(readFileSync(`data/${f}`, 'utf8'), { header: true, skipEmptyLines: true }).data;
     const all = rows.map((r) => ({ id: r.taxon_id, genus: r.genus, species: r.species, infra: r.infraspecific, cultivar: r.cultivar }));
