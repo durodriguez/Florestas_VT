@@ -285,6 +285,17 @@ dogwood and bush honeysuckle, each with a habitat and 32 photos between them
 from iNaturalist. Shrubs take no crown form. Shadblow serviceberry's
 candidates were Allegheny serviceberry at their source, and were refused.
 
+### Batch 16 (November 2026)
+
+The remaining unmapped shrubs and vines with research-grade photos: 27
+species, among them burning bush, fothergilla, the hydrangeas, winterberry
+and inkberry, the junipers, privet, Amur honeysuckle, Virginia creeper and
+Boston ivy, ninebark, chokecherry, the sumacs, multiflora rose, elderberry
+and bladdernut, plus pond cypress. Each has a habitat and about 70 photos
+between them from iNaturalist. Not yet done: blueberry, the viburnums,
+English yew, weigela, Tibetan bramble and Sargent crabapple, and the ferns
+and grasses.
+
 ### Adding photos from here on
 
 `data/part-photos.csv` is the record: edit it directly. Search Commons or
