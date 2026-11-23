@@ -34,10 +34,10 @@ A close photo of the one part, in focus, works best: the tile is small.
   Any of the zelkovas on Redstone Campus, such as UVM-4520 to UVM-4526.
 - [ ] **Japanese zelkova**, fruit (`zelkova-serrata`, fruit). Small, hard,
   lopsided, brown, along the twigs in September and October. The same trees.
-- [ ] **American hornbeam**, catkins (`carpinus-caroliniana`, flowers).
+- [x] **American hornbeam**, catkins (`carpinus-caroliniana`, flowers).
   Hanging green catkins in April and May. Try UVM-2400, UVM-1489 and
   UVM-2415 (Athletic Campus).
-- [ ] **Bur oak**, catkins (`quercus-macrocarpa`, flowers). Hanging
+- [x] **Bur oak**, catkins (`quercus-macrocarpa`, flowers). Hanging
   yellow-green catkins in May, with the new leaves. Try UVM-2324 and
   UVM-2323 (Athletic Campus).
 - [ ] **Washington hawthorn**, bark (`crataegus-phaenopyrum`, bark). Any
@@ -49,23 +49,23 @@ A close photo of the one part, in focus, works best: the tile is small.
   cherries in June and July; birds take them fast. The same trees.
 - [ ] **Lombardy poplar**, bark (`populus-nigra`, bark). Any time. Its
   campus trees stand in rows; any of them.
-- [ ] **Lombardy poplar**, catkins (`populus-nigra`, flowers). Reddish male
+- [x] **Lombardy poplar**, catkins (`populus-nigra`, flowers). Reddish male
   catkins in March and April, before the leaves.
-- [ ] **American chestnut**, burs (`castanea-dentata`, fruit). Spiny burs
+- [x] **American chestnut**, burs (`castanea-dentata`, fruit). Spiny burs
   in September; rare on sprouts that are still small.
-- [ ] **Scotch pine**, needles (`pinus-sylvestris`, leaves). Short, twisted,
+- [x] **Scotch pine**, needles (`pinus-sylvestris`, leaves). Short, twisted,
   blue-green pairs; any time.
-- [ ] **Scotch pine**, cones (`pinus-sylvestris`, fruit). Small, pointed,
+- [x] **Scotch pine**, cones (`pinus-sylvestris`, fruit). Small, pointed,
   gray-brown, any time.
-- [ ] **Eastern hophornbeam**, catkins (`ostrya-virginiana`, flowers).
+- [x] **Eastern hophornbeam**, catkins (`ostrya-virginiana`, flowers).
   Slender hanging catkins in April and May, with the new leaves.
-- [ ] **Bigtooth aspen**, catkins (`populus-grandidentata`, flowers). Gray,
+- [x] **Bigtooth aspen**, catkins (`populus-grandidentata`, flowers). Gray,
   fuzzy catkins in March and April, before the leaves.
-- [ ] **Bigtooth aspen**, fruit (`populus-grandidentata`, fruit). Strings of
+- [x] **Bigtooth aspen**, fruit (`populus-grandidentata`, fruit). Strings of
   small capsules that split to release cottony seed in May and June.
-- [ ] **Shingle oak**, catkins (`quercus-imbricaria`, flowers). In April and
+- [x] **Shingle oak**, catkins (`quercus-imbricaria`, flowers). In April and
   May, with the new leaves.
-- [ ] **Shingle oak**, acorns (`quercus-imbricaria`, fruit). Small, nearly
+- [x] **Shingle oak**, acorns (`quercus-imbricaria`, fruit). Small, nearly
   round, in a shallow cup; September and October.
 - [ ] **Northern white cedar**, pollen cones (`thuja-occidentalis`, flowers).
   Tiny yellow pollen cones at the tips of the sprays in April and May. Not
@@ -79,13 +79,13 @@ A close photo of the one part, in focus, works best: the tile is small.
   toothed; any time in leaf.
 - [ ] **Japanese tree lilac**, bark (`syringa-reticulata`, bark). Glossy
   reddish-brown with horizontal lenticels, like a cherry's; a close photo.
-- [ ] **Japanese tree lilac**, leaves (`syringa-reticulata`, leaves). Broad,
+- [x] **Japanese tree lilac**, leaves (`syringa-reticulata`, leaves). Broad,
   oval, in opposite pairs; a close photo.
-- [ ] **Black locust**, pods (`robinia-pseudoacacia`, fruit). Flat brown pods
+- [x] **Black locust**, pods (`robinia-pseudoacacia`, fruit). Flat brown pods
   hanging in bunches, September into winter.
 - [ ] **White fringetree**, bark (`chionanthus-virginicus`, bark). Smooth
   gray-brown, ridged with age.
-- [ ] **European beech**, flowers (`fagus-sylvatica`, flowers). Small green
+- [x] **European beech**, flowers (`fagus-sylvatica`, flowers). Small green
   flowers with the new leaves in April and May; on the green-leaved species,
   not a purple-leaved form.
 - [ ] **Three-flower maple**, samaras (`acer-triflorum`, fruit). Brown, in
@@ -94,7 +94,7 @@ A close photo of the one part, in focus, works best: the tile is small.
   September and October; not every year.
 - [ ] **Paperbark maple**, samaras (`acer-griseum`, fruit). Large, fuzzy,
   brown; September and October.
-- [ ] **Green ash**, samaras (`fraxinus-pennsylvanica`, fruit). Hanging
+- [x] **Green ash**, samaras (`fraxinus-pennsylvanica`, fruit). Hanging
   clusters of narrow samaras, September and October.
 - [ ] **European mountain ash**, bark (`sorbus-aucuparia`, bark). Smooth,
   shining gray, becoming scaly.
