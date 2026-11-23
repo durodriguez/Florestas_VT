@@ -209,7 +209,9 @@ pine, northern pin oak, European hornbeam, Turkish filbert, Scotch elm,
 Russian olive, Nordmann fir, wafer ash, Amur maackia, common sassafras,
 corneliancherry dogwood and sweetbay magnolia. All have a crown form and a
 habitat; two have new facts. Photos: 68, all from Commons, under the rules
-above; 24 parts are in PHOTO-GAPS.md. Not yet tried on iNaturalist.
+above; 24 parts are in PHOTO-GAPS.md. A search of iNaturalist (research
+grade, CC BY or CC0) then filled 10 of the 24, each looked at beside
+taxa.csv; 14 are still open.
 
 Every species-level tree on campus now has its page filled in. Left: the
 cultivar-only taxa (corkscrew willow, Montmorency cherry, Crimson Cloud
