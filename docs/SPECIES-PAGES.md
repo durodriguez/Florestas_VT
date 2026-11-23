@@ -315,6 +315,16 @@ Rocky Mountain juniper, American crabapple, green hawthorn, Oriental spruce,
 limber pine and Darlington oak. Each has a habitat, a crown form where it is a
 tree, and between one and four photos from iNaturalist (about 60 in all).
 
+### Batch 19 (November 2026)
+
+Twelve more, found once the photo search fell back to plain observations
+rather than only described or annotated ones: Atlas and Lebanon cedar, Serbian
+spruce, Swiss stone and Japanese white pine, Chinese redbud, red horse
+chestnut, willow and chinkapin oak, American plum, lacebark elm and common
+linden. Habitats and 30-odd photos. London plane is left: iNaturalist files it
+as *Platanus × hispanica*, which the identification check does not accept as
+*P. × acerifolia*.
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
