@@ -45,7 +45,9 @@ const problems = [];
 
 const namesFor = (t) => {
   const sp = `${t.genus} ${t.species}`;
-  return [sp, SYNONYMS[sp], sp === 'Callitropsis nootkatensis' ? 'Cupressus nootkatensis' : null].filter(Boolean).map((n) => n.toLowerCase());
+  // A hybrid is "Acer x freemanii" here and "Acer × freemanii" at both sources.
+  const hybrid = / x /.test(sp) ? sp.replace(' x ', ' × ') : null;
+  return [sp, hybrid, SYNONYMS[sp], sp === 'Callitropsis nootkatensis' ? 'Cupressus nootkatensis' : null].filter(Boolean).map((n) => n.toLowerCase());
 };
 
 // Commons, forty files to a request.
