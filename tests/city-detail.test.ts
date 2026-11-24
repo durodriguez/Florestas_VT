@@ -12,7 +12,7 @@ import type { CityTree, Taxon } from '../src/types';
 const taxon = {
   id: 'celtis-occidentalis', sci: 'Celtis occidentalis', common: 'Hackberry', family: 'Cannabaceae',
   genus: 'Celtis', species: 'occidentalis', infra: '', cultivar: '', type: 'deciduous-tree', origin: 'native',
-  flowerColor: '', flowerMonths: [], fruitColor: 'purple', fruitMonths: [9, 10], fallColor: 'yellow',
+  flowerColor: '', flowerMonths: [], fruitColor: 'purple', fruitMonths: [9, 10], leafColor: '', fallColor: 'yellow',
   matureHeightFt: 50, matureSpreadFt: 40, bark: 'Corky, warty ridges', pests: '', soil: '', zones: '3-9',
   wikipedia: '', description: '', funFact: '', alt: '', count: 0, parent: '', groupCount: 0,
 } as Taxon;

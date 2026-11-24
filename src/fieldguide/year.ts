@@ -12,10 +12,10 @@
  * brown acorns. No DOM here.
  */
 
-import { EVERGREEN, FALL_MONTH, LEAF, LEAF_MONTHS, MONTH_NAMES } from '../season';
+import { EVERGREEN, FALL_MONTH, LEAF, LEAF_MONTHS, MONTH_NAMES, leafTint } from '../season';
 import type { Taxon } from '../types';
 
-type Calendar = Pick<Taxon, 'type' | 'family' | 'flowerMonths' | 'flowerColor' | 'fruitMonths' | 'fruitColor' | 'fallColor'>;
+type Calendar = Pick<Taxon, 'type' | 'family' | 'flowerMonths' | 'flowerColor' | 'fruitMonths' | 'fruitColor' | 'fallColor'> & Partial<Pick<Taxon, 'leafColor'>>;
 
 /** Every color word taxa.csv uses, as the thing looks. */
 const COLORS: Record<string, string> = {
@@ -58,14 +58,17 @@ export function yearTable(t: Calendar): YearRow[] {
   const flower = colorOf(t.flowerColor);
   const fruit = colorOf(t.fruitColor);
   const word = fruitWord(t);
+  // Leaves that are not green in summer show their own color (taxa.csv leaf_color).
+  const tint = leafTint(t.leafColor);
+  const leafWord = tint ? `${cap(t.leafColor!)} ${evergreen ? 'foliage' : 'leaves'}` : '';
   return [
     {
       label: 'Leaves',
       // In leaf from May to October, as season.ts has it, with October in the
       // fall color. An evergreen is in leaf all year and has none.
-      cells: months((m) => evergreen ? { color: EVERGREEN, title: 'Evergreen' }
+      cells: months((m) => evergreen ? { color: tint ?? EVERGREEN, title: tint ? `Evergreen, ${leafWord.toLowerCase()}` : 'Evergreen' }
         : m === FALL_MONTH && fall ? { color: fall, title: `${cap(t.fallColor)} fall color` }
-          : LEAF_MONTHS.has(m) ? { color: LEAF, title: 'In leaf' } : null),
+          : LEAF_MONTHS.has(m) ? { color: tint ?? LEAF, title: tint ? leafWord : 'In leaf' } : null),
     },
     { label: 'Flowers', cells: months((m) => flower && t.flowerMonths.includes(m) ? { color: flower, title: `${cap(t.flowerColor)} flowers` } : null) },
     { label: cap(word), cells: months((m) => fruit && t.fruitMonths.includes(m) ? { color: fruit, title: `${cap(t.fruitColor)} ${word}` } : null) },
@@ -110,6 +113,13 @@ export function yearSummary(t: Calendar): string {
   }
   if (t.type !== 'evergreen-tree' && colorOf(t.fallColor)) {
     parts.push([FALL_MONTH + 0.2, `${cap(t.fallColor)} fall color in ${MONTH_NAMES[FALL_MONTH - 1]}.`]);
+  }
+  if (leafTint(t.leafColor)) {
+    // Summer leaves that are not green: all year on an evergreen, else the
+    // months in leaf before the fall color takes over.
+    const evergreen = t.type === 'evergreen-tree';
+    const inLeaf = [...LEAF_MONTHS].filter((m) => !(m === FALL_MONTH && colorOf(t.fallColor)));
+    parts.push(evergreen ? [0, `${cap(t.leafColor!)} foliage all year.`] : [Math.min(...inLeaf) - 0.1, `${cap(t.leafColor!)} leaves ${when(inLeaf)}.`]);
   }
   return parts.sort((a, b) => a[0] - b[0]).map(([, text]) => text).join(' ');
 }

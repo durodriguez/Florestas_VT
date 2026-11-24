@@ -54,6 +54,8 @@ export const UNKNOWN_TAXON = 'unknown';
  * taxon; blank means nobody has assessed it.
  */
 export const ORIGINS = ['vermont-native', 'vermont-invasive', 'introduced'];
+/** taxa.csv leaf_color: summer leaves that are not green. Each has a color in src/season.ts (LEAF_TINTS). */
+export const LEAF_COLORS = ['purple', 'red-purple', 'purple-red', 'gold', 'yellow', 'yellow-green', 'blue-gray'];
 
 /**
  * A gift, memorial or dedicated tree is one with `dedication_label` filled in —
@@ -92,7 +94,7 @@ export const OBSERVATION_NUMERIC = ['dbh_in', 'height_ft', 'spread_ft'];
 export const TAXON_COLUMNS = [
   'taxon_id', 'scientific_name', 'common_name', 'family', 'genus', 'species',
   'infraspecific', 'cultivar', 'plant_type', 'origin',
-  'flower_color', 'flower_months', 'fruit_color', 'fruit_months', 'fall_color',
+  'flower_color', 'flower_months', 'fruit_color', 'fruit_months', 'leaf_color', 'fall_color',
   'mature_height_ft', 'mature_spread_ft', 'bark_profile', 'pest_resistance',
   'soil_preference', 'hardiness_zones', 'wikipedia_url', 'description', 'fun_fact',
 ];

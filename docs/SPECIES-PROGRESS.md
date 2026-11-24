@@ -13,15 +13,15 @@ same list, with links, is on the site at /species/progress/.
 | On campus: hybrids | 3 | 0 | 80% |
 | On campus: cultivars and forms | 10 | 4 | 84% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 175 | 87 | 91% |
+| Not yet mapped: species | 175 | 92 | 92% |
 | Not yet mapped: hybrids | 17 | 7 | 78% |
-| Not yet mapped: cultivars and forms | 87 | 39 | 85% |
+| Not yet mapped: cultivars and forms | 87 | 44 | 85% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 417 | 250 | 91% |
+| **All** | 417 | 260 | 91% |
 
 ## Most often missing
 
-- bark photo: 111 pages
+- bark photo: 101 pages
 - flowers photo: 79 pages
 - fruit photo: 76 pages
 - leaves photo: 41 pages
@@ -130,24 +130,16 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Gracillimus maiden grass** (`miscanthus-sinensis-gracillimus`): leaves photo
 - [ ] **Boston ivy** (`parthenocissus-tricuspidata`): flowers photo
 - [ ] **American bladdernut** (`staphylea-trifolia`): bark photo
-- [ ] **American elderberry** (`sambucus-canadensis`): bark photo
 - [ ] **Arrowwood viburnum** (`viburnum-dentatum`): bark photo
-- [ ] **Black chokeberry** (`aronia-melanocarpa`): bark photo
 - [ ] **Blue holly** (`ilex-x-meserveae`): bark photo
-- [ ] **Bluecrop highbush blueberry** (`vaccinium-corymbosum-bluecrop`): bark photo
 - [ ] **Bottlebrush buckeye** (`aesculus-parviflora`): bark photo
 - [ ] **Bush honeysuckle** (`diervilla-lonicera`): bark photo
 - [ ] **Carolina allspice** (`calycanthus-floridus`): bark photo
 - [ ] **Catawba rhododendron** (`rhododendron-catawbiense`): bark photo
-- [ ] **Chandler highbush blueberry** (`vaccinium-corymbosum-chandler`): bark photo
-- [ ] **Chokecherry** (`prunus-virginiana`): bark photo
 - [ ] **Common privet** (`ligustrum-vulgare`): bark photo
-- [ ] **Duke highbush blueberry** (`vaccinium-corymbosum-duke`): bark photo
 - [ ] **Dwarf Everbearing black mulberry** (`morus-nigra-dwarf-everbearing`): flowers photo
 - [ ] **Fall Gold raspberry** (`rubus-idaeus-fall-gold`): fruit photo
 - [ ] **Fragrant sumac** (`rhus-aromatica`): bark photo
-- [ ] **Gray dogwood** (`cornus-racemosa`): bark photo
-- [ ] **Highbush blueberry** (`vaccinium-corymbosum`): bark photo
 - [ ] **Inkberry** (`ilex-glabra`): bark photo
 - [ ] **Japanese barberry** (`berberis-thunbergii`): bark photo
 - [ ] **Japanese spirea** (`spiraea-japonica`): bark photo
@@ -156,7 +148,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Nannyberry** (`viburnum-lentago`): bark photo
 - [ ] **Oakleaf hydrangea** (`hydrangea-quercifolia`): bark photo
 - [ ] **Panicle hydrangea** (`hydrangea-paniculata`): fruit photo
-- [ ] **Patriot highbush blueberry** (`vaccinium-corymbosum-patriot`): bark photo
 - [ ] **Red buckeye** (`aesculus-pavia`): bark photo
 - [ ] **Siberian peashrub** (`caragana-arborescens`): bark photo
 - [ ] **Smooth hydrangea** (`hydrangea-arborescens`): bark photo
@@ -169,7 +160,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Black maple** (`acer-nigrum`): flowers photo
 - [ ] **Blue ash** (`fraxinus-quadrangulata`): fruit photo
 - [ ] **Bosnian pine** (`pinus-heldreichii`): flowers photo
-- [ ] **Canada Red chokecherry** (`prunus-virginiana-canada-red`): bark photo
 - [ ] **Chestnut oak** (`quercus-montana`): flowers photo
 - [ ] **Chinese fringetree** (`chionanthus-retusus`): bark photo
 - [ ] **Coast redwood** (`sequoia-sempervirens`): leaves photo

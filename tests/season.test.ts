@@ -5,7 +5,7 @@ import type { Taxon } from '../src/types';
 const t = (over: Partial<Taxon>): Taxon => ({
   id: 'x', sci: '', common: 'X', family: '', genus: '', species: '', infra: '', cultivar: '',
   type: 'deciduous-tree', origin: '', flowerColor: '', flowerMonths: [], fruitColor: '', fruitMonths: [],
-  fallColor: '', matureHeightFt: null, matureSpreadFt: null, bark: '', pests: '', soil: '', zones: '',
+  leafColor: '', fallColor: '', matureHeightFt: null, matureSpreadFt: null, bark: '', pests: '', soil: '', zones: '',
   wikipedia: '', description: '', funFact: '', alt: '', count: 1, parent: '', groupCount: 1, ...over,
 });
 

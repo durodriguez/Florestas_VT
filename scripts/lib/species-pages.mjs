@@ -169,6 +169,14 @@ export function campusFacts(trees, base) {
  * Commons (data/part-photos.csv), each with what taxa.csv says of that part
  * and the photo's credit, as its license requires.
  */
+/** What the leaf tile says: evergreen or not, a summer color other than green, the fall color. */
+function leafCaption(t) {
+  const summer = t.leafColor ? t.leafColor.replace(/-/g, ' ') : '';
+  if (t.type === 'evergreen-tree') return summer ? `Evergreen, ${esc(summer)}.` : 'Evergreen.';
+  const parts = [summer && `${esc(titleCase(summer))} all summer.`, t.fallColor && `Fall color: ${esc(t.fallColor.replace(/-/g, ' '))}.`];
+  return parts.filter(Boolean).join(' ');
+}
+
 function knowItBy(t, photos) {
   if (!photos) return '';
   const needles = t.family === 'Pinaceae';
@@ -176,7 +184,7 @@ function knowItBy(t, photos) {
   const when = (color, months) => [titleCase(color), monthRange(months)].filter(Boolean).map(esc).join(' &middot; ');
   const parts = [
     ['bark', 'Bark', esc(t.bark)],
-    ['leaves', needles ? 'Needles' : 'Leaves', t.type === 'evergreen-tree' ? 'Evergreen.' : t.fallColor ? `Fall color: ${esc(t.fallColor.replace(/-/g, ' '))}.` : ''],
+    ['leaves', needles ? 'Needles' : 'Leaves', leafCaption(t)],
     ['flowers', cones ? 'Pollen cones' : 'Flowers', when(t.flowerColor, t.flowerMonths)],
     ['fruit', cones ? 'Cones' : t.genus === 'Quercus' ? 'Acorns' : 'Fruit', when(t.fruitColor, t.fruitMonths)],
   ].filter(([key]) => photos[key]);
@@ -359,6 +367,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     row('Origin', esc(origin)),
     row('Flowers', [titleCase(t.flowerColor), monthRange(t.flowerMonths)].filter(Boolean).map(esc).join(' &middot; ')),
     row('Fruit', [titleCase(t.fruitColor), monthRange(t.fruitMonths)].filter(Boolean).map(esc).join(' &middot; ')),
+    row('Summer leaves', esc(titleCase(t.leafColor))),
     row('Fall color', esc(titleCase(t.fallColor))),
     row('Mature height', t.matureHeightFt === null ? '' : `${t.matureHeightFt} ft`),
     row('Mature spread', t.matureSpreadFt === null ? '' : `${t.matureSpreadFt} ft`),

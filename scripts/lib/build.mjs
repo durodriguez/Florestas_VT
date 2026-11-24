@@ -2,7 +2,7 @@
 // Kept free of filesystem access so the test suite can exercise it directly.
 
 import {
-  CONDITIONS, STATUSES, ORIGINS, PLANT_TYPES, BOOLEANISH, PROSE_MAX,
+  CONDITIONS, STATUSES, ORIGINS, LEAF_COLORS, PLANT_TYPES, BOOLEANISH, PROSE_MAX,
   TAXON_REQUIRED, PLANT_REQUIRED, OBSERVATION_REQUIRED, UNKNOWN_TAXON,
   TAXON_NUMERIC, PLANT_NUMERIC, OBSERVATION_NUMERIC,
   OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS,
@@ -111,6 +111,10 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     if (origin && !ORIGINS.includes(origin)) {
       err(where, `origin "${row.origin}" is not one of: ${ORIGINS.join(', ')}`);
     }
+    const leafColor = token(row.leaf_color);
+    if (leafColor && !LEAF_COLORS.includes(leafColor)) {
+      err(where, `leaf_color "${row.leaf_color}" is not one of: ${LEAF_COLORS.join(', ')} (leave it blank for green)`);
+    }
     if (trim(row.fun_fact).length > PROSE_MAX) {
       warn(where, `fun_fact is ${trim(row.fun_fact).length} characters — it is meant to be one line, not a second description`);
     }
@@ -131,6 +135,8 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       flowerMonths: monthList(row.flower_months),
       fruitColor: token(row.fruit_color),
       fruitMonths: monthList(row.fruit_months),
+      // Summer leaf color, only where it is not green (Crimson King's purple).
+      leafColor: token(row.leaf_color),
       fallColor: token(row.fall_color),
       matureHeightFt: num(row.mature_height_ft),
       matureSpreadFt: num(row.mature_spread_ft),

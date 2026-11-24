@@ -12,6 +12,11 @@ const EVERGREEN = '#12501a';
 const LEAF = '#4ea72e';
 const LEAF_MONTHS = new Set([5, 6, 7, 8, 9, 10]);
 const FALL_MONTH = 10;
+const LEAF_TINTS = {
+  purple: '#6e3454', 'red-purple': '#7c2c4a', 'purple-red': '#873247', gold: '#d6b02a', yellow: '#dcc64a',
+  'yellow-green': '#a7c04a', 'blue-gray': '#7d99ab',
+};
+const leafTint = (word) => LEAF_TINTS[(word ?? '').trim().toLowerCase()] ?? null;
 export const MONTH_NAMES = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
@@ -44,12 +49,14 @@ export function yearTable(t) {
   const flower = colorOf(t.flowerColor);
   const fruit = colorOf(t.fruitColor);
   const word = fruitWord(t);
+  const tint = leafTint(t.leafColor);
+  const leafWord = tint ? `${cap(t.leafColor)} ${evergreen ? 'foliage' : 'leaves'}` : '';
   return [
     {
       label: 'Leaves',
-      cells: months((m) => evergreen ? { color: EVERGREEN, title: 'Evergreen' }
+      cells: months((m) => evergreen ? { color: tint ?? EVERGREEN, title: tint ? `Evergreen, ${leafWord.toLowerCase()}` : 'Evergreen' }
         : m === FALL_MONTH && fall ? { color: fall, title: `${cap(t.fallColor)} fall color` }
-          : LEAF_MONTHS.has(m) ? { color: LEAF, title: 'In leaf' } : null),
+          : LEAF_MONTHS.has(m) ? { color: tint ?? LEAF, title: tint ? leafWord : 'In leaf' } : null),
     },
     { label: 'Flowers', cells: months((m) => flower && t.flowerMonths.includes(m) ? { color: flower, title: `${cap(t.flowerColor)} flowers` } : null) },
     { label: cap(word), cells: months((m) => fruit && t.fruitMonths.includes(m) ? { color: fruit, title: `${cap(t.fruitColor)} ${word}` } : null) },
@@ -86,6 +93,11 @@ export function yearSummary(t) {
   }
   if (t.type !== 'evergreen-tree' && colorOf(t.fallColor)) {
     parts.push([FALL_MONTH + 0.2, `${cap(t.fallColor)} fall color in ${MONTH_NAMES[FALL_MONTH - 1]}.`]);
+  }
+  if (leafTint(t.leafColor)) {
+    const evergreen = t.type === 'evergreen-tree';
+    const inLeaf = [...LEAF_MONTHS].filter((m) => !(m === FALL_MONTH && colorOf(t.fallColor)));
+    parts.push(evergreen ? [0, `${cap(t.leafColor)} foliage all year.`] : [Math.min(...inLeaf) - 0.1, `${cap(t.leafColor)} leaves ${when(inLeaf)}.`]);
   }
   return parts.sort((a, b) => a[0] - b[0]).map(([, text]) => text).join(' ');
 }

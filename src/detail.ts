@@ -127,6 +127,7 @@ function aboutTaxon(t: Taxon, countOnCampus = true): string {
       ${row('Plant type', TYPE_LABELS[t.type] ?? titleCase(t.type))}
       ${row('Flowers', `${titleCase(t.flowerColor) || '—'}${t.flowerMonths.length ? ` &middot; ${monthRange(t.flowerMonths)}` : ''}`)}
       ${row('Fruit', `${titleCase(t.fruitColor) || '—'}${t.fruitMonths.length ? ` &middot; ${monthRange(t.fruitMonths)}` : ''}`)}
+      ${row('Summer leaves', titleCase(t.leafColor))}
       ${row('Fall color', titleCase(t.fallColor))}
       ${row('Mature height', numOr(t.matureHeightFt, ' ft'))}
       ${row('Mature spread', numOr(t.matureSpreadFt, ' ft'))}

@@ -55,9 +55,23 @@ export const LEAF = '#4ea72e';
 const BARE = '#c9bfae';
 
 export const LEAF_MONTHS = new Set([5, 6, 7, 8, 9, 10]);
+
+/**
+ * Leaves that are not green in summer (taxa.csv leaf_color): Crimson King's
+ * purple, Golden Spirit smokebush's gold, a blue spruce's blue-gray. Darker
+ * than the flower colors of the same names, as leaves are.
+ */
+const LEAF_TINTS: Record<string, string> = {
+  purple: '#6e3454', 'red-purple': '#7c2c4a', 'purple-red': '#873247', gold: '#d6b02a', yellow: '#dcc64a',
+  'yellow-green': '#a7c04a', 'blue-gray': '#7d99ab',
+};
+/** The summer color of leaves recorded as other than green, or null for green ones. */
+export function leafTint(word: string | undefined): string | null {
+  return LEAF_TINTS[(word ?? '').trim().toLowerCase()] ?? null;
+}
 export const FALL_MONTH = 10;
 
-type Calendar = Pick<Taxon, 'type' | 'flowerMonths' | 'flowerColor' | 'fruitMonths' | 'fruitColor' | 'fallColor'>;
+type Calendar = Pick<Taxon, 'type' | 'flowerMonths' | 'flowerColor' | 'fruitMonths' | 'fruitColor' | 'fallColor'> & Partial<Pick<Taxon, 'leafColor'>>;
 
 /**
  * A tree's state and color in a month (1–12). Flowers win over everything,
@@ -75,8 +89,8 @@ export function season(t: Calendar, month: number): { state: SeasonState; color:
   if (t.fruitMonths.includes(month) && FRUIT[t.fruitColor]) {
     return { state: 'fruit', color: FRUIT[t.fruitColor]! };
   }
-  if (evergreen) return { state: 'evergreen', color: EVERGREEN };
-  if (LEAF_MONTHS.has(month)) return { state: 'leaf', color: LEAF };
+  if (evergreen) return { state: 'evergreen', color: leafTint(t.leafColor) ?? EVERGREEN };
+  if (LEAF_MONTHS.has(month)) return { state: 'leaf', color: leafTint(t.leafColor) ?? LEAF };
   return { state: 'bare', color: BARE };
 }
 
