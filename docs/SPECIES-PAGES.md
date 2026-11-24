@@ -425,6 +425,22 @@ unidentified hibiscus; Karl Foerster grass in its tan winter plumes (purple is
 recorded for June and July). iNaturalist has almost no shrub bark: a round of
 eighteen shrubs found one usable photo.
 
+### Batch 27 (November 2026)
+
+The first rounds after non-commercial photos were allowed (Licenses, below).
+Campus gaps that had resisted every earlier search: Freeman maple's red
+flowers and samaras, Sargent cherry's, white fringetree's, spicebush's and
+sour cherry's bark, northern pin oak's acorns and swamp chestnut oak's
+catkins. Shrubs: inkberry, Japanese barberry, red buckeye, Siberian peashrub
+and winterberry bark, weigela's capsules. Peking willow and dragon's claw
+willow got catkin and seed photos filed under weeping willow, which both
+sites now treat them as (weeping willow's own fruit came from the same
+observation). American and European beech fruit were replaced with photos
+the owner chose. A further round added Rocky Mountain juniper and Manchurian
+alder bark, the alder's and chinkapin oak's catkins, Korean and Shantung maple
+flowers and flowering cherry's fruit. Rejected: "common privet" stems with thorns, which privet
+has not; northern white cedar's red seed cones again.
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the

@@ -43,7 +43,7 @@ A close photo of the one part, in focus, works best: the tile is small.
   UVM-2323 (Athletic Campus).
 - [x] **Washington hawthorn**, bark (`crataegus-phaenopyrum`, bark). Any
   time of year. Try UVM-0355, UVM-0353 and UVM-0354 (Central Campus).
-- [ ] **Sargent cherry**, bark (`prunus-sargentii`, bark). Polished
+- [x] **Sargent cherry**, bark (`prunus-sargentii`, bark). Polished
   red-brown with horizontal bands, any time of year. Try UVM-0747 (Central
   Campus), the largest measured, and UVM-2498 (Trinity Campus).
 - [x] **Sargent cherry**, fruit (`prunus-sargentii`, fruit). Small dark
@@ -84,7 +84,7 @@ A close photo of the one part, in focus, works best: the tile is small.
   oval, in opposite pairs; a close photo.
 - [x] **Black locust**, pods (`robinia-pseudoacacia`, fruit). Flat brown pods
   hanging in bunches, September into winter.
-- [ ] **White fringetree**, bark (`chionanthus-virginicus`, bark). Smooth
+- [x] **White fringetree**, bark (`chionanthus-virginicus`, bark). Smooth
   gray-brown, ridged with age.
 - [x] **European beech**, flowers (`fagus-sylvatica`, flowers). Small green
   flowers with the new leaves in April and May; on the green-leaved species,
@@ -105,7 +105,7 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [x] **Sweet birch**, flowers (`betula-lenta`, flowers). Green, April to May.
 - [x] **Sweet birch**, fruit (`betula-lenta`, fruit). Brown, August to September.
 - [x] **Swamp chestnut oak**, bark (`quercus-michauxii`, bark). Light gray, flaking in loose scales; any time of year.
-- [ ] **Swamp chestnut oak**, flowers (`quercus-michauxii`, flowers). Yellow-green, May.
+- [x] **Swamp chestnut oak**, flowers (`quercus-michauxii`, flowers). Yellow-green, May.
 - [x] **Swamp chestnut oak**, fruit (`quercus-michauxii`, fruit). Brown, September to October.
 - [x] **Hinoki falsecypress**, foliage (`chamaecyparis-obtusa`, leaves). A close photo of a shoot.
 - [ ] **Hinoki falsecypress**, pollen cones (`chamaecyparis-obtusa`, flowers). Brown, April.
@@ -116,7 +116,7 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [x] **Red pine**, needles (`pinus-resinosa`, leaves). A close photo of a shoot.
 - [x] **Red pine**, pollen cones (`pinus-resinosa`, flowers). Yellow, May to June.
 - [x] **Northern pin oak**, flowers (`quercus-ellipsoidalis`, flowers). Yellow-green, May.
-- [ ] **Northern pin oak**, fruit (`quercus-ellipsoidalis`, fruit). Brown, September to October.
+- [x] **Northern pin oak**, fruit (`quercus-ellipsoidalis`, fruit). Brown, September to October.
 - [x] **Russian olive**, fruit (`elaeagnus-angustifolia`, fruit). Yellow, August to September.
 - [x] **Nordmann fir**, needles (`abies-nordmanniana`, leaves). A close photo of a shoot.
 - [x] **Nordmann fir**, pollen cones (`abies-nordmanniana`, flowers). Yellow, May.
@@ -128,7 +128,7 @@ A close photo of the one part, in focus, works best: the tile is small.
   lumpy ash flower galls that hang on into autumn.
 - [x] **Midland hawthorn**, bark (`crataegus-laevigata`, bark). Gray-brown,
   scaly, with thorns.
-- [ ] **Sour cherry**, bark (`prunus-cerasus`, bark). Red-brown, glossy, with
+- [x] **Sour cherry**, bark (`prunus-cerasus`, bark). Red-brown, glossy, with
   horizontal lenticels.
 - [x] **Sour cherry**, leaves (`prunus-cerasus`, leaves). Smaller, glossier and
   less drooping than sweet cherry's, which iNaturalist often confuses with it.
@@ -145,16 +145,16 @@ A close photo of the one part, in focus, works best: the tile is small.
   tree, as recorded; the brown cones on the ground are old ones.
 - [x] **Freeman maple**, bark (`acer-x-freemanii`, bark). Smooth gray, breaking
   into plates; its 67 campus trees are the place to take it.
-- [ ] **Freeman maple**, flowers (`acer-x-freemanii`, flowers). Red, March and
+- [x] **Freeman maple**, flowers (`acer-x-freemanii`, flowers). Red, March and
   April, before the leaves.
-- [ ] **Freeman maple**, fruit (`acer-x-freemanii`, fruit). Red samaras in May.
+- [x] **Freeman maple**, fruit (`acer-x-freemanii`, fruit). Red samaras in May.
 - [ ] **Boxwood**, bark (`buxus-sempervirens`, bark). Pale, corky old stems.
 - [x] **Summersweet**, bark (`clethra-alnifolia`, bark). Slender gray-brown stems.
 - [x] **Summersweet**, leaves (`clethra-alnifolia`, leaves).
 - [x] **Witch hazel**, bark (`hamamelis-virginiana`, bark). Smooth light gray-brown.
 - [x] **Witch hazel**, fruit (`hamamelis-virginiana`, fruit). Woody capsules,
   brown when they split in September and October.
-- [ ] **Spicebush**, bark (`lindera-benzoin`, bark).
+- [x] **Spicebush**, bark (`lindera-benzoin`, bark).
 - [x] **Common buckthorn**, bark (`rhamnus-cathartica`, bark). Peeling to show
   orange inner bark.
 - [x] **Common lilac**, bark (`syringa-vulgaris`, bark).
