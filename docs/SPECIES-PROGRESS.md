@@ -14,16 +14,16 @@ same list, with links, is on the site at /species/progress/.
 | On campus: cultivars and forms | 10 | 4 | 84% |
 | On campus: named only to genus | 13 | 13 | 100% |
 | Not yet mapped: species | 175 | 75 | 90% |
-| Not yet mapped: hybrids | 17 | 5 | 76% |
+| Not yet mapped: hybrids | 17 | 6 | 77% |
 | Not yet mapped: cultivars and forms | 87 | 38 | 84% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 417 | 231 | 90% |
+| **All** | 417 | 232 | 90% |
 
 ## Most often missing
 
 - bark photo: 126 pages
 - fruit photo: 90 pages
-- flowers photo: 85 pages
+- flowers photo: 84 pages
 - leaves photo: 42 pages
 - where it grows wild: 1 pages
 - crown shape: 1 pages
@@ -196,7 +196,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Krauter Vesuvius purpleleaf plum** (`prunus-cerasifera-krauter-vesuvius`): bark photo
 - [ ] **Lacebark elm** (`ulmus-parvifolia`): flowers photo
 - [ ] **Laurel oak** (`quercus-hemisphaerica`): flowers photo
-- [ ] **London planetree** (`platanus-x-acerifolia`): flowers photo
 - [ ] **Mockernut hickory** (`carya-tomentosa`): flowers photo
 - [ ] **Ohio buckeye** (`aesculus-glabra`): leaves photo
 - [ ] **Overcup oak** (`quercus-lyrata`): flowers photo
