@@ -11,7 +11,8 @@ import Papa from 'papaparse';
 import { buildDataset } from './lib/build.mjs';
 import { UNKNOWN_TAXON } from './lib/vocab.mjs';
 import { normalizeName } from './lib/species.mjs';
-import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS } from './lib/species-pages.mjs';
+import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS, shell } from './lib/species-pages.mjs';
+import { completeness, progressHtml, progressMarkdown } from './lib/completeness.mjs';
 import { rangeBaseSvg, rangeLinesSvg } from './lib/range-map.mjs';
 import { speciesExtras, staleGaps } from './lib/species-extras.mjs';
 import { campusFrame, campusBaseSvg } from './lib/campus-map.mjs';
@@ -293,6 +294,27 @@ writeFileSync(
   join(speciesDir, 'index.html'),
   renderSpeciesIndex(describable, { base: siteBase, config }),
 );
+
+// ---- species page progress ---------------------------------------------------
+// What each page still lacks, item by item (lib/completeness.mjs): a page at
+// /species/progress/ and a committed snapshot, docs/SPECIES-PROGRESS.md, whose
+// history shows the gaps closing over time.
+{
+  const counts = Object.fromEntries(result.dataset.taxa.map((t) => [t.id, t.count ?? 0]));
+  const rows = completeness(result.dataset.taxa, extrasBuilt.extras, counts);
+  const date = new Date().toISOString().slice(0, 10);
+  mkdirSync(join(speciesDir, 'progress'), { recursive: true });
+  writeFileSync(join(speciesDir, 'progress', 'index.html'), shell({
+    title: `Species page progress — ${config.siteName}`,
+    description: 'What each species page still lacks.',
+    base: siteBase, body: progressHtml(rows, date), depth: 1,
+  }));
+  const doc = join(root, 'docs', 'SPECIES-PROGRESS.md');
+  const md = progressMarkdown(rows, date);
+  // Rewritten only when something but the date changed, so a build alone leaves git clean.
+  const strip = (t) => t.replace(/on \d{4}-\d{2}-\d{2};/, '');
+  if (!existsSync(doc) || strip(readFileSync(doc, 'utf8')) !== strip(md)) writeFileSync(doc, md);
+}
 
 // ---- the i-Tree page -------------------------------------------------------
 // What a city tree's "i-Tree estimates" link opens (docs/ITREE.md). Written

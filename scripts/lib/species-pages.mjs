@@ -521,7 +521,7 @@ export function renderSpeciesIndex(taxa, { base, config }) {
 
   const body = `<main class="page">
   <h1>Species</h1>
-  <p class="label">${mapped.length} species mapped on campus so far</p>
+  <p class="label">${mapped.length} species mapped on campus so far &middot; <a href="progress/">How complete each page is</a></p>
   ${SORT_CONTROL}
   <ul class="index">${items}</ul>
 </main>
