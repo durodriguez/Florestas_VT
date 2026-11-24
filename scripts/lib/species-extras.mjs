@@ -32,8 +32,13 @@ const trim = (v) => (v ?? '').toString().trim();
 /** As the fun fact is held to: what a phone can show in a few lines. */
 export const MAX_FACT = 240;
 export const PARTS = ['bark', 'leaves', 'flowers', 'fruit'];
-/** Licenses that allow reuse with credit: public domain, CC0, CC BY, CC BY-SA. */
-const FREE = /^(public domain|pd|cc0( 1\.0)?|cc by(-sa)? \d\.\d( [a-z]+)?)$/i;
+/**
+ * Licenses that allow this site's use with credit: public domain, CC0, CC BY,
+ * CC BY-SA, and the non-commercial CC BY-NC and CC BY-NC-SA, which fit a free
+ * educational site (docs/SPECIES-PAGES.md, "Licenses"). Not CC BY-ND or
+ * BY-NC-ND (no derivatives), nor all rights reserved.
+ */
+const FREE = /^(public domain|pd|cc0( 1\.0)?|cc by(-nc)?(-sa)? \d\.\d( [a-z]+)?)$/i;
 
 /**
  * @param {object} args  crownRows, habitatRows, factRows (parsed CSV rows),

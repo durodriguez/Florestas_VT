@@ -14,7 +14,8 @@ added, so the list does not go stale.
 
 The pages link to photos rather than holding them, and only from Wikimedia
 Commons or iNaturalist, so a photo needs to be posted to one of them first,
-under a license that allows reuse with credit (CC0, CC BY or CC BY-SA):
+under a license that allows reuse with credit (CC0, CC BY, CC BY-SA, or the
+non-commercial CC BY-NC and BY-NC-SA):
 
 - **iNaturalist** is the easier: post the photo as an observation of the
   species, with its license set to CC BY (Account settings → Content &
