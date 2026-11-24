@@ -325,6 +325,34 @@ linden. Habitats and 30-odd photos. London plane is left: iNaturalist files it
 as *Platanus × hispanica*, which the identification check does not accept as
 *P. × acerifolia*.
 
+### Batch 20 (November 2026)
+
+Photos for unmapped species that had none: Tibetan bramble, Sargent and
+Japanese flowering crabapple, shadblow serviceberry, speckled and Manchurian
+alder, Bosnian pine, hardy rubber tree, Japanese clethra, Japanese elm, Korean
+and Shantung maple, overcup and Shumard oak, Russian hawthorn and Sawara
+falsecypress, from iNaturalist and, where it had too little, Commons. Two
+things the identification check caught: iNaturalist had re-identified most of
+its "shadblow" photos as other serviceberries, and the search had picked up
+the Shumard oak *complex* (a group of look-alikes) rather than the species, so
+it returned red oaks; the search now prefers the species. Left out: creeping
+cotoneaster (Commons has only var. *praecox*, often treated as a species of
+its own) and Miyabe maple and lacebark pine, still to find.
+
+### Batch 21 (November 2026)
+
+Cultivars and hybrids. Where a cultivar's species has no page here, its
+photos are of the species, marked `of_species` (above): the two Chiffon roses
+of Sharon, Dwarf Everbearing mulberry, Fall Gold raspberry (not its fruit,
+which is yellow), Mariesii viburnum, Show Off forsythia, Brilliance autumn
+fern, and the two maiden grasses (flowers only: both are grown for leaves
+narrower than the species'). Hybrids: blue holly, hybrid witch hazel (a
+yellow-flowered one, as recorded; most on Commons are red or orange
+cultivars), apple serviceberry, Loebner magnolia, Yoshino cherry, European
+linden and Japanese flowering crabapple. Weeping Higan cherry's species is
+now recorded as *subhirtella*, matching its parent's row, so it shows that
+page's photos; its scientific name is unchanged.
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
