@@ -53,6 +53,7 @@ reading, and the earlier ones are still there to be asked about.
 | `flower_color` | | free text, one word: `pink`, `yellow-green` — a hyphenated pair here is one blended colour, not a sequence |
 | `flower_months` | | month numbers, e.g. `4,5` for April–May |
 | `fruit_color`, `fruit_months` | | same shape as the flower columns; blank for ferns, which bear spores, not fruit |
+| `leaf_color` | | summer leaf color, **only where it is not green**: `purple` (Crimson King), `gold`, `blue-gray` (blue spruce). Blank means green. It colors the Leaves row of the year table and the map's summer months. One of `purple`, `red-purple`, `purple-red`, `gold`, `yellow`, `yellow-green`, `blue-gray` (vocab.mjs `LEAF_COLORS`); the build refuses another word until it is added there and given a color in season.ts |
 | `fall_color` | | `orange`, `yellow`, `none` — a hyphenated pair is a **progression**, earliest first: `orange-red` turns orange, then red |
 | `mature_height_ft` | | number |
 | `mature_spread_ft` | | number — typical crown width at maturity |

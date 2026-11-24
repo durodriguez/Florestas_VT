@@ -94,6 +94,8 @@ export interface Taxon {
   flowerMonths: number[];
   fruitColor: string;
   fruitMonths: number[];
+  /** Summer leaf color where it is not green, e.g. "purple"; '' for green. */
+  leafColor: string;
   fallColor: string;
   matureHeightFt: number | null;
   matureSpreadFt: number | null;

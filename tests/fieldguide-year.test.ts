@@ -11,6 +11,18 @@ const crab = cal({ flowerColor: 'pink', flowerMonths: [5], fruitColor: 'red', fr
 const filled = (row: { cells: unknown[] }) => row.cells.map((c, i) => (c ? i + 1 : 0)).filter(Boolean);
 
 describe('a tree’s year', () => {
+  it('colors the leaves of a tree that is not green in summer', () => {
+    const crimson = cal({ family: 'Sapindaceae', flowerColor: 'yellow', flowerMonths: [4, 5], fruitColor: 'brown', fruitMonths: [9, 10], fallColor: 'bronze', leafColor: 'purple' });
+    const leaves = yearTable(crimson)[0]!.cells;
+    expect(leaves[6]).toMatchObject({ title: 'Purple leaves' });
+    expect(leaves[6]!.color).not.toBe(yearTable(cal({}))[0]!.cells[6]?.color);
+    expect(leaves[9]).toMatchObject({ title: 'Bronze fall color' });
+    expect(yearSummary(crimson)).toBe('Yellow flowers from April to May. Purple leaves from May to September. Brown fruit from September to October. Bronze fall color in October.');
+    const spruce = cal({ type: 'evergreen-tree', family: 'Pinaceae', leafColor: 'blue-gray' });
+    expect(yearTable(spruce)[0]!.cells[0]).toMatchObject({ title: 'Evergreen, blue-gray foliage' });
+    expect(yearSummary(spruce)).toBe('Blue-gray foliage all year.');
+  });
+
   it('names months as runs, across New Year too', () => {
     expect(monthRuns([5])).toBe('May');
     expect(monthRuns([9, 10, 11])).toBe('September to November');

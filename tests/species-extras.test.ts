@@ -23,7 +23,7 @@ const token = (v: string) => (v ?? '').trim().toLowerCase().replace(/\s+/g, '-')
 const calendars = rows.map((r) => ({
   id: r.taxon_id!, type: r.plant_type!, family: r.family!,
   flowerColor: token(r.flower_color!), flowerMonths: months(r.flower_months!),
-  fruitColor: token(r.fruit_color!), fruitMonths: months(r.fruit_months!), fallColor: token(r.fall_color!),
+  fruitColor: token(r.fruit_color!), fruitMonths: months(r.fruit_months!), leafColor: token(r.leaf_color!), fallColor: token(r.fall_color!),
 }));
 
 const range = (name: string) => JSON.parse(readFileSync(`data/ranges/${name}.json`, 'utf8'));

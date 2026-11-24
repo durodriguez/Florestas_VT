@@ -10,7 +10,7 @@ import type { Dataset, Plant, Taxon } from '../src/types';
 const taxon = (over: Partial<Taxon>): Taxon => ({
   id: 't', sci: '', common: '', family: '', genus: '', species: '', infra: '',
   cultivar: '', type: 'deciduous-tree', origin: 'vermont-native',
-  flowerColor: '', flowerMonths: [], fruitColor: '', fruitMonths: [], fallColor: '',
+  flowerColor: '', flowerMonths: [], fruitColor: '', fruitMonths: [], leafColor: '', fallColor: '',
   matureHeightFt: null, matureSpreadFt: null, bark: '', pests: '', soil: '',
   zones: '', wikipedia: '', description: '', funFact: '', alt: '', count: 0,
   parent: '', groupCount: 0, ...over,
