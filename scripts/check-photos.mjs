@@ -50,6 +50,8 @@ const problems = [];
 const PHOTO_NAMES = {
   'Platanus x acerifolia': 'Platanus × hispanica',
   'Magnolia x soulangiana': 'Magnolia × soulangeana',
+  // Both sites now file Peking willow, and dragon's claw willow, under weeping willow.
+  'Salix matsudana': 'Salix babylonica',
 };
 
 const namesFor = (t) => {

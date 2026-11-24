@@ -9,48 +9,41 @@ same list, with links, is on the site at /species/progress/.
 
 | Group | Pages | Complete | Items filled |
 | --- | --- | --- | --- |
-| On campus: species | 102 | 79 | 97% |
-| On campus: hybrids | 3 | 0 | 76% |
-| On campus: cultivars and forms | 10 | 4 | 80% |
+| On campus: species | 102 | 86 | 98% |
+| On campus: hybrids | 3 | 0 | 80% |
+| On campus: cultivars and forms | 10 | 4 | 83% |
 | On campus: named only to genus | 13 | 13 | 100% |
 | Not yet mapped: species | 175 | 53 | 83% |
 | Not yet mapped: hybrids | 16 | 0 | 62% |
-| Not yet mapped: cultivars and forms | 87 | 33 | 79% |
+| Not yet mapped: cultivars and forms | 87 | 35 | 79% |
 | Not yet mapped: named only to genus | 11 | 9 | 94% |
-| **All** | 417 | 191 | 85% |
+| **All** | 417 | 200 | 86% |
 
 ## Most often missing
 
-- bark photo: 185 pages
-- flowers photo: 120 pages
-- fruit photo: 119 pages
-- leaves photo: 89 pages
+- bark photo: 175 pages
+- fruit photo: 118 pages
+- flowers photo: 117 pages
+- leaves photo: 84 pages
 - "Which one?" leaves: 2 pages
 
 ## On campus: pages with gaps
 
 - [ ] **Tom Thumb cotoneaster** (`cotoneaster-tom-thumb`, 1 on campus): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Dragon's claw willow** (`salix-matsudana-tortuosa`, 2 on campus): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Snow Fountains weeping cherry** (`prunus-snofozam`, 1 on campus): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Freeman's maple** (`acer-x-freemanii`, 67 on campus): bark photo; flowers photo; fruit photo
 - [ ] **Green Giant arborvitae** (`thuja-green-giant`, 4 on campus): bark photo; flowers photo; fruit photo
+- [ ] **Snow Fountains weeping cherry** (`prunus-snofozam`, 1 on campus): bark photo; leaves photo; fruit photo
 - [ ] **Anglojap yew** (`taxus-x-media`, 4 on campus): bark photo; fruit photo
-- [ ] **Common witchhazel** (`hamamelis-virginiana`, 3 on campus): bark photo; fruit photo
-- [ ] **Summersweet** (`clethra-alnifolia`, 3 on campus): bark photo; leaves photo
-- [ ] **Beautybush** (`kolkwitzia-amabilis`, 1 on campus): bark photo; leaves photo
+- [ ] **Freeman's maple** (`acer-x-freemanii`, 67 on campus): flowers photo; fruit photo
+- [ ] **Dragon's claw willow** (`salix-matsudana-tortuosa`, 2 on campus): flowers photo; fruit photo
 - [ ] **Crimson Cloud hawthorn** (`crataegus-laevigata-crimson-cloud`, 1 on campus): bark photo; flowers photo
-- [ ] **English ivy** (`hedera-helix`, 1 on campus): leaves photo
-- [ ] **Japanese fiber banana** (`musa-basjoo`, 1 on campus): leaves photo
-- [ ] **Common buckthorn** (`rhamnus-cathartica`, 3 on campus): bark photo
+- [ ] **Common witchhazel** (`hamamelis-virginiana`, 3 on campus): bark photo
+- [ ] **Summersweet** (`clethra-alnifolia`, 3 on campus): bark photo
 - [ ] **Common boxwood** (`buxus-sempervirens`, 2 on campus): bark photo
 - [ ] **Common lilac** (`syringa-vulgaris`, 2 on campus): bark photo
-- [ ] **Japanese pieris** (`pieris-japonica`, 1 on campus): bark photo
+- [ ] **Beautybush** (`kolkwitzia-amabilis`, 1 on campus): bark photo
 - [ ] **Purpleleaf sand cherry** (`prunus-x-cistena`, 1 on campus): fruit photo
 - [ ] **Spicebush** (`lindera-benzoin`, 1 on campus): bark photo
 - [ ] **Northern white cedar** (`thuja-occidentalis`, 46 on campus): flowers photo
-- [ ] **Japanese zelkova** (`zelkova-serrata`, 34 on campus): flowers photo
-- [ ] **Washington hawthorn** (`crataegus-phaenopyrum`, 22 on campus): bark photo
-- [ ] **Japanese tree lilac** (`syringa-reticulata`, 19 on campus): bark photo
 - [ ] **Sargent cherry** (`prunus-sargentii`, 11 on campus): bark photo
 - [ ] **White fringetree** (`chionanthus-virginicus`, 4 on campus): bark photo
 - [ ] **Three-flower maple** (`acer-triflorum`, 3 on campus): fruit photo
@@ -135,9 +128,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Old-fashioned weigela** (`weigela-florida`): bark photo; leaves photo; fruit photo
 - [ ] **Panicle hydrangea** (`hydrangea-paniculata`): bark photo; leaves photo; fruit photo
 - [ ] **Adagio maiden grass** (`miscanthus-sinensis-adagio`): leaves photo; flowers photo
-- [ ] **Armstrong Freeman maple** (`acer-x-freemanii-armstrong`): bark photo; flowers photo; fruit photo
 - [ ] **Atlas cedar** (`cedrus-atlantica`): bark photo; flowers photo; fruit photo
-- [ ] **Autumn Blaze maple** (`acer-x-freemanii-autumn-blaze`): bark photo; flowers photo; fruit photo
 - [ ] **Cedar of Lebanon** (`cedrus-libani`): bark photo; flowers photo; fruit photo
 - [ ] **Chinese juniper** (`juniperus-chinensis`): bark photo; flowers photo; fruit photo
 - [ ] **Chinkapin oak** (`quercus-muehlenbergii`): bark photo; flowers photo; fruit photo
@@ -156,7 +147,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Rocky Mountain juniper** (`juniperus-scopulorum`): bark photo; flowers photo; fruit photo
 - [ ] **Scarlet oak** (`quercus-coccinea`): bark photo; flowers photo; fruit photo
 - [ ] **Shellbark hickory** (`carya-laciniosa`): bark photo; leaves photo; flowers photo
-- [ ] **Sienna Glen maple** (`acer-x-freemanii-sienna-glen`): bark photo; flowers photo; fruit photo
 - [ ] **Weeping cherry** (`prunus-subhirtella`): leaves photo; flowers photo; fruit photo
 - [ ] **Wichita Blue juniper** (`juniperus-scopulorum-wichita-blue`): bark photo; flowers photo; fruit photo
 - [ ] **Willow oak** (`quercus-phellos`): bark photo; leaves photo; flowers photo
@@ -172,7 +162,9 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Pleniflora Japanese kerria** (`kerria-japonica-pleniflora`): bark photo; fruit photo
 - [ ] **Smooth hydrangea** (`hydrangea-arborescens`): bark photo; fruit photo
 - [ ] **Virginia sweetspire** (`itea-virginica`): bark photo; fruit photo
+- [ ] **Armstrong Freeman maple** (`acer-x-freemanii-armstrong`): flowers photo; fruit photo
 - [ ] **Atlantic white cedar** (`chamaecyparis-thyoides`): leaves photo; flowers photo
+- [ ] **Autumn Blaze maple** (`acer-x-freemanii-autumn-blaze`): flowers photo; fruit photo
 - [ ] **Chinese fringetree** (`chionanthus-retusus`): bark photo; fruit photo
 - [ ] **European linden** (`tilia-x-europaea`): bark photo; flowers photo
 - [ ] **Japanese snowbell** (`styrax-japonicus`): bark photo; leaves photo
@@ -181,6 +173,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Red spruce** (`picea-rubens`): flowers photo; fruit photo
 - [ ] **Saucer magnolia** (`magnolia-x-soulangiana`): bark photo; fruit photo
 - [ ] **Serbian spruce** (`picea-omorika`): bark photo; flowers photo
+- [ ] **Sienna Glen maple** (`acer-x-freemanii-sienna-glen`): flowers photo; fruit photo
 - [ ] **Swiss stone pine** (`pinus-cembra`): bark photo; flowers photo
 - [ ] **Trident maple** (`acer-buergeranum`): bark photo; flowers photo
 - [ ] **Brilliance autumn fern** (`dryopteris-erythrosora-brilliance`): leaves photo
@@ -222,7 +215,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Chestnut oak** (`quercus-montana`): flowers photo
 - [ ] **Coast redwood** (`sequoia-sempervirens`): leaves photo
 - [ ] **Cockspur hawthorn** (`crataegus-crus-galli`): bark photo
-- [ ] **Columnar Japanese zelkova** (`zelkova-serrata-musashino`): flowers photo
 - [ ] **Columnar Sargent cherry** (`prunus-sargentii-columnaris`): bark photo
 - [ ] **Common pear** (`pyrus-communis`): bark photo
 - [ ] **Contorted hazelnut** (`corylus-avellana`): bark photo
@@ -231,7 +223,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Giant sequoia** (`sequoiadendron-giganteum`): fruit photo
 - [ ] **Golden weeping willow** (`salix-alba-tristis`): fruit photo
 - [ ] **Goldenrain tree** (`koelreuteria-paniculata`): bark photo
-- [ ] **Ivory Silk tree lilac** (`syringa-reticulata-ivory-silk`): bark photo
 - [ ] **Japanese pagoda tree** (`styphnolobium-japonicum`): bark photo
 - [ ] **Krauter Vesuvius purpleleaf plum** (`prunus-cerasifera-krauter-vesuvius`): bark photo
 - [ ] **Lacebark elm** (`ulmus-parvifolia`): flowers photo
