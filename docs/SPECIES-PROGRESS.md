@@ -11,7 +11,7 @@ same list, with links, is on the site at /species/progress/.
 | --- | --- | --- | --- |
 | On campus: species | 102 | 86 | 98% |
 | On campus: hybrids | 3 | 0 | 80% |
-| On campus: cultivars and forms | 10 | 4 | 81% |
+| On campus: cultivars and forms | 10 | 4 | 83% |
 | On campus: named only to genus | 13 | 13 | 100% |
 | Not yet mapped: species | 175 | 53 | 83% |
 | Not yet mapped: hybrids | 16 | 0 | 62% |
@@ -21,20 +21,20 @@ same list, with links, is on the site at /species/progress/.
 
 ## Most often missing
 
-- bark photo: 176 pages
-- flowers photo: 118 pages
+- bark photo: 175 pages
 - fruit photo: 118 pages
+- flowers photo: 117 pages
 - leaves photo: 84 pages
 - "Which one?" leaves: 2 pages
 
 ## On campus: pages with gaps
 
 - [ ] **Tom Thumb cotoneaster** (`cotoneaster-tom-thumb`, 1 on campus): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Snow Fountains weeping cherry** (`prunus-snofozam`, 1 on campus): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Green Giant arborvitae** (`thuja-green-giant`, 4 on campus): bark photo; flowers photo; fruit photo
-- [ ] **Dragon's claw willow** (`salix-matsudana-tortuosa`, 2 on campus): bark photo; flowers photo; fruit photo
+- [ ] **Snow Fountains weeping cherry** (`prunus-snofozam`, 1 on campus): bark photo; leaves photo; fruit photo
 - [ ] **Anglojap yew** (`taxus-x-media`, 4 on campus): bark photo; fruit photo
 - [ ] **Freeman's maple** (`acer-x-freemanii`, 67 on campus): flowers photo; fruit photo
+- [ ] **Dragon's claw willow** (`salix-matsudana-tortuosa`, 2 on campus): flowers photo; fruit photo
 - [ ] **Crimson Cloud hawthorn** (`crataegus-laevigata-crimson-cloud`, 1 on campus): bark photo; flowers photo
 - [ ] **Common witchhazel** (`hamamelis-virginiana`, 3 on campus): bark photo
 - [ ] **Summersweet** (`clethra-alnifolia`, 3 on campus): bark photo
