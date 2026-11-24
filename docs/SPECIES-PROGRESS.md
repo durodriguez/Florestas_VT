@@ -13,19 +13,21 @@ same list, with links, is on the site at /species/progress/.
 | On campus: hybrids | 3 | 0 | 80% |
 | On campus: cultivars and forms | 10 | 4 | 83% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 175 | 53 | 83% |
-| Not yet mapped: hybrids | 16 | 0 | 62% |
-| Not yet mapped: cultivars and forms | 87 | 35 | 79% |
-| Not yet mapped: named only to genus | 11 | 9 | 94% |
-| **All** | 417 | 200 | 86% |
+| Not yet mapped: species | 175 | 53 | 84% |
+| Not yet mapped: hybrids | 17 | 0 | 60% |
+| Not yet mapped: cultivars and forms | 87 | 36 | 80% |
+| Not yet mapped: named only to genus | 10 | 9 | 97% |
+| **All** | 417 | 201 | 86% |
 
 ## Most often missing
 
-- bark photo: 175 pages
-- fruit photo: 118 pages
+- bark photo: 171 pages
 - flowers photo: 117 pages
-- leaves photo: 84 pages
-- "Which one?" leaves: 2 pages
+- fruit photo: 117 pages
+- leaves photo: 81 pages
+- where it grows wild: 1 pages
+- crown shape: 1 pages
+- "Which one?" leaves: 1 pages
 
 ## On campus: pages with gaps
 
@@ -57,22 +59,20 @@ same list, with links, is on the site at /species/progress/.
 
 ## Not yet mapped: pages with gaps
 
+- [ ] **Hybrid paperbark maple** (`acer-griseum-x-maximowiczianum`): where it grows wild; crown shape; bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Ann magnolia** (`magnolia-ann`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Blue Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodthree`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Blue holly** (`ilex-x-meserveae`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Creeping cotoneaster** (`cotoneaster-adpressus`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Dwarf Everbearing black mulberry** (`morus-nigra-dwarf-everbearing`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Fall Gold raspberry** (`rubus-idaeus-fall-gold`): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Ghost bramble** (`rubus-thibetanus`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Hybrid witchhazel** (`hamamelis-x-intermedia`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Mariesii doublefile viburnum** (`viburnum-plicatum-tomentosum-mariesii`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Miss Kim lilac** (`syringa-pubescens-patula-miss-kim`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **PJM rhododendron** (`rhododendron-pjm`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Rosy Lights azalea** (`rhododendron-rosy-lights`): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Sargent crabapple** (`malus-sargentii`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Shadblow serviceberry** (`amelanchier-canadensis`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Show Off forsythia** (`forsythia-x-intermedia-mindor`): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Speckled alder** (`alnus-incana-rugosa`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Triple Crown thornless blackberry** (`rubus-triple-crown`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Verdant Hills boxwood** (`buxus-verdant-hills`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **White Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodtwo`): bark photo; leaves photo; flowers photo; fruit photo
@@ -80,7 +80,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Apple serviceberry** (`amelanchier-x-grandiflora`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Arnold horsechestnut** (`aesculus-x-arnoldiana`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Autumn Brilliance serviceberry** (`amelanchier-x-grandiflora-autumn-brilliance`): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Bosnian pine** (`pinus-heldreichii`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Cameo magnolia** (`magnolia-cameo`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Copper Curls Peking lilac** (`syringa-pekinensis-copper-curls`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Crimson Spire oak** (`quercus-x-bimundorum`): bark photo; leaves photo; flowers photo; fruit photo
@@ -88,7 +87,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Elizabeth magnolia** (`magnolia-elizabeth`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Gold Star magnolia** (`magnolia-gold-star`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Golden Raindrops crabapple** (`malus-schmidtcutleaf`): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Hardy rubber tree** (`eucommia-ulmoides`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Heritage oak** (`quercus-x-macdanielii-clemons`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Japanese clethra** (`clethra-barbinervis`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Japanese elm** (`ulmus-davidiana-japonica`): bark photo; leaves photo; flowers photo; fruit photo
@@ -118,7 +116,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Triumph elm** (`ulmus-morton-glossy`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Ultimate Yellow magnolia** (`magnolia-ultimate-yellow`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Ware oak** (`quercus-x-warei`): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Weeping Higan cherry** (`prunus-subhirtella-pendula`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Brouwer's Beauty andromeda** (`pieris-brouwers-beauty`): bark photo; leaves photo; flowers photo
 - [ ] **Blue Mist dwarf fothergilla** (`fothergilla-gardenii-blue-mist`): bark photo; flowers photo; fruit photo
 - [ ] **Creeping juniper** (`juniperus-horizontalis`): bark photo; flowers photo; fruit photo
@@ -127,6 +124,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Mugo pine** (`pinus-mugo`): bark photo; leaves photo; flowers photo
 - [ ] **Old-fashioned weigela** (`weigela-florida`): bark photo; leaves photo; fruit photo
 - [ ] **Panicle hydrangea** (`hydrangea-paniculata`): bark photo; leaves photo; fruit photo
+- [ ] **Sargent crabapple** (`malus-sargentii`): bark photo; leaves photo; flowers photo
 - [ ] **Adagio maiden grass** (`miscanthus-sinensis-adagio`): leaves photo; flowers photo
 - [ ] **Atlas cedar** (`cedrus-atlantica`): bark photo; flowers photo; fruit photo
 - [ ] **Cedar of Lebanon** (`cedrus-libani`): bark photo; flowers photo; fruit photo
@@ -137,7 +135,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Fraser fir** (`abies-fraseri`): bark photo; flowers photo; fruit photo
 - [ ] **Gracillimus maiden grass** (`miscanthus-sinensis-gracillimus`): leaves photo; flowers photo
 - [ ] **Grand fir** (`abies-grandis`): bark photo; flowers photo; fruit photo
-- [ ] **Hybrid paperbark maple** (`acer-griseum-x-maximowiczianum`): "Which one?" leaves
 - [ ] **Japanese cedar** (`cryptomeria-japonica`): bark photo; leaves photo; flowers photo
 - [ ] **Japanese cornel** (`cornus-officinalis`): bark photo; leaves photo; fruit photo
 - [ ] **Karl Foerster feather reed grass** (`calamagrostis-x-acutiflora-karl-foerster`): leaves photo; flowers photo
@@ -148,6 +145,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Scarlet oak** (`quercus-coccinea`): bark photo; flowers photo; fruit photo
 - [ ] **Shellbark hickory** (`carya-laciniosa`): bark photo; leaves photo; flowers photo
 - [ ] **Weeping cherry** (`prunus-subhirtella`): leaves photo; flowers photo; fruit photo
+- [ ] **Weeping Higan cherry** (`prunus-subhirtella-pendula`): leaves photo; flowers photo; fruit photo
 - [ ] **Wichita Blue juniper** (`juniperus-scopulorum-wichita-blue`): bark photo; flowers photo; fruit photo
 - [ ] **Willow oak** (`quercus-phellos`): bark photo; leaves photo; flowers photo
 - [ ] **Yoshino cherry** (`prunus-x-yedoensis`): bark photo; leaves photo; fruit photo
@@ -155,6 +153,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Catawba rhododendron** (`rhododendron-catawbiense`): bark photo; fruit photo
 - [ ] **Chinese redbud** (`cercis-chinensis`): bark photo; fruit photo
 - [ ] **Common juniper** (`juniperus-communis`): bark photo; flowers photo
+- [ ] **Ghost bramble** (`rubus-thibetanus`): flowers photo; fruit photo
 - [ ] **Japanese kerria** (`kerria-japonica`): bark photo; fruit photo
 - [ ] **Japanese spirea** (`spiraea-japonica`): bark photo; fruit photo
 - [ ] **Oakleaf hydrangea** (`hydrangea-quercifolia`): bark photo; fruit photo
@@ -165,8 +164,10 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Armstrong Freeman maple** (`acer-x-freemanii-armstrong`): flowers photo; fruit photo
 - [ ] **Atlantic white cedar** (`chamaecyparis-thyoides`): leaves photo; flowers photo
 - [ ] **Autumn Blaze maple** (`acer-x-freemanii-autumn-blaze`): flowers photo; fruit photo
+- [ ] **Bosnian pine** (`pinus-heldreichii`): flowers photo; fruit photo
 - [ ] **Chinese fringetree** (`chionanthus-retusus`): bark photo; fruit photo
 - [ ] **European linden** (`tilia-x-europaea`): bark photo; flowers photo
+- [ ] **Hardy rubber tree** (`eucommia-ulmoides`): flowers photo; fruit photo
 - [ ] **Japanese snowbell** (`styrax-japonicus`): bark photo; leaves photo
 - [ ] **Japanese white pine** (`pinus-parviflora`): bark photo; flowers photo
 - [ ] **Red horsechestnut** (`aesculus-x-carnea`): bark photo; fruit photo

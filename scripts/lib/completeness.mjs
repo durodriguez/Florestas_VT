@@ -19,7 +19,10 @@ const GROWING = [
   ['fallColor', 'fall color'], ['matureHeightFt', 'height'], ['matureSpreadFt', 'spread'], ['zones', 'hardiness zones'], ['bark', 'bark description'],
 ];
 
-export const kindOf = (t) => (t.cultivar || t.infra ? 'cultivar' : !t.species ? 'genus' : /^x\b/.test(t.species) ? 'hybrid' : 'species');
+/** A blank species is a genus-only entry ("Forsythia sp."), unless the name is a cross ("Acer griseum x maximowiczianum"). */
+export const kindOf = (t) => (t.cultivar || t.infra ? 'cultivar'
+  : !t.species ? (/ x /.test(t.sci ?? '') ? 'hybrid' : 'genus')
+  : /^x\b/.test(t.species) ? 'hybrid' : 'species');
 
 /** One taxon's checklist: [{ item, state }] with state done | borrowed | missing. */
 export function checklist(t, extras) {
