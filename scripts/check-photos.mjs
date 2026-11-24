@@ -54,6 +54,8 @@ const PHOTO_NAMES = {
   'Salix matsudana': 'Salix babylonica',
   // iNaturalist treats Japanese flowering crabapple as a hybrid.
   'Malus floribunda': 'Malus × floribunda',
+  // and Higan cherry as one.
+  'Prunus subhirtella': 'Prunus × subhirtella',
 };
 
 const namesFor = (t) => {

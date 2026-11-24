@@ -353,6 +353,18 @@ linden and Japanese flowering crabapple. Weeping Higan cherry's species is
 now recorded as *subhirtella*, matching its parent's row, so it shows that
 page's photos; its scientific name is unchanged.
 
+### Batch 22 (November 2026)
+
+Unmapped species missing two or three photos: mugo pine, old-fashioned
+weigela, panicle hydrangea, both fothergillas, creeping juniper, Japanese
+cedar, Japanese cornel, Higan cherry (*Prunus × subhirtella* on iNaturalist,
+which the identification check now accepts), willow, scarlet and chinkapin
+oak, shellbark hickory, flowering cherry and Persian ironwood. Rejected for
+disagreeing with taxa.csv: Fraser fir's cones (the photos show green-brown
+cones; purple is recorded), pond cypress's bark (pale and swollen in the
+photos; fibrous red-brown is recorded) and Higan cherry's fruit (green, not
+yet the black recorded).
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
