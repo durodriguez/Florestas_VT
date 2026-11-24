@@ -436,7 +436,9 @@ and winterberry bark, weigela's capsules. Peking willow and dragon's claw
 willow got catkin and seed photos filed under weeping willow, which both
 sites now treat them as (weeping willow's own fruit came from the same
 observation). American and European beech fruit were replaced with photos
-the owner chose. Rejected: "common privet" stems with thorns, which privet
+the owner chose. A further round added Rocky Mountain juniper and Manchurian
+alder bark, the alder's and chinkapin oak's catkins, Korean and Shantung maple
+flowers and flowering cherry's fruit. Rejected: "common privet" stems with thorns, which privet
 has not; northern white cedar's red seed cones again.
 
 ### Genus-only pages: Which one?
