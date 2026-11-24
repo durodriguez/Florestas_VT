@@ -13,7 +13,7 @@
 const FERN_FAMILIES = new Set(['Pteridaceae', 'Dryopteridaceae', 'Athyriaceae', 'Onocleaceae', 'Thelypteridaceae', 'Polypodiaceae']);
 const PARTS = ['bark', 'leaves', 'flowers', 'fruit'];
 /** Left blank on purpose (DATA-MODEL.md, "Filling in a new taxon"): boxwood's fruit is insignificant. */
-const DELIBERATE_NO_FRUIT_MONTHS = new Set(['buxus-sempervirens']);
+const DELIBERATE_NO_FRUIT_MONTHS = new Set(['buxus-sempervirens', 'buxus-verdant-hills']);
 const GROWING = [
   ['flowerColor', 'flower color'], ['flowerMonths', 'flower months'], ['fruitColor', 'fruit color'], ['fruitMonths', 'fruit months'],
   ['fallColor', 'fall color'], ['matureHeightFt', 'height'], ['matureSpreadFt', 'spread'], ['zones', 'hardiness zones'], ['bark', 'bark description'],
