@@ -411,6 +411,20 @@ keep turning up for northern white cedar. Freeman maple's flowers and fruit,
 Sargent cherry's bark and the other campus gaps in PHOTO-GAPS.md found nothing
 usable again; they need photos taken on campus.
 
+### Batch 26 (November 2026)
+
+Mongolian linden split in two at the owner's request (above). Then a Commons
+search of 30 cultivar and hybrid gaps: Ann magnolia's and Triumph elm's leaves,
+Miss Kim lilac's and Rosy Lights azalea's flowers (and the azalea's leaves),
+White Chiffon rose of Sharon's flower, Yoshino cherry's leaves, Triple Crown
+blackberry's flowers and Korean sun pear's bark (Commons files the pear as
+*Pyrus calleryana* var. *fauriei*, which the identification check now
+accepts). Nannyberry's bark came from iNaturalist. Rejected: Crimson Spire
+oak's photos, in no Commons category at all; a "Blue Chiffon" filed only as an
+unidentified hibiscus; Karl Foerster grass in its tan winter plumes (purple is
+recorded for June and July). iNaturalist has almost no shrub bark: a round of
+eighteen shrubs found one usable photo.
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
