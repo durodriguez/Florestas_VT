@@ -29,7 +29,7 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [x] **Colorado blue spruce**, pollen cones (`picea-pungens`, flowers).
   Small, reddish, at the branch tips in May, before the new shoots open.
   Try UVM-0593 and UVM-0576 (Central Campus), UVM-2852 (Athletic Campus).
-- [ ] **Japanese zelkova**, flowers (`zelkova-serrata`, flowers). Tiny and
+- [x] **Japanese zelkova**, flowers (`zelkova-serrata`, flowers). Tiny and
   greenish, along the new shoots in April as the leaves open; easy to miss.
   Any of the zelkovas on Redstone Campus, such as UVM-4520 to UVM-4526.
 - [x] **Japanese zelkova**, fruit (`zelkova-serrata`, fruit). Small, hard,
@@ -40,7 +40,7 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [x] **Bur oak**, catkins (`quercus-macrocarpa`, flowers). Hanging
   yellow-green catkins in May, with the new leaves. Try UVM-2324 and
   UVM-2323 (Athletic Campus).
-- [ ] **Washington hawthorn**, bark (`crataegus-phaenopyrum`, bark). Any
+- [x] **Washington hawthorn**, bark (`crataegus-phaenopyrum`, bark). Any
   time of year. Try UVM-0355, UVM-0353 and UVM-0354 (Central Campus).
 - [ ] **Sargent cherry**, bark (`prunus-sargentii`, bark). Polished
   red-brown with horizontal bands, any time of year. Try UVM-0747 (Central
@@ -77,7 +77,7 @@ A close photo of the one part, in focus, works best: the tile is small.
   catkins as the leaves open, April and May.
 - [x] **Paper birch**, leaves (`betula-papyrifera`, leaves). Oval, doubly
   toothed; any time in leaf.
-- [ ] **Japanese tree lilac**, bark (`syringa-reticulata`, bark). Glossy
+- [x] **Japanese tree lilac**, bark (`syringa-reticulata`, bark). Glossy
   reddish-brown with horizontal lenticels, like a cherry's; a close photo.
 - [x] **Japanese tree lilac**, leaves (`syringa-reticulata`, leaves). Broad,
   oval, in opposite pairs; a close photo.
@@ -142,21 +142,24 @@ A close photo of the one part, in focus, works best: the tile is small.
   Tiny, at the shoot tips in late winter.
 - [ ] **Giant sequoia**, cones (`sequoiadendron-giganteum`, fruit). Green on the
   tree, as recorded; the brown cones on the ground are old ones.
-- [ ] **Freeman maple**, bark (`acer-x-freemanii`, bark). Smooth gray, breaking
+- [x] **Freeman maple**, bark (`acer-x-freemanii`, bark). Smooth gray, breaking
   into plates; its 67 campus trees are the place to take it.
 - [ ] **Freeman maple**, flowers (`acer-x-freemanii`, flowers). Red, March and
   April, before the leaves.
 - [ ] **Freeman maple**, fruit (`acer-x-freemanii`, fruit). Red samaras in May.
 - [ ] **Boxwood**, bark (`buxus-sempervirens`, bark). Pale, corky old stems.
-- [ ] **Summersweet**, bark and leaves (`clethra-alnifolia`).
-- [ ] **Witch hazel**, bark and fruit (`hamamelis-virginiana`). Brown woody
-  capsules in September and October.
+- [ ] **Summersweet**, bark (`clethra-alnifolia`, bark). Slender gray-brown stems.
+- [x] **Summersweet**, leaves (`clethra-alnifolia`, leaves).
+- [ ] **Witch hazel**, bark (`hamamelis-virginiana`, bark). Smooth light gray-brown.
+- [x] **Witch hazel**, fruit (`hamamelis-virginiana`, fruit). Woody capsules,
+  brown when they split in September and October.
 - [ ] **Spicebush**, bark (`lindera-benzoin`, bark).
-- [ ] **Common buckthorn**, bark (`rhamnus-cathartica`, bark). Peeling to show
+- [x] **Common buckthorn**, bark (`rhamnus-cathartica`, bark). Peeling to show
   orange inner bark.
 - [ ] **Common lilac**, bark (`syringa-vulgaris`, bark).
-- [ ] **Beautybush**, bark and leaves (`kolkwitzia-amabilis`). Shaggy, peeling
-  old stems.
-- [ ] **Pieris**, bark (`pieris-japonica`, bark).
+- [ ] **Beautybush**, bark (`kolkwitzia-amabilis`, bark). Shaggy, peeling old stems.
+- [x] **Beautybush**, leaves (`kolkwitzia-amabilis`, leaves).
+- [x] **Pieris**, bark (`pieris-japonica`, bark).
 - [ ] **Cistena plum**, fruit (`prunus-x-cistena`, fruit). Black, July and August.
-- [ ] **Anglojap yew**, bark and fruit (`taxus-x-media`). Red arils in fall.
+- [ ] **Anglojap yew**, bark (`taxus-x-media`, bark). Reddish-brown, flaking.
+- [ ] **Anglojap yew**, fruit (`taxus-x-media`, fruit). Red arils in fall.
