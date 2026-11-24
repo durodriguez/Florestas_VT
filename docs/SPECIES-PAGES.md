@@ -532,6 +532,11 @@ again. The rules since:
    category that names the species; on iNaturalist, research grade.
    `npm run check:photos` checks every row for this.
 4. **When in doubt, leave the part empty** and add it to PHOTO-GAPS.md.
+5. **Prefer a clean photo** (the owner's standard, November 2026): a close-up
+   of the part itself, filling the frame, against a blurred background, with
+   no hands, napkins, rulers, labels or other objects in it. A photo with a
+   hand or a prop is a last resort, and one to replace when a clean one turns
+   up. American beech's and tamarack's fruit were replaced for this.
 
 Each photo is chosen by eye from Commons search results: the right species
 (named in the file, not just a "maple leaf"), the part shown clearly, and the
