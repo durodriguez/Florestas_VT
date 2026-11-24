@@ -353,13 +353,41 @@ linden and Japanese flowering crabapple. Weeping Higan cherry's species is
 now recorded as *subhirtella*, matching its parent's row, so it shows that
 page's photos; its scientific name is unchanged.
 
+### Batch 22 (November 2026)
+
+Unmapped species missing two or three photos: mugo pine, old-fashioned
+weigela, panicle hydrangea, both fothergillas, creeping juniper, Japanese
+cedar, Japanese cornel, Higan cherry (*Prunus × subhirtella* on iNaturalist,
+which the identification check now accepts), willow, scarlet and chinkapin
+oak, shellbark hickory, flowering cherry and Persian ironwood. Rejected for
+disagreeing with taxa.csv: Fraser fir's cones (the photos show green-brown
+cones; purple is recorded), pond cypress's bark (pale and swollen in the
+photos; fibrous red-brown is recorded) and Higan cherry's fruit (green, not
+yet the black recorded).
+
+### Batch 23 (November 2026)
+
+Single missing parts, mostly shrubs' fruit and conifers' cones: bush
+honeysuckle, Catawba rhododendron, Japanese spirea, smooth hydrangea,
+Virginia sweetspire and Siberian iris (their dry brown capsules), Atlantic
+white cedar's foliage, Japanese snowbell's leaves, and the red young cones of
+Serbian spruce and Swiss stone pine. A Commons round alongside filled red
+horse chestnut, oakleaf mountain ash, Spaeth alder, Miyabe maple and lacebark
+pine, and blank-species cultivars' flowers: Ann, Elizabeth, Gold Star
+and Shirazz magnolia and Brouwer's Beauty pieris. Mongolian linden's leaf was
+taken out again: the taxon is named *Tilia × mongolica*, after 'Harvest Gold'
+(littleleaf × Mongolian linden), while its text describes the wild species,
+so which plant a photo should show is an open question. Still without: the bark of most shrubs, which few
+photographers take.
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
 rest of the "sp." entries) now has a **Which one?** section in place of Know
-it by: a leaf of each species of that genus in the collection that has its own
-leaf photo, most planted on campus first, each labelled and linking to its page
-(species-extras.mjs, `kin`). Cultivars whose species is blank, such as the
+it by: a leaf of each species or hybrid of that genus in the collection that
+has its own leaf photo, most planted on campus first, each labelled and
+linking to its page (species-extras.mjs, `kin`). A genus with no species or
+hybrid of its own here, such as forsythia, shows its cultivars' leaves instead. Cultivars whose species is blank, such as the
 magnolia hybrids, do not get it: they are identified, just not to a species.
 
 ### Adding photos from here on

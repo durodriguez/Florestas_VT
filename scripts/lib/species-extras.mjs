@@ -143,18 +143,25 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
       photos: partPhotos(photos.get(t.id), parent ? photos.get(parent) : undefined, unlike(t, byId.get(parent))),
     });
   }
-  // A taxon named only to genus ("Ulmus sp.") shows a leaf of each species of
-  // that genus in the collection, most planted first, so a reader can work out
-  // which one is in front of them. Each says whose leaf it is.
+  // A taxon named only to genus ("Ulmus sp.") shows a leaf of each species or
+  // hybrid of that genus in the collection, most planted first, so a reader can
+  // work out which one is in front of them. Each says whose leaf it is. A genus
+  // with neither (forsythia: only a cultivar) shows its cultivars instead.
+  const leafOf = (k) => ({ k, photo: extras.get(k.id)?.photos?.leaves });
   for (const t of taxa) {
     if (t.species || !t.genus || t.cultivar || !/\bspp?\.?$/.test(t.sci ?? "")) continue;
-    const kin = taxa
-      .filter((k) => k.genus === t.genus && k.species && !k.cultivar && !k.infra && !/^x\b/.test(k.species))
-      .map((k) => ({ k, photo: extras.get(k.id)?.photos?.leaves }))
-      .filter(({ photo }) => photo && !photo.inherited)
+    const named = taxa.filter((k) => k.genus === t.genus && k.id !== t.id);
+    const pick = (ks, ownOnly) => ks
+      .map((k) => leafOf(k))
+      .filter(({ photo }) => photo && !(ownOnly && photo.inherited))
       .sort((a, b) => (b.k.count ?? 0) - (a.k.count ?? 0) || a.k.id.localeCompare(b.k.id))
-      .slice(0, 8)
-      .map(({ k, photo }) => ({ id: k.id, common: k.common, sci: `${k.genus} ${k.species}`, count: k.count ?? 0, photo }));
+      .slice(0, 8);
+    const species = named.filter((k) => k.species && !k.cultivar && !k.infra);
+    const chosen = species.length ? pick(species, true) : pick(named, false);
+    const kin = chosen.map(({ k, photo }) => ({
+      id: k.id, common: k.common, count: k.count ?? 0, photo,
+      sci: k.sci || `${k.genus} ${k.species}`,
+    }));
     if (kin.length) extras.get(t.id).kin = kin;
   }
   return { extras, errors, warnings };
