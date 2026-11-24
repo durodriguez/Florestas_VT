@@ -13,20 +13,20 @@ same list, with links, is on the site at /species/progress/.
 | On campus: hybrids | 3 | 0 | 80% |
 | On campus: cultivars and forms | 10 | 4 | 84% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 175 | 92 | 92% |
-| Not yet mapped: hybrids | 17 | 7 | 78% |
-| Not yet mapped: cultivars and forms | 87 | 44 | 85% |
+| Not yet mapped: species | 176 | 92 | 92% |
+| Not yet mapped: hybrids | 16 | 7 | 80% |
+| Not yet mapped: cultivars and forms | 88 | 44 | 85% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 417 | 260 | 91% |
+| **All** | 418 | 260 | 91% |
 
 ## Most often missing
 
-- bark photo: 101 pages
-- flowers photo: 79 pages
-- fruit photo: 76 pages
+- bark photo: 102 pages
+- flowers photo: 80 pages
+- fruit photo: 77 pages
 - leaves photo: 41 pages
+- crown shape: 2 pages
 - where it grows wild: 1 pages
-- crown shape: 1 pages
 
 ## On campus: pages with gaps
 
@@ -55,6 +55,7 @@ same list, with links, is on the site at /species/progress/.
 ## Not yet mapped: pages with gaps
 
 - [ ] **Hybrid paperbark maple** (`acer-griseum-x-maximowiczianum`): where it grows wild; crown shape; bark photo; leaves photo; flowers photo; fruit photo
+- [ ] **Harvest Gold linden** (`tilia-x-mongolica`): crown shape; bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Creeping cotoneaster** (`cotoneaster-adpressus`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Miss Kim lilac** (`syringa-pubescens-patula-miss-kim`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Rosy Lights azalea** (`rhododendron-rosy-lights`): bark photo; leaves photo; flowers photo; fruit photo
@@ -70,7 +71,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Heritage oak** (`quercus-x-macdanielii-clemons`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Judy Zuk magnolia** (`magnolia-judy-zuk`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Korean sun pear** (`pyrus-fauriei`): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Mongolian linden** (`tilia-x-mongolica`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Peking lilac** (`syringa-pekinensis`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Peking willow** (`salix-matsudana`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Prairifire crabapple** (`malus-prairifire`): bark photo; leaves photo; flowers photo; fruit photo
@@ -86,6 +86,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Fraser fir** (`abies-fraseri`): bark photo; flowers photo; fruit photo
 - [ ] **Gold Star magnolia** (`magnolia-gold-star`): bark photo; leaves photo; fruit photo
 - [ ] **Karl Foerster feather reed grass** (`calamagrostis-x-acutiflora-karl-foerster`): leaves photo; flowers photo
+- [ ] **Mongolian linden** (`tilia-mongolica`): bark photo; flowers photo; fruit photo
 - [ ] **Shirazz magnolia** (`magnolia-shirazz`): bark photo; leaves photo; fruit photo
 - [ ] **Brouwer's Beauty andromeda** (`pieris-brouwers-beauty`): bark photo; leaves photo
 - [ ] **Blue Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodthree`): bark photo; flowers photo

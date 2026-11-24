@@ -375,9 +375,12 @@ Serbian spruce and Swiss stone pine. A Commons round alongside filled red
 horse chestnut, oakleaf mountain ash, Spaeth alder, Miyabe maple and lacebark
 pine, and blank-species cultivars' flowers: Ann, Elizabeth, Gold Star
 and Shirazz magnolia and Brouwer's Beauty pieris. Mongolian linden's leaf was
-taken out again: the taxon is named *Tilia × mongolica*, after 'Harvest Gold'
-(littleleaf × Mongolian linden), while its text describes the wild species,
-so which plant a photo should show is an open question. Still without: the bark of most shrubs, which few
+taken out again: the taxon was named *Tilia × mongolica*, after 'Harvest Gold'
+(littleleaf × Mongolian linden), while its text described the wild species.
+Since resolved by keeping both: `tilia-mongolica` is the wild species, with
+that text, range and leaf photo, and `tilia-x-mongolica` (the id kept, as ids
+are never reused) is now 'Harvest Gold', a garden hybrid (NC State Extension).
+Still without: the bark of most shrubs, which few
 photographers take.
 
 ### Batch 24 (November 2026)
