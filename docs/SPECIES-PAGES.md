@@ -390,6 +390,24 @@ yellow buckeye. Rejected: the "sour cherry" and "peach" bark photos, pale gray
 where taxa.csv records red-brown and dark gray-brown, and an "Amur maple" set
 that was paperbark maple.
 
+### Batch 25 (November 2026)
+
+A Commons search round across 76 single missing parts, with iNaturalist for
+shrub fruit alongside. Filled: the bark of four campus shrubs (witch hazel,
+common lilac, beautybush, summersweet); Lebanon cedar, grand fir, Oriental and
+Serbian spruce, Swiss stone and Japanese white pine, pond cypress, Shantung
+maple, Japanese cornel, saucer magnolia and contorted hazelnut bark; cones of
+grand fir, red and Oriental spruce, Bosnian pine and giant sequoia (green, on
+the tree); Chinese and Rocky Mountain juniper berries; sycamore maple
+samaras; Ohio buckeye leaves; and the flowers of Persian ironwood, mockernut
+and bitternut hickory, pitch pine and Amur chokecherry. Rejected for not
+matching taxa.csv or not being filed under the species: Anglojap yew (both
+photos were English yew), Atlas cedar's bark (filed under cedar of Lebanon), a
+"flowering cherry" bark that looks like Tibetan cherry, and the red cones that
+keep turning up for northern white cedar. Freeman maple's flowers and fruit,
+Sargent cherry's bark and the other campus gaps in PHOTO-GAPS.md found nothing
+usable again; they need photos taken on campus.
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the

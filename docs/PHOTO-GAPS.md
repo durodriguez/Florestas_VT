@@ -140,7 +140,7 @@ A close photo of the one part, in focus, works best: the tile is small.
   rows; a grown shoot, not a seedling.
 - [x] **Giant sequoia**, pollen cones (`sequoiadendron-giganteum`, flowers).
   Tiny, at the shoot tips in late winter.
-- [ ] **Giant sequoia**, cones (`sequoiadendron-giganteum`, fruit). Green on the
+- [x] **Giant sequoia**, cones (`sequoiadendron-giganteum`, fruit). Green on the
   tree, as recorded; the brown cones on the ground are old ones.
 - [x] **Freeman maple**, bark (`acer-x-freemanii`, bark). Smooth gray, breaking
   into plates; its 67 campus trees are the place to take it.
@@ -148,16 +148,16 @@ A close photo of the one part, in focus, works best: the tile is small.
   April, before the leaves.
 - [ ] **Freeman maple**, fruit (`acer-x-freemanii`, fruit). Red samaras in May.
 - [ ] **Boxwood**, bark (`buxus-sempervirens`, bark). Pale, corky old stems.
-- [ ] **Summersweet**, bark (`clethra-alnifolia`, bark). Slender gray-brown stems.
+- [x] **Summersweet**, bark (`clethra-alnifolia`, bark). Slender gray-brown stems.
 - [x] **Summersweet**, leaves (`clethra-alnifolia`, leaves).
-- [ ] **Witch hazel**, bark (`hamamelis-virginiana`, bark). Smooth light gray-brown.
+- [x] **Witch hazel**, bark (`hamamelis-virginiana`, bark). Smooth light gray-brown.
 - [x] **Witch hazel**, fruit (`hamamelis-virginiana`, fruit). Woody capsules,
   brown when they split in September and October.
 - [ ] **Spicebush**, bark (`lindera-benzoin`, bark).
 - [x] **Common buckthorn**, bark (`rhamnus-cathartica`, bark). Peeling to show
   orange inner bark.
-- [ ] **Common lilac**, bark (`syringa-vulgaris`, bark).
-- [ ] **Beautybush**, bark (`kolkwitzia-amabilis`, bark). Shaggy, peeling old stems.
+- [x] **Common lilac**, bark (`syringa-vulgaris`, bark).
+- [x] **Beautybush**, bark (`kolkwitzia-amabilis`, bark). Shaggy, peeling old stems.
 - [x] **Beautybush**, leaves (`kolkwitzia-amabilis`, leaves).
 - [x] **Pieris**, bark (`pieris-japonica`, bark).
 - [ ] **Cistena plum**, fruit (`prunus-x-cistena`, fruit). Black, July and August.
