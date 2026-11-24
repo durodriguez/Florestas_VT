@@ -14,17 +14,17 @@ same list, with links, is on the site at /species/progress/.
 | On campus: cultivars and forms | 10 | 4 | 83% |
 | On campus: named only to genus | 13 | 13 | 100% |
 | Not yet mapped: species | 175 | 55 | 86% |
-| Not yet mapped: hybrids | 17 | 2 | 70% |
+| Not yet mapped: hybrids | 17 | 3 | 71% |
 | Not yet mapped: cultivars and forms | 87 | 38 | 83% |
 | Not yet mapped: named only to genus | 10 | 9 | 97% |
-| **All** | 417 | 207 | 88% |
+| **All** | 417 | 208 | 88% |
 
 ## Most often missing
 
-- bark photo: 155 pages
+- bark photo: 153 pages
 - fruit photo: 103 pages
-- flowers photo: 102 pages
-- leaves photo: 60 pages
+- flowers photo: 101 pages
+- leaves photo: 57 pages
 - where it grows wild: 1 pages
 - crown shape: 1 pages
 - "Which one?" leaves: 1 pages
@@ -99,9 +99,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Creeping juniper** (`juniperus-horizontalis`): bark photo; flowers photo; fruit photo
 - [ ] **Dwarf fothergilla** (`fothergilla-gardenii`): bark photo; flowers photo; fruit photo
 - [ ] **Large fothergilla** (`fothergilla-major`): bark photo; leaves photo; fruit photo
-- [ ] **Mugo pine** (`pinus-mugo`): bark photo; leaves photo; flowers photo
-- [ ] **Old-fashioned weigela** (`weigela-florida`): bark photo; leaves photo; fruit photo
-- [ ] **Panicle hydrangea** (`hydrangea-paniculata`): bark photo; leaves photo; fruit photo
 - [ ] **Atlas cedar** (`cedrus-atlantica`): bark photo; flowers photo; fruit photo
 - [ ] **Cedar of Lebanon** (`cedrus-libani`): bark photo; flowers photo; fruit photo
 - [ ] **Chinese juniper** (`juniperus-chinensis`): bark photo; flowers photo; fruit photo
@@ -133,6 +130,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Japanese kerria** (`kerria-japonica`): bark photo; fruit photo
 - [ ] **Japanese spirea** (`spiraea-japonica`): bark photo; fruit photo
 - [ ] **Oakleaf hydrangea** (`hydrangea-quercifolia`): bark photo; fruit photo
+- [ ] **Old-fashioned weigela** (`weigela-florida`): bark photo; fruit photo
 - [ ] **Picta Japanese kerria** (`kerria-japonica-picta`): bark photo; fruit photo
 - [ ] **Pleniflora Japanese kerria** (`kerria-japonica-pleniflora`): bark photo; fruit photo
 - [ ] **Show Off forsythia** (`forsythia-x-intermedia-mindor`): bark photo; fruit photo
@@ -185,8 +183,10 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Highbush blueberry** (`vaccinium-corymbosum`): bark photo
 - [ ] **Inkberry** (`ilex-glabra`): bark photo
 - [ ] **Japanese barberry** (`berberis-thunbergii`): bark photo
+- [ ] **Mugo pine** (`pinus-mugo`): bark photo
 - [ ] **Multiflora rose** (`rosa-multiflora`): bark photo
 - [ ] **Nannyberry** (`viburnum-lentago`): bark photo
+- [ ] **Panicle hydrangea** (`hydrangea-paniculata`): fruit photo
 - [ ] **Patriot highbush blueberry** (`vaccinium-corymbosum-patriot`): bark photo
 - [ ] **Red buckeye** (`aesculus-pavia`): bark photo
 - [ ] **Siberian peashrub** (`caragana-arborescens`): bark photo
@@ -210,7 +210,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Contorted hazelnut** (`corylus-avellana`): bark photo
 - [ ] **Emerald Green arborvitae** (`thuja-occidentalis-smaragd`): flowers photo
 - [ ] **European bird cherry** (`prunus-padus`): bark photo
-- [ ] **European linden** (`tilia-x-europaea`): bark photo
 - [ ] **Giant sequoia** (`sequoiadendron-giganteum`): fruit photo
 - [ ] **Golden weeping willow** (`salix-alba-tristis`): fruit photo
 - [ ] **Goldenrain tree** (`koelreuteria-paniculata`): bark photo

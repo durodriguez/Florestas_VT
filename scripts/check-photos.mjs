@@ -52,6 +52,8 @@ const PHOTO_NAMES = {
   'Magnolia x soulangiana': 'Magnolia × soulangeana',
   // Both sites now file Peking willow, and dragon's claw willow, under weeping willow.
   'Salix matsudana': 'Salix babylonica',
+  // iNaturalist treats Japanese flowering crabapple as a hybrid.
+  'Malus floribunda': 'Malus × floribunda',
 };
 
 const namesFor = (t) => {
