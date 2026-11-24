@@ -365,6 +365,17 @@ cones; purple is recorded), pond cypress's bark (pale and swollen in the
 photos; fibrous red-brown is recorded) and Higan cherry's fruit (green, not
 yet the black recorded).
 
+### Batch 23 (November 2026)
+
+Single missing parts, mostly shrubs' fruit and conifers' cones: bush
+honeysuckle, Catawba rhododendron, Japanese spirea, smooth hydrangea,
+Virginia sweetspire and Siberian iris (their dry brown capsules), Atlantic
+white cedar's foliage, Japanese snowbell's leaves, and the red young cones of
+Serbian spruce and Swiss stone pine. A Commons round alongside filled red
+horse chestnut, oakleaf mountain ash, Spaeth alder, Mongolian linden, Miyabe
+maple and lacebark pine. Still without: the bark of most shrubs, which few
+photographers take.
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
