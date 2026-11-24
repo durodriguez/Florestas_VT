@@ -372,8 +372,12 @@ honeysuckle, Catawba rhododendron, Japanese spirea, smooth hydrangea,
 Virginia sweetspire and Siberian iris (their dry brown capsules), Atlantic
 white cedar's foliage, Japanese snowbell's leaves, and the red young cones of
 Serbian spruce and Swiss stone pine. A Commons round alongside filled red
-horse chestnut, oakleaf mountain ash, Spaeth alder, Mongolian linden, Miyabe
-maple and lacebark pine. Still without: the bark of most shrubs, which few
+horse chestnut, oakleaf mountain ash, Spaeth alder, Miyabe maple and lacebark
+pine, and blank-species cultivars' flowers: Ann, Elizabeth, Gold Star
+and Shirazz magnolia and Brouwer's Beauty pieris. Mongolian linden's leaf was
+taken out again: the taxon is named *Tilia × mongolica*, after 'Harvest Gold'
+(littleleaf × Mongolian linden), while its text describes the wild species,
+so which plant a photo should show is an open question. Still without: the bark of most shrubs, which few
 photographers take.
 
 ### Genus-only pages: Which one?
