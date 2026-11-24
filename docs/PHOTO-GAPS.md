@@ -125,7 +125,7 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [x] **White ash**, flowers (`fraxinus-americana`, flowers). Small purplish
   clusters on bare twigs in April and May, before the leaves. Not the brown,
   lumpy ash flower galls that hang on into autumn.
-- [ ] **Midland hawthorn**, bark (`crataegus-laevigata`, bark). Gray-brown,
+- [x] **Midland hawthorn**, bark (`crataegus-laevigata`, bark). Gray-brown,
   scaly, with thorns.
 - [ ] **Sour cherry**, bark (`prunus-cerasus`, bark). Red-brown, glossy, with
   horizontal lenticels.

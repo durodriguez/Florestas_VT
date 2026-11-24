@@ -380,6 +380,16 @@ taken out again: the taxon is named *Tilia × mongolica*, after 'Harvest Gold'
 so which plant a photo should show is an open question. Still without: the bark of most shrubs, which few
 photographers take.
 
+### Batch 24 (November 2026)
+
+Tree bark from Commons search ("<species> bark"), where iNaturalist had little:
+Allegheny serviceberry, balsam and quaking aspen, white poplar, bigleaf linden,
+cockspur and midland hawthorn, common pear, European bird cherry, goldenrain
+tree, Japanese pagoda tree, pawpaw, pecan, southern catalpa, Tatarian maple and
+yellow buckeye. Rejected: the "sour cherry" and "peach" bark photos, pale gray
+where taxa.csv records red-brown and dark gray-brown, and an "Amur maple" set
+that was paperbark maple.
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
