@@ -332,4 +332,24 @@ describe('a taxon named only to genus', () => {
     expect(extras.get('ulmus-sp').kin.map((k: { id: string }) => k.id)).toEqual(['ulmus-americana', 'ulmus-rubra']);
     expect(extras.get('ulmus-morton').kin).toBeUndefined();
   });
+
+  it('includes hybrids, and falls back to cultivars when a genus has no species', () => {
+    const leaf = (taxon_id: string, extra = {}) => ({
+      taxon_id, part: 'leaves', title: `File:${taxon_id}.jpg`,
+      page_url: `https://commons.wikimedia.org/wiki/File:${taxon_id}.jpg`,
+      image_url: `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/${taxon_id}.jpg/500px-${taxon_id}.jpg`,
+      author: 'A. Photographer', license: 'CC BY 4.0', license_url: '', matches: 'as recorded', ...extra,
+    });
+    const taxa = [
+      { id: 'acer-sp', sci: 'Acer sp.', genus: 'Acer', species: '', infra: '', cultivar: '', common: 'Maple', count: 5 },
+      { id: 'acer-x-freemanii', sci: 'Acer x freemanii', genus: 'Acer', species: 'x freemanii', infra: '', cultivar: '', common: 'Freeman maple', count: 67 },
+      { id: 'acer-x-freemanii-armstrong', sci: "Acer x freemanii 'Armstrong'", genus: 'Acer', species: 'x freemanii', infra: '', cultivar: 'Armstrong', common: 'Armstrong maple', count: 0 },
+      { id: 'forsythia-sp', sci: 'Forsythia sp.', genus: 'Forsythia', species: '', infra: '', cultivar: '', common: 'Forsythia', count: 2 },
+      { id: 'forsythia-x-intermedia-mindor', sci: "Forsythia x intermedia 'Mindor'", genus: 'Forsythia', species: 'x intermedia', infra: '', cultivar: 'Mindor', common: 'Show Off forsythia', count: 0 },
+    ];
+    const { errors, extras } = speciesExtras({ photoRows: [leaf('acer-x-freemanii'), leaf('forsythia-x-intermedia-mindor', { of_species: 'yes' })], taxa });
+    expect(errors).toEqual([]);
+    expect(extras.get('acer-sp').kin.map((k: { id: string }) => k.id)).toEqual(['acer-x-freemanii']);
+    expect(extras.get('forsythia-sp').kin).toMatchObject([{ id: 'forsythia-x-intermedia-mindor', sci: "Forsythia x intermedia 'Mindor'" }]);
+  });
 });

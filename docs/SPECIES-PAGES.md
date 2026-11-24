@@ -369,9 +369,10 @@ yet the black recorded).
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
 rest of the "sp." entries) now has a **Which one?** section in place of Know
-it by: a leaf of each species of that genus in the collection that has its own
-leaf photo, most planted on campus first, each labelled and linking to its page
-(species-extras.mjs, `kin`). Cultivars whose species is blank, such as the
+it by: a leaf of each species or hybrid of that genus in the collection that
+has its own leaf photo, most planted on campus first, each labelled and
+linking to its page (species-extras.mjs, `kin`). A genus with no species or
+hybrid of its own here, such as forsythia, shows its cultivars' leaves instead. Cultivars whose species is blank, such as the
 magnolia hybrids, do not get it: they are identified, just not to a species.
 
 ### Adding photos from here on

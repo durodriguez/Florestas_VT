@@ -16,8 +16,8 @@ same list, with links, is on the site at /species/progress/.
 | Not yet mapped: species | 175 | 58 | 88% |
 | Not yet mapped: hybrids | 17 | 5 | 77% |
 | Not yet mapped: cultivars and forms | 87 | 38 | 83% |
-| Not yet mapped: named only to genus | 10 | 9 | 97% |
-| **All** | 417 | 213 | 89% |
+| Not yet mapped: named only to genus | 10 | 10 | 100% |
+| **All** | 417 | 214 | 89% |
 
 ## Most often missing
 
@@ -27,7 +27,6 @@ same list, with links, is on the site at /species/progress/.
 - leaves photo: 44 pages
 - where it grows wild: 1 pages
 - crown shape: 1 pages
-- "Which one?" leaves: 1 pages
 
 ## On campus: pages with gaps
 
@@ -93,7 +92,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Atlas cedar** (`cedrus-atlantica`): bark photo; flowers photo; fruit photo
 - [ ] **Cedar of Lebanon** (`cedrus-libani`): bark photo; flowers photo; fruit photo
 - [ ] **Chinese juniper** (`juniperus-chinensis`): bark photo; flowers photo; fruit photo
-- [ ] **Forsythia** (`forsythia-sp`): "Which one?" leaves
 - [ ] **Fraser fir** (`abies-fraseri`): bark photo; flowers photo; fruit photo
 - [ ] **Grand fir** (`abies-grandis`): bark photo; flowers photo; fruit photo
 - [ ] **Karl Foerster feather reed grass** (`calamagrostis-x-acutiflora-karl-foerster`): leaves photo; flowers photo
