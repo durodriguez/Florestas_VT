@@ -6,7 +6,11 @@ described and worth the stop, and rewritten the notes; then its rows go into
 `data/tours.csv` and `data/tour-stops.csv` (DATA-MODEL.md, "tours.csv and
 tour-stops.csv").
 
-## Native or not (drafted November 2026)
+## Native or not (drafted November 2026; on the map since 24 November)
+
+Added to `data/tours.csv` and `data/tour-stops.csv` as `native-or-not` at the
+owner's request, before anyone had walked it. The checks below still stand:
+fix any stop or note that turns out wrong on the ground.
 
 Six stops on Central Campus, each a non-native tree with a Vermont native of
 the same genus beside it, so the two can be compared side by side. About 850 m
