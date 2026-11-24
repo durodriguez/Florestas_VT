@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { checklist, completeness, summary, progressMarkdown } from '../scripts/lib/completeness.mjs';
+import { kindOf, checklist, completeness, summary, progressMarkdown } from '../scripts/lib/completeness.mjs';
 
 const base = { id: 'x', sci: 'X y', common: 'X', family: 'Aceraceae', genus: 'X', species: 'y', infra: '', cultivar: '', type: 'deciduous-tree',
   description: 'd', funFact: 'f', flowerColor: 'red', flowerMonths: [4], fruitColor: 'red', fruitMonths: [6], fallColor: 'red',
@@ -21,6 +21,8 @@ describe('species page completeness', () => {
     expect(fern.every((i) => i.state === 'done')).toBe(true);
     expect(checklist({ ...base, fruitColor: 'none', fruitMonths: [] }, full).some((i) => i.item === 'fruit photo')).toBe(false);
     expect(checklist({ ...base, species: '' }, { kin: [{}] }).map((i) => i.item)).toEqual(['description', 'fun fact', '"Which one?" leaves']);
+    expect(kindOf({ ...base, species: '', sci: 'Forsythia sp.' })).toBe('genus');
+    expect(kindOf({ ...base, species: '', sci: 'Acer griseum x maximowiczianum' })).toBe('hybrid');
   });
 
   it('counts a borrowed photo as filled, and sorts campus pages first, least complete first', () => {

@@ -325,6 +325,34 @@ linden. Habitats and 30-odd photos. London plane is left: iNaturalist files it
 as *Platanus × hispanica*, which the identification check does not accept as
 *P. × acerifolia*.
 
+### Batch 20 (November 2026)
+
+Photos for unmapped species that had none: Tibetan bramble, Sargent and
+Japanese flowering crabapple, shadblow serviceberry, speckled and Manchurian
+alder, Bosnian pine, hardy rubber tree, Japanese clethra, Japanese elm, Korean
+and Shantung maple, overcup and Shumard oak, Russian hawthorn and Sawara
+falsecypress, from iNaturalist and, where it had too little, Commons. Two
+things the identification check caught: iNaturalist had re-identified most of
+its "shadblow" photos as other serviceberries, and the search had picked up
+the Shumard oak *complex* (a group of look-alikes) rather than the species, so
+it returned red oaks; the search now prefers the species. Left out: creeping
+cotoneaster (Commons has only var. *praecox*, often treated as a species of
+its own) and Miyabe maple and lacebark pine, still to find.
+
+### Batch 21 (November 2026)
+
+Cultivars and hybrids. Where a cultivar's species has no page here, its
+photos are of the species, marked `of_species` (above): the two Chiffon roses
+of Sharon, Dwarf Everbearing mulberry, Fall Gold raspberry (not its fruit,
+which is yellow), Mariesii viburnum, Show Off forsythia, Brilliance autumn
+fern, and the two maiden grasses (flowers only: both are grown for leaves
+narrower than the species'). Hybrids: blue holly, hybrid witch hazel (a
+yellow-flowered one, as recorded; most on Commons are red or orange
+cultivars), apple serviceberry, Loebner magnolia, Yoshino cherry, European
+linden and Japanese flowering crabapple. Weeping Higan cherry's species is
+now recorded as *subhirtella*, matching its parent's row, so it shows that
+page's photos; its scientific name is unchanged.
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
@@ -358,7 +386,7 @@ here, not by a botanist.
 ## Know it by: photos of the parts
 
 `data/part-photos.csv` (taxon_id, part, title, page_url, image_url, author,
-license, license_url): a photo of a species' bark, leaves, flowers or fruit
+license, license_url, matches, of_species): a photo of a species' bark, leaves, flowers or fruit
 from Wikimedia Commons, shown in four tiles under the description, each with
 what `taxa.csv` says of that part and a credit line (photographer, license,
 link to the photo's Commons page), as the licenses require. The page loads the
@@ -374,6 +402,15 @@ The build refuses a photo that is not under public domain, CC0, CC BY or CC
 BY-SA, has no author, or is not a Commons thumbnail or an iNaturalist
 observation photo. A cultivar or variety
 without photos of its own shows its species', and says so.
+
+Some cultivars belong to a species that has no page of its own here, such as
+the rose of Sharon cultivars (*Hibiscus syriacus*), so there are no species
+photos for them to borrow. For those, a photo of the species itself can be
+filed under the cultivar with `of_species` set to `yes`: the page then shows
+it as the species', just as if it had been borrowed, and the progress tracker
+counts it as borrowed. Use it only where the cultivar looks like its species
+in that part; a cultivar grown for its odd flowers or leaves needs its own
+photo of that part, or none.
 
 ### Choosing a photo
 

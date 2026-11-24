@@ -271,6 +271,15 @@ describe('what species pages add by hand', () => {
     const red = speciesExtras({ photoRows: [photo('crataegus-laevigata', 'flowers', 'White'), photo('crataegus-laevigata', 'fruit', 'Haws')], taxa: hawthorns });
     expect(red.extras.get('crataegus-laevigata-crimson-cloud').photos).toEqual({ inherited: true, fruit: expect.objectContaining({ title: 'File:Haws.jpg' }) });
 
+    // A photo of the species, filed under a cultivar whose species has no page of its own.
+    const rose = [{ id: 'hibiscus-syriacus-blue-bird', genus: 'Hibiscus', species: 'syriacus', infra: '', cultivar: 'Blue Bird' }];
+    const ofSp = speciesExtras({ photoRows: [{ ...photo('hibiscus-syriacus-blue-bird', 'leaves', 'Leaf'), of_species: 'yes' }], taxa: rose });
+    expect(ofSp.errors).toEqual([]);
+    expect(ofSp.extras.get('hibiscus-syriacus-blue-bird').photos).toMatchObject({ inherited: true, leaves: { title: 'File:Leaf.jpg', inherited: true } });
+    expect(staleGaps('- [ ] **Blue Bird**, leaves (`hibiscus-syriacus-blue-bird`, leaves).', ofSp.extras)).toEqual([]);
+    const notCultivar = speciesExtras({ photoRows: [{ ...photo('gleditsia-triacanthos', 'leaves', 'Leaf'), of_species: 'yes' }], taxa });
+    expect(notCultivar.errors).toEqual([expect.stringContaining('of_species is only for a cultivar')]);
+
     const doc = '- [ ] **Skyline**, bark (`gleditsia-triacanthos-inermis-skyline`, bark).\n- [ ] **Skyline**, leaves (`gleditsia-triacanthos-inermis-skyline`, leaves).';
     expect(staleGaps(doc, extras)).toEqual(['docs/PHOTO-GAPS.md: gleditsia-triacanthos-inermis-skyline now has a leaves photo; tick its line off']);
   });
