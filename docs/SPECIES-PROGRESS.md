@@ -13,17 +13,17 @@ same list, with links, is on the site at /species/progress/.
 | On campus: hybrids | 3 | 0 | 80% |
 | On campus: cultivars and forms | 10 | 4 | 84% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 176 | 93 | 92% |
+| Not yet mapped: species | 176 | 94 | 92% |
 | Not yet mapped: hybrids | 16 | 7 | 80% |
 | Not yet mapped: cultivars and forms | 88 | 44 | 86% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 261 | 92% |
+| **All** | 418 | 262 | 92% |
 
 ## Most often missing
 
 - bark photo: 100 pages
-- fruit photo: 77 pages
 - flowers photo: 76 pages
+- fruit photo: 76 pages
 - leaves photo: 37 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
@@ -157,7 +157,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Amur maple** (`acer-ginnala`): bark photo
 - [ ] **Atlantic white cedar** (`chamaecyparis-thyoides`): flowers photo
 - [ ] **Black maple** (`acer-nigrum`): flowers photo
-- [ ] **Blue ash** (`fraxinus-quadrangulata`): fruit photo
 - [ ] **Bosnian pine** (`pinus-heldreichii`): flowers photo
 - [ ] **Chestnut oak** (`quercus-montana`): flowers photo
 - [ ] **Chinese fringetree** (`chionanthus-retusus`): bark photo
