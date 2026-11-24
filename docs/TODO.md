@@ -1029,6 +1029,23 @@ inventory itself, in a database of a kind), public access through the map and
 species pages, and printable labels. The plan, the governing group and the
 collections policy are for UVM to write; the inventory can supply their facts.
 
+## 25. Field-guide illustrations of each tree [open, 24 November 2026: owner to give further instructions]
+
+The drawing of a tree at maturity on each species page (tree-drawing.mjs) is
+generated in code and looks rough. The owner wants field-guide plates
+instead: one per species, ink and watercolor on off-white paper, made with an
+image generator (Nano Banana) from a prompt the owner has written, with
+`{description}` filled from taxa.csv. A test plate of red maple looked right.
+
+To do, once the owner gives the go-ahead and any further instructions: a
+prompts file, one prompt per tree species in taxa.csv (about 250), then
+placing the images on the species pages, scaled to each species' recorded
+height and width beside the 6 ft person. Suggested changes to the prompt:
+no lettering in the image (the page prints the name), the same framing every
+time (trunk base at a fixed point, a fixed size) so the scaling works, and a
+check that the generator's terms allow publishing. Each image needs checking
+against the species' recorded crown shape before it goes up.
+
 ## Finished
 
 ## 1. Rename `memorial`, add `dedication_label` [done, 11 September 2026]

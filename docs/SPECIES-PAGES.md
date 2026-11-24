@@ -375,9 +375,12 @@ Serbian spruce and Swiss stone pine. A Commons round alongside filled red
 horse chestnut, oakleaf mountain ash, Spaeth alder, Miyabe maple and lacebark
 pine, and blank-species cultivars' flowers: Ann, Elizabeth, Gold Star
 and Shirazz magnolia and Brouwer's Beauty pieris. Mongolian linden's leaf was
-taken out again: the taxon is named *Tilia × mongolica*, after 'Harvest Gold'
-(littleleaf × Mongolian linden), while its text describes the wild species,
-so which plant a photo should show is an open question. Still without: the bark of most shrubs, which few
+taken out again: the taxon was named *Tilia × mongolica*, after 'Harvest Gold'
+(littleleaf × Mongolian linden), while its text described the wild species.
+Since resolved by keeping both: `tilia-mongolica` is the wild species, with
+that text, range and leaf photo, and `tilia-x-mongolica` (the id kept, as ids
+are never reused) is now 'Harvest Gold', a garden hybrid (NC State Extension).
+Still without: the bark of most shrubs, which few
 photographers take.
 
 ### Batch 24 (November 2026)
@@ -407,6 +410,20 @@ photos were English yew), Atlas cedar's bark (filed under cedar of Lebanon), a
 keep turning up for northern white cedar. Freeman maple's flowers and fruit,
 Sargent cherry's bark and the other campus gaps in PHOTO-GAPS.md found nothing
 usable again; they need photos taken on campus.
+
+### Batch 26 (November 2026)
+
+Mongolian linden split in two at the owner's request (above). Then a Commons
+search of 30 cultivar and hybrid gaps: Ann magnolia's and Triumph elm's leaves,
+Miss Kim lilac's and Rosy Lights azalea's flowers (and the azalea's leaves),
+White Chiffon rose of Sharon's flower, Yoshino cherry's leaves, Triple Crown
+blackberry's flowers and Korean sun pear's bark (Commons files the pear as
+*Pyrus calleryana* var. *fauriei*, which the identification check now
+accepts). Nannyberry's bark came from iNaturalist. Rejected: Crimson Spire
+oak's photos, in no Commons category at all; a "Blue Chiffon" filed only as an
+unidentified hibiscus; Karl Foerster grass in its tan winter plumes (purple is
+recorded for June and July). iNaturalist has almost no shrub bark: a round of
+eighteen shrubs found one usable photo.
 
 ### Genus-only pages: Which one?
 

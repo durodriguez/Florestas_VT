@@ -56,6 +56,8 @@ const PHOTO_NAMES = {
   'Malus floribunda': 'Malus × floribunda',
   // and Higan cherry as one.
   'Prunus subhirtella': 'Prunus × subhirtella',
+  // Commons files Korean sun pear as a variety of Callery pear.
+  'Pyrus fauriei': 'Pyrus calleryana var. fauriei',
 };
 
 const namesFor = (t) => {
