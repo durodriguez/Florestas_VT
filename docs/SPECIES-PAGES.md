@@ -471,9 +471,19 @@ credited "iNaturalist" and linked to the observation. The photos are links,
 not files: the repository holds one line per photo, and visitors' browsers
 fetch each from Wikimedia or iNaturalist.
 
-The build refuses a photo that is not under public domain, CC0, CC BY or CC
-BY-SA, has no author, or is not a Commons thumbnail or an iNaturalist
-observation photo. A cultivar or variety
+The build refuses a photo that is not under public domain, CC0, CC BY, CC
+BY-SA, CC BY-NC or CC BY-NC-SA, has no author, or is not a Commons thumbnail
+or an iNaturalist observation photo.
+
+**Licenses.** Until 24 November 2026 only CC0, CC BY and CC BY-SA were taken;
+that was a choice made when the photo tiles were built, not a requirement,
+and the owner widened it. The site is free and educational, with no ads or
+sales, which is the non-commercial use CC BY-NC and BY-NC-SA allow; each tile
+already credits the photographer and links the license, as both require. Should
+the site or its data ever be used commercially (sold, paywalled, carrying ads,
+or reused in a paid product), the NC photos would have to come out: their rows
+say which in the `license` column. Still refused: no-derivatives licenses (ND)
+and anything all rights reserved. A cultivar or variety
 without photos of its own shows its species', and says so.
 
 Some cultivars belong to a species that has no page of its own here, such as

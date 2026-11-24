@@ -222,7 +222,7 @@ describe('what species pages add by hand', () => {
 
     const bad = speciesExtras({
       photoRows: [
-        { ...photo, license: 'CC BY-NC 4.0' },
+        { ...photo, license: 'CC BY-ND 4.0' },
         { ...photo, author: '' },
         { ...photo, part: 'roots' },
         { ...photo, image_url: 'https://example.org/bark.jpg' },
@@ -235,6 +235,9 @@ describe('what species pages add by hand', () => {
     expect(bad.errors.join('\n')).toMatch(/part must be one of/);
     expect(bad.errors.join('\n')).toMatch(/Commons 500px thumbnail/);
     expect(bad.errors.join('\n')).toMatch(/matches is empty/);
+    // Non-commercial licenses fit a free educational site; no-derivatives and all-rights-reserved do not.
+    for (const license of ['CC BY-NC 4.0', 'CC BY-NC-SA 4.0', 'CC BY-NC 2.0']) expect(speciesExtras({ photoRows: [{ ...photo, license }], taxa }).errors, license).toEqual([]);
+    for (const license of ['CC BY-NC-ND 4.0', 'All rights reserved']) expect(speciesExtras({ photoRows: [{ ...photo, license }], taxa }).errors.join(''), license).toMatch(/not one that allows reuse/);
     const inat = speciesExtras({ photoRows: [{ ...photo, image_url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/757919298/medium.jpg', page_url: 'https://www.inaturalist.org/observations/411951899', license: 'CC BY 4.0' }], taxa });
     expect(inat.errors).toEqual([]);
     expect(inat.extras.get('gleditsia-triacanthos').photos.bark.site).toBe('iNaturalist');
