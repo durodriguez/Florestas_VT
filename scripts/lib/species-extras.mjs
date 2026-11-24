@@ -9,7 +9,8 @@
  * - data/facts.csv: taxon_id, fact, source, source_url. One row per fact,
  *   shown in Worth knowing after the fun fact, in file order.
  * - data/part-photos.csv: taxon_id, part, title, page_url, image_url, author,
- *   license, license_url, matches. A photo of its bark, leaves, flowers or fruit
+ *   license, license_url, matches, of_species ("yes" when the photo is of the
+ *   species a cultivar was selected from, not listed in taxa.csv). A photo of its bark, leaves, flowers or fruit
  *   (PARTS), from Wikimedia Commons under a free license, credited on the
  *   page. From Wikimedia Commons, image_url is the 500 px thumbnail on
  *   upload.wikimedia.org and page_url its Commons page; from iNaturalist, a
@@ -85,6 +86,7 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     facts.get(id).push({ text, source: trim(r.source), url: trim(r.source_url) });
   });
 
+  const byIdAll = new Map(taxa.map((t) => [t.id, t]));
   const photos = new Map();
   photoRows.forEach((r, i) => {
     const where = `part-photos.csv row ${i + 2}`;
@@ -103,9 +105,18 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     if (!trim(r.matches)) return errors.push(`${where}: matches is empty; say what the photo shows that agrees with taxa.csv for this part`);
     if (!photos.has(id)) photos.set(id, {});
     if (photos.get(id)[part]) return errors.push(`${where}: ${id} already has a ${part} photo`);
+    // of_species: the photo is of the species a cultivar was selected from,
+    // which taxa.csv does not list, so it cannot be borrowed from the
+    // species' own page. Shown with the same "of the species" note.
+    const ofSpecies = /^(yes|y|true)$/i.test(trim(r.of_species));
+    if (ofSpecies) {
+      const t = byIdAll.get(id);
+      if (!t?.species || !(t.cultivar || t.infra)) return errors.push(`${where}: of_species is only for a cultivar or variety of a named species`);
+    }
     photos.get(id)[part] = {
       title: trim(r.title), page: trim(r.page_url), image: trim(r.image_url), site: inat ? 'iNaturalist' : 'Wikimedia Commons',
       author: trim(r.author), license: trim(r.license), licenseUrl: trim(r.license_url),
+      ...(ofSpecies && { inherited: true }),
     };
   });
 

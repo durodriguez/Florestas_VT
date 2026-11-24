@@ -358,7 +358,7 @@ here, not by a botanist.
 ## Know it by: photos of the parts
 
 `data/part-photos.csv` (taxon_id, part, title, page_url, image_url, author,
-license, license_url): a photo of a species' bark, leaves, flowers or fruit
+license, license_url, matches, of_species): a photo of a species' bark, leaves, flowers or fruit
 from Wikimedia Commons, shown in four tiles under the description, each with
 what `taxa.csv` says of that part and a credit line (photographer, license,
 link to the photo's Commons page), as the licenses require. The page loads the
@@ -374,6 +374,15 @@ The build refuses a photo that is not under public domain, CC0, CC BY or CC
 BY-SA, has no author, or is not a Commons thumbnail or an iNaturalist
 observation photo. A cultivar or variety
 without photos of its own shows its species', and says so.
+
+Some cultivars belong to a species that has no page of its own here, such as
+the rose of Sharon cultivars (*Hibiscus syriacus*), so there are no species
+photos for them to borrow. For those, a photo of the species itself can be
+filed under the cultivar with `of_species` set to `yes`: the page then shows
+it as the species', just as if it had been borrowed, and the progress tracker
+counts it as borrowed. Use it only where the cultivar looks like its species
+in that part; a cultivar grown for its odd flowers or leaves needs its own
+photo of that part, or none.
 
 ### Choosing a photo
 
