@@ -13,18 +13,18 @@ same list, with links, is on the site at /species/progress/.
 | On campus: hybrids | 3 | 0 | 80% |
 | On campus: cultivars and forms | 10 | 4 | 83% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 175 | 57 | 87% |
-| Not yet mapped: hybrids | 17 | 3 | 71% |
+| Not yet mapped: species | 175 | 58 | 88% |
+| Not yet mapped: hybrids | 17 | 5 | 77% |
 | Not yet mapped: cultivars and forms | 87 | 38 | 83% |
 | Not yet mapped: named only to genus | 10 | 9 | 97% |
-| **All** | 417 | 210 | 89% |
+| **All** | 417 | 213 | 89% |
 
 ## Most often missing
 
-- bark photo: 147 pages
-- fruit photo: 100 pages
-- flowers photo: 95 pages
-- leaves photo: 49 pages
+- bark photo: 143 pages
+- fruit photo: 96 pages
+- flowers photo: 93 pages
+- leaves photo: 44 pages
 - where it grows wild: 1 pages
 - crown shape: 1 pages
 - "Which one?" leaves: 1 pages
@@ -79,16 +79,11 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Heritage oak** (`quercus-x-macdanielii-clemons`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Judy Zuk magnolia** (`magnolia-judy-zuk`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Korean sun pear** (`pyrus-fauriei`): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Lacebark pine** (`pinus-bungeana`): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Miyabe maple** (`acer-miyabei`): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Mongolian linden** (`tilia-x-mongolica`): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Oakleaf mountain ash** (`sorbus-x-thuringiaca`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Peking lilac** (`syringa-pekinensis`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Peking willow** (`salix-matsudana`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Prairifire crabapple** (`malus-prairifire`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Royal Frost birch** (`betula-penci-2`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Shirazz magnolia** (`magnolia-shirazz`): bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Spaeth alder** (`alnus-x-spaethii`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Swedish whitebeam** (`scandosorbus-intermedia`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Swedish whitebeam** (`sorbus-x-hybrida`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Triumph elm** (`ulmus-morton-glossy`): bark photo; leaves photo; flowers photo; fruit photo
@@ -102,6 +97,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Fraser fir** (`abies-fraseri`): bark photo; flowers photo; fruit photo
 - [ ] **Grand fir** (`abies-grandis`): bark photo; flowers photo; fruit photo
 - [ ] **Karl Foerster feather reed grass** (`calamagrostis-x-acutiflora-karl-foerster`): leaves photo; flowers photo
+- [ ] **Mongolian linden** (`tilia-x-mongolica`): bark photo; flowers photo; fruit photo
 - [ ] **Oriental spruce** (`picea-orientalis`): bark photo; flowers photo; fruit photo
 - [ ] **Pond cypress** (`taxodium-ascendens`): bark photo; flowers photo; fruit photo
 - [ ] **Rocky Mountain juniper** (`juniperus-scopulorum`): bark photo; flowers photo; fruit photo
@@ -143,13 +139,14 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Japanese white pine** (`pinus-parviflora`): bark photo; flowers photo
 - [ ] **Korean maple** (`acer-pseudosieboldianum`): flowers photo; fruit photo
 - [ ] **Manchurian alder** (`alnus-hirsuta`): bark photo; flowers photo
+- [ ] **Miyabe maple** (`acer-miyabei`): flowers photo; fruit photo
 - [ ] **Persian ironwood** (`parrotia-persica`): flowers photo; fruit photo
-- [ ] **Red horsechestnut** (`aesculus-x-carnea`): bark photo; fruit photo
 - [ ] **Red spruce** (`picea-rubens`): flowers photo; fruit photo
 - [ ] **Russian hawthorn** (`crataegus-ambigua`): bark photo; flowers photo
 - [ ] **Saucer magnolia** (`magnolia-x-soulangiana`): bark photo; fruit photo
 - [ ] **Serbian spruce** (`picea-omorika`): bark photo; flowers photo
 - [ ] **Sienna Glen maple** (`acer-x-freemanii-sienna-glen`): flowers photo; fruit photo
+- [ ] **Spaeth alder** (`alnus-x-spaethii`): bark photo; flowers photo
 - [ ] **Swiss stone pine** (`pinus-cembra`): bark photo; flowers photo
 - [ ] **Trident maple** (`acer-buergeranum`): bark photo; flowers photo
 - [ ] **Yoshino cherry** (`prunus-x-yedoensis`): leaves photo; fruit photo
