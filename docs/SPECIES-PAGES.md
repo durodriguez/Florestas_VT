@@ -441,6 +441,20 @@ alder bark, the alder's and chinkapin oak's catkins, Korean and Shantung maple
 flowers and flowering cherry's fruit. Rejected: "common privet" stems with thorns, which privet
 has not; northern white cedar's red seed cones again.
 
+### Batch 28 (November 2026): clean photos
+
+The owner asked for clean close-ups (rule 5 under "Choosing a photo"). Every
+photo on the site, about 1,070, was looked at in contact sheets: 150 showed a
+hand or a prop (mostly hands; also coins, rulers, paper backgrounds and a soda
+bottle). The campus species came first. Replaced with clean photos from
+Commons and iNaturalist: Freeman maple's, Japanese maple's, sweet birch's,
+flowering dogwood's, sweetgum's, common buckthorn's, Kentucky coffeetree's,
+English ivy's and bigleaf magnolia's leaves; basswood's, paper birch's,
+northern catalpa's, American chestnut's, white oak's, summersweet's, kousa
+dogwood's, coffeetree's, apple's, Japanese stewartia's and Turkish hazel's
+fruit; buckthorn's bark; Cistena plum's flowers. The rest are listed in
+PHOTO-GAPS.md ("Photos to replace"), campus trees first.
+
 ### Genus-only pages: Which one?
 
 A taxon named only to genus (crabapples, elms, serviceberries, ashes and the
