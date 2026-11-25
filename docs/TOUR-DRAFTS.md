@@ -13,7 +13,10 @@ owner's request, before anyone had walked it. The checks below still stand:
 fix any stop or note that turns out wrong on the ground.
 
 Six stops on Central Campus, each a non-native tree with a Vermont native of
-the same genus beside it, so the two can be compared side by side. About 850 m
+the same genus beside it, so the two can be compared side by side.
+Since 25 November 2026 each pair is two stops, twelve in all, the non-native
+first and its native next, so the walk stops at both trees; until then only
+the non-native was a stop, and the native was named in its note. About 850 m
 from stop to stop, north to south.
 
 Picked by script: every non-native tree (taxa.csv `origin` introduced or
