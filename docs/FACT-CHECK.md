@@ -26,6 +26,11 @@ Then:
 - **Partly confirmed**: trim the fact to the confirmed part.
 - **Not confirmed**: replace it with a fact two of those sources agree on.
 
+A fact found only in one expert reference (an extension service, Trees and
+Shrubs Online, Silvics or FEIS) and not contradicted anywhere is kept, and
+listed below as "single expert source" so it can be revisited. A fact found
+only in Wikipedia is never kept on its own.
+
 ## Progress
 
 The facts are taken in the order they appear in `data/facts.csv` among the
@@ -37,4 +42,15 @@ new rows (alphabetical by taxon id).
   - `acer-pseudoplatanus`: the new "great maple and harewood" fact rests on
     Trees and Shrubs Online's list of names; it needs a second source.
   - `adiantum-pedatum`: "pedatum, like a bird's foot" is NC State only.
-- To do: `alnus-hirsuta` onward, about 340 facts.
+- Done: `alnus-hirsuta` through `carya-ovata` (40 facts). 15 replaced or
+  trimmed. Two were wrong: pignut nuts were not, as Wikipedia says, a Native
+  American food (Trees and Shrubs Online: bitter, apparently not eaten), and
+  the shagbark "bark syrup" fact left out that the Omaha and Pawnee tapped
+  its sap for sugar. Single expert source: `alnus-hirsuta` (both),
+  `amauropelta-noveboracensis` songbird nests, `amelanchier-canadensis` and
+  `amelanchier-laevis` caterpillars, `aronia-melanocarpa` "black-fruited",
+  `athyrium-filix-femina` "doorless", `carya-cordiformis` and `carya-glabra`
+  caterpillars (NC State); `alnus-x-spaethii` (both; Trees and Shrubs Online,
+  which cites Bean and Grootendorst). `aralia-elata` shoots: English and
+  Japanese Wikipedia only.
+- To do: `carya-tomentosa` onward, about 300 facts.
