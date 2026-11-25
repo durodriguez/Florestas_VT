@@ -264,8 +264,10 @@ function yearSection(t) {
  */
 export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = [], range: rangeIn = null, maps = null, shared = {}, extras = null }) {
   const t = taxon;
-  // A European range is drawn only on its own map; without one, none.
-  const europe = rangeIn?.source === 'caudullo';
+  // A European or East Asian range is drawn only on its own map, framed to
+  // it; without one, none.
+  const europe = rangeIn?.source === 'caudullo' || rangeIn?.source === 'gbif';
+  const fromRecords = rangeIn?.source === 'gbif';
   // Photo credits, numbered in the order the photos appear (footnote()).
   const credits = [];
   const range = europe && !maps?.range ? null : rangeIn;
@@ -352,7 +354,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     <figure class="range">
       ${europe
     ? `<div class="range-map"><img src="${esc(maps.range.base)}" alt="">${maps.range.fill}<img src="${esc(maps.range.lines)}" alt=""></div>
-      <figcaption><span class="key"><i></i>Grows wild</span>${range.points?.length ? '<span class="key"><i class="dot"></i>Small isolated stands</span>' : ''}</figcaption>`
+      <figcaption><span class="key"><i></i>Grows wild</span>${range.points?.length ? `<span class="key"><i class="dot"></i>${fromRecords ? 'Isolated records' : 'Small isolated stands'}</span>` : ''}</figcaption>`
     : `<div class="range-map"><img src="${esc(shared.rangeBase)}" alt="">${rangeSvg(range)}<img src="${esc(shared.rangeLines)}" alt=""></div>
       <figcaption><span class="key"><i></i>Grows wild</span><span class="key star">&#9733; Burlington</span><span class="key vt">Vermont</span></figcaption>`}
     </figure>
@@ -406,10 +408,13 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
   ].join('');
 
   // Credits only for what a license requires: the European range map (CC BY
-  // 4.0) and the photos (photoCredits). Little's maps are public domain; the
+  // 4.0), the East Asian one (drawn from CC BY records and Kew's checklist,
+  // CC BY 4.0) and the photos (photoCredits). Little's maps are public domain; the
   // habitat's and facts' sources are kept in their files, not shown, as the
   // description's and fun fact's are not.
-  const mapCredit = range && europe
+  const mapCredit = range && fromRecords
+    ? `<section class="credits"><p><b>Map credit.</b></p><p class="credit-line">Drawn for this site from herbarium specimens shared through <a href="https://www.gbif.org" rel="noopener">GBIF.org</a> (records under CC0 or CC BY, November 2026), leaving out any labelled as planted, within the native range in Govaerts et al. 2021, <a href="https://doi.org/10.1038/s41597-021-00997-6" rel="noopener">The World Checklist of Vascular Plants</a>, Royal Botanic Gardens, Kew, <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener license">CC BY 4.0</a>.</p></section>`
+    : range && europe
     ? `<section class="credits"><p><b>Map credit.</b></p><p class="credit-line">Caudullo, G., Welk, E., San-Miguel-Ayanz, J., 2017, <a href="https://doi.org/10.1016/j.dib.2017.05.007" rel="noopener">Chorological maps for the main European woody species</a>, <i>Data in Brief</i> 12, European Commission Joint Research Centre, <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener license">CC BY 4.0</a>. Drawn here without the areas where the species was introduced.</p></section>`
     : '';
 

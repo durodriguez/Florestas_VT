@@ -29,6 +29,7 @@
     "itree:import": "node scripts/import-itree.mjs",
     "ranges:fetch": "node scripts/fetch-ranges.mjs",
     "ranges:fetch-europe": "node scripts/fetch-ranges-europe.mjs",
+    "ranges:fetch-asia": "python3 scripts/ranges-asia/fetch_ranges_asia.py",
     "check:photos": "node scripts/check-photos.mjs"
   },
   "dependencies": {
