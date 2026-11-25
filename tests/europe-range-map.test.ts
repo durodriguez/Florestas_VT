@@ -103,6 +103,7 @@ describe('a European range on its species page', () => {
     expect(html).toContain('picea-abies-base.svg');
     expect(html).toContain('Not native to North America');
     expect(html).toContain('Small isolated stands');
+    expect(html).toContain('<b>Map credit.</b>');
     expect(html).toContain('Chorological maps for the main European woody species');
     expect(html).not.toContain('Burlington</span>');
     expect(html).not.toContain('Atlas of United States Trees');
