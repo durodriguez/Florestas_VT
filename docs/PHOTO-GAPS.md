@@ -164,3 +164,76 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [ ] **Cistena plum**, fruit (`prunus-x-cistena`, fruit). Black, July and August.
 - [ ] **Anglojap yew**, bark (`taxus-x-media`, bark). Reddish-brown, flaking.
 - [ ] **Anglojap yew**, fruit (`taxus-x-media`, fruit). Red arils in fall.
+
+## Photos to replace: hands and props
+
+Rule 5 of SPECIES-PAGES.md ("Choosing a photo") asks for a clean close-up: the
+part itself, against a blurred background, with no hands, napkins, rulers,
+coins or other objects. In November 2026 every photo on the site was looked
+at for this; these still show a hand or a prop, and no clean photo of the
+same part was found yet. They stay up until one is: a photo with a hand is
+better than none. Delete a line once its photo is replaced.
+
+- **Japanese zelkova**, fruit — `zelkova-serrata` (34 on campus)
+- **Japanese tree lilac**, bark — `syringa-reticulata` (19 on campus)
+- **Common baldcypress**, flowers — `taxodium-distichum` (13 on campus)
+- **Bigtooth aspen**, flowers — `populus-grandidentata` (4 on campus)
+- **Dragon's claw willow**, fruit — `salix-matsudana-tortuosa` (2 on campus)
+- **White fir**, fruit — `abies-concolor` (2 on campus)
+- **Northern pin oak**, fruit — `quercus-ellipsoidalis` (1 on campus)
+- **Swamp chestnut oak**, leaves — `quercus-michauxii` (1 on campus)
+- **Allegheny serviceberry**, bark — `amelanchier-laevis`
+- **American elderberry**, leaves — `sambucus-canadensis`
+- **American elm**, fruit — `ulmus-americana`
+- **Arrowwood viburnum**, flowers — `viburnum-dentatum`
+- **Arrowwood viburnum**, fruit — `viburnum-dentatum`
+- **Arrowwood viburnum**, leaves — `viburnum-dentatum`
+- **Atlantic white cedar**, fruit — `chamaecyparis-thyoides`
+- **Black alder**, leaves — `alnus-glutinosa`
+- **Black oak**, leaves — `quercus-velutina`
+- **Black willow**, leaves — `salix-nigra`
+- **Blackhaw**, fruit — `viburnum-prunifolium`
+- **Blackhaw**, leaves — `viburnum-prunifolium`
+- **Blue Chiffon rose of Sharon**, leaves — `hibiscus-syriacus-notwoodthree`
+- **Blue ash**, flowers — `fraxinus-quadrangulata`
+- **Blue ash**, fruit — `fraxinus-quadrangulata`
+- **Carolina allspice**, leaves — `calycanthus-floridus`
+- **Chestnut oak**, fruit — `quercus-montana`
+- **Chinkapin oak**, leaves — `quercus-muehlenbergii`
+- **Christmas fern**, leaves — `polystichum-acrostichoides`
+- **Coast redwood**, fruit — `sequoia-sempervirens`
+- **Common pear**, fruit — `pyrus-communis`
+- **English yew**, leaves — `taxus-baccata`
+- **European linden**, leaves — `tilia-x-europaea`
+- **Fall Gold raspberry**, leaves — `rubus-idaeus-fall-gold`
+- **Fragrant sumac**, leaves — `rhus-aromatica`
+- **Inkberry**, fruit — `ilex-glabra`
+- **Japanese pagoda tree**, leaves — `styphnolobium-japonicum`
+- **Japanese snowbell**, flowers — `styrax-japonicus`
+- **Lacebark pine**, bark — `pinus-bungeana`
+- **Laurel oak**, fruit — `quercus-hemisphaerica`
+- **Mariesii doublefile viburnum**, leaves — `viburnum-plicatum-tomentosum-mariesii`
+- **Nannyberry**, flowers — `viburnum-lentago`
+- **Nannyberry**, fruit — `viburnum-lentago`
+- **Nannyberry**, leaves — `viburnum-lentago`
+- **Old-fashioned weigela**, leaves — `weigela-florida`
+- **Overcup oak**, fruit — `quercus-lyrata`
+- **Peking willow**, fruit — `salix-matsudana`
+- **Persimmon**, leaves — `diospyros-virginiana`
+- **Post oak**, flowers — `quercus-stellata`
+- **Post oak**, fruit — `quercus-stellata`
+- **Post oak**, leaves — `quercus-stellata`
+- **Sawtooth oak**, fruit — `quercus-acutissima`
+- **Scarlet oak**, leaves — `quercus-coccinea`
+- **Shumard oak**, fruit — `quercus-shumardii`
+- **Shumard oak**, leaves — `quercus-shumardii`
+- **Slippery elm**, flowers — `ulmus-rubra`
+- **Slippery elm**, leaves — `ulmus-rubra`
+- **Sugarberry**, fruit — `celtis-laevigata`
+- **Weeping cherry**, leaves — `prunus-subhirtella`
+- **Weeping willow**, flowers — `salix-babylonica`
+- **Weeping willow**, fruit — `salix-babylonica`
+- **Weeping willow**, leaves — `salix-babylonica`
+- **White Chiffon rose of Sharon**, leaves — `hibiscus-syriacus-notwoodtwo`
+- **White willow**, flowers — `salix-alba`
+- **White willow**, leaves — `salix-alba`
