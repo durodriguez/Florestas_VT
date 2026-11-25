@@ -28,6 +28,7 @@ import { yearSummary, yearTable } from './year';
 import { tilesFor } from './tiles';
 import { ORIGIN_LABELS } from '../palette';
 import { neighbours, othersOfItsKind, step, stepText } from './walk';
+import { initSheetSplit } from './sheet-split';
 import type { Dataset, Plant, Tour } from '../types';
 
 const BASE = import.meta.env.BASE_URL;
@@ -378,6 +379,11 @@ function record(how: Hist, state: Record<string, unknown> | null = history.state
  * Walk a tour: its stops numbered and joined in order over the faded trees,
  * and the sheet turned to the stop the visitor is on and the way to the next.
  */
+/** The divider above the sheet while a tour is walked (sheet-split.ts): re-centre the stop after a resize. */
+const sheetSplit = initSheetSplit($('fg-sheet'), $('fg-sheet-split'), () => {
+  if (walking) showPoint(walking.stops[walking.index]!, map.getZoom());
+});
+
 function startTour(tour: Tour, index: number, how: Hist): void {
   const stops = tour.stops.map((s) => byId.get(s.plantId)).filter((p): p is Plant => p !== undefined);
   if (stops.length < 2) return;
@@ -399,6 +405,7 @@ function startTour(tour: Tour, index: number, how: Hist): void {
   $('fg-around').hidden = true;
   $('fg-tours').hidden = true;
   $('fg-walk').hidden = false;
+  sheetSplit.enable(true);
   renderWalk();
   const c = sheetCover();
   map.fitBounds(L.latLngBounds(stops.map((p) => [p.lat, p.lng] as [number, number])), {
@@ -447,6 +454,7 @@ function renderWalk(): void {
         : '<button type="button" class="fg-step fg-step--next" data-go="end">End of the tour</button>'}
     </div>
     <a class="fg-walk-explorer" href="${esc(BASE)}?tour=${encodeURIComponent(tour.id)}">This tour in the explorer</a>`;
+  sheetSplit.refit();
 }
 
 /** "End tour": back through history if the tour began here, so Back and this agree. */
@@ -460,6 +468,7 @@ function endTour(how: Hist): void {
   tourLayer.clearLayers();
   fadeTrees(false);
   $('fg-walk').hidden = true;
+  sheetSplit.enable(false);
   $('fg-tabs').hidden = false;
   setTab('tours');
   record(how, null);

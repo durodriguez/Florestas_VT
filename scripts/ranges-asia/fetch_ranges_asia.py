@@ -17,7 +17,9 @@ States and Caudullo et al. for Europe, so these are drawn from records:
   China (the herbarium record there is too thin to draw from), and one native
   outside East Asia too is left out.
 - Where in those regions: herbarium specimens with coordinates, from GBIF.org,
-  under CC0 or CC BY (not CC BY-NC), leaving out any whose label says it was
+  under CC0, CC BY or CC BY-NC (the site is educational and non-commercial;
+  until November 2026 CC BY-NC was left out, which hid most Korean specimens,
+  Seoul National University's), leaving out any whose label says it was
   planted or grown in a garden, park, temple, school or plantation, any placed
   less precisely than 25 km, and any outside the native regions.
 
@@ -45,7 +47,7 @@ EAST_ASIA = {'JAP', 'KOR', 'KUR', 'NNS', 'KRY', 'TAI', 'OGA', 'SAK', 'PRM'}
 CHINA = {'CHC', 'CHH', 'CHI', 'CHM', 'CHN', 'CHQ', 'CHS', 'CHT', 'CHX'}
 COUNTRIES = ('Japan', 'South Korea', 'North Korea', 'Russia', 'Taiwan', 'China')
 PLANTED = re.compile(r'cultiv|planted|plantation|garden|botanic|park\b|campus|arboret|nursery|'
-                     r'植栽|栽培|植林|造林|人工林|公園|庭|園|行道|校|寺|神社|식재|재배|공원|수목원|조림', re.I)
+                     r'experiment station|植栽|栽培|植林|造林|人工林|試験場|公園|庭|園|行道|校|寺|神社|식재|재배|공원|수목원|조림|시험장', re.I)
 
 # Kilometres: each record's circle; the gap closed between neighbours; the
 # farthest apart three records may be and still be joined; and the smallest
@@ -64,6 +66,15 @@ NORTH_LIMIT = {
     # Southern Tohoku southward, a few in Akita; escaped in Hokkaido
     # (Japanese Wikipedia, Megi; Hokkaido University's flora pages).
     'Berberis thunbergii': {'lat': 40.0},
+}
+
+# Where a species is known wild but so rare that its specimens stand alone,
+# a single specimen inside the box (west, south, east, north) is drawn as a
+# dot rather than left out.
+RARE_WILD = {
+    # Kyushu, without Yakushima's Yakutanegoyo, a pine of its own: listed as
+    # threatened in Kumamoto (VU, Red List Kumamoto 2024) and Saga (Category I).
+    'Pinus parviflora': (128.5, 31.0, 132.2, 34.3),
 }
 
 
@@ -149,13 +160,21 @@ def draw(name, codes, regions, land):
     kept, dropped = [], {'licence': 0, 'planted': 0, 'imprecise': 0, 'not native there': 0, 'at sea': 0}
     for r in specimens(name):
         lic = r.get('license') or ''
-        if not (('publicdomain/zero' in lic) or ('licenses/by/' in lic)): dropped['licence'] += 1; continue
+        # CC0, CC BY and CC BY-NC: the site is educational and non-commercial.
+        if not any(k in lic for k in ('publicdomain/zero', 'licenses/by/', 'licenses/by-nc/')): dropped['licence'] += 1; continue
         if PLANTED.search(' '.join(str(r.get(k) or '') for k in ('locality', 'habitat', 'occurrenceRemarks', 'establishmentMeans'))): dropped['planted'] += 1; continue
         if (r.get('coordinateUncertaintyInMeters') or 0) > 25000: dropped['imprecise'] += 1; continue
         p = Point(FWD(r['decimalLongitude'], r['decimalLatitude']))
         if not mask.contains(p): dropped['not native there'] += 1; continue
         if here.distance(p) > 5: dropped['at sea'] += 1; continue
         kept.append(p)
+    # Duplicates of one gathering (eleven sheets from one spot in Jeju City)
+    # count once, so they cannot vouch for each other as neighbours.
+    seen, distinct = set(), []
+    for p in kept:
+        k = (round(p.x), round(p.y))   # to the kilometre
+        if k not in seen: seen.add(k); distinct.append(p)
+    kept = distinct
     limit = NORTH_LIMIT.get(name) or {}
     if limit:
         south = project(Polygon([(115, 20), (160, 20), (160, limit['lat']), (115, limit['lat'])]).segmentize(0.5))
@@ -176,7 +195,9 @@ def draw(name, codes, regions, land):
     # A record with no neighbour is drawn as a dot only if a second specimen
     # was taken within 25 km of it: one alone is as likely a planted tree
     # whose label does not say so.
-    single = [p for p, l in zip(kept, lonely) if l and len(tree.query(p.buffer(25))) < 2]
+    box = RARE_WILD.get(name)
+    rare = project(Polygon([(box[0], box[1]), (box[2], box[1]), (box[2], box[3]), (box[0], box[3])])) if box else Polygon()
+    single = [p for p, l in zip(kept, lonely) if l and len(tree.query(p.buffer(25))) < 2 and not rare.contains(p)]
     dropped['single record'] = len(single)
     areas, dots = [], [(p.x, p.y) for p, l in zip(kept, lonely) if l and p not in single]
     for g in polys:
@@ -189,7 +210,7 @@ def draw(name, codes, regions, land):
     return {
         'species': name, 'source': 'gbif',
         'regions': sorted(codes),
-        'records': len(kept), 'left_out': dropped,
+        'places': len(kept), 'left_out': dropped,
         'range': [[ll(g.exterior.coords)] + [ll(h.coords) for h in g.interiors] for g in areas],
         'absent': [],
         'points': ll(dots),
@@ -218,7 +239,7 @@ def main():
     for name, codes in sorted(todo.items()):
         r = draw(name, codes, regions, land)
         with open(os.path.join(OUT, names[name] + '.json'), 'w') as f: json.dump(r, f, separators=(',', ':'))
-        print(f"{name}: {r['records']} specimens, {len(r['range'])} areas, {len(r['points'])} dots; left out {r['left_out']}", file=sys.stderr)
+        print(f"{name}: specimens from {r['places']} places, {len(r['range'])} areas, {len(r['points'])} dots; left out {r['left_out']}", file=sys.stderr)
 
 
 if __name__ == '__main__':

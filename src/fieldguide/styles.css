@@ -51,8 +51,16 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
   position: absolute; z-index: 600; left: 0; right: 0; bottom: 0;
   padding: .55rem max(14px, env(safe-area-inset-right, 0px)) calc(.9rem + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px));
   background: var(--bg); border-radius: 18px 18px 0 0; box-shadow: 0 -4px 20px rgb(0 0 0 / 16%);
+  /* A long tour note scrolls in the sheet rather than hiding the map. */
+  max-height: 75vh; overflow-y: auto;
 }
 .fg-sheet::before { content: ""; display: block; width: 2.4rem; height: 4px; border-radius: 2px; background: var(--rule); margin: 0 auto .5rem; }
+/* While a tour is walked, the grip is a divider: drag it to share the screen between map and sheet (sheet-split.ts). */
+.fg-sheet--split::before { display: none; }
+.fg-sheet-split { position: sticky; top: -.55rem; z-index: 1; margin: -.55rem -14px .35rem; padding: .7rem 0 .55rem; cursor: ns-resize; touch-action: none; background: var(--bg); border-radius: 18px 18px 0 0; }
+.fg-sheet-split::before { content: ""; display: block; width: 2.6rem; height: 5px; border-radius: 3px; background: var(--rule); margin: 0 auto; }
+.fg-sheet-split:hover::before, .fg-sheet-split.is-dragging::before, .fg-sheet-split:focus-visible::before { background: var(--dim); }
+.fg-sheet-split:focus-visible { outline: 3px solid var(--gold); outline-offset: -3px; }
 .fg-tabs { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .2rem; }
 .fg-tabs[hidden] { display: none; }
 .fg-tabs button {
@@ -103,7 +111,8 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
 .fg-linkbtn { font: inherit; font-size: .85rem; font-weight: 600; padding: 0; border: 0; background: none; color: var(--green-2); text-decoration: underline; cursor: pointer; white-space: nowrap; }
 .fg-card--stop { grid-template-columns: 5.5rem 1fr; grid-template-rows: none; }
 .fg-card--stop .fg-thumb { height: auto; min-height: 5.2rem; }
-.fg-note { color: var(--ink) !important; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+/* A tour's note is shown whole: it is what the stop is for (until November 2026 it was cut to three lines). */
+.fg-note { color: var(--ink) !important; }
 .fg-walk-offer { margin: .45rem 0 0; font-size: .82rem; color: var(--dim); }
 .fg-walk-nav { display: flex; gap: .45rem; margin-top: .5rem; }
 .fg-step {
@@ -129,6 +138,7 @@ body { font-family: var(--font); color: var(--ink); background: var(--bg); overf
 @media (min-width: 48rem) {
   .fg-sheet { left: 1rem; right: auto; bottom: 1rem; width: 22rem; border-radius: 14px; }
   .fg-sheet::before { display: none; }
+  .fg-sheet-split { display: none; }
   .fg-cards { grid-auto-flow: row; grid-auto-columns: auto; overflow: visible; }
   .fg-card { grid-template-columns: 5.5rem 1fr; grid-template-rows: none; }
   .fg-thumb { height: auto; min-height: 4.6rem; }

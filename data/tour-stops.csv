@@ -1,17 +1,23 @@
 tour_id,stop,plant_id,note
-giants-of-the-green,1,UVM-0018,Tied for No. 14 of the 978 trunks measured on campus: 31 in across in 2014. The first of four silver maples on this walk.
-giants-of-the-green,2,UVM-0021,"No. 9 of the 978 trunks measured on campus: 35 in across in 2014, the biggest silver maple on the walk."
+giants-of-the-green,1,UVM-0018,Tied for No. 16 of the 990 trunks measured on campus: 31 in across in 2014. The first of four silver maples on this walk.
+giants-of-the-green,2,UVM-0021,"No. 9 of the 990 trunks measured on campus: 35 in across in 2014, the biggest silver maple on the walk."
 giants-of-the-green,3,UVM-0058,The largest trunk measured on campus: 49 in across in 2014.
-giants-of-the-green,4,UVM-0062,No. 8 of the 978 trunks measured on campus: 38 in across in 2014.
-giants-of-the-green,5,UVM-0064,"Tied for No. 11 of the 978 trunks measured on campus: 32 in across in 2014, the same as the silver maple at the next stop."
-giants-of-the-green,6,UVM-0069,Tied for No. 11 of the 978 trunks measured on campus: 32 in across in 2014.
-giants-of-the-green,7,UVM-0100,No. 6 of the 978 trunks measured on campus: 40 in across in 2014.
-giants-of-the-green,8,UVM-0109,"Tied for No. 14 of the 978 trunks measured on campus: 31 in across in 2014. The inventory names it only as an ash, so its species is still to be checked."
-giants-of-the-green,9,UVM-0092,"No. 7 of the 978 trunks measured on campus: 39.1 in across, measured by the 2022 dendrology class. Like the last stop, an ash still to be named to species."
-giants-of-the-green,10,UVM-0144,"Tied for No. 25 of the 978 trunks measured on campus: 28 in across in 2014, and the only evergreen on the walk."
-native-or-not,1,UVM-3232,"A Norway maple, marked invasive in Vermont, 4 m from a native sugar maple (UVM-4181). Snap a leaf stalk: Norway maple's sap is milky, sugar maple's clear."
-native-or-not,2,UVM-0594,"A Scotch pine, 29 m from a native eastern white pine (UVM-0588). Count the needles in a bundle: two, short and twisted, against white pine's five, long and soft."
-native-or-not,3,UVM-0745,"A Norway spruce, 6 m from a native white spruce (UVM-4005). Norway spruce's side branches hang like curtains and its cones are long; white spruce's cones are short."
-native-or-not,4,UVM-0781,"A Lombardy poplar, 5 m from a native bigtooth aspen (UVM-4011): a narrow column grown from cuttings of one male tree, beside an aspen with big, coarse teeth on its leaves."
-native-or-not,5,UVM-4728,"A young kousa dogwood, 16 m from a young native flowering dogwood (UVM-4726). Kousa blooms weeks later, with pointed bracts; flowering dogwood's bracts are notched."
-native-or-not,6,UVM-3802,"A Colorado blue spruce, from the Rockies, 5 m from a native white spruce (UVM-4185): stiff, sharp, blue-gray needles against white spruce's softer green."
+giants-of-the-green,4,UVM-0062,No. 8 of the 990 trunks measured on campus: 38 in across in 2014.
+giants-of-the-green,5,UVM-0064,"Tied for No. 13 of the 990 trunks measured on campus: 32 in across in 2014, the same as the silver maple at the next stop."
+giants-of-the-green,6,UVM-0069,Tied for No. 13 of the 990 trunks measured on campus: 32 in across in 2014.
+giants-of-the-green,7,UVM-0100,No. 7 of the 990 trunks measured on campus: 40 in across in 2014.
+giants-of-the-green,8,UVM-0109,"Tied for No. 16 of the 990 trunks measured on campus: 31 in across in 2014. The inventory names it only as an ash, so its species is still to be checked."
+giants-of-the-green,9,UVM-0092,"No. 6 of the 990 trunks measured on campus: 39.1 in across, measured by the 2022 dendrology class. Like the last stop, an ash still to be named to species."
+giants-of-the-green,10,UVM-0144,"Tied for No. 28 of the 990 trunks measured on campus: 28 in across in 2014, and the only evergreen on the walk."
+native-or-not,1,UVM-3232,"A Norway maple, from Europe, marked invasive in Vermont. Snap a leaf stalk: its sap is milky. Its native counterpart, a sugar maple, is the next stop, 4 m away."
+native-or-not,2,UVM-4181,"A sugar maple, native to Vermont, 4 m from the Norway maple. Snap a leaf stalk: its sap is clear."
+native-or-not,3,UVM-0594,"A Scotch pine, from Europe and Asia. Count the needles in a bundle: two, short and twisted; its upper bark is orange. Its native counterpart, an eastern white pine, is the next stop, 29 m away."
+native-or-not,4,UVM-0588,"An eastern white pine, native to Vermont, 29 m from the Scotch pine. Its needles come five to a bundle, long and soft."
+native-or-not,5,UVM-0745,"A Norway spruce, from Europe. Its side branches hang like curtains, and its cones are long. Its native counterpart, a white spruce, is the next stop, 6 m away."
+native-or-not,6,UVM-4005,"A white spruce, native to Vermont, 6 m from the Norway spruce. Its cones are short, and its crushed needles smell sharp."
+native-or-not,7,UVM-0781,"A Lombardy poplar: a narrow column grown from cuttings of one male tree from Italy. Its native counterpart, a bigtooth aspen, is the next stop, 5 m away."
+native-or-not,8,UVM-4011,"A bigtooth aspen, native to Vermont, 5 m from the Lombardy poplar, with big, coarse teeth on its leaves."
+native-or-not,9,UVM-4728,"A young kousa dogwood, from East Asia. It blooms weeks after the native one, with pointed bracts. Its native counterpart, a flowering dogwood, is the next stop, 16 m away."
+native-or-not,10,UVM-4726,"A young flowering dogwood, native to Vermont, 16 m from the kousa. Its bracts are notched at the tip."
+native-or-not,11,UVM-3802,"A Colorado blue spruce, from the Rockies, with stiff, sharp, blue-gray needles. Its native counterpart, a white spruce, is the next stop, 5 m away."
+native-or-not,12,UVM-4185,"A white spruce, native to Vermont, 5 m from the blue spruce: softer, green needles."
