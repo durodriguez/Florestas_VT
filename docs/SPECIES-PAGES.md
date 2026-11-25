@@ -209,6 +209,12 @@ under *Map credit*.
   Fukushima (38°N; native from Fukushima to Yakushima), sawara likewise, with
   its outlying stand on Mount Hayachine in Iwate as a dot, and Japanese
   barberry at 40°N (southern Tohoku and a few in Akita; escaped in Hokkaido).
+- **Rare in part of its range.** Japanese white pine is wild in Kyushu but
+  rare there (threatened on Kumamoto's and Saga's red lists, which keep their
+  stands' places vague), and GBIF holds one specimen from the island, in
+  Miyazaki. Where a species is so rare that its specimens stand alone, the
+  script keeps a single one as a dot (`RARE_WILD`); the Distribution says it
+  is rare there.
 - **China.** Seventy-one East Asian species in `taxa.csv` are native in
   China too, and GBIF's Chinese specimens are too few to draw them (zelkova
   has about 200 across the country, which drew as scattered patches). The

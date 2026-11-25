@@ -5,7 +5,7 @@ import { SIZE, frameFor, europeRangeSvg } from '../scripts/lib/europe-range-map.
 // @ts-expect-error -- plain .mjs module, intentionally untyped
 import { renderSpeciesPage } from '../scripts/lib/species-pages.mjs';
 
-type Range = { species: string; source: string; regions: string[]; records: number; range: number[][][][]; absent: unknown[]; points: number[][] };
+type Range = { species: string; source: string; regions: string[]; places: number; range: number[][][][]; absent: unknown[]; points: number[][] };
 const dir = 'data/ranges/asia';
 const range = (name: string): Range => JSON.parse(readFileSync(`${dir}/${name}.json`, 'utf8'));
 const names = readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => f.replace(/\.json$/, ''));
@@ -44,6 +44,11 @@ describe('East Asian range maps', () => {
       const lats = [...r.range.flatMap((poly) => poly[0]!), ...r.points].map(([, lat]) => lat!);
       expect(Math.max(...lats), n).toBeLessThan(40);
     }
+  });
+
+  it('keeps Japanese white pine\'s rare Kyushu specimen as a dot', () => {
+    const kyushu = range('pinus-parviflora').points.filter(([lng, lat]) => lng! < 132.2 && lat! > 31 && lat! < 34.3);
+    expect(kyushu.length).toBeGreaterThan(0);
   });
 
   it('puts star magnolia around Ise Bay, not across Japan', () => {
