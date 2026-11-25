@@ -110,22 +110,33 @@ describe('renderSpeciesPage', () => {
     expect(page(taxon({ count: 0 }))).toMatch(/<p class="actions"><a class="btn" href="https:\/\/en\.wikipedia[^"]*" rel="noopener">Wikipedia<\/a><\/p>/);
   });
 
-  it('leads with the newest campus photo and puts the rest in On campus, above its button', () => {
-    const html = page(taxon({ count: 2 }), {
+  it('keeps campus photos out of the top of the page: all in On campus, newest first, above its button', () => {
+    const html = page(taxon({ count: 2, matureSpreadFt: 40 }), {
       photos: [
         { id: 'UVM-0493', url: 'https://uvm.edu/photos/493.webp', taken: '2026-05-01' },
         { id: 'UVM-0494', url: 'https://uvm.edu/photos/494.webp', taken: '2026-09-01' },
       ],
     });
     const at = (s: string) => html.indexOf(s);
-    expect(at('<figure class="lead">')).toBeLessThan(at('<h2>On campus</h2>'));
-    expect(html.slice(at('<figure class="lead">'), at('</figure>'))).toContain('494.webp');
-    expect(html).toContain('photographed Sep 2026');
+    // The drawing leads, with the description beside it.
+    expect(at('<section class="hero">')).toBeGreaterThan(-1);
+    expect(html.slice(at('<section class="hero">'), at('</section>'))).toContain('class="mature"');
+    expect(html.slice(at('<section class="hero">'), at('</section>'))).not.toContain('.webp');
+    expect(at('class="lead"')).toBe(-1);
     expect(at('2 mapped on campus')).toBeGreaterThan(at('<h2>On campus</h2>'));
     expect(at('class="shots"')).toBeGreaterThan(at('2 mapped on campus'));
-    expect(html.slice(at('class="shots"'))).toContain('493.webp');
+    expect(at('494.webp')).toBeGreaterThan(at('class="shots"'));
+    expect(at('493.webp')).toBeGreaterThan(at('494.webp'));
     expect(at('Show them on the map')).toBeGreaterThan(at('class="shots"'));
     expect(at('<h2>Characteristics</h2>')).toBeGreaterThan(at('<h2>On campus</h2>'));
+  });
+
+  it('keeps Worth knowing to the species: no campus facts', () => {
+    const html = page(taxon({ count: 1 }), { trees: [{ id: 'UVM-0001', lat: 44.478, lng: -73.199, dbh: 30, campus: 'Central Campus' }] });
+    const worth = html.slice(html.indexOf('class="worth"'), html.indexOf('</aside>'));
+    expect(worth).toContain('Linden honey');
+    expect(worth).not.toContain('mapped on campus');
+    expect(worth).not.toContain('largest trunk');
   });
 
   it('keeps the base path so the pages work under a project URL', () => {

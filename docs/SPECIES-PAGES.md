@@ -15,7 +15,7 @@ by species, most common first.
 
 1. **The name**, its family and type above it, and its origin (Vermont native,
    introduced, Vermont invasive) as a badge.
-2. **The drawing and the lead photo**, side by side.
+2. **The drawing**, with the description and Worth knowing (3) beside it.
    - *The drawing* (`scripts/lib/tree-drawing.mjs`, tested): the tree at
      maturity, from the mature height and spread in `taxa.csv`, beside a 6 ft
      person, with a guide every 20 ft. Every species is drawn at the same
@@ -27,14 +27,16 @@ by species, most common first.
      everything else an oval. Everything random is seeded by the taxon's id,
      so a drawing is the same on every build. Only trees with both a height
      and a spread get one.
-   - *The lead photo*: the newest photo of the species taken on campus, aimed
-     a little above the middle as the field guide's are. A tap shows it whole.
-     The other photos are under On campus.
-3. **The description**, and beside it **Worth knowing**: the fun fact, the
-   facts in `data/facts.csv`, then what the inventory can vouch for, worked out at every build so it stays
-   true. That it is the only one on campus, or the largest trunk measured so
-   far ("so far", because most trees have no measurement yet). How many there
-   are and where is On campus's to say, not repeated here.
+   - No campus photo here: since November 2026 they are all under On campus,
+     newest first. The newest one used to lead the page beside the drawing;
+     the top is the drawing's, to be brought up to standard species by species.
+   - A page without a drawing (shrubs, vines, ferns, a tree without its size on
+     file) opens with the description and Worth knowing side by side.
+3. **The description**, and with it **Worth knowing**: the fun fact, then the
+   facts in `data/facts.csv`, about the species. Until November 2026 it ended
+   with facts about the campus's own trees (the only one mapped, the largest
+   trunk measured so far); those were taken out, as Worth knowing is about the
+   species, and On campus says how many there are and where.
 4. **Through the year**: the field guide's year table and its sentence under it
    (leaves, flowers, fruit or cones, month by month, in their colors), from
    the species' typical months in `taxa.csv`. `scripts/lib/year.mjs` is a copy
@@ -60,7 +62,7 @@ by species, most common first.
    dots it draws for *Small isolated stands*. (A *Not native to North
    America* note there was dropped in November 2026: the origin badge at the
    top of the page says as much.)
-6. **On campus**: how many are mapped, by campus, the other photos, the
+6. **On campus**: how many are mapped, by campus, its photos, newest first (a tap shows one whole), the
    buttons to the map and Wikipedia, and a small campus map with each tree as
    a red dot linking to it on the map (`scripts/lib/campus-map.mjs`). Not a
    zoomable map: "Show them on the map" is the way to one.

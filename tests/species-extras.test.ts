@@ -14,7 +14,7 @@ import { speciesExtras, staleGaps } from '../scripts/lib/species-extras.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
 import { campusFrame, campusSvg } from '../scripts/lib/campus-map.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
-import { campusFacts, whereSentence } from '../scripts/lib/species-pages.mjs';
+import { whereSentence } from '../scripts/lib/species-pages.mjs';
 
 const rows = Papa.parse<Record<string, string>>(readFileSync('data/taxa.csv', 'utf8'), { header: true, skipEmptyLines: true }).data;
 const months = (v: string) => (v ?? '').split(/[,;\s]+/).filter(Boolean).map(Number).filter((m) => m >= 1 && m <= 12);
@@ -124,19 +124,6 @@ describe('the campus on a species page', () => {
     expect(whereSentence(trees)).toBe('4 trees mapped on campus: 3 on Redstone Campus and 1 on Central Campus.');
     expect(whereSentence(trees.slice(1, 3))).toBe('2 trees mapped on campus, both on Redstone Campus.');
     expect(whereSentence(trees.slice(0, 1))).toBe('1 tree mapped on campus, on Central Campus.');
-  });
-
-  it('names the largest trunk measured, and every tree tied for it', () => {
-    const [fact] = campusFacts(trees, '/');
-    expect(fact).toContain('The largest trunk measured so far is 20 in across');
-    expect(fact).toContain('href="/?plant=UVM-0001">UVM-0001</a> on Central Campus and');
-    expect(fact).toContain('UVM-0002</a> on Redstone Campus');
-    expect(campusFacts(trees.slice(1, 3), '/')[0]).toContain('UVM-0002</a>, on Redstone Campus');
-  });
-
-  it('says when there is only one, and claims nothing about its size', () => {
-    expect(campusFacts(trees.slice(0, 1), '/')).toEqual(['The only one mapped on campus, on Central Campus.']);
-    expect(campusFacts([], '/')).toEqual([]);
   });
 
   it('draws each tree as a link to it on the map', () => {

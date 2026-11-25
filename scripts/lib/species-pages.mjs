@@ -141,31 +141,6 @@ export function whereSentence(trees) {
 }
 
 /**
- * Facts the inventory itself can vouch for, worked out at every build so they
- * stay true: that it is the only one, or the largest trunk measured.
- * "Measured so far", because most trees have no measurement yet.
- */
-export function campusFacts(trees, base) {
-  if (!trees.length) return [];
-  const facts = [];
-  // How many and where is On campus's to say; here only that there is one.
-  if (trees.length === 1) facts.push(`The only one mapped on campus${trees[0].campus ? `, on ${esc(trees[0].campus)}` : ''}.`);
-  const measured = trees.filter((t) => typeof t.dbh === 'number' && t.dbh > 0);
-  if (trees.length > 1 && measured.length) {
-    const top = Math.max(...measured.map((t) => t.dbh));
-    const biggest = measured.filter((t) => t.dbh === top).sort((a, b) => a.id.localeCompare(b.id)).slice(0, 3);
-    const link = (t) => `<a href="${esc(base)}?plant=${encodeURIComponent(t.id)}">${esc(t.id)}</a>`;
-    // The campus once when they share it, after each when they do not.
-    const shared = oneCampus(biggest);
-    const named = shared
-      ? `${listing(biggest.map(link))}, ${biggest.length === 2 ? 'both ' : biggest.length > 2 ? 'all ' : ''}on ${esc(shared)}`
-      : listing(biggest.map((t) => `${link(t)}${t.campus ? ` on ${esc(t.campus)}` : ''}`));
-    facts.push(`The largest trunk measured so far is ${top} in across: ${named}.`);
-  }
-  return facts;
-}
-
-/**
  * Know it by: a photo of its bark, leaves, flowers and fruit, from Wikimedia
  * Commons (data/part-photos.csv), each with what taxa.csv says of that part.
  * A tap shows the photo full size (LIGHTBOX_JS). Its credit, as its license
@@ -299,15 +274,14 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
   const kicker = [esc(t.family), TYPE_LABELS[t.type] ?? titleCase(t.type)].filter(Boolean).join(' &middot; ');
   const origin = ORIGIN_LABELS[t.origin] ?? titleCase(t.origin);
 
-  // The newest campus photo leads the page; the rest go with the trees below.
+  // Campus photos, newest first, all under On campus; the top of the page is
+  // the drawing's (November 2026: the newest photo used to lead the page).
   const shots = [...photos].sort((a, b) => String(b.taken ?? '').localeCompare(String(a.taken ?? '')));
-  const lead = shots[0];
-  const rest = shots.slice(1);
   const shotButton = (p) => `<button type="button" class="shot-open" aria-label="Show the photo full size">
           <img src="${esc(p.url)}" alt="${esc(t.common)} on campus, accession ${esc(p.id)}" loading="lazy">
         </button>`;
-  const gallery = rest.length
-    ? `<ul class="shots">${rest.map((p) => {
+  const gallery = shots.length
+    ? `<ul class="shots">${shots.map((p) => {
       const taken = photoTaken(p.taken);
       return `<li>
         ${shotButton(p)}
@@ -326,19 +300,24 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     ? `<figure class="mature">${drawing}<dl class="stats">${stats}</dl>
       <figcaption>At maturity, drawn to scale beside a person.</figcaption></figure>`
     : '';
-  const leadPhoto = lead
-    ? `<figure class="lead">${shotButton(lead)}
-      <figcaption><b>On campus.</b> <a href="${esc(base)}?plant=${encodeURIComponent(lead.id)}">${esc(lead.id)}</a>${photoTaken(lead.taken) ? `, photographed ${esc(photoTaken(lead.taken))}` : ''}.</figcaption></figure>`
-    : '';
-  const hero = drawingCard || leadPhoto
-    ? `<section class="hero${drawingCard && leadPhoto ? '' : ' hero--one'}">${drawingCard}${leadPhoto}</section>`
-    : '';
-
-  // Worth knowing: the fun fact, then what the inventory can vouch for.
-  const facts = [t.funFact ? esc(t.funFact) : '', ...added.map((f) => esc(f.text)), ...campusFacts(trees, base)].filter(Boolean);
+  // Worth knowing: about the species, not the campus: the fun fact, then the
+  // facts in data/facts.csv. (Until November 2026 it ended with the campus's
+  // own, campusFacts: the only one mapped, the largest trunk measured.)
+  const facts = [t.funFact ? esc(t.funFact) : '', ...added.map((f) => esc(f.text))].filter(Boolean);
   const factsBox = facts.length
     ? `<aside class="worth"><h2>Worth knowing</h2><ul>${facts.map((f) => `<li>${f}</li>`).join('')}</ul></aside>`
     : '';
+  const lede = t.description ? `<p class="lede">${esc(t.description)}</p>` : '';
+
+  // The top of the page: the drawing of the tree at maturity, with the
+  // description and Worth knowing beside it; without a drawing (shrubs,
+  // ferns, a tree without its size on file), the two side by side.
+  const hero = drawingCard
+    ? `<section class="hero">${drawingCard}<div class="hero-text">${lede}${factsBox}</div></section>`
+    : `<section class="intro${factsBox ? '' : ' intro--one'}">
+    ${lede || '<div></div>'}
+    ${factsBox}
+  </section>`;
 
   // Where it grows wild: the habitat in words, beside Little's map when the
   // species has one. Where no habitat is written yet, the map's own summary
@@ -433,10 +412,6 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     ${origin ? `<p class="badge badge--${esc(t.origin)}">${esc(origin)}</p>` : ''}
   </header>
   ${hero}
-  <section class="intro${factsBox ? '' : ' intro--one'}">
-    ${t.description ? `<p class="lede">${esc(t.description)}</p>` : '<div></div>'}
-    ${factsBox}
-  </section>
 
   ${knowItBy(t, extras?.photos, credits)}
   ${whichOne(t, extras?.kin, credits)}
@@ -756,8 +731,8 @@ h2 {
 .badge--vermont-native { background: var(--mint); color: var(--green-light); }
 .badge--vermont-invasive { background: #fbe3dc; color: #7a2410; }
 
-.hero { display: grid; grid-template-columns: 18rem 1fr; gap: 1.3rem; margin-top: 1.4rem; align-items: start; }
-.hero--one { grid-template-columns: minmax(0, 28rem); }
+.hero { display: grid; grid-template-columns: 18rem 1fr; gap: 1.6rem; margin-top: 1.4rem; align-items: start; }
+.hero-text .worth { margin-top: 1.3rem; }
 figure { margin: 0; }
 .mature { background: var(--sunk); border-radius: 14px; padding: .8rem .8rem .7rem; }
 .tree-drawing { display: block; width: 100%; height: auto; max-height: 26rem; }
@@ -774,9 +749,6 @@ figure { margin: 0; }
 .stats dd { margin: 0; font-weight: 700; font-size: 1.05rem; }
 .sp figcaption { font-size: .78rem; color: var(--dim); margin-top: .35rem; }
 .sp figcaption a { color: inherit; }
-/* Aimed a little above the middle, where a crown usually is, as in the field guide. */
-.lead .shot-open img { width: 100%; height: 30rem; object-fit: cover; object-position: 50% 30%; border-radius: 14px; display: block; }
-.hero--one .lead .shot-open img { height: auto; max-height: 34rem; }
 
 .intro { display: grid; grid-template-columns: 1fr 19rem; gap: 1.6rem; margin-top: 1.6rem; align-items: start; }
 .intro--one { grid-template-columns: 1fr; }
@@ -844,8 +816,6 @@ figure { margin: 0; }
   .sp-head h1 { font-size: 1.9rem; }
   .hero, .intro, .wild, .oncampus { grid-template-columns: 1fr; }
   .parts { grid-template-columns: repeat(2, 1fr); gap: .7rem; }
-  .hero .lead { order: -1; }
-  .lead .shot-open img { height: 22rem; }
   .mature { max-width: 22rem; }
   .campus { max-width: 15rem; }
 }
