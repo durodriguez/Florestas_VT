@@ -197,8 +197,10 @@ under *Map credit*.
   botanical country (Japan, Korea, the Kurils...). Kew takes some species
   broadly: its Japanese maple includes the mountain maple of Hokkaido, so the
   map shades Hokkaido, and the Distribution says so.
-- **Where in those regions** is herbarium specimens from GBIF.org, CC0 or CC
-  BY only, without any whose label says planted (garden, park, temple,
+- **Where in those regions** is herbarium specimens from GBIF.org, CC0, CC
+  BY or CC BY-NC (the site is non-commercial; CC BY-NC was left out at
+  first, which hid most of Korea's specimens, Seoul National University's),
+  without any whose label says planted (garden, park, temple,
   school, plantation...). Each is drawn as a 20 km circle; records within
   120 km of each other are joined, and the result is cut to the coast. A
   record with no neighbour is a dot, keyed *Isolated records* rather than

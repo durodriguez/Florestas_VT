@@ -17,7 +17,9 @@ States and Caudullo et al. for Europe, so these are drawn from records:
   China (the herbarium record there is too thin to draw from), and one native
   outside East Asia too is left out.
 - Where in those regions: herbarium specimens with coordinates, from GBIF.org,
-  under CC0 or CC BY (not CC BY-NC), leaving out any whose label says it was
+  under CC0, CC BY or CC BY-NC (the site is educational and non-commercial;
+  until November 2026 CC BY-NC was left out, which hid most Korean specimens,
+  Seoul National University's), leaving out any whose label says it was
   planted or grown in a garden, park, temple, school or plantation, any placed
   less precisely than 25 km, and any outside the native regions.
 
@@ -158,7 +160,8 @@ def draw(name, codes, regions, land):
     kept, dropped = [], {'licence': 0, 'planted': 0, 'imprecise': 0, 'not native there': 0, 'at sea': 0}
     for r in specimens(name):
         lic = r.get('license') or ''
-        if not (('publicdomain/zero' in lic) or ('licenses/by/' in lic)): dropped['licence'] += 1; continue
+        # CC0, CC BY and CC BY-NC: the site is educational and non-commercial.
+        if not any(k in lic for k in ('publicdomain/zero', 'licenses/by/', 'licenses/by-nc/')): dropped['licence'] += 1; continue
         if PLANTED.search(' '.join(str(r.get(k) or '') for k in ('locality', 'habitat', 'occurrenceRemarks', 'establishmentMeans'))): dropped['planted'] += 1; continue
         if (r.get('coordinateUncertaintyInMeters') or 0) > 25000: dropped['imprecise'] += 1; continue
         p = Point(FWD(r['decimalLongitude'], r['decimalLatitude']))

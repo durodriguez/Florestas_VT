@@ -240,7 +240,7 @@ these are drawn for this site from two sources:
 | --- | --- |
 | Where it is native | Kew's World Checklist of Vascular Plants (WCVP), by botanical country, downloaded November 2026 from https://sftp.kew.org/pub/data-repositories/WCVP/ ; **CC BY 4.0** |
 | Region outlines | TDWG's World Geographical Scheme for Recording Plant Distributions, level 3, https://github.com/tdwg/wgsrpd ; **CC BY 4.0** |
-| Where in those regions | herbarium specimens with coordinates, from the GBIF.org occurrence API, November 2026; only records published under **CC0** or **CC BY**, not CC BY-NC |
+| Where in those regions | herbarium specimens with coordinates, from the GBIF.org occurrence API, November 2026; records published under **CC0**, **CC BY** or **CC BY-NC** (non-commercial: this site is educational and non-commercial; were it ever not, maps drawn with CC BY-NC records would have to be drawn again without them) |
 
 **Citation** for the checklist:
 
