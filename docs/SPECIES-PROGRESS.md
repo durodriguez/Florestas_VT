@@ -9,7 +9,7 @@ same list, with links, is on the site at /species/progress/.
 
 | Group | Pages | Complete | Items filled |
 | --- | --- | --- | --- |
-| On campus: species | 102 | 39 | 93% |
+| On campus: species | 102 | 38 | 93% |
 | On campus: hybrids | 3 | 0 | 79% |
 | On campus: cultivars and forms | 10 | 3 | 82% |
 | On campus: named only to genus | 13 | 6 | 87% |
@@ -17,11 +17,11 @@ same list, with links, is on the site at /species/progress/.
 | Not yet mapped: hybrids | 16 | 0 | 72% |
 | Not yet mapped: cultivars and forms | 88 | 19 | 80% |
 | Not yet mapped: named only to genus | 10 | 0 | 75% |
-| **All** | 418 | 68 | 85% |
+| **All** | 418 | 67 | 85% |
 
 ## Most often missing
 
-- worth knowing (3): 347 pages
+- worth knowing (3): 348 pages
 - bark photo: 85 pages
 - fruit photo: 66 pages
 - flowers photo: 65 pages
@@ -71,6 +71,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Silver linden** (`tilia-tomentosa`, 6 on campus): worth knowing (3) (2 of 3)
 - [ ] **Common smoketree** (`cotinus-coggygria`, 5 on campus): worth knowing (3) (2 of 3)
 - [ ] **Eastern hophornbeam** (`ostrya-virginiana`, 5 on campus): worth knowing (3) (2 of 3)
+- [ ] **Hedge maple** (`acer-campestre`, 5 on campus): worth knowing (3) (2 of 3)
 - [ ] **Alaska cedar** (`callitropsis-nootkatensis`, 4 on campus): worth knowing (3) (2 of 3)
 - [ ] **Bigtooth aspen** (`populus-grandidentata`, 4 on campus): worth knowing (3) (1 of 3)
 - [ ] **Gray birch** (`betula-populifolia`, 4 on campus): worth knowing (3) (1 of 3)
