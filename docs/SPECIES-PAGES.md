@@ -139,13 +139,23 @@ Worth knowing about the data:
   slip for `_plg`, kept).
 - Cedar of Lebanon's includes one point on Cyprus, the Cyprus cedar, which
   the dataset files under *Cedrus libani* and some botanists treat as a
-  species of its own.
+  species of its own. Its habitat says so.
 - Norway spruce's range runs past the Urals into western Siberia, where it
-  meets Siberian spruce, which some botanists treat as a subspecies of it and
-  some as a species. The page's habitat says only "northern Russia". Not yet
-  checked which the dataset follows.
+  merges with Siberian spruce, which some botanists treat as a subspecies of
+  it and some as a species. Its habitat says so.
+- Walnut's has no separate file for where it was introduced, and shades much
+  of western, central and northern Europe (Britain, southern Sweden) as its
+  range, where other accounts give it as native only from the Balkans east.
+  Its habitat keeps that account and says what the map also shows.
 - Like Little's, these are continental-scale maps, the authors say, not to be
   read for whether a given place is inside.
+
+Habitats were checked against these maps when they were added (November
+2026): 22 of the 36 said less than the map shows (Norway spruce's stopped at
+northern Russia; beech's left out the oriental beech of Turkey and the
+Caucasus) and had their geography widened to match it, in their own words,
+leaving the rest of each as written. The map is cited on the same page, under
+Sources.
 
 ## Written by hand: crown forms, habitats, facts
 

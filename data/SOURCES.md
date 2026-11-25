@@ -217,8 +217,9 @@ points. The page states that introduced areas are left out.
 
 **Known limits.** The authors describe the maps as showing the general range
 at continental scale; presence or absence at a given place is not reliable.
-See SPECIES-PAGES.md for two misspelled file names and two taxonomic
-questions (Cyprus cedar, Siberian spruce).
+See SPECIES-PAGES.md for two misspelled file names, two taxonomic
+questions (Cyprus cedar, Siberian spruce), and walnut, whose map shades
+western Europe as native where other accounts do not.
 
 ## 9. Map outlines for Europe and Asia: Natural Earth
 
