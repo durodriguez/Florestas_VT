@@ -13,7 +13,8 @@
  *
  * Everything on them is in taxa.csv and plants.csv, apart from the native
  * range maps, which are Little's Atlas of United States Trees in data/ranges/
- * (range-map.mjs). The drawing of the tree at maturity (tree-drawing.mjs), the
+ * (range-map.mjs) and, for European species it does not map, Caudullo et
+ * al.'s chorological maps in data/ranges/europe/ (europe-range-map.mjs). The drawing of the tree at maturity (tree-drawing.mjs), the
  * year (year.mjs) and the campus facts are worked out from those, at every
  * build. See docs/SPECIES-PAGES.md.
  */
@@ -251,12 +252,17 @@ function yearSection(t) {
  *
  * `trees` are its standing trees ({ id, lat, lng, dbh, campus }); `range` is
  * its native range from data/ranges/, or null; `maps` holds what the range and
- * campus maps need (range-map.mjs, campus-map.mjs); `shared` the addresses of
+ * campus maps need (range-map.mjs, campus-map.mjs), and for a European range
+ * its own map (`maps.range`: the addresses of its two outer layers and its
+ * inline layer, europe-range-map.mjs); `shared` the addresses of
  * the files every page shares. All but the first three are optional, so a
  * page can be rendered from a taxon alone.
  */
-export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = [], range = null, maps = null, shared = {}, extras = null }) {
+export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = [], range: rangeIn = null, maps = null, shared = {}, extras = null }) {
   const t = taxon;
+  // A European range is drawn only on its own map; without one, none.
+  const europe = rangeIn?.source === 'caudullo';
+  const range = europe && !maps?.range ? null : rangeIn;
   const habitat = extras?.habitat ?? null;
   const added = extras?.facts ?? [];
   const kicker = [esc(t.family), TYPE_LABELS[t.type] ?? titleCase(t.type)].filter(Boolean).join(' &middot; ');
@@ -325,8 +331,11 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
       ${growing}
     </div>
     <figure class="range">
-      <div class="range-map"><img src="${esc(shared.rangeBase)}" alt="">${rangeSvg(range)}<img src="${esc(shared.rangeLines)}" alt=""></div>
-      <figcaption><span class="key"><i></i>Grows wild</span><span class="key star">&#9733; Burlington</span><span class="key vt">Vermont</span></figcaption>
+      ${europe
+    ? `<div class="range-map"><img src="${esc(maps.range.base)}" alt="">${maps.range.fill}<img src="${esc(maps.range.lines)}" alt=""></div>
+      <figcaption><span class="key"><i></i>Grows wild</span>${range.points?.length ? '<span class="key"><i class="dot"></i>Small isolated stands</span>' : ''}<span class="key away">Not native to North America</span></figcaption>`
+    : `<div class="range-map"><img src="${esc(shared.rangeBase)}" alt="">${rangeSvg(range)}<img src="${esc(shared.rangeLines)}" alt=""></div>
+      <figcaption><span class="key"><i></i>Grows wild</span><span class="key star">&#9733; Burlington</span><span class="key vt">Vermont</span></figcaption>`}
     </figure>
   </section>`;
   } else if (habitat) {
@@ -381,7 +390,8 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
   const factSources = [...new Map(added.map((f) => [f.url, f])).values()];
   const sources = [
     habitat ? `Habitat: ${cite(habitat)}.` : '',
-    range && maps ? `Range: Little, E.L., Jr., <i>Atlas of United States Trees</i>, U.S. Department of Agriculture, 1971&ndash;1978 (public domain), as digitized by the U.S. Geological Survey.` : '',
+    range && maps && !europe ? `Range: Little, E.L., Jr., <i>Atlas of United States Trees</i>, U.S. Department of Agriculture, 1971&ndash;1978 (public domain), as digitized by the U.S. Geological Survey.` : '',
+    range && europe ? `Range: Caudullo, G., Welk, E., San-Miguel-Ayanz, J., <a href="https://doi.org/10.1016/j.dib.2017.05.007" rel="noopener">Chorological maps for the main European woody species</a>, <i>Data in Brief</i> 12 (2017), European Commission Joint Research Centre (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>); drawn here without the areas where it was introduced.` : '',
     factSources.length ? `Worth knowing: ${factSources.map(cite).join('; ')}.` : '',
     extras?.photos ? 'Photos of the bark, leaves, flowers and fruit: Wikimedia Commons and iNaturalist, credited under each.' : '',
     drawing ? 'Drawing: from the mature height and spread on file.' : '',
@@ -767,11 +777,13 @@ figure { margin: 0; }
 .range-map img { border-radius: 10px; border: 1px solid var(--border); }
 .range-map img + svg, .range-map img:last-child, .campus-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .range-map img:last-child { border-color: transparent; }
-.range-fill path { fill: #3d8a5e; fill-opacity: .85; }
+.range-fill path, .range-fill circle { fill: #3d8a5e; fill-opacity: .85; }
 .key { margin-right: .9rem; white-space: nowrap; }
 .key i { display: inline-block; width: .8rem; height: .8rem; margin-right: .3rem; vertical-align: -1px; background: #3d8a5e; border-radius: 2px; }
 .key.star { color: #8a6d00; }
 .key.vt { border-bottom: 2px solid var(--green); }
+.key i.dot { width: .5rem; height: .5rem; border-radius: 50%; vertical-align: 1px; }
+.key.away { color: var(--dim); }
 
 .oncampus { display: grid; grid-template-columns: 1fr 14rem; gap: 1.4rem; align-items: start; }
 .oncampus--one { grid-template-columns: 1fr; }

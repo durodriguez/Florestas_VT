@@ -54,7 +54,7 @@ const TOLERANCE = 0.04;
 const MIN_AREA = 0.002;
 
 /** Shoelace area of a ring, in square degrees. */
-const area = (ring) => Math.abs(ring.reduce((sum, [x, y], i) => {
+export const area = (ring) => Math.abs(ring.reduce((sum, [x, y], i) => {
   const [nx, ny] = ring[(i + 1) % ring.length];
   return sum + x * ny - nx * y;
 }, 0)) / 2;
@@ -66,7 +66,7 @@ async function get(url, as = 'json') {
 }
 
 /** Douglas–Peucker on one ring of [lng, lat]. */
-function simplify(ring, tol) {
+export function simplify(ring, tol) {
   if (ring.length < 5) return ring;
   const keep = new Uint8Array(ring.length);
   const last = ring.length - 1;

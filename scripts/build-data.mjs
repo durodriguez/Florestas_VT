@@ -14,6 +14,7 @@ import { normalizeName } from './lib/species.mjs';
 import { renderSpeciesIndex, renderSpeciesPage, SPECIES_CSS, shell } from './lib/species-pages.mjs';
 import { completeness, progressHtml, progressMarkdown } from './lib/completeness.mjs';
 import { rangeBaseSvg, rangeLinesSvg } from './lib/range-map.mjs';
+import { frameFor, europeBaseSvg, europeLinesSvg, europeRangeSvg } from './lib/europe-range-map.mjs';
 import { speciesExtras, staleGaps } from './lib/species-extras.mjs';
 import { campusFrame, campusBaseSvg } from './lib/campus-map.mjs';
 import { renderItreePage } from './lib/itree-page.mjs';
@@ -251,13 +252,17 @@ for (const row of result.plants.rows) {
   }
 }
 
-// Native ranges (data/ranges/, from Little's atlas; scripts/fetch-ranges.mjs)
+// Native ranges (data/ranges/, from Little's atlas, scripts/fetch-ranges.mjs;
+// data/ranges/europe/, from Caudullo et al., scripts/fetch-ranges-europe.mjs)
 // and the files every page's two maps share, each with a fingerprint in its
 // address so a browser holding an old copy fetches the new one.
 const rangesDir = join(root, 'data', 'ranges');
+const readRanges = (dir) => readdirSync(dir).filter((f) => f.endsWith('.json') && f !== 'basemap.json')
+  .map((f) => [f.replace(/\.json$/, ''), JSON.parse(readFileSync(join(dir, f), 'utf8'))]);
 const basemap = JSON.parse(readFileSync(join(rangesDir, 'basemap.json'), 'utf8'));
-const ranges = new Map(readdirSync(rangesDir).filter((f) => f.endsWith('.json') && f !== 'basemap.json')
-  .map((f) => [f.replace(/\.json$/, ''), JSON.parse(readFileSync(join(rangesDir, f), 'utf8'))]));
+const europeBasemap = JSON.parse(readFileSync(join(rangesDir, 'europe', 'basemap.json'), 'utf8'));
+// Little's first, where a species is in both (none is yet).
+const ranges = new Map([...readRanges(join(rangesDir, 'europe')), ...readRanges(rangesDir)]);
 const campus = campusFrame(standing);
 const sharedFile = (name, text) => {
   writeFileSync(join(speciesDir, name), text);
@@ -269,9 +274,28 @@ const shared = {
   campusBase: sharedFile('campus-map.svg', campusBaseSvg(campus, result.dataset.campusAreas, standing)),
 };
 /** A taxon's range: its species', so a cultivar or variety shows the wild range it came from. Not for hybrids. */
-const rangeOf = (t) => (t.genus && t.species && !/^x\b/.test(t.species)
-  ? ranges.get(`${t.genus} ${t.species}`.toLowerCase().replace(/\s+/g, '-')) ?? null
+const rangeKey = (t) => (t.genus && t.species && !/^x\b/.test(t.species)
+  ? `${t.genus} ${t.species}`.toLowerCase().replace(/\s+/g, '-')
   : null);
+const rangeOf = (t) => ranges.get(rangeKey(t)) ?? null;
+// A European range's map is framed to the range, so its two outer layers
+// are its own, in species/ranges/, shared by the species' cultivars.
+const europeMaps = new Map();
+mkdirSync(join(speciesDir, 'ranges'), { recursive: true });
+const europeMapOf = (t) => {
+  const key = rangeKey(t);
+  const range = ranges.get(key);
+  if (range?.source !== 'caudullo') return null;
+  if (!europeMaps.has(key)) {
+    const frame = frameFor(range);
+    europeMaps.set(key, frame && {
+      base: sharedFile(`ranges/${key}-base.svg`, europeBaseSvg(frame, europeBasemap)),
+      lines: sharedFile(`ranges/${key}-lines.svg`, europeLinesSvg(frame, europeBasemap)),
+      fill: europeRangeSvg(range, frame),
+    });
+  }
+  return europeMaps.get(key);
+};
 
 // Not for the placeholder of an unidentified plant: there is no species to describe.
 const describable = result.dataset.taxa.filter((t) => t.id !== UNKNOWN_TAXON);
@@ -284,7 +308,7 @@ for (const taxon of describable) {
     trees: treesByTaxon.get(taxon.id) ?? [],
     extras: extrasBuilt.extras.get(taxon.id),
     range: rangeOf(taxon),
-    maps: { campus },
+    maps: { campus, range: europeMapOf(taxon) },
     shared,
     base: siteBase,
     config,

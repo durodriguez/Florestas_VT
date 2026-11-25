@@ -1,6 +1,6 @@
 # Where the data came from, and under what terms
 
-Six outside datasets feed this project, and one model's output. Each is recorded here with its
+Seven outside datasets feed this project, and one model's output. Each is recorded here with its
 source, its licence and what was done to it, because attribution that lives
 only in somebody's memory is attribution that gets lost on the next refresh.
 
@@ -185,6 +185,47 @@ cover species native to the United States only.
 large lakes, that the range maps are drawn on. From Natural Earth's 1:50m
 cultural and physical vectors (https://www.naturalearthdata.com), **public
 domain**, cut and simplified as the ranges are.
+
+## 8. Native ranges in Europe: Caudullo, Welk and San-Miguel-Ayanz
+
+**`data/ranges/europe/<species>.json`** — where each of 36 European species
+in `taxa.csv` that Little's atlas does not map grows wild, drawn on its
+species page.
+
+| | |
+| --- | --- |
+| Dataset | Chorological data for the main European woody species, version 19 (January 2026) |
+| Published by | European Commission Joint Research Centre, on Mendeley Data, DOI 10.17632/hr5h2hcgg4.19 |
+| Licence | **CC BY 4.0** (https://creativecommons.org/licenses/by/4.0/): free to use and change, with credit and a note of what was changed |
+| Source | https://data.mendeley.com/datasets/hr5h2hcgg4 |
+
+**Citation**, as the authors ask:
+
+> Caudullo, G., Welk, E., San-Miguel-Ayanz, J., 2017. Chorological maps for
+> the main European woody species. *Data in Brief* 12, 662–666.
+> https://doi.org/10.1016/j.dib.2017.05.007
+
+Each species page carries it, with the licence, under Sources.
+
+**What was changed.** `npm run ranges:fetch-europe`
+(`scripts/fetch-ranges-europe.mjs`) matches the dataset to `taxa.csv` by
+genus and species; keeps each species' native range and isolated stands and
+leaves out where it was introduced; puts subspecies mapped apart together;
+cuts everything to the equator-to-Arctic, Azores-to-Bering-Strait box;
+simplifies outlines to about 2 km; and turns areas under about 20 km² into
+points. The page states that introduced areas are left out.
+
+**Known limits.** The authors describe the maps as showing the general range
+at continental scale; presence or absence at a given place is not reliable.
+See SPECIES-PAGES.md for two misspelled file names and two taxonomic
+questions (Cyprus cedar, Siberian spruce).
+
+## 9. Map outlines for Europe and Asia: Natural Earth
+
+**`data/ranges/europe/basemap.json`** — the countries and large lakes from
+the equator to the Arctic and from the Azores to the Bering Strait, that the
+European range maps are drawn on. From Natural Earth's 1:50m vectors,
+**public domain**, as in section 7.
 
 ## On ShareAlike
 
