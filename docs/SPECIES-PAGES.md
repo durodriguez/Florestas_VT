@@ -73,12 +73,12 @@ by species, most common first.
    dots it draws for *Small isolated stands*. (A *Not native to North
    America* note there was dropped in November 2026: the origin badge at the
    top of the page says as much.)
-6. **On campus**: how many are mapped, by campus, its photos, newest first (a tap shows one whole), the
+6. **Characteristics**: the table every page had before, listing only what is
+   recorded. (It came after On campus until November 2026.)
+7. **On campus**: how many are mapped, by campus, its photos, newest first (a tap shows one whole), the
    buttons to the map and Wikipedia, and a small campus map with each tree as
    a red dot linking to it on the map (`scripts/lib/campus-map.mjs`). Not a
    zoomable map: "Show them on the map" is the way to one.
-7. **Characteristics**: the table every page had before, listing only what is
-   recorded.
 8. **Credits**, only for what a license requires: the European range map's
    (*Map credit*, CC BY 4.0) and the photos' (*Photo credits*, numbered as
    marked). Until November 2026 a *Sources* line also cited the habitat, the

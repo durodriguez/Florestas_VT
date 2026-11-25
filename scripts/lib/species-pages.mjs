@@ -429,6 +429,9 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
 
   ${rangeSection}
 
+  <h2>Characteristics</h2>
+  <dl class="facts">${characteristics}</dl>
+
   <h2>On campus</h2>
   <section class="oncampus${campusMap ? '' : ' oncampus--one'}">
     <div>
@@ -438,9 +441,6 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     </div>
     ${campusMap}
   </section>
-
-  <h2>Characteristics</h2>
-  <dl class="facts">${characteristics}</dl>
 
   ${mapCredit || credits.length ? `<div class="sources">${mapCredit}${photoCredits(credits)}</div>` : ''}
   <p class="foot">Something look wrong? Email

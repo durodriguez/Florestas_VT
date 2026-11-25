@@ -128,7 +128,9 @@ describe('renderSpeciesPage', () => {
     expect(at('494.webp')).toBeGreaterThan(at('class="shots"'));
     expect(at('493.webp')).toBeGreaterThan(at('494.webp'));
     expect(at('Show them on the map')).toBeGreaterThan(at('class="shots"'));
-    expect(at('<h2>Characteristics</h2>')).toBeGreaterThan(at('<h2>On campus</h2>'));
+    // Characteristics comes before On campus (since November 2026).
+    expect(at('<h2>Characteristics</h2>')).toBeLessThan(at('<h2>On campus</h2>'));
+    expect(at('<h2>Characteristics</h2>')).toBeGreaterThan(at('<h2>Where it grows wild</h2>'));
   });
 
   it('keeps Worth knowing to the species: no campus facts', () => {
