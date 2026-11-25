@@ -9,19 +9,19 @@ same list, with links, is on the site at /species/progress/.
 
 | Group | Pages | Complete | Items filled |
 | --- | --- | --- | --- |
-| On campus: species | 102 | 40 | 93% |
+| On campus: species | 102 | 39 | 93% |
 | On campus: hybrids | 3 | 0 | 79% |
 | On campus: cultivars and forms | 10 | 3 | 82% |
 | On campus: named only to genus | 13 | 6 | 87% |
 | Not yet mapped: species | 176 | 1 | 83% |
 | Not yet mapped: hybrids | 16 | 0 | 72% |
-| Not yet mapped: cultivars and forms | 88 | 20 | 80% |
+| Not yet mapped: cultivars and forms | 88 | 19 | 80% |
 | Not yet mapped: named only to genus | 10 | 0 | 75% |
-| **All** | 418 | 70 | 85% |
+| **All** | 418 | 68 | 85% |
 
 ## Most often missing
 
-- worth knowing (3): 345 pages
+- worth knowing (3): 347 pages
 - bark photo: 85 pages
 - fruit photo: 66 pages
 - flowers photo: 65 pages
@@ -62,6 +62,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Spicebush** (`lindera-benzoin`, 1 on campus): worth knowing (3) (1 of 3)
 - [ ] **Freeman's maple** (`acer-x-freemanii`, 67 on campus): worth knowing (3) (2 of 3)
 - [ ] **Northern white cedar** (`thuja-occidentalis`, 46 on campus): flowers photo
+- [ ] **Silver maple** (`acer-saccharinum`, 26 on campus): worth knowing (3) (2 of 3)
 - [ ] **American hornbeam** (`carpinus-caroliniana`, 23 on campus): worth knowing (3) (2 of 3)
 - [ ] **Washington hawthorn** (`crataegus-phaenopyrum`, 22 on campus): worth knowing (3) (1 of 3)
 - [ ] **Japanese tree lilac** (`syringa-reticulata`, 19 on campus): worth knowing (3) (1 of 3)
@@ -306,6 +307,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Common pear** (`pyrus-communis`): worth knowing (3) (1 of 3)
 - [ ] **Contorted hazelnut** (`corylus-avellana`): worth knowing (3) (1 of 3)
 - [ ] **Cucumbertree magnolia** (`magnolia-acuminata`): worth knowing (3) (1 of 3)
+- [ ] **Cutleaf silver maple** (`acer-saccharinum-skinneri`): worth knowing (3) (2 of 3)
 - [ ] **Devil's walkingstick** (`aralia-spinosa`): worth knowing (3) (1 of 3)
 - [ ] **Downy serviceberry** (`amelanchier-arborea`): worth knowing (3) (1 of 3)
 - [ ] **Eastern cottonwood** (`populus-deltoides`): worth knowing (3) (1 of 3)
