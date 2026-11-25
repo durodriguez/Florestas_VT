@@ -321,7 +321,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     : '';
   const growing = `${habitatPara}
       ${t.soil ? `<p><b>Soil:</b> ${esc(t.soil)}</p>` : ''}
-      ${t.zones ? `<p><b>Hardiness zones:</b> ${esc(t.zones)}. On the USDA's 2023 map the campus is in zone 5a, and Burlington's lakeshore in 5b.</p>` : ''}`;
+      ${t.zones ? `<p><b>Hardiness zones:</b> ${esc(t.zones)}.</p>` : ''}`;
   let rangeSection = '';
   if (range && maps) {
     rangeSection = `<h2>Where it grows wild</h2>

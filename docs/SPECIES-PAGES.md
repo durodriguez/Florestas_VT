@@ -51,8 +51,9 @@ by species, most common first.
    states, from Maine west to Minnesota and south to Florida and Texas,
    reaching north into Canada"), from the states it covers, read off the map
    once by `npm run ranges:fetch` and stored with it. Then the soil and
-   hardiness zones from `taxa.csv`, and the campus's zone, 5a on the USDA's
-   2023 map (the lakeshore is 5b). Whether Burlington is inside the range is
+   hardiness zones from `taxa.csv` (until November 2026 followed by the
+   campus's own zone, 5a, a sentence on every page, taken out as bloat).
+   Whether Burlington is inside the range is
    left to the map, which marks it with a star; until November 2026 a
    sentence said so, and it repeated the habitat. A European map has no star
    (Burlington is far off it); its key says *Not native to North America*
