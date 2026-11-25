@@ -13,15 +13,15 @@ same list, with links, is on the site at /species/progress/.
 | On campus: hybrids | 3 | 1 | 89% |
 | On campus: cultivars and forms | 10 | 3 | 82% |
 | On campus: named only to genus | 13 | 6 | 87% |
-| Not yet mapped: species | 176 | 52 | 88% |
-| Not yet mapped: hybrids | 16 | 2 | 76% |
+| Not yet mapped: species | 176 | 70 | 90% |
+| Not yet mapped: hybrids | 16 | 4 | 77% |
 | Not yet mapped: cultivars and forms | 88 | 19 | 80% |
 | Not yet mapped: named only to genus | 10 | 0 | 75% |
-| **All** | 418 | 178 | 89% |
+| **All** | 418 | 198 | 89% |
 
 ## Most often missing
 
-- worth knowing (3): 192 pages
+- worth knowing (3): 162 pages
 - bark photo: 85 pages
 - fruit photo: 66 pages
 - flowers photo: 65 pages
@@ -91,7 +91,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Blue Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodthree`): worth knowing (3) (1 of 3); bark photo; flowers photo
 - [ ] **Blue Mist dwarf fothergilla** (`fothergilla-gardenii-blue-mist`): worth knowing (3) (1 of 3); bark photo; fruit photo
 - [ ] **Ghost bramble** (`rubus-thibetanus`): worth knowing (3) (1 of 3); flowers photo; fruit photo
-- [ ] **Japanese kerria** (`kerria-japonica`): worth knowing (3) (1 of 3); bark photo; fruit photo
 - [ ] **Picta Japanese kerria** (`kerria-japonica-picta`): worth knowing (3) (1 of 3); bark photo; fruit photo
 - [ ] **PJM rhododendron** (`rhododendron-pjm`): worth knowing (3) (1 of 3); bark photo; fruit photo
 - [ ] **Pleniflora Japanese kerria** (`kerria-japonica-pleniflora`): worth knowing (3) (1 of 3); bark photo; fruit photo
@@ -101,12 +100,10 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Autumn Brilliance serviceberry** (`amelanchier-x-grandiflora-autumn-brilliance`): worth knowing (3) (1 of 3); leaves photo; fruit photo
 - [ ] **Fraser fir** (`abies-fraseri`): bark photo; flowers photo; fruit photo
 - [ ] **Japanese elm** (`ulmus-davidiana-japonica`): worth knowing (3) (1 of 3); flowers photo; fruit photo
-- [ ] **Japanese flowering crabapple** (`malus-floribunda`): worth knowing (3) (1 of 3); bark photo; leaves photo
 - [ ] **Peking willow** (`salix-matsudana`): worth knowing (3) (1 of 3); bark photo; leaves photo
 - [ ] **Pond cypress** (`taxodium-ascendens`): worth knowing (3) (1 of 3); flowers photo; fruit photo
 - [ ] **Adagio maiden grass** (`miscanthus-sinensis-adagio`): worth knowing (3) (1 of 3); leaves photo
 - [ ] **Gracillimus maiden grass** (`miscanthus-sinensis-gracillimus`): worth knowing (3) (1 of 3); leaves photo
-- [ ] **Boston ivy** (`parthenocissus-tricuspidata`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Dogwood** (`cornus-sp`): worth knowing (3) (1 of 3)
 - [ ] **Forsythia** (`forsythia-sp`): worth knowing (3) (1 of 3)
 - [ ] **Iris** (`iris-sp`): worth knowing (3) (1 of 3)
@@ -122,12 +119,12 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Catawba rhododendron** (`rhododendron-catawbiense`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Chinese redbud** (`cercis-chinensis`): bark photo; fruit photo
 - [ ] **Common juniper** (`juniperus-communis`): bark photo; flowers photo
-- [ ] **Common privet** (`ligustrum-vulgare`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Creeping juniper** (`juniperus-horizontalis`): bark photo; flowers photo
 - [ ] **Dwarf Everbearing black mulberry** (`morus-nigra-dwarf-everbearing`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Dwarf fothergilla** (`fothergilla-gardenii`): bark photo; fruit photo
 - [ ] **Fall Gold raspberry** (`rubus-idaeus-fall-gold`): worth knowing (3) (1 of 3); fruit photo
 - [ ] **Fragrant sumac** (`rhus-aromatica`): worth knowing (3) (1 of 3); bark photo
+- [ ] **Japanese kerria** (`kerria-japonica`): bark photo; fruit photo
 - [ ] **Japanese spirea** (`spiraea-japonica`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Large fothergilla** (`fothergilla-major`): bark photo; fruit photo
 - [ ] **Mugo pine** (`pinus-mugo`): worth knowing (3) (1 of 3); bark photo
@@ -136,7 +133,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **White Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodtwo`): worth knowing (3) (1 of 3); bark photo
 - [ ] **American plum** (`prunus-americana`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Apple serviceberry** (`amelanchier-x-grandiflora`): leaves photo; fruit photo
-- [ ] **Bosnian pine** (`pinus-heldreichii`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Cedar of Lebanon** (`cedrus-libani`): flowers photo; fruit photo
 - [ ] **Chestnut oak** (`quercus-montana`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Chinese juniper** (`juniperus-chinensis`): bark photo; flowers photo
@@ -144,35 +140,29 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Coast redwood** (`sequoia-sempervirens`): worth knowing (3) (1 of 3); leaves photo
 - [ ] **Flowering cherry** (`prunus-serrulata`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Hardy rubber tree** (`eucommia-ulmoides`): flowers photo; fruit photo
+- [ ] **Japanese flowering crabapple** (`malus-floribunda`): bark photo; leaves photo
 - [ ] **Japanese snowbell** (`styrax-japonicus`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Japanese white pine** (`pinus-parviflora`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Krauter Vesuvius purpleleaf plum** (`prunus-cerasifera-krauter-vesuvius`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Lacebark elm** (`ulmus-parvifolia`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Laurel oak** (`quercus-hemisphaerica`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Miyabe maple** (`acer-miyabei`): flowers photo; fruit photo
-- [ ] **Oriental spruce** (`picea-orientalis`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Overcup oak** (`quercus-lyrata`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Peach** (`prunus-persica`): worth knowing (3) (1 of 3); bark photo
-- [ ] **Persian ironwood** (`parrotia-persica`): worth knowing (3) (1 of 3); fruit photo
 - [ ] **Purple leaf plum** (`prunus-cerasifera`): worth knowing (3) (1 of 3); bark photo
-- [ ] **Red spruce** (`picea-rubens`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Russian hawthorn** (`crataegus-ambigua`): bark photo; flowers photo
 - [ ] **Scarlet oak** (`quercus-coccinea`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Shumard oak** (`quercus-shumardii`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Spaeth alder** (`alnus-x-spaethii`): bark photo; flowers photo
-- [ ] **Sweet crabapple** (`malus-coronaria`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Trident maple** (`acer-buergeranum`): bark photo; flowers photo
-- [ ] **Umbrella magnolia** (`magnolia-tripetala`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Weeping cherry** (`prunus-subhirtella`): worth knowing (3) (1 of 3); fruit photo
 - [ ] **Weeping Higan cherry** (`prunus-subhirtella-pendula`): worth knowing (3) (1 of 3); fruit photo
 - [ ] **Wichita Blue juniper** (`juniperus-scopulorum-wichita-blue`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Yoshino cherry** (`prunus-x-yedoensis`): worth knowing (3) (1 of 3); fruit photo
 - [ ] **Brilliance autumn fern** (`dryopteris-erythrosora-brilliance`): worth knowing (3) (1 of 3)
 - [ ] **Christmas fern** (`polystichum-acrostichoides`): worth knowing (3) (1 of 3)
-- [ ] **Ostrich fern** (`matteuccia-struthiopteris`): worth knowing (3) (1 of 3)
-- [ ] **Virginia creeper** (`parthenocissus-quinquefolia`): worth knowing (3) (1 of 3)
+- [ ] **Boston ivy** (`parthenocissus-tricuspidata`): flowers photo
 - [ ] **American elderberry** (`sambucus-canadensis`): worth knowing (3) (1 of 3)
-- [ ] **Amur honeysuckle** (`lonicera-maackii`): worth knowing (3) (1 of 3)
 - [ ] **Blackhaw** (`viburnum-prunifolium`): worth knowing (3) (1 of 3)
 - [ ] **Blue holly** (`ilex-x-meserveae`): bark photo
 - [ ] **Bluecrop highbush blueberry** (`vaccinium-corymbosum-bluecrop`): worth knowing (3) (1 of 3)
@@ -181,18 +171,17 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Carolina allspice** (`calycanthus-floridus`): bark photo
 - [ ] **Chandler highbush blueberry** (`vaccinium-corymbosum-chandler`): worth knowing (3) (1 of 3)
 - [ ] **Chokecherry** (`prunus-virginiana`): worth knowing (3) (1 of 3)
+- [ ] **Common privet** (`ligustrum-vulgare`): bark photo
 - [ ] **Duke highbush blueberry** (`vaccinium-corymbosum-duke`): worth knowing (3) (1 of 3)
 - [ ] **Dwarf burning bush** (`euonymus-alatus-compactus`): worth knowing (3) (1 of 3)
 - [ ] **Golden Spirit smokebush** (`cotinus-coggygria-ancot`): worth knowing (3) (2 of 3)
 - [ ] **Highbush blueberry** (`vaccinium-corymbosum`): worth knowing (3) (1 of 3)
 - [ ] **Mariesii doublefile viburnum** (`viburnum-plicatum-tomentosum-mariesii`): worth knowing (3) (1 of 3)
 - [ ] **Nannyberry** (`viburnum-lentago`): worth knowing (3) (1 of 3)
-- [ ] **Ninebark** (`physocarpus-opulifolius`): worth knowing (3) (1 of 3)
 - [ ] **Oakleaf hydrangea** (`hydrangea-quercifolia`): bark photo
 - [ ] **Panicle hydrangea** (`hydrangea-paniculata`): fruit photo
 - [ ] **Patriot highbush blueberry** (`vaccinium-corymbosum-patriot`): worth knowing (3) (1 of 3)
 - [ ] **Ragin Red redosier dogwood** (`cornus-sericea-ragin-red`): worth knowing (3) (1 of 3)
-- [ ] **Sargent crabapple** (`malus-sargentii`): worth knowing (3) (1 of 3)
 - [ ] **Smooth hydrangea** (`hydrangea-arborescens`): bark photo
 - [ ] **Speckled alder** (`alnus-incana-rugosa`): worth knowing (3) (1 of 3)
 - [ ] **Staghorn sumac** (`rhus-typhina`): worth knowing (3) (1 of 3)
@@ -210,13 +199,12 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Black oak** (`quercus-velutina`): worth knowing (3) (1 of 3)
 - [ ] **Black willow** (`salix-nigra`): worth knowing (3) (1 of 3)
 - [ ] **Bloodgood Japanese maple** (`acer-palmatum-bloodgood`): worth knowing (3) (1 of 3)
+- [ ] **Bosnian pine** (`pinus-heldreichii`): flowers photo
 - [ ] **Canada Red chokecherry** (`prunus-virginiana-canada-red`): worth knowing (3) (1 of 3)
 - [ ] **Chinese fringetree** (`chionanthus-retusus`): bark photo
 - [ ] **Columnar European beech** (`fagus-sylvatica-fastigiata`): worth knowing (3) (2 of 3)
 - [ ] **Columnar Sargent cherry** (`prunus-sargentii-columnaris`): worth knowing (3) (1 of 3)
-- [ ] **Common larch** (`larix-decidua`): worth knowing (3) (1 of 3)
 - [ ] **Common pear** (`pyrus-communis`): worth knowing (3) (1 of 3)
-- [ ] **Cucumbertree magnolia** (`magnolia-acuminata`): worth knowing (3) (1 of 3)
 - [ ] **Cutleaf silver maple** (`acer-saccharinum-skinneri`): worth knowing (3) (2 of 3)
 - [ ] **Eastern cottonwood** (`populus-deltoides`): worth knowing (3) (1 of 3)
 - [ ] **Emerald Green arborvitae** (`thuja-occidentalis-smaragd`): flowers photo
@@ -225,20 +213,17 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **European linden** (`tilia-x-europaea`): worth knowing (3) (1 of 3)
 - [ ] **Giant sequoia** (`sequoiadendron-giganteum`): worth knowing (3) (1 of 3)
 - [ ] **Golden weeping willow** (`salix-alba-tristis`): worth knowing (3) (1 of 3)
-- [ ] **Goldenrain tree** (`koelreuteria-paniculata`): worth knowing (3) (1 of 3)
 - [ ] **Grand fir** (`abies-grandis`): flowers photo
 - [ ] **Honeycrisp apple** (`malus-domestica-honeycrisp`): worth knowing (3) (2 of 3)
 - [ ] **Ivory Silk tree lilac** (`syringa-reticulata-ivory-silk`): worth knowing (3) (1 of 3)
 - [ ] **Japanese clethra** (`clethra-barbinervis`): fruit photo
 - [ ] **Japanese pagoda tree** (`styphnolobium-japonicum`): worth knowing (3) (1 of 3)
 - [ ] **Korean maple** (`acer-pseudosieboldianum`): fruit photo
-- [ ] **Lacebark pine** (`pinus-bungeana`): worth knowing (3) (1 of 3)
-- [ ] **Limber pine** (`pinus-flexilis`): worth knowing (3) (1 of 3)
-- [ ] **Loebner magnolia** (`magnolia-x-loebneri`): worth knowing (3) (1 of 3)
 - [ ] **London planetree** (`platanus-x-acerifolia`): worth knowing (3) (1 of 3)
 - [ ] **Meader persimmon** (`diospyros-virginiana-meader`): worth knowing (3) (1 of 3)
 - [ ] **Oakleaf mountain ash** (`sorbus-x-thuringiaca`): worth knowing (3) (1 of 3)
-- [ ] **Osage orange** (`maclura-pomifera`): worth knowing (3) (1 of 3)
+- [ ] **Oriental spruce** (`picea-orientalis`): flowers photo
+- [ ] **Persian ironwood** (`parrotia-persica`): fruit photo
 - [ ] **Pin cherry** (`prunus-pennsylvanica`): worth knowing (3) (1 of 3)
 - [ ] **Pink Flair Sargent cherry** (`prunus-sargentii-jfs-kw58`): worth knowing (3) (1 of 3)
 - [ ] **Pitch pine** (`pinus-rigida`): worth knowing (3) (1 of 3)
@@ -246,25 +231,20 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Princeton American elm** (`ulmus-americana-princeton`): worth knowing (3) (1 of 3)
 - [ ] **Purple Robe black locust** (`robinia-pseudoacacia-purple-robe`): flowers photo
 - [ ] **Quaking aspen** (`populus-tremuloides`): worth knowing (3) (1 of 3)
-- [ ] **Red mulberry** (`morus-rubra`): worth knowing (3) (1 of 3)
+- [ ] **Red spruce** (`picea-rubens`): flowers photo
 - [ ] **Rivers purple beech** (`fagus-sylvatica-riversii`): worth knowing (3) (2 of 3)
 - [ ] **Rocky Mountain juniper** (`juniperus-scopulorum`): flowers photo
-- [ ] **Saucer magnolia** (`magnolia-x-soulangiana`): worth knowing (3) (1 of 3)
 - [ ] **Sawara falsecypress** (`chamaecyparis-pisifera`): flowers photo
 - [ ] **Sawtooth oak** (`quercus-acutissima`): worth knowing (3) (1 of 3)
 - [ ] **Scotch elm** (`ulmus-glabra`): worth knowing (3) (1 of 3)
-- [ ] **Serbian spruce** (`picea-omorika`): worth knowing (3) (1 of 3)
 - [ ] **Shantung maple** (`acer-truncatum`): fruit photo
 - [ ] **Shellbark hickory** (`carya-laciniosa`): flowers photo
 - [ ] **Siberian elm** (`ulmus-pumila`): worth knowing (3) (1 of 3)
 - [ ] **Sienna Glen maple** (`acer-x-freemanii-sienna-glen`): worth knowing (3) (1 of 3)
 - [ ] **Slippery elm** (`ulmus-rubra`): worth knowing (3) (1 of 3)
 - [ ] **Sour cherry** (`prunus-cerasus`): worth knowing (3) (1 of 3)
-- [ ] **Sourwood** (`oxydendrum-arboreum`): worth knowing (3) (1 of 3)
-- [ ] **Southern magnolia** (`magnolia-grandiflora`): worth knowing (3) (1 of 3)
-- [ ] **Star magnolia** (`magnolia-stellata`): worth knowing (3) (1 of 3)
-- [ ] **Swiss stone pine** (`pinus-cembra`): worth knowing (3) (1 of 3)
-- [ ] **Tamarack** (`larix-laricina`): worth knowing (3) (1 of 3)
+- [ ] **Sweet crabapple** (`malus-coronaria`): bark photo
+- [ ] **Umbrella magnolia** (`magnolia-tripetala`): bark photo
 - [ ] **Valley Forge American elm** (`ulmus-americana-valley-forge`): worth knowing (3) (1 of 3)
 - [ ] **Weeping Alaska cedar** (`callitropsis-nootkatensis-pendula`): worth knowing (3) (2 of 3)
 - [ ] **Weeping European beech** (`fagus-sylvatica-pendula`): worth knowing (3) (2 of 3)
