@@ -28,6 +28,7 @@
     "areas:check": "node scripts/check-areas.mjs",
     "itree:import": "node scripts/import-itree.mjs",
     "ranges:fetch": "node scripts/fetch-ranges.mjs",
+    "ranges:fetch-europe": "node scripts/fetch-ranges-europe.mjs",
     "check:photos": "node scripts/check-photos.mjs"
   },
   "dependencies": {
@@ -45,6 +46,7 @@
     "@types/papaparse": "^5.5.2",
     "pngjs": "^7.0.0",
     "qrcode": "^1.5.4",
+    "shapefile": "^0.6.6",
     "sharp": "^0.35.5",
     "typescript": "^5.5.4",
     "vite": "^8.2.2",

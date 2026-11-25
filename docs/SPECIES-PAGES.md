@@ -43,25 +43,29 @@ by species, most common first.
 5. **Where it grows wild**, for the 126 species in Little's *Atlas of United
    States Trees* (see below), including every Vermont-native tree species but
    two, *Amelanchier laevis* and *Crataegus crus-galli*, which the atlas does
-   not map. A cultivar or variety shows its species' range, and says so; a
+   not map; and since November 2026 for 36 European species it does not map,
+   from Caudullo et al.'s chorological maps (see *European ranges*). A cultivar or variety shows its species' range, and says so; a
    hybrid has none. Beside the map, under *Habitat*, the species' habitat
    from `data/habitat.csv` where one is written. Where none is yet, a
    sentence on where the range lies stands in for it ("Grows wild in 32
    states, from Maine west to Minnesota and south to Florida and Texas,
    reaching north into Canada"), from the states it covers, read off the map
    once by `npm run ranges:fetch` and stored with it. Then the soil and
-   hardiness zones from `taxa.csv`, and the campus's zone, 5a on the USDA's
-   2023 map (the lakeshore is 5b). Whether Burlington is inside the range is
+   hardiness zones from `taxa.csv` (until November 2026 followed by the
+   campus's own zone, 5a, a sentence on every page, taken out as bloat).
+   Whether Burlington is inside the range is
    left to the map, which marks it with a star; until November 2026 a
-   sentence said so, and it repeated the habitat.
+   sentence said so, and it repeated the habitat. A European map has no star
+   (Burlington is far off it); its key says *Not native to North America*
+   instead, and shows the dots it draws for small isolated stands.
 6. **On campus**: how many are mapped, by campus, the other photos, the
    buttons to the map and Wikipedia, and a small campus map with each tree as
    a red dot linking to it on the map (`scripts/lib/campus-map.mjs`). Not a
    zoomable map: "Show them on the map" is the way to one.
 7. **Characteristics**: the table every page had before, listing only what is
    recorded.
-8. **Sources**: the range map's citation, when there is one, and where the
-   drawing comes from.
+8. **Sources**: the range map's citation (Little's or Caudullo et al.'s),
+   when there is one, and where the drawing comes from.
 
 ## The maps, and the files they share
 
@@ -75,6 +79,11 @@ once to `public/species/` and cached:
 | `range-lines.svg` | the large lakes, state lines, Vermont, and a star on Burlington |
 | `campus-map.svg` | the campuses and every standing tree as a gray dot |
 | *(inline)* | the species' own trees, as red links |
+
+A European range map is drawn the same way, but framed to its range, so its
+two outer layers are its own: `ranges/<species>-base.svg` (the sea and the
+land) and `ranges/<species>-lines.svg` (the large lakes and the borders),
+shared only by the species and its cultivars.
 
 Each shared file's address carries a fingerprint of its contents, so a
 browser fetches it again when it changes. They carry their own light and dark
@@ -97,6 +106,57 @@ limit; Wikipedia says it is absent from the state), so `taxa.csv` records no
 origin for it. Tulip tree, marked there too, is native to Vermont but rare
 (S1, endangered, per the Native Plant Trust's Go Botany), and since November
 2026 is recorded as a Vermont native.
+
+## European ranges
+
+`data/ranges/europe/` holds the 36 species in `taxa.csv` that Caudullo, Welk
+and San-Miguel-Ayanz's *Chorological maps for the main European woody
+species* (European Commission Joint Research Centre, CC BY 4.0) maps and
+Little's atlas does not, and the outlines they are drawn on (Natural Earth's
+countries from the equator to the Arctic, the Azores to the Bering Strait).
+Credited in `data/SOURCES.md`. `npm run ranges:fetch-europe`
+(`scripts/fetch-ranges-europe.mjs`) fetches them again, by hand, after
+species are added to `taxa.csv`; it leaves Little's files be, and
+`ranges:fetch` leaves these.
+
+The dataset maps each species' native range, its small isolated stands as
+points, and where it was introduced. The pages show the first two: the range
+in green and the stands as dots. Where it maps subspecies apart (Austrian
+pine's five; Norway spruce's none), they are put together, as `taxa.csv`
+names the species. Areas too small to see at the map's scale are drawn as
+dots too.
+
+Each map is framed to its range (`scripts/lib/europe-range-map.mjs`, tested):
+a Lambert azimuthal equal-area projection centred on it, the range with room
+around it, never narrower than about 2,500 km, in the US maps' size. So Scotch
+pine's runs from Spain to the Pacific and Serbian spruce's shows the Balkans,
+with its few valleys on the Drina as a speck and four dots.
+
+Worth knowing about the data:
+
+- Two file names in version 19 break the dataset's pattern: sycamore maple's
+  introduced stands are also in a file spelled `_sym_pnt` (left out, with the
+  `_syn_` files), and Atlas cedar's native range is in one spelled `_png` (a
+  slip for `_plg`, kept).
+- Cedar of Lebanon's includes one point on Cyprus, the Cyprus cedar, which
+  the dataset files under *Cedrus libani* and some botanists treat as a
+  species of its own. Its habitat says so.
+- Norway spruce's range runs past the Urals into western Siberia, where it
+  merges with Siberian spruce, which some botanists treat as a subspecies of
+  it and some as a species. Its habitat says so.
+- Walnut's has no separate file for where it was introduced, and shades much
+  of western, central and northern Europe (Britain, southern Sweden) as its
+  range, where other accounts give it as native only from the Balkans east.
+  Its habitat keeps that account and says what the map also shows.
+- Like Little's, these are continental-scale maps, the authors say, not to be
+  read for whether a given place is inside.
+
+Habitats were checked against these maps when they were added (November
+2026): 22 of the 36 said less than the map shows (Norway spruce's stopped at
+northern Russia; beech's left out the oriental beech of Turkey and the
+Caucasus) and had their geography widened to match it, in their own words,
+leaving the rest of each as written. The map is cited on the same page, under
+Sources.
 
 ## Written by hand: crown forms, habitats, facts
 
