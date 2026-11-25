@@ -774,14 +774,14 @@ UVM-3213,3213,quercus-rubra,44.477284,-73.199319,"Position corrected on imagery,
 UVM-0094,94,fagus-grandifolia,44.477336,-73.199493,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,c6c938d3-3943-43ce-a1f4-ab44d1c32490
 UVM-0095,95,picea-pungens,44.477298,-73.199615,"Position corrected on imagery, 2026-11-04",central,,,,edbc4ca3-0475-46e6-ad6a-cbc1c7767102
 UVM-0098,98,picea-abies,44.477238,-73.199619,"Position corrected on imagery, 2026-11-04",central,,,,97790e4a-f8fc-496c-a447-1a76a5e47795
-UVM-0146,146,picea-glauca,44.477233,-73.199509,"Position corrected on imagery, 2026-11-04",central,,,,5718dcde-19c9-4d90-896a-ad2096b0e74f
+UVM-0146,146,picea-glauca,44.476751,-73.199597,Position set by pin on imagery,central,,,,5718dcde-19c9-4d90-896a-ad2096b0e74f
 UVM-0096,96,picea-pungens,44.477183,-73.199469,"Position corrected on imagery, 2026-11-04",central,,,,2aadf6bc-a1c3-4753-bfeb-b69bb44140ce
 UVM-3212,3212,quercus-palustris,44.477130,-73.199293,"Position corrected on imagery, 2026-11-04",central,,,,791a72be-51c2-4955-a6bd-68e33c35c3bc
 UVM-0138,138,acer-saccharum,44.477084,-73.199411,"Position corrected on imagery, 2026-11-04",central,,,,9d69605c-3981-44f6-97fc-299b3d2052c9
 UVM-0140,140,aesculus-hippocastanum,44.476952,-73.199358,"Position corrected on imagery, 2026-11-04",central,,,,d2bebe1d-4bbb-46ee-84e9-ef9b16a1a6db
 UVM-0141,141,picea-pungens,44.476902,-73.199370,"Position corrected on imagery, 2026-11-04",central,,,,83d835f3-0dee-4fbe-a863-325b16a74682
-UVM-0142,142,picea-abies,44.476884,-73.199379,"Position corrected on imagery, 2026-11-04",central,,,,658443e3-bf58-4aab-9cbd-80c914541a6f
-UVM-0143,143,pseudotsuga-menziesii,44.476848,-73.199415,"Position corrected on imagery, 2026-11-04",central,,,,32fdef0b-9342-474e-b44f-164b8a8e760c
+UVM-0142,142,picea-abies,44.476857,-73.199417,Position set by pin on imagery,central,,,,658443e3-bf58-4aab-9cbd-80c914541a6f
+UVM-0143,143,pseudotsuga-menziesii,44.476841,-73.199408,Position set by pin on imagery,central,,,,32fdef0b-9342-474e-b44f-164b8a8e760c
 UVM-0144,144,picea-abies,44.476744,-73.199302,"Position corrected on imagery, 2026-11-04",central,,,,0ca1c853-cfca-4225-af28-12fb0e4b5670
 UVM-4200,,acer-saccharinum,44.476532,-73.199288,"Position corrected on imagery, 2026-11-04",central,,,,29d378f9-20f6-4d00-ab0b-031d6804d304
 UVM-0157,157,fraxinus-sp,44.476517,-73.199390,"Position corrected on imagery, 2026-11-04",central,,,,2b74b4b7-0e76-480f-a620-0537d5bbc068
@@ -793,11 +793,20 @@ UVM-0150,150,picea-abies,44.476693,-73.199695,"Position corrected on imagery, 20
 UVM-0097,97,picea-abies,44.476754,-73.199596,"Position corrected on imagery, 2026-11-04",central,,,,ccfce518-259f-4f07-ab15-67c4512c5af3
 UVM-0147,147,picea-pungens,44.476818,-73.199679,"Position corrected on imagery, 2026-11-04",central,,,,19f43024-e085-46b3-a921-1506eefae5f6
 UVM-0148,148,picea-pungens,44.476758,-73.199736,"Position corrected on imagery, 2026-11-04",central,,,,92f5a449-49eb-4b8d-a030-2e7f18d0dae1
-UVM-0151,151,quercus-rubra,44.476707,-73.199803,"Position corrected on imagery, 2026-11-04",central,,,,946fda68-6453-453c-a07c-7d069078a2e2
+UVM-0151,151,quercus-rubra,44.476707,-73.199803,"Position corrected on imagery, 2026-11-04",central,,"Commemorating the
+Class of 1997
+Reunion Gift Campaign
+2001-2002",,946fda68-6453-453c-a07c-7d069078a2e2
 UVM-0152,152,fagus-sylvatica,44.476773,-73.199901,"Position corrected on imagery, 2026-11-04",central,,,,4fa7cc6b-ffcf-453a-8761-9914a568d592
 UVM-0133,133,malus-sp,44.476864,-73.199955,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,7c6b0bc5-d886-40d9-b8ab-e591e9f996f1
-UVM-0135,135,malus-sp,44.476942,-73.199850,"Position corrected on imagery, 2026-11-04",central,,,,31c2e8e8-a165-4516-ab6c-0ff7406886d0
-UVM-0136,136,malus-sp,44.476964,-73.199778,"Position corrected on imagery, 2026-11-04",central,,,,193c8223-ba6d-4dc3-a6d0-d4b6be6f3de1
+UVM-0135,135,malus-sp,44.476942,-73.199850,"Position corrected on imagery, 2026-11-04",central,,"Commemorating the
+Class of 1963
+Reunion Gift Campaign
+1997-98",,31c2e8e8-a165-4516-ab6c-0ff7406886d0
+UVM-0136,136,malus-sp,44.476964,-73.199778,"Position corrected on imagery, 2026-11-04",central,,"Commemorating the
+Class of 1973
+Reunion Gift Campaign
+1997-98",,193c8223-ba6d-4dc3-a6d0-d4b6be6f3de1
 UVM-4203,,picea-pungens,44.474202,-73.193172,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,461e988d-9709-4c2b-8af9-2a7377c04e29
 UVM-4204,,betula-nigra,44.474153,-73.193166,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,060029e7-34f5-47ab-a9ae-430e2ba12723
 UVM-0829,829,fraxinus-sp,44.474099,-73.193154,"Mapped in UVM's ArcGIS tree layer, 2023–24",central,,,,681751ab-25e2-47c8-9bcc-68e59a2db6c0
@@ -2053,8 +2062,8 @@ UVM-4700,,acer-platanoides,44.469645,-73.199101,"Mapped in UVM's ArcGIS tree lay
 UVM-4701,,acer-platanoides,44.469659,-73.199107,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,dd38476f-4906-4191-a9df-2ef975b1ec6c
 UVM-4702,,acer-platanoides,44.469670,-73.199092,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,7bdd02d2-ed81-4753-b550-7d94f815838b
 UVM-4703,,acer-platanoides,44.469681,-73.199111,"Mapped in UVM's ArcGIS tree layer, 2023–24",redstone,,,,630ef896-12e1-474b-aada-fca126778536
-UVM-4704,,gleditsia-triacanthos-inermis,44.478459,-73.201477,Position set by pin on imagery,central,,,,
-UVM-4705,,gleditsia-triacanthos-inermis,44.478200,-73.201528,Position set by pin on imagery,central,,,,
+UVM-1127,1127,gleditsia-triacanthos-inermis,44.478459,-73.201477,Position set by pin on imagery,central,,,,
+UVM-1128,1128,gleditsia-triacanthos-inermis,44.478200,-73.201528,Position set by pin on imagery,central,,,,
 UVM-4706,,acer-x-freemanii,44.477818,-73.201807,Position set by pin on imagery,central,,,,
 UVM-4707,,acer-x-freemanii,44.477869,-73.201807,Position set by pin on imagery,central,,,,
 UVM-4708,,acer-x-freemanii,44.477907,-73.201810,Position set by pin on imagery,central,,,,
@@ -2153,3 +2162,12 @@ UVM-1696,1696,thuja-occidentalis,44.472906,-73.197262,GPS ±1 m,athletic,,,,
 UVM-2679,2679,thuja-occidentalis,44.472862,-73.197233,Position set by pin on imagery,athletic,,,,
 UVM-2678,2678,thuja-occidentalis,44.472814,-73.197263,Position set by pin on imagery,athletic,,,,
 UVM-2677,2677,thuja-occidentalis,44.472774,-73.197229,Position set by pin on imagery,athletic,,,,
+UVM-0191,191,picea-pungens,44.477634,-73.200937,GPS ±3 m,central,,,,
+UVM-0190,190,picea-pungens,44.477635,-73.201024,GPS ±3 m,central,,,,
+UVM-0195,195,acer-saccharum,44.478125,-73.200804,Position set by pin on imagery,central,,,,
+UVM-0200,200,acer-saccharum,44.478432,-73.200785,Position set by pin on imagery,central,,,,
+UVM-0202,202,acer-saccharum,44.478704,-73.200729,Position set by pin on imagery,central,,,,
+UVM-1102,1102,tsuga-canadensis,44.478684,-73.200889,Position set by pin on imagery,central,,,,
+UVM-1103,1103,tsuga-canadensis,44.478733,-73.200940,Position set by pin on imagery,central,,,,
+UVM-0203,203,tsuga-canadensis,44.478698,-73.200913,Position set by pin on imagery,central,,,,
+UVM-0208,208,fraxinus-pennsylvanica,44.479172,-73.200827,GPS ±3 m,central,,,,
