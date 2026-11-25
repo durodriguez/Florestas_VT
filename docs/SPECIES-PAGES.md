@@ -554,9 +554,16 @@ here, not by a botanist.
 `data/part-photos.csv` (taxon_id, part, title, page_url, image_url, author,
 license, license_url, matches, of_species): a photo of a species' bark, leaves, flowers or fruit
 from Wikimedia Commons, shown in four tiles under the description, each with
-what `taxa.csv` says of that part and a credit line (photographer, license,
-link to the photo's Commons page), as the licenses require. The page loads the
-500 px thumbnail from Wikimedia, and the 960 px one on a sharp screen.
+what `taxa.csv` says of that part. Each photo's credit (photographer, license,
+link to the photo's Commons page), as the licenses require, is a numbered note:
+a small number after the part's name links to the *Photo credits* list at the
+end of the page, after Sources, which links back. Until November 2026 the
+credit was written out under each tile, which made the row busy. The "Which
+one?" tiles of a genus-only page are credited the same way.
+
+A tap on a photo shows it full size, as the campus photos and the map do
+(the same viewer), loading the larger copy, with its credit beneath. The page
+loads the 500 px thumbnail from Wikimedia, and the 960 px one on a sharp screen.
 
 Where Commons has nothing usable, a photo can come from iNaturalist instead:
 from a research-grade observation (its species confirmed by other observers),
@@ -571,8 +578,8 @@ or an iNaturalist observation photo.
 **Licenses.** Until 24 November 2026 only CC0, CC BY and CC BY-SA were taken;
 that was a choice made when the photo tiles were built, not a requirement,
 and the owner widened it. The site is free and educational, with no ads or
-sales, which is the non-commercial use CC BY-NC and BY-NC-SA allow; each tile
-already credits the photographer and links the license, as both require. Should
+sales, which is the non-commercial use CC BY-NC and BY-NC-SA allow; each page
+credits the photographer and links the license, as both require. Should
 the site or its data ever be used commercially (sold, paywalled, carrying ads,
 or reused in a paid product), the NC photos would have to come out: their rows
 say which in the `license` column. Still refused: no-derivatives licenses (ND)

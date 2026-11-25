@@ -207,3 +207,40 @@ describe('Know it by, for a cultivar', () => {
     expect(html).toContain('Photos of <i>Acer platanoides</i>, the species this was selected from.');
   });
 });
+
+describe('Know it by: credits as notes, photos full size on a tap', () => {
+  const shot = (name: string, author: string) => ({
+    title: `File:${name}.jpg`, page: `https://commons.wikimedia.org/wiki/File:${name}.jpg`,
+    image: `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/${name}.jpg/500px-${name}.jpg`,
+    site: 'Wikimedia Commons', author, license: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  });
+  const html = page(taxon(), { extras: { photos: { bark: shot('Bark', 'Ann Bark'), leaves: shot('Leaf', 'Lee Leaf') } } });
+  const parts = html.slice(html.indexOf('<h2>Know it by</h2>'), html.indexOf('</section>', html.indexOf('<h2>Know it by</h2>')));
+
+  it('keeps the credit out of the caption, as a numbered note', () => {
+    const captions = [...parts.matchAll(/<figcaption>([\s\S]*?)<\/figcaption>/g)].map((m) => m[1]).join(' ');
+    expect(captions).not.toContain('Ann Bark');
+    expect(captions).not.toContain('CC BY');
+    expect(parts).toContain('<b>Bark.</b><sup class="fn"><a href="#credit-1" id="credit-ref-1"');
+    expect(parts).toContain('href="#credit-2"');
+  });
+
+  it('writes the credits out in full at the end, in order, linked back', () => {
+    const credits = html.slice(html.indexOf('class="credits"'));
+    expect(credits).toMatch(/<li id="credit-1">Bark: <a href="https:\/\/commons\.wikimedia\.org\/wiki\/File:Bark\.jpg" rel="noopener">Ann Bark<\/a>, <a href="https:\/\/creativecommons\.org\/licenses\/by\/4\.0\/" rel="noopener license">CC BY 4\.0<\/a>, Wikimedia Commons\./);
+    expect(credits).toContain('<li id="credit-2">Leaves: ');
+    expect(credits).toContain('href="#credit-ref-1"');
+    expect(html.indexOf('class="credits"')).toBeGreaterThan(html.indexOf('class="sources"'));
+  });
+
+  it('opens each photo full size, the larger copy, with its credit', () => {
+    expect(parts).toContain('class="shot-open"');
+    expect(parts).toContain('data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Bark.jpg/960px-Bark.jpg"');
+    expect(parts).toContain('data-credit="Bark. Photo: Ann Bark, CC BY 4.0, Wikimedia Commons"');
+    expect(html).toContain('btn.dataset.full');
+  });
+
+  it('has no notes without photos', () => {
+    expect(page()).not.toContain('class="credits"');
+  });
+});
