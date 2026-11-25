@@ -165,8 +165,9 @@ Worth knowing about the data:
   it and some as a species. Its habitat says so.
 - Walnut's has no separate file for where it was introduced, and shades much
   of western, central and northern Europe (Britain, southern Sweden) as its
-  range, where other accounts give it as native only from the Balkans east.
-  Its habitat keeps that account and says what the map also shows.
+  range. The European Atlas of Forest Tree Species says its natural range is
+  unclear after so long in cultivation: thought native to the Mediterranean
+  and Central Asia. Its Distribution says so, and what the map also shows.
 - Like Little's, these are continental-scale maps, the authors say, not to be
   read for whether a given place is inside.
 
