@@ -180,6 +180,10 @@ describe('what species pages add by hand', () => {
     expect(skyline.speciesFacts.map((f: { text: string }) => f.text)).toEqual(['In the pea family.']);
     expect(extras.get('gleditsia-triacanthos').speciesFacts).toEqual([]);
     const bad = speciesExtras({ crownRows: [], habitatRows: [], factRows: [{ taxon_id: 'gleditsia-triacanthos', fact: 'x', ...src, cultivars: 'maybe' }], taxa });
+    const empty = speciesExtras({ crownRows: [], habitatRows: [{ taxon_id: 'gleditsia-triacanthos', habitat: '', distribution: '', ...src }], factRows: [], taxa });
+    expect(empty.errors[0]).toContain('habitat and distribution are both empty');
+    const split = speciesExtras({ crownRows: [], habitatRows: [{ taxon_id: 'gleditsia-triacanthos', habitat: 'River bottoms.', distribution: 'Central United States.', ...src }], factRows: [], taxa });
+    expect(split.extras.get('gleditsia-triacanthos-inermis').habitat).toMatchObject({ text: 'River bottoms.', distribution: 'Central United States.', inherited: true });
     expect(bad.errors[0]).toContain('cultivars must be yes, no or blank');
   });
 

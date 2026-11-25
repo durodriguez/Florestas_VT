@@ -4,8 +4,10 @@
  *
  * - data/crown-forms.csv: taxon_id, crown_form. The shape the drawing of the
  *   tree at maturity takes (tree-drawing.mjs's CROWN_FORMS).
- * - data/habitat.csv: taxon_id, habitat, source, source_url. Where it grows
- *   wild, in a few sentences.
+ * - data/habitat.csv: taxon_id, habitat, distribution, source, source_url.
+ *   Where it grows wild, as a field guide puts it: habitat, the ground, light
+ *   and places it grows in; distribution, where in the world. Either may be
+ *   blank, not both.
  * - data/facts.csv: taxon_id, fact, source, source_url, cultivars. One row per
  *   fact, shown in Worth knowing after the fun fact, in file order. cultivars
  *   "yes": the fact holds for the species' cultivars and varieties too, and
@@ -78,9 +80,9 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
   habitatRows.forEach((r, i) => {
     const id = trim(r.taxon_id);
     if (!known('habitat.csv', i, id) || !sourced('habitat.csv', i, r)) return;
-    if (!trim(r.habitat)) return errors.push(`habitat.csv row ${i + 2}: habitat is empty`);
+    if (!trim(r.habitat) && !trim(r.distribution)) return errors.push(`habitat.csv row ${i + 2}: habitat and distribution are both empty`);
     if (habitats.has(id)) return errors.push(`habitat.csv row ${i + 2}: ${id} is listed twice`);
-    habitats.set(id, { text: trim(r.habitat), source: trim(r.source), url: trim(r.source_url) });
+    habitats.set(id, { text: trim(r.habitat), distribution: trim(r.distribution), source: trim(r.source), url: trim(r.source_url) });
   });
 
   const facts = new Map();

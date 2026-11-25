@@ -277,3 +277,28 @@ describe('Worth knowing on a cultivar\'s page', () => {
     expect(worth).toMatch(/Of the species, <i>Tilia cordata<\/i>:<\/p><ul><li>National tree of the Czech Republic\.<\/li>/);
   });
 });
+
+describe('Where it grows wild', () => {
+  const wild = (t = taxon(), over: Record<string, unknown> = {}) => {
+    const html = page(t, over);
+    const at = html.indexOf('<h2>Where it grows wild</h2>');
+    return at < 0 ? '' : html.slice(at, html.indexOf('</section>', at));
+  };
+
+  it('shows Habitat and Distribution, as a field guide does, and not the soil and zones Characteristics already lists', () => {
+    const section = wild(taxon({ soil: 'Moist, well-drained', zones: '3-7' }), {
+      extras: { habitat: { text: 'Mixed broadleaf forests on fertile soils.', distribution: 'Wild across most of Europe.' } },
+    });
+    expect(section).toContain('<h3>Habitat</h3><p>Mixed broadleaf forests on fertile soils.</p>');
+    expect(section).toContain('<h3>Distribution</h3><p>Wild across most of Europe.</p>');
+    expect(section.indexOf('Habitat')).toBeLessThan(section.indexOf('Distribution'));
+    expect(section).not.toContain('Soil:');
+    expect(section).not.toContain('Hardiness zones');
+  });
+
+  it('shows Distribution alone for a garden hybrid with no wild habitat', () => {
+    const section = wild(taxon(), { extras: { habitat: { text: '', distribution: 'A garden hybrid, not found wild.' } } });
+    expect(section).toContain('<h3>Distribution</h3>');
+    expect(section).not.toContain('<h3>Habitat</h3>');
+  });
+});

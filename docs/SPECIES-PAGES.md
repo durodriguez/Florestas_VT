@@ -47,15 +47,18 @@ by species, most common first.
    two, *Amelanchier laevis* and *Crataegus crus-galli*, which the atlas does
    not map; and since November 2026 for 36 European species it does not map,
    from Caudullo et al.'s chorological maps (see *European ranges*). A cultivar or variety shows its species' range, and says so; a
-   hybrid has none. Beside the map, under *Habitat*, the species' habitat
-   from `data/habitat.csv` where one is written. Where none is yet, a
+   hybrid has none. Beside the map, as a field guide sets it out, *Habitat*
+   (the ground, light and places it grows in) and *Distribution* (where in
+   the world), from `data/habitat.csv`. Where no distribution is written, a
    sentence on where the range lies stands in for it ("Grows wild in 32
    states, from Maine west to Minnesota and south to Florida and Texas,
    reaching north into Canada"), from the states it covers, read off the map
-   once by `npm run ranges:fetch` and stored with it. Then the soil and
-   hardiness zones from `taxa.csv` (until November 2026 followed by the
-   campus's own zone, 5a, a sentence on every page, taken out as bloat).
-   Whether Burlington is inside the range is
+   once by `npm run ranges:fetch` and stored with it. Until November 2026 the
+   two were one paragraph, followed by the soil and hardiness zones, which
+   repeated Characteristics word for word; the 333 habitats were split then,
+   in their own words and from their own sources, and the soil and zones
+   left to Characteristics. A garden hybrid, wild nowhere, shows where it
+   came from under Distribution, and under Habitat, where it is grown. Whether Burlington is inside the range is
    left to the map, which marks it with a star; until November 2026 a
    sentence said so, and it repeated the habitat. A European map has no star
    (Burlington is far off it); its key, on one line, is *Grows wild* and the
@@ -174,7 +177,7 @@ Three files beside `taxa.csv`, read by `scripts/lib/species-extras.mjs`
 | File | Columns | Shown |
 | --- | --- | --- |
 | `data/crown-forms.csv` | taxon_id, crown_form | the drawing's shape |
-| `data/habitat.csv` | taxon_id, habitat, source, source_url | Where it grows wild, as *Habitat*, with or without a range map |
+| `data/habitat.csv` | taxon_id, habitat, distribution, source, source_url | Where it grows wild, as *Habitat* and *Distribution*, with or without a range map |
 | `data/facts.csv` | taxon_id, fact, source, source_url, cultivars | Worth knowing, after the fun fact, in file order |
 
 A cultivar or variety without its own crown form or habitat takes its

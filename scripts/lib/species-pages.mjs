@@ -324,19 +324,23 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     ${factsBox}
   </section>`;
 
-  // Where it grows wild: the habitat in words, beside Little's map when the
-  // species has one. Where no habitat is written yet, the map's own summary
-  // of the states it covers stands in for it (range-map.mjs, describeRange).
-  // Whether Burlington is inside is for the map's star to show.
-  const habitatText = habitat?.text || (range ? describeRange(range.where) : '');
-  const habitatPara = habitatText ? `<h3>Habitat</h3><p>${esc(habitatText)}</p>` : '';
+  // Where it grows wild, as a field guide has it: Habitat (the ground and
+  // light it grows in) and Distribution (where in the world), from
+  // habitat.csv, beside the range map when the species has one. Where no
+  // distribution is written yet, the map's own summary of the states it
+  // covers stands in for it (range-map.mjs, describeRange). Soil and
+  // hardiness zones are in Characteristics, not repeated here (until November
+  // 2026 they were). Whether Burlington is inside is for the map's star to show.
+  const habitatText = habitat?.text ?? '';
+  const distributionText = habitat?.distribution || (range ? describeRange(range.where) : '');
+  const growing = [
+    habitatText ? `<h3>Habitat</h3><p>${esc(habitatText)}</p>` : '',
+    distributionText ? `<h3>Distribution</h3><p>${esc(distributionText)}</p>` : '',
+  ].join('\n      ');
   // A cultivar's or variety's habitat and range are its species', said once.
   const ofSpecies = (t.cultivar || t.infra) && (habitat?.inherited || range)
     ? `<p class="note of-species">For <i>${esc(`${t.genus} ${t.species}`)}</i>, the species this was selected from.</p>`
     : '';
-  const growing = `${habitatPara}
-      ${t.soil ? `<p><b>Soil:</b> ${esc(t.soil)}</p>` : ''}
-      ${t.zones ? `<p><b>Hardiness zones:</b> ${esc(t.zones)}.</p>` : ''}`;
   let rangeSection = '';
   if (range && maps) {
     rangeSection = `<h2>Where it grows wild</h2>
@@ -794,6 +798,7 @@ figure { margin: 0; }
 .wild { display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.6rem; align-items: start; }
 .wild p { margin: 0 0 .8rem; font-size: .93rem; }
 .wild h3 { margin: 0 0 .25rem; font-size: .95rem; }
+.wild p + h3 { margin-top: 1rem; }
 .wild--text { grid-template-columns: minmax(0, 40rem); }
 .of-species { margin: -.3rem 0 .8rem; }
 .range-map, .campus-map { position: relative; }
