@@ -58,7 +58,15 @@ by species, most common first.
    repeated Characteristics word for word; the 333 habitats were split then,
    in their own words and from their own sources, and the soil and zones
    left to Characteristics. A garden hybrid, wild nowhere, shows where it
-   came from under Distribution, and under Habitat, where it is grown. Whether Burlington is inside the range is
+   came from under Distribution, and under Habitat, where it is grown.
+   Since November 2026 Habitat and Distribution are being written out in
+   full, to the depth of a field guide (climate, soils, moisture, light and
+   elevation; the whole range and where it grows best), from *Silvics of
+   North America* for native trees and the European Commission's *European
+   Atlas of Forest Tree Species* for European ones, each then the row's
+   cited source. Trees neither covers (most East Asian ones) add a sentence
+   on how they do when planted, from NC State Extension's Plant Toolbox;
+   their row cites both sources, its two addresses separated by a space. Whether Burlington is inside the range is
    left to the map, which marks it with a star; until November 2026 a
    sentence said so, and it repeated the habitat. A European map has no star
    (Burlington is far off it); its key, on one line, is *Grows wild* and the
