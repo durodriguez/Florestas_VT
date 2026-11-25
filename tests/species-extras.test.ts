@@ -165,6 +165,24 @@ describe('what species pages add by hand', () => {
     expect(extras.get('gleditsia-triacanthos').habitat.inherited).toBeUndefined();
   });
 
+  it('gives a cultivar the species\' facts marked as holding for it, and only those', () => {
+    const { extras, errors } = speciesExtras({
+      crownRows: [], habitatRows: [],
+      factRows: [
+        { taxon_id: 'gleditsia-triacanthos', fact: 'Wild trees carry thorns.', ...src, cultivars: '' },
+        { taxon_id: 'gleditsia-triacanthos', fact: 'In the pea family.', ...src, cultivars: 'yes' },
+      ],
+      taxa,
+    });
+    expect(errors).toEqual([]);
+    const skyline = extras.get('gleditsia-triacanthos-inermis-skyline');
+    expect(skyline.facts).toEqual([]);
+    expect(skyline.speciesFacts.map((f: { text: string }) => f.text)).toEqual(['In the pea family.']);
+    expect(extras.get('gleditsia-triacanthos').speciesFacts).toEqual([]);
+    const bad = speciesExtras({ crownRows: [], habitatRows: [], factRows: [{ taxon_id: 'gleditsia-triacanthos', fact: 'x', ...src, cultivars: 'maybe' }], taxa });
+    expect(bad.errors[0]).toContain('cultivars must be yes, no or blank');
+  });
+
   it('lets a cultivar have a crown form of its own', () => {
     const { extras } = speciesExtras({
       crownRows: [

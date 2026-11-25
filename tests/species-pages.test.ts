@@ -267,3 +267,13 @@ describe('credits at the end of the page', () => {
     expect(html).not.toContain('Map credit');
   });
 });
+
+describe('Worth knowing on a cultivar\'s page', () => {
+  it('adds the species\' facts marked for it, under a line naming the species', () => {
+    const cultivar = taxon({ genus: 'Tilia', species: 'cordata', cultivar: 'Greenspire' });
+    const html = page(cultivar, { extras: { facts: [], speciesFacts: [{ text: 'National tree of the Czech Republic.' }] } });
+    const worth = html.slice(html.indexOf('class="worth"'), html.indexOf('</aside>'));
+    expect(worth).toContain('Linden honey');
+    expect(worth).toMatch(/Of the species, <i>Tilia cordata<\/i>:<\/p><ul><li>National tree of the Czech Republic\.<\/li>/);
+  });
+});

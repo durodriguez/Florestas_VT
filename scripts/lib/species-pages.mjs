@@ -303,9 +303,14 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
   // Worth knowing: about the species, not the campus: the fun fact, then the
   // facts in data/facts.csv. (Until November 2026 it ended with the campus's
   // own, campusFacts: the only one mapped, the largest trunk measured.)
+  // A cultivar's page adds its species' facts marked as holding for it too
+  // (facts.csv's cultivars column), under a line saying whose they are.
   const facts = [t.funFact ? esc(t.funFact) : '', ...added.map((f) => esc(f.text))].filter(Boolean);
-  const factsBox = facts.length
-    ? `<aside class="worth"><h2>Worth knowing</h2><ul>${facts.map((f) => `<li>${f}</li>`).join('')}</ul></aside>`
+  const fromSpecies = (extras?.speciesFacts ?? []).map((f) => esc(f.text));
+  const list = (items) => `<ul>${items.map((f) => `<li>${f}</li>`).join('')}</ul>`;
+  const factsBox = facts.length || fromSpecies.length
+    ? `<aside class="worth"><h2>Worth knowing</h2>${facts.length ? list(facts) : ''}${fromSpecies.length
+      ? `<p class="worth-of">Of the species, <i>${esc(`${t.genus} ${t.species}`)}</i>:</p>${list(fromSpecies)}` : ''}</aside>`
     : '';
   const lede = t.description ? `<p class="lede">${esc(t.description)}</p>` : '';
 
@@ -758,6 +763,7 @@ figure { margin: 0; }
 .worth ul { margin: 0; padding-left: 1.1rem; font-size: .87rem; }
 .worth li { margin-bottom: .45rem; }
 .worth a { color: inherit; }
+.worth-of { margin: .2rem 0 .3rem; font-size: .8rem; color: var(--note-ink); }
 
 .parts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 .part img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: var(--sunk); }

@@ -12,6 +12,8 @@
 
 const FERN_FAMILIES = new Set(['Pteridaceae', 'Dryopteridaceae', 'Athyriaceae', 'Onocleaceae', 'Thelypteridaceae', 'Polypodiaceae']);
 const PARTS = ['bark', 'leaves', 'flowers', 'fruit'];
+/** How many things a page's Worth knowing should hold: the fun fact and at least two more. */
+export const WORTH_KNOWING = 3;
 /** Left blank on purpose (DATA-MODEL.md, "Filling in a new taxon"): boxwood's fruit is insignificant. */
 const DELIBERATE_NO_FRUIT_MONTHS = new Set(['buxus-sempervirens', 'buxus-verdant-hills']);
 const GROWING = [
@@ -35,6 +37,11 @@ export function checklist(t, extras) {
 
   add('description', !!t.description);
   add('fun fact', !!t.funFact);
+  // Worth knowing: the fun fact and the facts in facts.csv, a cultivar's own
+  // and its species' marked for it; WORTH_KNOWING or more to count as done.
+  const own = (t.funFact ? 1 : 0) + (e.facts?.length ?? 0);
+  const worth = own + (e.speciesFacts?.length ?? 0);
+  items.push({ item: `worth knowing (${WORTH_KNOWING})`, state: worth >= WORTH_KNOWING ? (own >= WORTH_KNOWING ? 'done' : 'borrowed') : 'missing', detail: `${worth} of ${WORTH_KNOWING}` });
   if (kind === 'genus') {
     add('"Which one?" leaves', !!e.kin?.length);
     return items;

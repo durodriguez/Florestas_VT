@@ -5,22 +5,23 @@ const base = { id: 'x', sci: 'X y', common: 'X', family: 'Aceraceae', genus: 'X'
   description: 'd', funFact: 'f', flowerColor: 'red', flowerMonths: [4], fruitColor: 'red', fruitMonths: [6], fallColor: 'red',
   matureHeightFt: 40, matureSpreadFt: 30, zones: '3-9', bark: 'gray' };
 const photo = { image: 'i' };
-const full = { habitat: { text: 'h' }, crownForm: 'oval', photos: { bark: photo, leaves: photo, flowers: photo, fruit: photo } };
+const fact = { text: 't' };
+const full = { habitat: { text: 'h' }, crownForm: 'oval', facts: [fact, fact], photos: { bark: photo, leaves: photo, flowers: photo, fruit: photo } };
 
 describe('species page completeness', () => {
   it('scores a full tree page complete, and names what a bare one lacks', () => {
     expect(checklist(base, full).every((i) => i.state === 'done')).toBe(true);
     const bare = checklist({ ...base, fallColor: '' }, {});
     const missing = bare.filter((i) => i.state === 'missing').map((i) => i.item);
-    expect(missing).toEqual(['growing details', 'where it grows wild', 'crown shape', 'bark photo', 'leaves photo', 'flowers photo', 'fruit photo']);
+    expect(missing).toEqual(['worth knowing (3)', 'growing details', 'where it grows wild', 'crown shape', 'bark photo', 'leaves photo', 'flowers photo', 'fruit photo']);
     expect(bare.find((i) => i.item === 'growing details')?.detail).toBe('fall color');
   });
 
   it('leaves out what does not apply: a fern\'s bark, flowers and fruit; fruit on a fruitless clone; a genus page\'s photos', () => {
-    const fern = checklist({ ...base, family: 'Dryopteridaceae', type: 'perennial', flowerColor: '', flowerMonths: [], fruitColor: '', fruitMonths: [], fallColor: '', bark: '' }, { habitat: { text: 'h' }, photos: { leaves: photo } });
+    const fern = checklist({ ...base, family: 'Dryopteridaceae', type: 'perennial', flowerColor: '', flowerMonths: [], fruitColor: '', fruitMonths: [], fallColor: '', bark: '' }, { habitat: { text: 'h' }, facts: [fact, fact], photos: { leaves: photo } });
     expect(fern.every((i) => i.state === 'done')).toBe(true);
     expect(checklist({ ...base, fruitColor: 'none', fruitMonths: [] }, full).some((i) => i.item === 'fruit photo')).toBe(false);
-    expect(checklist({ ...base, species: '' }, { kin: [{}] }).map((i) => i.item)).toEqual(['description', 'fun fact', '"Which one?" leaves']);
+    expect(checklist({ ...base, species: '' }, { kin: [{}] }).map((i) => i.item)).toEqual(['description', 'fun fact', 'worth knowing (3)', '"Which one?" leaves']);
     expect(kindOf({ ...base, species: '', sci: 'Forsythia sp.' })).toBe('genus');
     expect(kindOf({ ...base, species: '', sci: 'Acer griseum x maximowiczianum' })).toBe('hybrid');
   });
@@ -34,5 +35,12 @@ describe('species page completeness', () => {
     expect(rows.map((r) => r.id)).toEqual(['b', 'a', 'c']);
     expect(summary(rows).complete).toBe(1);
     expect(progressMarkdown(rows, '2026-01-01')).toContain('- [ ] **X** (`b`, 1 on campus)');
+  });
+
+  it('wants three things worth knowing, counting a cultivar\'s species\' facts as borrowed', () => {
+    const worth = (t: object, e: object) => checklist({ ...base, ...t }, e).find((i) => i.item === 'worth knowing (3)');
+    expect(worth({}, { facts: [fact] })).toMatchObject({ state: 'missing', detail: '2 of 3' });
+    expect(worth({}, { facts: [fact, fact] })?.state).toBe('done');
+    expect(worth({ cultivar: 'C' }, { speciesFacts: [fact, fact] })?.state).toBe('borrowed');
   });
 });

@@ -175,12 +175,21 @@ Three files beside `taxa.csv`, read by `scripts/lib/species-extras.mjs`
 | --- | --- | --- |
 | `data/crown-forms.csv` | taxon_id, crown_form | the drawing's shape |
 | `data/habitat.csv` | taxon_id, habitat, source, source_url | Where it grows wild, as *Habitat*, with or without a range map |
-| `data/facts.csv` | taxon_id, fact, source, source_url | Worth knowing, after the fun fact, in file order |
+| `data/facts.csv` | taxon_id, fact, source, source_url, cultivars | Worth knowing, after the fun fact, in file order |
 
 A cultivar or variety without its own crown form or habitat takes its
-species', and the page says once that what follows is the species'. Not its
-facts: one about the species may not hold for a selection of it (wild
-honeylocusts carry thorns; the planted ones are thornless).
+species', and the page says once that what follows is the species'. Its
+facts only where a fact's `cultivars` column says `yes`: one about the species
+may not hold for a selection of it (wild honeylocusts carry thorns; the planted
+ones are thornless), so each is marked as it is written. A cultivar's page
+shows those after its own, under "Of the species, *Gleditsia triacanthos*:".
+Until November 2026 cultivars took none, which left 98 pages with only their
+fun fact; the 43 facts then on file were all marked `yes`, each read as
+holding for the species' selections too.
+
+**Worth knowing should hold three things**: the fun fact and two more. The
+progress page counts it (`worth knowing (3)`, borrowed when a cultivar's
+come from its species). In November 2026, 413 of 419 pages had fewer.
 
 Habitats and facts are held to the fun fact's rule (DATA-MODEL.md): checkable,
 with a source recorded in their file (the build refuses a row without one).
