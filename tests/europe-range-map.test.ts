@@ -101,7 +101,7 @@ describe('a European range on its species page', () => {
     const html = page({ maps: { range: map } });
     expect(html).toContain('<h2>Where it grows wild</h2>');
     expect(html).toContain('picea-abies-base.svg');
-    expect(html).toContain('Not native to North America');
+    expect(html).not.toContain('Not native to North America');
     expect(html).toContain('Small isolated stands');
     expect(html).toContain('<b>Map credit.</b>');
     expect(html).toContain('Chorological maps for the main European woody species');

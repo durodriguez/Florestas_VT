@@ -364,7 +364,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     <figure class="range">
       ${europe
     ? `<div class="range-map"><img src="${esc(maps.range.base)}" alt="">${maps.range.fill}<img src="${esc(maps.range.lines)}" alt=""></div>
-      <figcaption><span class="key"><i></i>Grows wild</span>${range.points?.length ? '<span class="key"><i class="dot"></i>Small isolated stands</span>' : ''}<span class="key away">Not native to North America</span></figcaption>`
+      <figcaption><span class="key"><i></i>Grows wild</span>${range.points?.length ? '<span class="key"><i class="dot"></i>Small isolated stands</span>' : ''}</figcaption>`
     : `<div class="range-map"><img src="${esc(shared.rangeBase)}" alt="">${rangeSvg(range)}<img src="${esc(shared.rangeLines)}" alt=""></div>
       <figcaption><span class="key"><i></i>Grows wild</span><span class="key star">&#9733; Burlington</span><span class="key vt">Vermont</span></figcaption>`}
     </figure>
@@ -829,7 +829,6 @@ figure { margin: 0; }
 .key.star { color: #8a6d00; }
 .key.vt { border-bottom: 2px solid var(--green); }
 .key i.dot { width: .5rem; height: .5rem; border-radius: 50%; vertical-align: 1px; }
-.key.away { color: var(--dim); }
 
 .oncampus { display: grid; grid-template-columns: 1fr 14rem; gap: 1.4rem; align-items: start; }
 .oncampus--one { grid-template-columns: 1fr; }
