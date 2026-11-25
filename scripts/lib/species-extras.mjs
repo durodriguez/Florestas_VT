@@ -4,10 +4,14 @@
  *
  * - data/crown-forms.csv: taxon_id, crown_form. The shape the drawing of the
  *   tree at maturity takes (tree-drawing.mjs's CROWN_FORMS).
- * - data/habitat.csv: taxon_id, habitat, source, source_url. Where it grows
- *   wild, in a few sentences.
- * - data/facts.csv: taxon_id, fact, source, source_url. One row per fact,
- *   shown in Worth knowing after the fun fact, in file order.
+ * - data/habitat.csv: taxon_id, habitat, distribution, source, source_url.
+ *   Where it grows wild, as a field guide puts it: habitat, the ground, light
+ *   and places it grows in; distribution, where in the world. Either may be
+ *   blank, not both.
+ * - data/facts.csv: taxon_id, fact, source, source_url, cultivars. One row per
+ *   fact, shown in Worth knowing after the fun fact, in file order. cultivars
+ *   "yes": the fact holds for the species' cultivars and varieties too, and
+ *   their pages show it, after their own, as the species'.
  * - data/part-photos.csv: taxon_id, part, title, page_url, image_url, author,
  *   license, license_url, matches, of_species ("yes" when the photo is of the
  *   species a cultivar was selected from, not listed in taxa.csv). A photo of its bark, leaves, flowers or fruit
@@ -19,8 +23,9 @@
  * A cultivar or variety without its own crown form, habitat or photos takes its
  * species' (the taxon of the same genus and species, with neither; photos
  * part by part, so it can replace just the part that differs): a
- * thornless honeylocust is shaped and grows wild like any other. Not its
- * facts: one about the species may not hold for a selection of it.
+ * thornless honeylocust is shaped and grows wild like any other. Its facts
+ * only where marked (cultivars "yes"): one about the species may not hold for
+ * a selection of it (wild honeylocusts carry thorns; the planted ones do not).
  *
  * Every habitat and fact needs a source: they are checkable claims, held to
  * the fun fact's rule (docs/DATA-MODEL.md). No DOM here.
@@ -75,9 +80,9 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
   habitatRows.forEach((r, i) => {
     const id = trim(r.taxon_id);
     if (!known('habitat.csv', i, id) || !sourced('habitat.csv', i, r)) return;
-    if (!trim(r.habitat)) return errors.push(`habitat.csv row ${i + 2}: habitat is empty`);
+    if (!trim(r.habitat) && !trim(r.distribution)) return errors.push(`habitat.csv row ${i + 2}: habitat and distribution are both empty`);
     if (habitats.has(id)) return errors.push(`habitat.csv row ${i + 2}: ${id} is listed twice`);
-    habitats.set(id, { text: trim(r.habitat), source: trim(r.source), url: trim(r.source_url) });
+    habitats.set(id, { text: trim(r.habitat), distribution: trim(r.distribution), source: trim(r.source), url: trim(r.source_url) });
   });
 
   const facts = new Map();
@@ -88,7 +93,9 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     if (!text) return errors.push(`facts.csv row ${i + 2}: fact is empty`);
     if (text.length > MAX_FACT) warnings.push(`facts.csv row ${i + 2}: ${id}'s fact runs to ${text.length} characters (keep it under ${MAX_FACT})`);
     if (!facts.has(id)) facts.set(id, []);
-    facts.get(id).push({ text, source: trim(r.source), url: trim(r.source_url) });
+    const forCultivars = trim(r.cultivars);
+    if (forCultivars && !/^(yes|no)$/i.test(forCultivars)) return errors.push(`facts.csv row ${i + 2}: cultivars must be yes, no or blank, got "${forCultivars}"`);
+    facts.get(id).push({ text, source: trim(r.source), url: trim(r.source_url), ...(/^yes$/i.test(forCultivars) && { forCultivars: true }) });
   });
 
   const byIdAll = new Map(taxa.map((t) => [t.id, t]));
@@ -145,6 +152,8 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
       crownForm: forms.get(t.id) ?? (parent ? forms.get(parent) ?? null : null),
       habitat,
       facts: facts.get(t.id) ?? [],
+      // The species' facts that hold for its cultivars too, shown after the cultivar's own.
+      speciesFacts: parent ? (facts.get(parent) ?? []).filter((f) => f.forCultivars) : [],
       photos: partPhotos(photos.get(t.id), parent ? photos.get(parent) : undefined, unlike(t, byId.get(parent))),
     });
   }

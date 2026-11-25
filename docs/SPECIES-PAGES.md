@@ -15,7 +15,7 @@ by species, most common first.
 
 1. **The name**, its family and type above it, and its origin (Vermont native,
    introduced, Vermont invasive) as a badge.
-2. **The drawing and the lead photo**, side by side.
+2. **The drawing**, with the description and Worth knowing (3) beside it.
    - *The drawing* (`scripts/lib/tree-drawing.mjs`, tested): the tree at
      maturity, from the mature height and spread in `taxa.csv`, beside a 6 ft
      person, with a guide every 20 ft. Every species is drawn at the same
@@ -27,14 +27,16 @@ by species, most common first.
      everything else an oval. Everything random is seeded by the taxon's id,
      so a drawing is the same on every build. Only trees with both a height
      and a spread get one.
-   - *The lead photo*: the newest photo of the species taken on campus, aimed
-     a little above the middle as the field guide's are. A tap shows it whole.
-     The other photos are under On campus.
-3. **The description**, and beside it **Worth knowing**: the fun fact, the
-   facts in `data/facts.csv`, then what the inventory can vouch for, worked out at every build so it stays
-   true. That it is the only one on campus, or the largest trunk measured so
-   far ("so far", because most trees have no measurement yet). How many there
-   are and where is On campus's to say, not repeated here.
+   - No campus photo here: since November 2026 they are all under On campus,
+     newest first. The newest one used to lead the page beside the drawing;
+     the top is the drawing's, to be brought up to standard species by species.
+   - A page without a drawing (shrubs, vines, ferns, a tree without its size on
+     file) opens with the description and Worth knowing side by side.
+3. **The description**, and with it **Worth knowing**: the fun fact, then the
+   facts in `data/facts.csv`, about the species. Until November 2026 it ended
+   with facts about the campus's own trees (the only one mapped, the largest
+   trunk measured so far); those were taken out, as Worth knowing is about the
+   species, and On campus says how many there are and where.
 4. **Through the year**: the field guide's year table and its sentence under it
    (leaves, flowers, fruit or cones, month by month, in their colors), from
    the species' typical months in `taxa.csv`. `scripts/lib/year.mjs` is a copy
@@ -45,22 +47,33 @@ by species, most common first.
    two, *Amelanchier laevis* and *Crataegus crus-galli*, which the atlas does
    not map; and since November 2026 for 36 European species it does not map,
    from Caudullo et al.'s chorological maps (see *European ranges*). A cultivar or variety shows its species' range, and says so; a
-   hybrid has none. Beside the map, under *Habitat*, the species' habitat
-   from `data/habitat.csv` where one is written. Where none is yet, a
+   hybrid has none. Beside the map, as a field guide sets it out, *Habitat*
+   (the ground, light and places it grows in) and *Distribution* (where in
+   the world), from `data/habitat.csv`. Where no distribution is written, a
    sentence on where the range lies stands in for it ("Grows wild in 32
    states, from Maine west to Minnesota and south to Florida and Texas,
    reaching north into Canada"), from the states it covers, read off the map
-   once by `npm run ranges:fetch` and stored with it. Then the soil and
-   hardiness zones from `taxa.csv` (until November 2026 followed by the
-   campus's own zone, 5a, a sentence on every page, taken out as bloat).
-   Whether Burlington is inside the range is
+   once by `npm run ranges:fetch` and stored with it. Until November 2026 the
+   two were one paragraph, followed by the soil and hardiness zones, which
+   repeated Characteristics word for word; the 333 habitats were split then,
+   in their own words and from their own sources, and the soil and zones
+   left to Characteristics. A garden hybrid, wild nowhere, shows where it
+   came from under Distribution, and under Habitat, where it is grown.
+   Since November 2026 Habitat and Distribution are being written out in
+   full, to the depth of a field guide (climate, soils, moisture, light and
+   elevation; the whole range and where it grows best), from *Silvics of
+   North America* for native trees and the European Commission's *European
+   Atlas of Forest Tree Species* for European ones, each then the row's
+   cited source. Trees neither covers (most East Asian ones) add a sentence
+   on how they do when planted, from NC State Extension's Plant Toolbox;
+   their row cites both sources, its two addresses separated by a space. Whether Burlington is inside the range is
    left to the map, which marks it with a star; until November 2026 a
    sentence said so, and it repeated the habitat. A European map has no star
    (Burlington is far off it); its key, on one line, is *Grows wild* and the
    dots it draws for *Small isolated stands*. (A *Not native to North
    America* note there was dropped in November 2026: the origin badge at the
    top of the page says as much.)
-6. **On campus**: how many are mapped, by campus, the other photos, the
+6. **On campus**: how many are mapped, by campus, its photos, newest first (a tap shows one whole), the
    buttons to the map and Wikipedia, and a small campus map with each tree as
    a red dot linking to it on the map (`scripts/lib/campus-map.mjs`). Not a
    zoomable map: "Show them on the map" is the way to one.
@@ -152,8 +165,9 @@ Worth knowing about the data:
   it and some as a species. Its habitat says so.
 - Walnut's has no separate file for where it was introduced, and shades much
   of western, central and northern Europe (Britain, southern Sweden) as its
-  range, where other accounts give it as native only from the Balkans east.
-  Its habitat keeps that account and says what the map also shows.
+  range. The European Atlas of Forest Tree Species says its natural range is
+  unclear after so long in cultivation: thought native to the Mediterranean
+  and Central Asia. Its Distribution says so, and what the map also shows.
 - Like Little's, these are continental-scale maps, the authors say, not to be
   read for whether a given place is inside.
 
@@ -172,13 +186,22 @@ Three files beside `taxa.csv`, read by `scripts/lib/species-extras.mjs`
 | File | Columns | Shown |
 | --- | --- | --- |
 | `data/crown-forms.csv` | taxon_id, crown_form | the drawing's shape |
-| `data/habitat.csv` | taxon_id, habitat, source, source_url | Where it grows wild, as *Habitat*, with or without a range map |
-| `data/facts.csv` | taxon_id, fact, source, source_url | Worth knowing, after the fun fact, in file order |
+| `data/habitat.csv` | taxon_id, habitat, distribution, source, source_url | Where it grows wild, as *Habitat* and *Distribution*, with or without a range map |
+| `data/facts.csv` | taxon_id, fact, source, source_url, cultivars | Worth knowing, after the fun fact, in file order |
 
 A cultivar or variety without its own crown form or habitat takes its
-species', and the page says once that what follows is the species'. Not its
-facts: one about the species may not hold for a selection of it (wild
-honeylocusts carry thorns; the planted ones are thornless).
+species', and the page says once that what follows is the species'. Its
+facts only where a fact's `cultivars` column says `yes`: one about the species
+may not hold for a selection of it (wild honeylocusts carry thorns; the planted
+ones are thornless), so each is marked as it is written. A cultivar's page
+shows those after its own, under "Of the species, *Gleditsia triacanthos*:".
+Until November 2026 cultivars took none, which left 98 pages with only their
+fun fact; the 43 facts then on file were all marked `yes`, each read as
+holding for the species' selections too.
+
+**Worth knowing should hold three things**: the fun fact and two more. The
+progress page counts it (`worth knowing (3)`, borrowed when a cultivar's
+come from its species). In November 2026, 413 of 419 pages had fewer.
 
 Habitats and facts are held to the fun fact's rule (DATA-MODEL.md): checkable,
 with a source recorded in their file (the build refuses a row without one).

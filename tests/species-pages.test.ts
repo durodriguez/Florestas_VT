@@ -110,22 +110,33 @@ describe('renderSpeciesPage', () => {
     expect(page(taxon({ count: 0 }))).toMatch(/<p class="actions"><a class="btn" href="https:\/\/en\.wikipedia[^"]*" rel="noopener">Wikipedia<\/a><\/p>/);
   });
 
-  it('leads with the newest campus photo and puts the rest in On campus, above its button', () => {
-    const html = page(taxon({ count: 2 }), {
+  it('keeps campus photos out of the top of the page: all in On campus, newest first, above its button', () => {
+    const html = page(taxon({ count: 2, matureSpreadFt: 40 }), {
       photos: [
         { id: 'UVM-0493', url: 'https://uvm.edu/photos/493.webp', taken: '2026-05-01' },
         { id: 'UVM-0494', url: 'https://uvm.edu/photos/494.webp', taken: '2026-09-01' },
       ],
     });
     const at = (s: string) => html.indexOf(s);
-    expect(at('<figure class="lead">')).toBeLessThan(at('<h2>On campus</h2>'));
-    expect(html.slice(at('<figure class="lead">'), at('</figure>'))).toContain('494.webp');
-    expect(html).toContain('photographed Sep 2026');
+    // The drawing leads, with the description beside it.
+    expect(at('<section class="hero">')).toBeGreaterThan(-1);
+    expect(html.slice(at('<section class="hero">'), at('</section>'))).toContain('class="mature"');
+    expect(html.slice(at('<section class="hero">'), at('</section>'))).not.toContain('.webp');
+    expect(at('class="lead"')).toBe(-1);
     expect(at('2 mapped on campus')).toBeGreaterThan(at('<h2>On campus</h2>'));
     expect(at('class="shots"')).toBeGreaterThan(at('2 mapped on campus'));
-    expect(html.slice(at('class="shots"'))).toContain('493.webp');
+    expect(at('494.webp')).toBeGreaterThan(at('class="shots"'));
+    expect(at('493.webp')).toBeGreaterThan(at('494.webp'));
     expect(at('Show them on the map')).toBeGreaterThan(at('class="shots"'));
     expect(at('<h2>Characteristics</h2>')).toBeGreaterThan(at('<h2>On campus</h2>'));
+  });
+
+  it('keeps Worth knowing to the species: no campus facts', () => {
+    const html = page(taxon({ count: 1 }), { trees: [{ id: 'UVM-0001', lat: 44.478, lng: -73.199, dbh: 30, campus: 'Central Campus' }] });
+    const worth = html.slice(html.indexOf('class="worth"'), html.indexOf('</aside>'));
+    expect(worth).toContain('Linden honey');
+    expect(worth).not.toContain('mapped on campus');
+    expect(worth).not.toContain('largest trunk');
   });
 
   it('keeps the base path so the pages work under a project URL', () => {
@@ -254,5 +265,40 @@ describe('credits at the end of the page', () => {
     expect(html).not.toContain('Some Book');
     expect(html).not.toContain('from the mature height and spread on file');
     expect(html).not.toContain('Map credit');
+  });
+});
+
+describe('Worth knowing on a cultivar\'s page', () => {
+  it('adds the species\' facts marked for it, under a line naming the species', () => {
+    const cultivar = taxon({ genus: 'Tilia', species: 'cordata', cultivar: 'Greenspire' });
+    const html = page(cultivar, { extras: { facts: [], speciesFacts: [{ text: 'National tree of the Czech Republic.' }] } });
+    const worth = html.slice(html.indexOf('class="worth"'), html.indexOf('</aside>'));
+    expect(worth).toContain('Linden honey');
+    expect(worth).toMatch(/Of the species, <i>Tilia cordata<\/i>:<\/p><ul><li>National tree of the Czech Republic\.<\/li>/);
+  });
+});
+
+describe('Where it grows wild', () => {
+  const wild = (t = taxon(), over: Record<string, unknown> = {}) => {
+    const html = page(t, over);
+    const at = html.indexOf('<h2>Where it grows wild</h2>');
+    return at < 0 ? '' : html.slice(at, html.indexOf('</section>', at));
+  };
+
+  it('shows Habitat and Distribution, as a field guide does, and not the soil and zones Characteristics already lists', () => {
+    const section = wild(taxon({ soil: 'Moist, well-drained', zones: '3-7' }), {
+      extras: { habitat: { text: 'Mixed broadleaf forests on fertile soils.', distribution: 'Wild across most of Europe.' } },
+    });
+    expect(section).toContain('<h3>Habitat</h3><p>Mixed broadleaf forests on fertile soils.</p>');
+    expect(section).toContain('<h3>Distribution</h3><p>Wild across most of Europe.</p>');
+    expect(section.indexOf('Habitat')).toBeLessThan(section.indexOf('Distribution'));
+    expect(section).not.toContain('Soil:');
+    expect(section).not.toContain('Hardiness zones');
+  });
+
+  it('shows Distribution alone for a garden hybrid with no wild habitat', () => {
+    const section = wild(taxon(), { extras: { habitat: { text: '', distribution: 'A garden hybrid, not found wild.' } } });
+    expect(section).toContain('<h3>Distribution</h3>');
+    expect(section).not.toContain('<h3>Habitat</h3>');
   });
 });

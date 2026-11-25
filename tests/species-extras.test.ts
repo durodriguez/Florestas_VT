@@ -14,7 +14,7 @@ import { speciesExtras, staleGaps } from '../scripts/lib/species-extras.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
 import { campusFrame, campusSvg } from '../scripts/lib/campus-map.mjs';
 // @ts-expect-error -- plain .mjs module, intentionally untyped
-import { campusFacts, whereSentence } from '../scripts/lib/species-pages.mjs';
+import { whereSentence } from '../scripts/lib/species-pages.mjs';
 
 const rows = Papa.parse<Record<string, string>>(readFileSync('data/taxa.csv', 'utf8'), { header: true, skipEmptyLines: true }).data;
 const months = (v: string) => (v ?? '').split(/[,;\s]+/).filter(Boolean).map(Number).filter((m) => m >= 1 && m <= 12);
@@ -126,19 +126,6 @@ describe('the campus on a species page', () => {
     expect(whereSentence(trees.slice(0, 1))).toBe('1 tree mapped on campus, on Central Campus.');
   });
 
-  it('names the largest trunk measured, and every tree tied for it', () => {
-    const [fact] = campusFacts(trees, '/');
-    expect(fact).toContain('The largest trunk measured so far is 20 in across');
-    expect(fact).toContain('href="/?plant=UVM-0001">UVM-0001</a> on Central Campus and');
-    expect(fact).toContain('UVM-0002</a> on Redstone Campus');
-    expect(campusFacts(trees.slice(1, 3), '/')[0]).toContain('UVM-0002</a>, on Redstone Campus');
-  });
-
-  it('says when there is only one, and claims nothing about its size', () => {
-    expect(campusFacts(trees.slice(0, 1), '/')).toEqual(['The only one mapped on campus, on Central Campus.']);
-    expect(campusFacts([], '/')).toEqual([]);
-  });
-
   it('draws each tree as a link to it on the map', () => {
     const frame = campusFrame(trees);
     const svg = campusSvg(frame, trees.slice(0, 1), '/Florestas_VT/');
@@ -176,6 +163,28 @@ describe('what species pages add by hand', () => {
     expect(skyline.facts).toEqual([]);
     expect(extras.get('gleditsia-triacanthos').facts.map((f: { text: string }) => f.text)).toEqual(['Wild trees carry thorns.']);
     expect(extras.get('gleditsia-triacanthos').habitat.inherited).toBeUndefined();
+  });
+
+  it('gives a cultivar the species\' facts marked as holding for it, and only those', () => {
+    const { extras, errors } = speciesExtras({
+      crownRows: [], habitatRows: [],
+      factRows: [
+        { taxon_id: 'gleditsia-triacanthos', fact: 'Wild trees carry thorns.', ...src, cultivars: '' },
+        { taxon_id: 'gleditsia-triacanthos', fact: 'In the pea family.', ...src, cultivars: 'yes' },
+      ],
+      taxa,
+    });
+    expect(errors).toEqual([]);
+    const skyline = extras.get('gleditsia-triacanthos-inermis-skyline');
+    expect(skyline.facts).toEqual([]);
+    expect(skyline.speciesFacts.map((f: { text: string }) => f.text)).toEqual(['In the pea family.']);
+    expect(extras.get('gleditsia-triacanthos').speciesFacts).toEqual([]);
+    const bad = speciesExtras({ crownRows: [], habitatRows: [], factRows: [{ taxon_id: 'gleditsia-triacanthos', fact: 'x', ...src, cultivars: 'maybe' }], taxa });
+    const empty = speciesExtras({ crownRows: [], habitatRows: [{ taxon_id: 'gleditsia-triacanthos', habitat: '', distribution: '', ...src }], factRows: [], taxa });
+    expect(empty.errors[0]).toContain('habitat and distribution are both empty');
+    const split = speciesExtras({ crownRows: [], habitatRows: [{ taxon_id: 'gleditsia-triacanthos', habitat: 'River bottoms.', distribution: 'Central United States.', ...src }], factRows: [], taxa });
+    expect(split.extras.get('gleditsia-triacanthos-inermis').habitat).toMatchObject({ text: 'River bottoms.', distribution: 'Central United States.', inherited: true });
+    expect(bad.errors[0]).toContain('cultivars must be yes, no or blank');
   });
 
   it('lets a cultivar have a crown form of its own', () => {
