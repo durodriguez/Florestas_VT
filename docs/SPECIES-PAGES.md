@@ -56,8 +56,10 @@ by species, most common first.
    Whether Burlington is inside the range is
    left to the map, which marks it with a star; until November 2026 a
    sentence said so, and it repeated the habitat. A European map has no star
-   (Burlington is far off it); its key says *Not native to North America*
-   instead, and shows the dots it draws for small isolated stands.
+   (Burlington is far off it); its key, on one line, is *Grows wild* and the
+   dots it draws for *Small isolated stands*. (A *Not native to North
+   America* note there was dropped in November 2026: the origin badge at the
+   top of the page says as much.)
 6. **On campus**: how many are mapped, by campus, the other photos, the
    buttons to the map and Wikipedia, and a small campus map with each tree as
    a red dot linking to it on the map (`scripts/lib/campus-map.mjs`). Not a
