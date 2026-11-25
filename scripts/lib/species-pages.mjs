@@ -417,16 +417,13 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     row('Hardiness zones', esc(t.zones)),
   ].join('');
 
-  const cite = (s) => `<a href="${esc(s.url)}" rel="noopener">${esc(s.source)}</a>`;
-  const factSources = [...new Map(added.map((f) => [f.url, f])).values()];
-  const sources = [
-    habitat ? `Habitat: ${cite(habitat)}.` : '',
-    range && maps && !europe ? `Range: Little, E.L., Jr., <i>Atlas of United States Trees</i>, U.S. Department of Agriculture, 1971&ndash;1978 (public domain), as digitized by the U.S. Geological Survey.` : '',
-    range && europe ? `Range: Caudullo, G., Welk, E., San-Miguel-Ayanz, J., <a href="https://doi.org/10.1016/j.dib.2017.05.007" rel="noopener">Chorological maps for the main European woody species</a>, <i>Data in Brief</i> 12 (2017), European Commission Joint Research Centre (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>); drawn here without the areas where it was introduced.` : '',
-    factSources.length ? `Worth knowing: ${factSources.map(cite).join('; ')}.` : '',
-    extras?.photos ? 'Photos of the bark, leaves, flowers and fruit: Wikimedia Commons and iNaturalist, credited below.' : '',
-    drawing ? 'Drawing: from the mature height and spread on file.' : '',
-  ].filter(Boolean);
+  // Credits only for what a license requires: the European range map (CC BY
+  // 4.0) and the photos (photoCredits). Little's maps are public domain; the
+  // habitat's and facts' sources are kept in their files, not shown, as the
+  // description's and fun fact's are not.
+  const mapCredit = range && europe
+    ? `<section class="credits"><p><b>Map credit.</b></p><p class="credit-line">Caudullo, G., Welk, E., San-Miguel-Ayanz, J., 2017, <a href="https://doi.org/10.1016/j.dib.2017.05.007" rel="noopener">Chorological maps for the main European woody species</a>, <i>Data in Brief</i> 12, European Commission Joint Research Centre, <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener license">CC BY 4.0</a>. Drawn here without the areas where the species was introduced.</p></section>`
+    : '';
 
   const body = `<main class="page sp">
   <header class="sp-head">
@@ -461,8 +458,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
   <h2>Characteristics</h2>
   <dl class="facts">${characteristics}</dl>
 
-  ${sources.length ? `<p class="sources"><b>Sources.</b> ${sources.join(' ')}</p>` : ''}
-  ${photoCredits(credits)}
+  ${mapCredit || credits.length ? `<div class="sources">${mapCredit}${photoCredits(credits)}</div>` : ''}
   <p class="foot">Something look wrong? Email
     <a href="mailto:${esc(config.contactEmail)}?subject=${encodeURIComponent(`${config.siteName} species ${t.id}`)}">${esc(config.contactEmail)}</a>.</p>
 </main>${photos.length || extras?.photos ? `\n<script>${LIGHTBOX_JS}</script>` : ''}`;
@@ -842,7 +838,8 @@ figure { margin: 0; }
 .campus-trees circle { fill: #c0392b; stroke: #fff; stroke-width: 1.4; }
 .campus-trees a:hover circle, .campus-trees a:focus circle { fill: var(--gold); stroke: var(--green); }
 .foot a, .sources a { color: inherit; }
-.sources { margin-top: 2.2rem; padding-top: .8rem; border-top: 1px solid var(--border); font-size: .76rem; color: var(--dim); }
+.sources { margin-top: 2.2rem; padding-top: .1rem; border-top: 1px solid var(--border); font-size: .76rem; color: var(--dim); }
+.credits .credit-line { margin: 0; }
 
 @media (max-width: 48rem) {
   .sp-head h1 { font-size: 1.9rem; }

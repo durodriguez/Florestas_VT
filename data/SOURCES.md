@@ -205,7 +205,7 @@ species page.
 > the main European woody species. *Data in Brief* 12, 662–666.
 > https://doi.org/10.1016/j.dib.2017.05.007
 
-Each species page carries it, with the licence, under Sources.
+Each species page carries it, with the licence, under *Map credit*.
 
 **What was changed.** `npm run ranges:fetch-europe`
 (`scripts/fetch-ranges-europe.mjs`) matches the dataset to `taxa.csv` by

@@ -64,8 +64,12 @@ by species, most common first.
    zoomable map: "Show them on the map" is the way to one.
 7. **Characteristics**: the table every page had before, listing only what is
    recorded.
-8. **Sources**: the range map's citation (Little's or Caudullo et al.'s),
-   when there is one, and where the drawing comes from.
+8. **Credits**, only for what a license requires: the European range map's
+   (*Map credit*, CC BY 4.0) and the photos' (*Photo credits*, numbered as
+   marked). Until November 2026 a *Sources* line also cited the habitat, the
+   added facts, Little's atlas (public domain) and the drawing; it was taken
+   out, as the description and fun fact were never cited on the page either.
+   The habitats' and facts' sources are still required in their files.
 
 ## The maps, and the files they share
 
@@ -155,8 +159,8 @@ Habitats were checked against these maps when they were added (November
 2026): 22 of the 36 said less than the map shows (Norway spruce's stopped at
 northern Russia; beech's left out the oriental beech of Turkey and the
 Caucasus) and had their geography widened to match it, in their own words,
-leaving the rest of each as written. The map is cited on the same page, under
-Sources.
+leaving the rest of each as written. The map is credited on the same page,
+under *Map credit*.
 
 ## Written by hand: crown forms, habitats, facts
 
@@ -175,7 +179,9 @@ facts: one about the species may not hold for a selection of it (wild
 honeylocusts carry thorns; the planted ones are thornless).
 
 Habitats and facts are held to the fun fact's rule (DATA-MODEL.md): checkable,
-with a source the page cites. Habitats are written in our own words from
+with a source recorded in their file (the build refuses a row without one).
+Since November 2026 the page does not show it, as it does not show the
+description's or fun fact's. Habitats are written in our own words from
 *Silvics of North America* (U.S. Forest Service, public domain) where it covers
 the species, from other sources where it does not (it covers no European
 trees). `npm run data` warns about a fact longer than 240 characters.
@@ -557,7 +563,7 @@ from Wikimedia Commons, shown in four tiles under the description, each with
 what `taxa.csv` says of that part. Each photo's credit (photographer, license,
 link to the photo's Commons page), as the licenses require, is a numbered note:
 a small number after the part's name links to the *Photo credits* list at the
-end of the page, after Sources, which links back. Until November 2026 the
+end of the page, which links back. Until November 2026 the
 credit was written out under each tile, which made the row busy. The "Which
 one?" tiles of a genus-only page are credited the same way.
 

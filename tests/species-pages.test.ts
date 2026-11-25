@@ -244,3 +244,15 @@ describe('Know it by: credits as notes, photos full size on a tap', () => {
     expect(page()).not.toContain('class="credits"');
   });
 });
+
+describe('credits at the end of the page', () => {
+  it('credits only what a license requires: no Sources line, no habitat or drawing credit', () => {
+    const html = page(taxon({ matureSpreadFt: 40 }), {
+      extras: { habitat: { text: 'Woods.', source: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Tilia_cordata' }, facts: [{ text: 'A fact.', source: 'Some Book', url: 'https://example.org/book' }] },
+    });
+    expect(html).not.toContain('<b>Sources.</b>');
+    expect(html).not.toContain('Some Book');
+    expect(html).not.toContain('from the mature height and spread on file');
+    expect(html).not.toContain('Map credit');
+  });
+});
