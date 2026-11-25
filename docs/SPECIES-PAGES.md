@@ -452,8 +452,11 @@ flowering dogwood's, sweetgum's, common buckthorn's, Kentucky coffeetree's,
 English ivy's and bigleaf magnolia's leaves; basswood's, paper birch's,
 northern catalpa's, American chestnut's, white oak's, summersweet's, kousa
 dogwood's, coffeetree's, apple's, Japanese stewartia's and Turkish hazel's
-fruit; buckthorn's bark; Cistena plum's flowers. The rest are listed in
-PHOTO-GAPS.md ("Photos to replace"), campus trees first.
+fruit; buckthorn's bark; Cistena plum's flowers. Further rounds, from
+iNaturalist and then Commons, replaced all but 21 of the 150; those are listed
+in PHOTO-GAPS.md ("Photos to replace"), campus trees first. For most of them
+no clean photo could be found that also matched taxa.csv's colors (bigtooth
+aspen's green catkins, baldcypress's purple ones) or was filed under the species.
 
 ### Genus-only pages: Which one?
 
