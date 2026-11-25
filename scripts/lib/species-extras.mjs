@@ -100,7 +100,7 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     if (!known('part-photos.csv', i, id)) return;
     if (!PARTS.includes(part)) return errors.push(`${where}: part must be one of ${PARTS.join(', ')}, got "${part}"`);
     const commons = /^https:\/\/upload\.wikimedia\.org\/.+\/500px-[^/]+$/.test(trim(r.image_url)) && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(trim(r.page_url));
-    const inat = /^https:\/\/inaturalist-open-data\.s3\.amazonaws\.com\/photos\/\d+\/medium\.(jpe?g|png)$/.test(trim(r.image_url)) && /^https:\/\/www\.inaturalist\.org\/observations\/\d+$/.test(trim(r.page_url));
+    const inat = /^https:\/\/inaturalist-open-data\.s3\.amazonaws\.com\/photos\/\d+\/medium\.(jpe?g|png)$/i.test(trim(r.image_url)) && /^https:\/\/www\.inaturalist\.org\/observations\/\d+$/.test(trim(r.page_url));
     if (!commons && !inat) return errors.push(`${where}: needs a Commons 500px thumbnail and its File: page, or an iNaturalist medium photo and its observation page`);
     if (!FREE.test(trim(r.license))) return errors.push(`${where}: license "${trim(r.license)}" is not one that allows reuse with credit`);
     if (!trim(r.author)) return errors.push(`${where}: author is empty; credit is a condition of the license`);
