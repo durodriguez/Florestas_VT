@@ -17,3 +17,6 @@ itree-export/
 
 # Python byte-code from scripts/lidar/
 __pycache__/
+
+# Downloads cached by scripts/ranges-asia/fetch_ranges_asia.py
+.cache/

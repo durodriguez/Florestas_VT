@@ -253,7 +253,9 @@ for (const row of result.plants.rows) {
 }
 
 // Native ranges (data/ranges/, from Little's atlas, scripts/fetch-ranges.mjs;
-// data/ranges/europe/, from Caudullo et al., scripts/fetch-ranges-europe.mjs)
+// data/ranges/europe/, from Caudullo et al., scripts/fetch-ranges-europe.mjs;
+// data/ranges/asia/, from specimens via GBIF within Kew's native regions,
+// scripts/ranges-asia/fetch_ranges_asia.py)
 // and the files every page's two maps share, each with a fingerprint in its
 // address so a browser holding an old copy fetches the new one.
 const rangesDir = join(root, 'data', 'ranges');
@@ -262,7 +264,7 @@ const readRanges = (dir) => readdirSync(dir).filter((f) => f.endsWith('.json') &
 const basemap = JSON.parse(readFileSync(join(rangesDir, 'basemap.json'), 'utf8'));
 const europeBasemap = JSON.parse(readFileSync(join(rangesDir, 'europe', 'basemap.json'), 'utf8'));
 // Little's first, where a species is in both (none is yet).
-const ranges = new Map([...readRanges(join(rangesDir, 'europe')), ...readRanges(rangesDir)]);
+const ranges = new Map([...readRanges(join(rangesDir, 'asia')), ...readRanges(join(rangesDir, 'europe')), ...readRanges(rangesDir)]);
 const campus = campusFrame(standing);
 const sharedFile = (name, text) => {
   writeFileSync(join(speciesDir, name), text);
@@ -278,14 +280,15 @@ const rangeKey = (t) => (t.genus && t.species && !/^x\b/.test(t.species)
   ? `${t.genus} ${t.species}`.toLowerCase().replace(/\s+/g, '-')
   : null);
 const rangeOf = (t) => ranges.get(rangeKey(t)) ?? null;
-// A European range's map is framed to the range, so its two outer layers
+// A European or East Asian range's map is framed to the range, so its two outer layers
 // are its own, in species/ranges/, shared by the species' cultivars.
+const FRAMED = new Set(['caudullo', 'gbif']);
 const europeMaps = new Map();
 mkdirSync(join(speciesDir, 'ranges'), { recursive: true });
 const europeMapOf = (t) => {
   const key = rangeKey(t);
   const range = ranges.get(key);
-  if (range?.source !== 'caudullo') return null;
+  if (!FRAMED.has(range?.source)) return null;
   if (!europeMaps.has(key)) {
     const frame = frameFor(range);
     europeMaps.set(key, frame && {

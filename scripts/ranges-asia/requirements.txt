@@ -1,0 +1,2 @@
+# For scripts/ranges-asia/fetch_ranges_asia.py only; the site needs none of this.
+shapely>=2.0

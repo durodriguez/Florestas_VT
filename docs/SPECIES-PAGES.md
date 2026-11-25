@@ -46,7 +46,9 @@ by species, most common first.
    States Trees* (see below), including every Vermont-native tree species but
    two, *Amelanchier laevis* and *Crataegus crus-galli*, which the atlas does
    not map; and since November 2026 for 36 European species it does not map,
-   from Caudullo et al.'s chorological maps (see *European ranges*). A cultivar or variety shows its species' range, and says so; a
+   from Caudullo et al.'s chorological maps (see *European ranges*); and
+   since November 2026 for 8 species native only to Japan, Korea and nearby,
+   drawn from herbarium specimens (see *East Asian ranges*). A cultivar or variety shows its species' range, and says so; a
    hybrid has none. Beside the map, as a field guide sets it out, *Habitat*
    (the ground, light and places it grows in) and *Distribution* (where in
    the world), from `data/habitat.csv`. Where no distribution is written, a
@@ -177,6 +179,53 @@ northern Russia; beech's left out the oriental beech of Turkey and the
 Caucasus) and had their geography widened to match it, in their own words,
 leaving the rest of each as written. The map is credited on the same page,
 under *Map credit*.
+
+## East Asian ranges
+
+No one has drawn chorological maps of East Asia as Little did for the United
+States and Caudullo et al. for Europe. `data/ranges/asia/` holds maps drawn
+for this site, November 2026, for the 8 species in `taxa.csv` native only to
+Japan, Korea and nearby: Japanese maple, Japanese barberry, hinoki, sawara,
+star magnolia, Japanese white pine, Sargent cherry and Japanese stewartia.
+`npm run ranges:fetch-asia` (`scripts/ranges-asia/fetch_ranges_asia.py`,
+Python, `pip install -r scripts/ranges-asia/requirements.txt`) draws them
+again, picking the species itself; it caches its two large downloads in
+`.cache/` (not committed). Credited in `data/SOURCES.md`, and on the page
+under *Map credit*.
+
+- **Where it is native** is Kew's World Checklist of Vascular Plants, by
+  botanical country (Japan, Korea, the Kurils...). Kew takes some species
+  broadly: its Japanese maple includes the mountain maple of Hokkaido, so the
+  map shades Hokkaido, and the Distribution says so.
+- **Where in those regions** is herbarium specimens from GBIF.org, CC0 or CC
+  BY only, without any whose label says planted (garden, park, temple,
+  school, plantation...). Each is drawn as a 20 km circle; records within
+  120 km of each other are joined, and the result is cut to the coast. A
+  record with no neighbour is a dot, keyed *Isolated records* rather than
+  *Small isolated stands*, as a specimen is not a stand; a single specimen
+  alone is left out, as likely a planted tree whose label does not say so.
+- **Northern limits.** Where a Japanese flora gives a northern limit that
+  plantations and hedges gone wild overrun, the map is cut there: hinoki at
+  Fukushima (38°N; native from Fukushima to Yakushima), sawara likewise, with
+  its outlying stand on Mount Hayachine in Iwate as a dot, and Japanese
+  barberry at 40°N (southern Tohoku and a few in Akita; escaped in Hokkaido).
+- **China.** Seventy-one East Asian species in `taxa.csv` are native in
+  China too, and GBIF's Chinese specimens are too few to draw them (zelkova
+  has about 200 across the country, which drew as scattered patches). The
+  county-level distributions behind the *Atlas of Woody Plants in China*
+  (Fang, Wang and Tang 2011) would do it, but are not public: the Dryad
+  deposits from that group (doi:10.5061/dryad.pzgmsbcnn and
+  doi:10.5061/dryad.ns1rn8ptx) hold model projections, with the species
+  numbered rather than named, not the observed records, which would have
+  to be asked of the authors.
+- **Ginkgo** is held: almost every ginkgo is planted, and the stands thought
+  wild (the West Tianmu Mountains, Gong et al. 2008; the Dalou Mountains,
+  Tang et al. 2012) are a few dots on a map this wide.
+
+The Distribution of each was checked against its map and Kew when it was
+drawn, and six were rewritten to match (barberry's said eastern China, which
+Kew does not count; star magnolia's said only "Japan", where it grows wild
+around Ise Bay).
 
 ## Written by hand: crown forms, habitats, facts
 

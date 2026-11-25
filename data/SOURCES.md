@@ -225,8 +225,47 @@ western Europe as native where other accounts do not.
 
 **`data/ranges/europe/basemap.json`** — the countries and large lakes from
 the equator to the Arctic and from the Azores to the Bering Strait, that the
-European range maps are drawn on. From Natural Earth's 1:50m vectors,
+European and East Asian range maps are drawn on. From Natural Earth's 1:50m vectors,
 **public domain**, as in section 7.
+
+## 10. Native ranges in East Asia: specimens via GBIF, within Kew's checklist
+
+**`data/ranges/asia/<species>.json`** — where each of 8 species in
+`taxa.csv` native only to Japan, Korea and nearby (Taiwan, the Kurils,
+Sakhalin, Primorye) grows wild, drawn on its species page. No one has
+published chorological maps of East Asia like Little's or Caudullo's, so
+these are drawn for this site from two sources:
+
+| | |
+| --- | --- |
+| Where it is native | Kew's World Checklist of Vascular Plants (WCVP), by botanical country, downloaded November 2026 from https://sftp.kew.org/pub/data-repositories/WCVP/ ; **CC BY 4.0** |
+| Region outlines | TDWG's World Geographical Scheme for Recording Plant Distributions, level 3, https://github.com/tdwg/wgsrpd ; **CC BY 4.0** |
+| Where in those regions | herbarium specimens with coordinates, from the GBIF.org occurrence API, November 2026; only records published under **CC0** or **CC BY**, not CC BY-NC |
+
+**Citation** for the checklist:
+
+> Govaerts, R., Nic Lughadha, E., Black, N., Turner, R., Paton, A., 2021. The
+> World Checklist of Vascular Plants, a continuously updated resource for
+> exploring global plant diversity. *Scientific Data* 8, 215.
+> https://doi.org/10.1038/s41597-021-00997-6
+
+Each species page carries a short form of it, with GBIF.org, under *Map credit*.
+
+**What was done.** `npm run ranges:fetch-asia`
+(`scripts/ranges-asia/fetch_ranges_asia.py`) leaves out specimens whose label
+says they were planted or grown in a garden, park, temple, school or
+plantation, any placed less precisely than 25 km, and any outside the
+species' native regions; joins records close together and cuts the result to
+the coast; draws a record with no neighbour as a dot, if a second specimen was
+taken within 25 km of it, and leaves out a single one. Where a Japanese flora
+gives a northern limit the specimens overrun (hinoki, sawara, Japanese
+barberry), the map is cut there; see SPECIES-PAGES.md.
+
+**Known limits.** A specimen map shows where botanists have collected, not
+everywhere a species grows: thinly collected ground can look empty, and a
+planted tree whose label does not say so can still slip through. Species
+native in China are left out until a source covering China is found: GBIF's
+Chinese specimens are too few to draw from (see SPECIES-PAGES.md).
 
 ## On ShareAlike
 
