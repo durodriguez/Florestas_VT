@@ -167,9 +167,36 @@ export function campusFacts(trees, base) {
 
 /**
  * Know it by: a photo of its bark, leaves, flowers and fruit, from Wikimedia
- * Commons (data/part-photos.csv), each with what taxa.csv says of that part
- * and the photo's credit, as its license requires.
+ * Commons (data/part-photos.csv), each with what taxa.csv says of that part.
+ * A tap shows the photo full size (LIGHTBOX_JS). Its credit, as its license
+ * requires, is a numbered note at the end of the page (photoCredits), so the
+ * captions stay short; the full-size view shows it too.
  */
+
+/** A photo's credit: author, license and site, linked. */
+function creditHtml(p) {
+  const license = p.licenseUrl ? `<a href="${esc(p.licenseUrl)}" rel="noopener license">${esc(p.license)}</a>` : esc(p.license);
+  return `<a href="${esc(p.page)}" rel="noopener">${esc(p.author)}</a>, ${license}, ${esc(p.site)}`;
+}
+
+/**
+ * Numbers a photo's credit for the notes at the end of the page and returns
+ * its marker: a small number linking down to the note, which links back up.
+ */
+function footnote(credits, what, p) {
+  credits.push({ what, p });
+  const n = credits.length;
+  return `<sup class="fn"><a href="#credit-${n}" id="credit-ref-${n}" aria-label="Photo credit ${n}">${n}</a></sup>`;
+}
+
+/** The notes: every photo credit on the page, numbered as marked. */
+function photoCredits(credits) {
+  if (!credits.length) return '';
+  return `<section class="credits" aria-labelledby="credits-head">
+    <p id="credits-head"><b>Photo credits.</b></p>
+    <ol>${credits.map(({ what, p }, i) => `<li id="credit-${i + 1}">${what}: ${creditHtml(p)}. <a href="#credit-ref-${i + 1}" class="fn-back" aria-label="Back to the photo">&uarr;</a></li>`).join('')}</ol>
+  </section>`;
+}
 /** What the leaf tile says: evergreen or not, a summer color other than green, the fall color. */
 function leafCaption(t) {
   const summer = t.leafColor ? t.leafColor.replace(/-/g, ' ') : '';
@@ -178,7 +205,7 @@ function leafCaption(t) {
   return parts.filter(Boolean).join(' ');
 }
 
-function knowItBy(t, photos) {
+function knowItBy(t, photos, credits) {
   if (!photos) return '';
   const needles = t.family === 'Pinaceae';
   const cones = t.family === 'Pinaceae' || t.family === 'Cupressaceae';
@@ -193,10 +220,12 @@ function knowItBy(t, photos) {
   const tiles = parts.map(([key, label, says]) => {
     const p = photos[key];
     const big = p.site === 'iNaturalist' ? p.image.replace('/medium.', '/large.') : p.image.replace('/500px-', '/960px-');
-    const license = p.licenseUrl ? `<a href="${esc(p.licenseUrl)}" rel="noopener license">${esc(p.license)}</a>` : esc(p.license);
+    const mark = footnote(credits, esc(label), p);
     return `<figure class="part">
-      <img src="${esc(p.image)}" srcset="${esc(p.image)} 500w, ${esc(big)} ${p.site === 'iNaturalist' ? 1024 : 960}w" sizes="(max-width: 48rem) 50vw, 15rem" alt="${esc(`${label} of ${t.common.toLowerCase()}`)}" loading="lazy">
-      <figcaption><b>${esc(label)}.</b> ${says}<span class="credit">Photo: <a href="${esc(p.page)}" rel="noopener">${esc(p.author)}</a>, ${license}, ${esc(p.site)}</span></figcaption>
+      <button type="button" class="shot-open" aria-label="Show the photo of the ${esc(label.toLowerCase())} full size" data-full="${esc(big)}" data-credit="${esc(`${label}. Photo: ${p.author}, ${p.license}, ${p.site}`)}">
+        <img src="${esc(p.image)}" srcset="${esc(p.image)} 500w, ${esc(big)} ${p.site === 'iNaturalist' ? 1024 : 960}w" sizes="(max-width: 48rem) 50vw, 15rem" alt="${esc(`${label} of ${t.common.toLowerCase()}`)}" loading="lazy">
+      </button>
+      <figcaption><b>${esc(label)}.</b>${mark} ${says}</figcaption>
     </figure>`;
   }).join('');
   return `<h2>Know it by</h2>
@@ -205,14 +234,14 @@ function knowItBy(t, photos) {
 }
 
 /** For a taxon named only to genus: a leaf of each species of the genus here, labelled and linked. */
-function whichOne(t, kin) {
+function whichOne(t, kin, credits) {
   if (!kin?.length) return '';
   const tiles = kin.map((k) => {
     const p = k.photo;
-    const license = p.licenseUrl ? `<a href="${esc(p.licenseUrl)}" rel="noopener license">${esc(p.license)}</a>` : esc(p.license);
+    const mark = footnote(credits, `${esc(k.common)} leaves`, p);
     return `<figure class="part">
       <a href="../${esc(k.id)}/"><img src="${esc(p.image)}" alt="${esc(`Leaves of ${k.common.toLowerCase()}`)}" loading="lazy"></a>
-      <figcaption><b><a href="../${esc(k.id)}/">${esc(k.common)}</a></b> <i>${esc(k.sci)}</i>${k.count ? ` &middot; ${k.count} on campus` : ''}<span class="credit">Photo: <a href="${esc(p.page)}" rel="noopener">${esc(p.author)}</a>, ${license}, ${esc(p.site)}</span></figcaption>
+      <figcaption><b><a href="../${esc(k.id)}/">${esc(k.common)}</a></b>${mark} <i>${esc(k.sci)}</i>${k.count ? ` &middot; ${k.count} on campus` : ''}</figcaption>
     </figure>`;
   }).join('');
   return `<h2>Which one?</h2>
@@ -262,6 +291,8 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
   const t = taxon;
   // A European range is drawn only on its own map; without one, none.
   const europe = rangeIn?.source === 'caudullo';
+  // Photo credits, numbered in the order the photos appear (footnote()).
+  const credits = [];
   const range = europe && !maps?.range ? null : rangeIn;
   const habitat = extras?.habitat ?? null;
   const added = extras?.facts ?? [];
@@ -393,7 +424,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     range && maps && !europe ? `Range: Little, E.L., Jr., <i>Atlas of United States Trees</i>, U.S. Department of Agriculture, 1971&ndash;1978 (public domain), as digitized by the U.S. Geological Survey.` : '',
     range && europe ? `Range: Caudullo, G., Welk, E., San-Miguel-Ayanz, J., <a href="https://doi.org/10.1016/j.dib.2017.05.007" rel="noopener">Chorological maps for the main European woody species</a>, <i>Data in Brief</i> 12 (2017), European Commission Joint Research Centre (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>); drawn here without the areas where it was introduced.` : '',
     factSources.length ? `Worth knowing: ${factSources.map(cite).join('; ')}.` : '',
-    extras?.photos ? 'Photos of the bark, leaves, flowers and fruit: Wikimedia Commons and iNaturalist, credited under each.' : '',
+    extras?.photos ? 'Photos of the bark, leaves, flowers and fruit: Wikimedia Commons and iNaturalist, credited below.' : '',
     drawing ? 'Drawing: from the mature height and spread on file.' : '',
   ].filter(Boolean);
 
@@ -410,8 +441,8 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     ${factsBox}
   </section>
 
-  ${knowItBy(t, extras?.photos)}
-  ${whichOne(t, extras?.kin)}
+  ${knowItBy(t, extras?.photos, credits)}
+  ${whichOne(t, extras?.kin, credits)}
 
   ${yearSection(t)}
 
@@ -431,9 +462,10 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
   <dl class="facts">${characteristics}</dl>
 
   ${sources.length ? `<p class="sources"><b>Sources.</b> ${sources.join(' ')}</p>` : ''}
+  ${photoCredits(credits)}
   <p class="foot">Something look wrong? Email
     <a href="mailto:${esc(config.contactEmail)}?subject=${encodeURIComponent(`${config.siteName} species ${t.id}`)}">${esc(config.contactEmail)}</a>.</p>
-</main>${photos.length ? `\n<script>${LIGHTBOX_JS}</script>` : ''}`;
+</main>${photos.length || extras?.photos ? `\n<script>${LIGHTBOX_JS}</script>` : ''}`;
 
   return shell({
     title: `${t.common} (${t.sci}) — ${config.siteName}`,
@@ -478,9 +510,15 @@ const LIGHTBOX_JS = `(() => {
     box.setAttribute('aria-label', 'Photo, full size');
     box.innerHTML = '<button type="button" class="lightbox-close" aria-label="Close the photo">&times;</button>';
     const big = document.createElement('img');
-    big.src = img.currentSrc || img.src;
+    big.src = btn.dataset.full || img.currentSrc || img.src;
     big.alt = img.alt;
     box.append(big);
+    if (btn.dataset.credit) {
+      const cap = document.createElement('p');
+      cap.className = 'lightbox-credit';
+      cap.textContent = btn.dataset.credit;
+      box.append(cap);
+    }
     box.addEventListener('click', close);
     opener = btn;
     document.body.append(box);
@@ -756,8 +794,20 @@ figure { margin: 0; }
 .parts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 .part img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: var(--sunk); }
 .part figcaption { font-size: .84rem; color: var(--ink); margin-top: .45rem; }
-.part .credit { display: block; margin-top: .2rem; font-size: .7rem; color: var(--dim); }
-.part .credit a { color: inherit; }
+.part .shot-open { border-radius: 10px; }
+.fn { font-size: .68em; line-height: 0; margin-left: .1em; }
+.fn a { color: var(--dim); text-decoration: none; padding: 0 .1em; }
+.fn a:hover, .fn a:focus-visible { color: var(--ink); text-decoration: underline; }
+.credits { font-size: .76rem; color: var(--dim); }
+.credits p { margin: .9rem 0 .2rem; }
+.credits ol { margin: 0; padding-left: 1.4rem; }
+.credits li { margin-bottom: .15rem; }
+.credits a { color: inherit; }
+.credits li:target { color: var(--ink); background: var(--note, #fff6d6); border-radius: 4px; }
+.fn-back { text-decoration: none; }
+.lightbox { grid-template-rows: auto auto; align-content: center; }
+.lightbox:has(.lightbox-credit) img { max-height: calc(100vh - 5rem); max-height: calc(100dvh - 5rem); }
+.lightbox-credit { margin: .5rem 0 0; color: rgb(255 255 255 / 75%); font-size: .8rem; text-align: center; }
 .year { width: 100%; border-collapse: separate; border-spacing: 3px; table-layout: fixed; }
 .year thead th { font-size: .74rem; font-weight: 500; color: var(--dim); text-align: center; }
 .year thead td, .year tbody th { width: 5rem; }
