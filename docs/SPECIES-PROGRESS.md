@@ -13,15 +13,15 @@ same list, with links, is on the site at /species/progress/.
 | On campus: hybrids | 3 | 1 | 89% |
 | On campus: cultivars and forms | 10 | 3 | 81% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 176 | 103 | 94% |
+| Not yet mapped: species | 176 | 104 | 94% |
 | Not yet mapped: hybrids | 16 | 7 | 82% |
 | Not yet mapped: cultivars and forms | 88 | 19 | 80% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 251 | 92% |
+| **All** | 418 | 252 | 92% |
 
 ## Most often missing
 
-- bark photo: 84 pages
+- bark photo: 83 pages
 - worth knowing (3): 74 pages
 - fruit photo: 69 pages
 - flowers photo: 65 pages
@@ -190,7 +190,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Shellbark hickory** (`carya-laciniosa`): flowers photo
 - [ ] **Shumard oak** (`quercus-shumardii`): flowers photo
 - [ ] **Sienna Glen maple** (`acer-x-freemanii-sienna-glen`): worth knowing (3) (1 of 3)
-- [ ] **Sweet crabapple** (`malus-coronaria`): bark photo
 - [ ] **Umbrella magnolia** (`magnolia-tripetala`): bark photo
 - [ ] **Valley Forge American elm** (`ulmus-americana-valley-forge`): worth knowing (3) (1 of 3)
 - [ ] **Weeping Alaska cedar** (`callitropsis-nootkatensis-pendula`): worth knowing (3) (2 of 3)
