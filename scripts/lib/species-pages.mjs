@@ -237,9 +237,14 @@ function chooseTiles(t, photos, know) {
       continue;
     }
     const stand = defaults.find((d) => k.parts.includes(d.key) && !used.has(d.key));
-    if (stand) { tiles.push(stand); used.add(stand.key); }
+    if (stand && tiles.length < 4) { tiles.push(stand); used.add(stand.key); }
   }
-  return tiles.filter((tile, i) => tiles.findIndex((o) => o.parts.join() === tile.parts.join()) === i);
+  // Fewer than four written (or lent): the defaults not yet shown fill in.
+  for (const d of defaults) {
+    if (tiles.length >= 4) break;
+    if (!used.has(d.key)) { tiles.push(d); used.add(d.key); }
+  }
+  return tiles;
 }
 
 function knowItBy(t, photos, credits, know) {

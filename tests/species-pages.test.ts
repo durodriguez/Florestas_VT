@@ -240,8 +240,9 @@ describe('Know it by, written tiles', () => {
     expect(parts).toContain('<div class="pair">');
     expect(parts).toContain('500px-Flower.jpg');
     expect(parts).toContain('500px-Husk.jpg');
-    expect(parts).not.toContain('500px-Bark.jpg');
     expect(html).toContain('Flowers and fruit, fruit: ');
+    // Two written: the default bark tile fills in after them.
+    expect(parts.indexOf('500px-Bark.jpg')).toBeGreaterThan(parts.indexOf('500px-Husk.jpg'));
   });
 
   it('on a cultivar, swaps a species tile for the default where the cultivar has its own photo of that part', () => {

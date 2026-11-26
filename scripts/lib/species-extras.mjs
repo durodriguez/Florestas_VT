@@ -27,7 +27,8 @@
  * only where marked (cultivars "yes"): one about the species may not hold for
  * a selection of it (wild honeylocusts carry thorns; the planted ones do not).
  *
- * - data/know-it-by.csv: taxon_id, label, parts, text, source, source_url.
+ * - data/know-it-by.csv: taxon_id, label, parts, text, source, source_url,
+ *   cultivars ("no": the note does not hold for its cultivars, not lent).
  *   Up to four Know it by tiles, in file order, each naming the photo parts it
  *   shows (PHOTO_PARTS; two joined by + sit side by side) and a note in prose.
  *   A taxon without rows shows the four default tiles (bark, leaves, flowers,
@@ -164,7 +165,9 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     if (text.length > MAX_KNOW) warnings.push(`${where}: ${id}'s ${label.toLowerCase()} note runs to ${text.length} characters (keep it under ${MAX_KNOW})`);
     if (!knows.has(id)) knows.set(id, []);
     if (knows.get(id).length >= 4) return errors.push(`${where}: ${id} already has four Know it by tiles`);
-    knows.get(id).push({ label, parts, text, source: trim(r.source), url: trim(r.source_url) });
+    const forCultivars = trim(r.cultivars);
+    if (forCultivars && !/^(yes|no)$/i.test(forCultivars)) return errors.push(`${where}: cultivars must be yes, no or blank, got "${forCultivars}"`);
+    knows.get(id).push({ label, parts, text, source: trim(r.source), url: trim(r.source_url), ...(/^no$/i.test(forCultivars) && { notForCultivars: true }) });
   });
   for (const [id, tiles] of knows) {
     for (const k of tiles) {
@@ -199,7 +202,9 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
       // Its own Know it by, or its species', marked inherited: a tile of the
       // species' is shown on a cultivar's page only where the cultivar shows
       // the species' photos of those parts (the page checks).
-      know: knows.get(t.id) ?? (parent && knows.has(parent) ? knows.get(parent).map((k) => ({ ...k, inherited: true })) : null),
+      // Not a tile marked cultivars "no": thorns on honeylocust, which its
+      // planted cultivars lack.
+      know: knows.get(t.id) ?? (parent && knows.has(parent) ? knows.get(parent).filter((k) => !k.notForCultivars).map((k) => ({ ...k, inherited: true })) : null),
     });
   }
   // A taxon named only to genus ("Ulmus sp.") shows a leaf of each species or

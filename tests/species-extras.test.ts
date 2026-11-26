@@ -228,6 +228,9 @@ describe('what species pages add by hand', () => {
     expect(bad.errors.join('\n')).toMatch(/one part or two/);
     expect(bad.errors.join('\n')).toMatch(/label and text/);
     expect(bad.errors.join('\n')).toMatch(/needs a source/);
+    const thornless = speciesExtras({ knowRows: [{ ...row, cultivars: 'no' }], taxa });
+    expect(thornless.extras.get('gleditsia-triacanthos').know).toHaveLength(1);
+    expect(thornless.extras.get('gleditsia-triacanthos-inermis-skyline').know).toEqual([]);
     const five = speciesExtras({ knowRows: Array(5).fill(row), taxa });
     expect(five.errors.join('\n')).toMatch(/already has four/);
   });
