@@ -93,4 +93,12 @@ new rows (alphabetical by taxon id).
   `juniperus-virginiana` age, `larix-laricina` Native uses (FEIS),
   `magnolia-grandiflora` "magnolia curtain" (Trees and Shrubs Online).
   English and Japanese Wikipedia only: `lonicera-maackii` Japan.
-- To do: `magnolia-tripetala`'s second fact onward, 179 facts.
+- Done: `magnolia-tripetala`'s second fact to the first `pinus-mugo` fact
+  (40). 24 replaced or trimmed: this stretch leaned on Wikipedia for
+  anecdotes (Zirbenschnaps, the Augsburg arms, Baikushev's pine, the
+  2,000-year limber pine, Cherokee uses) that no second source carries.
+  Single expert source: `malus-coronaria` and `malus-floribunda` (NC State /
+  Oregon State), `morus-rubra` fruit, `picea-omorika` Mustila,
+  `picea-rubens` mine sites, `pinus-bungeana` temples, `pinus-cembra` tree
+  line, `parthenocissus-tricuspidata` Veitch.
+- To do: the second `pinus-mugo` fact onward, 139 facts.
