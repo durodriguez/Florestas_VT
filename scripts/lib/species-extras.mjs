@@ -49,7 +49,7 @@ export const PARTS = ['bark', 'leaves', 'flowers', 'fruit'];
  * and the others a Know it by tile in know-it-by.csv can ask for. For a
  * conifer, flowers are its pollen cones and fruit its seed cones.
  */
-export const PHOTO_PARTS = [...PARTS, 'buds', 'twigs', 'thorns', 'catkins', 'seeds', 'fronds', 'habit', 'roots'];
+export const PHOTO_PARTS = [...PARTS, 'buds', 'twigs', 'thorns', 'catkins', 'seeds', 'fronds', 'fiddleheads', 'spores', 'underside', 'color', 'habit', 'roots'];
 /** A Know it by note: about as long as the book's, a short paragraph on a phone. */
 export const MAX_KNOW = 320;
 /**

@@ -650,6 +650,12 @@ here, not by a botanist.
 
 ## Know it by: photos of the parts
 
+Since November 2026 a species can have written tiles instead of the four
+defaults: any part, two photos side by side, and a note in prose, in
+`data/know-it-by.csv`. How to choose the parts and write the notes, and what
+is left, is in [KNOW-IT-BY.md](KNOW-IT-BY.md). The rest of this section
+describes the photos, which both kinds of tile use.
+
 `data/part-photos.csv` (taxon_id, part, title, page_url, image_url, author,
 license, license_url, matches, of_species): a photo of a species' bark, leaves, flowers or fruit
 from Wikimedia Commons, shown in four tiles under the description, each with

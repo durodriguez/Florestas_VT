@@ -201,7 +201,7 @@ function partTile(t, { label, parts, says }, photos, credits) {
       <figcaption><b>${esc(label)}.</b>${shots.map((s) => s.mark).join('')} ${says}</figcaption>
     </figure>`;
 }
-const PART_WORDS = { leaves: 'leaves', flowers: 'flowers', fruit: 'fruit', bark: 'bark', buds: 'buds', twigs: 'twigs', thorns: 'thorns', catkins: 'catkins', seeds: 'seeds', fronds: 'fronds', habit: 'whole plant', roots: 'roots' };
+const PART_WORDS = { leaves: 'leaves', flowers: 'flowers', fruit: 'fruit', bark: 'bark', buds: 'buds', twigs: 'twigs', thorns: 'thorns', catkins: 'catkins', seeds: 'seeds', fronds: 'fronds', fiddleheads: 'fiddleheads', spores: 'spore cases', underside: 'underside', color: 'seasonal color', habit: 'whole plant', roots: 'roots' };
 
 /** The four tiles a page shows without written ones: bark, leaves, flowers and fruit, captioned from taxa.csv. */
 function defaultTiles(t, photos) {
