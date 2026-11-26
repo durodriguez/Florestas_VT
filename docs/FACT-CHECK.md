@@ -53,4 +53,18 @@ new rows (alphabetical by taxon id).
   caterpillars (NC State); `alnus-x-spaethii` (both; Trees and Shrubs Online,
   which cites Bean and Grootendorst). `aralia-elata` shoots: English and
   Japanese Wikipedia only.
-- To do: `carya-tomentosa` onward, about 300 facts.
+- Done: `carya-tomentosa` through `crataegus-crus-galli` (40 facts). 14
+  replaced or trimmed. One was wrong: southern catalpa is not, as its
+  Wikipedia page says, a parent of the chitalpa; Wikipedia's own Chitalpa
+  page says the main forms come from northern catalpa. Two facts traded a
+  Wikipedia-only claim for a sourced one on the same subject (red-osier
+  dogwood fruit: 95 bird species in New England, per FEIS, not 47). Single
+  expert source: `carya-tomentosa` bearing age, `castanea-mollissima` China
+  fact (Trees and Shrubs Online), `catalpa-bignonioides` name, `cercis-
+  chinensis` "kerkis", `clethra-barbinervis` bees and butterflies,
+  `cornus-sericea` bear-seed test (FEIS), `cotoneaster-adpressus` (both),
+  `crataegus-crus-galli` nectar and moths, `celtis-laevigata` butterflies
+  (NC State). Two Wikipedia articles only: `cephalanthus-occidentalis`
+  Buttonwillow (an official California landmark). English and Japanese
+  Wikipedia only: `chamaecyparis-pisifera` wood.
+- To do: `crataegus-laevigata` onward, about 260 facts.
