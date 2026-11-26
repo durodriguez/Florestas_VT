@@ -118,6 +118,17 @@ each other's part; they are now the right way round.
    tile on 27 November 2026 (Shape for shrubs and conifers, Fall color,
    Thorny twigs, bark, pollen cones). Left: mostly oaks (catkins), pines,
    and parts whose photo the audit removed: abies-concolor, acer-triflorum, caragana-arborescens, carya-laciniosa, castanea-mollissima, chamaecyparis-thyoides, fraxinus-quadrangulata, ilex-x-meserveae, larix-laricina, magnolia-macrophylla, pinus-cembra, pinus-flexilis, pinus-parviflora, pinus-resinosa, pinus-rigida, populus-grandidentata, prunus-cerasifera, prunus-maackii, prunus-persica, prunus-x-cistena, prunus-x-yedoensis, ptelea-trifoliata, quercus-coccinea, quercus-hemisphaerica, quercus-lyrata, quercus-montana, quercus-phellos, quercus-shumardii, ulmus-parvifolia, viburnum-lentago.
+1b. **Default tiles still showing (27 November 2026).** A tile with a photo
+   but no written note shows the old caption (color and months from
+   taxa.csv). The build marks them (`part--default`), so they can be counted:
+   85 pages on 27 November 2026, 53 by the end of that day, after first
+   notes for 37 species that had none. Six are on species with notes (Chinese chestnut and tamarack
+   bark; Swiss stone, limber and red pine pollen cones; Amur chokecherry
+   fruit); the sources tried say too little. The rest are the species with
+   no notes yet (item 2) and their cultivars. Cultivar pages can now carry
+   their own note for a part where they differ, and a species note marked
+   `cultivars` = `only` stands in on its cultivars where a species tile is
+   withheld (honeylocust's flowers on the thornless pages).
 2. **Species with no written tiles: 53.** 16 have three or four photos but
    no expert page found that describes them part by part (NC State, Trees
    and Shrubs Online and Silvics were tried); English ivy's "bark" photo is

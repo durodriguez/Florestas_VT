@@ -164,10 +164,11 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     if (bad) return errors.push(`${where}: part must be one of ${PHOTO_PARTS.join(', ')}, got "${bad}"`);
     if (text.length > MAX_KNOW) warnings.push(`${where}: ${id}'s ${label.toLowerCase()} note runs to ${text.length} characters (keep it under ${MAX_KNOW})`);
     if (!knows.has(id)) knows.set(id, []);
-    if (knows.get(id).length >= 4) return errors.push(`${where}: ${id} already has four Know it by tiles`);
     const forCultivars = trim(r.cultivars);
-    if (forCultivars && !/^(yes|no)$/i.test(forCultivars)) return errors.push(`${where}: cultivars must be yes, no or blank, got "${forCultivars}"`);
-    knows.get(id).push({ label, parts, text, source: trim(r.source), url: trim(r.source_url), ...(/^no$/i.test(forCultivars) && { notForCultivars: true }) });
+    if (forCultivars && !/^(yes|no|only)$/i.test(forCultivars)) return errors.push(`${where}: cultivars must be yes, no, only or blank, got "${forCultivars}"`);
+    const onlyCultivars = /^only$/i.test(forCultivars);
+    if (!onlyCultivars && knows.get(id).filter((k) => !k.onlyCultivars).length >= 4) return errors.push(`${where}: ${id} already has four Know it by tiles`);
+    knows.get(id).push({ label, parts, text, source: trim(r.source), url: trim(r.source_url), ...(/^no$/i.test(forCultivars) && { notForCultivars: true }), ...(onlyCultivars && { onlyCultivars: true }) });
   });
   for (const [id, tiles] of knows) {
     for (const k of tiles) {
@@ -204,7 +205,7 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
       // the species' photos of those parts (the page checks).
       // Not a tile marked cultivars "no": thorns on honeylocust, which its
       // planted cultivars lack.
-      know: knows.get(t.id) ?? (parent && knows.has(parent) ? knows.get(parent).filter((k) => !k.notForCultivars).map((k) => ({ ...k, inherited: true })) : null),
+      know: knowFor(knows.get(t.id), parent ? knows.get(parent) : undefined),
     });
   }
   // A taxon named only to genus ("Ulmus sp.") shows a leaf of each species or
@@ -229,6 +230,28 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     if (kin.length) extras.get(t.id).kin = kin;
   }
   return { extras, errors, warnings };
+}
+
+/**
+ * A taxon's Know it by tiles. A species shows its own, but not those marked
+ * cultivars "only" (spares for its cultivars: honeylocust's flowers, shown
+ * where its thorns tile, marked "no", is not). A cultivar shows its own tiles
+ * first, for the parts it differs in, then its species' (marked inherited)
+ * for the parts its own do not cover, never those marked "no".
+ */
+function knowFor(own = [], species = []) {
+  const mine = own.filter((k) => !k.onlyCultivars);
+  if (!species.length) return mine.length ? mine : null;
+  // In the species' order, each of its tiles replaced by the cultivar's own
+  // for the same part; the cultivar's tiles for other parts come last.
+  const all = [];
+  const used = new Set();
+  for (const k of species.filter((x) => !x.notForCultivars)) {
+    const mineHere = mine.find((m) => !used.has(m) && m.parts.some((p) => k.parts.includes(p)));
+    if (mineHere) { all.push(mineHere); used.add(mineHere); } else all.push({ ...k, inherited: true });
+  }
+  all.push(...mine.filter((m) => !used.has(m)));
+  return all.length ? all : null;
 }
 
 const COLOR_GROUPS = [

@@ -645,6 +645,16 @@ page, and wait a few seconds between requests. `npm run check:photos` falls
 back to reading each file page itself when the API refuses, at one page every
 two seconds; a full run takes about fifteen minutes.
 
+**Searching Commons gently (November 2026).** One search request can bring
+back a dozen candidates with their licence, author and thumbnail address
+together: `api.php?action=query&generator=search&gsrsearch=<name>
+filetype:bitmap&gsrnamespace=6&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=500`.
+Send the project's own User-Agent (the one in `scripts/check-photos.mjs`),
+make one request at a time with at least four seconds between them, view
+candidates as 250 px thumbnails, and when refused (HTTP 429) wait at least a
+minute, longer each time, before trying again. Refusals come in spells; a
+search that is refused in the morning often goes through an hour later.
+
 **For review:** every habitat and fact in these batches is a draft, written
 here, not by a botanist.
 
