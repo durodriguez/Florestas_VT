@@ -140,9 +140,9 @@ new rows (alphabetical by taxon id).
 All 379 facts have been through the check. Each now cites at least one
 expert reference (NC State, Trees and Shrubs Online, Silvics, FEIS, Oregon
 State, or a primary source), or two independent sources; none rests on
-Wikipedia alone. 300 cite two or more sources; 79 cite a single expert
+Wikipedia alone. 302 cite two or more sources; 77 cite a single expert
 source, listed above. A few cite English and Japanese Wikipedia together,
 also listed above.
 
-Next: the same pass over the 135 facts for on-campus species already on
-`master`.
+Next: the same pass over the 226 facts already on `master` (mostly for
+on-campus species), 121 of which cite Wikipedia alone.
