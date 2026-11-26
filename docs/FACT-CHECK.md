@@ -144,5 +144,15 @@ Wikipedia alone. 302 cite two or more sources; 77 cite a single expert
 source, listed above. A few cite English and Japanese Wikipedia together,
 also listed above.
 
-Next: the same pass over the 226 facts already on `master` (mostly for
-on-campus species), 121 of which cite Wikipedia alone.
+## The facts merged earlier (226)
+
+Same method. Taken in file order.
+
+- Done: the first 130. State and provincial trees were confirmed against
+  State Symbols USA (statesymbolsusa.org) and provincial governments or The
+  Canadian Encyclopedia. Corrections: swamp white oak is not easy to
+  transplant (NC State says the opposite), so that fact was replaced; the
+  Major Oak was reported dead in 2026, so its fact now says so; the Wye Oak
+  fact now cites Maryland DNR. Replacements were checked against each
+  species' fun fact so nothing repeats on a page.
+- To do: facts 131 to 226.
