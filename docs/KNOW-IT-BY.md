@@ -92,41 +92,34 @@ the order they would notice it. Good swaps:
 
 ## Done
 
-Written notes for the most-planted species first (November 2026): 175 species
-in the first session, every species with four photos and an NC State Plant
-Toolbox page. The record is `know-it-by.csv` itself; to list the species,
-`cut -d, -f1 data/know-it-by.csv | sort -u`.
+Written notes (November 2026) for 234 of the 296 species, most planted first,
+each checked against its source after writing. The record is
+`know-it-by.csv`.
 
-Swaps made so far, in the book's spirit: honeylocust *Thorns* (not on its
-thornless cultivars), black locust *Spines*, bald cypress *Knees*,
-horsechestnut *Buds*, beech *Buds* with *Flowers and nuts* in one tile,
-Lombardy poplar *Shape*, arborvitae *Winter color*, Washington hawthorn *Bark
-and thorns*, sweetgum *Bark and twigs*, smoketree *Smoke*.
+Swaps made in the book's spirit: honeylocust *Thorns* (not on its thornless
+cultivars), black locust *Spines*, bald cypress *Knees*, horsechestnut and
+beech *Buds* (beech with *Flowers and nuts* in one tile), Lombardy poplar
+*Shape*, arborvitae *Winter color*, oakleaf hydrangea, sweetspire and
+fragrant sumac *Fall color*, multiflora rose *Stipules*, Washington hawthorn
+*Bark and thorns*, sweetgum *Bark and twigs*, burning bush *Winged twigs*,
+barberry *Spines*, devil's walking stick *Prickly stems*, smoketree *Smoke*.
+New photos come from iNaturalist (research grade, looked at before use).
 
-New photos (iNaturalist, research grade) were looked at before use, as
-`part-photos.csv` asks.
-
-Skipped for now, 22 species with four photos but too little in NC State's
-toolbox, or a photo to fix first (English ivy's "bark" photo is a leaf); use
-Silvics, FEIS or Trees and Shrubs Online: acer-x-freemanii, betula-populifolia, caragana-arborescens, castanea-mollissima, crataegus-laevigata, fraxinus-excelsior, hedera-helix, heptacodium-miconioides, larix-laricina, magnolia-x-soulangiana, malus-sargentii, picea-glauca, pinus-flexilis, pinus-resinosa, populus-grandidentata, prunus-maackii, prunus-padus, prunus-pennsylvanica, quercus-ellipsoidalis, sequoiadendron-giganteum, sorbus-x-thuringiaca, tilia-x-europaea.
+A fix on the way: American elm's bark and leaf photos had been filed under
+each other's part; they are now the right way round.
 
 ## Still to do
 
-1. **Species with fewer than four tiles: 99.** Listed by
-   `npm run check:species` as missing part photos; the plan is to choose four
-   categories each (above), find photos (iNaturalist research-grade when
-   Commons throttles us), and write the notes. Groups:
-   - *Conifers missing pollen cones* (fir, false cypresses, junipers, spruces,
-     arborvitae, pond cypress): swap in buds, underside or winter color.
-   - *Shrubs missing bark* (about 30: hydrangeas, fothergillas, viburnum,
-     weigela, itea, spirea, privet, rhododendron and others): habit, twigs or
-     fall color.
-   - *Ferns* (five): fronds, fiddleheads, spore cases, habit.
-   - *No photos at all* (hybrids and rarities: Arnold horsechestnut,
-     cotoneaster, two hybrid oaks, two whitebeams, Peking lilac, Faurie pear):
-     four photos each, and some may have too few online.
-2. **Species with four tiles:** done but for the skipped ones above. More
-   swaps are worth making as photos turn up: bitternut hickory's sulfur-yellow
-   buds, Osage orange's thorns, balsam poplar's sticky buds, Norway and sugar
-   maple's buds.
-3. **Cultivars** inherit their species' notes; no work unless one differs.
+1. **Species with fewer than four written tiles: 60.** Most have only three
+   photos; each wants a fourth photo and note. Shrubs: habit, twigs or fall
+   color; conifers: buds or underside; oaks: buds. abies-grandis, acer-ginnala, acer-nigrum, acer-triflorum, acer-truncatum, aesculus-parviflora, buxus-sempervirens, calycanthus-floridus, carya-laciniosa, chamaecyparis-obtusa, chamaecyparis-pisifera, chamaecyparis-thyoides, chionanthus-retusus, clethra-barbinervis, cotinus-obovatus, crataegus-crus-galli, crataegus-viridis, euonymus-fortunei, hydrangea-arborescens, hydrangea-paniculata, ilex-x-meserveae, iris-sibirica, juniperus-scopulorum, ligustrum-vulgare, maackia-amurensis, magnolia-macrophylla, magnolia-tripetala, malus-coronaria, musa-basjoo, parrotia-persica, parthenocissus-quinquefolia, picea-orientalis, picea-rubens, pinus-cembra, pinus-heldreichii, pinus-mugo, pinus-parviflora, pinus-rigida, populus-tremuloides, prunus-americana, prunus-cerasifera, prunus-persica, prunus-serrulata, prunus-x-cistena, prunus-x-yedoensis, ptelea-trifoliata, quercus-coccinea, quercus-hemisphaerica, quercus-lyrata, quercus-montana, quercus-muehlenbergii, quercus-shumardii, rhododendron-catawbiense, sequoia-sempervirens, spiraea-japonica, staphylea-trifolia, styrax-japonicus, ulmus-parvifolia, viburnum-dentatum, weigela-florida.
+2. **Species with no written tiles: 62.** Of these, 25 have three or four
+   photos but NC State's toolbox says too little; use Silvics, FEIS or Trees
+   and Shrubs Online: acer-pseudosieboldianum, acer-x-freemanii, betula-populifolia, caragana-arborescens, castanea-mollissima, crataegus-laevigata, diervilla-lonicera, fraxinus-excelsior, hedera-helix, heptacodium-miconioides, larix-laricina, magnolia-x-soulangiana, malus-sargentii, picea-glauca, pinus-flexilis, pinus-resinosa, populus-grandidentata, prunus-maackii, prunus-padus, prunus-pennsylvanica, prunus-subhirtella, quercus-ellipsoidalis, sequoiadendron-giganteum, sorbus-x-thuringiaca, tilia-x-europaea. The other 37 have two photos or fewer and need
+   photos first: abies-fraseri, acer-buergeranum, acer-miyabei, adiantum-pedatum, aesculus-x-arnoldiana, alnus-x-spaethii, amauropelta-noveboracensis, amelanchier-x-grandiflora, athyrium-filix-femina, cedrus-atlantica, cedrus-libani, cercis-chinensis, cotoneaster-adpressus, crataegus-ambigua, eucommia-ulmoides, fothergilla-gardenii, fothergilla-major, juniperus-chinensis, juniperus-communis, juniperus-horizontalis, kerria-japonica, malus-floribunda, matteuccia-struthiopteris, parthenocissus-tricuspidata, polystichum-acrostichoides, pyrus-fauriei, quercus-x-bimundorum, quercus-x-warei, rubus-thibetanus, salix-matsudana, scandosorbus-intermedia, sorbus-x-hybrida, syringa-pekinensis, taxodium-ascendens, taxus-x-media, tilia-mongolica, ulmus-davidiana-japonica.
+3. **Cultivars** inherit their species' notes. One that differs in a part
+   (purple leaves, double flowers) shows its own photo there with the default
+   caption; a note of its own for that part would be better.
+4. **Photo swaps still worth making** as photos turn up: bitternut hickory's
+   sulfur-yellow buds, Osage orange's thorns, balsam poplar's sticky buds,
+   Norway and sugar maple's buds, Hinoki cypress's white Y marks.
