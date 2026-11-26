@@ -101,4 +101,15 @@ new rows (alphabetical by taxon id).
   Oregon State), `morus-rubra` fruit, `picea-omorika` Mustila,
   `picea-rubens` mine sites, `pinus-bungeana` temples, `pinus-cembra` tree
   line, `parthenocissus-tricuspidata` Veitch.
-- To do: the second `pinus-mugo` fact onward, 139 facts.
+- Done: the second `pinus-mugo` fact to `pyrus-communis`'s first (40). 25
+  replaced or trimmed. One was wrong: the NYC Parks emblem is described by
+  NYC Parks as a London plane leaf, not a plane-maple cross. The Jindai-zakura
+  age is now "1,800 to 2,000 years", as Japanese Wikipedia gives it.
+  Confirmed from outside sources: 'Taihaku' returned to Japan in 1932 (Keele
+  University's National Collection of Flowering Cherries); the oldest
+  Somei-yoshino (Japanese Wikipedia, citing the 2019 radiocarbon study).
+  Single expert source: `pinus-parviflora` forms, `populus-alba`
+  introduction, `prunus-cerasifera` 'Pissardii' (Oregon State),
+  `populus-deltoides` (both; NC State and Silvics), `prunus-cerasus` first
+  fruit (NC State).
+- To do: the second `pyrus-communis` fact onward, 99 facts.
