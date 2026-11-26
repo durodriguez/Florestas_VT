@@ -92,9 +92,8 @@ the order they would notice it. Good swaps:
 
 ## Done
 
-Written notes for the most-planted species first (November 2026): 48 species
-by the end of the first session, every one of the 40 most planted on campus
-among them. The record is `know-it-by.csv` itself; to list the species,
+Written notes for the most-planted species first (November 2026): about 100
+species in the first session, working down the campus counts. The record is `know-it-by.csv` itself; to list the species,
 `cut -d, -f1 data/know-it-by.csv | sort -u`.
 
 Swaps made so far, in the book's spirit: honeylocust *Thorns* (not on its
@@ -106,7 +105,9 @@ and thorns*, sweetgum *Bark and twigs*, smoketree *Smoke*.
 New photos (iNaturalist, research grade) were looked at before use, as
 `part-photos.csv` asks.
 
-Not yet done among the most planted: Freeman maple and white spruce (NC
+Skipped for now, needing other sources or photo fixes: English ivy (its
+"bark" photo is a leaf), seven-son flower and English hawthorn (NC State says
+too little), northern pin oak and red pine (no NC State page), Freeman maple and white spruce (NC
 State's pages say too little; use Silvics or Trees and Shrubs Online),
 bigtooth aspen and gray birch (no NC State page).
 

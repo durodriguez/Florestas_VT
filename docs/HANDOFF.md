@@ -63,6 +63,13 @@ next. Written 26 November 2026, at the end of a long session.
 
 ## What to do next
 
+0. **Know it by, in progress (26 November 2026).** The section now takes
+   written tiles: any part, two photos side by side, a prose note.
+   About 100 species are done, most planted first; the method, the book it
+   follows and the list of what is left are in
+   [KNOW-IT-BY.md](KNOW-IT-BY.md). To find the next species, list those with
+   four photos and no rows in `data/know-it-by.csv`, by campus count.
+
 From the assessment and the progress reports, roughly in order of value:
 
 1. **Owner decisions** listed in section 5 of the assessment: the final web
