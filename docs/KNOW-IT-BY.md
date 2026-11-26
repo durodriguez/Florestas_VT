@@ -114,10 +114,10 @@ each other's part; they are now the right way round.
 
 ## Still to do
 
-1. **Species with fewer than four written tiles: 36.** 33 got a fourth tile
-   on 27 November 2026 (Shape for shrubs, Fall color, Thorny twigs, pollen
-   cones); for these no clean photo turned up yet, or the source says too
-   little: abies-grandis, acer-triflorum, caragana-arborescens, carya-laciniosa, castanea-mollissima, chamaecyparis-obtusa, chamaecyparis-pisifera, chamaecyparis-thyoides, euonymus-fortunei, ilex-x-meserveae, juniperus-scopulorum, larix-laricina, magnolia-macrophylla, malus-coronaria, picea-rubens, pinus-cembra, pinus-flexilis, pinus-heldreichii, pinus-parviflora, pinus-resinosa, pinus-rigida, populus-grandidentata, prunus-cerasifera, prunus-maackii, prunus-persica, prunus-x-cistena, prunus-x-yedoensis, ptelea-trifoliata, quercus-coccinea, quercus-hemisphaerica, quercus-lyrata, quercus-montana, quercus-shumardii, sequoia-sempervirens, staphylea-trifolia, ulmus-parvifolia.
+1. **Species showing fewer than four written tiles: 30.** 47 got a fourth
+   tile on 27 November 2026 (Shape for shrubs and conifers, Fall color,
+   Thorny twigs, bark, pollen cones). Left: mostly oaks (catkins), pines,
+   and parts whose photo the audit removed: abies-concolor, acer-triflorum, caragana-arborescens, carya-laciniosa, castanea-mollissima, chamaecyparis-thyoides, fraxinus-quadrangulata, ilex-x-meserveae, larix-laricina, magnolia-macrophylla, pinus-cembra, pinus-flexilis, pinus-parviflora, pinus-resinosa, pinus-rigida, populus-grandidentata, prunus-cerasifera, prunus-maackii, prunus-persica, prunus-x-cistena, prunus-x-yedoensis, ptelea-trifoliata, quercus-coccinea, quercus-hemisphaerica, quercus-lyrata, quercus-montana, quercus-phellos, quercus-shumardii, ulmus-parvifolia, viburnum-lentago.
 2. **Species with no written tiles: 53.** 16 have three or four photos but
    no expert page found that describes them part by part (NC State, Trees
    and Shrubs Online and Silvics were tried); English ivy's "bark" photo is
