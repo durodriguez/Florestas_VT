@@ -10,7 +10,7 @@ same list, with links, is on the site at /species/progress/.
 | Group | Pages | Complete | Items filled |
 | --- | --- | --- | --- |
 | On campus: species | 102 | 95 | 99% |
-| On campus: hybrids | 3 | 1 | 89% |
+| On campus: hybrids | 3 | 1 | 93% |
 | On campus: cultivars and forms | 10 | 3 | 81% |
 | On campus: named only to genus | 13 | 13 | 100% |
 | Not yet mapped: species | 176 | 104 | 94% |
@@ -23,7 +23,7 @@ same list, with links, is on the site at /species/progress/.
 
 - bark photo: 83 pages
 - worth knowing (3): 74 pages
-- fruit photo: 66 pages
+- fruit photo: 65 pages
 - flowers photo: 63 pages
 - leaves photo: 34 pages
 - crown shape: 2 pages
@@ -34,9 +34,9 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Tom Thumb cotoneaster** (`cotoneaster-tom-thumb`, 1 on campus): worth knowing (3) (1 of 3); bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Green Giant arborvitae** (`thuja-green-giant`, 4 on campus): worth knowing (3) (1 of 3); bark photo; flowers photo; fruit photo
 - [ ] **Snow Fountains weeping cherry** (`prunus-snofozam`, 1 on campus): worth knowing (3) (1 of 3); bark photo; leaves photo; fruit photo
-- [ ] **Anglojap yew** (`taxus-x-media`, 4 on campus): bark photo; fruit photo
 - [ ] **Dragon's claw willow** (`salix-matsudana-tortuosa`, 2 on campus): worth knowing (3) (1 of 3); fruit photo
 - [ ] **Crimson Cloud hawthorn** (`crataegus-laevigata-crimson-cloud`, 1 on campus): worth knowing (3) (1 of 3); flowers photo
+- [ ] **Anglojap yew** (`taxus-x-media`, 4 on campus): bark photo
 - [ ] **Common boxwood** (`buxus-sempervirens`, 2 on campus): bark photo
 - [ ] **Purpleleaf sand cherry** (`prunus-x-cistena`, 1 on campus): fruit photo
 - [ ] **Northern white cedar** (`thuja-occidentalis`, 46 on campus): flowers photo
