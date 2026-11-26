@@ -83,10 +83,11 @@ disagree; only the way in differs. The code is in `src/fieldguide/`.
   offers "Walk the tour from here" when no tour is under way. The address
   carries the tour and the stop (`?tour=giants-of-the-green&stop=3`).
   On a phone the stop's note is shown whole (until November 2026 it was cut
-  to three lines), and the grip at the top of the sheet is a divider while a
-  tour is walked: drag it down for more map, up for more of the note (no
-  taller than the note needs, nor 85% of the screen), or focus it and use
-  the arrow keys; a double-tap puts it back. The height is remembered in
+  to three lines). On a phone the grip at the top of the sheet is a divider,
+  on every tab (Around you, Tours, and while a tour is walked; until 27
+  November 2026 only the last): drag it down for more map, up for more of
+  the sheet (no taller than its contents need, nor 85% of the screen), or
+  focus it and use the arrow keys; a double-tap puts it back. The height is remembered in
   this browser only (`src/fieldguide/sheet-split.ts`).
 - **Links both ways with the explorer.** The explorer has a "Field guide"
   link in its top bar, an "In the field guide" button on each standing

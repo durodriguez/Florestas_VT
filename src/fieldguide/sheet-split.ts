@@ -1,6 +1,6 @@
 /**
- * The divider between the map and the sheet along the bottom while a tour is
- * walked, on a phone: drag it up for more of the note, down for more map, or
+ * The divider between the map and the sheet along the bottom, on a phone, on
+ * every tab (Around you, Tours, and while a tour is walked): drag it up for more of the note, down for more map, or
  * focus it and use the arrow keys. Double-click (or double-tap) puts the
  * sheet back to fit its contents.
  *
@@ -46,7 +46,7 @@ function writeShare(share: number | null): void {
 }
 
 export interface SheetSplit {
-  /** Turn the divider on (a tour started) or off (it ended). */
+  /** Turn the divider on or off. */
   enable(on: boolean): void;
   /** Fit again after the sheet's contents change (another stop). */
   refit(): void;
@@ -129,6 +129,14 @@ export function initSheetSplit(sheet: HTMLElement, handle: HTMLElement, moved: (
 
   window.addEventListener('resize', apply);
   phone.addEventListener('change', apply);
+  // Fit again whenever the sheet's contents change (another tab, the trees
+  // around a new spot, the next stop), so it never opens empty space under them.
+  let pending = false;
+  new MutationObserver(() => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => { pending = false; apply(); });
+  }).observe(sheet, { childList: true, subtree: true, characterData: true });
 
   return {
     enable(next: boolean): void {
