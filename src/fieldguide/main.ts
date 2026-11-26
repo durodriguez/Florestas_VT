@@ -379,10 +379,12 @@ function record(how: Hist, state: Record<string, unknown> | null = history.state
  * Walk a tour: its stops numbered and joined in order over the faded trees,
  * and the sheet turned to the stop the visitor is on and the way to the next.
  */
-/** The divider above the sheet while a tour is walked (sheet-split.ts): re-centre the stop after a resize. */
+/** The divider above the sheet (sheet-split.ts): while a tour is walked, re-centre the stop after a resize. */
 const sheetSplit = initSheetSplit($('fg-sheet'), $('fg-sheet-split'), () => {
   if (walking) showPoint(walking.stops[walking.index]!, map.getZoom());
 });
+// On every tab, not only while a tour is walked (owner's request, 27 November 2026).
+sheetSplit.enable(true);
 
 function startTour(tour: Tour, index: number, how: Hist): void {
   const stops = tour.stops.map((s) => byId.get(s.plantId)).filter((p): p is Plant => p !== undefined);
@@ -468,7 +470,7 @@ function endTour(how: Hist): void {
   tourLayer.clearLayers();
   fadeTrees(false);
   $('fg-walk').hidden = true;
-  sheetSplit.enable(false);
+  sheetSplit.refit();
   $('fg-tabs').hidden = false;
   setTab('tours');
   record(how, null);

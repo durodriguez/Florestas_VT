@@ -10,12 +10,12 @@ same list, with links, is on the site at /species/progress/.
 | Group | Pages | Complete | Items filled |
 | --- | --- | --- | --- |
 | On campus: species | 102 | 95 | 99% |
-| On campus: hybrids | 3 | 1 | 89% |
+| On campus: hybrids | 3 | 1 | 93% |
 | On campus: cultivars and forms | 10 | 3 | 81% |
 | On campus: named only to genus | 13 | 13 | 100% |
 | Not yet mapped: species | 176 | 104 | 94% |
 | Not yet mapped: hybrids | 16 | 7 | 82% |
-| Not yet mapped: cultivars and forms | 88 | 19 | 80% |
+| Not yet mapped: cultivars and forms | 88 | 19 | 81% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
 | **All** | 418 | 252 | 92% |
 
@@ -23,9 +23,9 @@ same list, with links, is on the site at /species/progress/.
 
 - bark photo: 83 pages
 - worth knowing (3): 74 pages
-- fruit photo: 69 pages
-- flowers photo: 65 pages
-- leaves photo: 37 pages
+- fruit photo: 65 pages
+- flowers photo: 63 pages
+- leaves photo: 34 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
 
@@ -34,9 +34,9 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Tom Thumb cotoneaster** (`cotoneaster-tom-thumb`, 1 on campus): worth knowing (3) (1 of 3); bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Green Giant arborvitae** (`thuja-green-giant`, 4 on campus): worth knowing (3) (1 of 3); bark photo; flowers photo; fruit photo
 - [ ] **Snow Fountains weeping cherry** (`prunus-snofozam`, 1 on campus): worth knowing (3) (1 of 3); bark photo; leaves photo; fruit photo
-- [ ] **Anglojap yew** (`taxus-x-media`, 4 on campus): bark photo; fruit photo
 - [ ] **Dragon's claw willow** (`salix-matsudana-tortuosa`, 2 on campus): worth knowing (3) (1 of 3); fruit photo
 - [ ] **Crimson Cloud hawthorn** (`crataegus-laevigata-crimson-cloud`, 1 on campus): worth knowing (3) (1 of 3); flowers photo
+- [ ] **Anglojap yew** (`taxus-x-media`, 4 on campus): bark photo
 - [ ] **Common boxwood** (`buxus-sempervirens`, 2 on campus): bark photo
 - [ ] **Purpleleaf sand cherry** (`prunus-x-cistena`, 1 on campus): fruit photo
 - [ ] **Northern white cedar** (`thuja-occidentalis`, 46 on campus): flowers photo
@@ -55,7 +55,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Verdant Hills boxwood** (`buxus-verdant-hills`): worth knowing (3) (1 of 3); bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Accolade elm** (`ulmus-morton`): worth knowing (3) (1 of 3); bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Cameo magnolia** (`magnolia-cameo`): worth knowing (3) (1 of 3); bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Copper Curls Peking lilac** (`syringa-pekinensis-copper-curls`): worth knowing (3) (1 of 3); bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Donald Wyman crabapple** (`malus-donald-wyman`): worth knowing (3) (1 of 3); bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Golden Raindrops crabapple** (`malus-schmidtcutleaf`): worth knowing (3) (1 of 3); bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Heritage oak** (`quercus-x-macdanielii-clemons`): worth knowing (3) (1 of 3); bark photo; leaves photo; flowers photo; fruit photo
@@ -63,7 +62,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Prairifire crabapple** (`malus-prairifire`): worth knowing (3) (1 of 3); bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Royal Frost birch** (`betula-penci-2`): worth knowing (3) (1 of 3); bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Ultimate Yellow magnolia** (`magnolia-ultimate-yellow`): worth knowing (3) (1 of 3); bark photo; leaves photo; flowers photo; fruit photo
-- [ ] **Creeping cotoneaster** (`cotoneaster-adpressus`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Miss Kim lilac** (`syringa-pubescens-patula-miss-kim`): worth knowing (3) (1 of 3); bark photo; leaves photo; fruit photo
 - [ ] **Triple Crown thornless blackberry** (`rubus-triple-crown`): worth knowing (3) (1 of 3); bark photo; leaves photo; fruit photo
 - [ ] **Karl Foerster feather reed grass** (`calamagrostis-x-acutiflora-karl-foerster`): worth knowing (3) (1 of 3); leaves photo; flowers photo
@@ -71,7 +69,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Crimson Spire oak** (`quercus-x-bimundorum`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Elizabeth magnolia** (`magnolia-elizabeth`): worth knowing (3) (1 of 3); bark photo; leaves photo; fruit photo
 - [ ] **Gold Star magnolia** (`magnolia-gold-star`): worth knowing (3) (1 of 3); bark photo; leaves photo; fruit photo
-- [ ] **Peking lilac** (`syringa-pekinensis`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Shirazz magnolia** (`magnolia-shirazz`): worth knowing (3) (1 of 3); bark photo; leaves photo; fruit photo
 - [ ] **Swedish whitebeam** (`scandosorbus-intermedia`): bark photo; leaves photo; flowers photo; fruit photo
 - [ ] **Swedish whitebeam** (`sorbus-x-hybrida`): bark photo; leaves photo; flowers photo; fruit photo
@@ -96,6 +93,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Gracillimus maiden grass** (`miscanthus-sinensis-gracillimus`): worth knowing (3) (1 of 3); leaves photo
 - [ ] **Chinese redbud** (`cercis-chinensis`): bark photo; fruit photo
 - [ ] **Common juniper** (`juniperus-communis`): bark photo; flowers photo
+- [ ] **Creeping cotoneaster** (`cotoneaster-adpressus`): bark photo; flowers photo
 - [ ] **Creeping juniper** (`juniperus-horizontalis`): bark photo; flowers photo
 - [ ] **Dwarf Everbearing black mulberry** (`morus-nigra-dwarf-everbearing`): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Dwarf fothergilla** (`fothergilla-gardenii`): bark photo; fruit photo
@@ -108,6 +106,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Blue ash** (`fraxinus-quadrangulata`): flowers photo; fruit photo
 - [ ] **Cedar of Lebanon** (`cedrus-libani`): flowers photo; fruit photo
 - [ ] **Chinese juniper** (`juniperus-chinensis`): bark photo; flowers photo
+- [ ] **Copper Curls Peking lilac** (`syringa-pekinensis-copper-curls`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Hardy rubber tree** (`eucommia-ulmoides`): flowers photo; fruit photo
 - [ ] **Japanese elm** (`ulmus-davidiana-japonica`): flowers photo; fruit photo
 - [ ] **Japanese flowering crabapple** (`malus-floribunda`): bark photo; leaves photo
@@ -177,6 +176,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Meader persimmon** (`diospyros-virginiana-meader`): worth knowing (3) (1 of 3)
 - [ ] **Overcup oak** (`quercus-lyrata`): flowers photo
 - [ ] **Peach** (`prunus-persica`): bark photo
+- [ ] **Peking lilac** (`syringa-pekinensis`): bark photo
 - [ ] **Persian ironwood** (`parrotia-persica`): fruit photo
 - [ ] **Pink Flair Sargent cherry** (`prunus-sargentii-jfs-kw58`): worth knowing (3) (1 of 3)
 - [ ] **Princeton American elm** (`ulmus-americana-princeton`): worth knowing (3) (1 of 3)
