@@ -129,6 +129,12 @@ each other's part; they are now the right way round.
    their own note for a part where they differ, and a species note marked
    `cultivars` = `only` stands in on its cultivars where a species tile is
    withheld (honeylocust's flowers on the thornless pages).
+1c. **Commons, tried for oak catkins (27 November 2026).** A full-text search
+   by species name and "flowers", at one request every few seconds, ran an
+   hour: two of eight searches were refused outright, and those answered
+   returned no catkin close-ups (chestnut oak's nine were trees, leaves and
+   stray matches). Next time, browse each species' own category page
+   (`Category:Quercus montana`) for flower photos instead of searching.
 2. **Species with no written tiles: 53.** 16 have three or four photos but
    no expert page found that describes them part by part (NC State, Trees
    and Shrubs Online and Silvics were tried); English ivy's "bark" photo is
