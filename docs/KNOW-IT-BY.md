@@ -92,10 +92,23 @@ the order they would notice it. Good swaps:
 
 ## Done
 
-Written notes (November 2026): eastern white pine, honeylocust (with a new
-*Thorns* tile, not shown on its thornless cultivars), red oak, river birch,
-Norway maple, swamp white oak, Colorado blue spruce, sugar maple, red maple.
-Each species' row in `know-it-by.csv` is the record.
+Written notes for the most-planted species first (November 2026): 48 species
+by the end of the first session, every one of the 40 most planted on campus
+among them. The record is `know-it-by.csv` itself; to list the species,
+`cut -d, -f1 data/know-it-by.csv | sort -u`.
+
+Swaps made so far, in the book's spirit: honeylocust *Thorns* (not on its
+thornless cultivars), black locust *Spines*, bald cypress *Knees*,
+horsechestnut *Buds*, beech *Buds* with *Flowers and nuts* in one tile,
+Lombardy poplar *Shape*, arborvitae *Winter color*, Washington hawthorn *Bark
+and thorns*, sweetgum *Bark and twigs*, smoketree *Smoke*.
+
+New photos (iNaturalist, research grade) were looked at before use, as
+`part-photos.csv` asks.
+
+Not yet done among the most planted: Freeman maple and white spruce (NC
+State's pages say too little; use Silvics or Trees and Shrubs Online),
+bigtooth aspen and gray birch (no NC State page).
 
 ## Still to do
 
