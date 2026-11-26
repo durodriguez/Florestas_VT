@@ -23,8 +23,8 @@ same list, with links, is on the site at /species/progress/.
 
 - bark photo: 83 pages
 - worth knowing (3): 74 pages
-- fruit photo: 65 pages
 - flowers photo: 63 pages
+- fruit photo: 63 pages
 - leaves photo: 34 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
@@ -85,7 +85,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Show Off forsythia** (`forsythia-x-intermedia-mindor`): worth knowing (3) (1 of 3); bark photo; fruit photo
 - [ ] **Atlas cedar** (`cedrus-atlantica`): bark photo; flowers photo; fruit photo
 - [ ] **Autumn Brilliance serviceberry** (`amelanchier-x-grandiflora-autumn-brilliance`): worth knowing (3) (1 of 3); leaves photo; fruit photo
-- [ ] **Fraser fir** (`abies-fraseri`): bark photo; flowers photo; fruit photo
 - [ ] **Korean sun pear** (`pyrus-fauriei`): leaves photo; flowers photo; fruit photo
 - [ ] **Mongolian linden** (`tilia-mongolica`): bark photo; flowers photo; fruit photo
 - [ ] **Peking willow** (`salix-matsudana`): bark photo; leaves photo; fruit photo
@@ -104,9 +103,9 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **White Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodtwo`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Apple serviceberry** (`amelanchier-x-grandiflora`): leaves photo; fruit photo
 - [ ] **Blue ash** (`fraxinus-quadrangulata`): flowers photo; fruit photo
-- [ ] **Cedar of Lebanon** (`cedrus-libani`): flowers photo; fruit photo
 - [ ] **Chinese juniper** (`juniperus-chinensis`): bark photo; flowers photo
 - [ ] **Copper Curls Peking lilac** (`syringa-pekinensis-copper-curls`): worth knowing (3) (1 of 3); bark photo
+- [ ] **Fraser fir** (`abies-fraseri`): bark photo; flowers photo
 - [ ] **Hardy rubber tree** (`eucommia-ulmoides`): flowers photo; fruit photo
 - [ ] **Japanese elm** (`ulmus-davidiana-japonica`): flowers photo; fruit photo
 - [ ] **Japanese flowering crabapple** (`malus-floribunda`): bark photo; leaves photo
@@ -155,6 +154,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Bloodgood Japanese maple** (`acer-palmatum-bloodgood`): worth knowing (3) (1 of 3)
 - [ ] **Bosnian pine** (`pinus-heldreichii`): flowers photo
 - [ ] **Canada Red chokecherry** (`prunus-virginiana-canada-red`): worth knowing (3) (1 of 3)
+- [ ] **Cedar of Lebanon** (`cedrus-libani`): flowers photo
 - [ ] **Chestnut oak** (`quercus-montana`): flowers photo
 - [ ] **Chinese fringetree** (`chionanthus-retusus`): bark photo
 - [ ] **Coast redwood** (`sequoia-sempervirens`): leaves photo
