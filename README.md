@@ -7,15 +7,22 @@ Search and filter every mapped tree, shrub and vine on campus; tap a plant for
 its full record; scan a QR code on a physical label to land straight on that
 plant's page.
 
-> **2,060 plants are on the map**, almost all of them from UVM's ArcGIS tree
+> **2,146 plants are on the map**, almost all of them from UVM's ArcGIS tree
 > layer, surveyed by Erin Camire in 2023–24 and used with her permission — see
-> [docs/ARCGIS-IMPORT.md](docs/ARCGIS-IMPORT.md). What they do not have is
+> [docs/ARCGIS-IMPORT.md](docs/ARCGIS-IMPORT.md). What most do not have is
 > measurements: the layer records a position, a species and a health rating,
 > and nothing about trunk diameter or height. Those arrive one tree at a time,
-> from the field app, and a re-survey adds to a tree's record rather than
-> replacing it. `data/taxa.csv` carries 257 species, so the species list still
-> runs ahead of what has been mapped. Two more records are kept but hidden by
-> default — one tree removed, one a survey could not find — for 2,062 in all.
+> from the field app and older inventories (996 trees have a trunk size so
+> far), and a re-survey adds to a tree's record rather than replacing it.
+> `data/taxa.csv` carries 419 species, hybrids, cultivars and genera, each with
+> its own page, so the species list runs well ahead of what has been mapped.
+> Nine more records are kept but hidden by default (removed, or not found by a
+> survey), for 2,155 in all.
+>
+> **New to the project, or picking it up in a new session?** Start with
+> [docs/HANDOFF.md](docs/HANDOFF.md): where things stand, the working rules,
+> and what to do next. The November 2026 review of the whole project is
+> [docs/ASSESSMENT-2026-11.md](docs/ASSESSMENT-2026-11.md).
 
 ## Quick start
 
@@ -124,7 +131,7 @@ on a phone. It suggests species by common name, scientific name or any alias,
 ranked as the survey app ranks them, and fetches the species list only once the
 search is used.
 
-**Burlington street trees** — 364 of the city's street trees stand inside the
+**Burlington street trees** — 358 of the city's street trees stand inside the
 campus boundary, on Main Street, College Street, Colchester Avenue and the rest.
 They are on the map behind **Show Burlington street trees**, off by default,
 folded under *City trees* in the panel's *Layers*, in Burlington's flag blue and
@@ -236,6 +243,10 @@ species never reaches the live site.
 | **Hosting, domains, scaling** | [docs/DEPLOY.md](docs/DEPLOY.md) |
 | **Ecosystem services with i-Tree** | [docs/ITREE.md](docs/ITREE.md) |
 | **What's planned next** | [docs/TODO.md](docs/TODO.md) |
+| **Picking up the project (start here)** | [docs/HANDOFF.md](docs/HANDOFF.md) |
+| **Assessment, November 2026** | [docs/ASSESSMENT-2026-11.md](docs/ASSESSMENT-2026-11.md) |
+| **Species pages and their sources** | [docs/SPECIES-PAGES.md](docs/SPECIES-PAGES.md) |
+| **How the facts were checked** | [docs/FACT-CHECK.md](docs/FACT-CHECK.md) |
 
 ## Commands
 
