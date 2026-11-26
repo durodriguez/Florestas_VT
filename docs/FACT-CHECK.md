@@ -112,4 +112,15 @@ new rows (alphabetical by taxon id).
   introduction, `prunus-cerasifera` 'Pissardii' (Oregon State),
   `populus-deltoides` (both; NC State and Silvics), `prunus-cerasus` first
   fruit (NC State).
-- To do: the second `pyrus-communis` fact onward, 99 facts.
+- Done: the second `pyrus-communis` fact to `salix-babylonica`'s first (40).
+  21 replaced or trimmed. Single expert source: `pyrus-communis` germplasm,
+  `pyrus-fauriei` Callery confusion, `rubus-thibetanus` stems (Trees and
+  Shrubs Online), `quercus-acutissima` invasive, `rhus-typhina` female
+  plants, `rhododendron-catawbiense` wildlife (NC State), `quercus-lyrata`
+  first acorns (Silvics), `quercus-stellata` fire (FEIS).
+  Tool note: until this batch the look-up script cached failed page fetches
+  as empty pages, so some earlier "no second source" calls may have missed a
+  page that was briefly unreachable. Every replacement made because of that
+  still has its own sources, so nothing wrong was published, but a few good
+  facts may have been swapped out unnecessarily.
+- To do: the second `salix-babylonica` fact onward, 59 facts.
