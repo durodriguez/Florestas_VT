@@ -114,9 +114,10 @@ each other's part; they are now the right way round.
 
 ## Still to do
 
-1. **Species with fewer than four written tiles: 67.** Most have only three
-   photos; each wants a fourth photo and note. Shrubs: habit, twigs or fall
-   color; conifers: buds or underside; oaks: buds. abies-grandis, acer-ginnala, acer-nigrum, acer-triflorum, acer-truncatum, aesculus-parviflora, buxus-sempervirens, calycanthus-floridus, caragana-arborescens, carya-laciniosa, castanea-mollissima, chamaecyparis-obtusa, chamaecyparis-pisifera, chamaecyparis-thyoides, chionanthus-retusus, clethra-barbinervis, cotinus-obovatus, crataegus-crus-galli, crataegus-viridis, euonymus-fortunei, hydrangea-arborescens, hydrangea-paniculata, ilex-x-meserveae, iris-sibirica, juniperus-scopulorum, larix-laricina, ligustrum-vulgare, maackia-amurensis, magnolia-macrophylla, magnolia-tripetala, malus-coronaria, musa-basjoo, parrotia-persica, parthenocissus-quinquefolia, picea-orientalis, picea-rubens, pinus-cembra, pinus-flexilis, pinus-heldreichii, pinus-mugo, pinus-parviflora, pinus-resinosa, pinus-rigida, populus-grandidentata, populus-tremuloides, prunus-americana, prunus-cerasifera, prunus-maackii, prunus-persica, prunus-serrulata, prunus-x-cistena, prunus-x-yedoensis, ptelea-trifoliata, quercus-coccinea, quercus-hemisphaerica, quercus-lyrata, quercus-montana, quercus-muehlenbergii, quercus-shumardii, rhododendron-catawbiense, sequoia-sempervirens, spiraea-japonica, staphylea-trifolia, styrax-japonicus, ulmus-parvifolia, viburnum-dentatum, weigela-florida.
+1. **Species with fewer than four written tiles: 36.** 33 got a fourth tile
+   on 27 November 2026 (Shape for shrubs, Fall color, Thorny twigs, pollen
+   cones); for these no clean photo turned up yet, or the source says too
+   little: abies-grandis, acer-triflorum, caragana-arborescens, carya-laciniosa, castanea-mollissima, chamaecyparis-obtusa, chamaecyparis-pisifera, chamaecyparis-thyoides, euonymus-fortunei, ilex-x-meserveae, juniperus-scopulorum, larix-laricina, magnolia-macrophylla, malus-coronaria, picea-rubens, pinus-cembra, pinus-flexilis, pinus-heldreichii, pinus-parviflora, pinus-resinosa, pinus-rigida, populus-grandidentata, prunus-cerasifera, prunus-maackii, prunus-persica, prunus-x-cistena, prunus-x-yedoensis, ptelea-trifoliata, quercus-coccinea, quercus-hemisphaerica, quercus-lyrata, quercus-montana, quercus-shumardii, sequoia-sempervirens, staphylea-trifolia, ulmus-parvifolia.
 2. **Species with no written tiles: 53.** 16 have three or four photos but
    no expert page found that describes them part by part (NC State, Trees
    and Shrubs Online and Silvics were tried); English ivy's "bark" photo is
