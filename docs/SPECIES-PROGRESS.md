@@ -25,7 +25,7 @@ same list, with links, is on the site at /species/progress/.
 - worth knowing (3): 74 pages
 - fruit photo: 63 pages
 - flowers photo: 62 pages
-- leaves photo: 34 pages
+- leaves photo: 33 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
 
@@ -86,7 +86,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Atlas cedar** (`cedrus-atlantica`): bark photo; flowers photo; fruit photo
 - [ ] **Autumn Brilliance serviceberry** (`amelanchier-x-grandiflora-autumn-brilliance`): worth knowing (3) (1 of 3); leaves photo; fruit photo
 - [ ] **Korean sun pear** (`pyrus-fauriei`): leaves photo; flowers photo; fruit photo
-- [ ] **Peking willow** (`salix-matsudana`): bark photo; leaves photo; fruit photo
 - [ ] **Adagio maiden grass** (`miscanthus-sinensis-adagio`): worth knowing (3) (1 of 3); leaves photo
 - [ ] **Gracillimus maiden grass** (`miscanthus-sinensis-gracillimus`): worth knowing (3) (1 of 3); leaves photo
 - [ ] **Chinese redbud** (`cercis-chinensis`): bark photo; fruit photo
@@ -110,6 +109,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Krauter Vesuvius purpleleaf plum** (`prunus-cerasifera-krauter-vesuvius`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Miyabe maple** (`acer-miyabei`): flowers photo; fruit photo
 - [ ] **Mongolian linden** (`tilia-mongolica`): bark photo; fruit photo
+- [ ] **Peking willow** (`salix-matsudana`): bark photo; fruit photo
 - [ ] **Pond cypress** (`taxodium-ascendens`): flowers photo; fruit photo
 - [ ] **Russian hawthorn** (`crataegus-ambigua`): bark photo; flowers photo
 - [ ] **Spaeth alder** (`alnus-x-spaethii`): bark photo; flowers photo
