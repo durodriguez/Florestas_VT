@@ -122,8 +122,46 @@ each other's part; they are now the right way round.
    and Shrubs Online and Silvics were tried); English ivy's "bark" photo is
    a leaf and needs replacing first: acer-pseudosieboldianum, acer-x-freemanii, betula-populifolia, crataegus-laevigata, diervilla-lonicera, fraxinus-excelsior, hedera-helix, heptacodium-miconioides, magnolia-x-soulangiana, malus-sargentii, picea-glauca, prunus-pennsylvanica, prunus-subhirtella, quercus-ellipsoidalis, sequoiadendron-giganteum, sorbus-x-thuringiaca. The other 37 have two photos or
    fewer and need photos first: abies-fraseri, acer-buergeranum, acer-miyabei, adiantum-pedatum, aesculus-x-arnoldiana, alnus-x-spaethii, amauropelta-noveboracensis, amelanchier-x-grandiflora, athyrium-filix-femina, cedrus-atlantica, cedrus-libani, cercis-chinensis, cotoneaster-adpressus, crataegus-ambigua, eucommia-ulmoides, fothergilla-gardenii, fothergilla-major, juniperus-chinensis, juniperus-communis, juniperus-horizontalis, kerria-japonica, malus-floribunda, matteuccia-struthiopteris, parthenocissus-tricuspidata, polystichum-acrostichoides, pyrus-fauriei, quercus-x-bimundorum, quercus-x-warei, rubus-thibetanus, salix-matsudana, scandosorbus-intermedia, sorbus-x-hybrida, syringa-pekinensis, taxodium-ascendens, taxus-x-media, tilia-mongolica, ulmus-davidiana-japonica.
-3. **Photo audit.** The photos chosen before this rule was written have not
-   all been looked at again for hands or objects in the frame; worth a pass.
+3. **Photo audit.** All 620 iNaturalist photos were looked at on 26
+   November 2026; 32 broke the photo rule (a hand, a ruler, a pencil, a
+   fence or street, or the part laid on a table or cloth). 24 were replaced
+   with clean close-ups; 8 were removed because no clean photo turned up
+   (marked below), and want one when found. The 460 Wikimedia Commons photos are not yet checked:
+   Commons refuses this project's downloads for now (see HANDOFF.md).
+
+   - [x] `abies-concolor`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/1711555
+   - [x] `populus-grandidentata`, flowers: https://www.inaturalist.org/observations/155049184
+   - [x] `quercus-coccinea`, leaves: https://www.inaturalist.org/observations/18096656
+   - [x] `quercus-montana`, leaves: https://www.inaturalist.org/observations/185581695
+   - [x] `populus-deltoides`, bark: https://www.inaturalist.org/observations/7718358
+   - [x] `ulmus-rubra`, flowers: https://www.inaturalist.org/observations/346043391
+   - [x] `salix-nigra`, leaves: https://www.inaturalist.org/observations/239429382
+   - [x] `asimina-triloba`, flowers: https://www.inaturalist.org/observations/207754488
+   - [x] `asimina-triloba`, fruit: https://www.inaturalist.org/observations/34654133
+   - [x] `catalpa-bignonioides`, fruit: https://www.inaturalist.org/observations/107127588
+   - [x] `celtis-laevigata`, fruit: https://www.inaturalist.org/observations/337371176
+   - [x] `morus-rubra`, fruit: https://www.inaturalist.org/observations/159134763
+   - [x] `picea-rubens`, leaves: https://www.inaturalist.org/observations/108753967
+   - [x] `quercus-stellata`, leaves: https://www.inaturalist.org/observations/35307036
+   - [x] `prunus-virginiana`, leaves: https://www.inaturalist.org/observations/1552239
+   - [x] `ilex-glabra`, fruit: https://www.inaturalist.org/observations/107291109
+   - [x] `polystichum-acrostichoides`, leaves: https://www.inaturalist.org/observations/325890589
+   - [x] `chamaecyparis-thyoides`, fruit: https://www.inaturalist.org/observations/103893524
+   - [x] `fraxinus-quadrangulata`, leaves: https://www.inaturalist.org/observations/246656157
+   - [x] `fraxinus-quadrangulata`, flowers (removed; no clean replacement found yet): https://www.inaturalist.org/observations/258473855
+   - [x] `ulmus-davidiana-japonica`, leaves: https://www.inaturalist.org/observations/286674276
+   - [x] `hibiscus-syriacus-notwoodtwo`, leaves: https://www.inaturalist.org/observations/155799715
+   - [x] `viburnum-plicatum-tomentosum-mariesii`, leaves: https://www.inaturalist.org/observations/353215802
+   - [x] `weigela-florida`, leaves: https://www.inaturalist.org/observations/191556061
+   - [x] `fothergilla-major`, leaves: https://www.inaturalist.org/observations/196874244
+   - [x] `quercus-phellos`, flowers (removed; no clean replacement found yet): https://www.inaturalist.org/observations/154113129
+   - [x] `viburnum-lentago`, bark (removed; no clean replacement found yet): https://www.inaturalist.org/observations/20764350
+   - [x] `fraxinus-quadrangulata`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/39389456
+   - [x] `salix-matsudana-tortuosa`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/8405816
+   - [x] `salix-matsudana`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/8405816
+   - [x] `salix-babylonica`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/8405816
+   - [x] `quercus-stellata`, fruit: https://www.inaturalist.org/observations/251388509
+
 4. **Cultivars** inherit their species' notes. One that differs in a part
    (purple leaves, double flowers) shows its own photo there with the default
    caption; a note of its own for that part would be better.

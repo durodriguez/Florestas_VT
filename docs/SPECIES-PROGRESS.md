@@ -9,22 +9,22 @@ same list, with links, is on the site at /species/progress/.
 
 | Group | Pages | Complete | Items filled |
 | --- | --- | --- | --- |
-| On campus: species | 102 | 95 | 99% |
+| On campus: species | 102 | 94 | 99% |
 | On campus: hybrids | 3 | 1 | 89% |
-| On campus: cultivars and forms | 10 | 3 | 82% |
+| On campus: cultivars and forms | 10 | 3 | 81% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 176 | 102 | 94% |
+| Not yet mapped: species | 176 | 98 | 93% |
 | Not yet mapped: hybrids | 16 | 7 | 82% |
 | Not yet mapped: cultivars and forms | 88 | 19 | 80% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 250 | 92% |
+| **All** | 418 | 245 | 91% |
 
 ## Most often missing
 
-- bark photo: 85 pages
+- bark photo: 86 pages
 - worth knowing (3): 74 pages
-- fruit photo: 66 pages
-- flowers photo: 65 pages
+- fruit photo: 71 pages
+- flowers photo: 67 pages
 - leaves photo: 37 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
@@ -35,12 +35,13 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Green Giant arborvitae** (`thuja-green-giant`, 4 on campus): worth knowing (3) (1 of 3); bark photo; flowers photo; fruit photo
 - [ ] **Snow Fountains weeping cherry** (`prunus-snofozam`, 1 on campus): worth knowing (3) (1 of 3); bark photo; leaves photo; fruit photo
 - [ ] **Anglojap yew** (`taxus-x-media`, 4 on campus): bark photo; fruit photo
+- [ ] **Dragon's claw willow** (`salix-matsudana-tortuosa`, 2 on campus): worth knowing (3) (1 of 3); fruit photo
 - [ ] **Crimson Cloud hawthorn** (`crataegus-laevigata-crimson-cloud`, 1 on campus): worth knowing (3) (1 of 3); flowers photo
 - [ ] **Common boxwood** (`buxus-sempervirens`, 2 on campus): bark photo
 - [ ] **Purpleleaf sand cherry** (`prunus-x-cistena`, 1 on campus): fruit photo
 - [ ] **Northern white cedar** (`thuja-occidentalis`, 46 on campus): flowers photo
 - [ ] **Three-flower maple** (`acer-triflorum`, 3 on campus): fruit photo
-- [ ] **Dragon's claw willow** (`salix-matsudana-tortuosa`, 2 on campus): worth knowing (3) (1 of 3)
+- [ ] **White fir** (`abies-concolor`, 2 on campus): fruit photo
 - [ ] **Amur maackia** (`maackia-amurensis`, 1 on campus): bark photo
 - [ ] **Bigleaf magnolia** (`magnolia-macrophylla`, 1 on campus): bark photo
 - [ ] **Camperdown elm** (`ulmus-glabra-camperdownii`, 1 on campus): worth knowing (3) (1 of 3)
@@ -91,6 +92,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Fraser fir** (`abies-fraseri`): bark photo; flowers photo; fruit photo
 - [ ] **Korean sun pear** (`pyrus-fauriei`): leaves photo; flowers photo; fruit photo
 - [ ] **Mongolian linden** (`tilia-mongolica`): bark photo; flowers photo; fruit photo
+- [ ] **Peking willow** (`salix-matsudana`): bark photo; leaves photo; fruit photo
 - [ ] **Adagio maiden grass** (`miscanthus-sinensis-adagio`): worth knowing (3) (1 of 3); leaves photo
 - [ ] **Gracillimus maiden grass** (`miscanthus-sinensis-gracillimus`): worth knowing (3) (1 of 3); leaves photo
 - [ ] **Chinese redbud** (`cercis-chinensis`): bark photo; fruit photo
@@ -104,6 +106,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Large fothergilla** (`fothergilla-major`): bark photo; fruit photo
 - [ ] **White Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodtwo`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Apple serviceberry** (`amelanchier-x-grandiflora`): leaves photo; fruit photo
+- [ ] **Blue ash** (`fraxinus-quadrangulata`): flowers photo; fruit photo
 - [ ] **Cedar of Lebanon** (`cedrus-libani`): flowers photo; fruit photo
 - [ ] **Chinese juniper** (`juniperus-chinensis`): bark photo; flowers photo
 - [ ] **Hardy rubber tree** (`eucommia-ulmoides`): flowers photo; fruit photo
@@ -111,7 +114,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Japanese flowering crabapple** (`malus-floribunda`): bark photo; leaves photo
 - [ ] **Krauter Vesuvius purpleleaf plum** (`prunus-cerasifera-krauter-vesuvius`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Miyabe maple** (`acer-miyabei`): flowers photo; fruit photo
-- [ ] **Peking willow** (`salix-matsudana`): bark photo; leaves photo
 - [ ] **Pond cypress** (`taxodium-ascendens`): flowers photo; fruit photo
 - [ ] **Russian hawthorn** (`crataegus-ambigua`): bark photo; flowers photo
 - [ ] **Spaeth alder** (`alnus-x-spaethii`): bark photo; flowers photo
@@ -138,6 +140,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Mariesii doublefile viburnum** (`viburnum-plicatum-tomentosum-mariesii`): worth knowing (3) (1 of 3)
 - [ ] **Mugo pine** (`pinus-mugo`): bark photo
 - [ ] **Multiflora rose** (`rosa-multiflora`): bark photo
+- [ ] **Nannyberry** (`viburnum-lentago`): bark photo
 - [ ] **Oakleaf hydrangea** (`hydrangea-quercifolia`): bark photo
 - [ ] **Old-fashioned weigela** (`weigela-florida`): bark photo
 - [ ] **Panicle hydrangea** (`hydrangea-paniculata`): fruit photo
@@ -199,6 +202,8 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Weeping Alaska cedar** (`callitropsis-nootkatensis-pendula`): worth knowing (3) (2 of 3)
 - [ ] **Weeping cherry** (`prunus-subhirtella`): fruit photo
 - [ ] **Weeping European beech** (`fagus-sylvatica-pendula`): worth knowing (3) (2 of 3)
+- [ ] **Weeping willow** (`salix-babylonica`): fruit photo
 - [ ] **Whitespire birch** (`betula-populifolia-whitespire`): worth knowing (3) (1 of 3)
 - [ ] **Wildfire black tupelo** (`nyssa-sylvatica-wildfire`): worth knowing (3) (1 of 3)
+- [ ] **Willow oak** (`quercus-phellos`): flowers photo
 - [ ] **Yoshino cherry** (`prunus-x-yedoensis`): fruit photo
