@@ -27,6 +27,13 @@
  * only where marked (cultivars "yes"): one about the species may not hold for
  * a selection of it (wild honeylocusts carry thorns; the planted ones do not).
  *
+ * - data/know-it-by.csv: taxon_id, label, parts, text, source, source_url,
+ *   cultivars ("no": the note does not hold for its cultivars, not lent).
+ *   Up to four Know it by tiles, in file order, each naming the photo parts it
+ *   shows (PHOTO_PARTS; two joined by + sit side by side) and a note in prose.
+ *   A taxon without rows shows the four default tiles (bark, leaves, flowers,
+ *   fruit) captioned from taxa.csv.
+ *
  * Every habitat and fact needs a source: they are checkable claims, held to
  * the fun fact's rule (docs/DATA-MODEL.md). No DOM here.
  */
@@ -37,6 +44,14 @@ const trim = (v) => (v ?? '').toString().trim();
 /** As the fun fact is held to: what a phone can show in a few lines. */
 export const MAX_FACT = 240;
 export const PARTS = ['bark', 'leaves', 'flowers', 'fruit'];
+/**
+ * Every part a photo can show: the four above, which a page shows by default,
+ * and the others a Know it by tile in know-it-by.csv can ask for. For a
+ * conifer, flowers are its pollen cones and fruit its seed cones.
+ */
+export const PHOTO_PARTS = [...PARTS, 'buds', 'twigs', 'thorns', 'catkins', 'seeds', 'fronds', 'fiddleheads', 'spores', 'underside', 'color', 'habit', 'roots'];
+/** A Know it by note: about as long as the book's, a short paragraph on a phone. */
+export const MAX_KNOW = 320;
 /**
  * Licenses that allow this site's use with credit: public domain, CC0, CC BY,
  * CC BY-SA, and the non-commercial CC BY-NC and CC BY-NC-SA, which fit a free
@@ -51,7 +66,7 @@ const FREE = /^(public domain|pd|cc0( 1\.0)?|cc by(-nc)?(-sa)? \d\.\d( [a-z]+)?)
  *   flowerColor and fruitColor where known).
  * @returns {{ extras: Map<string, { crownForm: string|null, habitat: object|null, facts: object[] }>, errors: string[], warnings: string[] }}
  */
-export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [], photoRows = [], taxa }) {
+export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [], photoRows = [], knowRows = [], taxa }) {
   const errors = [];
   const warnings = [];
   const ids = new Set(taxa.map((t) => t.id));
@@ -105,7 +120,7 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     const id = trim(r.taxon_id);
     const part = trim(r.part);
     if (!known('part-photos.csv', i, id)) return;
-    if (!PARTS.includes(part)) return errors.push(`${where}: part must be one of ${PARTS.join(', ')}, got "${part}"`);
+    if (!PHOTO_PARTS.includes(part)) return errors.push(`${where}: part must be one of ${PHOTO_PARTS.join(', ')}, got "${part}"`);
     const commons = /^https:\/\/upload\.wikimedia\.org\/.+\/500px-[^/]+$/.test(trim(r.image_url)) && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(trim(r.page_url));
     const inat = /^https:\/\/inaturalist-open-data\.s3\.amazonaws\.com\/photos\/\d+\/medium\.(jpe?g|png)$/i.test(trim(r.image_url)) && /^https:\/\/www\.inaturalist\.org\/observations\/\d+$/.test(trim(r.page_url));
     if (!commons && !inat) return errors.push(`${where}: needs a Commons 500px thumbnail and its File: page, or an iNaturalist medium photo and its observation page`);
@@ -132,6 +147,35 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     };
   });
 
+  // Know it by, written: up to four tiles, each a label, the parts its photos
+  // show (one, or two side by side: "flowers+fruit"), and a note in prose on
+  // what tells the species apart by them. In file order.
+  const knows = new Map();
+  knowRows.forEach((r, i) => {
+    const where = `know-it-by.csv row ${i + 2}`;
+    const id = trim(r.taxon_id);
+    if (!known('know-it-by.csv', i, id) || !sourced('know-it-by.csv', i, r)) return;
+    const label = trim(r.label);
+    const parts = trim(r.parts).split('+').map(trim).filter(Boolean);
+    const text = trim(r.text);
+    if (!label || !text) return errors.push(`${where}: label and text are both needed`);
+    if (!parts.length || parts.length > 2) return errors.push(`${where}: parts must name one part or two joined by +, got "${trim(r.parts)}"`);
+    const bad = parts.find((p) => !PHOTO_PARTS.includes(p));
+    if (bad) return errors.push(`${where}: part must be one of ${PHOTO_PARTS.join(', ')}, got "${bad}"`);
+    if (text.length > MAX_KNOW) warnings.push(`${where}: ${id}'s ${label.toLowerCase()} note runs to ${text.length} characters (keep it under ${MAX_KNOW})`);
+    if (!knows.has(id)) knows.set(id, []);
+    if (knows.get(id).length >= 4) return errors.push(`${where}: ${id} already has four Know it by tiles`);
+    const forCultivars = trim(r.cultivars);
+    if (forCultivars && !/^(yes|no)$/i.test(forCultivars)) return errors.push(`${where}: cultivars must be yes, no or blank, got "${forCultivars}"`);
+    knows.get(id).push({ label, parts, text, source: trim(r.source), url: trim(r.source_url), ...(/^no$/i.test(forCultivars) && { notForCultivars: true }) });
+  });
+  for (const [id, tiles] of knows) {
+    for (const k of tiles) {
+      const missing = k.parts.filter((p) => !photos.get(id)?.[p]);
+      if (missing.length) warnings.push(`know-it-by.csv: ${id}'s ${k.label.toLowerCase()} tile has no ${missing.join(' or ')} photo of its own in part-photos.csv`);
+    }
+  }
+
   // A cultivar's or variety's species: same genus and species, neither of its own.
   const speciesKey = (t) => `${t.genus}|${t.species}`;
   const speciesOf = new Map(taxa.filter((t) => t.species && !t.cultivar && !t.infra).map((t) => [speciesKey(t), t.id]));
@@ -155,6 +199,12 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
       // The species' facts that hold for its cultivars too, shown after the cultivar's own.
       speciesFacts: parent ? (facts.get(parent) ?? []).filter((f) => f.forCultivars) : [],
       photos: partPhotos(photos.get(t.id), parent ? photos.get(parent) : undefined, unlike(t, byId.get(parent))),
+      // Its own Know it by, or its species', marked inherited: a tile of the
+      // species' is shown on a cultivar's page only where the cultivar shows
+      // the species' photos of those parts (the page checks).
+      // Not a tile marked cultivars "no": thorns on honeylocust, which its
+      // planted cultivars lack.
+      know: knows.get(t.id) ?? (parent && knows.has(parent) ? knows.get(parent).filter((k) => !k.notForCultivars).map((k) => ({ ...k, inherited: true })) : null),
     });
   }
   // A taxon named only to genus ("Ulmus sp.") shows a leaf of each species or
@@ -205,11 +255,11 @@ function sameColor(a, b) {
  */
 function partPhotos(own = {}, species = {}, unlike = []) {
   const out = {};
-  for (const part of PARTS) {
+  for (const part of PHOTO_PARTS) {
     if (own[part]) out[part] = own[part];
     else if (species[part] && !unlike.includes(part)) out[part] = { ...species[part], inherited: true };
   }
-  const shown = PARTS.filter((p) => out[p]);
+  const shown = PHOTO_PARTS.filter((p) => out[p]);
   if (!shown.length) return null;
   if (shown.every((p) => out[p].inherited)) out.inherited = true;
   return out;

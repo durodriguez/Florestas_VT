@@ -217,6 +217,24 @@ describe('what species pages add by hand', () => {
     expect(errors.join('\n')).toMatch(/needs a source/);
   });
 
+  it('reads written Know it by tiles, checks them, and lends them to cultivars', () => {
+    const row = { taxon_id: 'gleditsia-triacanthos', label: 'Thorns', parts: 'thorns', text: 'Branched thorns on the trunk.', source: 'NC State', source_url: 'https://plants.ces.ncsu.edu/' };
+    const ok = speciesExtras({ knowRows: [row, { ...row, label: 'Flowers and fruit', parts: 'flowers+fruit' }], taxa });
+    expect(ok.errors).toEqual([]);
+    expect(ok.extras.get('gleditsia-triacanthos').know[1]).toMatchObject({ label: 'Flowers and fruit', parts: ['flowers', 'fruit'] });
+    expect(ok.extras.get('gleditsia-triacanthos-inermis-skyline').know[0]).toMatchObject({ label: 'Thorns', inherited: true });
+    const bad = speciesExtras({ knowRows: [{ ...row, parts: 'trunk' }, { ...row, parts: 'a+b+c' }, { ...row, text: '' }, { ...row, source_url: '' }], taxa });
+    expect(bad.errors.join('\n')).toMatch(/part must be one of/);
+    expect(bad.errors.join('\n')).toMatch(/one part or two/);
+    expect(bad.errors.join('\n')).toMatch(/label and text/);
+    expect(bad.errors.join('\n')).toMatch(/needs a source/);
+    const thornless = speciesExtras({ knowRows: [{ ...row, cultivars: 'no' }], taxa });
+    expect(thornless.extras.get('gleditsia-triacanthos').know).toHaveLength(1);
+    expect(thornless.extras.get('gleditsia-triacanthos-inermis-skyline').know).toEqual([]);
+    const five = speciesExtras({ knowRows: Array(5).fill(row), taxa });
+    expect(five.errors.join('\n')).toMatch(/already has four/);
+  });
+
   it('takes a Commons photo under a free license, credited, and gives it to cultivars', () => {
     const photo = {
       taxon_id: 'gleditsia-triacanthos', part: 'bark', title: 'File:Bark.jpg',
@@ -233,7 +251,7 @@ describe('what species pages add by hand', () => {
       photoRows: [
         { ...photo, license: 'CC BY-ND 4.0' },
         { ...photo, author: '' },
-        { ...photo, part: 'roots' },
+        { ...photo, part: 'trunk' },
         { ...photo, image_url: 'https://example.org/bark.jpg' },
         { ...photo, matches: '' },
       ],

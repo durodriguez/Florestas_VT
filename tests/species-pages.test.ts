@@ -221,6 +221,41 @@ describe('Know it by, for a cultivar', () => {
   });
 });
 
+describe('Know it by, written tiles', () => {
+  const shot = (name: string, inherited?: boolean) => ({
+    title: `File:${name}.jpg`, page: `https://commons.wikimedia.org/wiki/File:${name}.jpg`,
+    image: `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/${name}.jpg/500px-${name}.jpg`,
+    site: 'Wikimedia Commons', author: 'A. Photographer', license: 'CC BY 4.0', licenseUrl: '', ...(inherited ? { inherited } : {}),
+  });
+  const know = [
+    { label: 'Buds', parts: ['buds'], text: 'Long, slim, pointed buds, like cigars.' },
+    { label: 'Flowers and fruit', parts: ['flowers', 'fruit'], text: 'Flowers in spring; prickly husks in fall.' },
+  ];
+
+  it('shows the written labels and prose, with two photos side by side for a combined tile', () => {
+    const html = page(taxon(), { extras: { know, photos: { bark: shot('Bark'), buds: shot('Bud'), flowers: shot('Flower'), fruit: shot('Husk') } } });
+    const parts = html.slice(html.indexOf('<h2>Know it by</h2>'), html.indexOf('</section>', html.indexOf('<h2>Know it by</h2>')));
+    expect(parts).toContain('<b>Buds.</b>');
+    expect(parts).toContain('like cigars.');
+    expect(parts).toContain('<div class="pair">');
+    expect(parts).toContain('500px-Flower.jpg');
+    expect(parts).toContain('500px-Husk.jpg');
+    expect(html).toContain('Flowers and fruit, fruit: ');
+    // Two written: the default bark tile fills in after them.
+    expect(parts.indexOf('500px-Bark.jpg')).toBeGreaterThan(parts.indexOf('500px-Husk.jpg'));
+  });
+
+  it('on a cultivar, swaps a species tile for the default where the cultivar has its own photo of that part', () => {
+    const cultivar = taxon({ genus: 'Acer', species: 'platanoides', cultivar: 'Crimson King', family: 'Sapindaceae' });
+    const inherited = [{ label: 'Leaves', parts: ['leaves'], text: 'Milky sap in the stalk.', inherited: true }, { label: 'Buds', parts: ['buds'], text: 'Fat red buds.', inherited: true }];
+    const html = page(cultivar, { extras: { know: inherited, photos: { leaves: shot('Purple'), buds: shot('Bud', true) } } });
+    expect(html).not.toContain('Milky sap');
+    expect(html).toContain('500px-Purple.jpg');
+    expect(html).toContain('Fat red buds.');
+    expect(html).toContain('The buds shown are of <i>Acer platanoides</i>');
+  });
+});
+
 describe('Know it by: credits as notes, photos full size on a tap', () => {
   const shot = (name: string, author: string) => ({
     title: `File:${name}.jpg`, page: `https://commons.wikimedia.org/wiki/File:${name}.jpg`,

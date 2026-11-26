@@ -43,6 +43,8 @@ next. Written 26 November 2026, at the end of a long session.
     against the species' fun fact in `data/taxa.csv` so a page never says the
     same thing twice.
   - Facts are at most 240 characters; fun facts too.
+- **Photos:** clean, natural close-ups of the plant only; no hands, coins,
+  rulers or other objects in the frame.
 - **Licences:** the project is educational and non-commercial; openly licensed
   material that fits may be used, with credit.
 
@@ -62,6 +64,13 @@ next. Written 26 November 2026, at the end of a long session.
   is easy to be a day off near midnight UTC.
 
 ## What to do next
+
+0. **Know it by, in progress (26 November 2026).** The section now takes
+   written tiles: any part, two photos side by side, a prose note.
+   243 species are done, most planted first; the method, the book it
+   follows and the list of what is left are in
+   [KNOW-IT-BY.md](KNOW-IT-BY.md). To find the next species, list those with
+   four photos and no rows in `data/know-it-by.csv`, by campus count.
 
 From the assessment and the progress reports, roughly in order of value:
 

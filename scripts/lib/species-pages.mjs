@@ -180,32 +180,83 @@ function leafCaption(t) {
   return parts.filter(Boolean).join(' ');
 }
 
-function knowItBy(t, photos, credits) {
-  if (!photos) return '';
+/** One photo of a tile, a button that shows it full size. */
+function partShot(t, label, p, credits, creditWhat) {
+  const big = p.site === 'iNaturalist' ? p.image.replace('/medium.', '/large.') : p.image.replace('/500px-', '/960px-');
+  return {
+    mark: footnote(credits, esc(creditWhat), p),
+    html: `<button type="button" class="shot-open" aria-label="Show the photo of the ${esc(label.toLowerCase())} full size" data-full="${esc(big)}" data-credit="${esc(`${label}. Photo: ${p.author}, ${p.license}, ${p.site}`)}">
+        <img src="${esc(p.image)}" srcset="${esc(p.image)} 500w, ${esc(big)} ${p.site === 'iNaturalist' ? 1024 : 960}w" sizes="(max-width: 48rem) 50vw, 15rem" alt="${esc(`${label} of ${t.common.toLowerCase()}`)}" loading="lazy">
+      </button>`,
+  };
+}
+
+/** A tile: its photo, or two side by side, and its caption. */
+function partTile(t, { label, parts, says }, photos, credits) {
+  const two = parts.length > 1;
+  const word = (part) => PART_WORDS[part] ?? part;
+  const shots = parts.map((part) => partShot(t, two ? word(part).charAt(0).toUpperCase() + word(part).slice(1) : label, photos[part], credits,
+    two ? `${label}, ${word(part)}` : label));
+  return `<figure class="part${two ? ' part--two' : ''}">
+      ${two ? `<div class="pair">${shots.map((s) => s.html).join('')}</div>` : shots[0].html}
+      <figcaption><b>${esc(label)}.</b>${shots.map((s) => s.mark).join('')} ${says}</figcaption>
+    </figure>`;
+}
+const PART_WORDS = { leaves: 'leaves', flowers: 'flowers', fruit: 'fruit', bark: 'bark', buds: 'buds', twigs: 'twigs', thorns: 'thorns', catkins: 'catkins', seeds: 'seeds', fronds: 'fronds', fiddleheads: 'fiddleheads', spores: 'spore cases', underside: 'underside', color: 'seasonal color', habit: 'whole plant', roots: 'roots' };
+
+/** The four tiles a page shows without written ones: bark, leaves, flowers and fruit, captioned from taxa.csv. */
+function defaultTiles(t, photos) {
   const needles = t.family === 'Pinaceae';
   const cones = t.family === 'Pinaceae' || t.family === 'Cupressaceae';
   const when = (color, months) => [titleCase(color), monthRange(months)].filter(Boolean).map(esc).join(' &middot; ');
-  const parts = [
-    ['bark', 'Bark', esc(t.bark)],
-    ['leaves', needles ? 'Needles' : 'Leaves', leafCaption(t)],
-    ['flowers', cones ? 'Pollen cones' : 'Flowers', when(t.flowerColor, t.flowerMonths)],
-    ['fruit', cones ? 'Cones' : t.genus === 'Quercus' ? 'Acorns' : 'Fruit', when(t.fruitColor, t.fruitMonths)],
-  ].filter(([key]) => photos[key]);
-  if (!parts.length) return '';
-  const tiles = parts.map(([key, label, says]) => {
-    const p = photos[key];
-    const big = p.site === 'iNaturalist' ? p.image.replace('/medium.', '/large.') : p.image.replace('/500px-', '/960px-');
-    const mark = footnote(credits, esc(label), p);
-    return `<figure class="part">
-      <button type="button" class="shot-open" aria-label="Show the photo of the ${esc(label.toLowerCase())} full size" data-full="${esc(big)}" data-credit="${esc(`${label}. Photo: ${p.author}, ${p.license}, ${p.site}`)}">
-        <img src="${esc(p.image)}" srcset="${esc(p.image)} 500w, ${esc(big)} ${p.site === 'iNaturalist' ? 1024 : 960}w" sizes="(max-width: 48rem) 50vw, 15rem" alt="${esc(`${label} of ${t.common.toLowerCase()}`)}" loading="lazy">
-      </button>
-      <figcaption><b>${esc(label)}.</b>${mark} ${says}</figcaption>
-    </figure>`;
-  }).join('');
+  return [
+    { key: 'bark', label: 'Bark', parts: ['bark'], says: esc(t.bark) },
+    { key: 'leaves', label: needles ? 'Needles' : 'Leaves', parts: ['leaves'], says: leafCaption(t) },
+    { key: 'flowers', label: cones ? 'Pollen cones' : 'Flowers', parts: ['flowers'], says: when(t.flowerColor, t.flowerMonths) },
+    { key: 'fruit', label: cones ? 'Cones' : t.genus === 'Quercus' ? 'Acorns' : 'Fruit', parts: ['fruit'], says: when(t.fruitColor, t.fruitMonths) },
+  ].filter((d) => photos[d.key]);
+}
+
+/**
+ * The tiles a page shows. Written ones (know-it-by.csv) where the taxon or its
+ * species has them; a species' tile on a cultivar's page only where every
+ * photo it needs is the species' too (a cultivar with its own leaf photo has
+ * leaves unlike the species', so the species' note on them would mislead),
+ * else that part's default tile in its place. Without written ones, the four
+ * defaults.
+ */
+function chooseTiles(t, photos, know) {
+  const defaults = defaultTiles(t, photos);
+  if (!know?.length) return defaults;
+  const tiles = [];
+  const used = new Set();
+  for (const k of know) {
+    const ok = k.parts.every((p) => photos[p] && (!k.inherited || photos[p].inherited));
+    if (ok) {
+      tiles.push({ label: k.label, parts: k.parts, says: esc(k.text), inherited: k.inherited });
+      k.parts.forEach((p) => used.add(p));
+      continue;
+    }
+    const stand = defaults.find((d) => k.parts.includes(d.key) && !used.has(d.key));
+    if (stand && tiles.length < 4) { tiles.push(stand); used.add(stand.key); }
+  }
+  // Fewer than four written (or lent): the defaults not yet shown fill in.
+  for (const d of defaults) {
+    if (tiles.length >= 4) break;
+    if (!used.has(d.key)) { tiles.push(d); used.add(d.key); }
+  }
+  return tiles;
+}
+
+function knowItBy(t, photos, credits, know) {
+  if (!photos) return '';
+  const tiles = chooseTiles(t, photos, know);
+  if (!tiles.length) return '';
+  const shown = tiles.flatMap((tile) => tile.parts.map((part) => [part, tile.parts.length > 1 ? `${tile.label} (${PART_WORDS[part] ?? part})` : tile.label]));
+  const notes = tiles.some((tile) => tile.inherited);
   return `<h2>Know it by</h2>
-  ${ofSpeciesNote(t, photos, parts.map(([key, label]) => [key, label]))}
-  <section class="parts">${tiles}</section>`;
+  ${ofSpeciesNote(t, photos, shown, notes)}
+  <section class="parts">${tiles.map((tile) => partTile(t, tile, photos, credits)).join('')}</section>`;
 }
 
 /** For a taxon named only to genus: a leaf of each species of the genus here, labelled and linked. */
@@ -225,9 +276,11 @@ function whichOne(t, kin, credits) {
 }
 
 /** Says which photos are of the species a cultivar was selected from: all of them, or the parts named. */
-function ofSpeciesNote(t, photos, shown) {
+function ofSpeciesNote(t, photos, shown, notes = false) {
   const species = `<i>${esc(`${t.genus} ${t.species}`)}</i>`;
-  if (photos.inherited) return `<p class="note of-species">Photos of ${species}, the species this was selected from.</p>`;
+  const all = shown.every(([key]) => photos[key]?.inherited);
+  if (all && notes) return `<p class="note of-species">Photos and notes of ${species}, the species this was selected from.</p>`;
+  if (photos.inherited || all) return `<p class="note of-species">Photos of ${species}, the species this was selected from.</p>`;
   const labels = shown.filter(([key]) => photos[key].inherited).map(([, label]) => label.toLowerCase());
   if (!labels.length) return '';
   const list = labels.length === 1 ? labels[0] : `${labels.slice(0, -1).join(', ')} and ${labels.at(-1)}`;
@@ -427,7 +480,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
   </header>
   ${hero}
 
-  ${knowItBy(t, extras?.photos, credits)}
+  ${knowItBy(t, extras?.photos, credits, extras?.know)}
   ${whichOne(t, extras?.kin, credits)}
 
   ${yearSection(t)}
@@ -778,6 +831,10 @@ figure { margin: 0; }
 .part img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: var(--sunk); }
 .part figcaption { font-size: .84rem; color: var(--ink); margin-top: .45rem; }
 .part .shot-open { border-radius: 10px; }
+.part .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+.part .pair img { aspect-ratio: 2 / 3; border-radius: 0; }
+.part .pair .shot-open:first-child img { border-radius: 10px 0 0 10px; }
+.part .pair .shot-open:last-child img { border-radius: 0 10px 10px 0; }
 .fn { font-size: .68em; line-height: 0; margin-left: .1em; }
 .fn a { color: var(--dim); text-decoration: none; padding: 0 .1em; }
 .fn a:hover, .fn a:focus-visible { color: var(--ink); text-decoration: underline; }

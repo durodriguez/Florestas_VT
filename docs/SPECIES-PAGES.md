@@ -650,6 +650,12 @@ here, not by a botanist.
 
 ## Know it by: photos of the parts
 
+Since November 2026 a species can have written tiles instead of the four
+defaults: any part, two photos side by side, and a note in prose, in
+`data/know-it-by.csv`. How to choose the parts and write the notes, and what
+is left, is in [KNOW-IT-BY.md](KNOW-IT-BY.md). The rest of this section
+describes the photos, which both kinds of tile use.
+
 `data/part-photos.csv` (taxon_id, part, title, page_url, image_url, author,
 license, license_url, matches, of_species): a photo of a species' bark, leaves, flowers or fruit
 from Wikimedia Commons, shown in four tiles under the description, each with
@@ -695,6 +701,12 @@ in that part; a cultivar grown for its odd flowers or leaves needs its own
 photo of that part, or none.
 
 ### Choosing a photo
+
+**The owner's rule (26 November 2026): clean, natural photos of the plant
+only.** Close-ups where the part is the subject; no hands, fingers, gloves,
+coins, rulers, tags or other objects in the frame, and no people. A photo
+with a hand "for scale" is refused, however clear the part. When several
+photos qualify, take the closest and plainest.
 
 A photo's label is not enough: uploaders get species wrong. In November 2026
 a photo of bright pink-red cones went in as northern white cedar's pollen

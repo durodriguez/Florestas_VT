@@ -94,6 +94,7 @@ const extrasBuilt = speciesExtras({
   habitatRows: readCsv('habitat.csv'),
   factRows: readCsv('facts.csv'),
   photoRows: readCsv('part-photos.csv'),
+  knowRows: existsSync(join(root, 'data', 'know-it-by.csv')) ? readCsv('know-it-by.csv') : [],
   taxa: result.dataset.taxa,
 });
 result.errors.push(...extrasBuilt.errors);
