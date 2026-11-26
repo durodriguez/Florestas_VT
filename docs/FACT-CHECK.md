@@ -155,4 +155,21 @@ Same method. Taken in file order.
   Major Oak was reported dead in 2026, so its fact now says so; the Wye Oak
   fact now cites Maryland DNR. Replacements were checked against each
   species' fun fact so nothing repeats on a page.
-- To do: facts 131 to 226.
+- Done: facts 131 to 226. More corrections: the "Wilson sent Kolkwitzia"
+  and other kept facts gained second sources; Lemoine's lilacs are "more than
+  200" (with his son and grandson), not 150; the Japanese maple reached
+  England in 1820, not 1821 (Trees and Shrubs Online, Oregon State); the
+  Cornelian cherry's name is explained as NC State gives it; Vermont does
+  not list flowering dogwood as threatened (it is ranked critically
+  imperiled), so that fact now says so; English ivy is now banned from sale
+  in Washington as well as Oregon (2025). Primary sources were found for the
+  mulberry pollen study (Taylor et al. 2006) and the 2,624-year-old bald
+  cypress (University of Arkansas).
+
+## Where it stands now
+
+All 605 facts in `data/facts.csv` have been checked, and none rests on
+Wikipedia alone. 459 cite two or more sources; 146 cite a single expert
+source (NC State, Trees and Shrubs Online, Silvics, FEIS, Oregon State or a
+named primary source). A few pair English with Japanese or Korean
+Wikipedia; these are listed above.
