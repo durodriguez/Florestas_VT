@@ -92,8 +92,9 @@ the order they would notice it. Good swaps:
 
 ## Done
 
-Written notes for the most-planted species first (November 2026): about 100
-species in the first session, working down the campus counts. The record is `know-it-by.csv` itself; to list the species,
+Written notes for the most-planted species first (November 2026): 175 species
+in the first session, every species with four photos and an NC State Plant
+Toolbox page. The record is `know-it-by.csv` itself; to list the species,
 `cut -d, -f1 data/know-it-by.csv | sort -u`.
 
 Swaps made so far, in the book's spirit: honeylocust *Thorns* (not on its
@@ -105,15 +106,13 @@ and thorns*, sweetgum *Bark and twigs*, smoketree *Smoke*.
 New photos (iNaturalist, research grade) were looked at before use, as
 `part-photos.csv` asks.
 
-Skipped for now, needing other sources or photo fixes: English ivy (its
-"bark" photo is a leaf), seven-son flower and English hawthorn (NC State says
-too little), northern pin oak and red pine (no NC State page), Freeman maple and white spruce (NC
-State's pages say too little; use Silvics or Trees and Shrubs Online),
-bigtooth aspen and gray birch (no NC State page).
+Skipped for now, 22 species with four photos but too little in NC State's
+toolbox, or a photo to fix first (English ivy's "bark" photo is a leaf); use
+Silvics, FEIS or Trees and Shrubs Online: acer-x-freemanii, betula-populifolia, caragana-arborescens, castanea-mollissima, crataegus-laevigata, fraxinus-excelsior, hedera-helix, heptacodium-miconioides, larix-laricina, magnolia-x-soulangiana, malus-sargentii, picea-glauca, pinus-flexilis, pinus-resinosa, populus-grandidentata, prunus-maackii, prunus-padus, prunus-pennsylvanica, quercus-ellipsoidalis, sequoiadendron-giganteum, sorbus-x-thuringiaca, tilia-x-europaea.
 
 ## Still to do
 
-1. **Species with fewer than four tiles: 101 of 296.** Listed by
+1. **Species with fewer than four tiles: 99.** Listed by
    `npm run check:species` as missing part photos; the plan is to choose four
    categories each (above), find photos (iNaturalist research-grade when
    Commons throttles us), and write the notes. Groups:
@@ -126,7 +125,8 @@ bigtooth aspen and gray birch (no NC State page).
    - *No photos at all* (hybrids and rarities: Arnold horsechestnut,
      cotoneaster, two hybrid oaks, two whitebeams, Peking lilac, Faurie pear):
      four photos each, and some may have too few online.
-2. **Species with four tiles: 195.** Rewrite each as prose, and swap a
-   category where another tells the tree apart better (beech's buds, black
-   locust's paired spines, cottonwood's seed, bald cypress's knees).
+2. **Species with four tiles:** done but for the skipped ones above. More
+   swaps are worth making as photos turn up: bitternut hickory's sulfur-yellow
+   buds, Osage orange's thorns, balsam poplar's sticky buds, Norway and sugar
+   maple's buds, white spruce's crushed-needle smell is not photographable.
 3. **Cultivars** inherit their species' notes; no work unless one differs.
