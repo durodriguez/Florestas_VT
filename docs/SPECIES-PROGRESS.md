@@ -13,18 +13,18 @@ same list, with links, is on the site at /species/progress/.
 | On campus: hybrids | 3 | 1 | 89% |
 | On campus: cultivars and forms | 10 | 3 | 81% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 176 | 98 | 93% |
+| Not yet mapped: species | 176 | 100 | 93% |
 | Not yet mapped: hybrids | 16 | 7 | 82% |
 | Not yet mapped: cultivars and forms | 88 | 19 | 80% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 246 | 91% |
+| **All** | 418 | 248 | 91% |
 
 ## Most often missing
 
 - bark photo: 85 pages
 - worth knowing (3): 74 pages
-- fruit photo: 71 pages
-- flowers photo: 67 pages
+- fruit photo: 70 pages
+- flowers photo: 66 pages
 - leaves photo: 37 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
@@ -154,7 +154,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Armstrong Freeman maple** (`acer-x-freemanii-armstrong`): worth knowing (3) (1 of 3)
 - [ ] **Atlantic white cedar** (`chamaecyparis-thyoides`): flowers photo
 - [ ] **Autumn Blaze maple** (`acer-x-freemanii-autumn-blaze`): worth knowing (3) (1 of 3)
-- [ ] **Black maple** (`acer-nigrum`): flowers photo
 - [ ] **Bloodgood Japanese maple** (`acer-palmatum-bloodgood`): worth knowing (3) (1 of 3)
 - [ ] **Bosnian pine** (`pinus-heldreichii`): flowers photo
 - [ ] **Canada Red chokecherry** (`prunus-virginiana-canada-red`): worth knowing (3) (1 of 3)
@@ -191,7 +190,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Rocky Mountain juniper** (`juniperus-scopulorum`): flowers photo
 - [ ] **Sawara falsecypress** (`chamaecyparis-pisifera`): flowers photo
 - [ ] **Scarlet oak** (`quercus-coccinea`): flowers photo
-- [ ] **Shantung maple** (`acer-truncatum`): fruit photo
 - [ ] **Shellbark hickory** (`carya-laciniosa`): flowers photo
 - [ ] **Shumard oak** (`quercus-shumardii`): flowers photo
 - [ ] **Sienna Glen maple** (`acer-x-freemanii-sienna-glen`): worth knowing (3) (1 of 3)
