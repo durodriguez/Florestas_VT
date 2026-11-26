@@ -626,8 +626,13 @@ magnolia hybrids, do not get it: they are identified, just not to a species.
 
 `data/part-photos.csv` is the record: edit it directly. Search Commons or
 iNaturalist, look at each candidate beside what taxa.csv records for that
-part, add the row with its `matches` note, then run `npm run check:photos`
-and `npm run data`. Commons rate-limits automated requests; one request every
+part, add the row with its `matches` note, then run `npm run check:photos --
+<taxon_id>` for just the species you changed, and `npm run data`. Keep
+Commons traffic low: it has throttled this project's requests more than
+once. Check only changed rows, ask for many files in one API request rather
+than one each, pause a few seconds between requests, and back off when refused
+(HTTP 429) rather than retrying quickly; a full check of every
+photo is for occasional audits only. Commons rate-limits automated requests; one request every
 couple of seconds gets through.
 
 **When the Commons API refuses (HTTP 429).** In November 2026 it refused this

@@ -3,7 +3,9 @@
  * Checks every photo in data/part-photos.csv against its source, as a second
  * line of defence behind looking at it (docs/SPECIES-PAGES.md, "Choosing a
  * photo"). Run by hand (`npm run check:photos`) after adding photos; it needs
- * the network, so the build does not run it.
+ * the network, so the build does not run it. Name the species you changed
+ * (`npm run check:photos -- musa-basjoo`) to check only their rows: Commons
+ * throttles heavy clients, so a full run is for occasional audits only.
  *
  * - Wikimedia Commons: the file must sit in a visible category that names
  *   the species (or the older name Little's atlas uses for it). A file filed
@@ -40,7 +42,11 @@ async function getJson(url, tries = 8) {
 }
 
 const taxa = new Map(read('taxa.csv').map((t) => [t.taxon_id, t]));
-const rows = read('part-photos.csv');
+// Taxon ids on the command line limit the check to those species' rows, so a
+// few new photos do not cost Commons ~900 requests: `npm run check:photos -- musa-basjoo`.
+const only = process.argv.slice(2);
+const rows = read('part-photos.csv').filter((r) => !only.length || only.includes(r.taxon_id));
+if (only.length && !rows.length) { console.error(`No photos for ${only.join(', ')}.`); process.exit(1); }
 const problems = [];
 
 /**
