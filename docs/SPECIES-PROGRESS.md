@@ -13,17 +13,17 @@ same list, with links, is on the site at /species/progress/.
 | On campus: hybrids | 3 | 1 | 89% |
 | On campus: cultivars and forms | 10 | 3 | 81% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 176 | 100 | 93% |
+| Not yet mapped: species | 176 | 101 | 93% |
 | Not yet mapped: hybrids | 16 | 7 | 82% |
 | Not yet mapped: cultivars and forms | 88 | 19 | 80% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 248 | 91% |
+| **All** | 418 | 249 | 91% |
 
 ## Most often missing
 
 - bark photo: 85 pages
 - worth knowing (3): 74 pages
-- fruit photo: 70 pages
+- fruit photo: 69 pages
 - flowers photo: 66 pages
 - leaves photo: 37 pages
 - crown shape: 2 pages
@@ -159,7 +159,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Canada Red chokecherry** (`prunus-virginiana-canada-red`): worth knowing (3) (1 of 3)
 - [ ] **Chestnut oak** (`quercus-montana`): flowers photo
 - [ ] **Chinese fringetree** (`chionanthus-retusus`): bark photo
-- [ ] **Chinkapin oak** (`quercus-muehlenbergii`): fruit photo
 - [ ] **Coast redwood** (`sequoia-sempervirens`): leaves photo
 - [ ] **Columnar European beech** (`fagus-sylvatica-fastigiata`): worth knowing (3) (2 of 3)
 - [ ] **Columnar Sargent cherry** (`prunus-sargentii-columnaris`): worth knowing (3) (1 of 3)
