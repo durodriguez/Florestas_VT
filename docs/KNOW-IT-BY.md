@@ -121,7 +121,8 @@ each other's part; they are now the right way round.
 1b. **Default tiles still showing (27 November 2026).** A tile with a photo
    but no written note shows the old caption (color and months from
    taxa.csv). The build marks them (`part--default`), so they can be counted:
-   85 pages. Six are on species with notes (Chinese chestnut and tamarack
+   85 pages on 27 November 2026, 53 by the end of that day, after first
+   notes for 37 species that had none. Six are on species with notes (Chinese chestnut and tamarack
    bark; Swiss stone, limber and red pine pollen cones; Amur chokecherry
    fruit); the sources tried say too little. The rest are the species with
    no notes yet (item 2) and their cultivars. Cultivar pages can now carry
