@@ -137,12 +137,12 @@ each other's part; they are now the right way round.
    - [x] `salix-nigra`, leaves: https://www.inaturalist.org/observations/239429382
    - [x] `asimina-triloba`, flowers: https://www.inaturalist.org/observations/207754488
    - [x] `asimina-triloba`, fruit: https://www.inaturalist.org/observations/34654133
-   - [ ] `catalpa-bignonioides`, fruit: https://www.inaturalist.org/observations/107127588
-   - [ ] `celtis-laevigata`, fruit: https://www.inaturalist.org/observations/337371176
-   - [ ] `morus-rubra`, fruit: https://www.inaturalist.org/observations/159134763
-   - [ ] `picea-rubens`, leaves: https://www.inaturalist.org/observations/108753967
-   - [ ] `quercus-stellata`, leaves: https://www.inaturalist.org/observations/35307036
-   - [ ] `prunus-virginiana`, leaves: https://www.inaturalist.org/observations/1552239
+   - [x] `catalpa-bignonioides`, fruit: https://www.inaturalist.org/observations/107127588
+   - [x] `celtis-laevigata`, fruit: https://www.inaturalist.org/observations/337371176
+   - [x] `morus-rubra`, fruit: https://www.inaturalist.org/observations/159134763
+   - [x] `picea-rubens`, leaves: https://www.inaturalist.org/observations/108753967
+   - [x] `quercus-stellata`, leaves: https://www.inaturalist.org/observations/35307036
+   - [x] `prunus-virginiana`, leaves: https://www.inaturalist.org/observations/1552239
    - [ ] `ilex-glabra`, fruit: https://www.inaturalist.org/observations/107291109
    - [ ] `polystichum-acrostichoides`, leaves: https://www.inaturalist.org/observations/325890589
    - [ ] `chamaecyparis-thyoides`, fruit: https://www.inaturalist.org/observations/103893524
@@ -159,7 +159,7 @@ each other's part; they are now the right way round.
    - [ ] `salix-matsudana-tortuosa`, fruit: https://www.inaturalist.org/observations/8405816
    - [ ] `salix-matsudana`, fruit: https://www.inaturalist.org/observations/8405816
    - [ ] `salix-babylonica`, fruit: https://www.inaturalist.org/observations/8405816
-   - [ ] `quercus-stellata`, fruit: https://www.inaturalist.org/observations/251388509
+   - [x] `quercus-stellata`, fruit: https://www.inaturalist.org/observations/251388509
 
 4. **Cultivars** inherit their species' notes. One that differs in a part
    (purple leaves, double flowers) shows its own photo there with the default
