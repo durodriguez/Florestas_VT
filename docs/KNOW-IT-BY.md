@@ -128,5 +128,5 @@ Silvics, FEIS or Trees and Shrubs Online: acer-x-freemanii, betula-populifolia, 
 2. **Species with four tiles:** done but for the skipped ones above. More
    swaps are worth making as photos turn up: bitternut hickory's sulfur-yellow
    buds, Osage orange's thorns, balsam poplar's sticky buds, Norway and sugar
-   maple's buds, white spruce's crushed-needle smell is not photographable.
+   maple's buds.
 3. **Cultivars** inherit their species' notes; no work unless one differs.
