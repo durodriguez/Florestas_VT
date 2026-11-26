@@ -67,4 +67,16 @@ new rows (alphabetical by taxon id).
   (NC State). Two Wikipedia articles only: `cephalanthus-occidentalis`
   Buttonwillow (an official California landmark). English and Japanese
   Wikipedia only: `chamaecyparis-pisifera` wood.
-- To do: `crataegus-laevigata` onward, about 260 facts.
+- Done: `crataegus-laevigata` to the first `ilex-x-meserveae` fact (40). 17
+  replaced or trimmed. One was wrong: fothergilla flowers draw bees and
+  butterflies, not birds (NC State, the fact's own source). "More than 48
+  kinds of birds" eat winterberry was in neither cited source. The blue ash
+  IUCN listing was confirmed through GBIF's Red List lookup
+  (api.gbif.org/v1/species/<key>/iucnRedListCategory), which is a quick way
+  to check any conservation-status fact. Single expert source:
+  `crataegus-viridis` birds, `cryptomeria-japonica` (both: Kew and Fortune
+  from Trees and Shrubs Online; 200 forms from Oregon State),
+  `diervilla-lonicera` browse (FEIS), `fraxinus-americana` swallowtail,
+  `hydrangea-paniculata` sun and mammals, `hydrangea-quercifolia`
+  butterflies and seeds (NC State).
+- To do: the second `ilex-x-meserveae` fact onward, 219 facts.
