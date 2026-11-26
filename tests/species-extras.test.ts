@@ -230,7 +230,14 @@ describe('what species pages add by hand', () => {
     expect(bad.errors.join('\n')).toMatch(/needs a source/);
     const thornless = speciesExtras({ knowRows: [{ ...row, cultivars: 'no' }], taxa });
     expect(thornless.extras.get('gleditsia-triacanthos').know).toHaveLength(1);
-    expect(thornless.extras.get('gleditsia-triacanthos-inermis-skyline').know).toEqual([]);
+    expect(thornless.extras.get('gleditsia-triacanthos-inermis-skyline').know).toBeNull();
+    // A spare marked "only": not on the species' page, lent to its cultivars.
+    const spare = speciesExtras({ knowRows: [{ ...row, cultivars: 'no' }, { ...row, label: 'Flowers', parts: 'flowers', cultivars: 'only' }], taxa });
+    expect(spare.extras.get('gleditsia-triacanthos').know.map((k: { label: string }) => k.label)).toEqual(['Thorns']);
+    expect(spare.extras.get('gleditsia-triacanthos-inermis-skyline').know.map((k: { label: string }) => k.label)).toEqual(['Flowers']);
+    // A cultivar's own tile for a part replaces its species' tile for that part.
+    const own = speciesExtras({ knowRows: [{ ...row, label: 'Pods', parts: 'fruit' }, { ...row, label: 'Leaves', parts: 'leaves' }, { ...row, taxon_id: 'gleditsia-triacanthos-inermis-skyline', label: 'Golden leaves', parts: 'leaves' }], taxa });
+    expect(own.extras.get('gleditsia-triacanthos-inermis-skyline').know.map((k: { label: string; inherited?: boolean }) => `${k.label}${k.inherited ? '*' : ''}`)).toEqual(['Pods*', 'Golden leaves']);
     const five = speciesExtras({ knowRows: Array(5).fill(row), taxa });
     expect(five.errors.join('\n')).toMatch(/already has four/);
   });

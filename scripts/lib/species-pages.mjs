@@ -192,12 +192,12 @@ function partShot(t, label, p, credits, creditWhat) {
 }
 
 /** A tile: its photo, or two side by side, and its caption. */
-function partTile(t, { label, parts, says }, photos, credits) {
+function partTile(t, { label, parts, says, def }, photos, credits) {
   const two = parts.length > 1;
   const word = (part) => PART_WORDS[part] ?? part;
   const shots = parts.map((part) => partShot(t, two ? word(part).charAt(0).toUpperCase() + word(part).slice(1) : label, photos[part], credits,
     two ? `${label}, ${word(part)}` : label));
-  return `<figure class="part${two ? ' part--two' : ''}">
+  return `<figure class="part${two ? ' part--two' : ''}${def ? ' part--default' : ''}">
       ${two ? `<div class="pair">${shots.map((s) => s.html).join('')}</div>` : shots[0].html}
       <figcaption><b>${esc(label)}.</b>${shots.map((s) => s.mark).join('')} ${says}</figcaption>
     </figure>`;
@@ -210,10 +210,10 @@ function defaultTiles(t, photos) {
   const cones = t.family === 'Pinaceae' || t.family === 'Cupressaceae';
   const when = (color, months) => [titleCase(color), monthRange(months)].filter(Boolean).map(esc).join(' &middot; ');
   return [
-    { key: 'bark', label: 'Bark', parts: ['bark'], says: esc(t.bark) },
-    { key: 'leaves', label: needles ? 'Needles' : 'Leaves', parts: ['leaves'], says: leafCaption(t) },
-    { key: 'flowers', label: cones ? 'Pollen cones' : 'Flowers', parts: ['flowers'], says: when(t.flowerColor, t.flowerMonths) },
-    { key: 'fruit', label: cones ? 'Cones' : t.genus === 'Quercus' ? 'Acorns' : 'Fruit', parts: ['fruit'], says: when(t.fruitColor, t.fruitMonths) },
+    { key: 'bark', def: true, label: 'Bark', parts: ['bark'], says: esc(t.bark) },
+    { key: 'leaves', def: true, label: needles ? 'Needles' : 'Leaves', parts: ['leaves'], says: leafCaption(t) },
+    { key: 'flowers', def: true, label: cones ? 'Pollen cones' : 'Flowers', parts: ['flowers'], says: when(t.flowerColor, t.flowerMonths) },
+    { key: 'fruit', def: true, label: cones ? 'Cones' : t.genus === 'Quercus' ? 'Acorns' : 'Fruit', parts: ['fruit'], says: when(t.fruitColor, t.fruitMonths) },
   ].filter((d) => photos[d.key]);
 }
 
