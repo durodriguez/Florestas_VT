@@ -149,10 +149,10 @@ each other's part; they are now the right way round.
    - [x] `fraxinus-quadrangulata`, leaves: https://www.inaturalist.org/observations/246656157
    - [x] `fraxinus-quadrangulata`, flowers (removed; no clean replacement found yet): https://www.inaturalist.org/observations/258473855
    - [x] `ulmus-davidiana-japonica`, leaves: https://www.inaturalist.org/observations/286674276
-   - [ ] `hibiscus-syriacus-notwoodtwo`, leaves: https://www.inaturalist.org/observations/155799715
-   - [ ] `viburnum-plicatum-tomentosum-mariesii`, leaves: https://www.inaturalist.org/observations/353215802
-   - [ ] `weigela-florida`, leaves: https://www.inaturalist.org/observations/191556061
-   - [ ] `fothergilla-major`, leaves: https://www.inaturalist.org/observations/196874244
+   - [x] `hibiscus-syriacus-notwoodtwo`, leaves: https://www.inaturalist.org/observations/155799715
+   - [x] `viburnum-plicatum-tomentosum-mariesii`, leaves: https://www.inaturalist.org/observations/353215802
+   - [x] `weigela-florida`, leaves: https://www.inaturalist.org/observations/191556061
+   - [x] `fothergilla-major`, leaves: https://www.inaturalist.org/observations/196874244
    - [ ] `quercus-phellos`, flowers: https://www.inaturalist.org/observations/154113129
    - [ ] `viburnum-lentago`, bark: https://www.inaturalist.org/observations/20764350
    - [x] `fraxinus-quadrangulata`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/39389456
