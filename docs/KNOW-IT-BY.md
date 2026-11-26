@@ -135,6 +135,9 @@ each other's part; they are now the right way round.
    returned no catkin close-ups (chestnut oak's nine were trees, leaves and
    stray matches). Next time, browse each species' own category page
    (`Category:Quercus montana`) for flower photos instead of searching.
+   Tried the same day: the Shumard and overcup oak categories hold acorns,
+   leaves and old book plates, but no catkins. Oak catkins may simply not be
+   photographed cleanly; the oaks keep three tiles until some turn up.
 2. **Species with no written tiles: 53.** 16 have three or four photos but
    no expert page found that describes them part by part (NC State, Trees
    and Shrubs Online and Silvics were tried); English ivy's "bark" photo is
