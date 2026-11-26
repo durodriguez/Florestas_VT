@@ -9,7 +9,7 @@ same list, with links, is on the site at /species/progress/.
 
 | Group | Pages | Complete | Items filled |
 | --- | --- | --- | --- |
-| On campus: species | 102 | 94 | 99% |
+| On campus: species | 102 | 95 | 99% |
 | On campus: hybrids | 3 | 1 | 89% |
 | On campus: cultivars and forms | 10 | 3 | 81% |
 | On campus: named only to genus | 13 | 13 | 100% |
@@ -17,11 +17,11 @@ same list, with links, is on the site at /species/progress/.
 | Not yet mapped: hybrids | 16 | 7 | 82% |
 | Not yet mapped: cultivars and forms | 88 | 19 | 80% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 245 | 91% |
+| **All** | 418 | 246 | 91% |
 
 ## Most often missing
 
-- bark photo: 86 pages
+- bark photo: 85 pages
 - worth knowing (3): 74 pages
 - fruit photo: 71 pages
 - flowers photo: 67 pages
@@ -42,7 +42,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Northern white cedar** (`thuja-occidentalis`, 46 on campus): flowers photo
 - [ ] **Three-flower maple** (`acer-triflorum`, 3 on campus): fruit photo
 - [ ] **White fir** (`abies-concolor`, 2 on campus): fruit photo
-- [ ] **Amur maackia** (`maackia-amurensis`, 1 on campus): bark photo
 - [ ] **Bigleaf magnolia** (`magnolia-macrophylla`, 1 on campus): bark photo
 - [ ] **Camperdown elm** (`ulmus-glabra-camperdownii`, 1 on campus): worth knowing (3) (1 of 3)
 - [ ] **Hinoki falsecypress** (`chamaecyparis-obtusa`, 1 on campus): flowers photo
