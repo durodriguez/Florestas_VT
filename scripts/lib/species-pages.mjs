@@ -194,8 +194,9 @@ function partShot(t, label, p, credits, creditWhat) {
 /** A tile: its photo, or two side by side, and its caption. */
 function partTile(t, { label, parts, says }, photos, credits) {
   const two = parts.length > 1;
-  const shots = parts.map((part) => partShot(t, two ? `${label} (${PART_WORDS[part] ?? part})` : label, photos[part], credits,
-    two ? `${label}, ${PART_WORDS[part] ?? part}` : label));
+  const word = (part) => PART_WORDS[part] ?? part;
+  const shots = parts.map((part) => partShot(t, two ? word(part).charAt(0).toUpperCase() + word(part).slice(1) : label, photos[part], credits,
+    two ? `${label}, ${word(part)}` : label));
   return `<figure class="part${two ? ' part--two' : ''}">
       ${two ? `<div class="pair">${shots.map((s) => s.html).join('')}</div>` : shots[0].html}
       <figcaption><b>${esc(label)}.</b>${shots.map((s) => s.mark).join('')} ${says}</figcaption>
