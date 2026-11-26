@@ -128,15 +128,15 @@ each other's part; they are now the right way round.
    off when replaced. The 460 Wikimedia Commons photos are not yet checked:
    Commons refuses this project's downloads for now (see HANDOFF.md).
 
-   - [ ] `abies-concolor`, fruit: https://www.inaturalist.org/observations/1711555
-   - [ ] `populus-grandidentata`, flowers: https://www.inaturalist.org/observations/155049184
-   - [ ] `quercus-coccinea`, leaves: https://www.inaturalist.org/observations/18096656
-   - [ ] `quercus-montana`, leaves: https://www.inaturalist.org/observations/185581695
-   - [ ] `populus-deltoides`, bark: https://www.inaturalist.org/observations/7718358
-   - [ ] `ulmus-rubra`, flowers: https://www.inaturalist.org/observations/346043391
-   - [ ] `salix-nigra`, leaves: https://www.inaturalist.org/observations/239429382
-   - [ ] `asimina-triloba`, flowers: https://www.inaturalist.org/observations/207754488
-   - [ ] `asimina-triloba`, fruit: https://www.inaturalist.org/observations/34654133
+   - [x] `abies-concolor`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/1711555
+   - [x] `populus-grandidentata`, flowers: https://www.inaturalist.org/observations/155049184
+   - [x] `quercus-coccinea`, leaves: https://www.inaturalist.org/observations/18096656
+   - [x] `quercus-montana`, leaves: https://www.inaturalist.org/observations/185581695
+   - [x] `populus-deltoides`, bark: https://www.inaturalist.org/observations/7718358
+   - [x] `ulmus-rubra`, flowers: https://www.inaturalist.org/observations/346043391
+   - [x] `salix-nigra`, leaves: https://www.inaturalist.org/observations/239429382
+   - [x] `asimina-triloba`, flowers: https://www.inaturalist.org/observations/207754488
+   - [x] `asimina-triloba`, fruit: https://www.inaturalist.org/observations/34654133
    - [ ] `catalpa-bignonioides`, fruit: https://www.inaturalist.org/observations/107127588
    - [ ] `celtis-laevigata`, fruit: https://www.inaturalist.org/observations/337371176
    - [ ] `morus-rubra`, fruit: https://www.inaturalist.org/observations/159134763
