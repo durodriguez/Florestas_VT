@@ -121,7 +121,7 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [x] **Nordmann fir**, needles (`abies-nordmanniana`, leaves). A close photo of a shoot.
 - [x] **Nordmann fir**, pollen cones (`abies-nordmanniana`, flowers). Yellow, May.
 - [ ] **Wafer ash**, bark (`ptelea-trifoliata`, bark). Smooth gray-brown with warty lenticels; any time of year.
-- [ ] **Amur maackia**, bark (`maackia-amurensis`, bark). Shiny copper-brown, peeling on young trunks; any time of year.
+- [x] **Amur maackia**, bark (`maackia-amurensis`, bark). Shiny copper-brown, peeling on young trunks; any time of year.
 - [x] **Corneliancherry dogwood**, leaves (`cornus-mas`, leaves). A close photo; fall color purple.
 - [x] **White ash**, flowers (`fraxinus-americana`, flowers). Small purplish
   clusters on bare twigs in April and May, before the leaves. Not the brown,

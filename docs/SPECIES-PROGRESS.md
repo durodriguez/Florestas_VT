@@ -9,22 +9,22 @@ same list, with links, is on the site at /species/progress/.
 
 | Group | Pages | Complete | Items filled |
 | --- | --- | --- | --- |
-| On campus: species | 102 | 94 | 99% |
+| On campus: species | 102 | 95 | 99% |
 | On campus: hybrids | 3 | 1 | 89% |
 | On campus: cultivars and forms | 10 | 3 | 81% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 176 | 98 | 93% |
+| Not yet mapped: species | 176 | 102 | 93% |
 | Not yet mapped: hybrids | 16 | 7 | 82% |
 | Not yet mapped: cultivars and forms | 88 | 19 | 80% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 245 | 91% |
+| **All** | 418 | 250 | 91% |
 
 ## Most often missing
 
-- bark photo: 86 pages
+- bark photo: 85 pages
 - worth knowing (3): 74 pages
-- fruit photo: 71 pages
-- flowers photo: 67 pages
+- fruit photo: 69 pages
+- flowers photo: 65 pages
 - leaves photo: 37 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
@@ -42,7 +42,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Northern white cedar** (`thuja-occidentalis`, 46 on campus): flowers photo
 - [ ] **Three-flower maple** (`acer-triflorum`, 3 on campus): fruit photo
 - [ ] **White fir** (`abies-concolor`, 2 on campus): fruit photo
-- [ ] **Amur maackia** (`maackia-amurensis`, 1 on campus): bark photo
 - [ ] **Bigleaf magnolia** (`magnolia-macrophylla`, 1 on campus): bark photo
 - [ ] **Camperdown elm** (`ulmus-glabra-camperdownii`, 1 on campus): worth knowing (3) (1 of 3)
 - [ ] **Hinoki falsecypress** (`chamaecyparis-obtusa`, 1 on campus): flowers photo
@@ -155,13 +154,11 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Armstrong Freeman maple** (`acer-x-freemanii-armstrong`): worth knowing (3) (1 of 3)
 - [ ] **Atlantic white cedar** (`chamaecyparis-thyoides`): flowers photo
 - [ ] **Autumn Blaze maple** (`acer-x-freemanii-autumn-blaze`): worth knowing (3) (1 of 3)
-- [ ] **Black maple** (`acer-nigrum`): flowers photo
 - [ ] **Bloodgood Japanese maple** (`acer-palmatum-bloodgood`): worth knowing (3) (1 of 3)
 - [ ] **Bosnian pine** (`pinus-heldreichii`): flowers photo
 - [ ] **Canada Red chokecherry** (`prunus-virginiana-canada-red`): worth knowing (3) (1 of 3)
 - [ ] **Chestnut oak** (`quercus-montana`): flowers photo
 - [ ] **Chinese fringetree** (`chionanthus-retusus`): bark photo
-- [ ] **Chinkapin oak** (`quercus-muehlenbergii`): fruit photo
 - [ ] **Coast redwood** (`sequoia-sempervirens`): leaves photo
 - [ ] **Columnar European beech** (`fagus-sylvatica-fastigiata`): worth knowing (3) (2 of 3)
 - [ ] **Columnar Sargent cherry** (`prunus-sargentii-columnaris`): worth knowing (3) (1 of 3)
@@ -179,7 +176,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Lacebark elm** (`ulmus-parvifolia`): flowers photo
 - [ ] **Laurel oak** (`quercus-hemisphaerica`): flowers photo
 - [ ] **Meader persimmon** (`diospyros-virginiana-meader`): worth knowing (3) (1 of 3)
-- [ ] **Oriental spruce** (`picea-orientalis`): flowers photo
 - [ ] **Overcup oak** (`quercus-lyrata`): flowers photo
 - [ ] **Peach** (`prunus-persica`): bark photo
 - [ ] **Persian ironwood** (`parrotia-persica`): fruit photo
@@ -192,7 +188,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Rocky Mountain juniper** (`juniperus-scopulorum`): flowers photo
 - [ ] **Sawara falsecypress** (`chamaecyparis-pisifera`): flowers photo
 - [ ] **Scarlet oak** (`quercus-coccinea`): flowers photo
-- [ ] **Shantung maple** (`acer-truncatum`): fruit photo
 - [ ] **Shellbark hickory** (`carya-laciniosa`): flowers photo
 - [ ] **Shumard oak** (`quercus-shumardii`): flowers photo
 - [ ] **Sienna Glen maple** (`acer-x-freemanii-sienna-glen`): worth knowing (3) (1 of 3)
