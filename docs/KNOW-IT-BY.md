@@ -123,9 +123,10 @@ each other's part; they are now the right way round.
    a leaf and needs replacing first: acer-pseudosieboldianum, acer-x-freemanii, betula-populifolia, crataegus-laevigata, diervilla-lonicera, fraxinus-excelsior, hedera-helix, heptacodium-miconioides, magnolia-x-soulangiana, malus-sargentii, picea-glauca, prunus-pennsylvanica, prunus-subhirtella, quercus-ellipsoidalis, sequoiadendron-giganteum, sorbus-x-thuringiaca. The other 37 have two photos or
    fewer and need photos first: abies-fraseri, acer-buergeranum, acer-miyabei, adiantum-pedatum, aesculus-x-arnoldiana, alnus-x-spaethii, amauropelta-noveboracensis, amelanchier-x-grandiflora, athyrium-filix-femina, cedrus-atlantica, cedrus-libani, cercis-chinensis, cotoneaster-adpressus, crataegus-ambigua, eucommia-ulmoides, fothergilla-gardenii, fothergilla-major, juniperus-chinensis, juniperus-communis, juniperus-horizontalis, kerria-japonica, malus-floribunda, matteuccia-struthiopteris, parthenocissus-tricuspidata, polystichum-acrostichoides, pyrus-fauriei, quercus-x-bimundorum, quercus-x-warei, rubus-thibetanus, salix-matsudana, scandosorbus-intermedia, sorbus-x-hybrida, syringa-pekinensis, taxodium-ascendens, taxus-x-media, tilia-mongolica, ulmus-davidiana-japonica.
 3. **Photo audit.** All 620 iNaturalist photos were looked at on 26
-   November 2026; 32 break the photo rule (a hand, a ruler, a pencil, a
-   fence or street, or the part laid on a table or cloth). Each is ticked
-   off when replaced. The 460 Wikimedia Commons photos are not yet checked:
+   November 2026; 32 broke the photo rule (a hand, a ruler, a pencil, a
+   fence or street, or the part laid on a table or cloth). 24 were replaced
+   with clean close-ups; 8 were removed because no clean photo turned up
+   (marked below), and want one when found. The 460 Wikimedia Commons photos are not yet checked:
    Commons refuses this project's downloads for now (see HANDOFF.md).
 
    - [x] `abies-concolor`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/1711555
@@ -153,12 +154,12 @@ each other's part; they are now the right way round.
    - [x] `viburnum-plicatum-tomentosum-mariesii`, leaves: https://www.inaturalist.org/observations/353215802
    - [x] `weigela-florida`, leaves: https://www.inaturalist.org/observations/191556061
    - [x] `fothergilla-major`, leaves: https://www.inaturalist.org/observations/196874244
-   - [ ] `quercus-phellos`, flowers: https://www.inaturalist.org/observations/154113129
-   - [ ] `viburnum-lentago`, bark: https://www.inaturalist.org/observations/20764350
+   - [x] `quercus-phellos`, flowers (removed; no clean replacement found yet): https://www.inaturalist.org/observations/154113129
+   - [x] `viburnum-lentago`, bark (removed; no clean replacement found yet): https://www.inaturalist.org/observations/20764350
    - [x] `fraxinus-quadrangulata`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/39389456
-   - [ ] `salix-matsudana-tortuosa`, fruit: https://www.inaturalist.org/observations/8405816
-   - [ ] `salix-matsudana`, fruit: https://www.inaturalist.org/observations/8405816
-   - [ ] `salix-babylonica`, fruit: https://www.inaturalist.org/observations/8405816
+   - [x] `salix-matsudana-tortuosa`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/8405816
+   - [x] `salix-matsudana`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/8405816
+   - [x] `salix-babylonica`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/8405816
    - [x] `quercus-stellata`, fruit: https://www.inaturalist.org/observations/251388509
 
 4. **Cultivars** inherit their species' notes. One that differs in a part
