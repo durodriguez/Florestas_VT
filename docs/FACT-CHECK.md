@@ -1,4 +1,4 @@
-# Second-source check of the Worth knowing facts (in progress)
+# Second-source check of the Worth knowing facts
 
 The owner asked (November 2026) that every fact in `data/facts.csv` rest on
 two independent sources, because the taxa file is meant for campuses across
@@ -37,8 +37,8 @@ The facts are taken in the order they appear in `data/facts.csv` among the
 new rows (alphabetical by taxon id).
 
 - Done: `abies-fraseri` through `alnus-glutinosa` (36 facts), except:
-  - `aesculus-glabra`: the Ohio State "Buckeyes" (1950) fact and the
-    fish-stunning fact are still Wikipedia only.
+  - `aesculus-glabra`: the Ohio State "Buckeyes" and fish-stunning facts
+    (Wikipedia only) were replaced at the end of the pass.
   - `acer-pseudoplatanus`: the new "great maple and harewood" fact rests on
     Trees and Shrubs Online's list of names; it needs a second source.
   - `adiantum-pedatum`: "pedatum, like a bird's foot" is NC State only.
@@ -123,4 +123,26 @@ new rows (alphabetical by taxon id).
   page that was briefly unreachable. Every replacement made because of that
   still has its own sources, so nothing wrong was published, but a few good
   facts may have been swapped out unnecessarily.
-- To do: the second `salix-babylonica` fact onward, 59 facts.
+- Done: the second `salix-babylonica` fact to the end (59). 27 replaced or
+  trimmed. One more Wikipedia slip: the Swedish whitebeam's parentage is
+  disputed (Trees and Shrubs Online), so "its closest relative is the
+  Finnish whitebeam, a cross of it and rowan" became a sentence about the
+  dispute. Replacements were checked against the fun facts in
+  `data/taxa.csv` so a species' page does not say the same thing twice.
+  Confirmed from outside sources: American elm as state tree of
+  Massachusetts and North Dakota (State Symbols USA). Single expert source:
+  `scandosorbus-intermedia` naturalized, `styphnolobium-japonicum` (both),
+  `taxodium-ascendens` wood, `tilia-mongolica` Paris, `ulmus-davidiana-
+  japonica` zone 2, `ulmus-rubra` age, `viburnum-lentago` names.
+
+## Where it stands
+
+All 379 facts have been through the check. Each now cites at least one
+expert reference (NC State, Trees and Shrubs Online, Silvics, FEIS, Oregon
+State, or a primary source), or two independent sources; none rests on
+Wikipedia alone. 300 cite two or more sources; 79 cite a single expert
+source, listed above. A few cite English and Japanese Wikipedia together,
+also listed above.
+
+Next: the same pass over the 135 facts for on-campus species already on
+`master`.
