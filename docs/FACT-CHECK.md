@@ -79,4 +79,18 @@ new rows (alphabetical by taxon id).
   `diervilla-lonicera` browse (FEIS), `fraxinus-americana` swallowtail,
   `hydrangea-paniculata` sun and mammals, `hydrangea-quercifolia`
   butterflies and seeds (NC State).
-- To do: the second `ilex-x-meserveae` fact onward, 219 facts.
+- Done: the second `ilex-x-meserveae` fact to `magnolia-tripetala`'s first
+  (40). 22 replaced or trimmed, mostly Wikipedia-only details with no second
+  source. Two corrections: tamarack's "snowshoe" sentence on Wikipedia is
+  copied word for word from the European larch article, so it was dropped;
+  the oldest eastern redcedar (940 years, Wikipedia) became FEIS's "more than
+  450 years". The Amur honeysuckle tick study was confirmed in the paper
+  itself (PubMed 20937859): PubMed's free API
+  (eutils.ncbi.nlm.nih.gov) is the way to check any "a study found" fact.
+  The White House magnolia is now past tense: it was cut down in 2025.
+  Single expert source: `juglans-cinerea` IUCN, `juglans-regia` pickles,
+  `koelreuteria-paniculata` (Trees and Shrubs Online / NC State),
+  `juniperus-virginiana` age, `larix-laricina` Native uses (FEIS),
+  `magnolia-grandiflora` "magnolia curtain" (Trees and Shrubs Online).
+  English and Japanese Wikipedia only: `lonicera-maackii` Japan.
+- To do: `magnolia-tripetala`'s second fact onward, 179 facts.
