@@ -13,18 +13,18 @@ same list, with links, is on the site at /species/progress/.
 | On campus: hybrids | 3 | 1 | 89% |
 | On campus: cultivars and forms | 10 | 3 | 82% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 176 | 102 | 94% |
+| Not yet mapped: species | 176 | 101 | 93% |
 | Not yet mapped: hybrids | 16 | 7 | 82% |
 | Not yet mapped: cultivars and forms | 88 | 19 | 80% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 249 | 92% |
+| **All** | 418 | 248 | 91% |
 
 ## Most often missing
 
 - bark photo: 85 pages
 - worth knowing (3): 74 pages
-- fruit photo: 67 pages
-- flowers photo: 65 pages
+- fruit photo: 68 pages
+- flowers photo: 66 pages
 - leaves photo: 37 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
@@ -105,6 +105,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Large fothergilla** (`fothergilla-major`): bark photo; fruit photo
 - [ ] **White Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodtwo`): worth knowing (3) (1 of 3); bark photo
 - [ ] **Apple serviceberry** (`amelanchier-x-grandiflora`): leaves photo; fruit photo
+- [ ] **Blue ash** (`fraxinus-quadrangulata`): flowers photo; fruit photo
 - [ ] **Cedar of Lebanon** (`cedrus-libani`): flowers photo; fruit photo
 - [ ] **Chinese juniper** (`juniperus-chinensis`): bark photo; flowers photo
 - [ ] **Hardy rubber tree** (`eucommia-ulmoides`): flowers photo; fruit photo

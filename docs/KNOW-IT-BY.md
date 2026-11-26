@@ -145,17 +145,17 @@ each other's part; they are now the right way round.
    - [x] `prunus-virginiana`, leaves: https://www.inaturalist.org/observations/1552239
    - [x] `ilex-glabra`, fruit: https://www.inaturalist.org/observations/107291109
    - [x] `polystichum-acrostichoides`, leaves: https://www.inaturalist.org/observations/325890589
-   - [ ] `chamaecyparis-thyoides`, fruit: https://www.inaturalist.org/observations/103893524
+   - [x] `chamaecyparis-thyoides`, fruit: https://www.inaturalist.org/observations/103893524
    - [x] `fraxinus-quadrangulata`, leaves: https://www.inaturalist.org/observations/246656157
-   - [ ] `fraxinus-quadrangulata`, flowers: https://www.inaturalist.org/observations/258473855
-   - [ ] `ulmus-davidiana-japonica`, leaves: https://www.inaturalist.org/observations/286674276
+   - [x] `fraxinus-quadrangulata`, flowers (removed; no clean replacement found yet): https://www.inaturalist.org/observations/258473855
+   - [x] `ulmus-davidiana-japonica`, leaves: https://www.inaturalist.org/observations/286674276
    - [ ] `hibiscus-syriacus-notwoodtwo`, leaves: https://www.inaturalist.org/observations/155799715
    - [ ] `viburnum-plicatum-tomentosum-mariesii`, leaves: https://www.inaturalist.org/observations/353215802
    - [ ] `weigela-florida`, leaves: https://www.inaturalist.org/observations/191556061
    - [ ] `fothergilla-major`, leaves: https://www.inaturalist.org/observations/196874244
    - [ ] `quercus-phellos`, flowers: https://www.inaturalist.org/observations/154113129
    - [ ] `viburnum-lentago`, bark: https://www.inaturalist.org/observations/20764350
-   - [ ] `fraxinus-quadrangulata`, fruit: https://www.inaturalist.org/observations/39389456
+   - [x] `fraxinus-quadrangulata`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/39389456
    - [ ] `salix-matsudana-tortuosa`, fruit: https://www.inaturalist.org/observations/8405816
    - [ ] `salix-matsudana`, fruit: https://www.inaturalist.org/observations/8405816
    - [ ] `salix-babylonica`, fruit: https://www.inaturalist.org/observations/8405816
