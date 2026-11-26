@@ -224,11 +224,17 @@ under *Map credit*.
   (Fang, Wang and Tang 2011) would do it, but are not public: the Dryad
   deposits from that group (doi:10.5061/dryad.pzgmsbcnn and
   doi:10.5061/dryad.ns1rn8ptx) hold model projections, with the species
-  numbered rather than named, not the observed records, which would have
-  to be asked of the authors.
-- **Ginkgo** is held: almost every ginkgo is planted, and the stands thought
-  wild (the West Tianmu Mountains, Gong et al. 2008; the Dalou Mountains,
-  Tang et al. 2012) are a few dots on a map this wide.
+  numbered rather than named, not the observed records. **Decided
+  (November 2026): no China maps.** The owner's rule is that a range map
+  is drawn only from published, public sources (encyclopedias, public
+  research and documents); data that would have to be requested from
+  authors is out. These species' pages describe China in their
+  Distribution text.
+- **Ginkgo: no map (decided November 2026).** Almost every ginkgo is
+  planted, and its history is too old and tangled for a tidy native range.
+  Its Distribution text describes the three Chinese glacial refuges instead
+  (Lin et al. 2022, Journal of Ecology; Zhao et al. 2019, Nature
+  Communications).
 
 The Distribution of each was checked against its map and Kew when it was
 drawn, and six were rewritten to match (barberry's said eastern China, which
