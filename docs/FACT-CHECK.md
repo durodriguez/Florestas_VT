@@ -169,7 +169,7 @@ Same method. Taken in file order.
 ## Where it stands now
 
 All 605 facts in `data/facts.csv` have been checked, and none rests on
-Wikipedia alone. 459 cite two or more sources; 146 cite a single expert
+Wikipedia alone. 461 cite two or more sources; 144 cite a single expert
 source (NC State, Trees and Shrubs Online, Silvics, FEIS, Oregon State or a
 named primary source). A few pair English with Japanese or Korean
 Wikipedia; these are listed above.
