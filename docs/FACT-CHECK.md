@@ -173,3 +173,16 @@ Wikipedia alone. 461 cite two or more sources; 144 cite a single expert
 source (NC State, Trees and Shrubs Online, Silvics, FEIS, Oregon State or a
 named primary source). A few pair English with Japanese or Korean
 Wikipedia; these are listed above.
+
+## Genus pages (November 2026)
+
+35 new facts bring the 18 genus pages that had one or two items to three
+(the hybrid paperbark maple included). Each was checked after writing
+against its cited sources; that check changed eleven: a "bark" detail
+confirmed, details without a second source dropped (lilac's "pipe"
+etymology replaced, dogwood's distribution replaced, "lychee" removed,
+"Russian" removed), the maple count widened to 130 to 160 to match both
+sources, and the iris data set now cites the UCI Machine Learning
+Repository. Trees and Shrubs Online's genus articles, NC State's genus
+pages and Wikipedia's genus articles were the sources.
+
