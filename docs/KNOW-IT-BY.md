@@ -143,10 +143,10 @@ each other's part; they are now the right way round.
    - [x] `picea-rubens`, leaves: https://www.inaturalist.org/observations/108753967
    - [x] `quercus-stellata`, leaves: https://www.inaturalist.org/observations/35307036
    - [x] `prunus-virginiana`, leaves: https://www.inaturalist.org/observations/1552239
-   - [ ] `ilex-glabra`, fruit: https://www.inaturalist.org/observations/107291109
-   - [ ] `polystichum-acrostichoides`, leaves: https://www.inaturalist.org/observations/325890589
+   - [x] `ilex-glabra`, fruit: https://www.inaturalist.org/observations/107291109
+   - [x] `polystichum-acrostichoides`, leaves: https://www.inaturalist.org/observations/325890589
    - [ ] `chamaecyparis-thyoides`, fruit: https://www.inaturalist.org/observations/103893524
-   - [ ] `fraxinus-quadrangulata`, leaves: https://www.inaturalist.org/observations/246656157
+   - [x] `fraxinus-quadrangulata`, leaves: https://www.inaturalist.org/observations/246656157
    - [ ] `fraxinus-quadrangulata`, flowers: https://www.inaturalist.org/observations/258473855
    - [ ] `ulmus-davidiana-japonica`, leaves: https://www.inaturalist.org/observations/286674276
    - [ ] `hibiscus-syriacus-notwoodtwo`, leaves: https://www.inaturalist.org/observations/155799715
