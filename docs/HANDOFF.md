@@ -43,6 +43,8 @@ next. Written 26 November 2026, at the end of a long session.
     against the species' fun fact in `data/taxa.csv` so a page never says the
     same thing twice.
   - Facts are at most 240 characters; fun facts too.
+- **Photos:** clean, natural close-ups of the plant only; no hands, coins,
+  rulers or other objects in the frame.
 - **Licences:** the project is educational and non-commercial; openly licensed
   material that fits may be used, with credit.
 

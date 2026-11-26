@@ -702,6 +702,12 @@ photo of that part, or none.
 
 ### Choosing a photo
 
+**The owner's rule (26 November 2026): clean, natural photos of the plant
+only.** Close-ups where the part is the subject; no hands, fingers, gloves,
+coins, rulers, tags or other objects in the frame, and no people. A photo
+with a hand "for scale" is refused, however clear the part. When several
+photos qualify, take the closest and plainest.
+
 A photo's label is not enough: uploaders get species wrong. In November 2026
 a photo of bright pink-red cones went in as northern white cedar's pollen
 cones because its Commons page said so; the cedar's are yellow, as taxa.csv

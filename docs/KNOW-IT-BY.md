@@ -104,6 +104,10 @@ fragrant sumac *Fall color*, multiflora rose *Stipules*, Washington hawthorn
 *Bark and thorns*, sweetgum *Bark and twigs*, burning bush *Winged twigs*,
 barberry *Spines*, devil's walking stick *Prickly stems*, smoketree *Smoke*.
 New photos come from iNaturalist (research grade, looked at before use).
+Every photo must be a clean, natural close-up of the plant, with no hands,
+coins, rulers or other objects ([SPECIES-PAGES.md](SPECIES-PAGES.md),
+"Choosing a photo"). Two photos that broke this rule (honeylocust thorns
+held against a hand, arborvitae foliage in a gloved hand) were replaced.
 
 A fix on the way: American elm's bark and leaf photos had been filed under
 each other's part; they are now the right way round.
@@ -118,9 +122,11 @@ each other's part; they are now the right way round.
    and Shrubs Online and Silvics were tried); English ivy's "bark" photo is
    a leaf and needs replacing first: acer-pseudosieboldianum, acer-x-freemanii, betula-populifolia, crataegus-laevigata, diervilla-lonicera, fraxinus-excelsior, hedera-helix, heptacodium-miconioides, magnolia-x-soulangiana, malus-sargentii, picea-glauca, prunus-pennsylvanica, prunus-subhirtella, quercus-ellipsoidalis, sequoiadendron-giganteum, sorbus-x-thuringiaca. The other 37 have two photos or
    fewer and need photos first: abies-fraseri, acer-buergeranum, acer-miyabei, adiantum-pedatum, aesculus-x-arnoldiana, alnus-x-spaethii, amauropelta-noveboracensis, amelanchier-x-grandiflora, athyrium-filix-femina, cedrus-atlantica, cedrus-libani, cercis-chinensis, cotoneaster-adpressus, crataegus-ambigua, eucommia-ulmoides, fothergilla-gardenii, fothergilla-major, juniperus-chinensis, juniperus-communis, juniperus-horizontalis, kerria-japonica, malus-floribunda, matteuccia-struthiopteris, parthenocissus-tricuspidata, polystichum-acrostichoides, pyrus-fauriei, quercus-x-bimundorum, quercus-x-warei, rubus-thibetanus, salix-matsudana, scandosorbus-intermedia, sorbus-x-hybrida, syringa-pekinensis, taxodium-ascendens, taxus-x-media, tilia-mongolica, ulmus-davidiana-japonica.
-3. **Cultivars** inherit their species' notes. One that differs in a part
+3. **Photo audit.** The photos chosen before this rule was written have not
+   all been looked at again for hands or objects in the frame; worth a pass.
+4. **Cultivars** inherit their species' notes. One that differs in a part
    (purple leaves, double flowers) shows its own photo there with the default
    caption; a note of its own for that part would be better.
-4. **Photo swaps still worth making** as photos turn up: bitternut hickory's
+5. **Photo swaps still worth making** as photos turn up: bitternut hickory's
    sulfur-yellow buds, Osage orange's thorns, balsam poplar's sticky buds,
    Norway and sugar maple's buds, Hinoki cypress's white Y marks.
