@@ -229,3 +229,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: heptacodium-miconioides, kolkwitzia-amabilis, lindera-benzoin, maackia-amurensis, magnolia-macrophylla, magnolia-virginiana.
 - 27 Nov 2026: morus-alba, musa-basjoo, nyssa-sylvatica, pieris-japonica, pinus-resinosa, prunus-x-cistena.
 - 27 Nov 2026: ptelea-trifoliata, quercus-ellipsoidalis, quercus-michauxii, sassafras-albidum, abies-fraseri, abies-grandis.
+- 27 Nov 2026: acer-buergeranum, acer-ginnala, acer-miyabei, acer-nigrum, acer-pseudoplatanus, acer-pseudosieboldianum.
