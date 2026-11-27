@@ -10,31 +10,31 @@ same list, with links, is on the site at /species/progress/.
 
 | Group | Pages | Complete | Items filled |
 | --- | --- | --- | --- |
-| On campus: species | 102 | 96 | 99% |
+| On campus: species | 102 | 97 | 99% |
 | On campus: hybrids | 3 | 0 | 86% |
-| On campus: cultivars and forms | 10 | 3 | 81% |
+| On campus: cultivars and forms | 10 | 3 | 82% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 176 | 124 | 96% |
+| Not yet mapped: species | 176 | 131 | 96% |
 | Not yet mapped: hybrids | 16 | 7 | 87% |
 | Not yet mapped: cultivars and forms | 88 | 19 | 80% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 272 | 93% |
+| **All** | 418 | 280 | 93% |
 
 ## Most often missing
 
 - know it by photos (4): 104 pages
 - worth knowing (3): 74 pages
-- know it by notes: 50 pages
+- know it by notes: 38 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
 
 ## On campus: pages with gaps
 
 - [ ] **Tom Thumb cotoneaster** (`cotoneaster-tom-thumb`, 1 on campus): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Crimson Cloud hawthorn** (`crataegus-laevigata-crimson-cloud`, 1 on campus): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4); know it by notes (none on bark)
 - [ ] **Snow Fountains weeping cherry** (`prunus-snofozam`, 1 on campus): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4); know it by notes (none on flowers)
 - [ ] **Green Giant arborvitae** (`thuja-green-giant`, 4 on campus): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4)
 - [ ] **Dragon's claw willow** (`salix-matsudana-tortuosa`, 2 on campus): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
+- [ ] **Crimson Cloud hawthorn** (`crataegus-laevigata-crimson-cloud`, 1 on campus): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
 - [ ] **Anglojap yew** (`taxus-x-media`, 4 on campus): know it by photos (4) (3 of 4)
 - [ ] **English ivy** (`hedera-helix`, 1 on campus): know it by photos (4) (3 of 4)
 - [ ] **Purpleleaf sand cherry** (`prunus-x-cistena`, 1 on campus): know it by photos (4) (3 of 4)
@@ -44,7 +44,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Bigleaf magnolia** (`magnolia-macrophylla`, 1 on campus): know it by photos (4) (3 of 4)
 - [ ] **Camperdown elm** (`ulmus-glabra-camperdownii`, 1 on campus): worth knowing (3) (1 of 3)
 - [ ] **Montmorency cherry** (`prunus-cerasus-montmorency`, 1 on campus): worth knowing (3) (1 of 3)
-- [ ] **Northern pin oak** (`quercus-ellipsoidalis`, 1 on campus): know it by notes (none on leaves, flowers, acorns)
 - [ ] **Wafer ash** (`ptelea-trifoliata`, 1 on campus): know it by photos (4) (3 of 4)
 
 ## Not yet mapped: pages with gaps
@@ -76,7 +75,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Blue Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodthree`): worth knowing (3) (1 of 3); know it by photos (4) (2 of 4)
 - [ ] **Blue Mist dwarf fothergilla** (`fothergilla-gardenii-blue-mist`): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
 - [ ] **Brilliance autumn fern** (`dryopteris-erythrosora-brilliance`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4)
-- [ ] **Bush honeysuckle** (`diervilla-lonicera`): know it by photos (4) (3 of 4); know it by notes (none on leaves, flowers, fruit)
 - [ ] **Fall Gold raspberry** (`rubus-idaeus-fall-gold`): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
 - [ ] **Gracillimus maiden grass** (`miscanthus-sinensis-gracillimus`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4)
 - [ ] **Miss Kim lilac** (`syringa-pubescens-patula-miss-kim`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4)
@@ -90,11 +88,9 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Copper Curls Peking lilac** (`syringa-pekinensis-copper-curls`): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
 - [ ] **Crimson Spire oak** (`quercus-x-bimundorum`): know it by photos (4) (0 of 4); know it by notes (no tiles yet)
 - [ ] **Elizabeth magnolia** (`magnolia-elizabeth`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4)
-- [ ] **Japanese flowering crabapple** (`malus-floribunda`): know it by photos (4) (2 of 4); know it by notes (none on flowers, fruit)
 - [ ] **Korean maple** (`acer-pseudosieboldianum`): know it by photos (4) (3 of 4); know it by notes (none on bark)
 - [ ] **Korean sun pear** (`pyrus-fauriei`): know it by photos (4) (1 of 4); know it by notes (none on bark)
 - [ ] **Krauter Vesuvius purpleleaf plum** (`prunus-cerasifera-krauter-vesuvius`): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
-- [ ] **Russian hawthorn** (`crataegus-ambigua`): know it by photos (4) (2 of 4); know it by notes (none on leaves, fruit)
 - [ ] **Sienna Glen maple** (`acer-x-freemanii-sienna-glen`): worth knowing (3) (1 of 3); know it by notes (none on flowers)
 - [ ] **Spaeth alder** (`alnus-x-spaethii`): know it by photos (4) (2 of 4); know it by notes (none on leaves, fruit)
 - [ ] **Swedish whitebeam** (`scandosorbus-intermedia`): know it by photos (4) (0 of 4); know it by notes (no tiles yet)
@@ -104,6 +100,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Blue holly** (`ilex-x-meserveae`): know it by photos (4) (3 of 4)
 - [ ] **Bluecrop highbush blueberry** (`vaccinium-corymbosum-bluecrop`): worth knowing (3) (1 of 3)
 - [ ] **Boston ivy** (`parthenocissus-tricuspidata`): know it by photos (4) (3 of 4)
+- [ ] **Bush honeysuckle** (`diervilla-lonicera`): know it by photos (4) (3 of 4)
 - [ ] **Chandler highbush blueberry** (`vaccinium-corymbosum-chandler`): worth knowing (3) (1 of 3)
 - [ ] **Chinese redbud** (`cercis-chinensis`): know it by photos (4) (2 of 4)
 - [ ] **Christmas fern** (`polystichum-acrostichoides`): know it by photos (4) (1 of 4)
@@ -124,9 +121,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Ostrich fern** (`matteuccia-struthiopteris`): know it by photos (4) (2 of 4)
 - [ ] **Patriot highbush blueberry** (`vaccinium-corymbosum-patriot`): worth knowing (3) (1 of 3)
 - [ ] **Ragin Red redosier dogwood** (`cornus-sericea-ragin-red`): worth knowing (3) (1 of 3)
-- [ ] **Sargent crabapple** (`malus-sargentii`): know it by notes (none on bark)
 - [ ] **Speckled alder** (`alnus-incana-rugosa`): worth knowing (3) (1 of 3)
-- [ ] **Amur chokecherry** (`prunus-maackii`): know it by notes (none on fruit)
 - [ ] **Apple serviceberry** (`amelanchier-x-grandiflora`): know it by photos (4) (2 of 4)
 - [ ] **Atlantic white cedar** (`chamaecyparis-thyoides`): know it by photos (4) (3 of 4)
 - [ ] **Atlas cedar** (`cedrus-atlantica`): know it by photos (4) (1 of 4)
@@ -136,23 +131,20 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Canada Red chokecherry** (`prunus-virginiana-canada-red`): worth knowing (3) (1 of 3)
 - [ ] **Cedar of Lebanon** (`cedrus-libani`): know it by photos (4) (3 of 4)
 - [ ] **Chestnut oak** (`quercus-montana`): know it by photos (4) (3 of 4)
-- [ ] **Chinese chestnut** (`castanea-mollissima`): know it by notes (none on bark)
 - [ ] **Chinese juniper** (`juniperus-chinensis`): know it by photos (4) (3 of 4)
 - [ ] **Columnar European beech** (`fagus-sylvatica-fastigiata`): worth knowing (3) (2 of 3)
 - [ ] **Columnar Sargent cherry** (`prunus-sargentii-columnaris`): worth knowing (3) (1 of 3)
 - [ ] **Cutleaf silver maple** (`acer-saccharinum-skinneri`): worth knowing (3) (2 of 3)
-- [ ] **European ash** (`fraxinus-excelsior`): know it by notes (none on bark, fruit)
 - [ ] **Fraser fir** (`abies-fraseri`): know it by photos (4) (2 of 4)
 - [ ] **Golden weeping willow** (`salix-alba-tristis`): worth knowing (3) (1 of 3)
 - [ ] **Hardy rubber tree** (`eucommia-ulmoides`): know it by photos (4) (2 of 4)
 - [ ] **Honeycrisp apple** (`malus-domestica-honeycrisp`): worth knowing (3) (2 of 3)
 - [ ] **Ivory Silk tree lilac** (`syringa-reticulata-ivory-silk`): worth knowing (3) (1 of 3)
 - [ ] **Japanese elm** (`ulmus-davidiana-japonica`): know it by photos (4) (2 of 4)
+- [ ] **Japanese flowering crabapple** (`malus-floribunda`): know it by photos (4) (2 of 4)
 - [ ] **Lacebark elm** (`ulmus-parvifolia`): know it by photos (4) (3 of 4)
 - [ ] **Laurel oak** (`quercus-hemisphaerica`): know it by photos (4) (3 of 4)
-- [ ] **Limber pine** (`pinus-flexilis`): know it by notes (none on pollen cones)
 - [ ] **Meader persimmon** (`diospyros-virginiana-meader`): worth knowing (3) (1 of 3)
-- [ ] **Midland hawthorn** (`crataegus-laevigata`): know it by notes (none on bark)
 - [ ] **Miyabe maple** (`acer-miyabei`): know it by photos (4) (2 of 4)
 - [ ] **Mongolian linden** (`tilia-mongolica`): know it by photos (4) (2 of 4)
 - [ ] **Oakleaf mountain ash** (`sorbus-x-thuringiaca`): know it by notes (none on bark, leaves, flowers, fruit)
@@ -166,10 +158,10 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Princeton Sentry ginkgo** (`ginkgo-biloba-princeton-sentry`): know it by photos (4) (3 of 4)
 - [ ] **Purple leaf plum** (`prunus-cerasifera`): know it by photos (4) (3 of 4)
 - [ ] **Rivers purple beech** (`fagus-sylvatica-riversii`): worth knowing (3) (2 of 3)
+- [ ] **Russian hawthorn** (`crataegus-ambigua`): know it by photos (4) (2 of 4)
 - [ ] **Scarlet oak** (`quercus-coccinea`): know it by photos (4) (3 of 4)
 - [ ] **Shellbark hickory** (`carya-laciniosa`): know it by photos (4) (3 of 4)
 - [ ] **Shumard oak** (`quercus-shumardii`): know it by photos (4) (3 of 4)
-- [ ] **Swiss stone pine** (`pinus-cembra`): know it by notes (none on pollen cones)
 - [ ] **Trident maple** (`acer-buergeranum`): know it by photos (4) (2 of 4)
 - [ ] **Valley Forge American elm** (`ulmus-americana-valley-forge`): worth knowing (3) (1 of 3)
 - [ ] **Weeping Alaska cedar** (`callitropsis-nootkatensis-pendula`): worth knowing (3) (2 of 3)
