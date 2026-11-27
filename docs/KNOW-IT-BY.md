@@ -125,7 +125,11 @@ each other's part; they are now the right way round.
    notes for 37 species that had none. Six are on species with notes (Chinese chestnut and tamarack
    bark; Swiss stone, limber and red pine pollen cones; Amur chokecherry
    fruit); the sources tried say too little. The rest are the species with
-   no notes yet (item 2) and their cultivars. Cultivar pages can now carry
+   no notes yet (item 2) and their cultivars. Later on 27 November 2026, 18 notes
+   closed the gaps on 12 species, from wider sources (Oregon State Landscape
+   Plants, the Gymnosperm Database, Utah State and Minnesota extension, the
+   UConn plant database). Still without a source: Korean maple and Korean
+   sun pear bark; Swedish whitebeam has no photos. Cultivar pages can now carry
    their own note for a part where they differ, and a species note marked
    `cultivars` = `only` stands in on its cultivars where a species tile is
    withheld (honeylocust's flowers on the thornless pages).

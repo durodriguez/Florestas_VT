@@ -193,3 +193,20 @@ sources, and the iris data set now cites the UCI Machine Learning
 Repository. Trees and Shrubs Online's genus articles, NC State's genus
 pages and Wikipedia's genus articles were the sources.
 
+
+## Cultivar and hybrid facts (27 November 2026)
+
+73 facts for the 39 cultivar and hybrid pages that still had fewer than
+three Worth knowing items, most with no species page to borrow from. At the
+owner's direction these were written from memory first, then checked, and
+for a named cultivar the check may rest on nursery or breeder copy (Proven
+Winners, Stark Bro's, Broken Arrow and others), plant patents and award
+listings, as well as the usual expert sources: there is often nothing else
+written about a cultivar. Each fact cites what confirmed it. Drafts the
+check did not bear out were replaced or cut, among them: a 1985
+introduction for 'Gold Star', a Pennsylvania Horticultural Society award
+for 'Elizabeth' (it was the RHS Award of Garden Merit, 1993; and the name
+honors Elizabeth Van Brunt, not a director), 'Shirazz' being bred by the
+Jury family (only its parent 'Vulcan' was), and a Boskoop medal for
+'Blue Chiffon' found only in one retailer's copy. Picta kerria stays at
+two: nothing found about it beyond its fun fact's subject.
