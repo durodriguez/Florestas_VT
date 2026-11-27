@@ -522,9 +522,16 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
  */
 const SORT_CONTROL = `<div class="sort" role="group" aria-label="Sort species" hidden>
     <span class="sort-label">Sort by</span>
-    <button type="button" data-sort="common" aria-pressed="true">Common name</button>
-    <button type="button" data-sort="scientific" aria-pressed="false">Scientific name</button>
+    <button type="button" data-sort="common" aria-pressed="true">Common</button>
+    <button type="button" data-sort="scientific" aria-pressed="false">Scientific</button>
+    <button type="button" data-sort="type" aria-pressed="false">Type</button>
   </div>`;
+
+/** The groups the index can be sorted into, in order, with their headings. */
+const TYPE_GROUPS = [
+  ['deciduous-tree', 'Deciduous trees'], ['evergreen-tree', 'Evergreen trees'], ['shrub', 'Shrubs'],
+  ['vine', 'Vines'], ['perennial', 'Perennials and ferns'], ['grass', 'Grasses'], ['unknown', 'Not yet identified'],
+];
 
 /**
  * A tap on a photo shows it full size, as the map's panel does (openPhoto in
@@ -575,9 +582,23 @@ const SORT_JS = `(() => {
   const rows = [...list.children];
   const byCommon = rows.slice();
   const bySci = rows.slice().sort((a, b) => a.dataset.sci.localeCompare(b.dataset.sci));
+  // By plant type: a heading for each group, then its species by common name.
+  const byType = [];
+  for (const [type, label] of JSON.parse(list.dataset.groups)) {
+    const members = byCommon.filter((r) => r.dataset.type === type);
+    if (!members.length) continue;
+    const h = document.createElement('li');
+    h.className = 'idx-group';
+    h.innerHTML = '<h2></h2>';
+    h.firstChild.textContent = label + ' ';
+    const n = document.createElement('span');
+    n.textContent = members.length;
+    h.firstChild.append(n);
+    byType.push(h, ...members);
+  }
   const apply = (mode, push) => {
     const sci = mode === 'scientific';
-    list.replaceChildren(...(sci ? bySci : byCommon));
+    list.replaceChildren(...(sci ? bySci : mode === 'type' ? byType : byCommon));
     list.classList.toggle('by-sci', sci);
     // Lead each row with the name it is sorted by.
     for (const a of list.querySelectorAll('a')) {
@@ -587,7 +608,7 @@ const SORT_JS = `(() => {
     for (const b of group.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.sort === mode));
     if (push) {
       const url = new URL(location.href);
-      if (sci) url.searchParams.set('sort', 'scientific'); else url.searchParams.delete('sort');
+      if (mode === 'common') url.searchParams.delete('sort'); else url.searchParams.set('sort', mode);
       history.replaceState(null, '', url);
     }
   };
@@ -595,7 +616,8 @@ const SORT_JS = `(() => {
     const b = e.target.closest('button[data-sort]');
     if (b) apply(b.dataset.sort, true);
   });
-  if (new URLSearchParams(location.search).get('sort') === 'scientific') apply('scientific', false);
+  const asked = new URLSearchParams(location.search).get('sort');
+  if (asked === 'scientific' || asked === 'type') apply(asked, false);
   group.hidden = false;
 })();`;
 
@@ -607,7 +629,7 @@ const SORT_JS = `(() => {
 export function renderSpeciesIndex(taxa, { base, config }) {
   const mapped = taxa.filter((t) => t.count > 0);
   const sorted = [...mapped].sort((a, b) => a.common.localeCompare(b.common));
-  const items = sorted.map((t) => `<li data-sci="${esc(t.sci)}">
+  const items = sorted.map((t) => `<li data-sci="${esc(t.sci)}" data-type="${esc(t.type || 'unknown')}">
     <a href="${encodeURIComponent(t.id)}/">
       <span class="idx-common">${esc(t.common)}</span>
       <span class="idx-sci">${esc(t.sci)}</span>
@@ -619,7 +641,7 @@ export function renderSpeciesIndex(taxa, { base, config }) {
   <h1>Species</h1>
   <p class="label">${mapped.length} species mapped on campus so far &middot; <a href="progress/">How complete each page is</a></p>
   ${SORT_CONTROL}
-  <ul class="index">${items}</ul>
+  <ul class="index" data-groups="${esc(JSON.stringify(TYPE_GROUPS))}">${items}</ul>
 </main>
 <script>${SORT_JS}</script>`;
 
@@ -758,6 +780,11 @@ h2 {
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 .index { list-style: none; padding: 0; margin: 1.2rem 0 0; }
+.index li.idx-group { display: block; border: 0; padding: 1.4rem 0 .3rem; }
+.index li.idx-group:first-child { padding-top: .2rem; }
+.index li.idx-group h2 { margin: 0; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--green); border-bottom: 2px solid var(--gold); padding-bottom: .3rem; }
+.index li.idx-group h2 span { color: var(--dim); font-weight: 400; letter-spacing: 0; }
+@media (prefers-color-scheme: dark) { .index li.idx-group h2 { color: #9fd3b4; } }
 .index li {
   display: flex; align-items: baseline; gap: .6rem;
   padding: .5rem 0; border-bottom: 1px solid var(--border);
