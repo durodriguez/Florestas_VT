@@ -234,3 +234,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: aesculus-pavia, aesculus-x-carnea, ailanthus-altissima, albizia-julibrissin, alnus-glutinosa, alnus-hirsuta.
 - 27 Nov 2026: alnus-incana-rugosa, amauropelta-noveboracensis, amelanchier-arborea, amelanchier-canadensis, amelanchier-laevis, amelanchier-x-grandiflora.
 - 27 Nov 2026: aralia-elata, aralia-spinosa, aronia-melanocarpa, asimina-triloba, athyrium-filix-femina, berberis-thunbergii.
+- 27 Nov 2026: calycanthus-floridus, caragana-arborescens, carya-cordiformis, carya-glabra, carya-illinoinensis, carya-laciniosa.
