@@ -144,6 +144,7 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       pests: trim(row.pest_resistance),
       soil: trim(row.soil_preference),
       zones: trim(row.hardiness_zones),
+      lifespan: trim(row.lifespan),
       wikipedia: trim(row.wikipedia_url),
       description: trim(row.description),
       funFact: trim(row.fun_fact),

@@ -135,6 +135,7 @@ function aboutTaxon(t: Taxon, countOnCampus = true): string {
       ${row('Soil', t.soil ? escapeHtml(t.soil) : null)}
       ${row('Pests and disease', t.pests ? escapeHtml(t.pests) : null)}
       ${row('Hardiness zones', t.zones)}
+      ${row('Lifespan', t.lifespan ? escapeHtml(t.lifespan) : null)}
       ${countOnCampus ? row('On campus', mapped) : ''}
     </dl>
   `;
