@@ -202,31 +202,3 @@ each other's part; they are now the right way round.
 5. **Photo swaps still worth making** as photos turn up: bitternut hickory's
    sulfur-yellow buds, Osage orange's thorns, balsam poplar's sticky buds,
    Norway and sugar maple's buds, Hinoki cypress's white Y marks.
-
-## Redone by the default method
-
-Every note written before November 2026's rule began from a source page,
-so all are being rewritten: drafted from memory, checked against several
-sources, revised (CLAUDE.md). Species done, in the order redone:
-
-- 27 Nov 2026: pinus-strobus, quercus-rubra, betula-nigra, quercus-bicolor,
-  acer-platanoides.
-- 27 Nov 2026: acer-x-freemanii, picea-pungens, acer-saccharum, acer-rubrum, pinus-nigra.
-- 27 Nov 2026: quercus-palustris, thuja-occidentalis, picea-glauca, tilia-cordata, picea-abies.
-- 27 Nov 2026: zelkova-serrata, ginkgo-biloba, tilia-americana, acer-saccharinum, carpinus-caroliniana.
-- 27 Nov 2026: betula-papyrifera, crataegus-phaenopyrum, syringa-reticulata, platanus-occidentalis, robinia-pseudoacacia, aesculus-hippocastanum.
-- 27 Nov 2026: quercus-macrocarpa, taxodium-distichum, catalpa-speciosa, populus-nigra, prunus-sargentii, castanea-dentata.
-- 27 Nov 2026: pinus-sylvestris, pseudotsuga-menziesii, tsuga-canadensis, cercis-canadensis, juglans-nigra, liriodendron-tulipifera.
-- 27 Nov 2026: quercus-alba, liquidambar-styraciflua, metasequoia-glyptostroboides, tilia-tomentosa, acer-campestre, cotinus-coggygria.
-- 27 Nov 2026: fagus-grandifolia, ostrya-virginiana, betula-alleghaniensis, betula-populifolia, callitropsis-nootkatensis, chionanthus-virginicus.
-- 27 Nov 2026: populus-grandidentata, quercus-imbricaria, quercus-robur, taxus-x-media, thuja-green-giant, acer-negundo.
-- 27 Nov 2026: acer-triflorum, cercidiphyllum-japonicum, clethra-alnifolia, cornus-kousa, fagus-sylvatica, fraxinus-pennsylvanica.
-- 27 Nov 2026: gymnocladus-dioicus, hamamelis-virginiana, malus-domestica, pyrus-calleryana, rhamnus-cathartica, abies-balsamea.
-- 27 Nov 2026: abies-concolor, acer-griseum, acer-platanoides-crimson-king, betula-lenta, buxus-sempervirens, celtis-occidentalis.
-- 27 Nov 2026: cladrastis-kentukea, cornus-florida, halesia-tetraptera, phellodendron-amurense, prunus-serotina, salix-matsudana-tortuosa.
-- 27 Nov 2026: sorbus-aucuparia, stewartia-pseudocamellia, syringa-vulgaris, abies-nordmanniana, acer-palmatum, carpinus-betulus.
-- 27 Nov 2026: chamaecyparis-obtusa, cornus-alternifolia, cornus-mas, corylus-colurna, elaeagnus-angustifolia, hedera-helix.
-- 27 Nov 2026: heptacodium-miconioides, kolkwitzia-amabilis, lindera-benzoin, maackia-amurensis, magnolia-macrophylla, magnolia-virginiana.
-- 27 Nov 2026: morus-alba, musa-basjoo, nyssa-sylvatica, pieris-japonica, pinus-resinosa, prunus-x-cistena.
-- 27 Nov 2026: ptelea-trifoliata, quercus-ellipsoidalis, quercus-michauxii, sassafras-albidum, abies-fraseri, abies-grandis.
-- 27 Nov 2026: acer-buergeranum, acer-ginnala, acer-miyabei, acer-nigrum, acer-pseudoplatanus, acer-pseudosieboldianum.

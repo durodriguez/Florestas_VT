@@ -102,9 +102,10 @@ all being redone by the default method, the species most planted on
 campus first: not only those citing NC State, but every note written
 before the rule, since all of them began from a source page (Trees and
 Shrubs Online, Silvics, FEIS and Oregon State as well). A note redone this
-way keeps its row; its text, source and source_url change. Progress: the
-redone species are listed in KNOW-IT-BY.md, "Redone by the default
-method".
+way keeps its row; its text, source and source_url change. The redone
+species are listed in KNOW-IT-BY.md, "Redone by the default method", on the
+session branch, where the rewrite is kept until it is finished: it was set
+aside when the rest of the branch was merged.
 
 Paused 27 November 2026 at the owner's request, unmerged on the session
 branch: 123 species (468 notes) redone, 187 species (669 notes) left. The
