@@ -202,3 +202,13 @@ each other's part; they are now the right way round.
 5. **Photo swaps still worth making** as photos turn up: bitternut hickory's
    sulfur-yellow buds, Osage orange's thorns, balsam poplar's sticky buds,
    Norway and sugar maple's buds, Hinoki cypress's white Y marks.
+
+## Redone by the default method
+
+Every note written before November 2026's rule began from a source page,
+so all are being rewritten: drafted from memory, checked against several
+sources, revised (CLAUDE.md). Species done, in the order redone:
+
+- 27 Nov 2026: pinus-strobus, quercus-rubra, betula-nigra, quercus-bicolor,
+  acer-platanoides.
+

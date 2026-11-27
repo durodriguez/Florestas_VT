@@ -98,5 +98,10 @@ Everything written about plants is drafted from memory first, then checked
 against several sources (not one site) and revised; see CLAUDE.md. In
 November 2026, 989 of the 1,113 Know it by notes cited NC State alone,
 because they were written by reading NC State's pages first. They are
-being redone by the default method, the species most planted on campus
-first.
+all being redone by the default method, the species most planted on
+campus first: not only those citing NC State, but every note written
+before the rule, since all of them began from a source page (Trees and
+Shrubs Online, Silvics, FEIS and Oregon State as well). A note redone this
+way keeps its row; its text, source and source_url change. Progress: the
+redone species are listed in KNOW-IT-BY.md, "Redone by the default
+method".
