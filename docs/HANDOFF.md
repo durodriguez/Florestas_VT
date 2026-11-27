@@ -110,3 +110,27 @@ Paused 27 November 2026 at the owner's request, unmerged on the session
 branch: 123 species (468 notes) redone, 187 species (669 notes) left. The
 next in line are acer-tataricum, acer-truncatum, adiantum-pedatum and the
 buckeyes. Order: most trees on campus first, then alphabetical.
+
+## Next session: finish the Know it by rewrite (27 November 2026)
+
+- **Branch:** the rewrite lives only on `claude/ecstatic-fermi-7aiu0z`,
+  unmerged; master (PR #308) has everything else, with the redone species'
+  earlier notes. Merge only when the owner says so.
+- **Where it stands:** 123 of 310 species redone (468 notes); 187 species,
+  669 notes left. `python3 scripts/know-it-by-tools/next.py 6` gives the
+  next six (acer-tataricum, acer-truncatum, adiantum-pedatum, the buckeyes).
+- **How:** scripts/know-it-by-tools/README.md. The method is CLAUDE.md's:
+  memory first, then several sources (Morton, Trees and Shrubs Online,
+  Silvics, FEIS, Oregon State, Missouri, extension services; NC State is one
+  among them), revise, cite what confirmed it. Each note under 320
+  characters; never repeat the description, fun fact, Characteristics or
+  Worth knowing. Commit and push after every batch.
+- **Known gaps** no source has described yet: Korean maple and Korean sun
+  pear bark notes.
+- **Photos, separately:** 93 pages are short of four photo tiles. Openverse
+  (scripts/know-it-by-tools/ovcands.py) finds Flickr and Commons photos;
+  NC State's Plant Toolbox shows what exists (ncphotos.py) but its links
+  expire, so photos are linked at their originals. No-derivatives licenses
+  stay excluded. Commons was refusing this session's requests (HTTP 429,
+  robot policy) by the end; Flickr is now an accepted source.
+
