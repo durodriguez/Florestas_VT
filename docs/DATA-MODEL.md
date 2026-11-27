@@ -61,7 +61,7 @@ reading, and the earlier ones are still there to be asked about.
 | `pest_resistance` | | known pest and disease **pressure**, not a resistance score — see below |
 | `soil_preference` | | moisture, drainage and pH in a phrase |
 | `hardiness_zones` | | `3-8` |
-| `lifespan` | | typical lifespan **in the wild**, as text: `150–250 years`. Planted street and campus trees often live far shorter. Written from knowledge and checked against Silvics, FEIS or another reputable source, as the rest of the file was. Blank where no source gives one. Shown in Characteristics and the explorer's About section |
+| `lifespan` | | typical lifespan **in the wild**, as text: `150–250 years`. Planted street and campus trees often live far shorter. Written from knowledge and checked against Silvics, FEIS or another reputable source, as the rest of the file was. Blank where no source gives one. Shown in Characteristics and the explorer's About section. A cultivar takes its species' value. Started 27 November 2026 with the species Silvics and FEIS state a lifespan for; the rest are still blank |
 | `wikipedia_url` | | linked from the plant record. Derived from the scientific name, so run `npm run check:links` to confirm they resolve — a redirect is fine and usually means the name is a synonym of the accepted one |
 | `description` | | one or two sentences shown on the record |
 | `fun_fact` | | one line about the species, shown on every plant of it — see the rule below |
