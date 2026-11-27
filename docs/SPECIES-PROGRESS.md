@@ -22,7 +22,7 @@ same list, with links, is on the site at /species/progress/.
 
 ## Most often missing
 
-- know it by photos (4): 97 pages
+- know it by photos (4): 96 pages
 - know it by notes: 38 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
@@ -64,7 +64,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Golden Raindrops crabapple** (`malus-schmidtcutleaf`): know it by photos (4) (0 of 4); know it by notes (no tiles yet)
 - [ ] **Heritage oak** (`quercus-x-macdanielii-clemons`): know it by photos (4) (0 of 4); know it by notes (no tiles yet)
 - [ ] **Judy Zuk magnolia** (`magnolia-judy-zuk`): know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Korean maple** (`acer-pseudosieboldianum`): know it by photos (4) (3 of 4); know it by notes (none on bark)
 - [ ] **Korean sun pear** (`pyrus-fauriei`): know it by photos (4) (1 of 4); know it by notes (none on bark)
 - [ ] **Prairifire crabapple** (`malus-prairifire`): know it by photos (4) (0 of 4); know it by notes (no tiles yet)
 - [ ] **Royal Frost birch** (`betula-penci-2`): know it by photos (4) (0 of 4); know it by notes (no tiles yet)
@@ -115,6 +114,7 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Hardy rubber tree** (`eucommia-ulmoides`): know it by photos (4) (2 of 4)
 - [ ] **Japanese elm** (`ulmus-davidiana-japonica`): know it by photos (4) (2 of 4)
 - [ ] **Japanese flowering crabapple** (`malus-floribunda`): know it by photos (4) (2 of 4)
+- [ ] **Korean maple** (`acer-pseudosieboldianum`): know it by notes (none on bark)
 - [ ] **Krauter Vesuvius purpleleaf plum** (`prunus-cerasifera-krauter-vesuvius`): know it by photos (4) (3 of 4)
 - [ ] **Lacebark elm** (`ulmus-parvifolia`): know it by photos (4) (3 of 4)
 - [ ] **Laurel oak** (`quercus-hemisphaerica`): know it by photos (4) (3 of 4)
