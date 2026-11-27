@@ -123,7 +123,11 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     if (!PHOTO_PARTS.includes(part)) return errors.push(`${where}: part must be one of ${PHOTO_PARTS.join(', ')}, got "${part}"`);
     const commons = /^https:\/\/upload\.wikimedia\.org\/.+\/500px-[^/]+$/.test(trim(r.image_url)) && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(trim(r.page_url));
     const inat = /^https:\/\/inaturalist-open-data\.s3\.amazonaws\.com\/photos\/\d+\/medium\.(jpe?g|png)$/i.test(trim(r.image_url)) && /^https:\/\/www\.inaturalist\.org\/observations\/\d+$/.test(trim(r.page_url));
-    if (!commons && !inat) return errors.push(`${where}: needs a Commons 500px thumbnail and its File: page, or an iNaturalist medium photo and its observation page`);
+    // Flickr (since November 2026, for a photo the owner chose there): a
+    // 640px live.staticflickr.com image, linked back to its photo page as
+    // Flickr's terms ask.
+    const flickr = /^https:\/\/live\.staticflickr\.com\/\d+\/\d+_[0-9a-f]+_z\.jpg$/.test(trim(r.image_url)) && /^https:\/\/www\.flickr\.com\/photos\/[^/]+\/\d+\/$/.test(trim(r.page_url));
+    if (!commons && !inat && !flickr) return errors.push(`${where}: needs a Commons 500px thumbnail and its File: page, an iNaturalist medium photo and its observation page, or a Flickr 640px (_z) image and its photo page`);
     if (!FREE.test(trim(r.license))) return errors.push(`${where}: license "${trim(r.license)}" is not one that allows reuse with credit`);
     if (!trim(r.author)) return errors.push(`${where}: author is empty; credit is a condition of the license`);
     // What the photo shows that agrees with taxa.csv's record of that part:
@@ -141,7 +145,7 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
       if (!t?.species || !(t.cultivar || t.infra)) return errors.push(`${where}: of_species is only for a cultivar or variety of a named species`);
     }
     photos.get(id)[part] = {
-      title: trim(r.title), page: trim(r.page_url), image: trim(r.image_url), site: inat ? 'iNaturalist' : 'Wikimedia Commons',
+      title: trim(r.title), page: trim(r.page_url), image: trim(r.image_url), site: inat ? 'iNaturalist' : flickr ? 'Flickr' : 'Wikimedia Commons',
       author: trim(r.author), license: trim(r.license), licenseUrl: trim(r.license_url),
       ...(ofSpecies && { inherited: true }),
     };

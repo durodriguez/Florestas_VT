@@ -182,11 +182,13 @@ function leafCaption(t) {
 
 /** One photo of a tile, a button that shows it full size. */
 function partShot(t, label, p, credits, creditWhat) {
-  const big = p.site === 'iNaturalist' ? p.image.replace('/medium.', '/large.') : p.image.replace('/500px-', '/960px-');
+  const big = p.site === 'iNaturalist' ? p.image.replace('/medium.', '/large.')
+    : p.site === 'Flickr' ? p.image.replace(/_z\.jpg$/, '_b.jpg') : p.image.replace('/500px-', '/960px-');
+  const [smallW, bigW] = p.site === 'iNaturalist' ? [500, 1024] : p.site === 'Flickr' ? [640, 1024] : [500, 960];
   return {
     mark: footnote(credits, esc(creditWhat), p),
     html: `<button type="button" class="shot-open" aria-label="Show the photo of the ${esc(label.toLowerCase())} full size" data-full="${esc(big)}" data-credit="${esc(`${label}. Photo: ${p.author}, ${p.license}, ${p.site}`)}">
-        <img src="${esc(p.image)}" srcset="${esc(p.image)} 500w, ${esc(big)} ${p.site === 'iNaturalist' ? 1024 : 960}w" sizes="(max-width: 48rem) 50vw, 15rem" alt="${esc(`${label} of ${t.common.toLowerCase()}`)}" loading="lazy">
+        <img src="${esc(p.image)}" srcset="${esc(p.image)} ${smallW}w, ${esc(big)} ${bigW}w" sizes="(max-width: 48rem) 50vw, 15rem" alt="${esc(`${label} of ${t.common.toLowerCase()}`)}" loading="lazy">
       </button>`,
   };
 }

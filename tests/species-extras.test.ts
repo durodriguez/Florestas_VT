@@ -272,6 +272,10 @@ describe('what species pages add by hand', () => {
     // Non-commercial licenses fit a free educational site; no-derivatives and all-rights-reserved do not.
     for (const license of ['CC BY-NC 4.0', 'CC BY-NC-SA 4.0', 'CC BY-NC 2.0']) expect(speciesExtras({ photoRows: [{ ...photo, license }], taxa }).errors, license).toEqual([]);
     for (const license of ['CC BY-NC-ND 4.0', 'All rights reserved']) expect(speciesExtras({ photoRows: [{ ...photo, license }], taxa }).errors.join(''), license).toMatch(/not one that allows reuse/);
+    const flickr = speciesExtras({ photoRows: [{ ...photo, image_url: 'https://live.staticflickr.com/2859/13415818594_ac3e6d14df_z.jpg', page_url: 'https://www.flickr.com/photos/121380246@N08/13415818594/', license: 'CC BY-NC-SA 2.0' }], taxa });
+    expect(flickr.errors).toEqual([]);
+    expect(flickr.extras.get('gleditsia-triacanthos').photos.bark.site).toBe('Flickr');
+    expect(speciesExtras({ photoRows: [{ ...photo, image_url: 'https://live.staticflickr.com/2859/13415818594_ac3e6d14df_o.jpg', page_url: 'https://www.flickr.com/photos/121380246@N08/13415818594/' }], taxa }).errors.join('')).toMatch(/Flickr 640px/);
     const inat = speciesExtras({ photoRows: [{ ...photo, image_url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/757919298/medium.jpg', page_url: 'https://www.inaturalist.org/observations/411951899', license: 'CC BY 4.0' }], taxa });
     expect(inat.errors).toEqual([]);
     expect(inat.extras.get('gleditsia-triacanthos').photos.bark.site).toBe('iNaturalist');
