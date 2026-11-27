@@ -766,3 +766,12 @@ survey takes them.
 - **Photos of the bark, leaves, flowers and fruit** for later batches, and
   the parts batch 1 is missing (see Know it by, above).
 - **Better drawings** still, if the drawn ones are not enough.
+
+**Cultivars and hybrids do not borrow a relative's photos** (owner's
+decision, November 2026). A named selection often looks unlike its
+species (flower color, leaf color, habit), so a cultivar or hybrid without
+a species page of its own, such as the magnolia and crabapple hybrids,
+waits for photos of itself rather than showing a parent's. (A cultivar
+whose species is on file still shows the species' photos of the parts it
+does not differ in, as before.)
+
