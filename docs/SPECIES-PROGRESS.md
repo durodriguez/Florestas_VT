@@ -10,19 +10,19 @@ same list, with links, is on the site at /species/progress/.
 
 | Group | Pages | Complete | Items filled |
 | --- | --- | --- | --- |
-| On campus: species | 102 | 101 | 100% |
-| On campus: hybrids | 3 | 0 | 86% |
+| On campus: species | 102 | 102 | 100% |
+| On campus: hybrids | 3 | 1 | 91% |
 | On campus: cultivars and forms | 11 | 6 | 92% |
 | On campus: named only to genus | 13 | 13 | 100% |
 | Not yet mapped: species | 176 | 135 | 97% |
 | Not yet mapped: hybrids | 16 | 7 | 87% |
 | Not yet mapped: cultivars and forms | 87 | 45 | 90% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 317 | 96% |
+| **All** | 418 | 319 | 96% |
 
 ## Most often missing
 
-- know it by photos (4): 95 pages
+- know it by photos (4): 93 pages
 - know it by notes: 38 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
@@ -32,13 +32,11 @@ same list, with links, is on the site at /species/progress/.
 
 - [ ] **Tom Thumb cotoneaster** (`cotoneaster-tom-thumb`, 1 on campus): know it by photos (4) (0 of 4); know it by notes (no tiles yet)
 - [ ] **Snow Fountains weeping cherry** (`prunus-snofozam`, 1 on campus): know it by photos (4) (1 of 4); know it by notes (none on flowers)
-- [ ] **Anglojap yew** (`taxus-x-media`, 4 on campus): know it by photos (4) (3 of 4)
 - [ ] **Purpleleaf sand cherry** (`prunus-x-cistena`, 1 on campus): know it by photos (4) (3 of 4)
 - [ ] **Freeman's maple** (`acer-x-freemanii`, 67 on campus): know it by notes (none on flowers)
 - [ ] **Green Giant arborvitae** (`thuja-green-giant`, 4 on campus): know it by photos (4) (1 of 4)
 - [ ] **Dragon's claw willow** (`salix-matsudana-tortuosa`, 2 on campus): know it by photos (4) (3 of 4)
 - [ ] **Crimson Cloud hawthorn** (`crataegus-laevigata-crimson-cloud`, 1 on campus): know it by photos (4) (3 of 4)
-- [ ] **Wafer ash** (`ptelea-trifoliata`, 1 on campus): know it by photos (4) (3 of 4)
 
 ## Not yet mapped: pages with gaps
 

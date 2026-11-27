@@ -126,8 +126,8 @@ export function speciesExtras({ crownRows = [], habitatRows = [], factRows = [],
     // Flickr (since November 2026, for a photo the owner chose there): a
     // 640px live.staticflickr.com image, linked back to its photo page as
     // Flickr's terms ask.
-    const flickr = /^https:\/\/live\.staticflickr\.com\/\d+\/\d+_[0-9a-f]+_z\.jpg$/.test(trim(r.image_url)) && /^https:\/\/www\.flickr\.com\/photos\/[^/]+\/\d+\/$/.test(trim(r.page_url));
-    if (!commons && !inat && !flickr) return errors.push(`${where}: needs a Commons 500px thumbnail and its File: page, an iNaturalist medium photo and its observation page, or a Flickr 640px (_z) image and its photo page`);
+    const flickr = /^https:\/\/live\.staticflickr\.com\/\d+\/\d+_[0-9a-f]+(_z)?\.jpg$/.test(trim(r.image_url)) && /^https:\/\/www\.flickr\.com\/photos\/[^/]+\/\d+\/$/.test(trim(r.page_url));
+    if (!commons && !inat && !flickr) return errors.push(`${where}: needs a Commons 500px thumbnail and its File: page, an iNaturalist medium photo and its observation page, or a Flickr 640px (_z) or 500px image and its photo page`);
     if (!FREE.test(trim(r.license))) return errors.push(`${where}: license "${trim(r.license)}" is not one that allows reuse with credit`);
     if (!trim(r.author)) return errors.push(`${where}: author is empty; credit is a condition of the license`);
     // What the photo shows that agrees with taxa.csv's record of that part:

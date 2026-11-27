@@ -162,7 +162,7 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [x] **Beautybush**, leaves (`kolkwitzia-amabilis`, leaves).
 - [x] **Pieris**, bark (`pieris-japonica`, bark).
 - [ ] **Cistena plum**, fruit (`prunus-x-cistena`, fruit). Black, July and August.
-- [ ] **Anglojap yew**, bark (`taxus-x-media`, bark). Reddish-brown, flaking.
+- [x] **Anglojap yew**, bark (`taxus-x-media`, bark). Reddish-brown, flaking.
 - [x] **Anglojap yew**, fruit (`taxus-x-media`, fruit). Red arils in fall.
 
 ## Photos to replace: hands and props

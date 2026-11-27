@@ -184,7 +184,7 @@ function leafCaption(t) {
 function partShot(t, label, p, credits, creditWhat) {
   const big = p.site === 'iNaturalist' ? p.image.replace('/medium.', '/large.')
     : p.site === 'Flickr' ? p.image.replace(/_z\.jpg$/, '_b.jpg') : p.image.replace('/500px-', '/960px-');
-  const [smallW, bigW] = p.site === 'iNaturalist' ? [500, 1024] : p.site === 'Flickr' ? [640, 1024] : [500, 960];
+  const [smallW, bigW] = p.site === 'iNaturalist' ? [500, 1024] : p.site === 'Flickr' ? (/_z\.jpg$/.test(p.image) ? [640, 1024] : [500, 500]) : [500, 960];
   return {
     mark: footnote(credits, esc(creditWhat), p),
     html: `<button type="button" class="shot-open" aria-label="Show the photo of the ${esc(label.toLowerCase())} full size" data-full="${esc(big)}" data-credit="${esc(`${label}. Photo: ${p.author}, ${p.license}, ${p.site}`)}">
