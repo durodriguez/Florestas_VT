@@ -12,29 +12,28 @@ same list, with links, is on the site at /species/progress/.
 | --- | --- | --- | --- |
 | On campus: species | 102 | 96 | 99% |
 | On campus: hybrids | 3 | 0 | 86% |
-| On campus: cultivars and forms | 10 | 3 | 77% |
+| On campus: cultivars and forms | 10 | 3 | 81% |
 | On campus: named only to genus | 13 | 13 | 100% |
 | Not yet mapped: species | 176 | 124 | 96% |
-| Not yet mapped: hybrids | 16 | 7 | 86% |
-| Not yet mapped: cultivars and forms | 88 | 19 | 76% |
+| Not yet mapped: hybrids | 16 | 7 | 87% |
+| Not yet mapped: cultivars and forms | 88 | 19 | 80% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 272 | 92% |
+| **All** | 418 | 272 | 93% |
 
 ## Most often missing
 
 - know it by photos (4): 104 pages
 - worth knowing (3): 74 pages
 - know it by notes: 50 pages
-- growing details: 32 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
 
 ## On campus: pages with gaps
 
-- [ ] **Tom Thumb cotoneaster** (`cotoneaster-tom-thumb`, 1 on campus): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Snow Fountains weeping cherry** (`prunus-snofozam`, 1 on campus): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (1 of 4); know it by notes (none on flowers)
-- [ ] **Green Giant arborvitae** (`thuja-green-giant`, 4 on campus): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (1 of 4)
+- [ ] **Tom Thumb cotoneaster** (`cotoneaster-tom-thumb`, 1 on campus): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
 - [ ] **Crimson Cloud hawthorn** (`crataegus-laevigata-crimson-cloud`, 1 on campus): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4); know it by notes (none on bark)
+- [ ] **Snow Fountains weeping cherry** (`prunus-snofozam`, 1 on campus): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4); know it by notes (none on flowers)
+- [ ] **Green Giant arborvitae** (`thuja-green-giant`, 4 on campus): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4)
 - [ ] **Dragon's claw willow** (`salix-matsudana-tortuosa`, 2 on campus): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
 - [ ] **Anglojap yew** (`taxus-x-media`, 4 on campus): know it by photos (4) (3 of 4)
 - [ ] **English ivy** (`hedera-helix`, 1 on campus): know it by photos (4) (3 of 4)
@@ -50,49 +49,47 @@ same list, with links, is on the site at /species/progress/.
 
 ## Not yet mapped: pages with gaps
 
-- [ ] **Harvest Gold linden** (`tilia-x-mongolica`): worth knowing (3) (1 of 3); growing details (lifespan); crown shape; know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Hybrid paperbark maple** (`acer-griseum-x-maximowiczianum`): growing details (lifespan); where it grows wild; crown shape; know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Ann magnolia** (`magnolia-ann`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (2 of 4); know it by notes (none on leaves, flowers)
-- [ ] **Brouwer's Beauty andromeda** (`pieris-brouwers-beauty`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (1 of 4); know it by notes (none on flowers)
-- [ ] **Dwarf Everbearing black mulberry** (`morus-nigra-dwarf-everbearing`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (3 of 4); know it by notes (none on bark, leaves, fruit)
-- [ ] **PJM rhododendron** (`rhododendron-pjm`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (2 of 4); know it by notes (none on leaves, flowers)
-- [ ] **Rosy Lights azalea** (`rhododendron-rosy-lights`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (2 of 4); know it by notes (none on leaves, flowers)
-- [ ] **Triple Crown thornless blackberry** (`rubus-triple-crown`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (1 of 4); know it by notes (none on flowers)
-- [ ] **Verdant Hills boxwood** (`buxus-verdant-hills`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Accolade elm** (`ulmus-morton`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Cameo magnolia** (`magnolia-cameo`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Donald Wyman crabapple** (`malus-donald-wyman`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Gold Star magnolia** (`magnolia-gold-star`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (1 of 4); know it by notes (none on flowers)
-- [ ] **Golden Raindrops crabapple** (`malus-schmidtcutleaf`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Heritage oak** (`quercus-x-macdanielii-clemons`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Judy Zuk magnolia** (`magnolia-judy-zuk`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Prairifire crabapple** (`malus-prairifire`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Royal Frost birch** (`betula-penci-2`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Shirazz magnolia** (`magnolia-shirazz`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (1 of 4); know it by notes (none on flowers)
-- [ ] **Triumph elm** (`ulmus-morton-glossy`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (1 of 4); know it by notes (none on leaves)
-- [ ] **Ultimate Yellow magnolia** (`magnolia-ultimate-yellow`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Blue Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodthree`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (2 of 4)
-- [ ] **Fall Gold raspberry** (`rubus-idaeus-fall-gold`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (3 of 4)
+- [ ] **Harvest Gold linden** (`tilia-x-mongolica`): worth knowing (3) (1 of 3); crown shape; know it by photos (4) (0 of 4); know it by notes (no tiles yet)
+- [ ] **Hybrid paperbark maple** (`acer-griseum-x-maximowiczianum`): where it grows wild; crown shape; know it by photos (4) (0 of 4); know it by notes (no tiles yet)
+- [ ] **Ann magnolia** (`magnolia-ann`): worth knowing (3) (1 of 3); know it by photos (4) (2 of 4); know it by notes (none on leaves, flowers)
+- [ ] **Brouwer's Beauty andromeda** (`pieris-brouwers-beauty`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4); know it by notes (none on flowers)
+- [ ] **Dwarf Everbearing black mulberry** (`morus-nigra-dwarf-everbearing`): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4); know it by notes (none on bark, leaves, fruit)
 - [ ] **Karl Foerster feather reed grass** (`calamagrostis-x-acutiflora-karl-foerster`): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
-- [ ] **Miss Kim lilac** (`syringa-pubescens-patula-miss-kim`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (1 of 4)
-- [ ] **Show Off forsythia** (`forsythia-x-intermedia-mindor`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (2 of 4)
-- [ ] **White Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodtwo`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (3 of 4)
+- [ ] **PJM rhododendron** (`rhododendron-pjm`): worth knowing (3) (1 of 3); know it by photos (4) (2 of 4); know it by notes (none on leaves, flowers)
+- [ ] **Rosy Lights azalea** (`rhododendron-rosy-lights`): worth knowing (3) (1 of 3); know it by photos (4) (2 of 4); know it by notes (none on leaves, flowers)
+- [ ] **Triple Crown thornless blackberry** (`rubus-triple-crown`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4); know it by notes (none on flowers)
+- [ ] **Verdant Hills boxwood** (`buxus-verdant-hills`): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
+- [ ] **Accolade elm** (`ulmus-morton`): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
 - [ ] **Autumn Brilliance serviceberry** (`amelanchier-x-grandiflora-autumn-brilliance`): worth knowing (3) (1 of 3); know it by photos (4) (2 of 4); know it by notes (none on bark, flowers)
-- [ ] **Elizabeth magnolia** (`magnolia-elizabeth`): worth knowing (3) (1 of 3); growing details (lifespan); know it by photos (4) (1 of 4)
+- [ ] **Cameo magnolia** (`magnolia-cameo`): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
+- [ ] **Donald Wyman crabapple** (`malus-donald-wyman`): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
+- [ ] **Gold Star magnolia** (`magnolia-gold-star`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4); know it by notes (none on flowers)
+- [ ] **Golden Raindrops crabapple** (`malus-schmidtcutleaf`): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
+- [ ] **Heritage oak** (`quercus-x-macdanielii-clemons`): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
+- [ ] **Judy Zuk magnolia** (`magnolia-judy-zuk`): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
+- [ ] **Prairifire crabapple** (`malus-prairifire`): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
+- [ ] **Royal Frost birch** (`betula-penci-2`): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
+- [ ] **Shirazz magnolia** (`magnolia-shirazz`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4); know it by notes (none on flowers)
+- [ ] **Triumph elm** (`ulmus-morton-glossy`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4); know it by notes (none on leaves)
+- [ ] **Ultimate Yellow magnolia** (`magnolia-ultimate-yellow`): worth knowing (3) (1 of 3); know it by photos (4) (0 of 4); know it by notes (no tiles yet)
 - [ ] **Adagio maiden grass** (`miscanthus-sinensis-adagio`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4)
+- [ ] **Blue Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodthree`): worth knowing (3) (1 of 3); know it by photos (4) (2 of 4)
 - [ ] **Blue Mist dwarf fothergilla** (`fothergilla-gardenii-blue-mist`): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
 - [ ] **Brilliance autumn fern** (`dryopteris-erythrosora-brilliance`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4)
 - [ ] **Bush honeysuckle** (`diervilla-lonicera`): know it by photos (4) (3 of 4); know it by notes (none on leaves, flowers, fruit)
+- [ ] **Fall Gold raspberry** (`rubus-idaeus-fall-gold`): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
 - [ ] **Gracillimus maiden grass** (`miscanthus-sinensis-gracillimus`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4)
-- [ ] **Mariesii doublefile viburnum** (`viburnum-plicatum-tomentosum-mariesii`): worth knowing (3) (1 of 3); growing details (lifespan)
+- [ ] **Miss Kim lilac** (`syringa-pubescens-patula-miss-kim`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4)
 - [ ] **Picta Japanese kerria** (`kerria-japonica-picta`): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
 - [ ] **Pleniflora Japanese kerria** (`kerria-japonica-pleniflora`): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
-- [ ] **Speckled alder** (`alnus-incana-rugosa`): worth knowing (3) (1 of 3); growing details (lifespan)
+- [ ] **Show Off forsythia** (`forsythia-x-intermedia-mindor`): worth knowing (3) (1 of 3); know it by photos (4) (2 of 4)
+- [ ] **White Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodtwo`): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
 - [ ] **Armstrong Freeman maple** (`acer-x-freemanii-armstrong`): worth knowing (3) (1 of 3); know it by notes (none on flowers)
 - [ ] **Arnold horsechestnut** (`aesculus-x-arnoldiana`): know it by photos (4) (0 of 4); know it by notes (no tiles yet)
 - [ ] **Autumn Blaze maple** (`acer-x-freemanii-autumn-blaze`): worth knowing (3) (1 of 3); know it by notes (none on flowers)
 - [ ] **Copper Curls Peking lilac** (`syringa-pekinensis-copper-curls`): worth knowing (3) (1 of 3); know it by photos (4) (3 of 4)
 - [ ] **Crimson Spire oak** (`quercus-x-bimundorum`): know it by photos (4) (0 of 4); know it by notes (no tiles yet)
+- [ ] **Elizabeth magnolia** (`magnolia-elizabeth`): worth knowing (3) (1 of 3); know it by photos (4) (1 of 4)
 - [ ] **Japanese flowering crabapple** (`malus-floribunda`): know it by photos (4) (2 of 4); know it by notes (none on flowers, fruit)
 - [ ] **Korean maple** (`acer-pseudosieboldianum`): know it by photos (4) (3 of 4); know it by notes (none on bark)
 - [ ] **Korean sun pear** (`pyrus-fauriei`): know it by photos (4) (1 of 4); know it by notes (none on bark)
@@ -121,12 +118,14 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Japanese kerria** (`kerria-japonica`): know it by photos (4) (3 of 4)
 - [ ] **Lady fern** (`athyrium-filix-femina`): know it by photos (4) (2 of 4)
 - [ ] **Large fothergilla** (`fothergilla-major`): know it by photos (4) (3 of 4)
+- [ ] **Mariesii doublefile viburnum** (`viburnum-plicatum-tomentosum-mariesii`): worth knowing (3) (1 of 3)
 - [ ] **New York fern** (`amauropelta-noveboracensis`): know it by photos (4) (1 of 4)
 - [ ] **Northern maidenhair fern** (`adiantum-pedatum`): know it by photos (4) (2 of 4)
 - [ ] **Ostrich fern** (`matteuccia-struthiopteris`): know it by photos (4) (2 of 4)
 - [ ] **Patriot highbush blueberry** (`vaccinium-corymbosum-patriot`): worth knowing (3) (1 of 3)
 - [ ] **Ragin Red redosier dogwood** (`cornus-sericea-ragin-red`): worth knowing (3) (1 of 3)
 - [ ] **Sargent crabapple** (`malus-sargentii`): know it by notes (none on bark)
+- [ ] **Speckled alder** (`alnus-incana-rugosa`): worth knowing (3) (1 of 3)
 - [ ] **Amur chokecherry** (`prunus-maackii`): know it by notes (none on fruit)
 - [ ] **Apple serviceberry** (`amelanchier-x-grandiflora`): know it by photos (4) (2 of 4)
 - [ ] **Atlantic white cedar** (`chamaecyparis-thyoides`): know it by photos (4) (3 of 4)
