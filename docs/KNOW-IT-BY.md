@@ -260,3 +260,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: sequoia-sempervirens, sequoiadendron-giganteum, spiraea-japonica, staphylea-trifolia, styphnolobium-japonicum, styrax-japonicus.
 - 27 Nov 2026: syringa-pekinensis, syringa-pubescens-patula-miss-kim, taxodium-ascendens, taxus-baccata, tilia-mongolica, tilia-platyphyllos, tilia-x-europaea.
 - 27 Nov 2026: ulmus-americana, ulmus-davidiana-japonica, ulmus-glabra, ulmus-parvifolia, ulmus-pumila, ulmus-rubra.
+- 27 Nov 2026: vaccinium-corymbosum, viburnum-dentatum, viburnum-lentago, viburnum-plicatum-tomentosum-mariesii, viburnum-prunifolium, weigela-florida.
