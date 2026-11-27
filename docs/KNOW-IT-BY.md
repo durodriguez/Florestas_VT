@@ -241,3 +241,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: cotoneaster-adpressus, crataegus-ambigua, crataegus-crus-galli, crataegus-laevigata, crataegus-viridis, cryptomeria-japonica.
 - 27 Nov 2026: diervilla-lonicera, diospyros-virginiana, dryopteris-erythrosora-brilliance, eucommia-ulmoides, euonymus-alatus, euonymus-fortunei.
 - 27 Nov 2026: forsythia-x-intermedia-mindor, fothergilla-gardenii, fothergilla-major, fraxinus-americana, fraxinus-excelsior, fraxinus-quadrangulata.
+- 27 Nov 2026: gleditsia-triacanthos, hamamelis-x-intermedia, hibiscus-syriacus-notwoodthree, hibiscus-syriacus-notwoodtwo, hydrangea-arborescens, hydrangea-paniculata.
