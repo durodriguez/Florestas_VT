@@ -66,10 +66,19 @@ apple, downy serviceberry, southern magnolia):
 - **Do not repeat** the page's description, fun fact, *Worth knowing* items
   or *Characteristics*. Read them first. Where the description already makes
   the point, add a different detail.
-- **Every claim from the cited source.** One expert source per note is
-  enough (NC State Plant Toolbox, Silvics, FEIS, Trees and Shrubs Online,
-  an extension service), never Wikipedia alone. Re-read the note against the
-  source after writing it, and cut what the source does not say.
+- **Write first, then check (owner's rule, November 2026).** Draft the
+  note from what you know of the plant, then check every claim against
+  sources and revise: cut or correct what they do not bear out. Do not
+  start from one page and paraphrase it; notes written that way read as
+  copied. Check against more than one site where you can: Morton
+  Arboretum, Missouri Botanical Garden's Plant Finder, Trees and Shrubs
+  Online, the Forest Service's Silvics and FEIS, Oregon State Landscape
+  Plants, university extension services and arboreta, the Gymnosperm
+  Database, Flora of North America. Cite the ones that confirmed the note.
+  NC State's Plant Toolbox is one source among these, not the default:
+  989 of the 1,113 notes written by November 2026 cite it alone, because
+  its pages describe each part in labelled fields and were read first.
+  Never Wikipedia alone.
 - **Our own words.** Never copy the book's captions or a source's sentences;
   both are copyrighted.
 
