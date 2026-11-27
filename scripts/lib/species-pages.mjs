@@ -182,11 +182,13 @@ function leafCaption(t) {
 
 /** One photo of a tile, a button that shows it full size. */
 function partShot(t, label, p, credits, creditWhat) {
-  const big = p.site === 'iNaturalist' ? p.image.replace('/medium.', '/large.') : p.image.replace('/500px-', '/960px-');
+  const big = p.site === 'iNaturalist' ? p.image.replace('/medium.', '/large.')
+    : p.site === 'Flickr' ? p.image.replace(/_z\.jpg$/, '_b.jpg') : p.image.replace('/500px-', '/960px-');
+  const [smallW, bigW] = p.site === 'iNaturalist' ? [500, 1024] : p.site === 'Flickr' ? (/_z\.jpg$/.test(p.image) ? [640, 1024] : [500, 500]) : [500, 960];
   return {
     mark: footnote(credits, esc(creditWhat), p),
     html: `<button type="button" class="shot-open" aria-label="Show the photo of the ${esc(label.toLowerCase())} full size" data-full="${esc(big)}" data-credit="${esc(`${label}. Photo: ${p.author}, ${p.license}, ${p.site}`)}">
-        <img src="${esc(p.image)}" srcset="${esc(p.image)} 500w, ${esc(big)} ${p.site === 'iNaturalist' ? 1024 : 960}w" sizes="(max-width: 48rem) 50vw, 15rem" alt="${esc(`${label} of ${t.common.toLowerCase()}`)}" loading="lazy">
+        <img src="${esc(p.image)}" srcset="${esc(p.image)} ${smallW}w, ${esc(big)} ${bigW}w" sizes="(max-width: 48rem) 50vw, 15rem" alt="${esc(`${label} of ${t.common.toLowerCase()}`)}" loading="lazy">
       </button>`,
   };
 }
@@ -582,10 +584,11 @@ const SORT_JS = `(() => {
   const rows = [...list.children];
   const byCommon = rows.slice();
   const bySci = rows.slice().sort((a, b) => a.dataset.sci.localeCompare(b.dataset.sci));
-  // By plant type: a heading for each group, then its species by common name.
+  // By plant type: a heading for each group, then its species by scientific
+  // name, scientific name first (owner's request, November 2026).
   const byType = [];
   for (const [type, label] of JSON.parse(list.dataset.groups)) {
-    const members = byCommon.filter((r) => r.dataset.type === type);
+    const members = bySci.filter((r) => r.dataset.type === type);
     if (!members.length) continue;
     const h = document.createElement('li');
     h.className = 'idx-group';
@@ -597,8 +600,8 @@ const SORT_JS = `(() => {
     byType.push(h, ...members);
   }
   const apply = (mode, push) => {
-    const sci = mode === 'scientific';
-    list.replaceChildren(...(sci ? bySci : mode === 'type' ? byType : byCommon));
+    const sci = mode === 'scientific' || mode === 'type';
+    list.replaceChildren(...(mode === 'scientific' ? bySci : mode === 'type' ? byType : byCommon));
     list.classList.toggle('by-sci', sci);
     // Lead each row with the name it is sorted by.
     for (const a of list.querySelectorAll('a')) {

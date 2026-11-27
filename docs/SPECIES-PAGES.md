@@ -686,7 +686,17 @@ loads the 500 px thumbnail from Wikimedia, and the 960 px one on a sharp screen.
 
 Where Commons has nothing usable, a photo can come from iNaturalist instead:
 from a research-grade observation (its species confirmed by other observers),
-credited "iNaturalist" and linked to the observation. The photos are links,
+credited "iNaturalist" and linked to the observation. A photo the owner picks on
+Flickr can be used too (November 2026; tried for the bald cypress knees, then replaced by a Commons photo without a watermark), under the
+same licenses: the 640 px image (`_z.jpg` on live.staticflickr.com), the
+1024 px one (`_b`) full size, credited "Flickr" and linked to its photo
+page, as Flickr's terms ask. NC State's Plant Toolbox carries many openly licensed photos in
+each entry, credited and licensed photo by photo, and is a good place to
+find one (owner, November 2026). Its image links are signed and expire
+within hours, so a photo found there is linked at its original home
+(Flickr, Commons or iNaturalist) when that can be traced, never at NC
+State. Its photos under no-derivatives licenses (CC BY-NC-ND and the like)
+stay excluded, as everywhere. The photos are links,
 not files: the repository holds one line per photo, and visitors' browsers
 fetch each from Wikimedia or iNaturalist.
 

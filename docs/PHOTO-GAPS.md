@@ -162,7 +162,7 @@ A close photo of the one part, in focus, works best: the tile is small.
 - [x] **Beautybush**, leaves (`kolkwitzia-amabilis`, leaves).
 - [x] **Pieris**, bark (`pieris-japonica`, bark).
 - [ ] **Cistena plum**, fruit (`prunus-x-cistena`, fruit). Black, July and August.
-- [ ] **Anglojap yew**, bark (`taxus-x-media`, bark). Reddish-brown, flaking.
+- [x] **Anglojap yew**, bark (`taxus-x-media`, bark). Reddish-brown, flaking.
 - [x] **Anglojap yew**, fruit (`taxus-x-media`, fruit). Red arils in fall.
 
 ## Photos to replace: hands and props
@@ -178,7 +178,6 @@ better than none. Delete a line once its photo is replaced.
 - **Common baldcypress**, flowers — `taxodium-distichum` (13 on campus)
 - **Bigtooth aspen**, flowers — `populus-grandidentata` (4 on campus)
 - **Dragon's claw willow**, fruit — `salix-matsudana-tortuosa` (2 on campus)
-- **White fir**, fruit — `abies-concolor` (2 on campus)
 - **Allegheny serviceberry**, bark — `amelanchier-laevis`
 - **Atlantic white cedar**, fruit — `chamaecyparis-thyoides`
 - **Black willow**, leaves — `salix-nigra`
