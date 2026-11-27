@@ -212,3 +212,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: pinus-strobus, quercus-rubra, betula-nigra, quercus-bicolor,
   acer-platanoides.
 - 27 Nov 2026: acer-x-freemanii, picea-pungens, acer-saccharum, acer-rubrum, pinus-nigra.
+- 27 Nov 2026: quercus-palustris, thuja-occidentalis, picea-glauca, tilia-cordata, picea-abies.
