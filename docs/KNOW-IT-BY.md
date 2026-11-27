@@ -238,3 +238,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: carya-ovata, carya-tomentosa, castanea-mollissima, catalpa-bignonioides, cedrus-atlantica, cedrus-libani.
 - 27 Nov 2026: celtis-laevigata, cephalanthus-occidentalis, cercis-chinensis, chamaecyparis-pisifera, chamaecyparis-thyoides, chionanthus-retusus.
 - 27 Nov 2026: clethra-barbinervis, cornus-officinalis, cornus-racemosa, cornus-sericea, corylus-avellana, cotinus-obovatus.
+- 27 Nov 2026: cotoneaster-adpressus, crataegus-ambigua, crataegus-crus-galli, crataegus-laevigata, crataegus-viridis, cryptomeria-japonica.
