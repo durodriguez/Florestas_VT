@@ -253,3 +253,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: pinus-parviflora, pinus-rigida, platanus-x-acerifolia, polystichum-acrostichoides, populus-alba, populus-balsamifera.
 - 27 Nov 2026: populus-deltoides, populus-tremuloides, prunus-americana, prunus-cerasifera, prunus-cerasus, prunus-maackii.
 - 27 Nov 2026: prunus-padus, prunus-pennsylvanica, prunus-persica, prunus-serrulata, prunus-subhirtella, prunus-virginiana.
+- 27 Nov 2026: prunus-x-yedoensis, pyrus-communis, quercus-acutissima, quercus-coccinea, quercus-hemisphaerica, quercus-lyrata.
