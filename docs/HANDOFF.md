@@ -105,3 +105,8 @@ Shrubs Online, Silvics, FEIS and Oregon State as well). A note redone this
 way keeps its row; its text, source and source_url change. Progress: the
 redone species are listed in KNOW-IT-BY.md, "Redone by the default
 method".
+
+Paused 27 November 2026 at the owner's request, unmerged on the session
+branch: 123 species (468 notes) redone, 187 species (669 notes) left. The
+next in line are acer-tataricum, acer-truncatum, adiantum-pedatum and the
+buckeyes. Order: most trees on campus first, then alphabetical.
