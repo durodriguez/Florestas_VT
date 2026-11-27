@@ -257,3 +257,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: quercus-montana, quercus-muehlenbergii, quercus-phellos, quercus-shumardii, quercus-stellata, quercus-velutina.
 - 27 Nov 2026: rhododendron-catawbiense, rhus-aromatica, rhus-typhina, robinia-pseudoacacia-purple-robe, rosa-multiflora, rubus-idaeus-fall-gold.
 - 27 Nov 2026: rubus-thibetanus, salix-alba, salix-babylonica, salix-matsudana, salix-nigra, sambucus-canadensis.
+- 27 Nov 2026: sequoia-sempervirens, sequoiadendron-giganteum, spiraea-japonica, staphylea-trifolia, styphnolobium-japonicum, styrax-japonicus.
