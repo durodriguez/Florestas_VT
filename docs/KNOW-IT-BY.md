@@ -220,3 +220,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: quercus-alba, liquidambar-styraciflua, metasequoia-glyptostroboides, tilia-tomentosa, acer-campestre, cotinus-coggygria.
 - 27 Nov 2026: fagus-grandifolia, ostrya-virginiana, betula-alleghaniensis, betula-populifolia, callitropsis-nootkatensis, chionanthus-virginicus.
 - 27 Nov 2026: populus-grandidentata, quercus-imbricaria, quercus-robur, taxus-x-media, thuja-green-giant, acer-negundo.
+- 27 Nov 2026: acer-triflorum, cercidiphyllum-japonicum, clethra-alnifolia, cornus-kousa, fagus-sylvatica, fraxinus-pennsylvanica.
