@@ -179,7 +179,7 @@ each other's part; they are now the right way round.
    - [x] `viburnum-plicatum-tomentosum-mariesii`, leaves: https://www.inaturalist.org/observations/353215802
    - [x] `weigela-florida`, leaves: https://www.inaturalist.org/observations/191556061
    - [x] `fothergilla-major`, leaves: https://www.inaturalist.org/observations/196874244
-   - [x] `quercus-phellos`, flowers (removed; no clean replacement found yet): https://www.inaturalist.org/observations/154113129
+   - [x] `quercus-phellos`, flowers (removed; replaced 27 November 2026 with iNaturalist observation 155045108, catkins among the leaves): https://www.inaturalist.org/observations/154113129
    - [x] `viburnum-lentago`, bark (removed; no clean replacement found yet): https://www.inaturalist.org/observations/20764350
    - [x] `fraxinus-quadrangulata`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/39389456
    - [x] `salix-matsudana-tortuosa`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/8405816
