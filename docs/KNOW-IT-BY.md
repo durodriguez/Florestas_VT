@@ -232,3 +232,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: acer-buergeranum, acer-ginnala, acer-miyabei, acer-nigrum, acer-pseudoplatanus, acer-pseudosieboldianum.
 - 27 Nov 2026: acer-tataricum, acer-truncatum, adiantum-pedatum, aesculus-flava, aesculus-glabra, aesculus-parviflora.
 - 27 Nov 2026: aesculus-pavia, aesculus-x-carnea, ailanthus-altissima, albizia-julibrissin, alnus-glutinosa, alnus-hirsuta.
+- 27 Nov 2026: alnus-incana-rugosa, amauropelta-noveboracensis, amelanchier-arborea, amelanchier-canadensis, amelanchier-laevis, amelanchier-x-grandiflora.
