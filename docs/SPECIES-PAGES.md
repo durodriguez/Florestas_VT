@@ -687,7 +687,7 @@ loads the 500 px thumbnail from Wikimedia, and the 960 px one on a sharp screen.
 Where Commons has nothing usable, a photo can come from iNaturalist instead:
 from a research-grade observation (its species confirmed by other observers),
 credited "iNaturalist" and linked to the observation. A photo the owner picks on
-Flickr can be used too (November 2026, the bald cypress knees), under the
+Flickr can be used too (November 2026; tried for the bald cypress knees, then replaced by a Commons photo without a watermark), under the
 same licenses: the 640 px image (`_z.jpg` on live.staticflickr.com), the
 1024 px one (`_b`) full size, credited "Flickr" and linked to its photo
 page, as Flickr's terms ask. The photos are links,
