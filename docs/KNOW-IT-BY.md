@@ -225,3 +225,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: abies-concolor, acer-griseum, acer-platanoides-crimson-king, betula-lenta, buxus-sempervirens, celtis-occidentalis.
 - 27 Nov 2026: cladrastis-kentukea, cornus-florida, halesia-tetraptera, phellodendron-amurense, prunus-serotina, salix-matsudana-tortuosa.
 - 27 Nov 2026: sorbus-aucuparia, stewartia-pseudocamellia, syringa-vulgaris, abies-nordmanniana, acer-palmatum, carpinus-betulus.
+- 27 Nov 2026: chamaecyparis-obtusa, cornus-alternifolia, cornus-mas, corylus-colurna, elaeagnus-angustifolia, hedera-helix.
