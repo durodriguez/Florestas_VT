@@ -225,7 +225,7 @@ function defaultTiles(t, photos) {
  * else that part's default tile in its place. Without written ones, the four
  * defaults.
  */
-function chooseTiles(t, photos, know) {
+export function chooseTiles(t, photos, know) {
   const defaults = defaultTiles(t, photos);
   if (!know?.length) return defaults;
   const tiles = [];
