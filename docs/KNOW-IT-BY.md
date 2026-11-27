@@ -243,3 +243,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: forsythia-x-intermedia-mindor, fothergilla-gardenii, fothergilla-major, fraxinus-americana, fraxinus-excelsior, fraxinus-quadrangulata.
 - 27 Nov 2026: gleditsia-triacanthos, hamamelis-x-intermedia, hibiscus-syriacus-notwoodthree, hibiscus-syriacus-notwoodtwo, hydrangea-arborescens, hydrangea-paniculata.
 - 27 Nov 2026: hydrangea-quercifolia, ilex-glabra, ilex-opaca, ilex-verticillata, ilex-x-meserveae, iris-sibirica.
+- 27 Nov 2026: itea-virginica, juglans-cinerea, juglans-regia, juniperus-chinensis, juniperus-communis, juniperus-horizontalis.
