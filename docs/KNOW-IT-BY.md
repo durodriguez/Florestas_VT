@@ -252,3 +252,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: picea-rubens, pinus-bungeana, pinus-cembra, pinus-flexilis, pinus-heldreichii, pinus-mugo.
 - 27 Nov 2026: pinus-parviflora, pinus-rigida, platanus-x-acerifolia, polystichum-acrostichoides, populus-alba, populus-balsamifera.
 - 27 Nov 2026: populus-deltoides, populus-tremuloides, prunus-americana, prunus-cerasifera, prunus-cerasus, prunus-maackii.
+- 27 Nov 2026: prunus-padus, prunus-pennsylvanica, prunus-persica, prunus-serrulata, prunus-subhirtella, prunus-virginiana.
