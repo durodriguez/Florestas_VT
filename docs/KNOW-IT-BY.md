@@ -249,3 +249,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: magnolia-stellata, magnolia-tripetala, magnolia-x-loebneri, magnolia-x-soulangiana, malus-coronaria, malus-floribunda.
 - 27 Nov 2026: malus-sargentii, matteuccia-struthiopteris, miscanthus-sinensis-adagio, miscanthus-sinensis-gracillimus, morus-rubra, oxydendrum-arboreum.
 - 27 Nov 2026: parrotia-persica, parthenocissus-quinquefolia, parthenocissus-tricuspidata, physocarpus-opulifolius, picea-omorika, picea-orientalis.
+- 27 Nov 2026: picea-rubens, pinus-bungeana, pinus-cembra, pinus-flexilis, pinus-heldreichii, pinus-mugo.
