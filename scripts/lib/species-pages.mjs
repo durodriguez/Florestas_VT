@@ -584,10 +584,11 @@ const SORT_JS = `(() => {
   const rows = [...list.children];
   const byCommon = rows.slice();
   const bySci = rows.slice().sort((a, b) => a.dataset.sci.localeCompare(b.dataset.sci));
-  // By plant type: a heading for each group, then its species by common name.
+  // By plant type: a heading for each group, then its species by scientific
+  // name, scientific name first (owner's request, November 2026).
   const byType = [];
   for (const [type, label] of JSON.parse(list.dataset.groups)) {
-    const members = byCommon.filter((r) => r.dataset.type === type);
+    const members = bySci.filter((r) => r.dataset.type === type);
     if (!members.length) continue;
     const h = document.createElement('li');
     h.className = 'idx-group';
@@ -599,8 +600,8 @@ const SORT_JS = `(() => {
     byType.push(h, ...members);
   }
   const apply = (mode, push) => {
-    const sci = mode === 'scientific';
-    list.replaceChildren(...(sci ? bySci : mode === 'type' ? byType : byCommon));
+    const sci = mode === 'scientific' || mode === 'type';
+    list.replaceChildren(...(mode === 'scientific' ? bySci : mode === 'type' ? byType : byCommon));
     list.classList.toggle('by-sci', sci);
     // Lead each row with the name it is sorted by.
     for (const a of list.querySelectorAll('a')) {
