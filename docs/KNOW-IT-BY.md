@@ -246,3 +246,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: itea-virginica, juglans-cinerea, juglans-regia, juniperus-chinensis, juniperus-communis, juniperus-horizontalis.
 - 27 Nov 2026: juniperus-scopulorum, juniperus-virginiana, kerria-japonica, koelreuteria-paniculata, larix-decidua, larix-laricina.
 - 27 Nov 2026: ligustrum-vulgare, lonicera-maackii, maclura-pomifera, magnolia-acuminata, magnolia-elizabeth, magnolia-grandiflora.
+- 27 Nov 2026: magnolia-stellata, magnolia-tripetala, magnolia-x-loebneri, magnolia-x-soulangiana, malus-coronaria, malus-floribunda.
