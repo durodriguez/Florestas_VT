@@ -117,7 +117,7 @@ each other's part; they are now the right way round.
 1. **Species showing fewer than four written tiles: 30.** 47 got a fourth
    tile on 27 November 2026 (Shape for shrubs and conifers, Fall color,
    Thorny twigs, bark, pollen cones). Left: mostly oaks (catkins), pines,
-   and parts whose photo the audit removed: acer-triflorum, caragana-arborescens, carya-laciniosa, castanea-mollissima, chamaecyparis-thyoides, fraxinus-quadrangulata, ilex-x-meserveae, larix-laricina, magnolia-macrophylla, pinus-cembra, pinus-flexilis, pinus-parviflora, pinus-resinosa, pinus-rigida, populus-grandidentata, prunus-cerasifera, prunus-maackii, prunus-persica, prunus-x-cistena, prunus-x-yedoensis, ptelea-trifoliata, quercus-coccinea, quercus-hemisphaerica, quercus-lyrata, quercus-montana, quercus-phellos, quercus-shumardii, ulmus-parvifolia, viburnum-lentago.
+   and parts whose photo the audit removed: acer-triflorum, caragana-arborescens, carya-laciniosa, castanea-mollissima, fraxinus-quadrangulata, ilex-x-meserveae, larix-laricina, pinus-cembra, pinus-flexilis, pinus-parviflora, pinus-resinosa, pinus-rigida, populus-grandidentata, prunus-cerasifera, prunus-maackii, prunus-persica, prunus-x-cistena, prunus-x-yedoensis, ptelea-trifoliata, quercus-coccinea, quercus-hemisphaerica, quercus-lyrata, quercus-shumardii, ulmus-parvifolia, viburnum-lentago.
 1b. **Default tiles still showing (27 November 2026).** A tile with a photo
    but no written note shows the old caption (color and months from
    taxa.csv). The build marks them (`part--default`), so they can be counted:

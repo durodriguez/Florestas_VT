@@ -14,15 +14,15 @@ same list, with links, is on the site at /species/progress/.
 | On campus: hybrids | 3 | 0 | 86% |
 | On campus: cultivars and forms | 10 | 5 | 91% |
 | On campus: named only to genus | 13 | 13 | 100% |
-| Not yet mapped: species | 176 | 133 | 97% |
+| Not yet mapped: species | 176 | 135 | 97% |
 | Not yet mapped: hybrids | 16 | 7 | 87% |
 | Not yet mapped: cultivars and forms | 88 | 46 | 90% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 314 | 96% |
+| **All** | 418 | 316 | 96% |
 
 ## Most often missing
 
-- know it by photos (4): 99 pages
+- know it by photos (4): 97 pages
 - know it by notes: 38 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
@@ -103,13 +103,11 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **White Chiffon rose of Sharon** (`hibiscus-syriacus-notwoodtwo`): know it by photos (4) (3 of 4)
 - [ ] **Apple serviceberry** (`amelanchier-x-grandiflora`): know it by photos (4) (2 of 4)
 - [ ] **Armstrong Freeman maple** (`acer-x-freemanii-armstrong`): know it by notes (none on flowers)
-- [ ] **Atlantic white cedar** (`chamaecyparis-thyoides`): know it by photos (4) (3 of 4)
 - [ ] **Atlas cedar** (`cedrus-atlantica`): know it by photos (4) (1 of 4)
 - [ ] **Autumn Blaze maple** (`acer-x-freemanii-autumn-blaze`): know it by notes (none on flowers)
 - [ ] **Autumn Gold ginkgo** (`ginkgo-biloba-autumn-gold`): know it by photos (4) (3 of 4)
 - [ ] **Blue ash** (`fraxinus-quadrangulata`): know it by photos (4) (2 of 4)
 - [ ] **Cedar of Lebanon** (`cedrus-libani`): know it by photos (4) (3 of 4)
-- [ ] **Chestnut oak** (`quercus-montana`): know it by photos (4) (3 of 4)
 - [ ] **Chinese juniper** (`juniperus-chinensis`): know it by photos (4) (3 of 4)
 - [ ] **Copper Curls Peking lilac** (`syringa-pekinensis-copper-curls`): know it by photos (4) (3 of 4)
 - [ ] **Elizabeth magnolia** (`magnolia-elizabeth`): know it by photos (4) (1 of 4)
