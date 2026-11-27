@@ -91,3 +91,12 @@ From the assessment and the progress reports, roughly in order of value:
    the species library from UVM's own data (assessment, section 4).
 
 The long list of planned work is [TODO.md](TODO.md).
+
+## Default method (owner's standing rule, November 2026)
+
+Everything written about plants is drafted from memory first, then checked
+against several sources (not one site) and revised; see CLAUDE.md. In
+November 2026, 989 of the 1,113 Know it by notes cited NC State alone,
+because they were written by reading NC State's pages first. They are
+being redone by the default method, the species most planted on campus
+first.
