@@ -258,3 +258,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: rhododendron-catawbiense, rhus-aromatica, rhus-typhina, robinia-pseudoacacia-purple-robe, rosa-multiflora, rubus-idaeus-fall-gold.
 - 27 Nov 2026: rubus-thibetanus, salix-alba, salix-babylonica, salix-matsudana, salix-nigra, sambucus-canadensis.
 - 27 Nov 2026: sequoia-sempervirens, sequoiadendron-giganteum, spiraea-japonica, staphylea-trifolia, styphnolobium-japonicum, styrax-japonicus.
+- 27 Nov 2026: syringa-pekinensis, syringa-pubescens-patula-miss-kim, taxodium-ascendens, taxus-baccata, tilia-mongolica, tilia-platyphyllos, tilia-x-europaea.
