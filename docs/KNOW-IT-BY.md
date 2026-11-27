@@ -227,3 +227,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: sorbus-aucuparia, stewartia-pseudocamellia, syringa-vulgaris, abies-nordmanniana, acer-palmatum, carpinus-betulus.
 - 27 Nov 2026: chamaecyparis-obtusa, cornus-alternifolia, cornus-mas, corylus-colurna, elaeagnus-angustifolia, hedera-helix.
 - 27 Nov 2026: heptacodium-miconioides, kolkwitzia-amabilis, lindera-benzoin, maackia-amurensis, magnolia-macrophylla, magnolia-virginiana.
+- 27 Nov 2026: morus-alba, musa-basjoo, nyssa-sylvatica, pieris-japonica, pinus-resinosa, prunus-x-cistena.
