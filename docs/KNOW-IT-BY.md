@@ -261,3 +261,5 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: syringa-pekinensis, syringa-pubescens-patula-miss-kim, taxodium-ascendens, taxus-baccata, tilia-mongolica, tilia-platyphyllos, tilia-x-europaea.
 - 27 Nov 2026: ulmus-americana, ulmus-davidiana-japonica, ulmus-glabra, ulmus-parvifolia, ulmus-pumila, ulmus-rubra.
 - 27 Nov 2026: vaccinium-corymbosum, viburnum-dentatum, viburnum-lentago, viburnum-plicatum-tomentosum-mariesii, viburnum-prunifolium, weigela-florida.
+
+Finished 27 Nov 2026: every species with written notes has now been redone by the default method.

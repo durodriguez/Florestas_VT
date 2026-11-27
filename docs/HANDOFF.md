@@ -106,19 +106,24 @@ way keeps its row; its text, source and source_url change. Progress: the
 redone species are listed in KNOW-IT-BY.md, "Redone by the default
 method".
 
-Paused 27 November 2026 at the owner's request, unmerged on the session
-branch: 123 species (468 notes) redone, 187 species (669 notes) left. The
-next in line are acer-tataricum, acer-truncatum, adiantum-pedatum and the
-buckeyes. Order: most trees on campus first, then alphabetical.
+Finished 27 November 2026, unmerged on the session branch: every species
+with Know it by notes has been redone (the last 187 species, 669 notes, in
+31 batches after the pause). Of the 1,116 notes, 15 now cite NC State
+alone and 159 rest on a single expert source, mostly where no second
+page describes the part (cultivars, ferns, a few Asian trees).
 
-## Next session: finish the Know it by rewrite (27 November 2026)
+## Know it by rewrite: done, awaiting the owner's word to merge
 
 - **Branch:** the rewrite lives only on `claude/ecstatic-fermi-7aiu0z`,
-  unmerged; master (PR #308) has everything else, with the redone species'
-  earlier notes. Merge only when the owner says so.
-- **Where it stands:** 123 of 310 species redone (468 notes); 187 species,
-  669 notes left. `python3 scripts/know-it-by-tools/next.py 6` gives the
-  next six (acer-tataricum, acer-truncatum, adiantum-pedatum, the buckeyes).
+  unmerged; master (PR #308) has everything else, with the earlier notes.
+  Merge only when the owner says so.
+- **Where it stands:** all species redone; `python3
+  scripts/know-it-by-tools/next.py` reports 0 left.
+- **Sources this round:** Morton Arboretum pages loaded again (some hang;
+  give curl a time limit). The Gymnosperm Database now answers scripts with
+  a cookie check, so it was used only once (red spruce); Missouri Botanical Garden did not
+  answer. Minnesota Wildflowers, Go Botany and the University of Maine and
+  Minnesota extension pages filled gaps for ferns, shrubs and brambles.
 - **How:** scripts/know-it-by-tools/README.md. The method is CLAUDE.md's:
   memory first, then several sources (Morton, Trees and Shrubs Online,
   Silvics, FEIS, Oregon State, Missouri, extension services; NC State is one
