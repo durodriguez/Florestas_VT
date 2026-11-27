@@ -96,7 +96,7 @@ export const TAXON_COLUMNS = [
   'infraspecific', 'cultivar', 'plant_type', 'origin',
   'flower_color', 'flower_months', 'fruit_color', 'fruit_months', 'leaf_color', 'fall_color',
   'mature_height_ft', 'mature_spread_ft', 'bark_profile', 'pest_resistance',
-  'soil_preference', 'hardiness_zones', 'wikipedia_url', 'description', 'fun_fact',
+  'soil_preference', 'hardiness_zones', 'lifespan', 'wikipedia_url', 'description', 'fun_fact',
 ];
 
 /**

@@ -105,6 +105,8 @@ export interface Taxon {
   pests: string;
   soil: string;
   zones: string;
+  /** Typical lifespan in the wild, as text: "150–250 years". Blank where unknown. */
+  lifespan?: string;
   wikipedia: string;
   description: string;
   /** One line about the species, shown on every plant of it. */

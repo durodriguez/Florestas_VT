@@ -458,6 +458,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     row('Soil', esc(t.soil)),
     row('Pests and disease', esc(t.pests)),
     row('Hardiness zones', esc(t.zones)),
+    row('Lifespan', esc(t.lifespan ?? '')),
   ].join('');
 
   // Credits only for what a license requires: the European range map (CC BY
