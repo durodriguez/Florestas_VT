@@ -90,7 +90,7 @@ new rows (alphabetical by taxon id).
   The White House magnolia is now past tense: it was cut down in 2025.
   Single expert source: `juglans-cinerea` IUCN, `juglans-regia` pickles,
   `koelreuteria-paniculata` (Trees and Shrubs Online / NC State),
-  `juniperus-virginiana` age, `larix-laricina` Native uses (FEIS),
+  `juniperus-virginiana` growth, `larix-laricina` Native uses (FEIS),
   `magnolia-grandiflora` "magnolia curtain" (Trees and Shrubs Online).
   English and Japanese Wikipedia only: `lonicera-maackii` Japan.
 - Done: `magnolia-tripetala`'s second fact to the first `pinus-mugo` fact
@@ -133,7 +133,14 @@ new rows (alphabetical by taxon id).
   Massachusetts and North Dakota (State Symbols USA). Single expert source:
   `scandosorbus-intermedia` naturalized, `styphnolobium-japonicum` (both),
   `taxodium-ascendens` wood, `tilia-mongolica` Paris, `ulmus-davidiana-
-  japonica` zone 2, `ulmus-rubra` age, `viburnum-lentago` names.
+  japonica` zone 2, `ulmus-rubra` wood, `viburnum-lentago` names.
+
+- 27 November 2026: four facts that gave a lifespan, now shown as a
+  Characteristics row from taxa.csv, were replaced so a page does not say
+  it twice: swamp white oak (wood sold as white oak; Silvics and FEIS),
+  coast Douglas-fir (tallest on record, 330 ft; Silvics), eastern
+  redcedar (kept its slow growth on prairie sites; FEIS), slippery elm (wood
+  sold as soft elm; Silvics and FEIS).
 
 ## Where it stands
 
