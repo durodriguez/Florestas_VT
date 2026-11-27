@@ -20,6 +20,8 @@ stale, which is how this file got untidy in the first place.
 | 22 | [Updating the map without a programmer: upload and review](#22-updating-the-map-without-a-programmer-upload-and-review-open-10-october-2026) | **open** |
 | 23 | [Tree Campus Higher Education recognition](#23-tree-campus-higher-education-recognition-open-11-october-2026) | **open** |
 | 24 | [ArbNet arboretum accreditation](#24-arbnet-arboretum-accreditation-open-11-october-2026) | **open** |
+| 25 | [Field-guide illustrations of each tree](#25-field-guide-illustrations-of-each-tree-open-24-november-2026-owner-to-give-further-instructions) | **open** |
+| 26 | [The American chestnuts by the athletic fields](#26-the-american-chestnuts-by-the-athletic-fields-open-27-november-2026-ask-who-planted-them) | **open** |
 | 1 | [Rename `memorial`, add `dedication_label`](#1-rename-memorial-add-dedication_label-done-11-september-2026) | done |
 | 2 | [Dedication in the survey app](#2-dedication-in-the-survey-app-done-12-september-2026) | done |
 | 3 | [`geolocation_notes`, right of `lng`](#3-geolocation_notes-right-of-lng-done-11-september-2026) | done |
@@ -1045,6 +1047,27 @@ no lettering in the image (the page prints the name), the same framing every
 time (trunk base at a fixed point, a fixed size) so the scaling works, and a
 check that the generator's terms allow publishing. Each image needs checking
 against the species' recorded crown shape before it goes up.
+
+## 26. The American chestnuts by the athletic fields [open, 27 November 2026: ask who planted them]
+
+The inventory has ten American chestnuts (`castanea-dentata`), all rated
+good in the 2023–24 survey: nine in a tight group by the athletic fields
+(UVM-4284 to 4287, 4303, 4304, 4336, 4338, 4340) and one on central campus
+(UVM-4008, 1.8 in DBH in 2022). A tight group usually means a deliberate
+planting. Chestnut blight reaches campus trees as it does wild ones; young
+trees often stay clean for 10 to 20 years, until the bark thickens and
+cracks, then a canker girdles the stem and the roots resprout.
+
+To find out, from UVM's forestry program (Rubenstein School) or Physical
+Plant: who planted the group and when; whether the trees are pure American
+chestnut, a blight-resistance trial (the American Chestnut Foundation's
+backcross trees, for example) or something else; and whether any show
+cankers. Worth a look in the field too: Chinese chestnut, sometimes recorded
+as American, has leaves downy beneath.
+
+If it is a resistance trial, it is a story for the trees' records (`story`
+in plants.csv) and a good stop for a tour. Record the planting year in
+`planted_year` once known.
 
 ## Finished
 
