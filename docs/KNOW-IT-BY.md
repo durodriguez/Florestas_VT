@@ -217,3 +217,4 @@ sources, revised (CLAUDE.md). Species done, in the order redone:
 - 27 Nov 2026: betula-papyrifera, crataegus-phaenopyrum, syringa-reticulata, platanus-occidentalis, robinia-pseudoacacia, aesculus-hippocastanum.
 - 27 Nov 2026: quercus-macrocarpa, taxodium-distichum, catalpa-speciosa, populus-nigra, prunus-sargentii, castanea-dentata.
 - 27 Nov 2026: pinus-sylvestris, pseudotsuga-menziesii, tsuga-canadensis, cercis-canadensis, juglans-nigra, liriodendron-tulipifera.
+- 27 Nov 2026: quercus-alba, liquidambar-styraciflua, metasequoia-glyptostroboides, tilia-tomentosa, acer-campestre, cotinus-coggygria.
