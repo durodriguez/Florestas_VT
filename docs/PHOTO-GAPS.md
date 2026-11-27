@@ -178,7 +178,6 @@ better than none. Delete a line once its photo is replaced.
 - **Common baldcypress**, flowers — `taxodium-distichum` (13 on campus)
 - **Bigtooth aspen**, flowers — `populus-grandidentata` (4 on campus)
 - **Dragon's claw willow**, fruit — `salix-matsudana-tortuosa` (2 on campus)
-- **White fir**, fruit — `abies-concolor` (2 on campus)
 - **Allegheny serviceberry**, bark — `amelanchier-laevis`
 - **Atlantic white cedar**, fruit — `chamaecyparis-thyoides`
 - **Black willow**, leaves — `salix-nigra`

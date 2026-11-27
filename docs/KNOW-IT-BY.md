@@ -117,7 +117,7 @@ each other's part; they are now the right way round.
 1. **Species showing fewer than four written tiles: 30.** 47 got a fourth
    tile on 27 November 2026 (Shape for shrubs and conifers, Fall color,
    Thorny twigs, bark, pollen cones). Left: mostly oaks (catkins), pines,
-   and parts whose photo the audit removed: abies-concolor, acer-triflorum, caragana-arborescens, carya-laciniosa, castanea-mollissima, chamaecyparis-thyoides, fraxinus-quadrangulata, ilex-x-meserveae, larix-laricina, magnolia-macrophylla, pinus-cembra, pinus-flexilis, pinus-parviflora, pinus-resinosa, pinus-rigida, populus-grandidentata, prunus-cerasifera, prunus-maackii, prunus-persica, prunus-x-cistena, prunus-x-yedoensis, ptelea-trifoliata, quercus-coccinea, quercus-hemisphaerica, quercus-lyrata, quercus-montana, quercus-phellos, quercus-shumardii, ulmus-parvifolia, viburnum-lentago.
+   and parts whose photo the audit removed: acer-triflorum, caragana-arborescens, carya-laciniosa, castanea-mollissima, chamaecyparis-thyoides, fraxinus-quadrangulata, ilex-x-meserveae, larix-laricina, magnolia-macrophylla, pinus-cembra, pinus-flexilis, pinus-parviflora, pinus-resinosa, pinus-rigida, populus-grandidentata, prunus-cerasifera, prunus-maackii, prunus-persica, prunus-x-cistena, prunus-x-yedoensis, ptelea-trifoliata, quercus-coccinea, quercus-hemisphaerica, quercus-lyrata, quercus-montana, quercus-phellos, quercus-shumardii, ulmus-parvifolia, viburnum-lentago.
 1b. **Default tiles still showing (27 November 2026).** A tile with a photo
    but no written note shows the old caption (color and months from
    taxa.csv). The build marks them (`part--default`), so they can be counted:
@@ -154,7 +154,7 @@ each other's part; they are now the right way round.
    (marked below), and want one when found. The 460 Wikimedia Commons photos are not yet checked:
    Commons refuses this project's downloads for now (see HANDOFF.md).
 
-   - [x] `abies-concolor`, fruit (removed; no clean replacement found yet): https://www.inaturalist.org/observations/1711555
+   - [x] `abies-concolor`, fruit (removed; replaced 27 November 2026 with the owner's pick, Commons File:Abies concolor cones.jpg): https://www.inaturalist.org/observations/1711555
    - [x] `populus-grandidentata`, flowers: https://www.inaturalist.org/observations/155049184
    - [x] `quercus-coccinea`, leaves: https://www.inaturalist.org/observations/18096656
    - [x] `quercus-montana`, leaves: https://www.inaturalist.org/observations/185581695
