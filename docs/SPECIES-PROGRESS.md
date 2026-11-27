@@ -10,7 +10,7 @@ same list, with links, is on the site at /species/progress/.
 
 | Group | Pages | Complete | Items filled |
 | --- | --- | --- | --- |
-| On campus: species | 102 | 100 | 100% |
+| On campus: species | 102 | 101 | 100% |
 | On campus: hybrids | 3 | 0 | 86% |
 | On campus: cultivars and forms | 11 | 6 | 92% |
 | On campus: named only to genus | 13 | 13 | 100% |
@@ -18,11 +18,11 @@ same list, with links, is on the site at /species/progress/.
 | Not yet mapped: hybrids | 16 | 7 | 87% |
 | Not yet mapped: cultivars and forms | 87 | 45 | 90% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
-| **All** | 418 | 316 | 96% |
+| **All** | 418 | 317 | 96% |
 
 ## Most often missing
 
-- know it by photos (4): 96 pages
+- know it by photos (4): 95 pages
 - know it by notes: 38 pages
 - crown shape: 2 pages
 - where it grows wild: 1 pages
@@ -36,7 +36,6 @@ same list, with links, is on the site at /species/progress/.
 - [ ] **Purpleleaf sand cherry** (`prunus-x-cistena`, 1 on campus): know it by photos (4) (3 of 4)
 - [ ] **Freeman's maple** (`acer-x-freemanii`, 67 on campus): know it by notes (none on flowers)
 - [ ] **Green Giant arborvitae** (`thuja-green-giant`, 4 on campus): know it by photos (4) (1 of 4)
-- [ ] **Three-flower maple** (`acer-triflorum`, 3 on campus): know it by photos (4) (3 of 4)
 - [ ] **Dragon's claw willow** (`salix-matsudana-tortuosa`, 2 on campus): know it by photos (4) (3 of 4)
 - [ ] **Crimson Cloud hawthorn** (`crataegus-laevigata-crimson-cloud`, 1 on campus): know it by photos (4) (3 of 4)
 - [ ] **Wafer ash** (`ptelea-trifoliata`, 1 on campus): know it by photos (4) (3 of 4)
