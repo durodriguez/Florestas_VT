@@ -12,11 +12,11 @@ same list, with links, is on the site at /species/progress/.
 | --- | --- | --- | --- |
 | On campus: species | 102 | 100 | 100% |
 | On campus: hybrids | 3 | 0 | 86% |
-| On campus: cultivars and forms | 10 | 5 | 91% |
+| On campus: cultivars and forms | 11 | 6 | 92% |
 | On campus: named only to genus | 13 | 13 | 100% |
 | Not yet mapped: species | 176 | 135 | 97% |
 | Not yet mapped: hybrids | 16 | 7 | 87% |
-| Not yet mapped: cultivars and forms | 88 | 46 | 90% |
+| Not yet mapped: cultivars and forms | 87 | 45 | 90% |
 | Not yet mapped: named only to genus | 10 | 10 | 100% |
 | **All** | 418 | 316 | 96% |
 
