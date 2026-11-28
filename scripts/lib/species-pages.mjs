@@ -461,10 +461,10 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     row('Mature height', t.matureHeightFt === null ? '' : `${t.matureHeightFt} ft`),
     row('Mature spread', t.matureSpreadFt === null ? '' : `${t.matureSpreadFt} ft`),
     row('Lifespan', esc(t.lifespan ?? '')),
+    row('Growth', t.growth ? `${esc(sentenceCase(t.growth))} (${esc(GROWTH_INCHES[t.growth] ?? '')})` : ''),
     row('Bark', esc(t.bark)),
     row('Soil', esc(t.soil)),
     row('Light', esc(sentenceCase(t.light ?? ''))),
-    row('Growth', t.growth ? `${esc(sentenceCase(t.growth))} (${esc(GROWTH_INCHES[t.growth] ?? '')})` : ''),
     row('Pests and disease', esc(t.pests)),
     row('Hardiness zones', esc(t.zones)),
   ].join('');
