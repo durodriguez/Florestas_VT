@@ -460,13 +460,13 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     row('Fall color', esc(titleCase(t.fallColor))),
     row('Mature height', t.matureHeightFt === null ? '' : `${t.matureHeightFt} ft`),
     row('Mature spread', t.matureSpreadFt === null ? '' : `${t.matureSpreadFt} ft`),
+    row('Lifespan', esc(t.lifespan ?? '')),
     row('Bark', esc(t.bark)),
     row('Soil', esc(t.soil)),
     row('Light', esc(sentenceCase(t.light ?? ''))),
     row('Growth', t.growth ? `${esc(sentenceCase(t.growth))} (${esc(GROWTH_INCHES[t.growth] ?? '')})` : ''),
     row('Pests and disease', esc(t.pests)),
     row('Hardiness zones', esc(t.zones)),
-    row('Lifespan', esc(t.lifespan ?? '')),
   ].join('');
 
   // Credits only for what a license requires: the European range map (CC BY
