@@ -142,10 +142,10 @@ function aboutTaxon(t: Taxon, countOnCampus = true): string {
       ${row('Mature height', numOr(t.matureHeightFt, ' ft'))}
       ${row('Mature spread', numOr(t.matureSpreadFt, ' ft'))}
       ${row('Lifespan', t.lifespan ? escapeHtml(t.lifespan) : null)}
+      ${row('Growth', t.growth ? `${sentenceCase(t.growth)} (${GROWTH_INCHES[t.growth] ?? ''})` : null)}
       ${row('Bark', t.bark ? escapeHtml(t.bark) : null)}
       ${row('Soil', t.soil ? escapeHtml(t.soil) : null)}
       ${row('Light', t.light ? sentenceCase(t.light) : null)}
-      ${row('Growth', t.growth ? `${sentenceCase(t.growth)} (${GROWTH_INCHES[t.growth] ?? ''})` : null)}
       ${row('Pests and disease', t.pests ? escapeHtml(t.pests) : null)}
       ${row('Hardiness zones', t.zones)}
       ${countOnCampus ? row('On campus', mapped) : ''}
