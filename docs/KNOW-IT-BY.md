@@ -202,3 +202,64 @@ each other's part; they are now the right way round.
 5. **Photo swaps still worth making** as photos turn up: bitternut hickory's
    sulfur-yellow buds, Osage orange's thorns, balsam poplar's sticky buds,
    Norway and sugar maple's buds, Hinoki cypress's white Y marks.
+
+## Redone by the default method
+
+Every note written before November 2026's rule began from a source page,
+so all are being rewritten: drafted from memory, checked against several
+sources, revised (CLAUDE.md). Species done, in the order redone:
+
+- 27 Nov 2026: pinus-strobus, quercus-rubra, betula-nigra, quercus-bicolor,
+  acer-platanoides.
+- 27 Nov 2026: acer-x-freemanii, picea-pungens, acer-saccharum, acer-rubrum, pinus-nigra.
+- 27 Nov 2026: quercus-palustris, thuja-occidentalis, picea-glauca, tilia-cordata, picea-abies.
+- 27 Nov 2026: zelkova-serrata, ginkgo-biloba, tilia-americana, acer-saccharinum, carpinus-caroliniana.
+- 27 Nov 2026: betula-papyrifera, crataegus-phaenopyrum, syringa-reticulata, platanus-occidentalis, robinia-pseudoacacia, aesculus-hippocastanum.
+- 27 Nov 2026: quercus-macrocarpa, taxodium-distichum, catalpa-speciosa, populus-nigra, prunus-sargentii, castanea-dentata.
+- 27 Nov 2026: pinus-sylvestris, pseudotsuga-menziesii, tsuga-canadensis, cercis-canadensis, juglans-nigra, liriodendron-tulipifera.
+- 27 Nov 2026: quercus-alba, liquidambar-styraciflua, metasequoia-glyptostroboides, tilia-tomentosa, acer-campestre, cotinus-coggygria.
+- 27 Nov 2026: fagus-grandifolia, ostrya-virginiana, betula-alleghaniensis, betula-populifolia, callitropsis-nootkatensis, chionanthus-virginicus.
+- 27 Nov 2026: populus-grandidentata, quercus-imbricaria, quercus-robur, taxus-x-media, thuja-green-giant, acer-negundo.
+- 27 Nov 2026: acer-triflorum, cercidiphyllum-japonicum, clethra-alnifolia, cornus-kousa, fagus-sylvatica, fraxinus-pennsylvanica.
+- 27 Nov 2026: gymnocladus-dioicus, hamamelis-virginiana, malus-domestica, pyrus-calleryana, rhamnus-cathartica, abies-balsamea.
+- 27 Nov 2026: abies-concolor, acer-griseum, acer-platanoides-crimson-king, betula-lenta, buxus-sempervirens, celtis-occidentalis.
+- 27 Nov 2026: cladrastis-kentukea, cornus-florida, halesia-tetraptera, phellodendron-amurense, prunus-serotina, salix-matsudana-tortuosa.
+- 27 Nov 2026: sorbus-aucuparia, stewartia-pseudocamellia, syringa-vulgaris, abies-nordmanniana, acer-palmatum, carpinus-betulus.
+- 27 Nov 2026: chamaecyparis-obtusa, cornus-alternifolia, cornus-mas, corylus-colurna, elaeagnus-angustifolia, hedera-helix.
+- 27 Nov 2026: heptacodium-miconioides, kolkwitzia-amabilis, lindera-benzoin, maackia-amurensis, magnolia-macrophylla, magnolia-virginiana.
+- 27 Nov 2026: morus-alba, musa-basjoo, nyssa-sylvatica, pieris-japonica, pinus-resinosa, prunus-x-cistena.
+- 27 Nov 2026: ptelea-trifoliata, quercus-ellipsoidalis, quercus-michauxii, sassafras-albidum, abies-fraseri, abies-grandis.
+- 27 Nov 2026: acer-buergeranum, acer-ginnala, acer-miyabei, acer-nigrum, acer-pseudoplatanus, acer-pseudosieboldianum.
+- 27 Nov 2026: acer-tataricum, acer-truncatum, adiantum-pedatum, aesculus-flava, aesculus-glabra, aesculus-parviflora.
+- 27 Nov 2026: aesculus-pavia, aesculus-x-carnea, ailanthus-altissima, albizia-julibrissin, alnus-glutinosa, alnus-hirsuta.
+- 27 Nov 2026: alnus-incana-rugosa, amauropelta-noveboracensis, amelanchier-arborea, amelanchier-canadensis, amelanchier-laevis, amelanchier-x-grandiflora.
+- 27 Nov 2026: aralia-elata, aralia-spinosa, aronia-melanocarpa, asimina-triloba, athyrium-filix-femina, berberis-thunbergii.
+- 27 Nov 2026: calycanthus-floridus, caragana-arborescens, carya-cordiformis, carya-glabra, carya-illinoinensis, carya-laciniosa.
+- 27 Nov 2026: carya-ovata, carya-tomentosa, castanea-mollissima, catalpa-bignonioides, cedrus-atlantica, cedrus-libani.
+- 27 Nov 2026: celtis-laevigata, cephalanthus-occidentalis, cercis-chinensis, chamaecyparis-pisifera, chamaecyparis-thyoides, chionanthus-retusus.
+- 27 Nov 2026: clethra-barbinervis, cornus-officinalis, cornus-racemosa, cornus-sericea, corylus-avellana, cotinus-obovatus.
+- 27 Nov 2026: cotoneaster-adpressus, crataegus-ambigua, crataegus-crus-galli, crataegus-laevigata, crataegus-viridis, cryptomeria-japonica.
+- 27 Nov 2026: diervilla-lonicera, diospyros-virginiana, dryopteris-erythrosora-brilliance, eucommia-ulmoides, euonymus-alatus, euonymus-fortunei.
+- 27 Nov 2026: forsythia-x-intermedia-mindor, fothergilla-gardenii, fothergilla-major, fraxinus-americana, fraxinus-excelsior, fraxinus-quadrangulata.
+- 27 Nov 2026: gleditsia-triacanthos, hamamelis-x-intermedia, hibiscus-syriacus-notwoodthree, hibiscus-syriacus-notwoodtwo, hydrangea-arborescens, hydrangea-paniculata.
+- 27 Nov 2026: hydrangea-quercifolia, ilex-glabra, ilex-opaca, ilex-verticillata, ilex-x-meserveae, iris-sibirica.
+- 27 Nov 2026: itea-virginica, juglans-cinerea, juglans-regia, juniperus-chinensis, juniperus-communis, juniperus-horizontalis.
+- 27 Nov 2026: juniperus-scopulorum, juniperus-virginiana, kerria-japonica, koelreuteria-paniculata, larix-decidua, larix-laricina.
+- 27 Nov 2026: ligustrum-vulgare, lonicera-maackii, maclura-pomifera, magnolia-acuminata, magnolia-elizabeth, magnolia-grandiflora.
+- 27 Nov 2026: magnolia-stellata, magnolia-tripetala, magnolia-x-loebneri, magnolia-x-soulangiana, malus-coronaria, malus-floribunda.
+- 27 Nov 2026: malus-sargentii, matteuccia-struthiopteris, miscanthus-sinensis-adagio, miscanthus-sinensis-gracillimus, morus-rubra, oxydendrum-arboreum.
+- 27 Nov 2026: parrotia-persica, parthenocissus-quinquefolia, parthenocissus-tricuspidata, physocarpus-opulifolius, picea-omorika, picea-orientalis.
+- 27 Nov 2026: picea-rubens, pinus-bungeana, pinus-cembra, pinus-flexilis, pinus-heldreichii, pinus-mugo.
+- 27 Nov 2026: pinus-parviflora, pinus-rigida, platanus-x-acerifolia, polystichum-acrostichoides, populus-alba, populus-balsamifera.
+- 27 Nov 2026: populus-deltoides, populus-tremuloides, prunus-americana, prunus-cerasifera, prunus-cerasus, prunus-maackii.
+- 27 Nov 2026: prunus-padus, prunus-pennsylvanica, prunus-persica, prunus-serrulata, prunus-subhirtella, prunus-virginiana.
+- 27 Nov 2026: prunus-x-yedoensis, pyrus-communis, quercus-acutissima, quercus-coccinea, quercus-hemisphaerica, quercus-lyrata.
+- 27 Nov 2026: quercus-montana, quercus-muehlenbergii, quercus-phellos, quercus-shumardii, quercus-stellata, quercus-velutina.
+- 27 Nov 2026: rhododendron-catawbiense, rhus-aromatica, rhus-typhina, robinia-pseudoacacia-purple-robe, rosa-multiflora, rubus-idaeus-fall-gold.
+- 27 Nov 2026: rubus-thibetanus, salix-alba, salix-babylonica, salix-matsudana, salix-nigra, sambucus-canadensis.
+- 27 Nov 2026: sequoia-sempervirens, sequoiadendron-giganteum, spiraea-japonica, staphylea-trifolia, styphnolobium-japonicum, styrax-japonicus.
+- 27 Nov 2026: syringa-pekinensis, syringa-pubescens-patula-miss-kim, taxodium-ascendens, taxus-baccata, tilia-mongolica, tilia-platyphyllos, tilia-x-europaea.
+- 27 Nov 2026: ulmus-americana, ulmus-davidiana-japonica, ulmus-glabra, ulmus-parvifolia, ulmus-pumila, ulmus-rubra.
+- 27 Nov 2026: vaccinium-corymbosum, viburnum-dentatum, viburnum-lentago, viburnum-plicatum-tomentosum-mariesii, viburnum-prunifolium, weigela-florida.
+
+Finished 27 Nov 2026: every species with written notes has now been redone by the default method.
