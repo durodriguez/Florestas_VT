@@ -523,7 +523,7 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
 
 /**
  * The index is written sorted by common name. The buttons re-sort it in the
- * page by scientific name and back, and lead each row with the name it is
+ * page by scientific name, by plant type or by how many are mapped, and back, and lead each row with the name it is
  * sorted by. Hidden until the script shows them, as they do nothing without
  * it; the choice rides in the address (?sort=scientific) so it can be shared
  * and survives the back button.
@@ -533,6 +533,7 @@ const SORT_CONTROL = `<div class="sort" role="group" aria-label="Sort species" h
     <button type="button" data-sort="common" aria-pressed="true">Common</button>
     <button type="button" data-sort="scientific" aria-pressed="false">Scientific</button>
     <button type="button" data-sort="type" aria-pressed="false">Type</button>
+    <button type="button" data-sort="count" aria-pressed="false">Count</button>
   </div>`;
 
 /** The groups the index can be sorted into, in order, with their headings. */
@@ -590,6 +591,8 @@ const SORT_JS = `(() => {
   const rows = [...list.children];
   const byCommon = rows.slice();
   const bySci = rows.slice().sort((a, b) => a.dataset.sci.localeCompare(b.dataset.sci));
+  // Most mapped first; ties stay in common-name order (owner's request, November 2026).
+  const byCount = rows.slice().sort((a, b) => Number(b.dataset.count) - Number(a.dataset.count));
   // By plant type: a heading for each group, then its species by scientific
   // name, scientific name first (owner's request, November 2026).
   const byType = [];
@@ -607,7 +610,7 @@ const SORT_JS = `(() => {
   }
   const apply = (mode, push) => {
     const sci = mode === 'scientific' || mode === 'type';
-    list.replaceChildren(...(mode === 'scientific' ? bySci : mode === 'type' ? byType : byCommon));
+    list.replaceChildren(...(mode === 'scientific' ? bySci : mode === 'type' ? byType : mode === 'count' ? byCount : byCommon));
     list.classList.toggle('by-sci', sci);
     // Lead each row with the name it is sorted by.
     for (const a of list.querySelectorAll('a')) {
@@ -626,7 +629,7 @@ const SORT_JS = `(() => {
     if (b) apply(b.dataset.sort, true);
   });
   const asked = new URLSearchParams(location.search).get('sort');
-  if (asked === 'scientific' || asked === 'type') apply(asked, false);
+  if (asked === 'scientific' || asked === 'type' || asked === 'count') apply(asked, false);
   group.hidden = false;
 })();`;
 
@@ -638,7 +641,7 @@ const SORT_JS = `(() => {
 export function renderSpeciesIndex(taxa, { base, config }) {
   const mapped = taxa.filter((t) => t.count > 0);
   const sorted = [...mapped].sort((a, b) => a.common.localeCompare(b.common));
-  const items = sorted.map((t) => `<li data-sci="${esc(t.sci)}" data-type="${esc(t.type || 'unknown')}">
+  const items = sorted.map((t) => `<li data-sci="${esc(t.sci)}" data-type="${esc(t.type || 'unknown')}" data-count="${t.count}">
     <a href="${encodeURIComponent(t.id)}/">
       <span class="idx-common">${esc(t.common)}</span>
       <span class="idx-sci">${esc(t.sci)}</span>
