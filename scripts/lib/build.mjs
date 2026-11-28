@@ -2,7 +2,7 @@
 // Kept free of filesystem access so the test suite can exercise it directly.
 
 import {
-  CONDITIONS, STATUSES, ORIGINS, LEAF_COLORS, PLANT_TYPES, BOOLEANISH, PROSE_MAX,
+  CONDITIONS, STATUSES, ORIGINS, LEAF_COLORS, LIGHTS, GROWTH_RATES, PLANT_TYPES, BOOLEANISH, PROSE_MAX,
   TAXON_REQUIRED, PLANT_REQUIRED, OBSERVATION_REQUIRED, UNKNOWN_TAXON,
   TAXON_NUMERIC, PLANT_NUMERIC, OBSERVATION_NUMERIC,
   OBSERVATION_COLUMNS, PLANT_FIELDS, OBSERVATION_FIELDS,
@@ -34,6 +34,8 @@ function monthList(value) {
 
 /** "yellow-green" / "Yellow Green" -> normalised lowercase token */
 const token = (value) => trim(value).toLowerCase().replace(/\s+/g, '-');
+/** A short phrase from a controlled list, lowercased with single spaces: "Sun to part shade" → "sun to part shade". */
+const phrase = (value) => trim(value).toLowerCase().replace(/\s+/g, ' ');
 
 function enumIndex(value, list) {
   return list.indexOf(token(value));
@@ -115,6 +117,14 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
     if (leafColor && !LEAF_COLORS.includes(leafColor)) {
       err(where, `leaf_color "${row.leaf_color}" is not one of: ${LEAF_COLORS.join(', ')} (leave it blank for green)`);
     }
+    const light = phrase(row.light);
+    if (light && !LIGHTS.includes(light)) {
+      err(where, `light "${row.light}" is not one of: ${LIGHTS.join(', ')}`);
+    }
+    const growth = phrase(row.growth);
+    if (growth && !GROWTH_RATES.includes(growth)) {
+      err(where, `growth "${row.growth}" is not one of: ${GROWTH_RATES.join(', ')}`);
+    }
     if (trim(row.fun_fact).length > PROSE_MAX) {
       warn(where, `fun_fact is ${trim(row.fun_fact).length} characters — it is meant to be one line, not a second description`);
     }
@@ -143,6 +153,8 @@ export function buildDataset({ taxaRows, plantRows, observationRows = [], collec
       bark: trim(row.bark_profile),
       pests: trim(row.pest_resistance),
       soil: trim(row.soil_preference),
+      light: phrase(row.light),
+      growth: phrase(row.growth),
       zones: trim(row.hardiness_zones),
       lifespan: trim(row.lifespan),
       wikipedia: trim(row.wikipedia_url),

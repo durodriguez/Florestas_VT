@@ -43,6 +43,16 @@ function familyLine(t: Taxon): string {
     .filter(Boolean).map(escapeHtml).join(' &middot; ');
 }
 
+/** Inches of new height a year behind each growth word (scripts/lib/vocab.mjs, GROWTH_INCHES). */
+const GROWTH_INCHES: Record<string, string> = {
+  'slow': 'under 12 in. a year',
+  'slow to medium': 'about 6 to 18 in. a year',
+  'medium': '12 to 24 in. a year',
+  'medium to fast': 'about 18 to 30 in. a year',
+  'fast': 'over 24 in. a year',
+};
+const sentenceCase = (s: string): string => (s ? s.charAt(0).toUpperCase() + s.slice(1) : '');
+
 function row(label: string, value: string | null | undefined, hint?: string): string {
   if (value === null || value === undefined || value === '' || value === '—') return '';
   const title = hint ? ` title="${escapeHtml(hint)}"` : '';
@@ -133,6 +143,8 @@ function aboutTaxon(t: Taxon, countOnCampus = true): string {
       ${row('Mature spread', numOr(t.matureSpreadFt, ' ft'))}
       ${row('Bark', t.bark ? escapeHtml(t.bark) : null)}
       ${row('Soil', t.soil ? escapeHtml(t.soil) : null)}
+      ${row('Light', t.light ? sentenceCase(t.light) : null)}
+      ${row('Growth', t.growth ? `${sentenceCase(t.growth)} (${GROWTH_INCHES[t.growth] ?? ''})` : null)}
       ${row('Pests and disease', t.pests ? escapeHtml(t.pests) : null)}
       ${row('Hardiness zones', t.zones)}
       ${row('Lifespan', t.lifespan ? escapeHtml(t.lifespan) : null)}

@@ -185,6 +185,12 @@ describe('renderSpeciesIndex', () => {
     expect(html).toContain('data-sci="Tilia cordata"');
   });
 
+  it('offers sorting by how many are mapped, each row carrying its count', () => {
+    const html = renderSpeciesIndex([taxon()], { base: '/', config });
+    expect(html).toContain('data-sort="count"');
+    expect(html).toMatch(/data-count="\d+"/);
+  });
+
   it('leaves out the "All species" link, which would lead back to itself', () => {
     expect(renderSpeciesIndex([taxon()], { base: '/', config })).not.toContain('All species');
     expect(page()).toContain('>All species</a>');

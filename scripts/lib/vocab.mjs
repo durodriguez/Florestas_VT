@@ -54,6 +54,22 @@ export const UNKNOWN_TAXON = 'unknown';
  * taxon; blank means nobody has assessed it.
  */
 export const ORIGINS = ['vermont-native', 'vermont-invasive', 'introduced'];
+/** taxa.csv light: how much sun the plant wants, from full sun to shade. Blank where no source gives it. */
+export const LIGHTS = ['full sun', 'sun to part shade', 'part shade', 'part shade to shade', 'shade'];
+/**
+ * taxa.csv growth: how fast it grows, as the sources put it. Slow is under
+ * 12 inches of height a year, medium 12 to 24, fast over 24, for a young
+ * plant in a good site. Blank where no source gives it.
+ */
+export const GROWTH_RATES = ['slow', 'slow to medium', 'medium', 'medium to fast', 'fast'];
+/** Inches of new height a year behind each growth word, shown beside it. */
+export const GROWTH_INCHES = {
+  'slow': 'under 12 in. a year',
+  'slow to medium': 'about 6 to 18 in. a year',
+  'medium': '12 to 24 in. a year',
+  'medium to fast': 'about 18 to 30 in. a year',
+  'fast': 'over 24 in. a year',
+};
 /** taxa.csv leaf_color: summer leaves that are not green. Each has a color in src/season.ts (LEAF_TINTS). */
 export const LEAF_COLORS = ['purple', 'red-purple', 'purple-red', 'gold', 'yellow', 'yellow-green', 'blue-gray'];
 
@@ -96,7 +112,7 @@ export const TAXON_COLUMNS = [
   'infraspecific', 'cultivar', 'plant_type', 'origin',
   'flower_color', 'flower_months', 'fruit_color', 'fruit_months', 'leaf_color', 'fall_color',
   'mature_height_ft', 'mature_spread_ft', 'bark_profile', 'pest_resistance',
-  'soil_preference', 'hardiness_zones', 'lifespan', 'wikipedia_url', 'description', 'fun_fact',
+  'soil_preference', 'light', 'growth', 'hardiness_zones', 'lifespan', 'wikipedia_url', 'description', 'fun_fact',
 ];
 
 /**
