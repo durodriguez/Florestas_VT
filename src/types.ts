@@ -104,6 +104,10 @@ export interface Taxon {
   /** Known pest and disease pressure, not a resistance score. */
   pests: string;
   soil: string;
+  /** Light it wants: full sun, sun to part shade, part shade, part shade to shade or shade. Blank where unknown. */
+  light?: string;
+  /** Growth rate: slow, slow to medium, medium, medium to fast or fast. Blank where unknown. */
+  growth?: string;
   zones: string;
   /** Typical lifespan in the wild, as text: "150–250 years". Blank where unknown. */
   lifespan?: string;

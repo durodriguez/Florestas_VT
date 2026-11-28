@@ -25,6 +25,7 @@ import { treeDrawing } from './tree-drawing.mjs';
 import { yearTable, yearSummary, MONTH_NAMES } from './year.mjs';
 import { describeRange, rangeSvg } from './range-map.mjs';
 import { campusSvg } from './campus-map.mjs';
+import { GROWTH_INCHES } from './vocab.mjs';
 
 export const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) =>
@@ -68,6 +69,9 @@ function sciHtml(t) {
   if (t.cultivar) parts.push(`&lsquo;${esc(t.cultivar)}&rsquo;`);
   return parts.join(' ') || esc(t.sci);
 }
+
+/** "sun to part shade" → "Sun to part shade". */
+const sentenceCase = (s) => (s ? s[0].toUpperCase() + s.slice(1) : '');
 
 export const row = (label, value) =>
   value === null || value === undefined || value === '' ? ''
@@ -458,6 +462,8 @@ export function renderSpeciesPage(taxon, { photos, areas, base, config, trees = 
     row('Mature spread', t.matureSpreadFt === null ? '' : `${t.matureSpreadFt} ft`),
     row('Bark', esc(t.bark)),
     row('Soil', esc(t.soil)),
+    row('Light', esc(sentenceCase(t.light ?? ''))),
+    row('Growth', t.growth ? `${esc(sentenceCase(t.growth))} (${esc(GROWTH_INCHES[t.growth] ?? '')})` : ''),
     row('Pests and disease', esc(t.pests)),
     row('Hardiness zones', esc(t.zones)),
     row('Lifespan', esc(t.lifespan ?? '')),
